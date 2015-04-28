@@ -1,0 +1,43 @@
+{
+	"name" : "Facebook Recent Posts",
+	"description" : "A stream of your 25 most recent Facebook posts.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookPosts",
+			"name": "Facebook Posts",
+			"description" : "See information on your 25 most recent Facebook posts including comments, likes, links, privacy settings, etc.",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/{{ds.facebook.pageId}}/posts",
+            	"graphUrl": "https://graph.facebook.com/{{ds.facebook.pageId}}/posts",
+            	"qtype": "Graph API",
+				"prop:index": "2"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"facebook" : "b99c63c6e0375f0a1dc5niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.facebook.pageId",
+			"label" : "Facebook Page Name",
+			"description":"To find your page name, navigate to your company Facebook page. The page name can be found in the address bar between 'facebook.com/' and the question mark. For example, capture '<span class='strong'>klipfolio</span>' from 'facebook.com/<span class='strong'>klipfolio</span>?'.",
+			"isRequired" : true
+		}
+	]
+}

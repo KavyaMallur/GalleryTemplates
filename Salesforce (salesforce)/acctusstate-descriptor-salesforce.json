@@ -1,0 +1,43 @@
+{
+    "name" : "Accounts by U.S. State",
+    "description" : "See the location of your U.S. Salesforce accounts.",
+
+    "datasources" : {
+        "salesforce" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Number of Accounts by US State",
+            "libraryAlias" :"SFAccountsByState",
+            "refreshInterval" : 300,
+            "description" :"See number of Salesforce accounts by US state.",
+            "props":{
+                "SOQLQuery": "SELECT COUNT(name), BillingState\r\nFROM Account WHERE BillingCountry = 'United States' OR BillingCountry = 'USA' GROUP BY BillingState",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+COUNT%28name%29%2C+BillingState%0D%0AFROM+Account+WHERE+BillingCountry+%3D+%27United+States%27+OR+BillingCountry+%3D+%27USA%27+GROUP+BY+BillingState",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "usIds" : {
+            "libraryAlias" : "usIds",
+            "name": "U.S. State IDs",
+            "description" : "A list of U.S. state IDs and their names.",
+            "type" : "simple_rest",
+            "format" : "xls",
+            "refreshInterval" : 864000,
+            "props" : { 
+                "endpoint_url": "http://static.klipfolio.com/datasources/usa-map-ids.xlsx"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "salesforce" : "128378928ae284b8dab8natceewzhere",
+        "usIds" : "3b4e3dc975699b2bff0bniktawuzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "salesforce"
+        }
+    ]
+}

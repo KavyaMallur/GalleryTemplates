@@ -1,0 +1,39 @@
+{
+	"name" : "Instagram Latest Posts",
+	"description" : "See the most recent media published by a user.",
+
+	"datasources" : {
+		"instagram" : {
+			"service" : "instagram",
+			"libraryAlias" : "",
+			"name": "Instagram Account Metrics",
+			"description" : "Get the most recent media published by a user. May return a mix of both image and video types.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.instagram.com/v1/users/{{ds.instagram.UserId}}/media/recent/",
+				"method": "get"
+  			}
+		}
+	},
+
+	"dsMappings" : {
+		"instagram" : "a3821f8a756a9b0cc1a5niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "instagram"
+		}
+	],
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.instagram.UserId",
+			"label" : "User ID",
+			"description": "To find your User ID, go to Instagram the <a href='https://apigee.com/console/instagram' target='_blank'>API console</a>. Select 'OAuth2' from the Authentication drop-down menu and then click the 'Sign in to Instagram' button that is in the pop-up window. Finally, paste 'https://api.instagram.com/v1/users/self' in the query box. Your ID is listed at the bottom of the results.",
+			"isRequired" : true
+		}
+	]
+}

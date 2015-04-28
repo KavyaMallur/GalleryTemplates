@@ -1,0 +1,60 @@
+{
+    "name" : "Pingdom Check History",
+    "description": "See historical uptime and response times for a server of your choice.",
+
+    "datasources" : {
+        "pingdom-01" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Service Checks",
+            "libraryAlias" :"pingdomServiceChecks",
+            "refreshInterval" : 3600,
+            "description" :"See an overview of all Pingdom checks.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/checks",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+
+        },
+        "pingdom-02" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Server History",
+            "libraryAlias" :"pingdomServerHistory",
+            "refreshInterval" : 3600,
+            "description" :"Provides server check details over time.  Brings back 1000 records.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/results/{{ds.pingdom.serverId}}",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+
+        }
+    },
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.pingdom.serverId",
+			"label" : "Server ID",
+			"description": "Enter the ID of the server you'd like to monitor. You can find your server ID by navigating to the Site you'd like to monitor in Pingdom and copying the number of 'checks=' in the address bar.",			
+			"isRequired" : true
+		}
+	],	
+
+    "dsMappings": {
+        "pingdom-01" : "b4fe50b45c834d192174niktawuzhere",
+		"pingdom-02" : "4e3d0b67a39b6b92d216niktawuzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "pingdom"
+        }
+    ]
+}

@@ -1,0 +1,117 @@
+{
+	"name" : "AdWords Cost-per-Conversion",
+	"description" : "Compare your cost-per-conversion to typed-in targets, or delete targets to compare to the previous period.",
+
+	"datasources" : {
+		"googleAdwords-01" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "AdWordsCampaignList",
+			"name": "Adwords Campaign List",
+			"description" : "See your AdWords campaigns and impressions.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201409",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+			}
+		},
+		"googleAdwords-02" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "AdWordsAccountPerformance",
+			"name": "AdWords Account Performance",
+			"description" : "See your Cost-per-Conversion rolled up for all your AdWords campaigns for the last 30 days.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"body": "__rdquery=SELECT AverageCpc,CostPerConversionManyPerClick\r\nFROM ACCOUNT_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201409",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+		},
+		"googleAdwords-03" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "AdWordsAccountPerformancePrev",
+			"name": "AdWords Account Performance (Prev Period)",
+			"description" : "See your Cost-per-Conversion rolled up for all your AdWords campaigns for the 30 days prior to the last 30 days.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"body": "__rdquery=SELECT AverageCpc,CostPerConversionManyPerClick\r\nFROM ACCOUNT_PERFORMANCE_REPORT\r\nDURING {date.add(-60).format('yyyyMMdd')},{date.add(-31).format('yyyyMMdd')}&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201409",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+		},
+		"googleAdwords-04" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "AdWordsCampaignPerfRollUp",
+			"name": "Adwords Campaign Performance (Rolled Up)",
+			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) rolled up for the 30 days.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Impressions,ConversionValue FROM CAMPAIGN_PERFORMANCE_REPORT DURING LAST_30_DAYS&__fmt=CSV&mode=Custom",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201409",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+			}
+		},
+		"googleAdwords-05" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "AdWordsCampaignPerfRollUpPrev",
+			"name": "Adwords Campaign Performance (Rolled Up, Prev Period)",
+			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) rolled up for the 30 days prior to the last 30 days.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING {date.add(-60).format('yyyyMMdd')},{date.add(-31).format('yyyyMMdd')}&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201409",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"googleAdwords-01" :"8b76bb7bdc738ba6efeaniktawuzhere",
+		"googleAdwords-02" :"2612dc3ba80b5571ac15niktawuzhere",
+		"googleAdwords-03" :"f8df734a03826a55a68fniktawuzhere",
+		"googleAdwords-04" :"1831330fe549598ae794niktawuzhere",
+		"googleAdwords-05" :"e94c6b4d70282a105b36niktawuzhere"
+	},
+
+	"uiVariables": [
+        {
+        	"name":"AWKTCampaign", 
+        	"value":"All" 
+        },
+        {
+        	"name":"AWKSCPConv_Target", 
+        	"value":"" 
+        }
+    ],
+    
+   "datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.google_adwords.customerId",
+			"label" : "Customer ID",
+			"description" : "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
+			"isRequired" : true
+		}
+	],
+
+	"services" : [
+		{
+			"service" : "google_adwords"
+		}
+	]
+}

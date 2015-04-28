@@ -1,0 +1,43 @@
+{
+	"name" : "Facebook Like Sources",
+	"description" : "Monitor where your Likes are coming from.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookLikeSources",
+			"name": "Facebook Like Sources",
+			"description" : "See a breakdown of the number of Page likes from the most common places where people can like your Page (Total Count).",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/{{ds.facebook.pageId}}/insights/page_fans_by_like_source/day?since={date.add(-90).format()}&until={date.today}",
+            	"graphUrl": "https://graph.facebook.com/{{ds.facebook.pageId}}/insights/page_fans_by_like_source/day?since={date.add(-90).format()}&until={date.today}",
+            	"qtype": "Graph API",
+				"prop:index": "2"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"facebook" : "d4e0a916689bb84da99cniktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.facebook.pageId",
+			"label" : "Facebook Page Name",
+			"description":"To find your page name, navigate to your company Facebook page. The page name can be found in the address bar between 'facebook.com/' and the question mark. For example, capture '<span class='strong'>klipfolio</span>' from 'facebook.com/<span class='strong'>klipfolio</span>?'.",
+			"isRequired" : true
+		}
+	]
+}

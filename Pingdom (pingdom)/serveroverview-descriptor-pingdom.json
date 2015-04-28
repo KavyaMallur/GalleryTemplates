@@ -1,0 +1,77 @@
+{
+    "name" : "Pingdom Server Overview",
+    "description": "See average response time, uptime and downtime for a specified Pingdom server.",
+
+    "datasources" : {
+        "pingdom-01" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Service Checks",
+            "libraryAlias" :"pingdomServiceChecks",
+            "refreshInterval" : 3600,
+            "description" :"See an overview of all Pingdom checks.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/checks",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+
+        },
+        "pingdom-02" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Server Summary Status (Last 30 Days)",
+            "libraryAlias" :"pingdomServerSummaryStatusLast30Daysv2",
+            "refreshInterval" : 3600,
+            "description" :"Provides high level server statistics over the past 30 days.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.last30Days.format('epochTime')}",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+            }
+
+        },
+        "pingdom-03" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Server Summary Status (31-60 Days Ago)",
+            "libraryAlias" :"pingdomServerSummaryStatus3160DaysAgov2",
+            "refreshInterval" : 3600,
+            "description" :"Provides high level server statistics for 31-60 days ago. Can be used for comparison.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.add(-60).format('epochTime')}&to={date.add(-31).format('epochTime')}",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+            }
+
+        }
+    },
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.pingdom.serverId",
+			"label" : "Server ID",
+			"description": "Enter the ID of the server you'd like to monitor. You can find your server ID by navigating to the Site you'd like to monitor in Pingdom and copying the number of 'checks=' in the address bar.",			
+			"isRequired" : true
+		}
+	],	
+
+    "dsMappings": {
+        "pingdom-01" : "b4fe50b45c834d192174niktawuzhere",
+		"pingdom-02" : "639abbccaa4e2d870f70niktawuzhere",
+		"pingdom-03" : "3ac202b3d931a2d373d3niktawuzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "pingdom"
+        }
+    ]
+}

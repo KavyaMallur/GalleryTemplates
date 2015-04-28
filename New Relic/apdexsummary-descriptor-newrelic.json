@@ -1,0 +1,41 @@
+{
+	"name" : "New Relic Application Apdex Summary (30m)",
+	"description" : "See a summary of your application's performance for the last 30 minutes.",
+
+	"datasources" : {
+		"newRelic-01" : {
+			"service" : "new_relic",
+			"libraryAlias" : "newRelicAppApdex",
+			"name": "New Relic Application Apdex",
+			"description" : "Application apdex for the last 30 minutes.",
+			"type" : "simple_rest",
+			"format" : "xml",
+			"refreshInterval" : 300,
+			"props" : { 
+				"endpoint_url": "https://api.newrelic.com/v2/applications/{{ds.new_relic.appid}}/metrics/data.xml?names[]=Apdex&values[]=score,s,f,t&from={date.tz(\"UTC\").addMinutes(-30).format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}&to={date.tz(\"UTC\").today.format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}",
+				"method": "get",
+				"parameters": "[{\"name\":\"X-Api-Key\",\"value\":\"{{auth.new_relic.apikey}}\",\"type\":\"header\"}]"
+  			}
+		}
+	},
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.new_relic.appid",
+			"label" : "Application ID",
+			"description":" <a href='https://docs.newrelic.com/docs/apm/apis/requirements/finding-product-id' target='_blank'>This </a>document explains how you can find your Application ID.",			
+			"isRequired" : true
+		}
+	],	
+
+	"dsMappings" : {
+		"newRelic-01" : "2d4ee174824aa4e02ffdniktawuzhere"
+	},
+
+	"services" : [
+		{
+			"service" : "new_relic"
+		}
+	]
+}

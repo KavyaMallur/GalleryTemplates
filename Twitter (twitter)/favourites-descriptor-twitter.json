@@ -1,0 +1,40 @@
+{
+	"name" : "Twitter Favourites (@{{ds.twitter.screenName}})",
+	"description" : "See the number of times that an account's latest 10 tweets have been favourited, and compare to the previous 10 tweets.",
+
+	"datasources" : {
+		"twitter" : {
+			"service" : "twitter",
+			"libraryAlias" : "twitter20Recent",
+			"name": "@{{ds.twitter.screenName}}'s Twitter Timeline",
+			"description" : "The most recent 20 tweets posted by @{{ds.twitter.screenName}}.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={{ds.twitter.screenName}}",
+            	"method": "get"
+ 			}
+		}
+	},
+
+	"dsMappings" : {
+		"twitter" : "ebff6c5df3ae732598d8niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "twitter"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.twitter.screenName",
+			"label" : "Twitter Handle",
+			"description" : "Enter the handle for the account you would like to track. <span class='strong'>Do not include the @ symbol.</span>",
+			"isRequired" : true
+		}
+	]
+}

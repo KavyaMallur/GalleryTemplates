@@ -1,0 +1,34 @@
+{
+    "name" : "Pingdom Service Summary",
+
+    "datasources" : {
+        "pingdom" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Service Checks",
+            "libraryAlias" :"",
+            "refreshInterval" : 300,
+            "description" :"List of services and their most recent statuses",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/checks",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.pingdom.username}}",
+                "basic_auth_password" : "{{auth.pingdom.password}}",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"{{auth.pingdom.appKey}}\",\"type\":\"header\"}]"
+            }
+
+        }
+    },
+
+    "dsMappings": {
+        "pingdom" : "1c6e3537dbcd1b29e0212dba008abea5"
+    },
+
+    "services" : [
+        {
+            "service" : "pingdom"
+        }
+    ]
+}

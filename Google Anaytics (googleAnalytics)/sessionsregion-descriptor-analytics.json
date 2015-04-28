@@ -1,0 +1,55 @@
+{
+	"name" : "Web Sessions by Region",
+	"description" : "Track where sessions on your website for the last 30 days are coming from.",
+
+	"datasources" : {
+		"googleAnalytics-01" : {
+			"service" : "google_analytics",
+			"libraryAlias" : "GASessionsByRegion",
+			"name": "GA: Sessions by Region (Last 30 Days)",
+			"description" : "Track which countries sessions on your website for the last 30 days are coming from.",
+			"type" : "google_analytics",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:country&metrics=ga:sessions&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+				 "max_pages": "10",
+           		 "mode": "Simple",
+           		 "profile": "{{ds.google_analytics.profileId}}",
+           		  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+			}
+		},
+		"worldRegionIds" : {
+			"libraryAlias" : "worldRegionIds",
+			"name": "World Region IDs",
+			"description" : "A list of region/country IDs and their names.",
+			"type" : "simple_rest",
+			"format" : "csv",
+			"refreshInterval" : 864000,
+			"props" : { 
+            	"endpoint_url": "http://static.klipfolio.com/static/klips/saas/quickstart/world_region_ids.csv"
+            }
+		}
+	},
+
+	"dsMappings" : {
+		"googleAnalytics-01" :"3fb3b9d24259e9fe5981niktawuzhere",
+		"worldRegionIds" :"75a9136c5ac6fdc99755niktawuzhere"
+	},
+
+	"services" : [
+		{
+			"service" : "google_analytics"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.google_analytics.profileId",
+			"label" : "Profile Id",
+			"description" : "Don't know where to find your Profile ID? Look under Step 2 <a href='https://klipfolio.uservoice.com/knowledgebase/articles/34516-use-google-analytics-as-a-data-source' target='_blank'>here.</a>",
+			"isRequired" : true
+		}
+	]
+}

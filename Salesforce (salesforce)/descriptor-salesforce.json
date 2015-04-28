@@ -1,0 +1,31 @@
+{
+    "name" : "salesforce Service Summary",
+    "description" : "",
+
+    "datasources" : {
+        "salesforce" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"salesforce Service Checks",
+            "libraryAlias" :"",
+            "refreshInterval" : 300,
+            "description" :"List of services and their most recent statuses",
+            "props":{
+                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
+                "endpoint_url": "https://na2.salesforce.com/services/data/v20.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
+                "instance": "https://na2.salesforce.com",
+            }
+        }
+    },
+
+    "dsMappings": {
+        "salesforce" : "df7bec64f58ae3dd3336f9a173e662cf"
+    },
+
+    "services" : [
+        {
+            "service" : "salesforce"
+        }
+    ],
+}

@@ -1,0 +1,43 @@
+{
+	"name" : "GA: Sessions by Device Type (Last 30 Days)",
+	"description" : "See the number of visits to your website using mobile, tablet, and desktop devices for the last 30 days.",
+
+	"datasources" : {
+		"googleAnalytics" : {
+			"service" : "google_analytics",
+			"libraryAlias" : "gaDeviceType",
+			"name": "GA Sessions Last 30 Days - v1",
+			"description" : "See the number of visits to your website using mobile, tablet, and desktop devices for the last 30 days.",
+			"type" : "google_analytics",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:1801902&dimensions=ga:deviceCategory,ga:date&metrics=ga:sessions&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+				 "max_pages": "1",
+           		 "mode": "Advanced",
+           		 "profile": "{{ds.google_analytics.profileId}}",
+           		  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"googleAnalytics" :"a642ac05589ee13aa503niktawuzhere"
+		},
+
+	"services" : [
+		{
+			"service" : "google_analytics"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.google_analytics.profileId",
+			"label" : "Profile Id",
+			"description" : "Don't know where to find your Profile ID? Look under Step 2 <a href='https://klipfolio.uservoice.com/knowledgebase/articles/34516-use-google-analytics-as-a-data-source' target='_blank'>here.</a>",
+			"isRequired" : true
+		}
+	]
+}

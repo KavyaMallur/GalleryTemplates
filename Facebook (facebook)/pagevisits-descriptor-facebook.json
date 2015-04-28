@@ -1,0 +1,42 @@
+{
+	"name" : "Facebook Page Visits",
+	"description" : "The number of visits your page has had over the last 90 days, and the average for each day over that period.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookDailyPageVisits",
+			"name": "Facebook Page Visits",
+			"description" : "Total count of daily Facebook page visits.",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/{{ds.facebook.pageId}}/insights/page_views/day?since={date.add(-90).format()}&until={date.today}",
+            	"graphUrl": "https://graph.facebook.com/{{ds.facebook.pageId}}/insights/page_views/day?since={date.add(-90).format()}&until={date.today}",
+            	"qtype": "Graph API"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"facebook" : "01d373cc62936ea9f4fcniktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.facebook.pageId",
+			"label" : "Facebook Page Name",
+			"description":"To find your page name, navigate to your company Facebook page. The page name can be found in the address bar between 'facebook.com/' and the first question mark. For example, 'facebook.com/klipfolio?",
+			"isRequired" : true
+		}
+	]
+}

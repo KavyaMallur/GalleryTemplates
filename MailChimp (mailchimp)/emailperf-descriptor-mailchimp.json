@@ -1,0 +1,40 @@
+{
+	"name" : "MailChimp Email List Performance",
+	"description" : "Monitor your Open, Click, and Unsubscribe rates as well as your List Ratings from MailChimp.",
+
+	"datasources" : {
+		"mailchimp" : {
+			"service" : "mailchimp",
+			"libraryAlias" : "mailchimpAllLists",
+			"name": "MailChimp All Lists",
+			"description" : "See an overview of stats for your MailChimp lists.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+			 	"body": "{ \"apikey\": \"{{auth.mailchimp.apiKey}}\" }",
+	            "endpoint_url": "https://{{ds.mailchimp.dataCentre}}.api.mailchimp.com/2.0/lists/list.json",
+	            "method": "post"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"mailchimp" : "3fcc454a9703f8f7cf1aniktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "mailchimp"
+		}
+	],
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.mailchimp.dataCentre",
+			"label" : "Datacenter",
+			"description" : "To find your datacenter, log into your account and navigate to the address bar. The first part identifies the datacenter. For example 'us1'.",
+			"isRequired" : true
+		}
+	]
+}

@@ -1,0 +1,90 @@
+{
+	"name" : "Marketing Funnel (GA+SFDC)",
+	"description" : "Combine the power of Google Analytics and Salesforce to see how prospects move through your marketing funnel.",
+
+	"datasources" : {
+		"googleAnalytics" : {
+			"service" : "google_analytics",
+			"libraryAlias" : "",
+			"name": "GA: Users (Last 30 Days)",
+			"description" : "See the number of users who visited your website, rolled up for the past 30 days.",
+			"type" : "google_analytics",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+				 "max_pages": "1",
+           		 "mode": "Simple",
+           		 "profile": "{{ds.google_analytics.profileId}}",
+           		  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+			}
+		},
+		"salesforce-01" : {
+			"service" : "salesforce",
+			"libraryAlias" : "",
+			"name": "Leads (Last 30 Days)",
+			"description" : "See your Salesforce leads from the last 30 days.",
+			"type" : "salesforce",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"SOQLQuery": "SELECT Name\r\nFROM Lead\r\nWHERE CreatedDate = LAST_N_DAYS:30",
+            	"endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Lead%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
+				"instance": "{{auth.salesforce.instanceName}}"
+            }
+		},
+		"salesforce-02" : {
+			"service" : "salesforce",
+			"libraryAlias" : "",
+			"name": "New Accounts (Last 30 Days)",
+			"description" : "See all accounts that were created in the last 30 days.",
+			"type" : "salesforce",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"SOQLQuery": "SELECT Name\r\nFROM Account\r\nWHERE CreatedDate = LAST_N_DAYS:30",
+            	"endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Account%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
+				"instance": "{{auth.salesforce.instanceName}}"
+            }
+		},
+		"salesforce-03" : {
+			"service" : "salesforce",
+			"libraryAlias" : "",
+			"name": "Opportunities (Last 30 Days)",
+			"description" : "See all opportunities that were created in the last 30 days.",
+			"type" : "salesforce",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"SOQLQuery": "SELECT Name\r\nFROM Opportunity\r\nWHERE CreatedDate = LAST_N_DAYS:30",
+            	"endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Opportunity%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
+				"instance": "{{auth.salesforce.instanceName}}"
+            }
+		}
+	},
+
+	"dsMappings" : {
+		"googleAnalytics" :"0cd7232f25991691d0d1niktawuzhere",
+		"salesforce-01" :"6e9aaf435597c36fd833niktawuzhere",
+		"salesforce-02" :"a1e3b6310c4a33644648niktawuzhere",
+		"salesforce-03" :"4df8712cd2d66b2e7b5eniktawuzhere"
+	},
+
+	"services" : [
+		{
+			"service" : "google_analytics"
+		},
+		{
+			"service" : "salesforce"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.google_analytics.profileId",
+			"label" : "Profile Id",
+			"isRequired" : true
+		}
+	]
+}

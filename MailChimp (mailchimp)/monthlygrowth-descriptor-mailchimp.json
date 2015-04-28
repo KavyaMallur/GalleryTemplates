@@ -1,0 +1,40 @@
+{
+	"name" : "MailChimp Monthly List Growth",
+	"description" : "Monitor the growth of your MailChimp contacts.",
+
+	"datasources" : {
+		"mailchimp" : {
+			"service" : "mailchimp",
+			"type" : "simple_rest",
+			"libraryAlias" : "mailchimpGrowthHistory",
+			"name": "MailChimp Growth History",
+			"description" : "See your number of existing, imported, and opt-in MailChimp contacts by month.",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+			 	"body": "{ \"apikey\": \"{{auth.mailchimp.apiKey}}\" }",
+	            "endpoint_url": "https://{{ds.mailchimp.dataCentre}}.api.mailchimp.com/2.0/lists/growth-history.json",
+	            "method": "post"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"mailchimp" : "9c481844dc3f52a69532niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "mailchimp"
+		}
+	],
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.mailchimp.dataCentre",
+			"label" : "Datacenter",
+			"description" : "To find your datacenter, log into your account and navigate to the address bar. The first part identifies the datacenter. For example 'us1'.",
+			"isRequired" : true
+		}
+	]
+}

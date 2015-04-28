@@ -1,0 +1,445 @@
+{
+   "title": "LinkedIn Comments",
+   "id": "521e4f5d9f076b42e244551ee43efc0c",
+   "workspace": {
+      "dimensions": {
+         "w": 546
+      },
+      "datasources": [
+         "13f8b7658bc41a69ab56niktawuzhere"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "c1a1d926",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "a972840e",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "b0012335",
+                     "displayName": "Comments Last Month",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "0"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "first(13f8b7658bc41a69ab56niktawuzhere@/company-statistics/status-update-statistics/views-by-month/view-by-month/comments;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "first",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "13f8b7658bc41a69ab56niktawuzhere",
+                                             "a": "/company-statistics/status-update-statistics/views-by-month/view-by-month/comments"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "b2c8a42e",
+                     "displayName": "Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Comments last month\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Comments last month"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           "Comments last month"
+                        ]
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "0d6e8e87-1",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "ef2c6bf7",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "de1187c2",
+                     "displayName": "Percent Change",
+                     "renamed": true,
+                     "size": "2",
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "contain",
+                                 "right": {
+                                    "raw": "na"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "text",
+                                 "value": "N/A",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-up-green",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-down-red",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-even-grey",
+                                 "pos": "right"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "if((slice(13f8b7658bc41a69ab56niktawuzhere@/company-statistics/status-update-statistics/views-by-month/view-by-month/comments;,\"1\",\"2\")!=\"0\"),((first(13f8b7658bc41a69ab56niktawuzhere@/company-statistics/status-update-statistics/views-by-month/view-by-month/comments;)-slice(13f8b7658bc41a69ab56niktawuzhere@/company-statistics/status-update-statistics/views-by-month/view-by-month/comments;,\"1\",\"2\"))/slice(13f8b7658bc41a69ab56niktawuzhere@/company-statistics/status-update-statistics/views-by-month/view-by-month/comments;,\"1\",\"2\")),\"na\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "13f8b7658bc41a69ab56niktawuzhere",
+                                                         "a": "/company-statistics/status-update-statistics/views-by-month/view-by-month/comments"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "1"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "2"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "!="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "first",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "13f8b7658bc41a69ab56niktawuzhere",
+                                                               "a": "/company-statistics/status-update-statistics/views-by-month/view-by-month/comments"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "count",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "-"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "13f8b7658bc41a69ab56niktawuzhere",
+                                                               "a": "/company-statistics/status-update-statistics/views-by-month/view-by-month/comments"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "2"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "13f8b7658bc41a69ab56niktawuzhere",
+                                                         "a": "/company-statistics/status-update-statistics/views-by-month/view-by-month/comments"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "1"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "2"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "na"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "81c8ab6e",
+                     "displayName": "Comments Prev Month",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "suffix": " prev. month",
+                        "precision": "0",
+                        "prefix": "vs "
+                     },
+                     "formulas": [
+                        {
+                           "txt": "slice(13f8b7658bc41a69ab56niktawuzhere@/company-statistics/status-update-statistics/views-by-month/view-by-month/comments;,\"1\",\"2\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "13f8b7658bc41a69ab56niktawuzhere",
+                                             "a": "/company-statistics/status-update-statistics/views-by-month/view-by-month/comments"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "2"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            }
+         ],
+         "rows": 1,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 2,
+               "w": "30%"
+            },
+            {
+               "x": 1,
+               "w": 20
+            }
+         ],
+         "cellData": [
+            {
+               "x": 2,
+               "y": 0,
+               "alignment": 1
+            },
+            {
+               "x": 1,
+               "y": 0
+            }
+         ]
+      }
+   ]
+}

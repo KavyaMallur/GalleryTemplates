@@ -1,0 +1,56 @@
+{
+	"name" : "Optimizely Experiment Results Summary",
+	"description" : "See the results of your Optimizely experiments at a glance.",
+
+	"datasources" : {
+		"optimizely-01" : {
+			"service" : "optimizely",
+			"libraryAlias" : "",
+			"name": "Optimizely List Experiments in Project",
+			"description" : "A list of experiments in project {{ds.optimizely.projectId}}",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://www.optimizelyapis.com/experiment/v1/projects/{{ds.optimizely.projectId}}/experiments/",
+            	"method": "get",
+            	"parameters": "[{\"name\":\"token\",\"value\":\"{{auth.optimizely.token}}\",\"type\":\"header\"}]"
+			},
+		},
+		"optimizely-02" : {
+			"service" : "optimizely",
+			"libraryAlias" : "",
+			"name": "Optimizely_KT: Experiment Results",
+			"description" : "Results for experiments.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://www.optimizelyapis.com/experiment/v1/experiments/{props.ExperimentID}/results",
+            	"method": "get",
+            	"parameters": "[{\"name\":\"token\",\"value\":\"{{auth.optimizely.token}}\",\"type\":\"header\"}]",
+            	"props:ExperimentID" : ""
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"optimizely-01" : "bbc0e68cd67534c540e15783063e3c5c",
+		"optimizely-02" : "96f8d764f786a2b91ffb4998cbdc31a3"	
+	},
+
+	"services" : [
+		{
+			"service" : "optimizely"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.optimizely.projectId",
+			"label" : "Project ID",
+			"isRequired" : true
+		}
+	]
+}

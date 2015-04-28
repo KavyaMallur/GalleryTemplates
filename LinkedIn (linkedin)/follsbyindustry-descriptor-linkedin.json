@@ -1,0 +1,54 @@
+{
+	"name" : "LinkedIn Followers by Industry",
+	"description" : "Shows the distribution of your LinkedIn followers for the last 12 months by industry.",
+
+"datasources" : {
+		"linkedin" : {
+			"service" : "linkedin",
+			"libraryAlias" : "LinkedInCompStats",
+			"name": "LinkedIn Company Statistics",
+			"description" : "LinkedIn company statistics and follower count by month for the past 12 months.",
+			"type" : "simple_rest",
+			"format" : "xml",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
+            	 "method": "get"
+			}
+		},
+
+		"linkedInCodes" : {
+			"libraryAlias" : "LinkedInCodes",
+			"name": "LinkedIn Codes",
+			"description" : "This data source is to look up LinkedIn country codes, industry codes, etc.",
+			"type" : "simple_rest",
+			"format" : "xls",
+			"refreshInterval" : 864000,
+			"props" : {
+				 "endpoint_url": "http://static.klipfolio.com/templates/datasources/LinkedInCodes.xlsx",
+            	 "method": "get"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"linkedin" : "13f8b7658bc41a69ab56niktawuzhere"	,
+		"linkedInCodes" : "b9abd642284c692a25f0niktawuzhere"
+	},
+
+	"services" : [
+		{
+			"service" : "linkedin"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.linkedin.companyId",
+			"label" : "Company ID",
+"description": "Find your company ID by searching for your company page in LinkedIn. The ID is the number immediately following 'www.linkedin.com/company/' and before the question mark. For example, capture the '<span class='strong'>123456</span>' from 'https://www.linkedin.com/company/<span class='strong'>123456</span>?'.",
+			"isRequired" : true
+		}
+	]
+}

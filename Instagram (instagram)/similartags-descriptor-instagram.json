@@ -1,0 +1,39 @@
+{
+	"name" : "Instagram Tags Similar to #{{ds.instagram.simtag}}",
+	"description" : "Track the tags similar to #{{ds.instagram.simtag}} that are gaining the most traction.",
+
+	"datasources" : {
+		"instagram" : {
+			"service" : "instagram",
+			"libraryAlias" : "instagramSimTags",
+			"name": "Instagram Tags Similar to #{{ds.instagram.simtag}}",
+			"description" : "Get a list of the tags similar to #{{ds.instagram.simtag}} that are gaining the most traction. Results are ordered first as an exact match, then by popularity. Short tags are treated as exact matches.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.instagram.com/v1/tags/search?q={{ds.instagram.simtag}}",
+				"method": "get"
+  			}
+		}
+	},
+
+	"dsMappings" : {
+		"instagram" : "af5f7967d7b9d82221bdniktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "instagram"
+		}
+	],
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.instagram.simtag",
+			"label" : "Hashtag",
+			"description": "Enter the hashtag you'd like to track. <span class='strong'>Do not include the '#' sign.</span>",
+			"isRequired" : true
+		}
+	]
+}

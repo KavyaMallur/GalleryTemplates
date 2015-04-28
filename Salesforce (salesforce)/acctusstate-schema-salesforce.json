@@ -1,0 +1,410 @@
+{
+   "title": "Accounts by US State",
+   "id": "5d7bdf9f4f72cbfc6178b0cdd61a2474",
+   "workspace": {
+      "datasources": [
+         "128378928ae284b8dab8natceewzhere",
+         "3b4e3dc975699b2bff0bniktawuzhere"
+      ],
+      "dimensions": {
+         "w": 384
+      }
+   },
+   "components": [
+      {
+         "type": "tile_map",
+         "id": "d578544a",
+         "displayName": "Map",
+         "size": 2,
+         "components": [
+            {
+               "type": "proxy",
+               "role": "tile_ids",
+               "id": "0b4cfb95",
+               "displayName": "Region ID",
+               "formulas": [
+                  {
+                     "txt": "slice(3b4e3dc975699b2bff0bniktawuzhere@A:A;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3b4e3dc975699b2bff0bniktawuzhere",
+                                       "a": "A:A"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ]
+            },
+            {
+               "type": "proxy",
+               "role": "tile_values",
+               "id": "d6e739fe",
+               "displayName": "Value",
+               "fmtArgs": {
+                  "suffix": " Accounts"
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup((slice(3b4e3dc975699b2bff0bniktawuzhere@A:A;)),128378928ae284b8dab8natceewzhere@/records/BillingState;,128378928ae284b8dab8natceewzhere@/records/expr0;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "0b4cfb95"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "128378928ae284b8dab8natceewzhere",
+                                       "a": "/records/BillingState"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "128378928ae284b8dab8natceewzhere",
+                                       "a": "/records/expr0"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "mixin": "label"
+            },
+            {
+               "type": "proxy",
+               "role": "tile_desc",
+               "id": "14954066",
+               "displayName": "Description",
+               "formulas": [
+                  {
+                     "txt": "concat(numberformat(((lookup((slice(3b4e3dc975699b2bff0bniktawuzhere@A:A;)),128378928ae284b8dab8natceewzhere@/records/BillingState;,128378928ae284b8dab8natceewzhere@/records/expr0;))/sum((lookup((slice(3b4e3dc975699b2bff0bniktawuzhere@A:A;)),128378928ae284b8dab8natceewzhere@/records/BillingState;,128378928ae284b8dab8natceewzhere@/records/expr0;)))*\"100\"),\"1\"),\"%\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "numberformat",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "d6e739fe"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "sum",
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "d6e739fe"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "data",
+                                                         "repeats": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "separator",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "%"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ]
+            },
+            {
+               "type": "proxy",
+               "role": "tile_xref",
+               "id": "2f094075",
+               "displayName": "Hyperlink",
+               "formulas": [],
+               "data": []
+            }
+         ],
+         "mapId": "usa_en"
+      },
+      {
+         "type": "label",
+         "id": "64a1ed9f",
+         "displayName": "Label",
+         "size": "1",
+         "fmt": "txt",
+         "formulas": [
+            {
+               "txt": "concat(\"Invalid state information provided for \",numberformat((sum(128378928ae284b8dab8natceewzhere@/records/expr0;)-sum((lookup((slice(3b4e3dc975699b2bff0bniktawuzhere@A:A;)),128378928ae284b8dab8natceewzhere@/records/BillingState;,128378928ae284b8dab8natceewzhere@/records/expr0;))))),\" of \",numberformat(sum(128378928ae284b8dab8natceewzhere@/records/expr0;)),\" accounts.\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Invalid state information provided for "
+                           },
+                           {
+                              "t": "f",
+                              "v": "numberformat",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "128378928ae284b8dab8natceewzhere",
+                                                   "a": "/records/expr0"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "d6e739fe"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "precision",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "separator",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": " of "
+                           },
+                           {
+                              "t": "f",
+                              "v": "numberformat",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "128378928ae284b8dab8natceewzhere",
+                                             "a": "/records/expr0"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "precision",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "separator",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": " accounts."
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [
+            [
+               
+            ]
+         ],
+         "align": "r",
+         "font_colour": "cx-color_888",
+         "font_style": "regular",
+         "wrap": true
+      }
+   ]
+}

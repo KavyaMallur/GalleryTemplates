@@ -1,0 +1,48 @@
+{
+	"name" : "AdWords Total Cost",
+	"description" : "See your overall AdWords spend compared to your Budget.",
+
+	"datasources" : {
+		"googleAdwords-01" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "",
+			"name": "Adwords Campaign List",
+			"description" : "See your AdWords campaigns and impressions.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201406",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"737-542-5760\",\"type\":\"header\"}]"
+			}
+		},
+		"googleAdwords-02" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "",
+			"name": "AdWords Campaign Performance",
+			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the last 30 days.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201406",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"737-542-5760\",\"type\":\"header\"}]"
+            }
+		}
+	},
+
+	"dsMappings" : {
+		"googleAdwords-01" :"8b76bb7bdc738ba6efeaniktawuzhere",
+		"googleAdwords-02" :"ee9eac7727c93ad62453niktawuzhere"
+	},
+
+	"services" : [
+		{
+			"service" : "google_adwords"
+		}
+	]
+}

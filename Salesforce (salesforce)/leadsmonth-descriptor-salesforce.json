@@ -1,0 +1,46 @@
+{
+    "name" : "Leads This Month",
+    "description" : "Monitor your leads this month and see how the number compares to the previous month.",
+
+    "datasources" : {
+        "salesforce-01" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Leads Previous Month",
+            "libraryAlias" :"SFDCLeadsPreviousMonth",
+            "refreshInterval" : 14400,
+            "description" :"Leads for last month.",
+            "props":{
+                "SOQLQuery": "SELECT Company, Name, Email, Status, CreatedDate, Owner.Alias\r\nFROM Lead\r\nWHERE CreatedDate = LAST_MONTH",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Company%2C+Name%2C+Email%2C+Status%2C+CreatedDate%2C+Owner.Alias%0D%0AFROM+Lead%0D%0AWHERE+CreatedDate+%3D+LAST_MONTH",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-02" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Leads Current Month",
+            "libraryAlias" :"SFDCLeadsCurrentMonth",
+            "refreshInterval" : 14400,
+            "description" :"Leads for current month.",
+            "props":{
+                "SOQLQuery": "SELECT Company, Name, Email, Status, CreatedDate,Owner.Alias\r\nFROM Lead\r\nWHERE CreatedDate = THIS_MONTH",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Company%2C+Name%2C+Email%2C+Status%2C+CreatedDate%2C+Owner.Alias%0D%0AFROM+Lead%0D%0AWHERE+CreatedDate+%3D+THIS_MONTH",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "salesforce-01" : "3b9fa4d318e3954c8ec3natceewzhere",
+        "salesforce-02" : "7b76c6aa65c4f72bb247natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "salesforce"
+        }
+    ]
+}

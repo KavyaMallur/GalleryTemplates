@@ -1,0 +1,39 @@
+{
+	"name" : "Instagram Recent Posts Under #{{ds.instagram.tag}}",
+	"description" : "See the most recent media published under #{{ds.instagram.tag}}.",
+
+	"datasources" : {
+		"instagram" : {
+			"service" : "instagram",
+			"libraryAlias" : "instagramTags",
+			"name": "Instagram Recent Posts Under #{{ds.instagram.tag}}",
+			"description" : "Get a list of recently tagged media. Note that this media is ordered by when the media was tagged with this tag, rather than the order it was posted.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.instagram.com/v1/tags/{{ds.instagram.tag}}/media/recent",
+				"method": "get"
+  			}
+		}
+	},
+
+	"dsMappings" : {
+		"instagram" : "e150f08f8ec45a8b7eccniktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "instagram"
+		}
+	],
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.instagram.tag",
+			"label" : "Hashtag",
+			"description": "Enter the hashtag you'd like to track. <span class='strong'>Do not include the '#' sign.</span>",
+			"isRequired" : true
+		}
+	]
+}

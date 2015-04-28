@@ -1,0 +1,43 @@
+{
+    "name" : "Accounts by Country",
+    "description" : "See the location of your Salesforce accounts.",
+
+    "datasources" : {
+        "salesforce" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Number of Accounts by Country",
+            "libraryAlias" :"SFAccountsByCountryv2",
+            "refreshInterval" : 300,
+            "description" :"See number of Salesforce accounts by Country.",
+            "props":{
+                "SOQLQuery": "SELECT COUNT(name), BillingCountry\r\nFROM Account GROUP BY BillingCountry",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+COUNT%28name%29%2C+BillingCountry%0D%0AFROM+Account+GROUP+BY+BillingCountry",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "worldRegionIds" : {
+            "libraryAlias" : "worldRegionIds",
+            "name": "World Region IDs",
+            "description" : "A list of region/country IDs and their names.",
+            "type" : "simple_rest",
+            "format" : "csv",
+            "refreshInterval" : 864000,
+            "props" : { 
+                "endpoint_url": "http://static.klipfolio.com/static/klips/saas/quickstart/world_region_ids.csv"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "salesforce" : "b2d65d046bdb0c404953natceewzhere",
+        "worldRegionIds" : "533a3a37fc25f4e3068cnatceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "salesforce"
+        }
+    ]
+}

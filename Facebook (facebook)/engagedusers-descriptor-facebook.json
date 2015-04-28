@@ -1,0 +1,43 @@
+{
+	"name" : "Facebook Engagement",
+	"description" : "Monitor the number of people who engaged with your page.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookEngagement",
+			"name": "Facebook Engagement",
+			"description" : "Monitor the number of people who engaged with your page. Engagement includes any click or story created (Unique Users).",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/{{ds.facebook.pageId}}/insights/page_engaged_users,page_impressions?since={date.last30Days}&until={date.today}",
+            	"graphUrl": "https://graph.facebook.com/{{ds.facebook.pageId}}/insights/page_engaged_users,page_impressions?since={date.last30Days}&until={date.today}",
+            	"qtype": "Graph API",
+				"prop:index": "2"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"facebook" : "1e8d974836bdaab9d5d8niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.facebook.pageId",
+			"label" : "Facebook Page Name",
+			"description":"To find your page name, navigate to your company Facebook page. The page name can be found in the address bar between 'facebook.com/' and the question mark. For example, 'facebook.com/klipfolio?",
+			"isRequired" : true
+		}
+	]
+}

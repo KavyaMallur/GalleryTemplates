@@ -1,0 +1,438 @@
+{
+   "title": "Accounts by Country",
+   "id": "df2b89180664086896c98b896a9b680c",
+   "workspace": {
+      "datasources": [
+         "533a3a37fc25f4e3068cnatceewzhere",
+         "b2d65d046bdb0c404953natceewzhere"
+      ],
+      "dimensions": {
+         "w": 384
+      }
+   },
+   "components": [
+      {
+         "type": "tile_map",
+         "id": "8dda098c",
+         "displayName": "Map",
+         "size": 2,
+         "components": [
+            {
+               "type": "proxy",
+               "role": "tile_ids",
+               "id": "dff60e7c",
+               "displayName": "Region ID",
+               "formulas": [
+                  {
+                     "txt": "slice(533a3a37fc25f4e3068cnatceewzhere@A:A;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "533a3a37fc25f4e3068cnatceewzhere",
+                                       "a": "A:A"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ]
+            },
+            {
+               "type": "proxy",
+               "role": "tile_values",
+               "id": "b162a51f",
+               "displayName": "Value",
+               "fmtArgs": {
+                  "suffix": " Accounts"
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup(slice(533a3a37fc25f4e3068cnatceewzhere@B:B;),b2d65d046bdb0c404953natceewzhere@/records/BillingCountry;,b2d65d046bdb0c404953natceewzhere@/records/expr0;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "533a3a37fc25f4e3068cnatceewzhere",
+                                             "a": "B:B"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "b2d65d046bdb0c404953natceewzhere",
+                                       "a": "/records/BillingCountry"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "b2d65d046bdb0c404953natceewzhere",
+                                       "a": "/records/expr0"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "mixin": "label"
+            },
+            {
+               "type": "proxy",
+               "role": "tile_desc",
+               "id": "47bc591d",
+               "displayName": "Description",
+               "formulas": [
+                  {
+                     "txt": "concat(numberformat((((lookup(slice(533a3a37fc25f4e3068cnatceewzhere@B:B;),b2d65d046bdb0c404953natceewzhere@/records/BillingCountry;,b2d65d046bdb0c404953natceewzhere@/records/expr0;))/sum((lookup(slice(533a3a37fc25f4e3068cnatceewzhere@B:B;),b2d65d046bdb0c404953natceewzhere@/records/BillingCountry;,b2d65d046bdb0c404953natceewzhere@/records/expr0;))))*\"100\"),\"1\"),\"%\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "numberformat",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b162a51f"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "sum",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "b162a51f"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "data",
+                                                               "repeats": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "separator",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "%"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ]
+            },
+            {
+               "type": "proxy",
+               "role": "tile_xref",
+               "id": "12c3c56a",
+               "displayName": "Hyperlink",
+               "formulas": [],
+               "data": []
+            }
+         ],
+         "mapId": "world_en"
+      },
+      {
+         "type": "label",
+         "id": "08e1ce36",
+         "displayName": "Label",
+         "size": "1",
+         "fmt": "txt",
+         "formulas": [
+            {
+               "txt": "concat(\"Invalid country information provided for \",numberformat((sum(b2d65d046bdb0c404953natceewzhere@/records/expr0;)-sum((lookup(slice(533a3a37fc25f4e3068cnatceewzhere@B:B;),b2d65d046bdb0c404953natceewzhere@/records/BillingCountry;,b2d65d046bdb0c404953natceewzhere@/records/expr0;))))),\" of \",numberformat(sum(b2d65d046bdb0c404953natceewzhere@/records/expr0;)),\" accounts.\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Invalid country information provided for "
+                           },
+                           {
+                              "t": "f",
+                              "v": "numberformat",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "b2d65d046bdb0c404953natceewzhere",
+                                                   "a": "/records/expr0"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "b162a51f"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "precision",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "separator",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": " of "
+                           },
+                           {
+                              "t": "f",
+                              "v": "numberformat",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "b2d65d046bdb0c404953natceewzhere",
+                                             "a": "/records/expr0"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "precision",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "separator",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": " accounts."
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [
+            [
+               
+            ]
+         ],
+         "align": "r",
+         "font_colour": "cx-color_888",
+         "font_style": "regular",
+         "wrap": true
+      }
+   ]
+}
