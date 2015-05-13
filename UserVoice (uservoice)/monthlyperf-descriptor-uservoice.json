@@ -1,0 +1,40 @@
+{
+    "name" : "UserVoice Support Perfomance (Monthly)",
+    "description" : "Show monthly response times for ticket messages.",
+
+    "datasources" : {
+        "uservoice" : {
+            "service" : "uservoice",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"UserVoice Support Perfomance",
+            "libraryAlias" :"UserVoiceSupportPerformance",
+            "refreshInterval" : 14400,
+            "description" :"Show number of incoming and outgoing messages, response times and support dexterity of the last 12 months. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "http://{{ds.uservoice.accountName}}.uservoice.com/api/v1/reports/support_performance.json?start_date={date.addMonths(-11).format()}&end_date={date.today}&granularity=month",
+                "instance": "{{ds.uservoice.instanceName}}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "uservoice" : "3dab440751924ab916f2natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "uservoice"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.uservoice.accountName",
+            "label" : "UserVoice Account",
+            "description":"Provide your UserVoice account.",
+            "isRequired" : true
+        }
+    ]
+}

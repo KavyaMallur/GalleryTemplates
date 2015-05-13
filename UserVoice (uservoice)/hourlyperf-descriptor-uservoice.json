@@ -1,0 +1,40 @@
+{
+    "name" : "UserVoice Support Perfomance (Hourly)",
+    "description" : "Show hourly response times for ticket messages.",
+
+    "datasources" : {
+        "uservoice" : {
+            "service" : "uservoice",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"UserVoice Support Perfomance (Hourly)",
+            "libraryAlias" :"UserVoiceHourlyPerformance",
+            "refreshInterval" : 14400,
+            "description" :"Show number of incoming and outgoing messages, response times and support dexterity of the last 12 months. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "http://{{ds.uservoice.accountName}}.uservoice.com/api/v1/reports/hourly_performance.json",
+                "instance": "{{ds.uservoice.instanceName}}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "uservoice" : "83c40cbfbeac4e035cd8natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "uservoice"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.uservoice.accountName",
+            "label" : "UserVoice Account Name",
+            "description":"Provide your UserVoice account.",
+            "isRequired" : true
+        }
+    ]
+}
