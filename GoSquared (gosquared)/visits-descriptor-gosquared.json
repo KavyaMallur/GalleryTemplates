@@ -1,0 +1,30 @@
+{
+   "name" : "GoSquared Visits (Last 30 Days)",
+   "description": "See your website's visits and new visits over the last 30 days. Originates from the Gallery.",
+
+   "datasources" : {
+      "goSquared" : {
+         "type": "simple_rest",
+         "format": "csv",
+         "name": "GoSquared Daily Aggregate Stats",
+         "libraryAlias": "GoSquaredDailyAggStats",
+         "refreshInterval": 14400,
+         "description": "See your website's KPI's including Bounce Rate, Engagement Time, Pageviews, Visits and more, by day for the last 30 days. Originates from the Gallery.",
+         "props": {
+            "endpoint_url": "https://api.gosquared.com/trends/v2/aggregate?api_key={{auth.gosquared.apiKey}}&site_token={{auth.gosquared.token}}&interval=day&format=csv&from={date.add(-30).format()}&to={date.today}",
+            "method": "GET"
+         }
+      }
+   },
+
+   "dsMappings": {
+      "goSquared": "5c41f98b28731673331cniktawuzhere"
+
+   },
+   "services" : [
+      {
+         "service" : "gosquared"
+      }
+   ]
+
+}
