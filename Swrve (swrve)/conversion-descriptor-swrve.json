@@ -1,0 +1,44 @@
+{
+	"name" : "Swrve Conversion",
+	"description": "Show user conversion for your mobile app. Originates from the Gallery.",
+
+	"datasources" : {
+		"swrve-01" : {
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Swrve Daily Paying Users",
+			"libraryAlias": "SwrveDailyPayingUsers",
+			"refreshInterval": 14400,
+			"description": "See the daily paying users of your mobile app. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/kpi/dpu.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+				"method": "GET"
+			}
+		},
+		"swrve-02" : {
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Swrve Conversion",
+			"libraryAlias": "SwrveConversion",
+			"refreshInterval": 14400,
+			"description": "See the user conversion of your mobile app. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/kpi/conversion.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+				"method": "GET"
+			}
+		}
+	},
+
+	"dsMappings": {
+		"swrve-01": "9c62b222839d746965fdnatceewzhere",
+		"swrve-02": "9b92cd7425ea85c38eafnatceewzhere"
+		
+
+	},
+	"services" : [
+		{
+			"service" : "swrve"
+		}
+	]
+
+}
