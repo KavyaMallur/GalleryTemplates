@@ -1,0 +1,40 @@
+{
+    "name" : "My Calendar Today",
+    "description" : "Retrieves Google Calendar events for today. Originates from the Gallery.",
+
+    "datasources" : {
+        "googleCalendar" : {
+            "service" : "google_calendar",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Google Calendar Today",
+            "libraryAlias" :"",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves today's events for a specified Google Calendar ID. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/calendar/v3/calendars/{{ds.googleCalendar.calendarID}}/events?timeMin={date.format(\"yyyy-MM-dd'T'00:00:00Z\")}&timeMax={date.format(\"yyyy-MM-dd'T'23:59:59Z\")}&singleEvents=true",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "googleCalendar" : "6f4352b2ddf541b85b14natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "google_calendar"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.googleCalendar.calendarID",
+            "label" : "Google Calendar ID",
+            "description":"Provide your Calendar ID.",
+            "isRequired" : true
+        }
+    ]
+}

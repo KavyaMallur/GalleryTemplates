@@ -1,0 +1,1199 @@
+{
+   "title": "My Calendar Today",
+   "id": "17808c77b63d06355d3071b952669187",
+   "workspace": {
+      "datasources": [
+         "6f4352b2ddf541b85b14natceewzhere"
+      ],
+      "dimensions": {
+         "w": 1496
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "461ffca0-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "62304398-1",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "concat(datevalue(today(),\"EEEE\"),\", \",datevalue(today(),\"MMM dd\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "today",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "EEEE"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": ", "
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "today",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "align": "c",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "89fea490-1",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "6f4352b2ddf541b85b14natceewzhere@/timeZone;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "6f4352b2ddf541b85b14natceewzhere",
+                                 "a": "/timeZone"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "align": "c",
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": "2",
+         "cols": 1,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ]
+            }
+         ]
+      },
+      {
+         "type": "html_tpl2",
+         "id": "ae5bc6d8-1",
+         "displayName": "HTML Template",
+         "components": [
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "c5b2190b-2",
+               "displayName": "URL",
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "sort(select(date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\",\"HH:mm\"),and((date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd\",\"EEEE\")=datevalue(today(),\"EEEE\")),(lookup(6f4352b2ddf541b85b14natceewzhere@/items/id;,6f4352b2ddf541b85b14natceewzhere@/items/id[preceding-sibling::attendees[self='true']/responseStatus];,6f4352b2ddf541b85b14natceewzhere@/items/attendees[self='true']/responseStatus;)!=\"declined\"))),\"ascnumeric\",select(6f4352b2ddf541b85b14natceewzhere@/items/htmlLink;,and((date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd\",\"EEEE\")=datevalue(today(),\"EEEE\")),(lookup(6f4352b2ddf541b85b14natceewzhere@/items/id;,6f4352b2ddf541b85b14natceewzhere@/items/id[preceding-sibling::attendees[self='true']/responseStatus];,6f4352b2ddf541b85b14natceewzhere@/items/attendees[self='true']/responseStatus;)!=\"declined\"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_convert",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                   "a": "/items/start/dateTime"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd'T'HH:mm"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "HH:mm"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_convert",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/start/dateTime"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/attendees[self='true']/responseStatus"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "declined"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "ascnumeric"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6f4352b2ddf541b85b14natceewzhere",
+                                             "a": "/items/htmlLink"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_convert",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/start/dateTime"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/attendees[self='true']/responseStatus"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "declined"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "mixin": "label",
+               "dataId": "KTURL"
+            },
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "c5ab6415-3",
+               "displayName": "Start Time",
+               "renamed": true,
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "h:mm tt"
+               },
+               "formulas": [
+                  {
+                     "txt": "sort(select(date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\",\"HH:mm\"),and((date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd\",\"EEEE\")=datevalue(today(),\"EEEE\")),(lookup(6f4352b2ddf541b85b14natceewzhere@/items/id;,6f4352b2ddf541b85b14natceewzhere@/items/id[preceding-sibling::attendees[self='true']/responseStatus];,6f4352b2ddf541b85b14natceewzhere@/items/attendees[self='true']/responseStatus;)!=\"declined\"))),\"ascnumeric\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_convert",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                   "a": "/items/start/dateTime"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd'T'HH:mm"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "HH:mm"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_convert",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/start/dateTime"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/attendees[self='true']/responseStatus"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "declined"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "ascnumeric"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "return values",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "mixin": "label",
+               "dataId": "KTstartTime"
+            },
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "059a0665-4",
+               "displayName": "Description",
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "sort(select(date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\",\"HH:mm\"),and((date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd\",\"EEEE\")=datevalue(today(),\"EEEE\")),(lookup(6f4352b2ddf541b85b14natceewzhere@/items/id;,6f4352b2ddf541b85b14natceewzhere@/items/id[preceding-sibling::attendees[self='true']/responseStatus];,6f4352b2ddf541b85b14natceewzhere@/items/attendees[self='true']/responseStatus;)!=\"declined\"))),\"ascnumeric\",select(6f4352b2ddf541b85b14natceewzhere@/items/summary;,and((date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd\",\"EEEE\")=datevalue(today(),\"EEEE\")),(lookup(6f4352b2ddf541b85b14natceewzhere@/items/id;,6f4352b2ddf541b85b14natceewzhere@/items/id[preceding-sibling::attendees[self='true']/responseStatus];,6f4352b2ddf541b85b14natceewzhere@/items/attendees[self='true']/responseStatus;)!=\"declined\"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_convert",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                   "a": "/items/start/dateTime"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd'T'HH:mm"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "HH:mm"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_convert",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/start/dateTime"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/attendees[self='true']/responseStatus"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "declined"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "ascnumeric"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6f4352b2ddf541b85b14natceewzhere",
+                                             "a": "/items/summary"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_convert",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/start/dateTime"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/attendees[self='true']/responseStatus"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "declined"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "mixin": "label",
+               "dataId": "KTDescription"
+            },
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "4748bea7-1",
+               "displayName": "End Time",
+               "renamed": true,
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "h:mm tt"
+               },
+               "formulas": [
+                  {
+                     "txt": "sort(select(date_convert(6f4352b2ddf541b85b14natceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\",\"HH:mm\"),and((date_convert(6f4352b2ddf541b85b14natceewzhere@/items/start/dateTime;,\"yyyy-MM-dd\",\"EEEE\")=datevalue(today(),\"EEEE\")),(lookup(6f4352b2ddf541b85b14natceewzhere@/items/id;,6f4352b2ddf541b85b14natceewzhere@/items/id[preceding-sibling::attendees[self='true']/responseStatus];,6f4352b2ddf541b85b14natceewzhere@/items/attendees[self='true']/responseStatus;)!=\"declined\"))),\"ascnumeric\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_convert",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                   "a": "/items/end/dateTime"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd'T'HH:mm"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "HH:mm"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_convert",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/start/dateTime"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "EEEE"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "6f4352b2ddf541b85b14natceewzhere",
+                                                               "a": "/items/attendees[self='true']/responseStatus"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "declined"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "ascnumeric"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "return values",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                    
+                  ]
+               ],
+               "mixin": "label",
+               "dataId": "KTendTime"
+            }
+         ],
+         "tpl": "<style type=\"text/css\">\n\n.KTstartTime {\n\twidth: 100px;\n\ttext-align: right;\n\tcolor: #333333;\n\tvertical-align: top;\n}\n\n.KTduration {\n\tcolor: #999999;\n\tfont-size:0.8em\n}\n\n.KTeventDescription {\n\tvertical-align: top;\n}\n\n</style>\n</head>\n\n<div>\n\n\n<table width=\"100%\" border=\"0\" cellspacing=\"0\" style=\"border-top: 1px solid;border-top-color: #E7E7E7;\">\n  <tbody>\n\n{{each data}}\n\n    <tr>\n      <td class=\"KTstartTime\" style=\"border-bottom: 1px solid;border-bottom-color: #E7E7E7;padding: 10px 5px 10px 0px;  \">${$value.KTstartTime}<BR><span class=\"KTduration\">${$value.KTendTime}</span></td>\n      <td class=\"KTeventDescription\" style=\"border-bottom: 1px solid;border-bottom-color: #E7E7E7;padding: 10px 0px 10px 5px;\"><a target=\"new\" href=\"${$value.KTURL}\">${$value.KTDescription}</a></td>\n    </tr>\n\n{{/each}}\n\n  </tbody>\n</table>\n\n\n</div>"
+      }
+   ]
+}
