@@ -1,0 +1,40 @@
+{
+    "name" : "YouTube Channel Subscribers",
+    "description" : "Retrieves channel subscribers lost vs. subscribers gained over the last 30 days. Originates from the Gallery.",
+
+    "datasources" : {
+        "youtube" : {
+            "service" : "youtube",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"YouTube Channel Metrics",
+            "libraryAlias" :"YouTubeChannelMetrics",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves a YouTube's channel key metrics. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/youtube/analytics/v1/reports?ids=channel=={{ds.youtube.channelID}}&start-date={date.add(-30).format()}&end-date={date.today}&metrics=views,subscribersGained,subscribersLost&dimensions=day&sort=day",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "youtube" : "e07b08f7b3830146c007natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "youtube"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.youtube.channelID",
+            "label" : "YouTube Channel ID",
+            "description":"Provide the channel ID to monitor.",
+            "isRequired" : true
+        }
+    ]
+}

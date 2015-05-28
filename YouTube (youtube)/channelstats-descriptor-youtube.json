@@ -1,0 +1,40 @@
+{
+    "name" : "YouTube Channel Statistics",
+    "description" : "Retrieves channel statistics for a YouTube channel. Originates from the Gallery.",
+
+    "datasources" : {
+        "youtube" : {
+            "service" : "youtube",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"YouTube Channel Statistics",
+            "libraryAlias" :"YouTubeChannelStatistics",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves a YouTube's channel statistics. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/youtube/v3/channels?part=statistics&id={{ds.youtube.channelID}}",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "youtube" : "2a29c286f6491861972enatceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "youtube"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.youtube.channelID",
+            "label" : "YouTube Channel ID",
+            "description":"Provide the channel ID to monitor.",
+            "isRequired" : true
+        }
+    ]
+}
