@@ -1,0 +1,45 @@
+{
+    "name" : "YouTube Top 10 Videos by Views",
+    "description" : "See which of your videos are attracting the most views. Originates from the Gallery.",
+
+    "datasources" : {
+        "youtube-01" : {
+            "service" : "youtube",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Youtube Top 10 Most Viewed Videos",
+            "libraryAlias" :"YoutubeTop10MostViewedVideos",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves a list of the top 10 YouTube videos on your channel. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/youtube/v3/search?order=viewCount&part=snippet&forMine=true&type=video&maxResults=50",
+                "method": "get"
+            }
+        },
+        "youtube-02" : {
+            "service" : "youtube",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Youtube Top 10 Videos Viewed Stats",
+            "libraryAlias" :"YoutubeTop10VideosViewedStats",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves a list of the top 10 YouTube videos on your channel. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/youtube/analytics/v1/reports?ids=channel%3D%3DMINE&start-date=2005-01-01&end-date={date.today}&metrics=estimatedMinutesWatched%2Cviews%2Clikes%2CsubscribersGained&dimensions=video&max-results=10&sort=-views",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "youtube-01" : "a1eadd554db4e29064dfniktawuzhere",
+        "youtube-02" : "8870d3cdbe0195fe080fniktawuzhere"
+
+    },
+
+    "services" : [
+        {
+            "service" : "youtube"
+        }
+    ]
+}
