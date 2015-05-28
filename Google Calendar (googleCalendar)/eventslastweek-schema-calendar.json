@@ -1,0 +1,986 @@
+{
+   "title": "Time Spent in Meetings (Previous Week)",
+   "id": "45794873bd4e898534ccd10f698876ce",
+   "workspace": {
+      "datasources": [
+         "d3608049f824bdadf24dnatceewzhere"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "label",
+         "id": "7af38e96-1",
+         "displayName": "Label",
+         "size": "1",
+         "fmt": "txt",
+         "formulas": [
+            {
+               "txt": "concat(datevalue(date_startof(date_add(today(),\"4\",\"-1\"),\"4\",\"sun\"),\"EEE MMM dd\"),\" to \",datevalue(date_endof(date_add(today(),\"4\",\"-1\"),\"4\",\"sun\"),\"EEE MMM dd\"))",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "4"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "4"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "relative value",
+                                             "optional": true
+                                          }
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "sun"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "EEE MMM dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": " to "
+                           },
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "4"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "4"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "relative value",
+                                             "optional": true
+                                          }
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "sun"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "EEE MMM dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "panel_grid",
+         "id": "27fd5558-7",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "gauge",
+               "id": "40a42fad-6",
+               "displayName": "Gauge",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "size": 2,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "4f956e88-7",
+                     "displayName": "Current Value",
+                     "size": "2",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "0"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "((sum((select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\"))-select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\")))))/\"3600\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "54beb7cd-5"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "3600"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           
+                        ]
+                     ],
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "dfa4f35a-8",
+                     "displayName": "Target Value",
+                     "size": 2,
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "4efcc684-9",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           
+                        ]
+                     ],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "22c5c900-10",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "if(($KTWeeklyWorkHours>\"0\"),$KTWeeklyWorkHours,\"37.5\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "var",
+                                                "v": "KTWeeklyWorkHours"
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": ">"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "var",
+                                          "v": "KTWeeklyWorkHours"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "37.5"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           
+                        ]
+                     ],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "d1578abc-4",
+                     "displayName": "Range",
+                     "renamed": true,
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "29b4b69b-5",
+                           "displayName": "Start",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "\"0\"",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                                 
+                              ]
+                           ]
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "3607ba0a-6",
+                           "displayName": "End",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "((sum((select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\"))-select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\")))))/\"3600\")",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "54beb7cd-5"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "3600"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 2,
+                     "color": "cx-theme_red_3"
+                  }
+               ],
+               "gaugeStyle": "hg"
+            },
+            {
+               "type": "simple_value",
+               "id": "98d3aea8-4",
+               "displayName": "Time in Meetings",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "54beb7cd-5",
+                     "displayName": "Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "durationFormat": "hh:mm"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum((select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\"))-select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\"))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d3608049f824bdadf24dnatceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d3608049f824bdadf24dnatceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                     "a": "/items/end/dateTime"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-MM-dd'T'HH:mm"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "lookup",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                     "a": "/items/id"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                     "a": "/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus]"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "date",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                           "a": "/items/end/dateTime"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "yyyy-MM-dd'T'HH:mm"
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": ">"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "0"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lookup",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d3608049f824bdadf24dnatceewzhere",
+                                                               "a": "/items/id"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d3608049f824bdadf24dnatceewzhere",
+                                                               "a": "/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus]"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                     "a": "/items/start/dateTime"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-MM-dd'T'HH:mm"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "lookup",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                     "a": "/items/id"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                     "a": "/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus]"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "date",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d3608049f824bdadf24dnatceewzhere",
+                                                                           "a": "/items/start/dateTime"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "yyyy-MM-dd'T'HH:mm"
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": ">"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "0"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "align": "c"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "8163936c-6",
+                     "displayName": "Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Hours in Meetings\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Hours in Meetings"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "align": "c",
+                     "font_style": "regular"
+                  }
+               ]
+            },
+            {
+               "type": "simple_value",
+               "id": "bcb99ddb-8",
+               "displayName": "Percentage of Time in Meetings",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 1
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "85a1baef-9",
+                     "displayName": "Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "formulas": [
+                        {
+                           "txt": "if(($KTWeeklyWorkHours>\"0\"),(((sum((select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\"))-select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\")))))/\"3600\")/($KTWeeklyWorkHours)),(((sum((select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/end/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\"))-select(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\")),(lookup(d3608049f824bdadf24dnatceewzhere@/items/id;,d3608049f824bdadf24dnatceewzhere@/items/id[preceding-sibling::attendees[self='true' and responseStatus!='declined']/responseStatus];,date(d3608049f824bdadf24dnatceewzhere@/items/start/dateTime;,\"yyyy-MM-dd'T'HH:mm\"))>\"0\")))))/\"3600\")/(\"37.5\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "var",
+                                                "v": "KTWeeklyWorkHours"
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": ">"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "54beb7cd-5"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "3600"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "var",
+                                                      "v": "KTWeeklyWorkHours"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "54beb7cd-5"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "3600"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "l",
+                                                      "v": "37.5"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "align": "c"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "5f5ab297-10",
+                     "displayName": "Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"% of Total Work Hours\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "% of Total Work Hours"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "align": "c",
+                     "font_style": "regular"
+                  }
+               ]
+            },
+            {
+               "type": "label",
+               "id": "04dbc89a-7",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Weekly Work Hours:\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Weekly Work Hours:"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "input",
+               "id": "d84573f5-11",
+               "displayName": "Weekly Work Hours",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 2
+               },
+               "renamed": true,
+               "components": [],
+               "scope": 1,
+               "propName": "KTWeeklyWorkHours",
+               "inputType": 2,
+               "defaultValue": "37.5",
+               "controlWidth": true,
+               "width": "90"
+            }
+         ],
+         "rows": "3",
+         "cols": 2,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 1
+            },
+            {
+               "x": 0,
+               "y": 2,
+               "alignment": 1
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "w": 2
+            },
+            {
+               "x": 1,
+               "y": 2,
+               "alignment": 1
+            }
+         ]
+      }
+   ]
+}
