@@ -1,10 +1,10 @@
 {
    "title": "GoSquared Bounce Rate (Today)",
-   "id": "191c3e5004fa8b3bee38832faa393295",
+   "id": "3cf2658c45d21b867730ba775edd2ac8",
    "workspace": {
       "datasources": [
-         "f7d640e366f007f74bf2niktawuzhere",
-         "5c41f98b28731673331cniktawuzhere"
+         "5c41f98b28731673331cniktawuzhere",
+         "f7d640e366f007f74bf2niktawuzhere"
       ],
       "dimensions": {
          "w": 589
@@ -13,12 +13,12 @@
    "components": [
       {
          "type": "panel_grid",
-         "id": "199238f9-1",
+         "id": "f6bc29d5",
          "displayName": "Layout Grid",
          "components": [
             {
                "type": "label",
-               "id": "0a2d9f13-3",
+               "id": "07928c06",
                "displayName": "Today's Rate",
                "layoutConfig": {
                   "x": 0,
@@ -32,43 +32,100 @@
                },
                "formulas": [
                   {
-                     "txt": "slice(5c41f98b28731673331cniktawuzhere@O:O;,\"-1\")/\"100\"",
+                     "txt": "(select(5c41f98b28731673331cniktawuzhere@/list/metrics/bounce_rate;,(date_convert(5c41f98b28731673331cniktawuzhere@/list/from;,\"yyyy-MM-dd'T'HH:mm:ss\",\"yyyy-MM-dd\")=datevalue(today(),\"yyyy-MM-dd\")))/\"100\")",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "f",
-                              "v": "slice",
+                              "t": "expr",
+                              "v": false,
                               "c": [
                                  {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "5c41f98b28731673331cniktawuzhere",
-                                       "a": "O:O"
-                                    }
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5c41f98b28731673331cniktawuzhere",
+                                             "a": "/list/metrics/bounce_rate"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "5c41f98b28731673331cniktawuzhere",
+                                                         "a": "/list/from"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd'T'HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "datevalue",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
                                  },
                                  {
                                     "t": "l",
-                                    "v": "-1"
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "end",
-                                       "optional": true
-                                    }
+                                    "v": "100"
                                  }
                               ]
-                           },
-                           {
-                              "t": "o",
-                              "v": "/"
-                           },
-                           {
-                              "t": "l",
-                              "v": "100"
                            }
                         ]
                      }
@@ -76,13 +133,14 @@
                ],
                "data": [
                   [
+                     
                   ]
                ],
                "wrap": true
             },
             {
                "type": "label",
-               "id": "07aa4bd6-5",
+               "id": "5eb10ec0",
                "displayName": "Month's Rate",
                "layoutConfig": {
                   "x": 1,
@@ -97,7 +155,7 @@
                },
                "formulas": [
                   {
-                     "txt": "f7d640e366f007f74bf2niktawuzhere@O2;/\"100\"",
+                     "txt": "f7d640e366f007f74bf2niktawuzhere@/list/metrics/bounce_rate;/\"100\"",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -106,7 +164,7 @@
                               "t": "d",
                               "v": {
                                  "id": "f7d640e366f007f74bf2niktawuzhere",
-                                 "a": "O2"
+                                 "a": "/list/metrics/bounce_rate"
                               }
                            },
                            {
@@ -123,6 +181,7 @@
                ],
                "data": [
                   [
+                     
                   ]
                ],
                "align": "r",
@@ -131,7 +190,7 @@
             },
             {
                "type": "mini_series",
-               "id": "fe7c5357-7",
+               "id": "b49bd5e8",
                "displayName": "Sparkline",
                "layoutConfig": {
                   "x": 1,
@@ -142,47 +201,26 @@
                   {
                      "type": "mini_data",
                      "role": "series",
-                     "id": "5d0c662e-8",
-                     "displayName": "Series 1",
+                     "id": "7ddb4b2a",
+                     "displayName": "Trend",
+                     "renamed": true,
                      "fmt": "pct",
                      "fmtArgs": {
                         "precision": "1"
                      },
                      "formulas": [
                         {
-                           "txt": "slice(5c41f98b28731673331cniktawuzhere@O:O;)/\"100\"",
+                           "txt": "5c41f98b28731673331cniktawuzhere@/list/metrics/bounce_rate;/\"100\"",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "5c41f98b28731673331cniktawuzhere",
-                                             "a": "O:O"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
+                                    "t": "d",
+                                    "v": {
+                                       "id": "5c41f98b28731673331cniktawuzhere",
+                                       "a": "/list/metrics/bounce_rate"
+                                    }
                                  },
                                  {
                                     "t": "o",
@@ -198,7 +236,7 @@
                      ],
                      "data": [
                         [
-                           
+                          
                         ]
                      ],
                      "seriesId": 1
@@ -206,7 +244,7 @@
                   {
                      "type": "label",
                      "role": "last-value",
-                     "id": "31f1ebdc-9",
+                     "id": "6fccb785",
                      "displayName": "Last Value",
                      "size": 3,
                      "fmt": "num",
@@ -227,7 +265,7 @@
                      ],
                      "data": [
                         [
-                           0
+                           
                         ]
                      ],
                      "dataDisabled": true
