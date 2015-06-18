@@ -1,0 +1,602 @@
+{
+   "title": "Monthly Account Retention Rate",
+   "id": "586ee04c3a4f11270d3718a16fd91e08",
+   "workspace": {
+      "datasources": [
+         "37ce0c981c664aaaa164niktawuzhere"
+      ],
+      "dimensions": {
+         "w": 447
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "94355673-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "99311c55-2",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Account Retention\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Account Retention"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     "Account Retention"
+                  ]
+               ],
+               "align": "c",
+               "font_colour": "cx-color_aaa",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "gauge",
+               "id": "a1603558",
+               "displayName": "Gauge",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "size": 2,
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "cx": "cb8919dc"
+                           },
+                           "type": "lt",
+                           "right": {
+                              "cx": "3c980655"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "value": "cx-theme_red_3",
+                           "isScalar": true,
+                           "type": "color"
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "cx": "cb8919dc"
+                           },
+                           "type": "gt",
+                           "right": {
+                              "cx": "3c980655"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "value": "cx-theme_green_3",
+                           "isScalar": true,
+                           "type": "color"
+                        }
+                     ]
+                  }
+               ],
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "cb8919dc",
+                     "displayName": "Current Value",
+                     "size": "2",
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "2",
+                        "prefix": "Actual:  ",
+                        "suffix": " Acct. Retention"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"1\"-(slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,3:3;,\"-1\")/slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,4:4;,\"-1\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "1"
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "-"
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "37ce0c981c664aaaa164niktawuzhere",
+                                                   "a": "retention and expansion,3:3"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "37ce0c981c664aaaa164niktawuzhere",
+                                                   "a": "retention and expansion,4:4"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "3c980655",
+                     "displayName": "Target Value",
+                     "size": "1",
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1",
+                        "prefix": "Target: "
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"0.99\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0.99"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "font_colour": "cx-color_888"
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "0bae530e",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "pct",
+                     "formulas": [
+                        {
+                           "txt": "\"0.97\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0.97"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "b8a1e01e",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "pct",
+                     "formulas": [
+                        {
+                           "txt": "\"1\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "1"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ],
+               "gaugeStyle": "ag"
+            },
+            {
+               "type": "label",
+               "id": "360e5171-3",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Actual:\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Actual:"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     "Actual:"
+                  ]
+               ],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "ac89d0b2-4",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 2
+               },
+               "size": "2",
+               "fmt": "pct",
+               "fmtArgs": {
+                  "precision": "2"
+               },
+               "formulas": [
+                  {
+                     "txt": "(\"1\"-(slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,3:3;,\"-1\")/slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,4:4;,\"-1\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "ref",
+                              "v": {
+                                 "r": "cx",
+                                 "cx": "cb8919dc"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                  ]
+               ],
+               "wrap": true
+            },
+            {
+               "type": "chart_series",
+               "id": "2c34e072",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "eb93f0cf",
+                     "displayName": "Account Retention Rate",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "(\"1\"-(slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,3:3;)/slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,4:4;)))*\"100\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "37ce0c981c664aaaa164niktawuzhere",
+                                                         "a": "retention and expansion,3:3"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "37ce0c981c664aaaa164niktawuzhere",
+                                                         "a": "retention and expansion,4:4"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "*"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "100"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                          
+                        ]
+                     ],
+                     "seriesName": "Account Retention Rate",
+                     "renderer": "line",
+                     "chartStyle": "line_area",
+                     "lineStyle": "curve",
+                     "axis": "cc98566a"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "6535ae44",
+                     "displayName": "Month",
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "slice(37ce0c981c664aaaa164niktawuzhere@retention and expansion,1:1;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "37ce0c981c664aaaa164niktawuzhere",
+                                             "a": "retention and expansion,1:1"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "label": "Month",
+                     "labelDrop": 0
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "cc98566a",
+                     "displayName": "Retention Rate Percentage",
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Retention Rate Percentage",
+                     "showAxis": false,
+                     "customRange": true,
+                     "min": "98",
+                     "max": "100",
+                     "customInterval": true,
+                     "tickInterval": "1",
+                     "labelDrop": 0,
+                     "grid": true
+                  }
+               ],
+               "height": "5",
+               "customHeight": "40",
+               "showLegend": false
+            }
+         ],
+         "rows": "4",
+         "cols": "2",
+         "cellData": [
+            {
+               "x": 0,
+               "y": 1,
+               "w": 2,
+               "alignment": 1
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "w": 2
+            },
+            {
+               "x": 0,
+               "y": 3,
+               "w": 2,
+               "cellPadding": [
+                  15,
+                  5,
+                  5,
+                  5
+               ]
+            }
+         ]
+      }
+   ]
+}
