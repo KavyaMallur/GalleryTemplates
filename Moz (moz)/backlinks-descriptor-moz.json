@@ -1,0 +1,64 @@
+{
+	"name" : "Moz Backlinks",
+	"description": "Show your backlinks and compare it with your competitors. Originates from the Gallery.",
+
+	"datasources" : {
+		"moz-01" : {
+			"service": "moz",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Moz URL Metrics",
+			"libraryAlias": "MozURLMetrics",
+			"refreshInterval": 14400,
+			"description": "Show your Moz URL stats. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "http://lsapi.seomoz.com/linkscape/url-metrics/www.klipfolio.com?Cols=182537206068411005&AccessID=mozscape-b6838361ee&Expires={hash.getExpiryTime(240);}&Signature={hash.append(\"mozscape-b6838361ee\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"9887092bac75d979d853f3bdfe1924c3\").encodeBase64().encodeURL().printDigest();}",
+				"method": "get"
+			}
+		},
+		"moz-02" : {
+			"service": "moz",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Moz Competitor URL Metrics",
+			"libraryAlias": "MozCompetitorURLMetrics",
+			"refreshInterval": 14400,
+			"description": "Show your competitors's Moz URL stats. Originates from the Gallery.",
+			"props": {
+				"body": "[\"{{ds.moz.competitor1}}\",\"{{ds.moz.competitor2}}\",\"{{ds.moz.competitor3}}\"]",
+				"endpoint_url": "https://lsapi.seomoz.com/linkscape/url-metrics/?Cols=182537206068411005&AccessID=mozscape-b6838361ee&Expires={hash.getExpiryTime(240);}&Signature={hash.append(\"mozscape-b6838361ee\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"9887092bac75d979d853f3bdfe1924c3\").encodeBase64().encodeURL().printDigest();}",
+				"method": "post"
+			}
+		}
+	},
+
+	"dsMappings": {
+		"moz-01": "594a15851caf8d4f5fb4natceewzhere",
+		"moz-02": "82abc91ed7bd1010dbc1natceewzhere"
+	},
+	"services" : [
+		{
+			"service" : "moz"
+		}
+	],
+
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.moz.competitor1",
+            "label" : "Competitor 1 URL",
+            "description": ""   },
+        {
+            "type" : "text",
+            "id" : "ds.moz.competitor2",
+            "label" : "Competitor 2 URL",
+            "description":""   },
+        {
+            "type" : "text",
+            "id" : "ds.moz.competitor3",
+            "label" : "Competitor 3 URL",
+            "description":""   }
+
+    ]
+
+}

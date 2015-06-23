@@ -1,0 +1,40 @@
+{
+    "name" : "Facebook Ads Today's Summary",
+    "description" : "The cost per impressions and cost per 1000 people reached. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "facebookAds-01" : {
+            "service" : "facebook_ads",
+            "libraryAlias" : "FacebookAdsMetrics",
+            "name": "Facebook Ads Metrics",
+            "description" : "Information on today's Facebook Ads Campaign metrics. Originates from the Gallery.",
+            "type" : "facebook",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://graph.facebook.com/v2.3/act_{{ds.facebook_ads.accountID}}/insights?level=adgroup&date_preset=today&sort=spend_descending&fields=campaign_group_name,campaign_name,adgroup_name,campaign_group_id,campaign_id,adgroup_id,spend,unique_clicks,cost_per_unique_click,cpm,ctr,campaign_start,objective,relevance_score,action_values,actions,cost_per_action_type",
+                "graphUrl": "https://graph.facebook.com/v2.3/act_{{ds.facebook_ads.accountID}}/reportstats?date_preset=last_7_days&data_columns=account_id,cpm,cpp,spend,impressions,reach,clicks&time_increment=1",
+                "qtype": "Graph API"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "facebookAds-01" : "c72b0ebaeb77f4d613fbnatceewzhere" 
+    },
+
+    "services" : [
+        {
+            "service" : "facebook_ads"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.facebook_ads.accountID",
+            "label" : "Facebook Account ID",
+            "description":"To find your Facebook Ads Account ID, follow the steps in <a href='#' target='_blank'>Klip Gallery: Facebook Ads</a>."   }
+    ]
+}
