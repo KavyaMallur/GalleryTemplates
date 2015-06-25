@@ -1,0 +1,41 @@
+{
+    "name" : "Shopify Avg. Number of Orders per Customer (Last 200 Customers)",
+    "description" : ". Originates from the Gallery.",
+
+    "datasources" : {
+        "shopify" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Last 200 Customers",
+            "libraryAlias" :"ShopifyLast200Customers",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves information on your last 200 orders. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{ds.shopify.shopName}}.myshopify.com/admin/customers.json?limit=200&order=created_at%20desc",
+                "method": "get",
+                "use_pagination":  false
+            }
+        }
+    },
+
+    "dsMappings": {
+        "shopify" : "c3b491288991c140b831natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "shopify"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.shopify.shopName",
+            "label" : "Shop name",
+            "description":"Your Shopify name. To learn more, see <a href='#' target='blank'>Klip Gallery: Shopify</a>.",
+            "isRequired" : true
+        }
+    ]
+} 
