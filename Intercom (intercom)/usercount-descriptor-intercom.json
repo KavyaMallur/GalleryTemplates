@@ -1,0 +1,34 @@
+{
+	"name" : "Intercom User Count",
+	"description": "Show your current user count. Originates from the Gallery.",
+
+	"datasources" : {
+		"intercom-01" : {
+			"service": "intercom",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Intercom company, user, tag and segment counts",
+			"libraryAlias": "IntercomCounts",
+			"refreshInterval": 86400,
+			"description": "Monitor your user, company, tag and segment count. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.intercom.io/counts",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Accept\",\"value\":\"application/json\",\"type\":\"header\"}]",
+				"auth_method" : "basic",
+                "basic_auth_username" : "{{auth.intercom.username}}",
+                "basic_auth_password" : "{{auth.intercom.password}}",
+			}
+		}
+	},
+
+	"dsMappings": {
+		"intercom-01": "21bb96fd37295d568natceewzhere"
+	},
+	"services" : [
+		{
+			"service" : "intercom"
+		}
+	]
+
+}
