@@ -1,0 +1,41 @@
+{
+	"name" : "Intercom Top 10 User Segments",
+	"description": "Show your top 10 user segments. Originates from the Gallery.",
+
+	"datasources" : {
+		"intercom-01" : {
+			"service": "intercom",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Intercom user count by segment",
+			"libraryAlias": "IntercomUsersBySegment",
+			"refreshInterval": 86400,
+			"description": "Monitor user count by segment. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.intercom.io/counts?type=user&count=segment",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Accept\",\"value\":\"application/json\",\"type\":\"header\"}]",
+				"auth_method" : "basic",
+                "basic_auth_username" : "{{auth.intercom.username}}",
+                "basic_auth_password" : "{{auth.intercom.password}}",
+			}
+		}
+	},
+
+	"dsMappings": {
+		"intercom-01": "b40f5ea94f9c8a39e669natceewzhere"
+						
+
+	},
+	"uiVariables": [
+        {
+            "name":"KTIntercomIndex" 
+        }
+    ],
+	"services" : [
+		{
+			"service" : "intercom"
+		}
+	]
+
+} 
