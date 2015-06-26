@@ -1,0 +1,359 @@
+{
+   "title": "Shopify Total Amount Sold (Last 100 Orders)",
+   "id": "9858456c2d4371e21ba62aa5ee5a21dd",
+   "workspace": {
+      "datasources": [
+         "0da3864b7e6d0c63ad64natceewzhere"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "gauge",
+         "id": "46f1a95f-6",
+         "displayName": "Gauge",
+         "size": 2,
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "4b62713a-7"
+                     },
+                     "type": "gt",
+                     "right": {
+                        "cx": "9dbea33d-8"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_green_3",
+                     "isScalar": true
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "4b62713a-7"
+                     },
+                     "type": "lt",
+                     "right": {
+                        "cx": "9dbea33d-8"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_orange_3",
+                     "isScalar": true
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "4b62713a-7"
+                     },
+                     "type": "eq",
+                     "right": {
+                        "cx": "9dbea33d-8"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_blue_3",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "4b62713a-7",
+               "displayName": "Current Value",
+               "size": 3,
+               "fmt": "cur",
+               "formulas": [
+                  {
+                     "txt": "sum(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"0\",\"100\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"0\",\"100\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sort",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                   "a": "/orders/created_at"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "desc"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                   "a": "/orders/total_price_usd"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ]
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "9dbea33d-8",
+               "displayName": "Target Value",
+               "size": 2,
+               "fmt": "cur",
+               "formulas": [
+                  {
+                     "txt": "sum(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"100\",\"200\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"100\",\"200\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sort",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                   "a": "/orders/created_at"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "200"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "desc"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                   "a": "/orders/total_price_usd"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "200"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "font_colour": "cx-color_888"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "bca5e0c6-9",
+               "displayName": "Min Value",
+               "size": 1,
+               "fmt": "cur",
+               "formulas": [
+                  {
+                     "txt": "\"0\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "c95e6165-10",
+               "displayName": "Max Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "max((sum(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"0\",\"100\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"0\",\"100\")))),(sum(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"100\",\"200\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"100\",\"200\")))))*\"1.25\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "max",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "4b62713a-7"
+                                    }
+                                 },
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "9dbea33d-8"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "values",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "o",
+                              "v": "*"
+                           },
+                           {
+                              "t": "l",
+                              "v": "1.25"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            }
+         ],
+         "gaugeStyle": "hg"
+      }
+   ]
+}
