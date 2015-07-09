@@ -1,0 +1,442 @@
+{
+   "title": "Shopify Avg Order Amount (Last 100 Orders)",
+   "id": "666d77903c2ec875a3adb70386974181",
+   "workspace": {
+      "datasources": [
+         "0da3864b7e6d0c63ad64natceewzhere"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "a08a0571-7",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "c01dbfba-4",
+               "displayName": "Average ",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "ca401919-5",
+                     "displayName": "Current",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "cur",
+                     "formulas": [
+                        {
+                           "txt": "average(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"0\",\"100\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"0\",\"100\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                         "a": "/orders/created_at"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "desc"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                         "a": "/orders/total_price_usd"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "dd0c28dc-6",
+                     "displayName": "Prev",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "cur",
+                     "fmtArgs": {
+                        "prefix": "Compared to ",
+                        "suffix": " for prev 100 orders"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "average(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"100\",\"200\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"100\",\"200\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                         "a": "/orders/created_at"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "200"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "desc"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                         "a": "/orders/total_price_usd"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "200"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                          
+                        ]
+                     ],
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "label",
+               "id": "e3c88569-11",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "size": "3",
+               "fmt": "pct",
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "(((average(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"0\",\"100\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"0\",\"100\"))))-(average(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"100\",\"200\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"100\",\"200\")))))/(average(sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"100\",\"200\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"100\",\"200\")))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ca401919-5"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "dd0c28dc-6"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "dd0c28dc-6"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "mini_series",
+               "id": "a13c3f24-12",
+               "displayName": "Sparkline",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "size": 3,
+               "components": [
+                  {
+                     "type": "mini_data",
+                     "role": "series",
+                     "id": "11460a0e-13",
+                     "displayName": "Current 100 Orders",
+                     "renamed": true,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "sort(slice(0da3864b7e6d0c63ad64natceewzhere@/orders/created_at;,\"0\",\"100\"),\"desc\",slice(0da3864b7e6d0c63ad64natceewzhere@/orders/total_price_usd;,\"0\",\"100\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sort",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                   "a": "/orders/created_at"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "desc"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                   "a": "/orders/total_price_usd"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           
+                        ]
+                     ],
+                     "seriesId": 1
+                  },
+                  {
+                     "type": "label",
+                     "role": "last-value",
+                     "id": "aec355d5-14",
+                     "displayName": "Last Value",
+                     "size": 3,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                           
+                        ]
+                     ],
+                     "dataDisabled": true
+                  }
+               ],
+               "lastValueSeries": "hidden"
+            }
+         ],
+         "rows": 2,
+         "cols": 2,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 1,
+               "w": 2
+            }
+         ]
+      }
+   ]
+}
