@@ -1,31 +1,32 @@
 {
-   "title": "Order Information",
-   "id": "6d5d93a777b597d7b2fe339580f31137",
+   "title": "Order Status",
+   "id": "66f0d308ef35013df98a2c2a17f5eaf1",
    "workspace": {
       "dimensions": {
          "w": 445
       },
       "datasources": [
-         "0a6c043dfb0226544fb6kavyamallur9"
+         "0a6c043dfb0226544fb6natceewzhere",
+         "da593949811736c8f727natceewzhere"
       ]
    },
    "components": [
       {
          "type": "label",
-         "id": "8098ca62-1",
+         "id": "f73a3953-1",
          "displayName": "Label",
-         "size": "1",
+         "size": "2",
          "fmt": "txt",
          "formulas": [
             {
-               "txt": "\"Show all orders and units where status is \\\"Delayed\\\". Uses SELECT\"",
+               "txt": "\"GROUP, GROUP_BY\"",
                "src": {
                   "t": "expr",
                   "v": false,
                   "c": [
                      {
                         "t": "l",
-                        "v": "Show all orders and units where status is \"Delayed\". Uses SELECT"
+                        "v": "GROUP, GROUP_BY"
                      }
                   ]
                }
@@ -39,147 +40,1453 @@
          "wrap": true
       },
       {
-         "type": "table",
-         "id": "bd63ed4b-1",
-         "displayName": "Table",
+         "type": "panel_grid",
+         "id": "e0b6943f-1",
+         "displayName": "Layout Grid",
          "components": [
             {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "4c367ba6-2",
-               "displayName": "Order Id",
-               "size": 1,
-               "fmt": "txt",
+               "type": "chart_series",
+               "id": "0c42455a-1",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
                "components": [
                   {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "9cfe55f0-3",
-                     "displayName": "Unnamed 1 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "select(0a6c043dfb0226544fb6kavyamallur9@Sheet1,D:D;,(0a6c043dfb0226544fb6kavyamallur9@Sheet1,F:F;=\"Delayed\"))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "select",
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "7f825533-2",
+                     "displayName": "Units",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "groupby(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,E:E;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
                               "c": [
                                  {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "0a6c043dfb0226544fb6kavyamallur9",
-                                       "a": "Sheet1,D:D"
-                                    }
-                                 },
-                                 {
-                                    "t": "expr",
-                                    "v": false,
+                                    "t": "f",
+                                    "v": "groupby",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "0a6c043dfb0226544fb6kavyamallur9",
-                                             "a": "Sheet1,F:F"
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,E:E"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
                                           }
-                                       },
-                                       {
-                                          "t": "o",
-                                          "v": "="
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "Delayed"
                                        }
                                     ]
                                  }
                               ]
                            }
+                        }
+                     ],
+                     "data": [
+                        [
+
                         ]
-                     }
+                     ],
+                     "seriesName": "Units",
+                     "axis": "4af9c76c-4"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "ffc361e1-3",
+                     "displayName": "State",
+                     "renamed": true,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "group(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "label": "Untitled",
+                     "labelAngle": "-45",
+                     "labelDrop": 0,
+                     "showLabelTicks": true
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "4af9c76c-4",
+                     "displayName": "Untitled",
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Untitled",
+                     "labelDrop": 0,
+                     "grid": true
                   }
-               ],
-               "data": [
-                  [
-                     
-                  ]
-               ],
-               "name": "Order Id",
-               "index": 0,
-               "align": "c",
-               "font_style": "bold"
+               ]
             },
             {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "aa48a973-8",
-               "displayName": "Units",
-               "size": 1,
-               "fmt": "num",
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "f4c934cf-9",
-                     "displayName": "Unnamed 4 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
+               "type": "label",
+               "id": "96b9c08a-2",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "size": "2",
+               "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "select(0a6c043dfb0226544fb6kavyamallur9@Sheet1,E:E;,(0a6c043dfb0226544fb6kavyamallur9@Sheet1,F:F;=\"Delayed\"))",
+                     "txt": "sum(select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,E:E;),and((slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"On Time\"),(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,A:A;)=\"Southwest\"))))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "select",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,E:E"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,F:F"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "On Time"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "Southwest"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "wrap": true
+            },
+            {
+               "type": "chart_series",
+               "id": "29861519",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "c963bd8c",
+                     "displayName": "Delayed Units",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "groupby(select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"Delayed\")),select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,E:E;),((slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"Delayed\"))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "groupby",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                         "a": "Sheet1,B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,F:F"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "Delayed"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                         "a": "Sheet1,E:E"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                                     "a": "Sheet1,F:F"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Delayed"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "seriesName": "Delayed Units",
+                     "axis": "e69eb377"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "da72243d",
+                     "displayName": "State",
+                     "renamed": true,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "group(select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"Delayed\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                         "a": "Sheet1,B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,F:F"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "Delayed"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "label": "Untitled",
+                     "labelAngle": "-45",
+                     "labelDrop": 0,
+                     "showLabelTicks": true
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "e69eb377",
+                     "displayName": "Untitled",
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Untitled",
+                     "labelDrop": 0,
+                     "grid": true
+                  }
+               ]
+            },
+            {
+               "type": "label",
+               "id": "9a6b000d-3",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"GROUP, GROUP_BY, SELECT, and LOOKUP\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "GROUP, GROUP_BY, SELECT, and LOOKUP"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "wrap": true
+            },
+            {
+               "type": "chart_series",
+               "id": "f0b01f4d",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 4
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "a2815d12",
+                     "displayName": "Units",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "groupby(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,E:E;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "groupby",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,E:E"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "seriesName": "Units",
+                     "axis": "593e27fe"
+                  },
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "c861996d-2",
+                     "displayName": "Delayed Units",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "lookup((group(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;))),group(select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"Delayed\"))),groupby(select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"Delayed\")),select(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,E:E;),(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,F:F;)=\"Delayed\"))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "6f5521a0"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "group",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                                     "a": "Sheet1,F:F"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Delayed"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "groupby",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                                     "a": "Sheet1,F:F"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Delayed"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                               "a": "Sheet1,E:E"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                                     "a": "Sheet1,F:F"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Delayed"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "method",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "seriesName": "Delayed Units",
+                     "axis": "593e27fe"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "6f5521a0",
+                     "displayName": "State3",
+                     "renamed": true,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "group(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "label": "Untitled",
+                     "labelAngle": "-45",
+                     "labelDrop": 0,
+                     "showLabelTicks": true
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "593e27fe",
+                     "displayName": "Untitled",
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Untitled",
+                     "labelDrop": 0,
+                     "grid": true
+                  }
+               ]
+            }
+         ],
+         "rows": "5",
+         "cols": 3,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "w": 3
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "w": 3
+            },
+            {
+               "x": 0,
+               "y": 2,
+               "w": 3
+            },
+            {
+               "x": 0,
+               "y": 3,
+               "w": 3
+            },
+            {
+               "x": 0,
+               "y": 4,
+               "w": 3
+            }
+         ]
+      },
+      {
+         "type": "tile_map",
+         "id": "2232795f-1",
+         "displayName": "Map",
+         "size": 2,
+         "components": [
+            {
+               "type": "proxy",
+               "role": "tile_ids",
+               "id": "09d7f164-2",
+               "displayName": "Region ID",
+               "formulas": [
+                  {
+                     "txt": "slice(da593949811736c8f727natceewzhere@Sheet1,A:A;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
                               "c": [
                                  {
                                     "t": "d",
                                     "v": {
-                                       "id": "0a6c043dfb0226544fb6kavyamallur9",
-                                       "a": "Sheet1,E:E"
+                                       "id": "da593949811736c8f727natceewzhere",
+                                       "a": "Sheet1,A:A"
                                     }
                                  },
                                  {
-                                    "t": "expr",
-                                    "v": false,
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     
+                  ]
+               ]
+            },
+            {
+               "type": "proxy",
+               "role": "tile_values",
+               "id": "4bc66005-3",
+               "displayName": "Value",
+               "formulas": [
+                  {
+                     "txt": "lookup(slice(da593949811736c8f727natceewzhere@Sheet1,B:B;),group(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;)),groupby(slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,B:B;),slice(0a6c043dfb0226544fb6natceewzhere@Sheet1,E:E;)))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
                                     "c": [
                                        {
                                           "t": "d",
                                           "v": {
-                                             "id": "0a6c043dfb0226544fb6kavyamallur9",
-                                             "a": "Sheet1,F:F"
+                                             "id": "da593949811736c8f727natceewzhere",
+                                             "a": "Sheet1,B:B"
                                           }
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "="
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true
+                                          }
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "Delayed"
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "groupby",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "0a6c043dfb0226544fb6natceewzhere",
+                                                   "a": "Sheet1,E:E"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
+                                          }
                                        }
                                     ]
                                  }
@@ -194,10 +1501,26 @@
                      
                   ]
                ],
-               "name": "Units",
-               "index": 1
+               "mixin": "label"
+            },
+            {
+               "type": "proxy",
+               "role": "tile_desc",
+               "id": "aeeb8019-4",
+               "displayName": "Description",
+               "formulas": [],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "tile_xref",
+               "id": "bff706c2-5",
+               "displayName": "Hyperlink",
+               "formulas": [],
+               "data": []
             }
-         ]
+         ],
+         "mapId": "usa_en"
       }
    ]
 }
