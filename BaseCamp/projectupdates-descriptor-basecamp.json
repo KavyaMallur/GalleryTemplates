@@ -1,0 +1,45 @@
+{
+    "name" : "Basecamp Project Updates",
+    "description" : "Provide updates for the selected project. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "basecamp-01" : {
+            "service" : "basecamp",
+            "libraryAlias" : "BasecampRecentEvents",
+            "name": "Basecamp Recent Events",
+            "description" : "Selected Project Updates. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects/{{ds.basecamp.projectID}}/events.json?since={date.addYear(-1).format()}"          
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "basecamp-01" : "d9a86e79bd3c641a2d0aKavyaMallur9" 
+    },
+
+    "services" : [
+        {
+            "service" : "basecamp"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.basecamp.accountId",
+            "label" : "Basecamp Account ID",
+            "description":"To find your Basecamp Account ID, follow the steps in <a href='https://klipfolio.uservoice.com/knowledgebase/articles/623667-new-use-basecamp-as-a-data-source' target='_blank'>Klip Gallery: Basecamp as datasource</a>."   
+        },
+        {
+            "type" : "text",
+            "id" : "ds.basecamp.projectID",
+            "label" : "Basecamp Project ID",
+            "description":""   
+        }
+    ]
+}
