@@ -1,0 +1,47 @@
+{
+	"name" : "Quintly Facebook Stats",
+	"description": "Compares your facebook stats with your competitor's over the last 14 days. Originates from the Gallery.",
+
+	"datasources" : {
+		"quintly-01" : {
+			"service": "quintly",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Quintly Key Metrics Radar",
+			"libraryAlias": "QuintlyKeyMetricsRadar",
+			"refreshInterval": 14400,
+			"description": "Compare facebook statistics for the provided profile IDs over the last 14 days. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.quintly.com/v0.9/qql?metric=keyMetricsRadar&startTime={date.add(-15).format(\"YYYY-MM-dd\")}&endTime={date.yesterday.format(\"YYYY-MM-dd\")}&interval=monthly&profileIds={{ds.quintly.profileId1}},{{ds.quintly.profileId2}}",
+				"method": "GET",
+				"auth_method" : "basic"
+			}
+		}
+	},
+
+	"dsMappings": {
+		"quintly-01": "0a5c3859fb7fcd343b3cKavyaMallur9"
+						
+
+	},
+	"services" : [
+		{
+			"service" : "quintly"
+		}
+	],
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.quintly.profileId1",
+            "label" : "Quintly your profile ID",
+            "description":"To find your Quintly Profile ID, follow the steps in <a href='#' target='_blank'>Klip Gallery: Quintly as datasource</a>."   
+        },
+        {
+            "type" : "text",
+            "id" : "ds.quintly.profileId2",
+            "label" : "Quintly your competitor's profile ID",
+            "description":""   
+        }
+    ]
+
+} 
