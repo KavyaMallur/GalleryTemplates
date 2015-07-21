@@ -1,0 +1,41 @@
+{
+    "name" : "Avg Price (Most recent 100 Subscriptions)",
+    "description" : "The average price of the most recent 100 subscriptions. Originates from the Gallery.",
+
+    "datasources" : {
+        "chargify" : {
+            "service" : "chargify",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Chargify Most Recent 200 Subscriptions",
+            "libraryAlias" :"chargifymostrecent200subscriptions",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of the most recent 200 subscriptions. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{ds.chargify.companyName}}.chargify.com/subscriptions.json?per_page=200",
+                "method": "get",
+                "parameters":  "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "chargify" : "f867802665673c05441cdoogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "chargify"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.chargify.companyName",
+            "label" : "Company name",
+            "description":"Your company name. To learn more, see <a href='#' target='blank'>Klip Gallery: Chargify</a>.",
+            "isRequired" : true
+        }
+    ]
+} 
