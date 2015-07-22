@@ -1,0 +1,44 @@
+{
+    "name" : "Basecamp Project Members",
+    "description" : "Provide list of team members who have access to the selected project. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "basecamp-01" : {
+            "service" : "basecamp",
+            "libraryAlias" : "BasecampPeoplewithaccesstoproject",
+            "name": "Basecamp People with access to project",
+            "description" : "Provide list of team members who have access to the selected project. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects/{{ds.basecamp.projectID}}/accesses.json"          
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "basecamp-01" : "f410a235d444f9cf54d3KavyaMallur9" 
+    },
+
+    "services" : [
+        {
+            "service" : "basecamp"
+        }
+    ],
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.basecamp.accountId",
+            "label" : "Basecamp Account ID",
+            "description":"To find your Basecamp Account ID and Project ID, follow the steps in <a href='https://klipfolio.uservoice.com/knowledgebase/articles/623667-new-use-basecamp-as-a-data-source' target='_blank'>Klip Gallery: Basecamp as datasource</a>."   
+        },
+        {
+            "type" : "text",
+            "id" : "ds.basecamp.projectID",
+            "label" : "Basecamp Project ID",
+            "description":""   
+        }
+    ]
+}

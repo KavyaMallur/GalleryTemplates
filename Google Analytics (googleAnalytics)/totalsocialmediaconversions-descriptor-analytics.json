@@ -1,0 +1,58 @@
+{  
+   "name":"Total Social Media Conversions",
+   "description":"Track the total number of users that got converted in the last 30 days after visiting your website via social media. Originates from the Gallery.",
+   "datasources":{  
+      "googleAnalytics-01":{  
+         "service":"google_analytics",
+         "libraryAlias":"GASocialConversion",
+         "name":"GA Social Conversion",
+         "description":"Track sessions to your website via social media for the last 30 days. Originates from the Gallery.",
+         "type":"google_analytics",
+         "format":"csv",
+         "refreshInterval":14400,
+         "props":{
+            "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+            "endpoint_url":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+            "max_pages":"1",
+            "mode":"Advanced",
+            "profile":"{{ds.google_analytics.profileId}}",
+            "timePeriod":"&start-date=30daysAgo&end-date=yesterday"
+         }
+      },
+      "googleAnalytics-02":{  
+         "service":"google_analytics",
+         "libraryAlias":"GASocialConversionPrevPeriod",
+         "name":"GA Social Conversion (Prev Period)",
+         "description":"Track sessions to your website via social media for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
+         "type":"google_analytics",
+         "format":"csv",
+         "refreshInterval":14400,
+         "props":{
+            "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+            "endpoint_url":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+            "max_pages":"1",
+            "mode":"Advanced",
+            "profile":"{{ds.google_analytics.profileId}}",
+            "timePeriod":"&start-date=60daysAgo&end-date=31daysAgo"
+         }
+      }
+   },
+   "dsMappings":{  
+      "googleAnalytics-01":"587a9bf3d3694112e7cfdoogeraspilk",
+      "googleAnalytics-02":"f6f1b65d86225a03b355doogeraspilk"
+   },
+   "services":[  
+      {  
+         "service":"google_analytics"
+      }
+   ],
+   "datasourceConfigModel":[  
+      {  
+         "type":"text",
+         "id":"ds.google_analytics.profileId",
+         "label":"Profile Id",
+         "description":"Don't know where to find your Profile ID? Look under Step 2 <a href='https://klipfolio.uservoice.com/knowledgebase/articles/34516-use-google-analytics-as-a-data-source' target='_blank'>here.</a>",
+         "isRequired":true
+      }
+   ]
+}
