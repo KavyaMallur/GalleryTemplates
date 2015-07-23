@@ -1,5 +1,5 @@
 {
-    "name" : "Avg Price (Most recent 100 Subscriptions)",
+    "name" : "Avg Product Price",
     "description" : "The average price of the most recent 100 subscriptions. Originates from the Gallery.",
 
     "datasources" : {
@@ -12,6 +12,9 @@
             "refreshInterval" : 14400,
             "description" :"Retrieve details of the most recent 200 subscriptions. Originates from the Gallery.",
             "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{ds.chargify.apiKey}}",
+                "basic_auth_password" : "x",
                 "endpoint_url": "https://{{ds.chargify.accountName}}.chargify.com/subscriptions.json?per_page=200",
                 "method": "get",
                 "parameters":  "[]"
@@ -34,7 +37,14 @@
             "type" : "text",
             "id" : "ds.chargify.accountName",
             "label" : "Account name",
-            "description":"Your company name. To learn more, see <a href='#' target='blank'>Klip Gallery: Chargify</a>.",
+            "description":"Your account name. To learn more, see <a href='#' target='blank'>Klip Gallery: Chargify</a>.",
+            "isRequired" : true
+        },
+        {
+            "type" : "text",
+            "id" : "ds.chargify.apiKey",
+            "label" : "API Key",
+            "description":"Your API Key. To learn more, see <a href='#' target='blank'>Klip Gallery: Chargify</a>.",
             "isRequired" : true
         }
     ]
