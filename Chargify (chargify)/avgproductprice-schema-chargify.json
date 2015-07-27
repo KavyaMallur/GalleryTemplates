@@ -1,0 +1,458 @@
+{
+   "title": "Chargify Average Product Price",
+   "id": "ad9f9e62884ba32df6e3178f62e61d6b",
+   "workspace": {
+      "dimensions": {
+         "w": 1048
+      },
+      "datasources": [
+         "f867802665673c05441cdoogeraspilk"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "ecbcc4e4-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "adc38e72-2",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "3473ace2-3",
+                     "displayName": "Avg Price Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "cur",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "color",
+                                 "value": "cx-theme_green_3"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "average((slice(f867802665673c05441cdoogeraspilk@/subscription/product_price_in_cents;,\"0\",\"100\")/\"100\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "f867802665673c05441cdoogeraspilk",
+                                                         "a": "/subscription/product_price_in_cents"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "a8d20a77-4",
+                     "displayName": "Avg Price Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Last 100 Subscriptions\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Last 100 Subscriptions"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "8b5cd9f1-1",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "orientation": "v"
+            },
+            {
+               "type": "simple_value",
+               "id": "45339ef0-4",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "35fff484-5",
+                     "displayName": "Avg Price Change",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-up-green",
+                                 "pos": "right",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true,
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-blank"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "if(((average((slice(f867802665673c05441cdoogeraspilk@/subscription/product_price_in_cents;,\"100\")/\"100\")))=\"0\"),\"0\",(((average((slice(f867802665673c05441cdoogeraspilk@/subscription/product_price_in_cents;,\"0\",\"100\")/\"100\")))-(average((slice(f867802665673c05441cdoogeraspilk@/subscription/product_price_in_cents;,\"100\")/\"100\"))))/(average((slice(f867802665673c05441cdoogeraspilk@/subscription/product_price_in_cents;,\"100\")/\"100\")))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "e93c7419-6"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "3473ace2-3"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "-"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "e93c7419-6"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "e93c7419-6"
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "e93c7419-6",
+                     "displayName": "Avg Price Prev",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "cur",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev 100 subscriptions"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "average((slice(f867802665673c05441cdoogeraspilk@/subscription/product_price_in_cents;,\"100\")/\"100\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "f867802665673c05441cdoogeraspilk",
+                                                         "a": "/subscription/product_price_in_cents"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "100"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            }
+         ],
+         "rows": 1,
+         "cols": "3",
+         "widths": [
+            {
+               "x": 1,
+               "w": 20
+            }
+         ],
+         "cellData": [
+            {
+               "x": 1,
+               "y": 0
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ]
+            }
+         ]
+      }
+   ]
+}

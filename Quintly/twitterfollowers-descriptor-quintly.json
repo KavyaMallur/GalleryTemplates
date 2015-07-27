@@ -1,0 +1,48 @@
+{
+	"name" : "Quintly Twitter Follower Change (Last 30 Days)",
+	"description": "Compare 30 days follower count between two Quintly Twitters profiles. Originates from the Gallery.",
+
+	"datasources" : {
+		"quintly-01" : {
+			"service": "quintly",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Quintly Twitter Followers by Day (30 Days)",
+			"libraryAlias": "QuintlyTwitterFollowersbyDay",
+			"refreshInterval": 14400,
+			"description": "Get count of Twitter followers for the past 30 days from Quintly. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+name+AS+pageName,+time,+profileId,+followers+FROM+twitter+INNER+JOIN+profiles+ON+twitter.profileId=profiles.id&startTime={date.add(-30).format()}&endTime={date.today}&interval=daily&profileIds={{ds.quintly.profileId1}},{{ds.quintly.profileId2}}",
+				"auth_method" : "basic",
+				"basic_auth_username" : "{{auth.quintly.clientId}}",
+				"basic_auth_password" : "{{auth.quintly.apiSecret}}"
+			}
+		}
+	},
+
+	"dsMappings": {
+		"quintly-01": "36a91b2bac3fc3d60fa1doogeraspilk"
+						
+
+	},
+	"services" : [
+		{
+			"service" : "quintly"
+		}
+	],
+
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.quintly.profileId1",
+            "label" : "Your profile ID",
+            "description":"To find your Quintly Profile ID, follow the steps in <a href='#' target='_blank'>Klip Gallery: Quintly as datasource</a>."   
+        },
+        {
+            "type" : "text",
+            "id" : "ds.quintly.profileId2",
+            "label" : "Your competitor's profile ID"
+        }
+    ]
+
+} 

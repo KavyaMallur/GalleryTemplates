@@ -1,0 +1,308 @@
+{
+   "title": "CallRail Average Call Duration (Last 500 Calls)",
+   "id": "95404a2cc7a351a9078c2b55a01238a1",
+   "workspace": {
+      "datasources": [
+         "9164a12028b14640c858KavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "gauge",
+         "id": "beb951d4-6",
+         "displayName": "Gauge",
+         "size": 2,
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "02bbc1d3-7"
+                     },
+                     "type": "gt",
+                     "right": {
+                        "cx": "abbcbc01-9"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_blue_3",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "02bbc1d3-7",
+               "displayName": "Current Value (last 500 calls)",
+               "renamed": true,
+               "size": 3,
+               "fmt": "dur",
+               "fmtArgs": {
+                  "prefix": ""
+               },
+               "formulas": [
+                  {
+                     "txt": "(average(select(slice(9164a12028b14640c858KavyaMallur9@/calls/duration;,\"500\",\"1000\"),(slice(9164a12028b14640c858KavyaMallur9@/calls/answered;,\"500\",\"1000\")=\"true\"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "9164a12028b14640c858KavyaMallur9",
+                                                         "a": "/calls/duration"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "500"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "1000"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "9164a12028b14640c858KavyaMallur9",
+                                                               "a": "/calls/answered"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "500"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1000"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "true"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ]
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "38fd4039-8",
+               "displayName": "Target Value (previous 500 calls)",
+               "renamed": true,
+               "size": 2,
+               "fmt": "dur",
+               "fmtArgs": {
+                  "precision": "0"
+               },
+               "formulas": [
+                  {
+                     "txt": "(average(select(slice(9164a12028b14640c858KavyaMallur9@/calls/duration;,\"0\",\"500\"),(slice(9164a12028b14640c858KavyaMallur9@/calls/answered;,\"0\",\"500\")=\"true\"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "9164a12028b14640c858KavyaMallur9",
+                                                         "a": "/calls/duration"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "500"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "9164a12028b14640c858KavyaMallur9",
+                                                               "a": "/calls/answered"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "0"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "500"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "true"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_colour": "cx-color_888"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "abbcbc01-9",
+               "displayName": "Min Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "1b5d73e6-10",
+               "displayName": "Max Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            }
+         ],
+         "gaugeStyle": "hg"
+      }
+   ]
+}
