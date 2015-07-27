@@ -1,0 +1,147 @@
+{
+	"name" : "Social Media Followers",
+	"description" : "See where you stand on all of your social media platforms in a single Klip! Originates from the Gallery.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookBasicPageInfo",
+			"name": "Facebook Basic Page Info",
+			"description" : "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/v2.2/{{ds.facebook.pageId}}",
+            	"graphUrl": "https://graph.facebook.com/v2.2/{{ds.facebook.pageId}}",
+            	"qtype": "Graph API"
+			}
+		},
+		"twitter" : {
+			"service" : "twitter",
+			"libraryAlias" : "",
+			"name": "Twitter_KT: Account Stats",
+			"description" : "",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
+            	"method": "get"
+ 			}
+		},
+		"youtube" : {
+            "service" : "youtube",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"YouTube Channel Statistics",
+            "libraryAlias" :"YouTubeChannelStatistics",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves a YouTube's channel statistics. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/youtube/v3/channels?part=statistics&id={{ds.youtube.channelID}}",
+                "method": "get"
+            }
+        },
+        "linkedin" : {
+			"service" : "linkedin",
+			"libraryAlias" : "LinkedInCompStats",
+			"name": "LinkedIn Company Statistics",
+			"description" : "LinkedIn company statistics and follower count by month for the past 12 months. Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "xml",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
+            	 "method": "get"
+			}
+		},
+		"instagram" : {
+			"service" : "instagram",
+			"libraryAlias" : "InstagramSelfMetrics",
+			"name": "Instagram Account Metrics",
+			"description" : "See the KPIs associated with your Instagram account such as the number of followers, post numbers, etc. Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.instagram.com/v1/users/self",
+				"method": "get"
+  			}
+		},
+        "googlePlus" : {
+            "service" : "google_plus",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Google+ Overview",
+            "libraryAlias" :"Google+Overview",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve an overview of resources that represents your Google+ profile ID. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://www.googleapis.com/plus/v1/people/me",
+                "method": "get"
+            }
+        }
+
+
+	},
+
+	"dsMappings" : {
+		"facebook" : "3246822217eb4a8e8db8gooderaspilk",
+		"twitter" : "6c69f794227e0f5cb3c2gooderaspilk",
+		"youtube" : "ad0e82ef982ad2492ab2gooderaspilk",
+		"linkedin" : "e6d9b616fe8d1a58ac87gooderaspilk",
+		"instagram" : "d1e2aba2a598ae28faa9gooderaspilk",
+		"google_plus" : "ed7109f7fbccc7b28075gooderaspilk"
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		},
+		{
+			"service" : "twitter"
+		},
+		{
+			"service" : "youtube"
+		},
+		{
+			"service" : "linkedin"
+		},
+		{
+			"service" : "instagram"
+		},
+		{
+			"service" : "google_plus"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.facebook.pageId",
+			"label" : "Facebook Page Name",
+			"description":"To find your company Facebook Page Name, follow the steps in <a href='http://klipfolio.uservoice.com/knowledgebase/articles/562989-klip-gallery-facebook#connect' target='_blank'>Klip Gallery: Facebook</a>.",
+			"isRequired" : true
+		},
+		{
+			"type" : "text",
+			"id" : "ds.twitter.screenName",
+			"label" : "Twitter Handle",
+			"isRequired" : true
+		},
+		{
+			"type" : "text",
+			"id" : "ds.youtube.channelID",
+            "label" : "YouTube Channel ID",
+            "isRequired" : true
+		},
+		{
+			"type" : "text",
+			"id" : "ds.linkedin.companyId",
+			"label" : "LinkedIn Company ID",
+			"isRequired" : true
+		}
+	]
+}
