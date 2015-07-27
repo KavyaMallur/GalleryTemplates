@@ -12,7 +12,7 @@
 			"refreshInterval": 14400,
 			"description": "Compare facebook statistics for the provided profile IDs over the last 14 days. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "https://api.quintly.com/v0.9/qql?metric=keyMetricsRadar&startTime={date.add(-15).format(\"YYYY-MM-dd\")}&endTime={date.yesterday.format(\"YYYY-MM-dd\")}&interval=monthly&profileIds={{ds.quintly.profileId1}},{{ds.quintly.profileId2}}",
+				"endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.add(-30).format()}&endTime={date.today}&interval=total&profileIds={{ds.quintly.profileId1}},{{ds.quintly.profileId2}}",
 				"method": "GET",
 				"auth_method" : "basic",
 				"basic_auth_username" : "{{auth.quintly.clientId}}",
