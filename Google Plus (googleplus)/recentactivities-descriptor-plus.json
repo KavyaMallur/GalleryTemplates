@@ -1,30 +1,40 @@
 {
-    "name" : "Google+ Circled By",
-    "description" : "In a single Klip, always know what's happening on Google+. Originates from the Gallery.",
+    "name" : "Google+ Recent Activities",
+    "description" : "Show recent activities on Google+. Originates from the Gallery.",
 
     "datasources" : {
         "googlePlus" : {
             "service" : "google_plus",
             "type" : "simple_rest",
             "format" : "json",
-            "name" :"Google+ Overview",
-            "libraryAlias" :"Google+Overview",
+            "name" :"Google+ Recent Activities",
+            "libraryAlias" :"Google+RecentActivities",
             "refreshInterval" : 14400,
-            "description" :"Retrieve an overview of resources that represents your Google+ profile ID. Originates from the Gallery.",
+            "description" :"Retrieve public activities related to your search query from Google+. Originates from the Gallery.",
             "props":{
-                "endpoint_url": "https://www.googleapis.com/plus/v1/people/me",
+                "endpoint_url": "https://www.googleapis.com/plus/v1/activities?query={{ds.google_plus.query}}",
                 "method": "get"
             }
         }
     },
 
     "dsMappings": {
-        "googlePlus" : "6afd49990a21f39bdcb1doogeraspilk"
+        "googlePlus" : "5c35df445d45cad8f95fdoogeraspilk"
     },
 
     "services" : [
         {
             "service" : "google_plus"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.google_plus.query",
+            "label" : "Google+ Search Query",
+            "description":"Enter a term you are interested in searching for on Google+. Use '+' between multiple words (for example, 'ottawa+weather'). Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase' target='blank'>Klip Gallery: Google+</a>.",
+            "isRequired" : true
         }
     ]
 }
