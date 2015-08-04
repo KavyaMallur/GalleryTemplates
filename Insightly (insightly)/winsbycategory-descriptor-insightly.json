@@ -1,0 +1,59 @@
+{
+	"name" : "Insightly Wins By Category",
+	"description": "View recently won opportunities listed by category (include most recent 25 wins). Originates from the Gallery.",
+
+	"datasources" : {
+		"insightly-01" : {
+			"service": "insightly",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Insightly Opportunities",
+			"libraryAlias": "InsightlyOpportunities",
+			"refreshInterval": 14400,
+			"description": "Get a list of all opportunities. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.insight.ly/v2.1/opportunities",
+				"auth_method" : "basic",
+				"basic_auth_username" : "{{ds.insightly.apiKey}}",
+				"basic_auth_password" : "",
+				"method" : "get"
+			}
+		},
+			"insightly-02" : {
+			"service": "insightly",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Insightly Opportunity Categories",
+			"libraryAlias": "InsightlyOpportunityCategories",
+			"refreshInterval": 14400,
+			"description": "Get a list of opportunity categories. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.insight.ly/v2.1/opportunitycategories",
+				"auth_method" : "basic",
+				"basic_auth_username" : "{{ds.insightly.apiKey}}",
+				"basic_auth_password" : "",
+				"method" : "get"
+			}
+		}
+	},
+
+	"dsMappings": {
+		"insightly-01": "7e7b790e70110dbb4cbfdoogeraspilk",
+		"insightly-02": "0e0208b2295286b6f49bdoogeraspilk"			
+	},
+	"services" : [
+		{
+			"service" : "insightly"
+		}
+	],
+
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.insightly.apiKey",
+            "label" : "Your API Key",
+            "description":"Enter your Insightly API Key. Need help? See <a href='#' target='_blank'>Klip Gallery: Insightly</a>."   
+        }
+    ]
+
+} 
