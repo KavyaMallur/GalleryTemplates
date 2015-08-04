@@ -1,0 +1,488 @@
+{
+   "title": "Insightly Deals Won (last 30 days)",
+   "id": "189ce9641da3f5f607bf368be1b24fe9",
+   "workspace": {
+      "datasources": [
+         "7e7b790e70110dbb4cbfdoogeraspilk"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "gauge",
+         "id": "1de1731f-6",
+         "displayName": "Gauge",
+         "size": 2,
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "dfac1414-7"
+                     },
+                     "type": "gteq",
+                     "right": {
+                        "cx": "1366d4ce-8"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_green_3",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "dfac1414-7",
+               "displayName": "Won Last 30 ",
+               "renamed": true,
+               "size": 3,
+               "fmt": "cur",
+               "formulas": [
+                  {
+                     "txt": "sum(select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,and((7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\"),(between(date(7e7b790e70110dbb4cbfdoogeraspilk@/FORECAST_CLOSE_DATE;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-30\"),today())))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                             "a": "/BID_AMOUNT"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/OPPORTUNITY_STATE"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "WON"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                                     "a": "/FORECAST_CLOSE_DATE"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-MM-dd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_add",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "5"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-30"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "1366d4ce-8",
+               "displayName": "Won Prev 30",
+               "renamed": true,
+               "size": "1",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "prefix": "prev. 30 days: "
+               },
+               "formulas": [
+                  {
+                     "txt": "sum(select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,and((7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\"),(between(date(7e7b790e70110dbb4cbfdoogeraspilk@/FORECAST_CLOSE_DATE;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-61\"),date_add(today(),\"5\",\"-31\"))))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                             "a": "/BID_AMOUNT"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/OPPORTUNITY_STATE"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "WON"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                                     "a": "/FORECAST_CLOSE_DATE"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-MM-dd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_add",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "5"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-61"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_add",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "5"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-31"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "89be4f80-9",
+               "displayName": "Min Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "b56a7050-10",
+               "displayName": "Max Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "range",
+               "role": "range",
+               "id": "dcbec503-4",
+               "displayName": "Range 2",
+               "components": [
+                  {
+                     "type": "proxy",
+                     "role": "start",
+                     "id": "a07303c9-5",
+                     "displayName": "Start 2",
+                     "formulas": [
+                        {
+                           "txt": "(0)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "89be4f80-9"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "proxy",
+                     "role": "end",
+                     "id": "eb023f81-6",
+                     "displayName": "End 2",
+                     "formulas": [
+                        {
+                           "txt": "(sum(select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,and((7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\"),(between(date(7e7b790e70110dbb4cbfdoogeraspilk@/FORECAST_CLOSE_DATE;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-30\"),today()))))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "dfac1414-7"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  }
+               ],
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "rangeId": 2
+            }
+         ],
+         "gaugeStyle": "hg"
+      }
+   ]
+}
