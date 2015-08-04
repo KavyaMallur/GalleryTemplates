@@ -1,0 +1,48 @@
+{
+	"name" : "Webtrends Website Page Views and Visits (Last 30 Days)",
+	"description": "Show webtrends for visits and page views over the last 30 days and also compares it against the previous 30 days. Originates from the Gallery.",
+
+	"datasources" : {
+		"webtrends-01" : {
+			"service": "webtrends",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Webtrends Key Metrics Trend (last 30 days)",
+			"libraryAlias": "WebtrendsKeyMetricTrendLast30Days",
+			"refreshInterval": 14400,
+			"description": "Monitor key metrics for the last 30 days. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://ws.webtrends.com/v3/Reporting/Profiles/KeyMetrics/?format=json&period_type=trend&start_period=current_day-30&end_period=current_day-1",
+				"method": "GET",
+				"auth_method" : "basic"
+			}
+		},
+		"webtrends-02" : {
+			"service": "webtrends",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "Webtrends Key Metrics Trend (previous 30 days)",
+			"libraryAlias": "WebtrendsKeyMetricsTrendPrevious30Days",
+			"refreshInterval": 14400,
+			"description": "Monitor key metrics for the previous 30 days. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://ws.webtrends.com/v3/Reporting/Profiles/KeyMetrics/?format=json&period_type=trend&start_period=current_day-60&end_period=current_day-31",
+				"method": "GET",
+				"auth_method" : "basic"
+			}
+		}
+	},
+
+
+	"dsMappings": {
+		"webtrends-01": "3c05a8b0246b164d6408KavyaMallur9",
+		"webtrends-02": "03f42a92893adf315612KavyaMallur9"
+	},
+
+	"services" : [
+		{
+			"service" : "webtrends"
+		}
+	]
+
+}
