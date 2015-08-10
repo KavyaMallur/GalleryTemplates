@@ -41,26 +41,19 @@
                ],
                "formulas": [
                   {
-                     "txt": "sort(groupby(0e0208b2295286b6f49bdoogeraspilk@/CATEGORY_ID;,groupby(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"OPEN\")),select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"OPEN\")))),\"descnumeric\",0e0208b2295286b6f49bdoogeraspilk@/CATEGORY_NAME;)",
+                     "txt": "lookup(sort(groupby(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\")),select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\"))),\"descnumeric\",group(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\")))),0e0208b2295286b6f49bdoogeraspilk@/CATEGORY_ID;,0e0208b2295286b6f49bdoogeraspilk@/CATEGORY_NAME;)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "sort",
+                              "v": "lookup",
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "groupby",
+                                    "v": "sort",
                                     "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "0e0208b2295286b6f49bdoogeraspilk",
-                                             "a": "/CATEGORY_ID"
-                                          }
-                                       },
                                        {
                                           "t": "f",
                                           "v": "groupby",
@@ -93,7 +86,7 @@
                                                          },
                                                          {
                                                             "t": "l",
-                                                            "v": "OPEN"
+                                                            "v": "WON"
                                                          }
                                                       ]
                                                    }
@@ -127,7 +120,7 @@
                                                          },
                                                          {
                                                             "t": "l",
-                                                            "v": "OPEN"
+                                                            "v": "WON"
                                                          }
                                                       ]
                                                    }
@@ -144,18 +137,57 @@
                                           ]
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "method",
-                                             "optional": true
-                                          }
+                                          "t": "opt",
+                                          "v": "descnumeric"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "group",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/CATEGORY_ID"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                               "a": "/OPPORTUNITY_STATE"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "WON"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
                                        }
                                     ]
                                  },
                                  {
-                                    "t": "opt",
-                                    "v": "descnumeric"
+                                    "t": "d",
+                                    "v": {
+                                       "id": "0e0208b2295286b6f49bdoogeraspilk",
+                                       "a": "/CATEGORY_ID"
+                                    }
                                  },
                                  {
                                     "t": "d",
@@ -170,7 +202,8 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+               ],
                "name": "Category",
                "index": 0,
                "fw": "fixed"
@@ -201,7 +234,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "sort(groupby(0e0208b2295286b6f49bdoogeraspilk@/CATEGORY_ID;,groupby(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"OPEN\")),select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"OPEN\")))),\"descnumeric\")",
+                     "txt": "sort(groupby(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\")),select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\"))),\"descnumeric\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -215,91 +248,70 @@
                                     "v": "groupby",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "0e0208b2295286b6f49bdoogeraspilk",
-                                             "a": "/CATEGORY_ID"
-                                          }
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                   "a": "/CATEGORY_ID"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/OPPORTUNITY_STATE"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "WON"
+                                                   }
+                                                ]
+                                             }
+                                          ]
                                        },
                                        {
                                           "t": "f",
-                                          "v": "groupby",
+                                          "v": "select",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "select",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                         "a": "/CATEGORY_ID"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                               "a": "/OPPORTUNITY_STATE"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "OPEN"
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "select",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                         "a": "/BID_AMOUNT"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                               "a": "/OPPORTUNITY_STATE"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "OPEN"
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "method",
-                                                   "optional": true
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                   "a": "/BID_AMOUNT"
                                                 }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/OPPORTUNITY_STATE"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "WON"
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
@@ -331,7 +343,8 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+               ],
                "name": "Value",
                "index": 1,
                "fw": "fixed",
@@ -346,8 +359,8 @@
                "size": 1,
                "fmt": "hrz",
                "fmtArgs": {
-                  "minVal": 2,
-                  "maxVal": 4,
+                  "minVal": 1,
+                  "maxVal": 20,
                   "hideRange": true
                },
                "components": [
@@ -358,7 +371,9 @@
                      "displayName": "Value Result",
                      "size": 1,
                      "formulas": [],
-                     "data": [],
+                     "data": [
+                        []
+                     ],
                      "mixin": "label",
                      "align": "l",
                      "font_style": "bold"
@@ -366,7 +381,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "sort(groupby(0e0208b2295286b6f49bdoogeraspilk@/CATEGORY_ID;,groupby(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"OPEN\")),select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"OPEN\")))),\"descnumeric\")",
+                     "txt": "sort(groupby(select(7e7b790e70110dbb4cbfdoogeraspilk@/CATEGORY_ID;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\")),select(7e7b790e70110dbb4cbfdoogeraspilk@/BID_AMOUNT;,(7e7b790e70110dbb4cbfdoogeraspilk@/OPPORTUNITY_STATE;=\"WON\"))),\"descnumeric\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -380,91 +395,70 @@
                                     "v": "groupby",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "0e0208b2295286b6f49bdoogeraspilk",
-                                             "a": "/CATEGORY_ID"
-                                          }
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                   "a": "/CATEGORY_ID"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/OPPORTUNITY_STATE"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "WON"
+                                                   }
+                                                ]
+                                             }
+                                          ]
                                        },
                                        {
                                           "t": "f",
-                                          "v": "groupby",
+                                          "v": "select",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "select",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                         "a": "/CATEGORY_ID"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                               "a": "/OPPORTUNITY_STATE"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "OPEN"
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "select",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                         "a": "/BID_AMOUNT"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "7e7b790e70110dbb4cbfdoogeraspilk",
-                                                               "a": "/OPPORTUNITY_STATE"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "OPEN"
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "method",
-                                                   "optional": true
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                   "a": "/BID_AMOUNT"
                                                 }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7e7b790e70110dbb4cbfdoogeraspilk",
+                                                         "a": "/OPPORTUNITY_STATE"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "WON"
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
@@ -496,7 +490,8 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+               ],
                "name": "",
                "index": 2,
                "borderLeft": "0",
