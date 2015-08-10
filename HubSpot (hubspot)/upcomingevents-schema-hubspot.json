@@ -1,0 +1,655 @@
+{
+   "title": "HubSpot Upcoming Events",
+   "id": "766a3e6cbb149be99bd6a455431ac937",
+   "workspace": {
+      "datasources": [
+         "597ecfeb1020b21a5ff5gooderaspilk"
+      ],
+      "dimensions": {
+         "w": 986
+      }
+   },
+   "components": [
+      {
+         "type": "table",
+         "id": "6f1bf94a-10",
+         "displayName": "Table",
+         "components": [
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "cea158db-11",
+               "displayName": "Date",
+               "size": 1,
+               "fmt": "txt",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "25b2e357-12",
+                     "displayName": "Unnamed 1 Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "datevalue((sort(597ecfeb1020b21a5ff5gooderaspilk@/eventDate;,\"asc\")/\"1000\"),\"MMM dd\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                   "a": "/eventDate"
+                                                }
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "asc"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "return values",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1000"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "MMM dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "name": "Date",
+               "index": 0,
+               "fw": "fixed",
+               "w": "80"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "ceeb0302-13",
+               "displayName": "Name",
+               "size": 1,
+               "fmt": "hyp",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "410ff4b7-14",
+                     "displayName": "Unnamed 2 Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "sort(597ecfeb1020b21a5ff5gooderaspilk@/eventDate;,\"asc\",concat(capitalize(if((597ecfeb1020b21a5ff5gooderaspilk@/name;!=\"\"),597ecfeb1020b21a5ff5gooderaspilk@/name;,if((substring(substitute_regex(597ecfeb1020b21a5ff5gooderaspilk@/description;,\"http*.*\",\"\"),\"51\")!=blank()),concat(left(substitute_regex(597ecfeb1020b21a5ff5gooderaspilk@/description;,\"http*.*\",\"\"),\"50\"),\"...\"),left(substitute_regex(597ecfeb1020b21a5ff5gooderaspilk@/description;,\"http*.*\",\"\"),\"50\")))),\"|\",if((597ecfeb1020b21a5ff5gooderaspilk@/url;!=\"\"),597ecfeb1020b21a5ff5gooderaspilk@/url;,substring(597ecfeb1020b21a5ff5gooderaspilk@/description;,indexof(597ecfeb1020b21a5ff5gooderaspilk@/description;,\"http\")))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                       "a": "/eventDate"
+                                    }
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "asc"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "concat",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "capitalize",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "if",
+                                                "c": [
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                               "a": "/name"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "!="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": ""
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                         "a": "/name"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "if",
+                                                      "c": [
+                                                         {
+                                                            "t": "expr",
+                                                            "v": false,
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "substring",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "substitute_regex",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                                                 "a": "/description"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "http*.*"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": ""
+                                                                           },
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "occurrence",
+                                                                                 "optional": true
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "51"
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "to",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "o",
+                                                                  "v": "!="
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "concat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "left",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "substitute_regex",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                                                 "a": "/description"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "http*.*"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": ""
+                                                                           },
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "occurrence",
+                                                                                 "optional": true
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "50"
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "..."
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "substitute_regex",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                                           "a": "/description"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "http*.*"
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": ""
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "occurrence",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "50"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "|"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "if",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                         "a": "/url"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "!="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": ""
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                   "a": "/url"
+                                                }
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "substring",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                         "a": "/description"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "indexof",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                               "a": "/description"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "http"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "occurrence",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "name": "Name",
+               "index": 1,
+               "w": "400"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "7a4e0fdd-1",
+               "displayName": "Category",
+               "size": 1,
+               "fmt": "txt",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "c2ea7d5f-2",
+                     "displayName": "New Column Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "sort(597ecfeb1020b21a5ff5gooderaspilk@/eventDate;,\"asc\",capitalize(597ecfeb1020b21a5ff5gooderaspilk@/category;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                       "a": "/eventDate"
+                                    }
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "asc"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "capitalize",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                             "a": "/category"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "name": "Category",
+               "index": 2,
+               "fw": "fixed",
+               "w": "150",
+               "align": "left"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "4aee46e8-15",
+               "displayName": "State",
+               "size": 1,
+               "fmt": "txt",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "35703eea-16",
+                     "displayName": "Unnamed 3 Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "sort(597ecfeb1020b21a5ff5gooderaspilk@/eventDate;,\"asc\",capitalize(lower(substitute_regex(597ecfeb1020b21a5ff5gooderaspilk@/state;,\"_\",\" \"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                       "a": "/eventDate"
+                                    }
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "asc"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "capitalize",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "lower",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "substitute_regex",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "597ecfeb1020b21a5ff5gooderaspilk",
+                                                         "a": "/state"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "_"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": " "
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "occurrence",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "name": "State",
+               "index": 3,
+               "fw": "fixed",
+               "w": "150"
+            }
+         ],
+         "maxRows": "8"
+      }
+   ]
+}
