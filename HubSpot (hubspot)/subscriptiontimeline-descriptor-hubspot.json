@@ -1,0 +1,34 @@
+{
+    "name" : "HubSpot Subscription Timeline",
+    "description" : "Show a plot of the email recipients that either unsubscribed or bounced within the past 30 Days. Originates from the Gallery.",
+
+    "datasources" : {
+        "hubspot" : {
+            "service" : "hubspot",
+            "type" : "hubspot",
+            "format" : "json",
+            "name" :"HubSpot Email Subscription Timeline Last 30 Days",
+            "libraryAlias" :"HubSpotEmailSubscriptionTimelineLast30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve 30 Days email subscription details from your HubSpot account. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://api.hubapi.com/email/public/v1/subscriptions/timeline?limit=1000&startTimestamp={date.add(-29).format('epochTime')}000&endTimestamp={date.today.format('epochTime')}000",
+                "method": "get",
+                "portalId":"{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string",
+                "oauth_use_header": "{{auth.hubspot.header}}",
+                "oauth_user_token": "{{auth.hubspot.token}}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "hubspot" : "7cea20e53abfac449a1edoogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "hubspot"
+        }
+    ]
+}
