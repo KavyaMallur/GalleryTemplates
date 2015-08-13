@@ -1,0 +1,39 @@
+{
+    "name" : "Mixpanel Event ({{ds.mixpanel.event}}) by Account Types",
+    "description" : "Compare Account Types of {{ds.mixpanel.event}} Event. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "mixpanel" : {
+            "service" : "mixpanel",
+            "libraryAlias" : "MixpanelEventwithProperties",
+            "name": "Mixpanel Event ({{ds.mixpanel.event}}) with Properties",
+            "description" : "Provide 30 days count by Account Types for {{ds.mixpanel.event}} event. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://mixpanel.com/api/2.0/events/properties?expire={hash.getExpiryTime(240)}&event={{ds.mixpanel.event}}&interval=30&name=Account+Type&type=general&unit=day&api_key={{auth.mixpanel.apiKey}}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=30\").append(\"name=Account Type\").append(\"type=general\").append(\"unit=day\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "mixpanel" : "6943b405076be92f03ffdoogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "mixpanel"
+        }
+    ],
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.mixpanel.event",
+            "label" : "Enter Event",
+            "description":"Enter an event you are interested in comparing by account types. ",
+            "isRequired" : true
+        }
+    ]
+}
