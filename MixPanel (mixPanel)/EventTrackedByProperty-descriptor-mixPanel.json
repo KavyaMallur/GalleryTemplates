@@ -13,7 +13,7 @@
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
-                "endpoint_url": "http://mixpanel.com/api/2.0/events/properties?expire={hash.getExpiryTime(240)}&event={{ds.mixpanel.event}}&interval=0&name=Company&type=general&unit=day&api_key=fb36f494841a4bb09b4e667a94d59f2d&sig={hash.append(\"api_key=fb36f494841a4bb09b4e667a94d59f2d\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=0\").append(\"name=Company\").append(\"type=general\").append(\"unit=day\").append(\"20ab9f381b2bfdbf2fde8bddf0f080f8\").encodeMd5().toHex().printDigest()}"
+                "endpoint_url": "http://mixpanel.com/api/2.0/events/properties?expire={hash.getExpiryTime(240)}&event={{ds.mixpanel.event}}&interval=0&name={{ds.mixpanel.property}}&type=general&unit=day&api_key={{auth.mixpanel.apiKey}}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=0\").append(\"name={{ds.mixpanel.property}}\").append(\"type=general\").append(\"unit=day\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}"
             }
         }
     },
@@ -33,7 +33,15 @@
             "type" : "text",
             "id" : "ds.mixpanel.event",
             "label" : "Event",
-            "description": "Enter your event",
+            "description": "Enter event",
+            "isRequired" : "true",
+            "urlEncode" : "true"
+        },
+                {
+            "type" : "text",
+            "id" : "ds.mixpanel.property",
+            "label" : "Event",
+            "description": "Enter property",
             "isRequired" : "true",
             "urlEncode" : "true"
         }
