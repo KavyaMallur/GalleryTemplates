@@ -1,25 +1,25 @@
 {
-    "name" : "Mixpanel Event ({{ds.mixpanel.event}}) by Account Types",
-    "description" : "Compare Account Types of {{ds.mixpanel.event}} Event. Originates from the Gallery.",
+    "name" : "Mixpanel Funnel",
+    "description" : "Track the 30 days conversion rate between event stages of a Mixpanel funnel. Originates from the Gallery.",
     
 
     "datasources" : {
         "mixpanel" : {
             "service" : "mixpanel",
-            "libraryAlias" : "MixpanelEventwithProperties",
-            "name": "Mixpanel Event ({{ds.mixpanel.event}}) with Properties",
-            "description" : "Provide 30 days count by Account Types for {{ds.mixpanel.event}} event. Originates from the Gallery.",
+            "libraryAlias" : "MixpanelFunnel",
+            "name": "Mixpanel Funnel ({{ds.mixpanel.funnelId}})",
+            "description" : "Provide the 30 days conversion details of events in a Mixpanel funnel. Originates from the Gallery.",
             "type" : "simple_rest",
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
-                "endpoint_url": "http://mixpanel.com/api/2.0/funnels/?expire={hash.getExpiryTime(240)}&funnel_id=1001565&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"funnel_id=1001565\").append(\"interval=30\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&interval=30&api_key={{auth.mixpanel.apiKey}}"
+                "endpoint_url": "http://mixpanel.com/api/2.0/funnels/?expire={hash.getExpiryTime(240)}&funnel_id={{ds.mixpanel.funnelId}}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"funnel_id={{ds.mixpanel.funnelId}}\").append(\"interval=30\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&interval=30&api_key={{auth.mixpanel.apiKey}}"
             }
         }
     },
 
     "dsMappings" : {
-        "mixpanel" : "6943b405076be92f03ffdoogeraspilk"
+        "mixpanel" : "0f5c3f0214cfd2b16c90doogeraspilk"
     },
 
     "services" : [
