@@ -1,12 +1,12 @@
 {
-   "title": "Mixpanel Funnel (Last 30 Days)",
+   "title": "Mixpanel Funnel (Last 30 days)",
    "id": "aad79972a0b939430ddedd258c4326b8",
    "workspace": {
       "datasources": [
          "0f5c3f0214cfd2b16c90doogeraspilk"
       ],
       "dimensions": {
-         "w": 705
+         "w": 754
       }
    },
    "components": [
@@ -28,35 +28,62 @@
                "fmt": "pct",
                "formulas": [
                   {
-                     "txt": "0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'completion')];/0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'starting_amount')];",
+                     "txt": "sum(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'completion')];)/sum(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'starting_amount')];)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "d",
-                              "v": {
-                                 "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//*[starts-with(name(.),'completion')]"
-                              }
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                       "a": "//*[starts-with(name(.),'completion')]"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
                            },
                            {
                               "t": "o",
                               "v": "/"
                            },
                            {
-                              "t": "d",
-                              "v": {
-                                 "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//*[starts-with(name(.),'starting_amount')]"
-                              }
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                       "a": "//*[starts-with(name(.),'starting_amount')]"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
                            }
                         ]
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [],
                "align": "r",
                "wrap": true
             },
@@ -85,8 +112,7 @@
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [],
                "font_style": "regular",
                "wrap": true
             }
@@ -148,7 +174,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];",
+                     "txt": "0f5c3f0214cfd2b16c90doogeraspilk@/data/*[1]//*[starts-with(name(.),'event')];",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -157,15 +183,14 @@
                               "t": "d",
                               "v": {
                                  "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//*[starts-with(name(.),'event')]"
+                                 "a": "/data/*[1]//*[starts-with(name(.),'event')]"
                               }
                            }
                         ]
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [],
                "name": "Stage",
                "index": 0
             },
@@ -174,6 +199,7 @@
                "role": "tcol",
                "id": "b27de4ce-13",
                "displayName": "Count",
+               "renamed": true,
                "size": 1,
                "fmt": "txt",
                "components": [
@@ -181,7 +207,7 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "e42d719b-14",
-                     "displayName": "Unnamed 2 Result",
+                     "displayName": "Count Result",
                      "size": 1,
                      "formulas": [],
                      "data": [
@@ -194,24 +220,70 @@
                ],
                "formulas": [
                   {
-                     "txt": "0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];",
+                     "txt": "lookup(0f5c3f0214cfd2b16c90doogeraspilk@/data/*[1]//*[starts-with(name(.),'event')];,group(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];),groupby(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];,0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "d",
-                              "v": {
-                                 "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//*[starts-with(name(.),'count')]"
-                              }
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                       "a": "/data/*[1]//*[starts-with(name(.),'event')]"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//*[starts-with(name(.),'event')]"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "groupby",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//*[starts-with(name(.),'event')]"
+                                          }
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//*[starts-with(name(.),'count')]"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
                            }
                         ]
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [],
                "name": "Count",
                "index": 1,
                "fw": "fixed",
@@ -221,12 +293,13 @@
                "type": "table_col",
                "role": "tcol",
                "id": "cb160a44-15",
-               "displayName": "Count Bars",
+               "displayName": "Count Value",
+               "renamed": true,
                "size": 1,
                "fmt": "hrz",
                "fmtArgs": {
-                  "minVal": 8788,
-                  "maxVal": 58682,
+                  "minVal": 108,
+                  "maxVal": 601,
                   "hideRange": true
                },
                "components": [
@@ -234,7 +307,7 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "e9682e8c-16",
-                     "displayName": "Unnamed 3 Result",
+                     "displayName": "Count Value Result",
                      "size": 1,
                      "formulas": [],
                      "data": [
@@ -247,25 +320,71 @@
                ],
                "formulas": [
                   {
-                     "txt": "0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];",
+                     "txt": "lookup(0f5c3f0214cfd2b16c90doogeraspilk@/data/*[1]//*[starts-with(name(.),'event')];,group(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];),groupby(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];,0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "d",
-                              "v": {
-                                 "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//*[starts-with(name(.),'count')]"
-                              }
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                       "a": "/data/*[1]//*[starts-with(name(.),'event')]"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//*[starts-with(name(.),'event')]"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "groupby",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//*[starts-with(name(.),'event')]"
+                                          }
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//*[starts-with(name(.),'count')]"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
                            }
                         ]
                      }
                   }
                ],
-               "data": [
-               ],
-               "name": "Count Bars",
+               "data": [],
+               "name": "",
                "index": 2,
                "borderLeft": "0",
                "fw": "fixed",
@@ -297,7 +416,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "(array(\"\\\"\\\"\",(slice((0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];),\"1\")/slice((0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];),\"0\",\"-1\"))))",
+                     "txt": "(array(\"\",(slice((lookup(0f5c3f0214cfd2b16c90doogeraspilk@/data/*[1]//*[starts-with(name(.),'event')];,group(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];),groupby(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];,0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];))),\"1\")/slice((lookup(0f5c3f0214cfd2b16c90doogeraspilk@/data/*[1]//*[starts-with(name(.),'event')];,group(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];),groupby(0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'event')];,0f5c3f0214cfd2b16c90doogeraspilk@//*[starts-with(name(.),'count')];))),\"0\",\"-1\"))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -312,7 +431,7 @@
                                     "c": [
                                        {
                                           "t": "l",
-                                          "v": "\"\""
+                                          "v": ""
                                        },
                                        {
                                           "t": "expr",
@@ -386,8 +505,7 @@
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [ ],
                "name": "Conv. #",
                "index": 3,
                "fw": "fixed",
