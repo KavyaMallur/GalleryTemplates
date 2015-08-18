@@ -1,9 +1,10 @@
 {
-   "title": "Shopify Avg Number of Orders per Customer (Last 100 Customers)",
-   "id": "d2e6c2e263ac84d9d76d9510847f331c",
+   "title": "Shopify Avg Number of Orders (Last 30 days)",
+   "id": "899054eed3beab79b0caf2fb34107dac",
    "workspace": {
       "datasources": [
-         "c3b491288991c140b831natceewzhere"
+         "c3b491288991c140b831natceewzhere",
+         "54241832c8771f9c8aadKavyaMallur9"
       ],
       "dimensions": {
          "w": 400
@@ -12,89 +13,162 @@
    "components": [
       {
          "type": "simple_value",
-         "id": "8400adf3-4",
+         "id": "418b2306",
          "displayName": "Value Pair",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
          "components": [
             {
                "type": "label",
                "role": "primary",
-               "id": "39e82cd4-5",
-               "displayName": "Primary Value",
+               "id": "cc505a3d",
+               "displayName": "Avg orders for last 30 days",
+               "renamed": true,
                "size": "3",
                "fmt": "num",
                "fmtArgs": {
                   "precision": "2"
                },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "cx": "e401c3c5"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_3",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gteq",
+                           "right": {
+                              "cx": "e401c3c5"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_green_3",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
                "formulas": [
                   {
-                     "txt": "average(sort(slice(c3b491288991c140b831natceewzhere@/customers/created_at;,\"0\",\"100\"),\"desc\",slice(c3b491288991c140b831natceewzhere@/customers/orders_count;,\"0\",\"100\")))",
+                     "txt": "if((count(sort(c3b491288991c140b831natceewzhere@/created_at;,\"desc\",c3b491288991c140b831natceewzhere@/orders_count;))=\"0\"),\"0\",average(sort(c3b491288991c140b831natceewzhere@/created_at;,\"desc\",c3b491288991c140b831natceewzhere@/orders_count;)))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "average",
+                              "v": "if",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "sort",
+                                    "t": "expr",
+                                    "v": false,
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "slice",
+                                          "v": "count",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "c3b491288991c140b831natceewzhere",
-                                                   "a": "/customers/created_at"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "0"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "100"
+                                                "t": "f",
+                                                "v": "sort",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "c3b491288991c140b831natceewzhere",
+                                                         "a": "/created_at"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "desc"
+                                                   },
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "c3b491288991c140b831natceewzhere",
+                                                         "a": "/orders_count"
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "desc"
+                                          "t": "o",
+                                          "v": "="
                                        },
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "c3b491288991c140b831natceewzhere",
-                                                   "a": "/customers/orders_count"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "0"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "100"
-                                             }
-                                          ]
+                                          "t": "l",
+                                          "v": "0"
                                        }
                                     ]
                                  },
                                  {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
+                                    "t": "l",
+                                    "v": "0"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "c3b491288991c140b831natceewzhere",
+                                                   "a": "/created_at"
+                                                }
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "desc"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "c3b491288991c140b831natceewzhere",
+                                                   "a": "/orders_count"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
                                  }
                               ]
                            }
@@ -104,7 +178,7 @@
                ],
                "data": [
                   [
-                     
+
                   ]
                ],
                "align": "c"
@@ -112,84 +186,112 @@
             {
                "type": "label",
                "role": "secondary",
-               "id": "c6f7718d-6",
-               "displayName": "Secondary Value",
-               "size": 1,
-               "fmt": "txt",
+               "id": "e401c3c5",
+               "displayName": "Avg orders for prev 30 days",
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
                "fmtArgs": {
-                  "prefix": "Compared to ",
-                  "suffix": " for previous 100 Customers"
+                  "prefix": "vs  ",
+                  "suffix": " prev month",
+                  "precision": "2"
                },
                "formulas": [
                   {
-                     "txt": "average(sort(slice(c3b491288991c140b831natceewzhere@/customers/created_at;,\"100\",\"200\"),\"desc\",slice(c3b491288991c140b831natceewzhere@/customers/orders_count;,\"100\",\"200\")))",
+                     "txt": "if((count(sort(54241832c8771f9c8aadKavyaMallur9@/created_at;,\"desc\",54241832c8771f9c8aadKavyaMallur9@/orders_count;))=\"0\"),\"0\",average(sort(54241832c8771f9c8aadKavyaMallur9@/created_at;,\"desc\",54241832c8771f9c8aadKavyaMallur9@/orders_count;)))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "average",
+                              "v": "if",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "sort",
+                                    "t": "expr",
+                                    "v": false,
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "slice",
+                                          "v": "count",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "c3b491288991c140b831natceewzhere",
-                                                   "a": "/customers/created_at"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "100"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "200"
+                                                "t": "f",
+                                                "v": "sort",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "54241832c8771f9c8aadKavyaMallur9",
+                                                         "a": "/created_at"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "desc"
+                                                   },
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "54241832c8771f9c8aadKavyaMallur9",
+                                                         "a": "/orders_count"
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "desc"
+                                          "t": "o",
+                                          "v": "="
                                        },
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "c3b491288991c140b831natceewzhere",
-                                                   "a": "/customers/orders_count"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "100"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "200"
-                                             }
-                                          ]
+                                          "t": "l",
+                                          "v": "0"
                                        }
                                     ]
                                  },
                                  {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
+                                    "t": "l",
+                                    "v": "0"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "54241832c8771f9c8aadKavyaMallur9",
+                                                   "a": "/created_at"
+                                                }
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "desc"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "54241832c8771f9c8aadKavyaMallur9",
+                                                   "a": "/orders_count"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
                                  }
                               ]
                            }
@@ -199,7 +301,7 @@
                ],
                "data": [
                   [
-                     
+
                   ]
                ],
                "align": "c",
