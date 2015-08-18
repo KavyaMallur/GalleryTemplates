@@ -12,7 +12,7 @@
             "refreshInterval" : 14400,
             "description" :"... Originates from the Gallery.",
             "props":{
-                "endpoint_url": "https://dax-rest.comscore.com/v1/reportitems.csv?itemid=130&client={{ds.comscore.clientName}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site=int&startdate={date.add(-60).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}&eventfilterid=3&visitfilterid=2",
+                "endpoint_url": "https://dax-rest.comscore{{ds.comscore.location}}/v1/reportitems.csv?itemid=130&client={{ds.comscore.clientName}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{ds.comscore.site}}&startdate={date.add(-60).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}&eventfilterid=3&visitfilterid=2",
                 "clientName":"{{ds.comscore.clientName}}",
                 "location": "{{ds.comscore.location}}"
             }
@@ -20,7 +20,7 @@
     },
 
     "dsMappings": {
-        "hubspot" : "96a4e3a309069faf93c5doogeraspilk"
+        "comscore" : "96a4e3a309069faf93c5doogeraspilk"
     },
 
     "services" : [
@@ -46,6 +46,23 @@
                 ],
             "isRequired" : "true",
             "selectedValue": ".com" 
+        },
+        {
+            "type": "select",
+            "id": "ds.comscore.site",
+            "label": "Site",
+            "options": [ 
+                    {"value":"int","label":"int (United States)"},
+                    {"value":"rus","label":"rus (Europe)"},
+                    {"value":"pos","label":"pos (Europe)"},
+                    {"value":"jpn","label":"jpn (Europe)"},
+                    {"value":"ita","label":"ita (Europe)"},
+                    {"value":"ger","label":"ger (Europe)"},
+                    {"value":"esl","label":"esl (Europe)"},
+                    {"value":"datamine","label":"datamine (Europe)"},
+                    {"value":"blog","label":"blog (Europe)"}
+                ],
+            "isRequired" : "true"
         }
     ]
 }
