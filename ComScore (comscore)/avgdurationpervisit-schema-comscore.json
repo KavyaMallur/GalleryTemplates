@@ -1,0 +1,434 @@
+{
+   "title": "comScore Avg Duration per Visit (Last 30 Days)",
+   "id": "1aea0e23e6e714b1825deb215195082d",
+   "workspace": {
+      "datasources": [
+         "49343e029db5ba194ddfdoogeraspilk"
+      ],
+      "dimensions": {
+         "w": 615
+      }
+   },
+   "datasourceProps": [
+      "gaProfile",
+      "gaStartDate",
+      "gaEndDate",
+      "gaPrevStartDate",
+      "gaPrevEndDate"
+   ],
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "a8286823",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "bc7c6c80",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Avg Duration per Visit\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Avg Duration per Visit"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [  ],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "053cd963",
+               "displayName": "Avg Duration per Visit",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 1
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "dur",
+               "fmtArgs": {
+                  "precision": "0"
+               },
+               "formulas": [
+                  {
+                     "txt": "average(slice(49343e029db5ba194ddfdoogeraspilk@C:C;,\"1\",\"31\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "average",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "49343e029db5ba194ddfdoogeraspilk",
+                                             "a": "C:C"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "31"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "mini_series",
+               "id": "43d2d24a",
+               "displayName": "Sparkline",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 0
+               },
+               "size": "2",
+               "components": [
+                  {
+                     "type": "mini_data",
+                     "role": "series",
+                     "id": "2d2d900e",
+                     "displayName": "Avg Duration per Visit Trend",
+                     "renamed": true,
+                     "fmt": "dur",
+                     "formulas": [
+                        {
+                           "txt": "slice(49343e029db5ba194ddfdoogeraspilk@C:C;,\"1\",\"31\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "49343e029db5ba194ddfdoogeraspilk",
+                                             "a": "C:C"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "31"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [  ],
+                     "seriesId": 1
+                  },
+                  {
+                     "type": "label",
+                     "role": "last-value",
+                     "id": "9148ebec",
+                     "displayName": "Last Value",
+                     "size": 3,
+                     "fmt": "dur",
+                     "formulas": [
+                        {
+                           "txt": "4.747440743423239e+27",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "4.747440743423239e+27",
+                                    "t": "l"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [  ],
+                     "dataDisabled": true
+                  }
+               ],
+               "lastValueSeries": "hidden"
+            },
+            {
+               "type": "simple_value",
+               "id": "6db4a623",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 1
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "a9d89cc7",
+                     "displayName": "Avg Duration per Visit Delta",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-even-grey",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "(((average(slice(49343e029db5ba194ddfdoogeraspilk@C:C;,\"1\",\"31\")))-(average(slice(49343e029db5ba194ddfdoogeraspilk@C:C;,\"32\"))))/(average(slice(49343e029db5ba194ddfdoogeraspilk@C:C;,\"32\"))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "053cd963"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "9d814c80"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "9d814c80"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [  ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "9d814c80",
+                     "displayName": "Avg Duration per Visit Prev",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "precision": "0",
+                        "prefix": "vs ",
+                        "suffix": " (Prev)"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "average(slice(49343e029db5ba194ddfdoogeraspilk@C:C;,\"32\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "49343e029db5ba194ddfdoogeraspilk",
+                                                   "a": "C:C"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "32"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [  ],
+                     "align": "r",
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ]
+            }
+         ],
+         "rows": 2,
+         "cols": "2",
+         "widths": [
+            {
+               "w": "65%",
+               "x": 0
+            }
+         ],
+         "cellData": [
+            {
+               "y": 0,
+               "x": 1
+            },
+            {
+               "y": 1,
+               "h": 1,
+               "x": 0
+            },
+            {
+               "y": 0,
+               "x": 0
+            }
+         ]
+      }
+   ]
+}

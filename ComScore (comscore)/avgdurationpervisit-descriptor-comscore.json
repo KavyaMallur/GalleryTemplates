@@ -1,0 +1,57 @@
+{
+    "name" : "comScore Avg Duration per Visit (Last 30 Days)",
+    "description" : "Compare 30 days average duration per visit for sites in your comScore account. Originates from the Gallery.",
+
+    "datasources" : {
+        "comscore" : {
+            "service" : "comscore",
+            "type" : "comscore",
+            "format" : "csv",
+            "name" :"comScore Avg Duration per Visit",
+            "libraryAlias" :"comScoreAvgDurationperVisit",
+            "refreshInterval" : 14400,
+            "description" :"60 days average duration per visit. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://dax-rest.comscore{{ds.comscore.location}}/v1/reportitems.csv?itemid=129&client={{ds.comscore.clientName}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{ds.comscore.site}}&startdate={date.add(-60).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}&eventfilterid=3&visitfilterid=2",
+                "clientName":"{{ds.comscore.clientName}}",
+                "location": "{{ds.comscore.location}}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "comscore" : "49343e029db5ba194ddfdoogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "comscore"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.comscore.clientName",
+            "label" : "Your Client Name",
+            "description":"Enter your comScore DAX Client Name and Site details. Need help? See <a href=# target='_blank'>Klip Gallery: comScore</a>."
+        },
+        {
+            "type": "select",
+            "id": "ds.comscore.location",
+            "label": "Data Center",
+            "options": [ 
+                    {"value":".com","label":"United States"},
+                    {"value":".eu","label":"Europe"}
+                ],
+            "isRequired" : "true",
+            "selectedValue": ".com" 
+        },
+        {
+            "type": "text",
+            "id": "ds.comscore.site",
+            "label": "Site",
+            "isRequired" : "true"
+        }
+    ]
+}
