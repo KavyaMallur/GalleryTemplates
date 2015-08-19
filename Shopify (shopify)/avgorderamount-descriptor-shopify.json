@@ -1,26 +1,44 @@
 {
-    "name" : "Shopify Avg Order Amount (Last 200 Orders)",
-    "description" : ". Originates from the Gallery.",
+    "name" : "Shopify Avg Order Amount (Last 30 days)",
+    "description" : "Provide average order amount over last 30 days and compares it against the previous 30 days. Originates from the Gallery.",
 
     "datasources" : {
-        "shopify" : {
+        "shopify-01" : {
             "service" : "shopify",
             "type" : "shopify",
             "format" : "json",
-            "name" :"Shopify Last 200 Orders",
-            "libraryAlias" :"ShopifyLast200Orders",
+            "name" :"Shopify Orders (Last 30 days)",
+            "libraryAlias" :"ShopifyOrdersLast30Days",
             "refreshInterval" : 14400,
-            "description" :"Retrieves information on your last 200 orders. Originates from the Gallery.",
+            "description" :"Retrieves order information for the last 30 days. Originates from the Gallery.",
             "props":{
-                "endpoint_url": "https://{{ds.shopify.shopName}}.myshopify.com/admin/orders.json?limit=200&order=processed_at%20desc",
+                "endpoint_url": "https://klipfolio.myshopify.com/admin/orders.json?created_at_min={date.add(-30).format()}&created_at_max={date.add(1).format()}",
                 "method": "get",
-                "use_pagination":  false
+                "use_pagination":  true,
+                "max_pages": 10
+            }
+        },
+
+        "shopify-02" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Orders (Prev 30 days)",
+            "libraryAlias" :"ShopifyOrdersPrev30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves order information for the previous 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://klipfolio.myshopify.com/admin/orders.json?created_at_min={date.add(-60).format()}&created_at_max={date.add(-31).format()}",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
             }
         }
     },
 
     "dsMappings": {
-        "shopify" : "0da3864b7e6d0c63ad64natceewzhere"
+        "shopify-01" : "0da3864b7e6d0c63ad64natceewzhere",
+        "shopify-02" : "278a2f3636db4b581846KavyaMallur9"
     },
 
     "services" : [
