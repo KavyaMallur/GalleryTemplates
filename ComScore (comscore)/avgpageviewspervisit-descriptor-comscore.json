@@ -1,24 +1,26 @@
 {
-    "name" : "comScore Referrer Drilldown",
-    "description" : "Show groups of referrer entry type of unique browser count, with Drilldown functionality. Originates from the Gallery.",
+    "name" : "comScore Avg Page Views per Visit (Last 30 Days)",
+    "description" : "Compare 30 average days page views per visit for site in your comScore account. Originates from the Gallery.",
 
     "datasources" : {
         "comscore" : {
             "service" : "comscore",
             "type" : "comscore",
             "format" : "csv",
-            "name" :"comScore Browsers per Entry Type",
-            "libraryAlias" :"comScoreBrowsersperEntryType",
+            "name" :"comScore Avg Page Views per Visit",
+            "libraryAlias" :"comScoreAvgPageViewsperVisit",
             "refreshInterval" : 14400,
-            "description" :"Retreive the count of unique browser per entry type for different sites. Originates from the Gallery.",
+            "description" :"60 days average page views per visit. Originates from the Gallery.",
             "props":{
-                "endpoint_url": "https://dax-rest.comscore.com/v1/reportitems.csv?itemid=260&client={{ds.comscore.clientName}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{ds.comscore.site}}&startdate={date.add(-30).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}&eventfilterid=3&visitfilterid=2"
+                "endpoint_url": "https://dax-rest.comscore{{ds.comscore.location}}/v1/reportitems.csv?itemid=130&client={{ds.comscore.clientName}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{ds.comscore.site}}&startdate={date.add(-60).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}&eventfilterid=3&visitfilterid=2",
+                "clientName":"{{ds.comscore.clientName}}",
+                "location": "{{ds.comscore.location}}"
             }
         }
     },
 
     "dsMappings": {
-        "comscore" : "40082bbbcf97fba73eb2doogeraspilk"
+        "comscore" : "96a4e3a309069faf93c5doogeraspilk"
     },
 
     "services" : [
