@@ -1,0 +1,46 @@
+{
+    "name" : "Mixpanel Events Trend",
+    "description" : "Provide events trend over the last 30 days as in yesterday. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "mixpanel" : {
+            "service" : "mixpanel",
+            "libraryAlias" : "MixpanelEvents30Days",
+            "name": "Mixpanel Events ({{ds.mixpanel.event1}},{{ds.mixpanel.event2}}) (30 days)",
+            "description" : "Provide events for the last 30 days. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://mixpanel.com/api/2.0/events/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event=[\\\"{{ds.mixpanel.event1}}\\\",\\\"{{ds.mixpanel.event2}}\\\"]\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=30\").append(\"type=general\").append(\"unit=day\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&event=[\"{{ds.mixpanel.event1}}\",\"{{ds.mixpanel.event2}}\"]&interval=30&type=general&unit=day&api_key={{auth.mixpanel.apiKey}}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "mixpanel" : "ef6ac98651741d594e75KavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "mixpanel"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.mixpanel.event1",
+            "label" : "Enter first event",
+            "description":"Enter the events you are interested in tracking on mixpanel.",
+            "isRequired" : true
+        },
+        {
+            "type" : "text",
+            "id" : "ds.mixpanel.event2",
+            "label" : "Enter second event",
+            "isRequired" : true
+        }
+    ]
+}

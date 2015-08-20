@@ -1,0 +1,49 @@
+{
+    "name" : "Shopify Avg Number of Orders per Customer (Last 30 days)",
+    "description" : "Provide average number of orders per customer over last 30 days and compares it against the previous 30 days. Originates from the Gallery.",
+
+    "datasources" : {
+        "shopify-01" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Customers (Last 30 days)",
+            "libraryAlias" :"ShopifyCustomersLast30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves customer information for the last 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/customers.json?created_at_min={date.add(-30).format()}&created_at_max={date.add(1).format()}",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
+            }
+        },
+
+        "shopify-02" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Customers (Prev 30 days)",
+            "libraryAlias" :"ShopifyCustomersPrev30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves customer information for the Prev 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/customers.json?created_at_min={date.add(-60).format()}&created_at_max={date.add(-31).format()}",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
+            }
+        }
+    },
+
+    "dsMappings": {
+        "shopify-01" : "c3b491288991c140b831natceewzhere",
+        "shopify-02" : "54241832c8771f9c8aadKavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "shopify"
+        }
+    ]
+}

@@ -1,20 +1,21 @@
 {
-    "name" : "Shopify Top Cities (Last 200 Customers)",
-    "description" : ". Originates from the Gallery.",
+    "name" : "Shopify Top Cities (Last 30 days)",
+    "description" : "Provide top cities over the last 30 days. Originates from the Gallery.",
 
     "datasources" : {
         "shopify" : {
             "service" : "shopify",
             "type" : "shopify",
             "format" : "json",
-            "name" :"Shopify Last 200 Customers",
-            "libraryAlias" :"ShopifyLast200Customers",
+            "name" :"Shopify Customers (Last 30 days)",
+            "libraryAlias" :"ShopifyCustomersLast30Days",
             "refreshInterval" : 14400,
-            "description" :"Retrieves information on your last 200 orders. Originates from the Gallery.",
+            "description" :"Retrieves customer information for the last 30 days. Originates from the Gallery.",
             "props":{
-                "endpoint_url": "https://{{ds.shopify.shopName}}.myshopify.com/admin/customers.json?limit=200&order=created_at%20desc",
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/customers.json?created_at_min={date.add(-30).format()}&created_at_max={date.add(1).format()}",
                 "method": "get",
-                "use_pagination":  false
+                "use_pagination":  true,
+                "max_pages": 10
             }
         }
     },
@@ -28,4 +29,4 @@
             "service" : "shopify"
         }
     ]
-} 
+}

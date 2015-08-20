@@ -1,0 +1,171 @@
+{
+   "title": "Shopify Avg Number of Orders per Customer (Last 30 days)",
+   "id": "899054eed3beab79b0caf2fb34107dac",
+   "workspace": {
+      "datasources": [
+         "c3b491288991c140b831natceewzhere",
+         "54241832c8771f9c8aadKavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "simple_value",
+         "id": "418b2306",
+         "displayName": "Value Pair",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
+         "components": [
+            {
+               "type": "label",
+               "role": "primary",
+               "id": "cc505a3d",
+               "displayName": "Avg orders for last 30 days",
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "fmtArgs": {
+                  "precision": "2"
+               },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "cx": "e401c3c5"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_3",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gteq",
+                           "right": {
+                              "cx": "e401c3c5"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_green_3",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "average(c3b491288991c140b831natceewzhere@/orders_count;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "average",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "c3b491288991c140b831natceewzhere",
+                                       "a": "/orders_count"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "c"
+            },
+            {
+               "type": "label",
+               "role": "secondary",
+               "id": "e401c3c5",
+               "displayName": "Avg orders for prev 30 days",
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "fmtArgs": {
+                  "prefix": "vs  ",
+                  "suffix": " prev month",
+                  "precision": "2"
+               },
+               "formulas": [
+                  {
+                     "txt": "average(54241832c8771f9c8aadKavyaMallur9@/orders_count;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "average",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "54241832c8771f9c8aadKavyaMallur9",
+                                       "a": "/orders_count"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "c",
+               "font_style": "regular"
+            }
+         ]
+      }
+   ]
+}

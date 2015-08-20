@@ -1,0 +1,29 @@
+{
+    "name" : "comScore Bounced Visits (Last 30 Days)",
+    "description" : "30 days comparison of visits and bounced visits. Originates from the Gallery.",
+
+    "datasources" : {
+        "comscore" : {
+            "service" : "comscore",
+            "type" : "comscore",
+            "format" : "csv",
+            "name" :"comScore Bounced Visits",
+            "libraryAlias" :"comScoreBouncedVisits",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve the number of visits and bounced visits for the last 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://dax-rest.comscore{{auth.comscore.location}}/v1/reportitems.csv?itemid=610&client={{auth.comscore.client}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{auth.comscore.site}}&startdate={date.add(-30).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}"
+             }
+        }
+    },
+
+    "dsMappings": {
+        "comscore" : "61baee47db4a2a71ebc0doogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "comscore"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "name" : "Mixpanel Top 5 {{ds.mixpanel.event}} by {{ds.mixpanel.name}}",
+    "description" : "Track top 5 event({{ds.mixpanel.event}}) by property({{ds.mixpanel.name}}). Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "mixpanel" : {
+            "service" : "mixpanel",
+            "libraryAlias" : "MixpanelEventPropertiesToday",
+            "name": "Mixpanel {{ds.mixpanel.event}} by {{ds.mixpanel.name}}(Today)",
+            "description" : "Provide event properties for today on the event:Klip Added from Gallery. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://mixpanel.com/api/2.0/events/properties?expire={hash.getExpiryTime(240)}&event={{ds.mixpanel.event}}&interval=0&name={{ds.mixpanel.name}}&type=general&unit=day&api_key={{auth.mixpanel.apiKey}}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=0\").append(\"name={{ds.mixpanel.name}}\").append(\"type=general\").append(\"unit=day\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "mixpanel" : "380afc656132a5d991ceKavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "mixpanel"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.mixpanel.event",
+            "label" : "Enter Event",
+            "description":"Enter an event you are interested in tracking on mixpanel.",
+            "isRequired" : true
+        },
+        {
+            "type" : "text",
+            "id" : "ds.mixpanel.name",
+            "label" : "Enter Property",
+            "description":"Enter a property you are interested in tracking on mixpanel.",
+            "isRequired" : true
+        }
+    ],
+
+    "uiVariables": [
+        {
+            "name":"KTtemp", 
+            "value":"1"
+        }
+    ]
+}
