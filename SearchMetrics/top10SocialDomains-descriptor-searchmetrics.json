@@ -1,0 +1,42 @@
+{
+    "name" : "Searchmetrics Top 10 Social Domains",
+    "description" : "Provide Social Visibility for top 10 URLs for a given domain. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "searchmetrics-01" : {
+            "service" : "searchmetrics",
+            "libraryAlias" : "SearchmetricsTopSocialVisibility",
+            "name": "Searchmetrics Top Social Visibility {{ds.searchmetrics.url}}",
+            "description" : "Provide Social Visibility for top 10 URLs for a given domain. Originates from gallery.",
+            "type" : "searchMetrics",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://api.searchmetrics.com/v1/ResearchSocialGetListTopUrls.json?url={{ds.searchmetrics.url}}",
+                "oauth_user_key" : "{{auth.searchmetrics.apiKey}}",
+                "oauth_user_secret" : "{{auth.searchmetrics.apiSecret}}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "searchmetrics-01" : "8282159b7205450feda9KavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "searchmetrics"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.searchmetrics.url",
+            "label" : "Domanin/Subdomain",
+            "description": "Enter a domain or subdomain; and select a country code.",
+            "isRequired" : true
+        }
+    ]
+}
