@@ -1,0 +1,32 @@
+{
+    "name" : "Stripe Disputes",
+    "description" : "Monitor the number of active disputes of your Stripe account. Originates from the Gallery.",
+
+    "datasources" : {
+        "stripe-01" : {
+            "service" : "stripe",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Stripe Disputes (Last 100 Disputes)",
+            "libraryAlias" :"StripeDisputes",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of your Stripe disputes. Originates from the Gallery.",
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.stripe.apiKey}}",
+                "endpoint_url": "https://api.stripe.com/v1/disputes?limit=100",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "stripe-01" : "349403170c9ef5be3d68natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "stripe"
+        }
+    ]
+}

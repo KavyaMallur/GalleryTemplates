@@ -1,0 +1,32 @@
+{
+    "name" : "Stripe Balance",
+    "description" : "Monitor the balance of your Stripe account. Originates from the Gallery.",
+
+    "datasources" : {
+        "stripe-01" : {
+            "service" : "stripe",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Stripe Balance",
+            "libraryAlias" :"StripeBalance",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of your Stripe payments. Originates from the Gallery.",
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.stripe.apiKey}}",
+                "endpoint_url": "https://api.stripe.com/v1/balance",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "stripe-01" : "69784448b2a151fb5fafnatceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "stripe"
+        }
+    ]
+}

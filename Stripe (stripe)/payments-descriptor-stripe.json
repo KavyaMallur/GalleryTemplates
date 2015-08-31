@@ -1,0 +1,80 @@
+{
+    "name" : "Stripe Payments (Last 24 Hours)",
+    "description" : "Monitor payments of your Stripe account. Originates from the Gallery.",
+
+    "datasources" : {
+        "stripe-01" : {
+            "service" : "stripe",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Stripe Payments Succeeded (Last 24 Hours)",
+            "libraryAlias" :"StripePaymentsSucceededLast24Hours",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of your Stripe successful payments made within the last 24 hours. Originates from the Gallery.",
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.stripe.apiKey}}",
+                "endpoint_url": "https://api.stripe.com/v1/events?created[gte]={date.addHours(-24).format('epochTime')}&limit=5&type=invoice.payment_succeeded&include[]=total_count",
+                "method": "get"
+            }
+        },
+        "stripe-02" : {
+            "service" : "stripe",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Stripe Payments Succeeded (Last 48 Hours)",
+            "libraryAlias" :"StripePaymentsSucceededLast48Hours",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of your Stripe successful payments made within last 48 hours. Originates from the Gallery.",
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.stripe.apiKey}}",
+                "endpoint_url": "https://api.stripe.com/v1/events?created[gte]={date.addHours(-48).format('epochTime')}&limit=5&type=invoice.payment_succeeded&include[]=total_count&created[lte]={date.addHours(-24).format('epochTime')}",
+                "method": "get"
+            }
+        },
+        "stripe-03" : {
+            "service" : "stripe",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Stripe Payments Failed (Last 48 Hours)",
+            "libraryAlias" :"StripePaymentsFailedLast48Hours",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of your Stripe failed payments made within the last 48 hours. Originates from the Gallery.",
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.stripe.apiKey}}",
+                "endpoint_url": "https://api.stripe.com/v1/events?created[gte]={date.addHours(-48).format('epochTime')}&limit=5&type=invoice.payment_failed&include[]=total_count&created[lte]={date.addHours(-24).format('epochTime')}",
+                "method": "get"
+            }
+        },
+        "stripe-04" : {
+            "service" : "stripe",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Stripe Payments Failed (Last 24 Hours)",
+            "libraryAlias" :"StripePaymentsFailedLast24Hours",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve details of your Stripe failed payments made within the last 48 hours. Originates from the Gallery.",
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.stripe.apiKey}}",
+                "endpoint_url": "https://api.stripe.com/v1/events?created[gte]={date.addHours(-24).format('epochTime')}&limit=5&type=invoice.payment_failed&include[]=total_count",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "stripe-01" : "4de92071d8b5502453f7natceewzhere",
+        "stripe-02" : "7cf57656b8697cf39ac5natceewzhere",
+        "stripe-03" : "a505c98dc6b367af0699natceewzhere",
+        "stripe-04" : "0c88a373f39eca1cc9f7natceewzhere"
+    },
+
+    "services" : [
+        {
+            "service" : "stripe"
+        }
+    ]
+}

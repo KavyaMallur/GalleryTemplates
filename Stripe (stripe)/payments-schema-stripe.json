@@ -1,0 +1,631 @@
+{
+   "title": "Stripe Payments (Last 24 Hours)",
+   "id": "c1241a2769b930098f2e56d65ff39137",
+   "workspace": {
+      "datasources": [
+         "4de92071d8b5502453f7natceewzhere",
+         "7cf57656b8697cf39ac5natceewzhere",
+         "a505c98dc6b367af0699natceewzhere",
+         "0c88a373f39eca1cc9f7natceewzhere"
+      ],
+      "dimensions": {
+         "w": 1048
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "8eb13a71b5dfb30561f33ab9e49ba64c633a2c59",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "7bea36f453fa5b60d03ba91abd103620bdee537e",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "371df57decf64c383f4b014fecba00ad53fd13dc",
+                     "displayName": "Payments Succeeded Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "4de92071d8b5502453f7natceewzhere@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "4de92071d8b5502453f7natceewzhere",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "e13c362f63be142888be78c31455dc97ac1c1a3c",
+                     "displayName": "Payments Succedded Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Payments Succeeded\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Payments Succeeded"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "30bc2373625d3543f0f0845d838b2e34349757c0",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "5c89008089e77290e29fd0d0ad351f8fd33ab832",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "d4bbd68d778cf8334b018708e6c09427e27047f5",
+                     "displayName": "Payments Succeeded Delta Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-blank",
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "(((4de92071d8b5502453f7natceewzhere@/total_count;)-(7cf57656b8697cf39ac5natceewzhere@/total_count;))/(7cf57656b8697cf39ac5natceewzhere@/total_count;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "371df57decf64c383f4b014fecba00ad53fd13dc"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "1467cfc377fb9456a58dfeaafae032b67745ac44"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "1467cfc377fb9456a58dfeaafae032b67745ac44"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "1467cfc377fb9456a58dfeaafae032b67745ac44",
+                     "displayName": "Payments Succeeded Previous Period",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev period"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "7cf57656b8697cf39ac5natceewzhere@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7cf57656b8697cf39ac5natceewzhere",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "simple_value",
+               "id": "8c15720e",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "3113d12e",
+                     "displayName": "Payments Failed Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "0c88a373f39eca1cc9f7natceewzhere@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "0c88a373f39eca1cc9f7natceewzhere",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "da98b9c2",
+                     "displayName": "Payments Failed Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Payments Failed\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Payments Failed"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "e09bd3bd73b016551e3162fe71fe1b3e2db25655",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "b64f8df9",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "33bf4f82",
+                     "displayName": "Payments Failed Delta Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-blank",
+                                 "type": "icon",
+                                 "isScalar": true,
+                                 "pos": "right"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "(((0c88a373f39eca1cc9f7natceewzhere@/total_count;)-(a505c98dc6b367af0699natceewzhere@/total_count;))/(a505c98dc6b367af0699natceewzhere@/total_count;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "3113d12e"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "c47a9ec0"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "c47a9ec0"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "c47a9ec0",
+                     "displayName": "Payments Failed Previous Period",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev period"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "a505c98dc6b367af0699natceewzhere@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "a505c98dc6b367af0699natceewzhere",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            }
+         ],
+         "rows": 2,
+         "cols": "3",
+         "widths": [
+            {
+               "w": 20,
+               "x": 1
+            }
+         ],
+         "cellData": [
+            {
+               "y": 0,
+               "x": 1
+            },
+            {
+               "y": 1,
+               "x": 1
+            },
+            {
+               "alignment": 2,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 1,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2
+            },
+            {
+               "alignment": 2,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2
+            }
+         ]
+      }
+   ]
+}

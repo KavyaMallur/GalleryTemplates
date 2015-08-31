@@ -1,0 +1,641 @@
+{
+   "title": "Stripe Subscriptions (Last 24 Hours)",
+   "id": "37deb35982e872e06ef89ab679e4e06c",
+   "workspace": {
+      "datasources": [
+         "3606b51b4502731e5b0eb04f3cf60474",
+         "3001b41c4af5ff455872cb1150b4aa5e",
+         "d896e48d4c68ae6f8b9f122a1c4ce4f0",
+         "8e92e28b7a694ec707a999c2bef330b5"
+      ],
+      "dimensions": {
+         "w": 1048
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "8eb13a71b5dfb30561f33ab9e49ba64c633a2c59",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "7bea36f453fa5b60d03ba91abd103620bdee537e",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "371df57decf64c383f4b014fecba00ad53fd13dc",
+                     "displayName": "Subscriptions Created Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "3001b41c4af5ff455872cb1150b4aa5e@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3001b41c4af5ff455872cb1150b4aa5e",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "e13c362f63be142888be78c31455dc97ac1c1a3c",
+                     "displayName": "Subscriptions Created Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Subscriptions Created\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Subscriptions Created"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "30bc2373625d3543f0f0845d838b2e34349757c0",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "5c89008089e77290e29fd0d0ad351f8fd33ab832",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "d4bbd68d778cf8334b018708e6c09427e27047f5",
+                     "displayName": "Subscriptions Created Delta Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-blank",
+                                 "type": "icon",
+                                 "isScalar": true
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "(((3001b41c4af5ff455872cb1150b4aa5e@/total_count;)-(3606b51b4502731e5b0eb04f3cf60474@/total_count;-3001b41c4af5ff455872cb1150b4aa5e@/total_count;))/(3606b51b4502731e5b0eb04f3cf60474@/total_count;-3001b41c4af5ff455872cb1150b4aa5e@/total_count;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "371df57decf64c383f4b014fecba00ad53fd13dc"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "1467cfc377fb9456a58dfeaafae032b67745ac44"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "1467cfc377fb9456a58dfeaafae032b67745ac44"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "1467cfc377fb9456a58dfeaafae032b67745ac44",
+                     "displayName": "Subscriptions Created Previous Period",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev period"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "3606b51b4502731e5b0eb04f3cf60474@/total_count;-3001b41c4af5ff455872cb1150b4aa5e@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3606b51b4502731e5b0eb04f3cf60474",
+                                       "a": "/total_count"
+                                    }
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "-"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3001b41c4af5ff455872cb1150b4aa5e",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "simple_value",
+               "id": "c8a2b25d",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "c27f6d00",
+                     "displayName": "Subscriptions Deleted Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "8e92e28b7a694ec707a999c2bef330b5@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "8e92e28b7a694ec707a999c2bef330b5",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "d496c23c",
+                     "displayName": "Subscriptions Deleted Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Subscriptions Deleted\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Subscriptions Deleted"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "e09bd3bd73b016551e3162fe71fe1b3e2db25655",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "39165b97",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "de20ed35",
+                     "displayName": "Subscriptions Deleted Delta Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-blank",
+                                 "type": "icon",
+                                 "isScalar": true
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "(((8e92e28b7a694ec707a999c2bef330b5@/total_count;)-(d896e48d4c68ae6f8b9f122a1c4ce4f0@/total_count;))/(d896e48d4c68ae6f8b9f122a1c4ce4f0@/total_count;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "c27f6d00"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "a0259a08"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "a0259a08"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "a0259a08",
+                     "displayName": "Subscriptions Deleted Previous Period",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev period"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "d896e48d4c68ae6f8b9f122a1c4ce4f0@/total_count;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "d896e48d4c68ae6f8b9f122a1c4ce4f0",
+                                       "a": "/total_count"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            }
+         ],
+         "rows": 2,
+         "cols": "3",
+         "widths": [
+            {
+               "w": 20,
+               "x": 1
+            }
+         ],
+         "cellData": [
+            {
+               "y": 0,
+               "x": 1
+            },
+            {
+               "y": 1,
+               "x": 1
+            },
+            {
+               "alignment": 2,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 1,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2
+            },
+            {
+               "alignment": 2,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2
+            }
+         ]
+      }
+   ]
+}
