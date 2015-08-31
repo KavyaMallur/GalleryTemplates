@@ -1,0 +1,363 @@
+{
+   "title": "Searchmetrics Estimated Value of Search Traffic ({{ds.searchmetrics.url}})",
+   "id": "b0cb7b6b64e47b29018b1c895921cc10",
+   "workspace": {
+      "datasources": [
+         "dc1b639b470156a96c9edoogeraspilk"
+      ],
+      "dimensions": {
+         "w": 1048
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "20dde604",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "d8ba5dfc-4",
+               "displayName": "Traffic Value",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "last(dc1b639b470156a96c9edoogeraspilk@//traffic_value;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "last",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "dc1b639b470156a96c9edoogeraspilk",
+                                       "a": "//traffic_value"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "count",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [  ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "separator",
+               "id": "4d85129b",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 1
+               },
+               "orientation": "v"
+            },
+            {
+               "type": "label",
+               "id": "f3cf537e-3",
+               "displayName": "Traffic Delta Value",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "pct",
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green",
+                           "isScalar": true,
+                           "pos": "left"
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-down-red",
+                           "pos": "left"
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "(last(dc1b639b470156a96c9edoogeraspilk@//traffic_value;)-first(dc1b639b470156a96c9edoogeraspilk@//traffic_value;))/first(dc1b639b470156a96c9edoogeraspilk@//traffic_value;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "last",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "dc1b639b470156a96c9edoogeraspilk",
+                                             "a": "//traffic_value"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "-"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "first",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "dc1b639b470156a96c9edoogeraspilk",
+                                             "a": "//traffic_value"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "o",
+                              "v": "/"
+                           },
+                           {
+                              "t": "f",
+                              "v": "first",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "dc1b639b470156a96c9edoogeraspilk",
+                                       "a": "//traffic_value"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "count",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [  ],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "3b312d4e-1",
+               "displayName": "Traffic Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"klipfolio.com traffic value\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "klipfolio.com traffic value"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "3b3f05f7-2",
+               "displayName": "Traffic Delta Label",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "fmtArgs": {
+                  "prefix": "vs ",
+                  "suffix": " prev month"
+               },
+               "formulas": [
+                  {
+                     "txt": "first(dc1b639b470156a96c9edoogeraspilk@//traffic_value;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "first",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "dc1b639b470156a96c9edoogeraspilk",
+                                       "a": "//traffic_value"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "count",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "font_colour": "cx-color_aaa",
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": "2",
+         "cols": "3",
+         "widths": [
+            {
+               "w": 20,
+               "x": 1
+            }
+         ],
+         "cellData": [
+            {
+               "y": 0,
+               "x": 1,
+               "h": 2
+            },
+            {
+               "alignment": 2,
+               "y": 0,
+               "x": 0,
+               "cellPadding": [
+                  5,
+                  12,
+                  0,
+                  5
+               ]
+            },
+            {
+               "alignment": 2,
+               "y": 0,
+               "x": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  4,
+                  12
+               ]
+            },
+            {
+               "x": 2,
+               "y": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  12
+               ]
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "cellPadding": [
+                  0,
+                  12,
+                  5,
+                  5
+               ]
+            }
+         ]
+      }
+   ]
+}

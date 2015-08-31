@@ -1,0 +1,29 @@
+{
+    "name" : "comScore Avg Page Views per Visit (Last 30 Days)",
+    "description" : "Track your average page views per visit and compare it to last month. Originates from the Gallery.",
+
+    "datasources" : {
+        "comscore" : {
+            "service" : "comscore",
+            "type" : "comscore",
+            "format" : "csv",
+            "name" :"comScore Avg Page Views per Visit",
+            "libraryAlias" :"comScoreAvgPageViewsperVisit",
+            "refreshInterval" : 14400,
+            "description" :"60 days average page views per visit. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://dax-rest.comscore{{auth.comscore.location}}/v1/reportitems.csv?itemid=130&client={{auth.comscore.client}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{auth.comscore.site}}&startdate={date.add(-60).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "comscore" : "96a4e3a309069faf93c5doogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "comscore"
+        }
+    ]
+}

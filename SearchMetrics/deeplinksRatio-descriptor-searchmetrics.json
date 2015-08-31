@@ -1,0 +1,42 @@
+{
+    "name" : "Searchmetrics Deeplinks Ratio",
+    "description" : "Provide ratio of homepage links and deeplinks for a given domain. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "searchmetrics" : {
+            "service" : "searchmetrics",
+            "libraryAlias" : "SearchmetricsDeeplinkRatio",
+            "name": "Searchmetrics Deeplink Ratio ({{ds.searchmetrics.url}})",
+            "description" : "Provide ratio of homepage links and deeplinks for {{ds.searchmetrics.url}}.",
+            "type" : "searchMetrics",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://api.searchmetrics.com/v1/ResearchLinksGetCountDeeplinkRatio.json?url={{ds.searchmetrics.url}}",
+                "oauth_user_key" : "{{auth.searchmetrics.apiKey}}",
+                "oauth_user_secret" : "{{auth.searchmetrics.apiSecret}}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "searchmetrics" : "0c8a9487327145b675f4KavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "searchmetrics"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.searchmetrics.url",
+            "label" : "Domanin/Subdomain",
+            "description": "Enter a domain or subdomain.",
+            "isRequired" : true
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+{
+    "name" : "Searchmetrics SEO Visibility ({{ds.searchmetrics.url}})",
+    "description" : "Show the SEO visibility based on searches in a specific country. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "searchmetrics-01" : {
+            "service" : "searchmetrics",
+            "libraryAlias" : "SearchmetricsSEOVisibility",
+            "name": "Searchmetrics SEO Visibility ({{ds.searchmetrics.url}})",
+            "description" : "Retrieve the country specific visibility in the organic search for a domain. Originates from the Gallery.",
+            "type" : "searchMetrics",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://api.searchmetrics.com/v1/ResearchOrganicGetValueSeoVisibility.json?url={{ds.searchmetrics.url}}&countrycode={{ds.searchmetrics.countrycode}}",
+                "oauth_user_key" : "{{auth.searchmetrics.apiKey}}",
+                "oauth_user_secret" : "{{auth.searchmetrics.apiSecret}}"
+            }
+        },
+        "searchmetrics-02" : {
+            "service" : "searchmetrics",
+            "libraryAlias" : "SearchmetricsSEOVisibility90DayTrend",
+            "name": "Searchmetrics SEO Visibility 90-Day Trend ({{ds.searchmetrics.url}})",
+            "description" : "Retrieve the country specific visibility in the organic search for a domain for the last 90 days. Originates from the Gallery.",
+            "type" : "searchMetrics",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "http://api.searchmetrics.com/v1/ResearchOrganicGetListSeoVisibilityHistoric.json?url={{ds.searchmetrics.url}}&countrycode={{ds.searchmetrics.countrycode}}&date_from={date.add(-90).format('yyyyMMdd')}&date_to={date.today.format('yyyyMMdd')}",
+                "oauth_user_key" : "{{auth.searchmetrics.apiKey}}",
+                "oauth_user_secret" : "{{auth.searchmetrics.apiSecret}}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "searchmetrics-01" : "689d0e0d646e38c70e37doogeraspilk",
+        "searchmetrics-02" : "167e987fcefb9c4c3356doogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "searchmetrics"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.searchmetrics.url",
+            "label" : "Domanin/Subdomain",
+            "description": "Enter a domain or subdomain; and select a country code.",
+            "isRequired" : true
+        },
+        {
+            "type": "select",
+            "id": "ds.searchmetrics.countrycode",
+            "label" : "Country Code",
+            "options": [
+                    {"label":"AR (Argentina)","value":"AR"},
+                    {"label":"AU (Australia)","value":"AU"},
+                    {"label":"AT (Austria)","value":"AT"},
+                    {"label":"BR (Brazil)","value":"BR"},
+                    {"label":"CA (Canada)","value":"CA"},
+                    {"label":"DK (Denmark)","value":"DK"},
+                    {"label":"FI (Finland)","value":"FI"},
+                    {"label":"FR (France)","value":"FR"},
+                    {"label":"DE (Germany)","value":"DE"},
+                    {"label":"HK (Hong Kong)","value":"HK"},
+                    {"label":"IN (India)","value":"IN"},
+                    {"label":"IT (Italy)","value":"IT"},
+                    {"label":"JP (Japan)","value":"JP"},
+                    {"label":"MX (Mexico)","value":"MX"},
+                    {"label":"NL (Netherlands)","value":"NL"},
+                    {"label":"NO (Norway)","value":"NO"},
+                    {"label":"PL (Poland)","value":"PL"},
+                    {"label":"RU (Russian Federation)","value":"RU"},
+                    {"label":"SG (Singapore)","value":"SG"},
+                    {"label":"SA (South Africa)","value":"ZA"},
+                    {"label":"ES (Spain)","value":"ES"},
+                    {"label":"SE (Sweden)","value":"SE"},
+                    {"label":"CH (Switzerland)","value":"CH"},
+                    {"label":"TR (Turkey)","value":"TR"},
+                    {"label":"US (USA)","value":"US"},
+                    {"label":"GB (United Kingdom)","value":"GB"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "US"
+}
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name" : "comScore Referrer Drilldown",
+    "description" : "Delve into the details of your referrers by clicking on each entry type (past 30 days). Originates from the Gallery.",
+
+    "datasources" : {
+        "comscore" : {
+            "service" : "comscore",
+            "type" : "comscore",
+            "format" : "csv",
+            "name" :"comScore Browsers per Entry Type",
+            "libraryAlias" :"comScoreBrowsersperEntryType",
+            "refreshInterval" : 14400,
+            "description" :"Retreive the count of unique browser per entry type for different sites. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://dax-rest.comscore{{auth.comscore.location}}/v1/reportitems.csv?itemid=260&client={{auth.comscore.client}}&user={{auth.comscore.username}}&password={{auth.comscore.password}}&site={{auth.comscore.site}}&startdate={date.add(-30).format('yyyyMMdd')}&enddate={date.today.format('yyyyMMdd')}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "comscore" : "40082bbbcf97fba73eb2doogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "comscore"
+        }
+    ]
+}
