@@ -1,0 +1,983 @@
+{
+   "title": "Searchmetrics Value of Traffic vs Competiors for {{ds.searchmetrics.url}} (Last Month)",
+   "id": "aa50687ef803f57a603de314811cd7c5",
+   "workspace": {
+      "datasources": [
+         "dc1b639b470156a96c9eKavyaMallur9",
+         "79bf8aae80120cab209fKavyaMallur9",
+         "5d1aea90ec5f4d94bb40KavyaMallur9",
+         "a18d1f0bc2e6e451540cKavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 427
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "76ee3a90",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "56a51d4c",
+               "displayName": "Traffic Value ",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "cur",
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gteq",
+                           "right": {
+                              "cx": "6947b9f5"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_green_3",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "cx": "6947b9f5"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_3",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "last(dc1b639b470156a96c9eKavyaMallur9@//*;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "last",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "dc1b639b470156a96c9eKavyaMallur9",
+                                       "a": "//*"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "count",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "603e8e66",
+               "displayName": "Traffic Delta",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "pct",
+               "fmtArgs": {
+                  "suffix": " vs prev month"
+               },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-down-red"
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "((last(dc1b639b470156a96c9eKavyaMallur9@//*;)-first(dc1b639b470156a96c9eKavyaMallur9@//*;))/first(dc1b639b470156a96c9eKavyaMallur9@//*;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "last",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "dc1b639b470156a96c9eKavyaMallur9",
+                                                   "a": "//*"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "count",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "first",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "dc1b639b470156a96c9eKavyaMallur9",
+                                                   "a": "//*"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "count",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "first",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "dc1b639b470156a96c9eKavyaMallur9",
+                                             "a": "//*"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "f8b63b91",
+               "displayName": "Traffic Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Value of Traffic\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Value of Traffic"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "c",
+               "wrap": true
+            }
+         ],
+         "rows": 2,
+         "cols": 2,
+         "cellData": [
+            {
+               "x": 1,
+               "y": 0,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  2,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  0,
+                  0,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "w": 2,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            }
+         ]
+      },
+      {
+         "type": "table",
+         "id": "cf00e1fd",
+         "displayName": "Table",
+         "renamed": true,
+         "components": [
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "2a5e8b27",
+               "displayName": "Competitor URL",
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "11c89c9e",
+                     "displayName": "Competitor URL Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "array(\"{{ds.searchmetrics.url1}}\",\"{{ds.searchmetrics.url2}}\",\"{{ds.searchmetrics.url3}}\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "array",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.searchmetrics.url1}}"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.searchmetrics.url2}}"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.searchmetrics.url3}}"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "URL",
+               "index": 0,
+               "fw": "fixed",
+               "w": "60%"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "86e8bba0",
+               "displayName": "Competitor Traffic Value",
+               "renamed": true,
+               "size": "1",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "0"
+               },
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "c6d4cab1",
+                     "displayName": "Competitor Traffic Value Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "array(last(79bf8aae80120cab209fKavyaMallur9@//*;),last(5d1aea90ec5f4d94bb40KavyaMallur9@//*;),last(a18d1f0bc2e6e451540cKavyaMallur9@//*;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "array",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "last",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "79bf8aae80120cab209fKavyaMallur9",
+                                             "a": "//*"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "last",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5d1aea90ec5f4d94bb40KavyaMallur9",
+                                             "a": "//*"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "last",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "a18d1f0bc2e6e451540cKavyaMallur9",
+                                             "a": "//*"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "Score",
+               "index": 1,
+               "align": "r",
+               "font_style": "bold"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "45ba3811",
+               "displayName": "Competitor Traffic Delta",
+               "renamed": true,
+               "size": 1,
+               "fmt": "pct",
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green"
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-down-red"
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "eq",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-blank"
+                        }
+                     ]
+                  }
+               ],
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "f9aaa5d4",
+                     "displayName": "Competitor Traffic Delta Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "array(((last(79bf8aae80120cab209fKavyaMallur9@//*;)-first(79bf8aae80120cab209fKavyaMallur9@//*;))/first(79bf8aae80120cab209fKavyaMallur9@//*;)),((last(5d1aea90ec5f4d94bb40KavyaMallur9@//*;)-first(5d1aea90ec5f4d94bb40KavyaMallur9@//*;))/first(5d1aea90ec5f4d94bb40KavyaMallur9@//*;)),((last(a18d1f0bc2e6e451540cKavyaMallur9@//*;)-first(a18d1f0bc2e6e451540cKavyaMallur9@//*;))/first(a18d1f0bc2e6e451540cKavyaMallur9@//*;)))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "array",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "last",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "79bf8aae80120cab209fKavyaMallur9",
+                                                         "a": "//*"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "first",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "79bf8aae80120cab209fKavyaMallur9",
+                                                         "a": "//*"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "first",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "79bf8aae80120cab209fKavyaMallur9",
+                                                   "a": "//*"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "count",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "last",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "5d1aea90ec5f4d94bb40KavyaMallur9",
+                                                         "a": "//*"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "first",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "5d1aea90ec5f4d94bb40KavyaMallur9",
+                                                         "a": "//*"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "first",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "5d1aea90ec5f4d94bb40KavyaMallur9",
+                                                   "a": "//*"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "count",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "last",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "a18d1f0bc2e6e451540cKavyaMallur9",
+                                                         "a": "//*"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "first",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "a18d1f0bc2e6e451540cKavyaMallur9",
+                                                         "a": "//*"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "first",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a18d1f0bc2e6e451540cKavyaMallur9",
+                                                   "a": "//*"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "count",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "New Column",
+               "index": 2,
+               "align": "l"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "6947b9f5",
+               "displayName": "Max Value",
+               "renamed": true,
+               "vis": false,
+               "size": 1,
+               "fmt": "txt",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "51dd3488",
+                     "displayName": "Max Value Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "max((array(last(79bf8aae80120cab209fKavyaMallur9@//*;),last(5d1aea90ec5f4d94bb40KavyaMallur9@//*;),last(a18d1f0bc2e6e451540cKavyaMallur9@//*;))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "max",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "86e8bba0"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "values",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "Max Score",
+               "index": 3,
+               "colHidden": "hidden",
+               "align": "left"
+            }
+         ],
+         "showHeader": false
+      }
+   ]
+}
