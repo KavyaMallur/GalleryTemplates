@@ -1,0 +1,57 @@
+{
+	"name" : "App Annie App Rankings (Yesterday)",
+	"description": "Retrieve ranks of a provided app. Originates from the Gallery.",
+
+	"datasources" : {
+		"appannie-01" : {
+			"service": "appannie",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "App Annie Ranks (Yesterday)",
+			"libraryAlias": "AppAnnieRanksYesterday",
+			"refreshInterval": 14400,
+			"description": "Provides information about a requested app for yesterday on a daily interval basis. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.appannie.com/v1.2/apps/{{ds.appannie.market}}/app/{{ds.appannie.productID}}/ranks?start_date={date.yesterday.format('yyyy-MM-dd')}&end_date={date.yesterday.format('yyyy-MM-dd')}&interval=daily&&asset=app",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+			}
+		}
+	},
+
+	"dsMappings": {
+		"appannie-01": "fad8e34e87fe9b694727KavyaMallur9"
+
+
+	},
+	"services" : [
+		{
+			"service" : "appannie"
+		}
+	],
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.appannie.productID",
+            "label" : "Market",
+            "description": "Enter Product ID",
+            "isRequired" : true
+        },
+    	{
+            "type": "select",
+            "id": "ds.appannie.market",
+            "label" : "Market",
+            "options": [
+                    {"label":"ios","value":"ios"},
+                    {"label":"mac","value":"mac"},
+                    {"label":"google-play","value":"google-play"},
+                    {"label":"amazon-appstore","value":"amazon-appstore"},
+                    {"label":"windows-phone","value":"windows-phone"},
+                    {"label":"windows-store","value":"windows-store"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "ios"
+		}
+	]
+}
