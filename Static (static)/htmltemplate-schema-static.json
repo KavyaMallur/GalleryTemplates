@@ -1,0 +1,122 @@
+{
+   "title": "Example - HTML Template",
+   "id": "535d8e49b49946adf0d41b7573e9d10e",
+   "workspace": {
+      "datasources": [
+         "d384d55e2fb26df43786doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 500
+      }
+   },
+   "components": [
+      {
+         "type": "html_tpl2",
+         "id": "bb9176f9-2",
+         "displayName": "HTML Template",
+         "components": [
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "59855475-4",
+               "displayName": "Words",
+               "formulas": [
+                  {
+                     "txt": "slice(d384d55e2fb26df43786doogeraspilk@Sheet1,A:A;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "d384d55e2fb26df43786doogeraspilk",
+                                       "a": "Sheet1,A:A"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "mixin": "label",
+               "dataId": "Words"
+            },
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "333138e3-5",
+               "displayName": "Values",
+               "formulas": [
+                  {
+                     "txt": "slice(d384d55e2fb26df43786doogeraspilk@Sheet1,B:B;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "d384d55e2fb26df43786doogeraspilk",
+                                       "a": "Sheet1,B:B"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "mixin": "label",
+               "dataId": "Values"
+            }
+         ],
+         "tpl": "<div id='wordcloud'>\n <ul id='wordcloud-words' style='display:none;'>\n {{each Words}}\n <li>${$value}</li>\n {{/each}}\n </ul>\n <ul id='wordcloud-values' style='display:none;'>\n {{each Values}}\n <li>${$value}</li>\n {{/each}}\n </ul>\n</div> ",
+         "script_tpl": "require(%20%5B%22https://cdnjs.cloudflare.com/ajax/libs/d3/3.0.8/d3.min.js%22%5D%20,%0Afunction(ok)%7B%0Arequire(%20%5B%22https://static.klipfolio.com/static/js/d3.layout.cloud.js%22%5D%20,%0Afunction(ok)%7B%0Avar%20fill%20=%20d3.scale.category20();%0Avar%20width%20=%20$(%22#wordcloud%22).width();%0Avar%20height%20=%20300;%0Avar%20minSize%20=%2015;%0Avar%20maxSize%20=%2050;%0Avar%20words%20=%20%5B%5D;%0A$(%22#wordcloud-words%20li%22).each(function()%20%7B%0A%20words.push($(this).text());%0A%7D);%0Avar%20values%20=%20%5B%5D;%0A$(%22#wordcloud-values%20li%22).each(function()%20%7B%0A%20values.push(FMT.convertToNumber($(this).text()));%0A%7D);%0Avar%20minVal%20=%20_.min(values);%0Avar%20maxVal%20=%20_.max(values);%0Avar%20wordObjs%20=%20%5B%5D;%0Afor%20(var%20i%20=%200;%20i%20%3C%20words.length;%20i++)%20%7B%0A%20if%20(i%20%3C%20values.length)%20%7B%0A%20var%20size%20=%20((values%5Bi%5D%20-%20minVal)%20/%20(maxVal%20-%20minVal))%20*%20(maxSize%20-%0AminSize)%20+%20minSize;%0A%20wordObjs.push(%7Btext:words%5Bi%5D,%20size:size%7D);%0A%20%7D%0A%7D%0A%20d3.layout.cloud().size(%5B%20width,%20height%5D)%0A%20.words(wordObjs)%0A%20.rotate(function()%20%7B%20return%20~~(Math.random()%20*%205)%20*%2030%20-%2060;%20%7D)%0A%20.font(%22Impact%22)%0A%20.fontSize(function(d)%20%7B%20return%20d.size;%20%7D)%0A%20.on(%22end%22,%20draw)%0A%20.start();%0A%20function%20draw(words)%20%7B%0A%20d3.select(%22#wordcloud%22).append(%22svg%22)%0A%20.attr(%22width%22,%20width)%0A%20.attr(%22height%22,%20height)%0A%20.append(%22g%22)%0A%20.attr(%22transform%22,%20%22translate(%22%20+%20width%20/%202%20+%20%22,%22%20+%20height%20/%202%20+%20%22)%22)%0A%20.selectAll(%22text%22)%0A%20.data(words)%0A%20.enter().append(%22text%22)%0A%20.style(%22font-size%22,%20function(d)%20%7B%20return%20d.size%20+%20%22px%22;%20%7D)%0A%20.style(%22font-family%22,%20%22Impact%22)%0A%20.style(%22fill%22,%20function(d,%20i)%20%7B%20return%20fill(i);%20%7D)%0A%20.attr(%22text-anchor%22,%20%22middle%22)%0A%20.attr(%22transform%22,%20function(d)%20%7B%0A%20return%20%22translate(%22%20+%20%5Bd.x,%20d.y%5D%20+%20%22)rotate(%22%20+%20d.rotate%20+%20%22)%22;%0A%20%7D)%0A%20.text(function(d)%20%7B%20return%20d.text;%20%7D);%0A%20%7D%0A%7D)%0A%7D)",
+         "dataModelType": "arr"
+      }
+   ]
+}
