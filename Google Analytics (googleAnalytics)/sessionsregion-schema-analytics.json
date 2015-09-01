@@ -1,5 +1,5 @@
 {
-   "title": "Web Sessions by Region",
+   "title": "Google Analytics Web Sessions by Region",
    "id": "723ad2ffc1878003b2180780bd144fbb",
    "workspace": {
       "datasources": [
@@ -10,7 +10,11 @@
          "w": 445
       }
    },
-
+   "datasourceProps": [
+      "gaProfile",
+      "gaStartDate",
+      "gaEndDate"
+   ],
    "components": [
       {
          "type": "panel_grid",
@@ -270,75 +274,22 @@
                "size": "1",
                "components": [
                   {
-                     "type": "proxy",
-                     "role": "tile_ids",
-                     "id": "25d88ab6",
-                     "displayName": "Region ID",
-                     "formulas": [
+                     "type": "map_region",
+                     "role": "tile_regions",
+                     "id": "a67583fb-1",
+                     "displayName": "Regions",
+                     "components": [
                         {
-                           "txt": "slice(75a9136c5ac6fdc99755niktawuzhere@A:A;)",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "75a9136c5ac6fdc99755niktawuzhere",
-                                             "a": "A:A"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        }
-                     ],
-                     "data": [
-                        [
-                          
-                        ]
-                     ]
-                  },
-                  {
-                     "type": "proxy",
-                     "role": "tile_values",
-                     "id": "cebefcc0",
-                     "displayName": "Value",
-                     "fmt": "num",
-                     "fmtArgs": {
-                        "prefix": "Sessions: "
-                     },
-                     "formulas": [
-                        {
-                           "txt": "lookup(slice(75a9136c5ac6fdc99755niktawuzhere@B:B;),slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;),slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;))",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "lookup",
+                           "type": "proxy",
+                           "role": "region_id",
+                           "id": "25d88ab6",
+                           "displayName": "ID",
+                           "formulas": [
+                              {
+                                 "txt": "slice(75a9136c5ac6fdc99755niktawuzhere@A:A;)",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
                                     "c": [
                                        {
                                           "t": "f",
@@ -348,35 +299,6 @@
                                                 "t": "d",
                                                 "v": {
                                                    "id": "75a9136c5ac6fdc99755niktawuzhere",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3fb3b9d24259e9fe5981niktawuzhere",
                                                    "a": "A:A"
                                                 }
                                              },
@@ -397,64 +319,222 @@
                                                 }
                                              }
                                           ]
-                                       },
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                                
+                              ]
+                           ]
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "region_color",
+                           "id": "cebefcc0",
+                           "displayName": "Color",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "prefix": "Sessions: "
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "lookup(slice(75a9136c5ac6fdc99755niktawuzhere@B:B;),slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;),slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
                                        {
                                           "t": "f",
-                                          "v": "slice",
+                                          "v": "lookup",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                   "a": "B:B"
-                                                }
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "75a9136c5ac6fdc99755niktawuzhere",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
                                              },
                                              {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "3fb3b9d24259e9fe5981niktawuzhere",
+                                                         "a": "A:A"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
                                              },
                                              {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "3fb3b9d24259e9fe5981niktawuzhere",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        }
                                     ]
                                  }
+                              }
+                           ],
+                           "data": [
+                              [
+                                
                               ]
-                           }
+                           ],
+                           "valueType": "color"
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "region_desc",
+                           "id": "cada2815",
+                           "displayName": "Description",
+                           "formulas": [],
+                           "data": []
+                        },
+                        {
+                           "type": "map_link",
+                           "role": "region_xref",
+                           "id": "1e43cd35",
+                           "displayName": "Link",
+                           "formulas": [],
+                           "data": []
                         }
-                     ],
-                     "data": [
-                        [
-                           
-                        ]
-                     ],
-                     "mixin": "label"
+                     ]
                   },
                   {
-                     "type": "proxy",
-                     "role": "tile_desc",
-                     "id": "cada2815",
-                     "displayName": "Description",
-                     "formulas": [],
-                     "data": []
-                  },
-                  {
-                     "type": "proxy",
-                     "role": "tile_xref",
-                     "id": "1e43cd35",
-                     "displayName": "Hyperlink",
-                     "formulas": [],
-                     "data": []
+                     "type": "map_marker",
+                     "role": "tile_markers",
+                     "id": "409a8bce-6",
+                     "displayName": "Markers",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "marker_lat",
+                           "id": "03adeccf-7",
+                           "displayName": "Latitude",
+                           "formulas": [],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "marker_lng",
+                           "id": "bcf7fb6d-8",
+                           "displayName": "Longitude",
+                           "formulas": [],
+                           "data": []
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_name",
+                           "id": "eadfbe76-9",
+                           "displayName": "Name",
+                           "formulas": [],
+                           "data": []
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_color",
+                           "id": "12a53e01-10",
+                           "displayName": "Color",
+                           "fmt": "num",
+                           "formulas": [],
+                           "data": [],
+                           "valueType": "color"
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_size",
+                           "id": "9181c90e-11",
+                           "displayName": "Size",
+                           "fmt": "num",
+                           "formulas": [],
+                           "data": [],
+                           "valueType": "size"
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_desc",
+                           "id": "edec9d72-12",
+                           "displayName": "Description",
+                           "formulas": [],
+                           "data": []
+                        },
+                        {
+                           "type": "map_link",
+                           "role": "marker_xref",
+                           "id": "8cc37fac-13",
+                           "displayName": "Link",
+                           "formulas": [],
+                           "data": []
+                        }
+                     ]
                   }
                ],
                "mapId": "world_en"
