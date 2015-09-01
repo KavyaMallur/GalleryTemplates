@@ -1,0 +1,55 @@
+{
+	"name" : "App Annie App Ratings",
+	"description": "Retrieve ratings of a requested app. Originates from the Gallery.",
+
+	"datasources" : {
+		"appannie-01" : {
+			"service": "appannie",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "App Annie Ratings",
+			"libraryAlias": "AppAnnieRatings",
+			"refreshInterval": 14400,
+			"description": "Retrieve ratings of a requested app. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.appannie.com/v1.2/apps/{{ds.appannie.market}}/app/{{ds.appannie.productID}}/ratings?",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+			}
+		}
+	},
+
+	"dsMappings": {
+		"appannie-01": "1c5d400d73e802d2e55fKavyaMallur9"
+	},
+	"services" : [
+		{
+			"service" : "appannie"
+		}
+	],
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.appannie.productID",
+            "label" : "Product ID",
+            "description": "Enter Product ID",
+            "isRequired" : true
+        },
+    	{
+            "type": "select",
+            "id": "ds.appannie.market",
+            "label" : "Market",
+            "options": [
+                    {"label":"ios","value":"ios"},
+                    {"label":"mac","value":"mac"},
+                    {"label":"google-play","value":"google-play"},
+                    {"label":"amazon-appstore","value":"amazon-appstore"},
+                    {"label":"windows-phone","value":"windows-phone"},
+                    {"label":"windows-store","value":"windows-store"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "ios"
+		}
+	]
+}
