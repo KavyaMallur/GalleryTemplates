@@ -1,0 +1,223 @@
+{
+   "title": "Input Control - Sample 1",
+   "id": "58741d2d586f83fef561c758c2521dc0",
+   "workspace": {
+      "datasources": [
+         "8722e3415ad26b7a082cf1f5341fd81a"
+      ],
+      "dimensions": {
+         "w": 300
+      }
+   },
+   "components": [
+      {
+         "type": "input",
+         "id": "8840c192-4",
+         "displayName": "Drop-Down List",
+         "components": [
+            {
+               "type": "proxy",
+               "role": "values",
+               "id": "39daf1ab-5",
+               "displayName": "Values",
+               "formulas": [
+                  {
+                     "txt": "slice(8722e3415ad26b7a082cf1f5341fd81a@B:B;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                       "a": "B:B"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     "Vancouver",
+                     "Toronto",
+                     "Ottawa",
+                     "Montreal",
+                     "New York",
+                     "Boston",
+                     "Chicago",
+                     "Dallas",
+                     "Munchen",
+                     "Hamburg",
+                     "Frankfurt",
+                     "Dusseldorf"
+                  ]
+               ]
+            },
+            {
+               "type": "proxy",
+               "role": "labels",
+               "id": "22d6deef-6",
+               "displayName": "Labels",
+               "formulas": [],
+               "data": []
+            }
+         ],
+         "scope": 2,
+         "propName": "sample_cityname_input",
+         "inputType": 1,
+         "inputLabel": "Choose City"
+      },
+      {
+         "type": "label",
+         "id": "f5fe5226-7",
+         "displayName": "Label",
+         "size": "2",
+         "fmt": "txt",
+         "fmtArgs": {
+            "prefix": ""
+         },
+         "formulas": [
+            {
+               "txt": "concat(if((lookup($sample_cityname_input,8722e3415ad26b7a082cf1f5341fd81a@B:B;,8722e3415ad26b7a082cf1f5341fd81a@A:A;)=\"USA\"),\"That city is in the \",\"That city is in \"),select(8722e3415ad26b7a082cf1f5341fd81a@A:A;,(8722e3415ad26b7a082cf1f5341fd81a@B:B;=$sample_cityname_input)))",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "lookup",
+                                          "c": [
+                                             {
+                                                "t": "var",
+                                                "v": "sample_cityname_input"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                                   "a": "B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                                   "a": "A:A"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "USA"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "That city is in the "
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "That city is in "
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "f",
+                              "v": "select",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                       "a": "A:A"
+                                    }
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                             "a": "B:B"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "var",
+                                          "v": "sample_cityname_input"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [
+            [
+               "That city is in Canada"
+            ]
+         ],
+         "font_style": "regular",
+         "wrap": true
+      }
+   ]
+}

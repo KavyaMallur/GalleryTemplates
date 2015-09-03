@@ -1,0 +1,243 @@
+{
+   "title": "Gauge - Sample 2",
+   "id": "655a2822884f87d23dd4a2eb6db975ca",
+   "workspace": {
+      "datasources": [
+         "8722e3415ad26b7a082cf1f5341fd81a"
+      ],
+      "dimensions": {
+         "w": 471
+      }
+   },
+   "components": [
+      {
+         "type": "gauge",
+         "id": "b632e5ae",
+         "displayName": "Gauge",
+         "size": 2,
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "df2a246a"
+                     },
+                     "type": "lt",
+                     "right": {
+                        "cx": "e1d60ee3"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_green_3",
+                     "isScalar": true
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "df2a246a"
+                     },
+                     "type": "gt",
+                     "right": {
+                        "cx": "e1d60ee3"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_red_3",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "df2a246a",
+               "displayName": "Current Value",
+               "size": "2",
+               "fmt": "dur",
+               "fmtArgs": {
+                  "durationFormat": "hh:mm",
+                  "prefix": "Wait time: "
+               },
+               "formulas": [
+                  {
+                     "txt": "8722e3415ad26b7a082cf1f5341fd81a@R2;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                 "a": "R2"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     "8712"
+                  ]
+               ]
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "e1d60ee3",
+               "displayName": "Target Value",
+               "size": 2,
+               "fmt": "dur",
+               "fmtArgs": {
+                  "prefix": "Avg: ",
+                  "durationFormat": "hh:mm"
+               },
+               "formulas": [
+                  {
+                     "txt": "average(8722e3415ad26b7a082cf1f5341fd81a@R:R;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "average",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "8722e3415ad26b7a082cf1f5341fd81a",
+                                       "a": "R:R"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     5217.25
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "8045a720",
+               "displayName": "Min Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     0
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "b2036d3a",
+               "displayName": "Max Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "max((8722e3415ad26b7a082cf1f5341fd81a@R2;),(average(8722e3415ad26b7a082cf1f5341fd81a@R:R;)))*\"1.1\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "max",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "df2a246a"
+                                    }
+                                 },
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "e1d60ee3"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "values",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "o",
+                              "v": "*"
+                           },
+                           {
+                              "t": "l",
+                              "v": "1.1"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     9583.2
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            }
+         ],
+         "gaugeStyle": "ag"
+      }
+   ]
+}
