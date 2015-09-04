@@ -1,0 +1,96 @@
+{
+	"name" : "App Annie APP Downloads (Last 30 Days)",
+	"description": "Compares app downloads in last 30 days against the downloads in prev 30 days. Originates from the Gallery.",
+
+	"datasources" : {
+		"appannie-01" : {
+			"service": "appannie",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "App Annie Details",
+			"libraryAlias": "AppAnnieDetails",
+			"refreshInterval": 14400,
+			"description": "Provide product details of a selected app. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.appannie.com/v1.2/apps/{{ds.appannie.market}}/app/{{ds.appannie.productID}}/details",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+			}
+		},
+		
+		"appannie-02" : {
+			"service": "appannie",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "App Annie Sales (Last 30 days)",
+			"libraryAlias": "AppAnnieSalesLast30Days",
+			"refreshInterval": 14400,
+			"description": "Provide sales for the last 30 days of a selected app. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products/{{ds.appannie.productID}}/sales?start_date={date.add(-31).format('yyyy-MM-dd')}&end_date={date.yesterday.format('yyyy-MM-dd')}",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+			}
+		},
+
+		"appannie-03" : {
+			"service": "appannie",
+			"type": "simple_rest",
+			"format": "json",
+			"name": "App Annie Sales (Prev 30 days)",
+			"libraryAlias": "AppAnnieSalesPrev30Days",
+			"refreshInterval": 14400,
+			"description": "Provide sales for the previous 30 days of a selected app. Originates from the Gallery.",
+			"props": {
+				"endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products/{{ds.appannie.productID}}/sales?start_date={date.add(-61).format('yyyy-MM-dd')}&end_date={date.add(-32).format('yyyy-MM-dd')}",
+				"method": "GET",
+				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+			}
+		}
+	},
+
+	"dsMappings": {
+		"appannie-01": "c4b5e3c36b88a22680d0KavyaMallur9",
+		"appannie-02": "96ad6a7d841085d7a226KavyaMallur9",
+		"appannie-03": "28cffb7bd1d19c9ede8bKavyaMallur9"
+	},
+	"services" : [
+		{
+			"service" : "appannie"
+		}
+	],
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.appannie.productID",
+            "label" : "Product ID",
+            "description": "Enter Product ID, Account ID",
+            "isRequired" : true
+        },
+        {
+            "type" : "text",
+            "id" : "ds.appannie.accountID",
+            "label" : "Account ID",
+            "isRequired" : true
+        },
+    	{
+            "type": "select",
+            "id": "ds.appannie.market",
+            "label" : "Market",
+            "description": "Select market.",
+            "options": [
+                    {"label":"ios","value":"ios"},
+                    {"label":"mac","value":"mac"},
+                    {"label":"google-play","value":"google-play"},
+                    {"label":"amazon-appstore","value":"amazon-appstore"},
+                    {"label":"windows-phone","value":"windows-phone"},
+                    {"label":"windows-store","value":"windows-store"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "ios"
+		}
+	]
+}
