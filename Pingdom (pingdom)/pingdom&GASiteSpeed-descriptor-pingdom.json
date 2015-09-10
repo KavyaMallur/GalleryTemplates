@@ -1,0 +1,101 @@
+{
+    "name" : "Pingdom & Google Analytics: Site Speed",
+    "description": "Compare the site speed of pingdom against that of google analytics. Originates from the Gallery.",
+
+    "datasources" : {
+        "pingdom-01" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Server Summary Status (Last 30 Days)",
+            "libraryAlias" :"pingdomServerSummaryStatusLast30Daysv2",
+            "refreshInterval" : 3600,
+            "description" :"Provides high level server statistics over the past 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.last30Days.format('epochTime')}",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+            }
+        },        
+        "pingdom-02" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Server Summary Status (31-60 Days Ago)",
+            "libraryAlias" :"pingdomServerSummaryStatus3160DaysAgov2",
+            "refreshInterval" : 3600,
+            "description" :"Provides high level server statistics for 31-60 days ago. Can be used for comparison. Originates from the Gallery.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.add(-60).format('epochTime')}&to={date.add(-31).format('epochTime')}",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+            }
+        },
+        "google_analytics-01" : {
+            "service" : "google_analytics",
+            "type" : "google_analytics",
+            "format" : "csv",
+            "name" :"GA Site Speed Stats (Last 60 Days)",
+            "libraryAlias" :"GASiteSpeedStatsLast60Days",
+            "refreshInterval" : 3600,
+            "description" :"Provides google analytics for last 60 days. Can be used for comparison. Originates from the Gallery.",
+            "props" : {
+                 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:pageviews,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
+                 "max_pages": "1",
+                 "mode": "Simple",
+                 "profile": "{{ds.google_analytics.profileId}}",
+                 "timePeriod": "&start-date={date.add(-60).format()}&end-date={date.today}"
+            }
+        },
+        "pingdom-04" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Average Response Time (Last 30 Days)",
+            "libraryAlias" :"PingdomAverageResponseTimeLast30Days",
+            "refreshInterval" : 3600,
+            "description" :"Provides server's average responste time on a daily basis for the last 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=day&from={date.last30Days.format('epochTime')}",
+                "method" : "GET",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+        }
+    },
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.pingdom.serverId",
+			"label" : "Server ID",
+			"description": "Enter the ID of the server you'd like to monitor. You can find your server ID by navigating to the Site you'd like to monitor in Pingdom and copying the number of 'checks=' in the address bar.",			
+			"isRequired" : true
+		},
+        {
+            "type" : "text",
+            "id" : "ds.google_analytics.profileId",
+            "label" : "Profile Id",
+            "description" : "Don't know where to find your Profile ID? Look under Step 2 <a href='https://klipfolio.uservoice.com/knowledgebase/articles/34516-use-google-analytics-as-a-data-source' target='_blank'>here.</a>",
+            "isRequired" : true
+        }
+	],	
+
+    "dsMappings": {
+        "pingdom-01" : "639abbccaa4e2d870f70KavyaMallur9",
+		"pingdom-02" : "3ac202b3d931a2d373d3KavyaMallur9",
+        "google_analytics-01" : "e172dcc230b35e273facKavyaMallur9",
+        "pingdom-04" : "25606ba6eb6016826497KavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "pingdom"
+        },
+        {
+            "service" : "google_analytics"
+        }
+    ]
+}
