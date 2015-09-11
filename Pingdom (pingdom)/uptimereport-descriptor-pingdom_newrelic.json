@@ -1,0 +1,108 @@
+{
+    "name" : "Pingdom & New Relic: Uptime Report",
+    "description": "Monitor the uptime of your specified server using Pingdom and New Relic. Originates from the Gallery.",
+
+    "datasources" : {
+        "pingdom-01" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Server History",
+            "libraryAlias" :"pingdomServerHistory",
+            "refreshInterval" : 900,
+            "description" :"Provides the last 1000 server check details. Originates from the Gallery.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/results/{{ds.pingdom.serverId}}?includeanalysis=true&limit=1000",
+                "method" : "get",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"{{ds.pingdom.appKey}}\",\"type\":\"header\"}]"
+            }
+
+        },
+        "pingdom-02" : {
+            "service" : "pingdom",
+            "type" : "simple_rest",
+            "format" : "json",
+            "name" :"Pingdom Service Checks",
+            "libraryAlias" :"pingdomServiceChecks",
+            "refreshInterval" : 14400,
+            "description" :"See an overview of all Pingdom checks. Originates from the Gallery.",
+            "props":{
+                "endpoint_url" : "https://api.pingdom.com/api/2.0/checks",
+                "method" : "get",
+                "auth_method" : "basic",
+                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"{{ds.pingdom.appKey}}\",\"type\":\"header\"}]"
+            }
+
+        },
+        "newrelic-01" : {
+            "service" : "new_relic",
+            "libraryAlias" : "NewRelicMinuteStats",
+            "name": "New Relic Minute Stats",
+            "description" : "Provides the last 101 response metric from New Relic. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "xml",
+            "refreshInterval" : 900,
+            "props" : { 
+                "endpoint_url": "https://api.newrelic.com/v2/applications/{{ds.new_relic.appId}}/metrics/data.xml?names[]=HttpDispatcher&from={date.tz(\"UTC\").addMinutes(-101).format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}&to={date.tz(\"UTC\").today.format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}",
+                "method": "get",
+                "parameters": "[{\"name\":\"X-Api-Key\",\"value\":\"{{auth.new_relic.apikey}}\",\"type\":\"header\"}]"
+            }
+        },
+        "newrelic-02" : {
+            "service" : "new_relic",
+            "libraryAlias" : "NewRelicApplications",
+            "name": "New Relic Applications",
+            "description" : "Provide the Applications in New Relic. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props" : { 
+                "endpoint_url": "https://api.newrelic.com/v2/applications.json",
+                "method": "get",
+                "parameters": "[{\"name\":\"X-Api-Key\",\"value\":\"{{auth.new_relic.apikey}}\",\"type\":\"header\"}]"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "pingdom-01" : "4e3d0b67a39b6b92d216doogeraspilk",
+        "pingdom-02" : "b4fe50b45c834d192174doogeraspilk",
+        "newrelic-01" : "5027b3f0a64a0cc732c6doogeraspilk",
+        "newrelic-02" : "fd44eb971cfa0f693a9edoogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "pingdom"
+        },
+        {
+            "service" : "new_relic"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.pingdom.serverId",
+            "label" : "Server ID",
+            "description": "Enter the Pingdom ID of the Server you'd like to monitor.",         
+            "isRequired" : true
+        },
+        {
+            "type" : "text",
+            "id" : "ds.pingdom.appKey",
+            "label" : "Application Key",
+            "description": "Enter your Pingdom Application Key.",          
+            "isRequired" : true
+        },
+ 
+        {
+            "type" : "text",
+            "id" : "ds.new_relic.appId",
+            "label" : "Application ID",
+            "description":" Enter the New Relic ID of the Application you'd like to monitor.",
+            "isRequired" : true
+        }
+    ]
+}

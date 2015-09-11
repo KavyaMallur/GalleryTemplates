@@ -1,0 +1,816 @@
+{
+   "title": "Pingdom & New Relic: Average Response Time",
+   "id": "72008d131038da070040dac8543911bd",
+   "useSamePadding": false,
+   "padding": [
+      10,
+      10,
+      "0",
+      10
+   ],
+   "innerPadding": "0",
+   "workspace": {
+      "dimensions": {
+         "w": 853
+      },
+      "datasources": [
+         "b4fe50b45c834d192174doogeraspilk",
+         "4e3d0b67a39b6b92d216doogeraspilk",
+         "5027b3f0a64a0cc732c6doogeraspilk",
+         "fd44eb971cfa0f693a9edoogeraspilk"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "284012a6-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "image",
+               "id": "73c4e1c0",
+               "displayName": "New Relic Logo",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/newrelic.png\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/newrelic.png"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ]
+            },
+            {
+               "type": "label",
+               "id": "eeceb4b6",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "select(fd44eb971cfa0f693a9edoogeraspilk@/applications/name;,(fd44eb971cfa0f693a9edoogeraspilk@/applications/id;=\"{{ds.new_relic.appId}}\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "select",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "fd44eb971cfa0f693a9edoogeraspilk",
+                                       "a": "/applications/name"
+                                    }
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "fd44eb971cfa0f693a9edoogeraspilk",
+                                             "a": "/applications/id"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "{{ds.new_relic.appId}}"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "font_colour": "cx-color_000",
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": 1,
+         "cols": 2,
+         "widths": [
+            {
+               "x": 0,
+               "w": 40
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0
+            }
+         ]
+      },
+      {
+         "type": "chart_series",
+         "id": "6873aa22",
+         "displayName": "Series Chart",
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "d33d6aff",
+               "displayName": "New Relic Response Time",
+               "renamed": true,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "lookup((reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/average_response_time;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "8fd3c538"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd'T'HH:mm"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM d, hh:mm aaa"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                       "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/average_response_time"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "seriesName": "New Relic Response Time",
+               "renderer": "line",
+               "chartStyle": "line_area",
+               "lineWeight": "1",
+               "axis": "fe493803",
+               "overrideColor": true,
+               "color": "cx-theme_blue_3"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "4f93f625",
+               "displayName": "New Relic Time",
+               "renamed": true,
+               "fmt": "txt",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateInputFormat": "custom",
+                  "dateInputFormatCustom": "yyyy-MM-dd'T'HH:mm",
+                  "dateFormatCustom": "dd-MMM-yy HH:mm"
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup((reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "8fd3c538"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd'T'HH:mm"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM d, hh:mm aaa"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd'T'HH:mm"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM d, hh:mm aaa"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "label": "New Relic Time",
+               "showAxisScale": false,
+               "labelStagger": "0",
+               "labelDrop": "30"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "fe493803",
+               "displayName": "New Relic Response Time",
+               "renamed": true,
+               "fmt": "num",
+               "fmtArgs": {
+                  "precision": "0",
+                  "durationFormat": "ss",
+                  "separator": ",.",
+                  "suffix": " ms"
+               },
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "New Relic Response Time",
+               "showAxis": false,
+               "originLine": false,
+               "labelDrop": 0
+            }
+         ],
+         "height": "1",
+         "showLegend": false
+      },
+      {
+         "type": "panel_grid",
+         "id": "7f809aa3-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "cad3125f",
+               "displayName": "Start Time",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"99\",\"100\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                             "a": "/results/time"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM d, hh:mm aaa"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "99"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "100"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "46207af2-2",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"to\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "to"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "align": "c",
+               "font_colour": "cx-color_aaa",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "57948cb6-1",
+               "displayName": "End Time",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"1\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                             "a": "/results/time"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM d, hh:mm aaa"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "1"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": 1,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 1,
+               "w": 30
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  10,
+                  30
+               ]
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "alignment": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  10,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "alignment": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  10,
+                  5
+               ]
+            }
+         ]
+      },
+      {
+         "type": "panel_grid",
+         "id": "248059cc-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "image",
+               "id": "5aa11394-2",
+               "displayName": "Pingdom Logo",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ]
+            },
+            {
+               "type": "label",
+               "id": "281577f1",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "select(b4fe50b45c834d192174doogeraspilk@/checks/name;,(b4fe50b45c834d192174doogeraspilk@/checks/id;=\"{{ds.pingdom.serverId}}\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "select",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "b4fe50b45c834d192174doogeraspilk",
+                                       "a": "/checks/name"
+                                    }
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "b4fe50b45c834d192174doogeraspilk",
+                                             "a": "/checks/id"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "{{ds.pingdom.serverId}}"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "font_colour": "cx-color_000",
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": "1",
+         "cols": "2",
+         "widths": [
+            {
+               "x": 0,
+               "w": 40
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0
+            }
+         ]
+      },
+      {
+         "type": "chart_series",
+         "id": "57cf0312",
+         "displayName": "Series Chart",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "9313d104",
+               "displayName": "Pingdom Check Status",
+               "fmt": "num",
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_3"
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "reverse(slice(4e3d0b67a39b6b92d216doogeraspilk@/results/responsetime;,\"0\",\"100\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "reverse",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                             "a": "/results/responsetime"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "100"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "seriesName": "Pingdom Check Status",
+               "renderer": "line",
+               "chartStyle": "line_area",
+               "lineWeight": "1",
+               "axis": "5bae2407",
+               "overrideColor": true,
+               "color": "cx-theme_blue_3"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "8fd3c538",
+               "displayName": "Pingdom Time",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateInputFormat": "default",
+                  "dateInputFormatCustom": "dd/MM/yyyy",
+                  "dateFormatCustom": "MMM d, yyyy h:mm tt"
+               },
+               "formulas": [
+                  {
+                     "txt": "reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "reverse",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                                   "a": "/results/time"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "MMM d, hh:mm aaa"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "100"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "label": "Pingdom Time",
+               "showAxis": false,
+               "showAxisScale": false,
+               "labelAngle": "-45",
+               "labelDrop": "10"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "5bae2407",
+               "displayName": "Pingdom Response Time",
+               "fmt": "num",
+               "fmtArgs": {
+                  "suffix": " ms"
+               },
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "Pingdom Response Time",
+               "showAxis": false,
+               "min": "-1",
+               "max": "1",
+               "originLine": false,
+               "labelDrop": 0
+            }
+         ],
+         "height": "1",
+         "customHeight": "50",
+         "showLegend": false
+      }
+   ]
+}
