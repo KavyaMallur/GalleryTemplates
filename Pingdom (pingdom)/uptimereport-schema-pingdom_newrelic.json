@@ -50,7 +50,8 @@
                      }
                   }
                ],
-               "data": [ ]
+               "data": [
+               ]
             },
             {
                "type": "label",
@@ -64,7 +65,7 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "select(fd44eb971cfa0f693a9edoogeraspilk@/applications/name;,(fd44eb971cfa0f693a9edoogeraspilk@/applications/id;=\"5750945\"))",
+                     "txt": "select(fd44eb971cfa0f693a9edoogeraspilk@/applications/name;,(fd44eb971cfa0f693a9edoogeraspilk@/applications/id;=\"{{ds.new_relic.appId}}\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -97,7 +98,7 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "5750945"
+                                          "v": "{{ds.new_relic.appId}}"
                                        }
                                     ]
                                  }
@@ -107,14 +108,16 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+                  []
+               ],
                "font_colour": "cx-color_000",
                "font_style": "regular",
                "wrap": true
             }
          ],
-         "rows": "1",
-         "cols": "2",
+         "rows": 1,
+         "cols": 2,
          "widths": [
             {
                "x": 0,
@@ -142,7 +145,7 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "lookup((reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/average_response_time;,\"0\",\"100\"))",
+                     "txt": "lookup((trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/average_response_time;)",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -160,63 +163,31 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "datevalue",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                                   "a": "/results/time"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "MMM d, hh:mm aaa"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "0"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "100"
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "slice",
+                                    "v": "date_convert",
                                     "c": [
                                        {
                                           "t": "d",
                                           "v": {
                                              "id": "5027b3f0a64a0cc732c6doogeraspilk",
-                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/average_response_time"
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
                                           }
                                        },
                                        {
                                           "t": "l",
-                                          "v": "0"
+                                          "v": "yyyy-MM-dd'T'HH:mm"
                                        },
                                        {
                                           "t": "l",
-                                          "v": "100"
+                                          "v": "MMM d, hh:mm aaa"
                                        }
                                     ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                       "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/average_response_time"
+                                    }
                                  }
                               ]
                            }
@@ -224,7 +195,8 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+               ],
                "seriesName": "Avg Response Time",
                "renderer": "line",
                "chartStyle": "line",
@@ -242,7 +214,7 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "lookup((reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/max_response_time;,\"0\",\"100\"))",
+                     "txt": "lookup((trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/max_response_time;)",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -260,63 +232,31 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "datevalue",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                                   "a": "/results/time"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "MMM d, hh:mm aaa"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "0"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "100"
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "slice",
+                                    "v": "date_convert",
                                     "c": [
                                        {
                                           "t": "d",
                                           "v": {
                                              "id": "5027b3f0a64a0cc732c6doogeraspilk",
-                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/max_response_time"
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
                                           }
                                        },
                                        {
                                           "t": "l",
-                                          "v": "0"
+                                          "v": "yyyy-MM-dd'T'HH:mm"
                                        },
                                        {
                                           "t": "l",
-                                          "v": "100"
+                                          "v": "MMM d, hh:mm aaa"
                                        }
                                     ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                       "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/values/max_response_time"
+                                    }
                                  }
                               ]
                            }
@@ -324,7 +264,8 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+               ],
                "seriesName": "Max Response Time",
                "renderer": "line",
                "chartStyle": "line",
@@ -348,7 +289,7 @@
                },
                "formulas": [
                   {
-                     "txt": "lookup((reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))",
+                     "txt": "lookup((trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -366,79 +307,43 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "slice",
+                                    "v": "date_convert",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "datevalue",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                                   "a": "/results/time"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "MMM d, hh:mm aaa"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
+                                          }
                                        },
                                        {
                                           "t": "l",
-                                          "v": "0"
+                                          "v": "yyyy-MM-dd'T'HH:mm"
                                        },
                                        {
                                           "t": "l",
-                                          "v": "100"
+                                          "v": "MMM d, hh:mm aaa"
                                        }
                                     ]
                                  },
                                  {
                                     "t": "f",
-                                    "v": "slice",
+                                    "v": "date_convert",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "datevalue",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                                   "a": "/results/time"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "MMM d, hh:mm aaa"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "d",
+                                          "v": {
+                                             "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                             "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
+                                          }
                                        },
                                        {
                                           "t": "l",
-                                          "v": "0"
+                                          "v": "yyyy-MM-dd'T'HH:mm"
                                        },
                                        {
                                           "t": "l",
-                                          "v": "100"
+                                          "v": "MMM d, hh:mm aaa"
                                        }
                                     ]
                                  }
@@ -448,7 +353,8 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+               ],
                "label": "New Relic Time",
                "showAxisScale": false,
                "labelStagger": "0",
@@ -520,47 +426,29 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"99\",\"100\")",
+                     "txt": "first((trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "slice",
+                              "v": "first",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "datevalue",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                             "a": "/results/time"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "MMM d, hh:mm aaa"
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "timezone",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "8fd3c538"
+                                    }
                                  },
                                  {
-                                    "t": "l",
-                                    "v": "99"
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "100"
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "count",
+                                       "optional": true
+                                    }
                                  }
                               ]
                            }
@@ -568,7 +456,8 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+               ],
                "align": "r",
                "font_style": "regular",
                "wrap": true
@@ -598,7 +487,8 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+               ],
                "align": "c",
                "font_colour": "cx-color_aaa",
                "font_style": "regular",
@@ -617,47 +507,29 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"1\")",
+                     "txt": "last((trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "slice",
+                              "v": "last",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "datevalue",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                             "a": "/results/time"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "MMM d, hh:mm aaa"
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "timezone",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "8fd3c538"
+                                    }
                                  },
                                  {
-                                    "t": "l",
-                                    "v": "0"
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "1"
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "count",
+                                       "optional": true
+                                    }
                                  }
                               ]
                            }
@@ -665,7 +537,8 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+               ],
                "font_style": "regular",
                "wrap": true
             }
@@ -743,7 +616,8 @@
                      }
                   }
                ],
-               "data": [ ]
+               "data": [
+               ]
             },
             {
                "type": "label",
@@ -757,7 +631,7 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "select(b4fe50b45c834d192174doogeraspilk@/checks/name;,(b4fe50b45c834d192174doogeraspilk@/checks/id;=\"401303\"))",
+                     "txt": "select(b4fe50b45c834d192174doogeraspilk@/checks/name;,(b4fe50b45c834d192174doogeraspilk@/checks/id;=\"{{ds.pingdom.serverId}}\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -790,7 +664,7 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "401303"
+                                          "v": "{{ds.pingdom.serverId}}"
                                        }
                                     ]
                                  }
@@ -800,7 +674,9 @@
                      }
                   }
                ],
-               "data": [ ],
+               "data": [
+                  []
+               ],
                "font_colour": "cx-color_000",
                "font_style": "regular",
                "wrap": true
@@ -843,61 +719,119 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "reverse(slice(if((4e3d0b67a39b6b92d216doogeraspilk@/results/status;=\"up\"),\"1\",\"-1\"),\"0\",\"100\"))",
+                           "txt": "lookup((lookup((trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"))),reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")),reverse(slice(if((4e3d0b67a39b6b92d216doogeraspilk@/results/status;=\"up\"),\"1\",\"-1\"),\"0\",\"100\")))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "reverse",
+                                    "v": "lookup",
                                     "c": [
                                        {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "4f93f625"
+                                          }
+                                       },
+                                       {
                                           "t": "f",
-                                          "v": "slice",
+                                          "v": "reverse",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "if",
+                                                "v": "slice",
                                                 "c": [
                                                    {
-                                                      "t": "expr",
-                                                      "v": false,
+                                                      "t": "f",
+                                                      "v": "datevalue",
                                                       "c": [
                                                          {
                                                             "t": "d",
                                                             "v": {
                                                                "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                                               "a": "/results/status"
+                                                               "a": "/results/time"
                                                             }
                                                          },
                                                          {
-                                                            "t": "o",
-                                                            "v": "="
+                                                            "t": "l",
+                                                            "v": "MMM d, hh:mm aaa"
                                                          },
                                                          {
-                                                            "t": "l",
-                                                            "v": "up"
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
                                                          }
                                                       ]
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "1"
+                                                      "v": "0"
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "-1"
+                                                      "v": "100"
                                                    }
                                                 ]
-                                             },
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "reverse",
+                                          "c": [
                                              {
-                                                "t": "l",
-                                                "v": "0"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "100"
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "if",
+                                                      "c": [
+                                                         {
+                                                            "t": "expr",
+                                                            "v": false,
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                                                     "a": "/results/status"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "o",
+                                                                  "v": "="
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "up"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   }
+                                                ]
                                              }
                                           ]
                                        }
@@ -907,7 +841,8 @@
                            }
                         }
                      ],
-                     "data": [ ],
+                     "data": [
+                     ],
                      "seriesName": "Pingdom Check Status",
                      "chartStyle": "line_area",
                      "lineStyle": "square",
@@ -930,53 +865,127 @@
                      },
                      "formulas": [
                         {
-                           "txt": "reverse(slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"))",
+                           "txt": "trim(lookup(date_convert(5027b3f0a64a0cc732c6doogeraspilk@/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to;,\"yyyy-MM-dd'T'HH:mm\",\"MMM d, hh:mm aaa\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\"),slice(datevalue(4e3d0b67a39b6b92d216doogeraspilk@/results/time;,\"MMM d, hh:mm aaa\"),\"0\",\"100\")))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "reverse",
+                                    "v": "trim",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "slice",
+                                          "v": "lookup",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "datevalue",
+                                                "v": "date_convert",
                                                 "c": [
                                                    {
                                                       "t": "d",
                                                       "v": {
-                                                         "id": "4e3d0b67a39b6b92d216doogeraspilk",
-                                                         "a": "/results/time"
+                                                         "id": "5027b3f0a64a0cc732c6doogeraspilk",
+                                                         "a": "/metric_data_response/metric_data/metrics/metric/timeslices/timeslice/to"
                                                       }
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "MMM d, hh:mm aaa"
+                                                      "v": "yyyy-MM-dd'T'HH:mm"
                                                    },
                                                    {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
+                                                      "t": "l",
+                                                      "v": "MMM d, hh:mm aaa"
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0"
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                                               "a": "/results/time"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "MMM d, hh:mm aaa"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   }
+                                                ]
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "100"
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "4e3d0b67a39b6b92d216doogeraspilk",
+                                                               "a": "/results/time"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "MMM d, hh:mm aaa"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "100"
+                                                   }
+                                                ]
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "pattern",
+                                             "optional": true
+                                          }
                                        }
                                     ]
                                  }
@@ -984,7 +993,8 @@
                            }
                         }
                      ],
-                     "data": [ ],
+                     "data": [
+                     ],
                      "label": "Time",
                      "showAxis": false,
                      "showAxisScale": false,
@@ -1018,7 +1028,7 @@
             }
          ],
          "rows": 2,
-         "cols": "2",
+         "cols": 2,
          "widths": [
             {
                "x": 0,
