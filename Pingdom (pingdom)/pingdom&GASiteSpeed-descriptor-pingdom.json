@@ -70,16 +70,16 @@
 		{
 			"type" : "select",
 			"id" : "ds.pingdom.serverId",
-			"label" : "Server ID",
-			"description": "Enter the ID of the server you'd like to monitor. You can find your server ID by navigating to the Site you'd like to monitor in Pingdom and copying the number of 'checks=' in the address bar.",			
+            "label" : "Pingdom Check",
+            "description": "Choose the Pingdom Check you'd like to monitor.",          
 			"isRequired" : true,
             "onChangeQueries" : [ "meow1" ]      
 		},
         {
             "type" : "select",
             "id" : "ds.google_analytics.profileId",
-            "label" : "Profile Id",
-            "description" : "Don't know where to find your Profile ID? Look under Step 2 <a href='https://klipfolio.uservoice.com/knowledgebase/articles/34516-use-google-analytics-as-a-data-source' target='_blank'>here.</a>",
+            "label" : "Google Analytics Profile",
+            "description" : "Select the Google Analytics profile you'd like to monitor.",
             "isRequired" : true
         }
 	],	
@@ -101,8 +101,10 @@
     ],
     "queries": [
         {
+            "errorMessage":"There seems to be a problem accessing your Pingdom data. Check your credentials and try again.",
             "connector": {
                 "service": "pingdom",
+                "errorMessage":"There seems to be a problem accessing your Pingdom data. Check your credentials and try again.",
                 "type": "simple_rest",
                 "format": "json",
                 "props": {
@@ -123,7 +125,7 @@
         },
         {
             "id":"meow1",
-            "errorMessage":"We were unable to access any profiles for your account. Make sure you have access to Google Analytics.",
+            "errorMessage":"The Google Analytics account you've selected doesn't have access to the required data. <br><br>Make sure your token hasn't expired and that your Google account has access to Google Analytics.",
             "connector": {
                 "service": "google_analytics",
                 "type": "simple_rest",
