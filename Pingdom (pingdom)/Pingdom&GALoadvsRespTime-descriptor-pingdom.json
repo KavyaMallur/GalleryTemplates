@@ -71,14 +71,16 @@
 
 	"datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.pingdom.serverId",
             "label" : "Server ID",
             "description": "Enter the ID of the server you'd like to monitor. You can find your server ID by navigating to the Site you'd like to monitor in Pingdom and copying the number of 'checks=' in the address bar.",          
-            "isRequired" : true
+            "isRequired" : true,
+            "onChangeQueries" : [ "meow" ]      
+
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.google_analytics.profileId",
             "label" : "Profile Id",
             "description" : "Don't know where to find your Profile ID? Look under Step 2 <a href='https://klipfolio.uservoice.com/knowledgebase/articles/34516-use-google-analytics-as-a-data-source' target='_blank'>here.</a>",
@@ -128,5 +130,51 @@
             "isRequired" : "true",
             "selectedValue": "GMT"
         }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Fetching list of Pingdom checks.",
+            "connector": {
+                "service": "pingdom",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.pingdom.com/api/2.0/checks",
+                    "method": "GET",
+                    "auth_method": "basic",
+                    "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.pingdom.serverId", 
+                    "propField" : "options", 
+                    "labels": "/checks/name",  
+                    "values": "/checks/id" 
+                }
+            ]
+        },
+        {
+            "id":"meow",
+            "userMessage":"bueno y bien.",
+            "connector": {
+                "service": "google_analytics",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                { 
+                    "propId" : "ds.google_analytics.profileId",
+                    "propField" : "options", 
+                    "labels": "/items/name",  
+                    "values": "/items/id" 
+                }
+            ]
+        }        
+   
     ]
 }

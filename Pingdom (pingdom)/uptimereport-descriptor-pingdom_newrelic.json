@@ -83,18 +83,66 @@
 
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.pingdom.serverId",
             "label" : "Server ID",
-            "description": "Enter the Pingdom ID of the Server you'd like to monitor.",         
-            "isRequired" : true
+            "description": "Enter the Pingdom ID of the Server you'd like to monitor.",      
+            "isRequired" : true,
+            "onChangeQueries" : [ "123456" ]      
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.new_relic.appId",
             "label" : "Application ID",
             "description":" Enter the New Relic ID of the Application you'd like to monitor.",
             "isRequired" : true
         }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Fetching list of Pingdom checks.",
+            "connector": {
+                "service": "pingdom",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.pingdom.com/api/2.0/checks",
+                    "method": "GET",
+                    "auth_method": "basic",
+                    "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.pingdom.serverId", 
+                    "propField" : "options", 
+                    "labels": "/checks/name",  
+                    "values": "/checks/id" 
+                }
+            ]
+        },
+        {   
+            "id": "123456",
+            "errorMessage":"Fetching list of New Relic applications.",
+            "connector": {
+                "service": "new_relic",
+                "type": "simple_rest",
+                "format": "json",
+                "props" : { 
+                    "endpoint_url": "https://api.newrelic.com/v2/applications.json",
+                    "method": "get",
+                    "parameters": "[{\"name\":\"X-Api-Key\",\"value\":\"{{auth.new_relic.apikey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.new_relic.appId", 
+                    "propField" : "options", 
+                    "labels": "/applications/name",  
+                    "values": "/applications/id" 
+                }
+            ]
+        }
+   
     ]
 }
