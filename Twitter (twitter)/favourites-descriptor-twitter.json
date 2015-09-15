@@ -30,11 +30,33 @@
 
 	"datasourceConfigModel" : [
 		{
-			"type" : "text",
+			"type" : "select",
 			"id" : "ds.twitter.screenName",
 			"label" : "Twitter Handle",
-			"description" : "Enter the handle for the account you would like to track. <span class='strong'>Do not include the @ symbol.</span>",
+			"description" : "Please select your twitter handle.",
 			"isRequired" : true
 		}
-	]
+	],
+	"queries": [
+        {
+            "userMessage":"Fetching twitter handle.",
+            "connector": {
+                "service": "twitter",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.twitter.com/1.1/statuses/user_timeline.json",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.twitter.screenName",
+                    "propField" : "options",
+                    "labels": "(/user/screen_name)[1]",
+                    "values": "(/user/screen_name)[1]"
+                }
+            ]
+        }   
+    ]
 }
