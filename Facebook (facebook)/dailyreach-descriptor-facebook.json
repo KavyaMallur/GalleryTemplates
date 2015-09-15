@@ -29,12 +29,35 @@
             "service" : "facebook"
         }
     ],
-
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.facebook.pageId",
             "label" : "Facebook Page Name",
             "description":"To find your company Facebook Page Name, follow the steps in <a href='http://klipfolio.uservoice.com/knowledgebase/articles/562989-klip-gallery-facebook#connect' target='_blank'>Klip Gallery: Facebook</a>."   }
+    ],
+    "queries": [
+        {
+            "userMessage":"Fetching list of facebook pages.",
+            "connector": {
+                "service": "facebook",
+                "type": "facebook",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://graph.facebook.com/v2.3/me/accounts",
+                    "graphUrl": "https://graph.facebook.com/v2.3/me/accounts",
+                    "method": "GET",
+                    "qtype": "Graph API"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.facebook.pageId",
+                    "propField" : "options",
+                    "labels": "/data/name",
+                    "values": "/data/id"
+                }
+            ]
+        }   
     ]
 }
