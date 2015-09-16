@@ -29,11 +29,35 @@
 	],
 	"datasourceConfigModel" : [
 		{
-			"type" : "text",
+			"type" : "select",
 			"id" : "ds.instagram.UserId",
 			"label" : "User ID",
-			"description": "To find your User ID, go to Instagram the <a href='https://apigee.com/console/instagram' target='_blank'>API console</a>. Select 'OAuth2' from the Authentication drop-down menu and then click the 'Sign in to Instagram' button that is in the pop-up window. Finally, paste 'https://api.instagram.com/v1/users/self' in the query box. Your ID is listed at the bottom of the results.",
 			"isRequired" : true
 		}
-	]
+	],
+	"queries": [
+        {
+            "userMessage":"schminstagram",
+            "connector": {
+                "service": "instagram",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.instagram.com/v1/users/self",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.instagram.UserId", 
+                    "propField" : "options", 
+                    "labels": "/data/username",  
+                    "values": "/data/id" 
+                }
+            ]
+        }
+        
+
+   
+    ]
 }
