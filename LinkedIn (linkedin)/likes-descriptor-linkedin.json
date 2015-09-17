@@ -30,11 +30,32 @@
 
 	"datasourceConfigModel" : [
 		{
-			"type" : "text",
+			"type" : "select",
 			"id" : "ds.linkedin.companyId",
 			"label" : "Company ID",
-"description": "Find your company ID by searching for your company page in LinkedIn. The ID is the number immediately following 'www.linkedin.com/company/' and before the question mark. For example, capture the '<span class='strong'>123456</span>' from 'https://www.linkedin.com/company/<span class='strong'>123456</span>?'.",
 			"isRequired" : true
 		}
-	]
+	],
+	"queries": [
+        {
+            "errorMessage":"Please provide a valid linkedIn oAuth token.",
+            "connector": {
+                "service": "linkedin",
+                "type": "simple_rest",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://api.linkedin.com/v1/companies?is-company-admin=true",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                { 
+                    "propId" : "ds.linkedin.companyId",
+                    "propField" : "options", 
+                    "labels": "/companies/company/name",  
+                    "values": "/companies/company/id" 
+                }
+            ]
+        }
+    ]
 }
