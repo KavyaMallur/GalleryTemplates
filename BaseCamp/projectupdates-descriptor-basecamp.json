@@ -30,16 +30,58 @@
 
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.basecamp.accountId",
             "label" : "Account ID",
-            "description":"To find your Basecamp Account ID and Project ID, follow the steps in <a href='http://klipfolio.uservoice.com/knowledgebase/articles/673621-klip-gallery-basecamp#ids' target='_blank'>Klip Gallery: Basecamp</a>."   
+            "description":"Select your Basecamp Account",
+            "onChangeQueries" : [ "q2" ]
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.basecamp.projectID",
             "label" : "Project ID",
-            "description":""   
+            "description":"Select your Basecamp Project"
+        }
+    ],
+    "queries": [
+        {
+            "userMessage":"Fetching list of Basecamp Accounts.",
+            "connector": {
+                "service": "basecamp",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://launchpad.37signals.com/authorization.json"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.basecamp.accountId", 
+                    "propField" : "options", 
+                    "labels": "/accounts/name",  
+                    "values": "/accounts/id" 
+                }
+            ]
+        },
+        {   
+            "id": "q2",
+            "userMessage":"Fetching list of Basecamp Projects.",
+            "connector": {
+                "service": "basecamp",
+                "type": "simple_rest",
+                "format": "json",
+                "props" : { 
+                    "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects.json"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.basecamp.projectID", 
+                    "propField" : "options", 
+                    "labels": "/name",  
+                    "values": "/id" 
+                }
+            ]
         }
     ]
 }
