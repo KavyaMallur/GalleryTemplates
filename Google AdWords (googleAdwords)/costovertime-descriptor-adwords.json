@@ -65,17 +65,41 @@
 
        "datasourceConfigModel" : [
 		{
-			"type" : "text",
+			"type" : "select",
 			"id" : "ds.google_adwords.customerId",
 			"label" : "Customer ID",
 			"description" : "Enter your Customer ID. To find your Customer ID, log in to your Google AdWords account.<br><br> Need extra help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/562755-klip-gallery-google-adwords' target='blank'>Klip Gallery: Google AdWords</a>.",
 			"isRequired" : true
 		}
 	],
-
+    
 	"services" : [
 		{
 			"service" : "google_adwords"
 		}
-	]
+	],
+
+	"queries": [
+        {
+            "errorMessage":"There are two possible reasons: <br><br>1. Your Google Adwords OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Adwords account. Ask an administrator to grant you access.",
+            "connector": {
+                "service": "google_adwords",
+                "type": "google_adwords",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://adwords.google.com/api/adwords/cm/v201506/ReportDefinitionService",
+                    "method": "POST",
+                    "client_list_report":"true"
+                }
+            },
+            "results": [
+                { 
+                    "propId" : "ds.google_adwords.customerId",
+                    "propField" : "options", 
+                    "labels": "//*[local-name()='name' and following-sibling::*='false']",  
+                    "values": "//*[local-name()='customerId' and following-sibling::*='false']" 
+                }
+            ]
+        }
+    ]
 }
