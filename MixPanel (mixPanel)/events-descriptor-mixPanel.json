@@ -27,26 +27,56 @@
             "service" : "mixpanel"
         }
     ],
-
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.event1",
             "label" : "Event 1",
-            "description":"Enter three Mixpanel events that you would like to compare. <br><br>Enter the event names in the exact same format as in Mixpanel. Klipfolio does not support custom events. ",
-            "isRequired" : true
+            "description":"Select three Mixpanel events that you would like to compare."
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.event2",
-            "label" : "Event 2",
-            "isRequired" : true
+            "label" : "Event 2"
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.event3",
-            "label" : "Event 3",
-            "isRequired" : true
+            "label" : "Event 3"
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Mixpanel Event Error",
+            "connector": {
+                "service": "mixpanel",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "http://mixpanel.com/api/2.0/events/names/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.mixpanel.event1", 
+                    "propField" : "options", 
+                    "labels": "/",  
+                    "values": "/" 
+                },
+                {
+                    "propId" : "ds.mixpanel.event2", 
+                    "propField" : "options", 
+                    "labels": "/",  
+                    "values": "/" 
+                },
+                {
+                    "propId" : "ds.mixpanel.event3", 
+                    "propField" : "options", 
+                    "labels": "/",  
+                    "values": "/" 
+                }
+
+            ]
         }
     ]
 }

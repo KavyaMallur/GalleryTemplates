@@ -27,24 +27,60 @@
             "service" : "mixpanel"
         }
     ],
-
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.event",
-            "label" : "Enter Event",
-            "description":"Enter a Mixpanel event and property that you are interested in tracking. <br><br> Be sure to enter the event name in the exact same format as in Mixpanel. Klipfolio does not support custom events.",
-            "isRequired" : true
+            "label" : "Select Event",
+            "description":"Select the Mixpanel event and property that you are interested in tracking.",
+            "onChangeQueries" : [ "q2" ]
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.name",
-            "label" : "Enter Property",
-
-            "isRequired" : true
+            "label" : "Enter Property"
         }
     ],
-
+    "queries": [
+        {
+            "errorMessage":"Mixpanel Event Error",
+            "connector": {
+                "service": "mixpanel",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "http://mixpanel.com/api/2.0/events/names/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.mixpanel.event", 
+                    "propField" : "options", 
+                    "labels": "/",  
+                    "values": "/" 
+                }
+            ]
+        },
+        {
+            "id": "q2",
+            "connector": {
+                "service": "mixpanel",
+                "type": "simple_rest",
+                "format": "json",
+                "props" : { 
+                    "endpoint_url": "http://mixpanel.com/api/2.0/events/properties/top?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"limit=100\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}&event={{ds.mixpanel.event}}&limit=100"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.mixpanel.name", 
+                    "propField" : "options", 
+                    "labels": "/name",  
+                    "values": "/id" 
+                }
+            ]
+        }
+    ],
     "uiVariables": [
         {
             "name":"KTtemp", 

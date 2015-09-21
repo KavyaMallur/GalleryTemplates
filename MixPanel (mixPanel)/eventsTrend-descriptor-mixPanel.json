@@ -27,20 +27,45 @@
             "service" : "mixpanel"
         }
     ],
-
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.event1",
-            "label" : "Enter first event",
-            "description":"Enter the Mixpanel events you are interested in tracking. <br><br>Enter event names in the exact same format as in Mixpanel. Klipfolio does not support custom events.",
-            "isRequired" : true
+            "label" : "Event 1",
+            "description":"Select the Mixpanel events you are interested in tracking."
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.event2",
-            "label" : "Enter second event",
-            "isRequired" : true
+            "label" : "Event 2"
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Mixpanel Event Error",
+            "connector": {
+                "service": "mixpanel",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "http://mixpanel.com/api/2.0/events/names/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.mixpanel.event1", 
+                    "propField" : "options", 
+                    "labels": "/",  
+                    "values": "/" 
+                },
+                {
+                    "propId" : "ds.mixpanel.event2", 
+                    "propField" : "options", 
+                    "labels": "/",  
+                    "values": "/" 
+                }
+
+            ]
         }
     ]
 }

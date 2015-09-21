@@ -29,11 +29,31 @@
     ],
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.mixpanel.funnelId",
             "label" : "Enter Funnel Id",
-            "description":"Enter ID of the funnel you want to monitor. <br> <br> Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/706440-klip-gallery-mixpanel#Funnel' target='_blank'>Klip Gallery: Mixpanel - Funnel</a>",
-            "isRequired" : true
+            "description":"Select the funnel you want to monitor. <br> <br> Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/706440-klip-gallery-mixpanel#Funnel' target='_blank'>Klip Gallery: Mixpanel - Funnel</a>"
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Mixpanel Funnel ID Error",
+            "connector": {
+                "service": "mixpanel",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "http://mixpanel.com/api/2.0/funnels/list/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.mixpanel.funnelId", 
+                    "propField" : "options", 
+                    "labels": "/name",  
+                    "values": "/funnel_id" 
+                }
+            ]
         }
     ]
 }
