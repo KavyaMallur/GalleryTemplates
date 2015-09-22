@@ -33,17 +33,44 @@
 	],
 	"datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.quintly.profileId1",
-            "label" : "Your Profile ID",
-            "description":"Enter your <b>Quintly Profile ID for Facebook</b> and your <b>competitor's Quintly Profile ID for Facebook</b>. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/677149-klip-gallery-quintly#connect' target='_blank'>Klip Gallery: Quintly</a>."   
+            "label" : "Your Profile",
+            "description":"Select your <b>Quintly Facebook Profile</b> and your <b>competitor's Quintly Facebook Profile</b>. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/677149-klip-gallery-quintly#connect' target='_blank'>Klip Gallery: Quintly</a>."   
         },
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.quintly.profileId2",
-            "label" : "Competitor Profile ID",
-            "description":""   
+            "label" : "Competitor Profile"
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Quintly Event Error",
+            "connector": {
+                "service": "quintly",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.quintly.com/v0.9/list-profiles",
+				"basic_auth_username" : "{{auth.quintly.clientId}}",
+				"basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.quintly.profileId1", 
+                    "propField" : "options", 
+                    "labels": "/data/platformUsername[preceding-sibling::platformType='facebook']",  
+                    "values": "/data/id[following-sibling::platformType='facebook']" 
+                },
+                {
+                    "propId" : "ds.quintly.profileId2", 
+                    "propField" : "options", 
+                    "labels": "/data/platformUsername[preceding-sibling::platformType='facebook']",  
+                    "values": "/data/id[following-sibling::platformType='facebook']" 
+                }
+            ]
         }
     ]
-
-} 
+}
