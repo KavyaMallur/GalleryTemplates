@@ -1,96 +1,158 @@
 {
-	"name" : "App Annie Downloads (Last 30 Days)",
-	"description": "Compare app downloads over past 30 days to downloads during the previous 30 days. Originates from the Gallery.",
+    "name" : "App Annie Downloads (Last 30 Days)",
+    "description": "Compare app downloads over past 30 days to downloads during the previous 30 days. Originates from the Gallery.",
 
-	"datasources" : {
-		"appannie-01" : {
-			"service": "appannie",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "App Annie Details",
-			"libraryAlias": "AppAnnieDetails",
-			"refreshInterval": 14400,
-			"description": "Provide product details of a selected app. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://api.appannie.com/v1.2/apps/{{ds.appannie.market}}/app/{{ds.appannie.productID}}/details",
-				"method": "GET",
-				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+    "datasources" : {
+        "appannie-01" : {
+            "service": "appannie",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "App Annie Details",
+            "libraryAlias": "AppAnnieDetails",
+            "refreshInterval": 14400,
+            "description": "Provide product details of a selected app. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.appannie.com/v1.2/apps/{{ds.appannie.market}}/app/{{ds.appannie.productID}}/details",
+                "method": "GET",
+                "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
 
-			}
-		},
-		
-		"appannie-02" : {
-			"service": "appannie",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "App Annie Sales (Last 30 days)",
-			"libraryAlias": "AppAnnieSalesLast30Days",
-			"refreshInterval": 14400,
-			"description": "Provide sales for the last 30 days of a selected app. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products/{{ds.appannie.productID}}/sales?start_date={date.add(-31).format('yyyy-MM-dd')}&end_date={date.yesterday.format('yyyy-MM-dd')}",
-				"method": "GET",
-				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
-
-			}
-		},
-
-		"appannie-03" : {
-			"service": "appannie",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "App Annie Sales (Prev 30 days)",
-			"libraryAlias": "AppAnnieSalesPrev30Days",
-			"refreshInterval": 14400,
-			"description": "Provide sales for the previous 30 days of a selected app. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products/{{ds.appannie.productID}}/sales?start_date={date.add(-61).format('yyyy-MM-dd')}&end_date={date.add(-32).format('yyyy-MM-dd')}",
-				"method": "GET",
-				"parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
-
-			}
-		}
-	},
-
-	"dsMappings": {
-		"appannie-01": "c4b5e3c36b88a22680d0KavyaMallur9",
-		"appannie-02": "96ad6a7d841085d7a226KavyaMallur9",
-		"appannie-03": "28cffb7bd1d19c9ede8bKavyaMallur9"
-	},
-	"services" : [
-		{
-			"service" : "appannie"
-		}
-	],
-	"datasourceConfigModel" : [
-        {
-            "type" : "text",
-            "id" : "ds.appannie.productID",
-            "label" : "Product ID",
-            "description": "Enter your App Annie Product ID and Account ID. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/729951-klip-gallery-app-annie#ids' target='_blank'>Where do I find my Product and Account IDs?</a>",
-            "isRequired" : true
+            }
         },
+        
+        "appannie-02" : {
+            "service": "appannie",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "App Annie Sales (Last 30 days)",
+            "libraryAlias": "AppAnnieSalesLast30Days",
+            "refreshInterval": 14400,
+            "description": "Provide sales for the last 30 days of a selected app. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products/{{ds.appannie.productID}}/sales?start_date={date.add(-31).format('yyyy-MM-dd')}&end_date={date.yesterday.format('yyyy-MM-dd')}",
+                "method": "GET",
+                "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+            }
+        },
+
+        "appannie-03" : {
+            "service": "appannie",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "App Annie Sales (Prev 30 days)",
+            "libraryAlias": "AppAnnieSalesPrev30Days",
+            "refreshInterval": 14400,
+            "description": "Provide sales for the previous 30 days of a selected app. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products/{{ds.appannie.productID}}/sales?start_date={date.add(-61).format('yyyy-MM-dd')}&end_date={date.add(-32).format('yyyy-MM-dd')}",
+                "method": "GET",
+                "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+
+            }
+        }
+    },
+
+    "dsMappings": {
+        "appannie-01": "c4b5e3c36b88a22680d0KavyaMallur9",
+        "appannie-02": "96ad6a7d841085d7a226KavyaMallur9",
+        "appannie-03": "28cffb7bd1d19c9ede8bKavyaMallur9"
+    },
+    "services" : [
         {
-            "type" : "text",
+            "service" : "appannie"
+        }
+    ],
+    "datasourceConfigModel" : [
+        {
+            "type" : "select",
             "id" : "ds.appannie.accountID",
-            "label" : "Account ID",
-            "isRequired" : true
-        },
-    	{
-            "type": "select",
-            "id": "ds.appannie.market",
-            "label" : "Market",
-            "description": "Select your app market.",
-            "options": [
-                    {"label":"IOS","value":"ios"},
-                    {"label":"Mac","value":"mac"},
-                    {"label":"Google Play","value":"google-play"},
-                    {"label":"Amazon Appstore","value":"amazon-appstore"},
-                    {"label":"Windows Phone","value":"windows-phone"},
-                    {"label":"Windows Store","value":"windows-store"}
-            ],
+            "label" : "Account",
+            "description":"Select your App Annie Account.",
             "isRequired" : true,
-            "selectedValue": "ios"
-		}
-	]
+            "onChangeQueries" : [ "ProductQuery" ]
+        },
+        {
+            "type" : "select",
+            "id" : "ds.appannie.productID",
+            "label" : "Product",
+            "isRequired" : true,
+            "description":"Select your App Annie Product.",
+            "onChangeQueries" : [ "MarketQuery" ]
+            
+        },
+        {
+            "type" : "select",
+            "id" : "ds.appannie.market",
+            "label" : "Market",
+            "description":"Select your App Annie Product Market.",
+            "isRequired" : true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"App Annie Account Error",
+            "connector": {
+                "service": "appannie",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.appannie.com/v1.2/accounts",
+                    "method": "GET",
+                    "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.appannie.accountID", 
+                    "propField" : "options", 
+                    "labels": "/accounts/account_name",  
+                    "values": "/accounts/account_id" 
+                }
+            ]
+        },
+        
+        {   
+            "id": "ProductQuery",
+            "connector": {
+                "service": "appannie",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products",
+                    "method": "GET",
+                    "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.appannie.productID", 
+                    "propField" : "options", 
+                    "labels": "/products/product_name",  
+                    "values": "/products/product_id" 
+                }
+            ]
+        },
+
+        {   
+            "id": "MarketQuery",
+            "connector": {
+                "service": "appannie",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.appannie.com/v1.2/accounts",
+                    "method": "GET",
+                    "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.appannie.market", 
+                    "propField" : "options", 
+                    "labels": "/accounts[attribute::account_id={{ds.appannie.accountID}}]/market",  
+                    "values": "/accounts[attribute::account_id={{ds.appannie.accountID}}]/market"
+                }
+            ]
+        }
+    ]
 }
