@@ -64,33 +64,95 @@
 	],
 	"datasourceConfigModel" : [
         {
-            "type" : "text",
-            "id" : "ds.appannie.productID",
-            "label" : "Product ID",
-            "description": "Enter your App Annie Product ID and Account ID. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/729951-klip-gallery-app-annie#ids' target='_blank'>Where do I find my Product and Account IDs?</a>",
-            "isRequired" : true
+            "type" : "select",
+            "id" : "ds.appannie.accountID",
+            "label" : "Account",
+            "description":"Select your App Annie Account.",
+            "isRequired" : true,
+            "onChangeQueries" : [ "ProductQuery" ]
         },
         {
-            "type" : "text",
-            "id" : "ds.appannie.accountID",
-            "label" : "Account ID",
-            "isRequired" : true
-        },
-    	{
-            "type": "select",
-            "id": "ds.appannie.market",
-            "label" : "Market",
-            "description": "Select your app market.",
-            "options": [
-                    {"label":"IOS","value":"ios"},
-                    {"label":"Mac","value":"mac"},
-                    {"label":"Google Play","value":"google-play"},
-                    {"label":"Amazon Appstore","value":"amazon-appstore"},
-                    {"label":"Windows Phone","value":"windows-phone"},
-                    {"label":"Windows Store","value":"windows-store"}
-            ],
+            "type" : "select",
+            "id" : "ds.appannie.productID",
+            "label" : "Product",
             "isRequired" : true,
-            "selectedValue": "ios"
-		}
-	]
+            "description":"Select your App Annie Product.",
+            "onChangeQueries" : [ "MarketQuery" ]
+            
+        },
+        {
+            "type" : "select",
+            "id" : "ds.appannie.market",
+            "label" : "Market",
+            "description":"Select your App Annie Product Market.",
+            "isRequired" : true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"App Annie Account Error",
+            "connector": {
+                "service": "appannie",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.appannie.com/v1.2/accounts",
+                    "method": "GET",
+                    "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.appannie.accountID", 
+                    "propField" : "options", 
+                    "labels": "/accounts/account_name",  
+                    "values": "/accounts/account_id" 
+                }
+            ]
+        },
+        
+        {   
+            "id": "ProductQuery",
+            "connector": {
+                "service": "appannie",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.appannie.com/v1.2/accounts/{{ds.appannie.accountID}}/products",
+                    "method": "GET",
+                    "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.appannie.productID", 
+                    "propField" : "options", 
+                    "labels": "/products/product_name",  
+                    "values": "/products/product_id" 
+                }
+            ]
+        },
+
+        {   
+            "id": "MarketQuery",
+            "connector": {
+                "service": "appannie",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.appannie.com/v1.2/meta/markets",
+                    "method": "GET",
+                    "parameters": "[{\"name\":\"Authorization\",\"value\":\" Bearer {{auth.appannie.apiKey}}\",\"type\":\"header\"}]"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.appannie.market", 
+                    "propField" : "options", 
+                    "labels": "/verticals[vertical_name='Apps']/markets/market_name",  
+                    "values": "/verticals[vertical_name='Apps']/markets/market_code"
+                }
+            ]
+        }
+    ]
 }
