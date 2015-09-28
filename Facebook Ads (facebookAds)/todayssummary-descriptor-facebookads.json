@@ -13,8 +13,8 @@
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
-                "endpoint_url": "https://graph.facebook.com/v2.4/act_{{ds.facebook_ads.accountID}}/insights?level=adgroup&date_preset=today&sort=spend_descending&fields=campaign_group_name,campaign_name,adgroup_name,campaign_group_id,campaign_id,adgroup_id,spend,unique_clicks,cost_per_unique_click,cpm,ctr,relevance_score,action_values,actions,cost_per_action_type",
-                "graphUrl": "https://graph.facebook.com/v2.4/act_{{ds.facebook_ads.accountID}}/insights?level=adgroup&date_preset=today&sort=spend_descending&fields=campaign_group_name,campaign_name,adgroup_name,campaign_group_id,campaign_id,adgroup_id,spend,unique_clicks,cost_per_unique_click,cpm,ctr,relevance_score,action_values,actions,cost_per_action_type",
+                "endpoint_url": "https://graph.facebook.com/v2.4/{{ds.facebook_ads.accountID}}/insights?level=adgroup&date_preset=today&sort=spend_descending&fields=campaign_group_name,campaign_name,adgroup_name,campaign_group_id,campaign_id,adgroup_id,spend,unique_clicks,cost_per_unique_click,cpm,ctr,relevance_score,action_values,actions,cost_per_action_type",
+                "graphUrl": "https://graph.facebook.com/v2.4/{{ds.facebook_ads.accountID}}/insights?level=adgroup&date_preset=today&sort=spend_descending&fields=campaign_group_name,campaign_name,adgroup_name,campaign_group_id,campaign_id,adgroup_id,spend,unique_clicks,cost_per_unique_click,cpm,ctr,relevance_score,action_values,actions,cost_per_action_type",
                 "qtype": "Graph API"
             }
         }
@@ -37,9 +37,34 @@
     ],
     "datasourceConfigModel" : [
         {
-            "type" : "text",
+            "type" : "select",
             "id" : "ds.facebook_ads.accountID",
             "label" : "Facebook Account ID",
-            "description":"To find your Facebook Ads Account ID, follow the steps in <a href='#' target='_blank'>Klip Gallery: Facebook Ads</a>."   }
+            "description":"Select Your Facebook Ads Account"
+        }
+    ],
+"queries": [
+        {
+            "errorMessage":"Facebook Ads Error Message",
+            "connector": {
+                "service": "facebook_ads",
+                "type": "facebook",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://graph.facebook.com/v2.4/me/adaccounts?fields=name,id",
+                    "graphUrl": "https://graph.facebook.com/v2.4/me/adaccounts?fields=name,id",
+                    "method": "GET",
+                    "qtype": "Graph API"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.facebook_ads.accountID", 
+                    "propField" : "options", 
+                    "labels": "/data/name",  
+                    "values": "/data/id" 
+                }
+            ]
+        }
     ]
 }
