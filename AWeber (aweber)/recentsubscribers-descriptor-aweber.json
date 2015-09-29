@@ -1,0 +1,85 @@
+{
+    "name" : "AWeber Recent Subscribers",
+    "description" : "A Chart of Recent Subscribers. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "aweber" : {
+            "service" : "aweber",
+            "libraryAlias" : "AWeberRecentSubscribersbyList",
+            "name": "AWeber Recent Subscribers by List",
+            "description" : "See a list of the most recent 100 subscribers by list. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" :  14400,                                                      
+            "props" : {
+                "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/subscribers"          
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "aweber" : "969880f2869f8c125814doogeraspilk" 
+    },
+
+    "services" : [
+        {
+            "service" : "aweber"
+        }
+    ],
+    "datasourceConfigModel" : [
+        {
+            "type" : "select",
+            "id" : "ds.aweber.accountID",
+            "label" : "Account",
+            "description":"Select your AWeber Account",
+            "onChangeQueries" : [ "q2" ]
+        },
+        {
+            "type" : "select",
+            "id" : "ds.aweber.listID",
+            "label" : "List",
+            "description":"Select your AWeber List"
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"There are two possible reasons: <br><br>1. Your AWeber OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. Your AWeber login details has changed. Please re-authorize with the new login details.",
+            "connector": {
+                "service": "aweber",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.aweber.com/1.0/accounts"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.aweber.accountID",
+                    "propField" : "options",
+                    "labels": "/entries/id",
+                    "values": "/entries/id"
+                }
+            ]
+        },
+        {   
+            "id": "q2",
+            "connector": {
+                "service": "aweber",
+                "type": "simple_rest",
+                "format": "json",
+                "props" : {
+                    "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.aweber.listID",
+                    "propField" : "options",
+                    "labels": "/entries/name",
+                    "values": "/entries/id"
+                }
+            ]
+        }
+    ]
+}
