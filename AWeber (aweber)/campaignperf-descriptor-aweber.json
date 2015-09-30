@@ -13,7 +13,7 @@
             "format" : "json",
             "refreshInterval" :  14400,                                                      
             "props" : {
-                "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/campaigns"          
+                "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/campaigns/{{ds.aweber.campaignType}}{{ds.aweber.campaignID}}/stats"
             }
         }
     },
@@ -45,7 +45,20 @@
             "type" : "select",
             "id" : "ds.aweber.listID",
             "label" : "List",
-            "description":"Select your AWeber List"
+            "description":"Select your AWeber List",
+            "onChangeQueries" : [ "q3" ]
+        },
+        {
+            "type" : "select",
+            "id" : "ds.aweber.campaignType",
+            "label" : "Campaign Type",
+            "description":"Select your AWeber Campaign Type"
+        },
+        {
+            "type" : "select",
+            "id" : "ds.aweber.campaignID",
+            "label" : "Campaign ID",
+            "description":"Select your AWeber Campaign"
         }
     ],
     "queries": [
@@ -83,6 +96,31 @@
                     "propId" : "ds.aweber.listID",
                     "propField" : "options",
                     "labels": "/entries/name",
+                    "values": "/entries/id"
+                }
+            ]
+        },
+        {   
+            "id": "q3",
+            "connector": {
+                "service": "aweber",
+                "type": "simple_rest",
+                "format": "json",
+                "props" : {
+                    "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/campaigns"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.aweber.campaignType",
+                    "propField" : "options",
+                    "labels": "/entries/campaign_type",
+                    "values": "/entries/campaign_type"
+                },
+                {
+                    "propId" : "ds.aweber.campaignID",
+                    "propField" : "options",
+                    "labels": "/entries/subject",
                     "values": "/entries/id"
                 }
             ]
