@@ -1,0 +1,113 @@
+{
+	"name" : "Social Media Followers",
+	"description" : "See where you stand on three of your social media platforms (Facebook, Twitter, and LinkedIn) in a single Klip! Originates from the Gallery.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookBasicPageInfo",
+			"name": "Facebook Basic Page Info",
+			"description" : "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/v2.2/{{ds.facebook.pageId}}",
+            	"graphUrl": "https://graph.facebook.com/v2.2/{{ds.facebook.pageId}}",
+            	"qtype": "Graph API"
+			}
+		},
+		"twitter" : {
+			"service" : "twitter",
+			"libraryAlias" : "TwitterAccountStats",
+			"name": "Twitter Account Stats",
+			"description" : "Retrieves the details of the specified Tweet ID. Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
+            	"method": "get"
+ 			}
+		},
+		"linkedin" : {
+			"service" : "linkedin",
+			"libraryAlias" : "LinkedInCompStats",
+			"name": "LinkedIn Company Statistics",
+			"description" : "LinkedIn company statistics and follower count by month for the past 12 months. Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "xml",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
+            	 "method": "get"
+			}
+		}
+
+	},
+
+	"dsMappings" : {
+		"facebook" : "3246822217eb4a8e8db8gooderaspilk",
+		"twitter" : "6c69f794227e0f5cb3c2gooderaspilk",
+		"linkedin" : "e6d9b616fe8d1a58ac87gooderaspilk"
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		},
+		{
+			"service" : "twitter"
+		},
+		{
+			"service" : "linkedin"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "text",
+			"id" : "ds.facebook.pageId",
+			"label" : "Facebook Page Name",
+			"description":"Enter your details in the boxes below. <br> <br> <b>Tips:</b> For Facebook, use your <b>Company</b> Page Name<br>For Twitter, do <b>not</b> enter the @ symbol.<br><br> Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/685518-klip-gallery-social-media-followers-multiple-da#connect2' target='_blank'>Klip Gallery: Social Media Followers</a>.",
+			"isRequired" : true
+			
+		},
+		{
+			"type" : "text",
+			"id" : "ds.twitter.screenName",
+			"label" : "Twitter Handle",
+			"isRequired" : true
+		},
+		{
+			"type" : "select",
+			"id" : "ds.linkedin.companyId",
+			"label" : "Company Page",
+			"description" : "Select a LinkedIn Company Page from the drop-down list.",
+			"isRequired" : true
+		}
+	],
+	"queries": [
+        {   
+            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have admin access to a LinkedIn Company Page. <br><br>2. From time to time, your LinkedIn OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "linkedin",
+                "type": "simple_rest",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://api.linkedin.com/v1/companies?is-company-admin=true",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                { 
+                    "propId" : "ds.linkedin.companyId",
+                    "propField" : "options", 
+                    "labels": "/companies/company/name",  
+                    "values": "/companies/company/id"
+                }
+            ]
+        }   
+    ]
+}
