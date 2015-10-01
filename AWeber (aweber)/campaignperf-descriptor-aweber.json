@@ -1,25 +1,38 @@
 {
-    "name" : "AWeber Total Campaign Performance",
-    "description" : "A Chart of Campaign Details. Originates from the Gallery.",
+    "name" : "AWeber Campaign Performance",
+    "description" : "Show the performance details of your AWeber campaign. Originates from the Gallery.",
     
 
     "datasources" : {
-        "aweber" : {
+        "aweber-01" : {
             "service" : "aweber",
             "libraryAlias" : "AWeber CampaignsbyList",
             "name": "AWeber Campaigns by List",
-            "description" : "Retrieve a list of the most recent 100 campaigns by list. Originates from the Gallery.",
+            "description" : "Retrieve a list of the most recent 100 AWeber campaigns. Originates from the Gallery.",
             "type" : "simple_rest",
             "format" : "json",
             "refreshInterval" :  14400,                                                      
             "props" : {
-                "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/campaigns/{{ds.aweber.campaignType}}{{ds.aweber.campaignID}}/stats"
+                "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/campaigns"
+            }
+        },
+        "aweber-02" : {
+            "service" : "aweber",
+            "libraryAlias" : "AWeber CampaignStats",
+            "name": "AWeber Campaign Stats ({ds.aweber.campaignID}})",
+            "description" : "Retrieve the statistics of an AWeber campaign. Originates from the Gallery.",
+            "type" : "simple_rest",
+            "format" : "json",
+            "refreshInterval" :  14400,                                                      
+            "props" : {
+                "endpoint_url": "https://api.aweber.com/1.0/accounts/{{ds.aweber.accountID}}/lists/{{ds.aweber.listID}}/campaigns/b{{ds.aweber.campaignID}}/stats"
             }
         }
     },
 
     "dsMappings" : {
-        "aweber" : "3cad621f40e7957cd20cdoogeraspilk" 
+        "aweber-01" : "3cad621f40e7957cd20cdoogeraspilk",
+        "aweber-02" : "27329ae15b83a0b88cd3doogeraspilk" 
     },
 
     "services" : [
@@ -47,12 +60,6 @@
             "label" : "List",
             "description":"Select your AWeber List",
             "onChangeQueries" : [ "q3" ]
-        },
-        {
-            "type" : "select",
-            "id" : "ds.aweber.campaignType",
-            "label" : "Campaign Type",
-            "description":"Select your AWeber Campaign Type"
         },
         {
             "type" : "select",
@@ -111,13 +118,7 @@
                 }
             },
             "results": [
-                {
-                    "propId" : "ds.aweber.campaignType",
-                    "propField" : "options",
-                    "labels": "/entries/campaign_type",
-                    "values": "/entries/campaign_type"
-                },
-                {
+        {
                     "propId" : "ds.aweber.campaignID",
                     "propField" : "options",
                     "labels": "/entries/subject",

@@ -1,9 +1,10 @@
 {
-   "title": "AWeber Total Campaign Performance",
-   "id": "9d5e159071021a2238d5c84664d75722",
+   "title": "AWeber Campaign Performance",
+   "id": "8efbd64f1913d4d31d07d5815924baf3",
    "workspace": {
       "datasources": [
-         "3cad621f40e7957cd20cdoogeraspilk"
+         "3cad621f40e7957cd20cdoogeraspilk",
+         "27329ae15b83a0b88cd3doogeraspilk"
       ],
       "dimensions": {
          "w": 715
@@ -12,56 +13,59 @@
    "components": [
       {
          "type": "panel_grid",
-         "id": "c92e0254",
+         "id": "05970b62",
          "displayName": "Layout Grid",
          "components": [
             {
-               "type": "input",
-               "id": "4850fcd5",
-               "displayName": "Drop-Down List",
+               "type": "label",
+               "id": "b6434d96-1",
+               "displayName": "Subject Label",
                "layoutConfig": {
-                  "y": 0,
-                  "x": 0
+                  "x": 0,
+                  "y": 0
                },
-               "components": [
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
                   {
-                     "type": "proxy",
-                     "role": "values",
-                     "id": "a3eca1bb",
-                     "displayName": "Campaign Values",
-                     "renamed": true,
-                     "formulas": [
-                        {
-                           "txt": "3cad621f40e7957cd20cdoogeraspilk@/entries/id;",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                       "a": "/entries/id"
-                                    }
-                                 }
-                              ]
+                     "txt": "\"Subject:\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Subject:"
                            }
-                        }
-                     ],
-                     "data": [ ]
-                  },
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "9e83c2b5-2",
+               "displayName": "Subject",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
                   {
-                     "type": "proxy",
-                     "role": "labels",
-                     "id": "4e8eb6d9",
-                     "displayName": "Campaign Labels",
-                     "renamed": true,
-                     "formulas": [
-                        {
-                           "txt": "3cad621f40e7957cd20cdoogeraspilk@/entries/subject;",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
+                     "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/subject;,(3cad621f40e7957cd20cdoogeraspilk@/entries/id;=\"{{ds.aweber.campaignID}}\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "select",
                               "c": [
                                  {
                                     "t": "d",
@@ -69,35 +73,45 @@
                                        "id": "3cad621f40e7957cd20cdoogeraspilk",
                                        "a": "/entries/subject"
                                     }
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "3cad621f40e7957cd20cdoogeraspilk",
+                                             "a": "/entries/id"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "{{ds.aweber.campaignID}}"
+                                       }
+                                    ]
                                  }
                               ]
                            }
-                        }
-                     ],
-                     "data": [ ]
+                        ]
+                     }
                   }
                ],
-               "scope": 1,
-               "propName": "KTCampaign",
-               "inputType": 1,
-               "inputLabel": "Campaign"
-            }
-         ],
-         "rows": 1,
-         "cols": 1
-      },
-      {
-         "type": "panel_grid",
-         "id": "c8ef0689",
-         "displayName": "Layout Grid",
-         "components": [
+               "data": [ ],
+               "font_style": "regular",
+               "wrap": true
+            },
             {
                "type": "label",
-               "id": "bc943d9f",
+               "id": "74a9a3b7",
                "displayName": "Sent Label",
                "layoutConfig": {
                   "x": 0,
-                  "y": 0
+                  "y": 1
                },
                "renamed": true,
                "size": "1",
@@ -122,11 +136,11 @@
             },
             {
                "type": "label",
-               "id": "ff2a089d",
+               "id": "b8ce7414",
                "displayName": "Sent Date",
                "layoutConfig": {
                   "x": 1,
-                  "y": 0
+                  "y": 1
                },
                "renamed": true,
                "size": "1",
@@ -141,7 +155,7 @@
                },
                "formulas": [
                   {
-                     "txt": "date_convert(select(3cad621f40e7957cd20cdoogeraspilk@/entries/scheduled_at;,($KTCampaign=3cad621f40e7957cd20cdoogeraspilk@/entries/id;)),\"yyyy-MM-dd HH:mm:ss\",\"MMM dd yyyy HH:mm\")",
+                     "txt": "date_convert(select(3cad621f40e7957cd20cdoogeraspilk@/entries/sent_at;,(3cad621f40e7957cd20cdoogeraspilk@/entries/id;=\"{{ds.aweber.campaignID}}\")),\"yyyy-MM-dd HH:mm:ss\",\"MMM dd yyyy HH:mm\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -158,7 +172,7 @@
                                           "t": "d",
                                           "v": {
                                              "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                             "a": "/entries/scheduled_at"
+                                             "a": "/entries/sent_at"
                                           }
                                        },
                                        {
@@ -166,19 +180,19 @@
                                           "v": false,
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "KTCampaign"
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
+                                                   "a": "/entries/id"
+                                                }
                                              },
                                              {
                                                 "t": "o",
                                                 "v": "="
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                                   "a": "/entries/id"
-                                                }
+                                                "t": "l",
+                                                "v": "{{ds.aweber.campaignID}}"
                                              }
                                           ]
                                        }
@@ -198,12 +212,12 @@
                      }
                   }
                ],
-               "data": [  ],
+               "data": [ ],
                "font_style": "regular",
                "wrap": true
             }
          ],
-         "rows": 1,
+         "rows": 2,
          "cols": 2,
          "widths": [
             {
@@ -220,18 +234,18 @@
       },
       {
          "type": "separator",
-         "id": "b0a5b2e0",
+         "id": "a761f057",
          "displayName": "Separator",
          "line_style": "ShortDot"
       },
       {
          "type": "panel_grid",
-         "id": "be47d77b",
+         "id": "abdf28b9",
          "displayName": "Layout Grid",
          "components": [
             {
                "type": "simple_value",
-               "id": "fd536afc",
+               "id": "577a4bf3",
                "displayName": "Value Pair",
                "layoutConfig": {
                   "y": 0,
@@ -241,14 +255,14 @@
                   {
                      "type": "label",
                      "role": "primary",
-                     "id": "62085db5",
+                     "id": "11b4bb98",
                      "displayName": "Emails Sent",
                      "renamed": true,
                      "size": "2",
                      "fmt": "txt",
                      "formulas": [
                         {
-                           "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/total_sent;,($KTCampaign=3cad621f40e7957cd20cdoogeraspilk@/entries/id;))",
+                           "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/total_sent;,(3cad621f40e7957cd20cdoogeraspilk@/entries/id;=\"{{ds.aweber.campaignID}}\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -269,19 +283,19 @@
                                           "v": false,
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "KTCampaign"
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
+                                                   "a": "/entries/id"
+                                                }
                                              },
                                              {
                                                 "t": "o",
                                                 "v": "="
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                                   "a": "/entries/id"
-                                                }
+                                                "t": "l",
+                                                "v": "{{ds.aweber.campaignID}}"
                                              }
                                           ]
                                        }
@@ -291,12 +305,12 @@
                            }
                         }
                      ],
-                     "data": [  ]
+                     "data": [ ]
                   },
                   {
                      "type": "label",
                      "role": "secondary",
-                     "id": "d1814790",
+                     "id": "7608984f",
                      "displayName": "Secondary Value",
                      "size": "1",
                      "fmt": "txt",
@@ -322,7 +336,7 @@
             },
             {
                "type": "separator",
-               "id": "cd08535c",
+               "id": "aec73917",
                "displayName": "Separator",
                "layoutConfig": {
                   "y": 0,
@@ -333,7 +347,7 @@
             },
             {
                "type": "simple_value",
-               "id": "3822158e",
+               "id": "2b7e778a",
                "displayName": "Value Pair",
                "layoutConfig": {
                   "y": 0,
@@ -343,70 +357,35 @@
                   {
                      "type": "label",
                      "role": "primary",
-                     "id": "b7c9a7f3",
+                     "id": "9d83a323",
                      "displayName": "Open",
                      "renamed": true,
                      "size": 2,
                      "fmt": "txt",
                      "formulas": [
                         {
-                           "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/total_opens;,($KTCampaign=3cad621f40e7957cd20cdoogeraspilk@/entries/id;))+\"0\"",
+                           "txt": "27329ae15b83a0b88cd3doogeraspilk@/entries/value[preceding-sibling::id='unique_opens'];",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "select",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                             "a": "/entries/total_opens"
-                                          }
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "var",
-                                                "v": "KTCampaign"
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "="
-                                             },
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                                   "a": "/entries/id"
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "+"
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "0"
+                                    "t": "d",
+                                    "v": {
+                                       "id": "27329ae15b83a0b88cd3doogeraspilk",
+                                       "a": "/entries/value[preceding-sibling::id='unique_opens']"
+                                    }
                                  }
                               ]
                            }
                         }
                      ],
-                     "data": [  ]
+                     "data": [ ]
                   },
                   {
                      "type": "label",
                      "role": "secondary",
-                     "id": "3a48db48",
+                     "id": "fb5299d1",
                      "displayName": "Secondary Value",
                      "size": 1,
                      "fmt": "txt",
@@ -432,7 +411,7 @@
             },
             {
                "type": "simple_value",
-               "id": "1a0db3d2",
+               "id": "ce9ec72e",
                "displayName": "Value Pair",
                "layoutConfig": {
                   "y": 1,
@@ -442,59 +421,24 @@
                   {
                      "type": "label",
                      "role": "primary",
-                     "id": "0e926c97",
+                     "id": "3f40df01",
                      "displayName": "Clicks",
                      "renamed": true,
                      "size": 2,
                      "fmt": "txt",
                      "formulas": [
                         {
-                           "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/total_clicks;,($KTCampaign=3cad621f40e7957cd20cdoogeraspilk@/entries/id;))+\"0\"",
+                           "txt": "27329ae15b83a0b88cd3doogeraspilk@/entries/value[preceding-sibling::id='unique_clicks'];",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "select",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                             "a": "/entries/total_clicks"
-                                          }
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "var",
-                                                "v": "KTCampaign"
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "="
-                                             },
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                                   "a": "/entries/id"
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "+"
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "0"
+                                    "t": "d",
+                                    "v": {
+                                       "id": "27329ae15b83a0b88cd3doogeraspilk",
+                                       "a": "/entries/value[preceding-sibling::id='unique_clicks']"
+                                    }
                                  }
                               ]
                            }
@@ -505,7 +449,7 @@
                   {
                      "type": "label",
                      "role": "secondary",
-                     "id": "d94cf71b",
+                     "id": "0c245ed8",
                      "displayName": "Secondary Value",
                      "size": 1,
                      "fmt": "txt",
@@ -531,7 +475,7 @@
             },
             {
                "type": "separator",
-               "id": "07d6a890",
+               "id": "227ee1ff",
                "displayName": "Separator",
                "layoutConfig": {
                   "y": 1,
@@ -542,7 +486,7 @@
             },
             {
                "type": "simple_value",
-               "id": "d413a651",
+               "id": "ef04a09a",
                "displayName": "Value Pair",
                "layoutConfig": {
                   "y": 1,
@@ -552,7 +496,7 @@
                   {
                      "type": "label",
                      "role": "primary",
-                     "id": "8dee1750",
+                     "id": "44b1f59f",
                      "displayName": "Unsubscribes",
                      "renamed": true,
                      "size": 2,
@@ -562,7 +506,7 @@
                            "predicates": [
                               {
                                  "left": {
-                                    "cx": "b7c9a7f3"
+                                    "cx": "9d83a323"
                                  },
                                  "type": "eq",
                                  "right": {
@@ -580,7 +524,7 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/total_unsubscribes;,($KTCampaign=3cad621f40e7957cd20cdoogeraspilk@/entries/id;))+\"0\"",
+                           "txt": "select(3cad621f40e7957cd20cdoogeraspilk@/entries/total_unsubscribes;,(3cad621f40e7957cd20cdoogeraspilk@/entries/id;=\"{{ds.aweber.campaignID}}\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -601,31 +545,23 @@
                                           "v": false,
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "KTCampaign"
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
+                                                   "a": "/entries/id"
+                                                }
                                              },
                                              {
                                                 "t": "o",
                                                 "v": "="
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "3cad621f40e7957cd20cdoogeraspilk",
-                                                   "a": "/entries/id"
-                                                }
+                                                "t": "l",
+                                                "v": "{{ds.aweber.campaignID}}"
                                              }
                                           ]
                                        }
                                     ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "+"
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "0"
                                  }
                               ]
                            }
@@ -636,7 +572,7 @@
                   {
                      "type": "label",
                      "role": "secondary",
-                     "id": "85c2c302",
+                     "id": "8fb62bb8",
                      "displayName": "Secondary Value",
                      "size": 1,
                      "fmt": "txt",
