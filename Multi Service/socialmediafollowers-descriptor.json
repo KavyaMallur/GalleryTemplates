@@ -119,11 +119,12 @@
 
 	"datasourceConfigModel" : [
 		{
-			"type" : "text",
-			"id" : "ds.facebook.pageId",
-			"label" : "Facebook Page Name",
-			"description":"Enter your details in the boxes below. <br> <br> <b>Tips:</b> For Facebook and LinkedIn, use your <b>Company</b> Page Name and ID. <br>For Twitter, do <b>not</b> enter the @ symbol.<br><br> Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/685518-klip-gallery-social-media-followers-multiple-da#connect2' target='_blank'>Klip Gallery: Social Media Followers</a>.",
-			"isRequired" : true
+            "type" : "select",
+            "id" : "ds.facebook.pageId",
+            "label" : "Facebook Page",
+			"description":"Select or Enter your details below. <br> <br> <b>Tips:</b> For Facebook, LinkedIn and Youtube, select your <b>Company</b> Name or Channel. <br>For Twitter, do <b>not</b> enter the @ symbol.<br><br> Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/685518-klip-gallery-social-media-followers-multiple-da#connect2' target='_blank'>Klip Gallery: Social Media Followers</a>.",
+			"isRequired" : true,
+			"onChangeQueries" : [ "q2" ]
 		},
 		{
 			"type" : "text",
@@ -134,21 +135,41 @@
 		{
 			"type" : "select",
 			"id" : "ds.linkedin.companyId",
-			"label" : "Company Page",
-			"description" : "Select a LinkedIn Company Page from the drop-down list.",
+			"label" : "LinkedIn Page",
 			"isRequired" : true,
-			"onChangeQueries" : [ "q2" ]
+			"onChangeQueries" : [ "q3" ]
 		},
 		{
 			"type" : "select",
 			"id" : "ds.youtube.channelID",
-            "label" : "YouTube Channel ID",
-            "description" : "Select a Youtube Channel Name from the drop-down list.",
+            "label" : "YouTube Channel",
             "isRequired" : true
 		}
 	],
 	"queries": [
+	{
+            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "facebook",
+                "type": "facebook",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://graph.facebook.com/v2.4/me/accounts?fields=name,id",
+                    "method": "GET",
+                    "qtype": "Graph API"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.facebook.pageId",
+                    "propField" : "options",
+                    "labels": "/data/name",
+                    "values": "/data/id"
+                }
+            ]
+        },
         {   
+        	"id": "q2",
             "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have admin access to a LinkedIn Company Page. <br><br>2. From time to time, your LinkedIn OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
             "connector": {
                 "service": "linkedin",
@@ -169,7 +190,7 @@
             ]
         },
         {   
-        	"id": "q2",
+        	"id": "q3",
             "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have admin access to the youtube channel.<br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
             "connector": {
                 "service": "youtube",
