@@ -31,12 +31,34 @@
 	],
 
 	"datasourceConfigModel" : [
-		{
-			"type" : "text",
-			"id" : "ds.facebook.pageId",
-			"label" : "Facebook Page Name",
-			"description":"To find your company Facebook Page Name, follow the steps in <a href='http://klipfolio.uservoice.com/knowledgebase/articles/562989-klip-gallery-facebook#connect' target='_blank'>Klip Gallery: Facebook</a>.",
-			"isRequired" : true
-		}
-	]
+        {
+            "type" : "select",
+            "id" : "ds.facebook.pageId",
+            "label" : "Facebook Page",
+            "description":"Select your company Facebook page from the drop-down list."
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "facebook",
+                "type": "facebook",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://graph.facebook.com/v2.4/me/accounts?fields=name,id",
+                    "method": "GET",
+                    "qtype": "Graph API"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.facebook.pageId",
+                    "propField" : "options",
+                    "labels": "/data/name",
+                    "values": "/data/id"
+                }
+            ]
+        }   
+    ]
 }
