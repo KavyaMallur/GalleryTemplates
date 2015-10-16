@@ -3,10 +3,9 @@
    "id": "c2961acca9e9e3291392db73acb2d36e",
    "workspace": {
       "datasources": [
-         "88653c44e3a4af193b7bdoogeraspilk",
-         "b8b095c164391c1721d5doogeraspilk",
          "8186a84fa24eaa55f096doogeraspilk",
-         "f7d1773809dcba4cdbf3doogeraspilk"
+         "f7d1773809dcba4cdbf3doogeraspilk",
+         "69cf8030f7d020d71b1edoogeraspilk"
       ],
       "dimensions": {
          "w": 400
@@ -175,7 +174,7 @@
                         {
                            "type": "icon",
                            "value": "ind-triangle-up-green",
-                           "pos": "left",
+                           "pos": "right",
                            "isScalar": true
                         }
                      ]
@@ -197,14 +196,14 @@
                            "type": "icon",
                            "value": "ind-triangle-down-red",
                            "isScalar": true,
-                           "pos": "left"
+                           "pos": "right"
                         }
                      ]
                   }
                ],
                "formulas": [
                   {
-                     "txt": "((8186a84fa24eaa55f096doogeraspilk@//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;+8186a84fa24eaa55f096doogeraspilk@//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value;)/b8b095c164391c1721d5doogeraspilk@/totalSize;)",
+                     "txt": "((8186a84fa24eaa55f096doogeraspilk@//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;+8186a84fa24eaa55f096doogeraspilk@//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value;)/countif(between(date(69cf8030f7d020d71b1edoogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-30\"),yesterday())))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -242,11 +241,83 @@
                                     "v": "/"
                                  },
                                  {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "b8b095c164391c1721d5doogeraspilk",
-                                       "a": "/totalSize"
-                                    }
+                                    "t": "f",
+                                    "v": "countif",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "69cf8030f7d020d71b1edoogeraspilk",
+                                                         "a": "/records/CloseDate"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-30"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
                                  }
                               ]
                            }
@@ -272,7 +343,7 @@
                },
                "formulas": [
                   {
-                     "txt": "((f7d1773809dcba4cdbf3doogeraspilk@//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;+f7d1773809dcba4cdbf3doogeraspilk@//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value;)/88653c44e3a4af193b7bdoogeraspilk@/totalSize;)",
+                     "txt": "((f7d1773809dcba4cdbf3doogeraspilk@//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;+f7d1773809dcba4cdbf3doogeraspilk@//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value;)/countif(between(date(69cf8030f7d020d71b1edoogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\"))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -310,11 +381,97 @@
                                     "v": "/"
                                  },
                                  {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "88653c44e3a4af193b7bdoogeraspilk",
-                                       "a": "/totalSize"
-                                    }
+                                    "t": "f",
+                                    "v": "countif",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "69cf8030f7d020d71b1edoogeraspilk",
+                                                         "a": "/records/CloseDate"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-60"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-31"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
                                  }
                               ]
                            }
@@ -324,7 +481,8 @@
                ],
                "data": [ ],
                "align": "c",
-               "font_colour": "cx-color_888"
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
             }
          ]
       }
