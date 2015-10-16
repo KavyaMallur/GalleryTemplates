@@ -1,0 +1,108 @@
+{
+	"name" : "AdWords Total Cost (This Month)",
+	"description" : "Compare your AdWords spend to your budget in Xero. Originates from the Gallery.",
+
+	"datasources" : {
+		"googleAdwords-01" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "adWordsCampaignListThisMonth",
+			"name": "Adwords Campaign List (This Month)",
+			"description" : "See your AdWords campaigns and impressions this month. Originates from the Gallery.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING THIS_MONTH&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+			}
+		},
+		"googleAdwords-02" : {
+			"service" : "google_adwords",
+			"libraryAlias" : "adWordsCampaignPerformanceThisMonth",
+			"name": "AdWords Campaign Performance (This Month)",
+			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for this month. Originates from the Gallery.",
+			"type" : "google_adwords",
+			"format" : "csv",
+			"refreshInterval" : 14400,
+			"props" : { 
+				"body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING THIS_MONTH&__fmt=CSV&mode=Standard",
+				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
+           		 "method": "post",
+           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+		},
+		"xero-01" : {
+            "service" : "xero",
+            "libraryAlias" : "xeroBudgetReport",
+            "name": "Xero Budget Report",
+            "description" : "Provide budget details for the current month. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/BudgetSummary?periods=1"
+            }
+        }
+	},
+
+	"dsMappings" : {
+		"googleAdwords-01" :"98df00a5429d8ee46f44natceewzhere",
+		"googleAdwords-02" :"c37cdf119660c5d51642natceewzhere",
+		"xero-01": "f94f2437342e81712971natceewzhere"
+	},
+
+	"uiVariables": [
+        {
+        	"name":"AWKTCampaign", 
+        	"value":"All" 
+        }
+    ],
+
+    "services" : [
+        {
+            "service" : "xero"
+        },
+        {
+            "service" : "google_adwords"
+        }
+    ],
+   "datasourceConfigModel" : [
+		{
+            "type" : "select",
+            "id" : "ds.xero.expenseName",
+            "label" : "Name of Expense",
+            "description" : "Please select the name of your marketing expense. Originates from the Gallery."    
+        },
+
+		{
+			"type" : "text",
+			"id" : "ds.google_adwords.customerId",
+			"label" : "Customer ID",
+			"description" : "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
+			"isRequired" : true
+		}
+	],
+	"queries": [
+        {
+            "errorMessage":"Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "xero",
+                "type": "xero",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/BudgetSummary?periods=1"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.xero.expenseName", 
+                    "propField" : "options", 
+                    "labels": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value",  
+                    "values": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value" 
+                }
+            ]
+        }
+    ]
+}
