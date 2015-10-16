@@ -1,0 +1,332 @@
+{
+   "title": "Xero & Salesforce: CAC (Last 30 Days)",
+   "id": "c2961acca9e9e3291392db73acb2d36e",
+   "workspace": {
+      "datasources": [
+         "88653c44e3a4af193b7bdoogeraspilk",
+         "b8b095c164391c1721d5doogeraspilk",
+         "8186a84fa24eaa55f096doogeraspilk",
+         "f7d1773809dcba4cdbf3doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "1a48a6f3-2",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "image",
+               "id": "9c58bca6-1",
+               "displayName": "Xero Logo",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/xero.png\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/xero.png"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ]
+            },
+            {
+               "type": "label",
+               "id": "92d4b2e3-4",
+               "displayName": "+",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"+\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "+"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "wrap": true
+            },
+            {
+               "type": "image",
+               "id": "8c8b2309-3",
+               "displayName": "Salesforce Logo",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/salesforce.png\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/salesforce.png"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "resizeWidth": "50",
+               "resizeHeight": "50"
+            }
+         ],
+         "rows": 1,
+         "cols": 4,
+         "rowHeights": [
+            {
+               "y": 0,
+               "h": 40
+            }
+         ],
+         "widths": [
+            {
+               "x": 0,
+               "w": 40
+            },
+            {
+               "x": 2,
+               "w": 45
+            },
+            {
+               "x": 1,
+               "w": 30
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 1
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "alignment": 1
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "alignment": 1
+            }
+         ]
+      },
+      {
+         "type": "simple_value",
+         "id": "ee6703ed-4",
+         "displayName": "Value Pair",
+         "components": [
+            {
+               "type": "label",
+               "role": "primary",
+               "id": "c238e798-5",
+               "displayName": "CAC",
+               "renamed": true,
+               "size": "3",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "2"
+               },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "cx": "215cfdea-6"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green",
+                           "pos": "left",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "cx": "215cfdea-6"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-down-red",
+                           "isScalar": true,
+                           "pos": "left"
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "((8186a84fa24eaa55f096doogeraspilk@//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;+8186a84fa24eaa55f096doogeraspilk@//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value;)/b8b095c164391c1721d5doogeraspilk@/totalSize;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "8186a84fa24eaa55f096doogeraspilk",
+                                             "a": "//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "+"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "8186a84fa24eaa55f096doogeraspilk",
+                                             "a": "//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "b8b095c164391c1721d5doogeraspilk",
+                                       "a": "/totalSize"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "align": "c"
+            },
+            {
+               "type": "label",
+               "role": "secondary",
+               "id": "215cfdea-6",
+               "displayName": "Prev CAC",
+               "renamed": true,
+               "size": 1,
+               "fmt": "cur",
+               "fmtArgs": {
+                  "prefix": "vs ",
+                  "suffix": " Prev 30 Days",
+                  "precision": "2"
+               },
+               "formulas": [
+                  {
+                     "txt": "((f7d1773809dcba4cdbf3doogeraspilk@//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;+f7d1773809dcba4cdbf3doogeraspilk@//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value;)/88653c44e3a4af193b7bdoogeraspilk@/totalSize;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f7d1773809dcba4cdbf3doogeraspilk",
+                                             "a": "//Row[child::Title=contains(.,'Operating Expenses')]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "+"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f7d1773809dcba4cdbf3doogeraspilk",
+                                             "a": "//Cells[descendant::Value='Total Cost of Sales']/Cell[2]/Value"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "88653c44e3a4af193b7bdoogeraspilk",
+                                       "a": "/totalSize"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [ ],
+               "align": "c",
+               "font_colour": "cx-color_888"
+            }
+         ]
+      }
+   ]
+}

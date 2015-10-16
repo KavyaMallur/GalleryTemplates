@@ -1,0 +1,106 @@
+{
+    "name" : "Xero & Salesforce: CAC (Last 30 Days)",
+    "description" : "Let this Klip address the most important question on your marketing team - what is our cost to acquire a customer (CAC)? This Klip uses your monthly Xero and Salesforce data to answer that very question. Originates from the Gallery.",
+    
+
+    "datasources" : {
+        "xero-01" : {
+            "service" : "xero",
+            "libraryAlias" : "XeroProfit&Loss(Last30Days)",
+            "name": "Xero Profit & Loss (Last 30 Days)",
+            "description" : "Retrieve the Profit and Loss Report for the last 30 Days. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-30).format('yyyy-MM-dd')}&toDate={date.add(-1).format('yyyy-MM-dd')} "
+            }
+        },
+        "xero-02" : {
+            "service" : "xero",
+            "libraryAlias" : "XeroProfit&Loss(Prev30Days)",
+            "name": "Xero Profit & Loss (Prev 30 Days)",
+            "description" : "Retrieve the Profit and Loss Report for the previous 30 Days. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-60).format('yyyy-MM-dd')}&toDate={date.add(-31).format('yyyy-MM-dd')} "
+            }
+        },
+        "salesforce-01" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Last 30 Days)",
+            "libraryAlias" :"SalesforceNewCustomers(Last30Days)",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve the list of New Customer in the last 30 Days. Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability FROM Opportunity WHERE CloseDate < Today AND CloseDate >= LAST_N_DAYS:30 AND Probability = 100",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3C+Today+AND+CloseDate+%3E%3D+LAST_N_DAYS%3A30+AND+Probability+%3D+100",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-02" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Prev 30 Days)",
+            "libraryAlias" :"SalesforceNewCustomers(Prev30Days)",
+            "refreshInterval" : 14400,
+            "description" :"Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability FROM Opportunity WHERE CloseDate < LAST_N_DAYS:30 AND CloseDate >= LAST_N_DAYS:60 AND Probability = 100",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3C+LAST_N_DAYS%3A30+AND+CloseDate+%3E%3D+LAST_N_DAYS%3A60+AND+Probability+%3D+100",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "xero-01" : "8186a84fa24eaa55f096doogeraspilk",
+        "xero-02" : "f7d1773809dcba4cdbf3doogeraspilk",
+        "salesforce-01" : "b8b095c164391c1721d5doogeraspilk",
+        "salesforce-02" : "88653c44e3a4af193b7bdoogeraspilk"
+    },
+
+    "services" : [
+        {
+            "service" : "xero"
+        },
+        {
+            "service" : "salesforce"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "select",
+            "id" : "ds.xero.expenseName",
+            "label" : "Name of Expense",
+            "description" : "Please select the name of your marketing expense. Originates from the Gallery."    
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "xero",
+                "type": "xero",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-30).format('yyyy-MM-dd')}&toDate={date.add(-1).format('yyyy-MM-dd')}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.xero.expenseName", 
+                    "propField" : "options", 
+                    "labels": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value",  
+                    "values": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value" 
+                }
+            ]
+        }
+    ]
+}
