@@ -1,0 +1,124 @@
+{
+    "name" : "Xero & Google Analytics: Marketing Expenses and Traffic (Last 30 Days)",
+    "description" : "Mash up your Google Analytics and Xero data by displaying GA session traffic and Xero marketing expenses. Originates from the Gallery.",
+
+    "datasources" : {
+        "xero-01" : {
+            "service" : "xero",
+            "libraryAlias" : "XeroProfit&Loss(Last30Days)",
+            "name": "Xero Profit & Loss (Last 30 Days)",
+            "description" : "Retrieve the Profit and Loss Report for the last 30 Days. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-30).format('yyyy-MM-dd')}&toDate={date.add(-1).format('yyyy-MM-dd')} "
+            }
+        },
+        "xero-02" : {
+            "service" : "xero",
+            "libraryAlias" : "XeroProfit&Loss(Prev30Days)",
+            "name": "Xero Profit & Loss (Prev 30 Days)",
+            "description" : "Retrieve the Profit and Loss Report for the previous 30 Days. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-60).format('yyyy-MM-dd')}&toDate={date.add(-31).format('yyyy-MM-dd')} "
+            }
+        },
+        "googleAnalytics" : {
+            "service" : "google_analytics",
+            "libraryAlias" : "GATrafficSourcesbyDayLast60Days",
+            "name": "GA: Traffic Sources by Day (Last 60 Days)",
+            "description" : "Shows the number of sessions by day, broken down by traffic source for the last 60 days. Originates from the Gallery.",
+            "type" : "google_analytics",
+            "format" : "csv",
+            "refreshInterval" : 14400,
+            "props" : {
+                 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:medium,ga:date&metrics=ga:sessions&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
+                 "max_pages": "1",
+                 "mode": "Simple",
+                 "profile": "{{ds.google_analytics.profileId}}",
+                  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "xero-01" : "8186a84fa24eaa55f096doogeraspilk",
+        "xero-02" : "f7d1773809dcba4cdbf3doogeraspilk",
+        "googleAnalytics" : "911ae68835d5ba91e56aniktawuzhere"
+        
+    },
+
+    "services" : [
+        {
+            "service" : "xero"
+        },
+        {
+            "service" : "google_analytics"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "select",
+            "id" : "ds.xero.expenseName",
+            "label" : "Name of Expense",
+            "description" : "Please select the name of your marketing expense.",
+            "isRequired" : true,
+            "onChangeQueries" : [ "q2" ]   
+        },
+        {
+            "type" : "select",
+            "id" : "ds.google_analytics.profileId",
+            "label" : "Analytics Account",
+            "description" : "Select an Analytics Account from the drop-down list.",
+            "isRequired" : true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "xero",
+                "type": "xero",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-30).format('yyyy-MM-dd')}&toDate={date.add(-1).format('yyyy-MM-dd')}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.xero.expenseName", 
+                    "propField" : "options", 
+                    "labels": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value",  
+                    "values": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value" 
+                }
+            ]
+        },
+
+        {
+            "id":"q2",
+            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "google_analytics",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                { 
+                    "propId" : "ds.google_analytics.profileId",
+                    "propField" : "options", 
+                    "labels": "/items/name",  
+                    "values": "/items/id" 
+                }
+            ]
+        }    
+    ]
+}
