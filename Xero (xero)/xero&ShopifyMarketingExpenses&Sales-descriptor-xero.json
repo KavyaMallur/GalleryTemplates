@@ -1,0 +1,110 @@
+{
+    "name" : "Xero & Shopify: Marketing Expenses and Sales",
+    "description" : "Mash up your Xero and Shopify data by displaying Xero marketing expenses and Shopify Sales. Originates from the Gallery.",
+
+    "datasources" : {
+        "xero-01" : {
+            "service" : "xero",
+            "libraryAlias" : "XeroProfit&Loss(Last30Days)",
+            "name": "Xero Profit & Loss (Last 30 Days)",
+            "description" : "Retrieve the Profit and Loss Report for the last 30 Days. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-30).format('yyyy-MM-dd')}&toDate={date.add(-1).format('yyyy-MM-dd')} "
+            }
+        },
+        "xero-02" : {
+            "service" : "xero",
+            "libraryAlias" : "XeroProfit&Loss(Prev30Days)",
+            "name": "Xero Profit & Loss (Prev 30 Days)",
+            "description" : "Retrieve the Profit and Loss Report for the previous 30 Days. Originates from the Gallery.",
+            "type" : "xero",
+            "format" : "xml",
+            "refreshInterval" : 14400,
+            "props" : {
+                "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-60).format('yyyy-MM-dd')}&toDate={date.add(-31).format('yyyy-MM-dd')} "
+            }
+        },
+        "shopify-01" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Orders (Last 30 days)",
+            "libraryAlias" :"ShopifyOrdersLast30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves order information for the last 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/orders.json?created_at_min={date.add(-30).format()}&created_at_max={date.add(1).format()}&fields=created_at,id,name,total-price_usd,referring_site,order_number,line_items,financial_status&status=any&financial_status=paid",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
+            }
+        },
+
+        "shopify-02" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Orders (Prev 30 days)",
+            "libraryAlias" :"ShopifyOrdersPrev30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves order information for the previous 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/orders.json?created_at_min={date.add(-60).format()}&created_at_max={date.add(-31).format()}&fields=created_at,id,name,total-price_usd,referring_site,order_number,line_items,financial_status&status=any&financial_status=paid",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
+            }
+        }
+    },
+
+    "dsMappings" : {
+        "xero-01" : "8186a84fa24eaa55f096doogeraspilk",
+        "xero-02" : "f7d1773809dcba4cdbf3doogeraspilk",
+        "shopify-01" : "0da3864b7e6d0c63ad64natceewzhere",
+        "shopify-02" : "278a2f3636db4b581846KavyaMallur9"
+        
+    },
+
+    "services" : [
+        {
+            "service" : "xero"
+        },
+        {
+            "service" : "shopify"
+        }
+    ],
+
+    "datasourceConfigModel" : [
+        {
+            "type" : "select",
+            "id" : "ds.xero.expenseName",
+            "label" : "Name of Expense",
+            "description" : "Please select the name of your marketing expense.",
+            "isRequired" : true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "xero",
+                "type": "xero",
+                "format": "xml",
+                "props": {
+                    "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-30).format('yyyy-MM-dd')}&toDate={date.add(-1).format('yyyy-MM-dd')}"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.xero.expenseName", 
+                    "propField" : "options", 
+                    "labels": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value",  
+                    "values": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value" 
+                }
+            ]
+        }
+    ]
+}
