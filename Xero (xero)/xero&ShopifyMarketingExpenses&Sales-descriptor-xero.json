@@ -1,7 +1,6 @@
 {
-    "name" : "Xero & Salesforce: CAC (Last 30 Days)",
-    "description" : "Let this Klip address the most important question on your marketing team - what is our cost to acquire a customer (CAC)? This Klip uses your monthly Xero and Salesforce data to answer that very question. Originates from the Gallery.",
-    
+    "name" : "Xero & Shopify: Marketing Expenses and Sales",
+    "description" : "Mash up your Xero and Shopify data by displaying Xero marketing expenses and Shopify Sales. Originates from the Gallery.",
 
     "datasources" : {
         "xero-01" : {
@@ -28,18 +27,35 @@
                 "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-60).format('yyyy-MM-dd')}&toDate={date.add(-31).format('yyyy-MM-dd')} "
             }
         },
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
+        "shopify-01" : {
+            "service" : "shopify",
+            "type" : "shopify",
             "format" : "json",
-            "name" :"Salesforce New Customers (Last 60 Days)",
-            "libraryAlias" :"SalesforceNewCustomers(Last60Days)",
+            "name" :"Shopify Orders (Last 30 days)",
+            "libraryAlias" :"ShopifyOrdersLast30Days",
             "refreshInterval" : 14400,
-            "description" :"Retrieve the list of New Customer in the last 60 Days. Originates from the Gallery.",
+            "description" :"Retrieves order information for the last 30 days. Originates from the Gallery.",
             "props":{
-                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability FROM Opportunity WHERE CloseDate < Today AND CloseDate >= LAST_N_DAYS:60 AND Probability = 100",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3C+Today+AND+CloseDate+%3E%3D+LAST_N_DAYS%3A60+AND+Probability+%3D+100",
-                "instance": "{{auth.salesforce.instanceName}}"
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/orders.json?created_at_min={date.add(-30).format()}&created_at_max={date.add(1).format()}&fields=created_at,id,name,total-price_usd,referring_site,order_number,line_items,financial_status&status=any&financial_status=paid",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
+            }
+        },
+
+        "shopify-02" : {
+            "service" : "shopify",
+            "type" : "shopify",
+            "format" : "json",
+            "name" :"Shopify Orders (Prev 30 days)",
+            "libraryAlias" :"ShopifyOrdersPrev30Days",
+            "refreshInterval" : 14400,
+            "description" :"Retrieves order information for the previous 30 days. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://{{auth.shopify.shopName}}.myshopify.com/admin/orders.json?created_at_min={date.add(-60).format()}&created_at_max={date.add(-31).format()}&fields=created_at,id,name,total-price_usd,referring_site,order_number,line_items,financial_status&status=any&financial_status=paid",
+                "method": "get",
+                "use_pagination":  true,
+                "max_pages": 10
             }
         }
     },
@@ -47,7 +63,9 @@
     "dsMappings" : {
         "xero-01" : "8186a84fa24eaa55f096doogeraspilk",
         "xero-02" : "f7d1773809dcba4cdbf3doogeraspilk",
-        "salesforce" : "1fe841a91bb36bc5f44bdoogeraspilk"
+        "shopify-01" : "0da3864b7e6d0c63ad64natceewzhere",
+        "shopify-02" : "278a2f3636db4b581846KavyaMallur9"
+        
     },
 
     "services" : [
@@ -55,7 +73,7 @@
             "service" : "xero"
         },
         {
-            "service" : "salesforce"
+            "service" : "shopify"
         }
     ],
 
@@ -64,7 +82,8 @@
             "type" : "select",
             "id" : "ds.xero.expenseName",
             "label" : "Name of Expense",
-            "description" : "Please select the name of your marketing expense. Originates from the Gallery."    
+            "description" : "Please select the name of your marketing expense.",
+            "isRequired" : true
         }
     ],
     "queries": [

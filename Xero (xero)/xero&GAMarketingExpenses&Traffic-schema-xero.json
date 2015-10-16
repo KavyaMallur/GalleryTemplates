@@ -1,0 +1,1255 @@
+{
+   "title": "Xero & Google Analytics: Marketing Expenses and Traffic (Last 30 Days)",
+   "id": "44e098643a4292dbcc6a3f1d28a3b0c4",
+   "workspace": {
+      "dimensions": {
+         "w": 573
+      },
+      "datasources": [
+         "911ae68835d5ba91e56aniktawuzhere",
+         "f7d1773809dcba4cdbf3doogeraspilk",
+         "8186a84fa24eaa55f096doogeraspilk"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "0d502e50-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "image",
+               "id": "3311846a-1",
+               "displayName": "Image",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "formulas": [
+                  {
+                     "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/xero.png\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/xero.png"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ]
+            },
+            {
+               "type": "label",
+               "id": "ac62c1fb",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"{{ds.xero.expenseName}}\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "{{ds.xero.expenseName}}"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "d7235771-7",
+               "displayName": "Expenses (Last 30 Days)",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "cur",
+               "formulas": [
+                  {
+                     "txt": "8186a84fa24eaa55f096doogeraspilk@//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "8186a84fa24eaa55f096doogeraspilk",
+                                 "a": "//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "simple_value",
+               "id": "940e2ad8-1",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 1
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "f38d9f31-2",
+                     "displayName": "Expenses Delta",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-down-green",
+                                 "pos": "right",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-up-red",
+                                 "isScalar": true,
+                                 "pos": "right"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "((8186a84fa24eaa55f096doogeraspilk@//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;)-(f7d1773809dcba4cdbf3doogeraspilk@//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;))/(f7d1773809dcba4cdbf3doogeraspilk@//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "d7235771-7"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "0d419d82-3"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "0d419d82-3"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "0d419d82-3",
+                     "displayName": "Expenses (Previous 30 Days)",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "cur",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " (Prev)"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "f7d1773809dcba4cdbf3doogeraspilk@//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f7d1773809dcba4cdbf3doogeraspilk",
+                                       "a": "//Row[child::Title[contains(.,'Operating Expenses')]]//Cells[descendant::Value='{{ds.xero.expenseName}}']/Cell[2]/Value"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "65d61b60-9",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "image",
+               "id": "bc234600-6",
+               "displayName": "Image",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "formulas": [
+                  {
+                     "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/google-analytics.png\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/google-analytics.png"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ]
+            },
+            {
+               "type": "label",
+               "id": "088e3476-7",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 3
+               },
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Session Traffic\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Session Traffic"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "aaedd6f1-8",
+               "displayName": "GA Traffic",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 3
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "sum(select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today()))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sum",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                   "a": "C:C"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "between",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                                     "a": "B:B"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-30"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "mini_series",
+               "id": "79b0f254-1",
+               "displayName": "Sparkline",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 4
+               },
+               "size": "2",
+               "components": [
+                  {
+                     "type": "mini_data",
+                     "role": "series",
+                     "id": "62569115-2",
+                     "displayName": "GA Traffic (Last 30 Days)",
+                     "renamed": true,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "0"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "groupby(group(select(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today())))),select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today()))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "groupby",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "group",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "between",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "date",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "slice",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                                                 "a": "B:B"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "start",
+                                                                                 "optional": true
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "end",
+                                                                                 "optional": true
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "yyyyMMdd"
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "date_add",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "today",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "timezone",
+                                                                                 "optional": true
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "opt",
+                                                                        "v": "5"
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "-30"
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                         "a": "C:C"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                                           "a": "B:B"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyyMMdd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_add",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "5"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-30"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "seriesId": 1
+                  },
+                  {
+                     "type": "label",
+                     "role": "last-value",
+                     "id": "1385aa12-3",
+                     "displayName": "Last Value",
+                     "size": 3,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "648",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "648"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "dataDisabled": true
+                  }
+               ],
+               "lastValueSeries": "hidden"
+            },
+            {
+               "type": "simple_value",
+               "id": "8fba1ea5",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 4
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "3a61159a",
+                     "displayName": "GA Traffic Delta",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gteq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true,
+                                 "pos": "right"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-down-red",
+                                 "pos": "right"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "((sum(select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today())))))-(sum(select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\")))))))/(sum(select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\"))))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "aaedd6f1-8"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "3ebf4194"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "3ebf4194"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "3ebf4194",
+                     "displayName": "GA Traffic (Previous 30 Days)",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " (Prev)"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum(select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\")))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                         "a": "C:C"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "911ae68835d5ba91e56aniktawuzhere",
+                                                                           "a": "B:B"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyyMMdd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_add",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "5"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-60"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_add",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "5"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-31"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ]
+            }
+         ],
+         "rows": 5,
+         "cols": 4,
+         "rowHeights": [
+            {
+               "y": 3,
+               "h": 60
+            },
+            {
+               "y": 0,
+               "h": 60
+            }
+         ],
+         "widths": [
+            {
+               "x": 0,
+               "w": 40
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 4
+            },
+            {
+               "x": 0,
+               "y": 3
+            },
+            {
+               "x": 1,
+               "y": 4,
+               "w": 2
+            },
+            {
+               "x": 1,
+               "y": 3,
+               "w": 2
+            },
+            {
+               "x": 0,
+               "y": 2,
+               "w": 4
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "w": 2
+            },
+            {
+               "x": 1,
+               "y": 1,
+               "w": 2
+            }
+         ]
+      }
+   ]
+}

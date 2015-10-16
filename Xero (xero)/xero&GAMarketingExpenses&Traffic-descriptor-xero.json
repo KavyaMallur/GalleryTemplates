@@ -1,7 +1,6 @@
 {
-    "name" : "Xero & Salesforce: CAC (Last 30 Days)",
-    "description" : "Let this Klip address the most important question on your marketing team - what is our cost to acquire a customer (CAC)? This Klip uses your monthly Xero and Salesforce data to answer that very question. Originates from the Gallery.",
-    
+    "name" : "Xero & Google Analytics: Marketing Expenses and Traffic (Last 30 Days)",
+    "description" : "Mash up your Google Analytics and Xero data by displaying GA session traffic and Xero marketing expenses. Originates from the Gallery.",
 
     "datasources" : {
         "xero-01" : {
@@ -28,18 +27,20 @@
                 "endpoint_url": "https://api-partner.network.xero.com/api.xro/2.0/Reports/ProfitandLoss?fromDate={date.add(-60).format('yyyy-MM-dd')}&toDate={date.add(-31).format('yyyy-MM-dd')} "
             }
         },
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
-            "format" : "json",
-            "name" :"Salesforce New Customers (Last 60 Days)",
-            "libraryAlias" :"SalesforceNewCustomers(Last60Days)",
+        "googleAnalytics" : {
+            "service" : "google_analytics",
+            "libraryAlias" : "GATrafficSourcesbyDayLast60Days",
+            "name": "GA: Traffic Sources by Day (Last 60 Days)",
+            "description" : "Shows the number of sessions by day, broken down by traffic source for the last 60 days. Originates from the Gallery.",
+            "type" : "google_analytics",
+            "format" : "csv",
             "refreshInterval" : 14400,
-            "description" :"Retrieve the list of New Customer in the last 60 Days. Originates from the Gallery.",
-            "props":{
-                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability FROM Opportunity WHERE CloseDate < Today AND CloseDate >= LAST_N_DAYS:60 AND Probability = 100",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3C+Today+AND+CloseDate+%3E%3D+LAST_N_DAYS%3A60+AND+Probability+%3D+100",
-                "instance": "{{auth.salesforce.instanceName}}"
+            "props" : {
+                 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:medium,ga:date&metrics=ga:sessions&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
+                 "max_pages": "1",
+                 "mode": "Simple",
+                 "profile": "{{ds.google_analytics.profileId}}",
+                  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
             }
         }
     },
@@ -47,7 +48,8 @@
     "dsMappings" : {
         "xero-01" : "8186a84fa24eaa55f096doogeraspilk",
         "xero-02" : "f7d1773809dcba4cdbf3doogeraspilk",
-        "salesforce" : "1fe841a91bb36bc5f44bdoogeraspilk"
+        "googleAnalytics" : "911ae68835d5ba91e56aniktawuzhere"
+        
     },
 
     "services" : [
@@ -55,7 +57,7 @@
             "service" : "xero"
         },
         {
-            "service" : "salesforce"
+            "service" : "google_analytics"
         }
     ],
 
@@ -64,7 +66,16 @@
             "type" : "select",
             "id" : "ds.xero.expenseName",
             "label" : "Name of Expense",
-            "description" : "Please select the name of your marketing expense. Originates from the Gallery."    
+            "description" : "Please select the name of your marketing expense.",
+            "isRequired" : true,
+            "onChangeQueries" : [ "q2" ]   
+        },
+        {
+            "type" : "select",
+            "id" : "ds.google_analytics.profileId",
+            "label" : "Analytics Account",
+            "description" : "Select an Analytics Account from the drop-down list.",
+            "isRequired" : true
         }
     ],
     "queries": [
@@ -86,6 +97,28 @@
                     "values": "//Row[child::Title[contains(.,'Operating Expenses')]]/Rows/Row/Cells/Cell[1]/Value" 
                 }
             ]
-        }
+        },
+
+        {
+            "id":"q2",
+            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "google_analytics",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                { 
+                    "propId" : "ds.google_analytics.profileId",
+                    "propField" : "options", 
+                    "labels": "/items/name",  
+                    "values": "/items/id" 
+                }
+            ]
+        }    
     ]
 }
