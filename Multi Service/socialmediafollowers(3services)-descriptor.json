@@ -13,9 +13,22 @@
 			"format" : "json",
 			"refreshInterval" : 14400,
 			"props" : {
-				"endpoint_url": "https://graph.facebook.com/v2.2/{{ds.facebook.pageId}}",
-            	"graphUrl": "https://graph.facebook.com/v2.2/{{ds.facebook.pageId}}",
+				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
             	"qtype": "Graph API"
+			}
+		},
+		"linkedin" : {
+			"service" : "linkedin",
+			"libraryAlias" : "LinkedInCompStats",
+			"name": "LinkedIn Company Statistics",
+			"description" : "LinkedIn company statistics and follower count by month for the past 12 months. Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "xml",
+			"refreshInterval" : 14400,
+			"props" : {
+				 "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
+            	 "method": "get"
 			}
 		},
 		"twitter" : {
@@ -30,27 +43,14 @@
 				"endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
             	"method": "get"
  			}
-		},
-		"linkedin" : {
-			"service" : "linkedin",
-			"libraryAlias" : "LinkedInCompStats",
-			"name": "LinkedIn Company Statistics",
-			"description" : "LinkedIn company statistics and follower count by month for the past 12 months. Originates from the Gallery.",
-			"type" : "simple_rest",
-			"format" : "xml",
-			"refreshInterval" : 14400,
-			"props" : {
-				 "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
-            	 "method": "get"
-			}
 		}
 
 	},
 
 	"dsMappings" : {
 		"facebook" : "3246822217eb4a8e8db8gooderaspilk",
-		"twitter" : "6c69f794227e0f5cb3c2gooderaspilk",
-		"linkedin" : "e6d9b616fe8d1a58ac87gooderaspilk"
+		"linkedin" : "e6d9b616fe8d1a58ac87gooderaspilk",
+		"twitter" : "6c69f794227e0f5cb3c2gooderaspilk"
 	},
 
 	"services" : [
@@ -58,10 +58,10 @@
 			"service" : "facebook"
 		},
 		{
-			"service" : "twitter"
+			"service" : "linkedin"
 		},
 		{
-			"service" : "linkedin"
+			"service" : "twitter"
 		}
 	],
 
@@ -75,15 +75,15 @@
 			"onChangeQueries" : [ "q2" ]
 		},
 		{
-			"type" : "text",
-			"id" : "ds.twitter.screenName",
-			"label" : "Twitter Handle",
-			"isRequired" : true
-		},
-		{
 			"type" : "select",
 			"id" : "ds.linkedin.companyId",
 			"label" : "LinkedIn Page",
+			"isRequired" : true
+		},
+		{
+			"type" : "text",
+			"id" : "ds.twitter.screenName",
+			"label" : "Twitter Handle",
 			"isRequired" : true
 		}
 	],
@@ -95,7 +95,7 @@
                 "type": "facebook",
                 "format": "json",
                 "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.4/me/accounts?fields=name,id",
+                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
                     "method": "GET",
                     "qtype": "Graph API"
                 }
