@@ -20,11 +20,12 @@
             {
                "type": "image",
                "id": "3311846a-1",
-               "displayName": "Image",
+               "displayName": "Xero Logo",
                "layoutConfig": {
                   "x": 0,
                   "y": 0
                },
+               "renamed": true,
                "formulas": [
                   {
                      "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/xero.png\"",
@@ -49,11 +50,12 @@
             {
                "type": "label",
                "id": "ac62c1fb",
-               "displayName": "Label",
+               "displayName": "Expense Label",
                "layoutConfig": {
                   "x": 1,
                   "y": 0
                },
+               "renamed": true,
                "size": "2",
                "fmt": "txt",
                "formulas": [
@@ -117,6 +119,40 @@
                "wrap": true
             },
             {
+               "type": "label",
+               "id": "7631968f-1",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 1
+               },
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Daily expense data is not available from Xero.\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Daily expense data is not available from Xero."
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_colour": "cx-color_aaa",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
                "type": "simple_value",
                "id": "940e2ad8-1",
                "displayName": "Value Pair",
@@ -172,6 +208,26 @@
                                  "type": "icon",
                                  "value": "ind-triangle-up-red",
                                  "isScalar": true,
+                                 "pos": "right"
+                              }
+                           ]
+                           },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-even-grey",
                                  "pos": "right"
                               }
                            ]
@@ -284,11 +340,12 @@
             {
                "type": "image",
                "id": "bc234600-6",
-               "displayName": "Image",
+               "displayName": "GA Logo",
                "layoutConfig": {
                   "x": 0,
                   "y": 3
                },
+               "renamed": true,
                "formulas": [
                   {
                      "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/google-analytics.png\"",
@@ -313,11 +370,12 @@
             {
                "type": "label",
                "id": "088e3476-7",
-               "displayName": "Label",
+               "displayName": "GA Traffic Label",
                "layoutConfig": {
                   "x": 1,
                   "y": 3
                },
+               "renamed": true,
                "size": "2",
                "fmt": "txt",
                "formulas": [
@@ -346,7 +404,7 @@
             {
                "type": "label",
                "id": "aaedd6f1-8",
-               "displayName": "GA Traffic",
+               "displayName": "GA Traffic Value",
                "layoutConfig": {
                   "x": 3,
                   "y": 3
@@ -545,7 +603,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "groupby(group(select(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today())))),select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today()))))",
+                           "txt": "groupby(group(select(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),yesterday())))),select(slice(911ae68835d5ba91e56aniktawuzhere@C:C;),(between(date(slice(911ae68835d5ba91e56aniktawuzhere@B:B;),\"yyyyMMdd\"),date_add(today(),\"5\",\"-30\"),today()))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -676,7 +734,7 @@
                                                                },
                                                                {
                                                                   "t": "f",
-                                                                  "v": "today",
+                                                                  "v": "yesterday",
                                                                   "c": [
                                                                      {
                                                                         "t": "a",
@@ -909,7 +967,7 @@
                                  "left": {
                                     "self": 1
                                  },
-                                 "type": "gteq",
+                                 "type": "gt",
                                  "right": {
                                     "raw": "0"
                                  }
@@ -920,6 +978,26 @@
                                  "type": "icon",
                                  "value": "ind-triangle-up-green",
                                  "isScalar": true,
+                                 "pos": "right"
+                                 }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-even-grey",
                                  "pos": "right"
                               }
                            ]
@@ -1222,7 +1300,8 @@
             },
             {
                "x": 0,
-               "y": 3
+               "y": 3,
+               "alignment": 1
             },
             {
                "x": 1,
@@ -1232,7 +1311,8 @@
             {
                "x": 1,
                "y": 3,
-               "w": 2
+               "w": 2,
+               "alignment": 1
             },
             {
                "x": 0,
@@ -1242,12 +1322,51 @@
             {
                "x": 1,
                "y": 0,
-               "w": 2
+               "w": 2,
+               "alignment": 1
             },
             {
                "x": 1,
                "y": 1,
-               "w": 2
+               "w": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 3,
+               "y": 1,
+               "alignment": 1
+            },
+            {
+               "x": 3,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "alignment": 1
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 1
+            },
+            {
+               "x": 3,
+               "y": 3,
+               "alignment": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ]
             }
          ]
       }
