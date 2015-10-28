@@ -1,59 +1,54 @@
 {
-	"name" : "Weekly Weather Forecast",
-	"description": "Provides forecast report for a week. Originates from the Gallery.",
+	"name" : "Open Weather Weekly Forecast",
+	"description": "Provides weekly weather forecast starting from today. Originates from the Gallery.",
 
 	"datasources" : {
 		"weather-01" : {
 			"service": "weather",
 			"type": "simple_rest",
 			"format": "json",
-			"name": "Today's Weather Report",
-			"libraryAlias": "TodaysWeatherReport",
+			"name": "Daily Forecast ({{ds.weather.location}} in {{ds.weather.unit}})",
+			"libraryAlias": "DailyForecast({{ds.weather.location}}in{{ds.weather.unit}})",
 			"refreshInterval": 14400,
-			"description": "Provide weather report for today. Originates from the Gallery.",
+			"description": "Provide daily weather forecast. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "http://api.openweathermap.org/data/2.5/weather?q=Ottawa&units=metric",
-				"method" : "get"
-			}
-		},
-
-		"weather-02" : {
-			"service": "weather",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Daily Forecast",
-			"libraryAlias": "DailyForecast",
-			"refreshInterval": 14400,
-			"description": "Provide weather  forcast on a daily basis. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "http://api.openweathermap.org/data/2.5/forecast/daily?q=Ottawa&cnt=9&units=metric",
-				"method" : "get"
-			}
-		},
-
-		"weather-03" : {
-			"service": "weather",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Hourly Forecast",
-			"libraryAlias": "HourlyForecast",
-			"refreshInterval": 14400,
-			"description": "Provide weather forcast on an hourly basis. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "http://api.openweathermap.org/data/2.5/forecast/hourly?q=Ottawa&units=metric&cnt=8",
+				"endpoint_url": "http://api.openweathermap.org/data/2.5/forecast/daily?q={{ds.weather.location}}&cnt=9&units={{ds.weather.unit}}&appid=4370c2c9df3c07ece0f94d062e2601bf",
 				"method" : "get"
 			}
 		}
 	},
 
 	"dsMappings": {
-		"weather-01": "624ee42a7ef7d0f57f54KavyaMallur9",
-		"weather-02": "f65503294b8a36670e1bKavyaMallur9",
-		"weather-03": "dcb6f9c43529277a41e1KavyaMallur9"		
+		"weather-01": "f65503294b8a36670e1bKavyaMallur9"		
 	},
 	"services" : [
 		{
 			"service" : "weather"
 		}
+	],
+	"datasourceConfigModel" : [
+
+		{
+			"type" : "text",
+			"id" : "ds.weather.location",
+			"label" : "Location",
+			"description" : "Provide your location",
+            "isRequired" : true,
+            "ghostText": "Ottawa, Canada"
+		},
+		
+		{
+			"type" : "select",
+			"id" : "ds.weather.unit",
+			"label" : "Units",
+			"description" : "Select the units for weather.",
+			"options": [
+                {"value":"metric","label":"Metric"},
+                {"value":"imperial","label":"Imperial"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "metric"
+		}
+		
 	]
 }

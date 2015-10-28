@@ -7,12 +7,12 @@
 			"service": "weather",
 			"type": "simple_rest",
 			"format": "json",
-			"name": "Daily Forecast ({{ds.weather.city}},{{ds.weather.country}} in {{ds.weather.unit}})",
-			"libraryAlias": "DailyForecast({{ds.weather.city}},{{ds.weather.country}}in{{ds.weather.unit}})",
+			"name": "Daily Forecast ({{ds.weather.location}} in {{ds.weather.unit}})",
+			"libraryAlias": "DailyForecast({{ds.weather.location}}in{{ds.weather.unit}})",
 			"refreshInterval": 14400,
 			"description": "Provide daily weather forecast. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "http://api.openweathermap.org/data/2.5/forecast/daily?q={{ds.weather.city}},{{ds.weather.country}}&cnt=9&units={{ds.weather.unit}}&appid=4370c2c9df3c07ece0f94d062e2601bf",
+				"endpoint_url": "http://api.openweathermap.org/data/2.5/forecast/daily?q={{ds.weather.location}}&cnt=9&units={{ds.weather.unit}}&appid=4370c2c9df3c07ece0f94d062e2601bf",
 				"method" : "get"
 			}
 		}
@@ -30,18 +30,13 @@
 
 		{
 			"type" : "text",
-			"id" : "ds.weather.city",
-			"label" : "City",
-			"description" : "Provide the city name.",
-            "isRequired" : true
+			"id" : "ds.weather.location",
+			"label" : "Location",
+			"description" : "Provide your location",
+            "isRequired" : true,
+            "ghostText": "Ottawa, Canada"
 		},
-		{
-			"type" : "text",
-			"id" : "ds.weather.country",
-			"label" : "Country",
-			"description" : "Provide the country name.",
-			"isRequired" : true
-		},
+		
 		{
 			"type" : "select",
 			"id" : "ds.weather.unit",
