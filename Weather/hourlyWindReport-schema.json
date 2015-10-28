@@ -1,0 +1,1355 @@
+{
+   "title": "Hourly Weather (Wind)",
+   "id": "0666a6add58ed253d4b12b498faaa06c",
+   "workspace": {
+      "dimensions": {
+         "w": 507
+      },
+      "datasources": [
+         "dcb6f9c43529277a41e1KavyaMallur9",
+         "f65503294b8a36670e1bKavyaMallur9"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "ff224609",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "17470eed",
+               "displayName": "Location",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "concat(f65503294b8a36670e1bKavyaMallur9@/city/name;,\", \",f65503294b8a36670e1bKavyaMallur9@/city/country;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f65503294b8a36670e1bKavyaMallur9",
+                                       "a": "/city/name"
+                                    }
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": ", "
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f65503294b8a36670e1bKavyaMallur9",
+                                       "a": "/city/country"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "c22d5fb9",
+               "displayName": "Date",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "dat",
+               "formulas": [
+                  {
+                     "txt": "datevalue(slice(f65503294b8a36670e1bKavyaMallur9@/list/dt;,\"0\",\"1\"),\"yyyy-MMM-dd\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f65503294b8a36670e1bKavyaMallur9",
+                                             "a": "/list/dt"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "yyyy-MMM-dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": 2,
+         "cols": 1,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "w": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            }
+         ]
+      },
+      {
+         "type": "separator",
+         "id": "59fcfbda-1",
+         "displayName": "Separator",
+         "line_style": "ShortDot"
+      },
+      {
+         "type": "panel_grid",
+         "id": "f84edb48",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "image",
+               "id": "d0f4f289-1",
+               "displayName": "Today's Weather Image",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "formulas": [
+                  {
+                     "txt": "concat(\"https://static.klipfolio.com/templates/images/Weather/\",slice(f65503294b8a36670e1bKavyaMallur9@/list/weather/icon;,\"0\",\"1\"),\".svg\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "https://static.klipfolio.com/templates/images/Weather/"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f65503294b8a36670e1bKavyaMallur9",
+                                             "a": "/list/weather/icon"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": ".svg"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "scale": "cover"
+            },
+            {
+               "type": "html_tpl2",
+               "id": "a2c87019",
+               "displayName": "HTML Template",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "01a98c2f",
+                     "displayName": "Today's Weather",
+                     "renamed": true,
+                     "formulas": [
+                        {
+                           "txt": "numberformat(round(slice(f65503294b8a36670e1bKavyaMallur9@/list/temp/day;,\"0\",\"1\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "numberformat",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "round",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "f65503294b8a36670e1bKavyaMallur9",
+                                                         "a": "/list/temp/day"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "1"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "digits",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "precision",
+                                             "optional": true
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "separator",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series1"
+                  },
+                  {
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "a3d9762e-4",
+                     "displayName": "Unit",
+                     "renamed": true,
+                     "formulas": [
+                        {
+                           "txt": "if(((\"{{ds.weather.unit}}\")=\"metric\"),\"C\",\"F\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "bfec7ce2-2"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "metric"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "C"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "F"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series2"
+                  }
+               ],
+               "tpl": "<P style=\"text-align:center\"><span style=\"font-size: 75px;font-weight:bold; font-family:sans-serif;\"><b>${data[0].Series1}</b></span><span style=\"font-size: 14px;font-weight:regular; font-family:sans-serif;\"><sup><sup><sup><sup><sup><sup><sup><sup> °${data[0].Series2}</sup></sup></sup></sup></sup></sup></sup></sup></span></p>\n",
+               "overflow": "ns"
+            },
+            {
+               "type": "separator",
+               "id": "99cc513b",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "label",
+               "id": "5533f0d1",
+               "displayName": "Pressure",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "prefix": "Pressure: ",
+                  "suffix": " hPa"
+               },
+               "formulas": [
+                  {
+                     "txt": "slice(f65503294b8a36670e1bKavyaMallur9@/list/pressure;,\"0\",\"1\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f65503294b8a36670e1bKavyaMallur9",
+                                       "a": "/list/pressure"
+                                    }
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "1"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "3dba3593",
+               "displayName": "Humidity",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "prefix": "Humidity: ",
+                  "suffix": " %"
+               },
+               "formulas": [
+                  {
+                     "txt": "slice(f65503294b8a36670e1bKavyaMallur9@/list/humidity;,\"0\",\"1\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f65503294b8a36670e1bKavyaMallur9",
+                                       "a": "/list/humidity"
+                                    }
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "1"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "639e1d5f",
+               "displayName": "Clouds",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 2
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "prefix": "Clouds: ",
+                  "suffix": " %"
+               },
+               "formulas": [
+                  {
+                     "txt": "slice(f65503294b8a36670e1bKavyaMallur9@/list/clouds;,\"0\",\"1\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "slice",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f65503294b8a36670e1bKavyaMallur9",
+                                       "a": "/list/clouds"
+                                    }
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "1"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "c5b129c2",
+               "displayName": "Weather Description",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "capitalize(first(f65503294b8a36670e1bKavyaMallur9@/list/weather/description;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "capitalize",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "first",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f65503294b8a36670e1bKavyaMallur9",
+                                             "a": "/list/weather/description"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "c",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "html_tpl2",
+               "id": "010e5309",
+               "displayName": "HTML Template",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 3
+               },
+               "components": [
+                  {
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "d754f192",
+                     "displayName": "Today's Weather Max & Min",
+                     "renamed": true,
+                     "formulas": [
+                        {
+                           "txt": "array(numberformat(round(slice(f65503294b8a36670e1bKavyaMallur9@/list/temp/min;,\"0\",\"1\"))),(concat(numberformat(round(slice(f65503294b8a36670e1bKavyaMallur9@/list/temp/max;,\"0\",\"1\"))))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "array",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "numberformat",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "round",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "f65503294b8a36670e1bKavyaMallur9",
+                                                               "a": "/list/temp/min"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "0"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "digits",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "precision",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "separator",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "concat",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "numberformat",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "round",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "f65503294b8a36670e1bKavyaMallur9",
+                                                                           "a": "/list/temp/max"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "0"
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "1"
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "digits",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "precision",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "separator",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "data",
+                                                         "repeats": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series1"
+                  },
+                  {
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "d3e129d8-3",
+                     "displayName": "Unit",
+                     "renamed": true,
+                     "formulas": [
+                        {
+                           "txt": "if(((\"{{ds.weather.unit}}\")=\"metric\"),\"C\",\"F\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "bfec7ce2-2"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "metric"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "C"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "F"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series2"
+                  }
+               ],
+               "tpl": "<P style=\"text-align:center\"><span style=\"font-size: 15px;font-weight:regular; font-family:sans-serif;\">${data[0].Series1}</span><span style=\"font-size: 9px;font-weight:regular; font-family:sans-serif;\"><sup> °${data[0].Series2}</sup></span> | <span style=\"font-size: 15px;font-weight:regular; font-family:sans-serif;\">${data[1].Series1}</span><span style=\"font-size: 9px;font-weight:regular; font-family:sans-serif;\"><sup> °${data[0].Series2}</sup></span></p>\n",
+               "overflow": "ns"
+            },
+            {
+               "type": "label",
+               "id": "a8fdd4da",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 3
+               },
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "prefix": "Wind: ",
+                  "suffix": ""
+               },
+               "formulas": [
+                  {
+                     "txt": "if(((\"{{ds.weather.unit}}\")=\"metric\"),concat(round((slice(f65503294b8a36670e1bKavyaMallur9@/list/speed;,\"0\",\"1\")*\"3.6\"),\"2\"),\" kmph\"),concat(round((slice(f65503294b8a36670e1bKavyaMallur9@/list/speed;,\"0\",\"1\")*\"3.6\"),\"2\"),\" mph\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "bfec7ce2-2"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "metric"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "concat",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "round",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "f65503294b8a36670e1bKavyaMallur9",
+                                                               "a": "/list/speed"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "0"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "*"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "3.6"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "2"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": " kmph"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "concat",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "round",
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "f65503294b8a36670e1bKavyaMallur9",
+                                                               "a": "/list/speed"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "0"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "*"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "3.6"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "2"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": " mph"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": 4,
+         "cols": 4,
+         "widths": [
+            {
+               "x": 0,
+               "w": 120
+            },
+            {
+               "x": 1,
+               "w": 200
+            },
+            {
+               "x": 2,
+               "w": 15
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "h": 3
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "h": 3,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "alignment": 1
+            },
+            {
+               "x": 0,
+               "y": 3,
+               "cellPadding": [
+                  5,
+                  5,
+                  10,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 3,
+               "cellPadding": [
+                  5,
+                  5,
+                  10,
+                  5
+               ]
+            },
+            {
+               "x": 3,
+               "y": 3,
+               "cellPadding": [
+                  5,
+                  5,
+                  10,
+                  5
+               ]
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "h": 4
+            }
+         ]
+      },
+      {
+         "type": "separator",
+         "id": "4a987b8c-2",
+         "displayName": "Separator",
+         "line_style": "ShortDot"
+      },
+      {
+         "type": "panel_grid",
+         "id": "3ccd3c48",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "chart_series",
+               "id": "6712c1c6",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "7727ad57",
+                     "displayName": "Wind",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "if(((\"{{ds.weather.unit}}\")=\"metric\"),(f65503294b8a36670e1bKavyaMallur9@/list/speed;*\"3.6\"),f65503294b8a36670e1bKavyaMallur9@/list/speed;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "bfec7ce2-2"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "metric"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "f65503294b8a36670e1bKavyaMallur9",
+                                                   "a": "/list/speed"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "3.6"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f65503294b8a36670e1bKavyaMallur9",
+                                             "a": "/list/speed"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesName": "Wind",
+                     "renderer": "line",
+                     "lineWeight": "2",
+                     "axis": "2eb04975"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "45ddf08c",
+                     "displayName": "Durations",
+                     "fmt": "dat",
+                     "fmtArgs": {
+                        "durationFormat": "hh:mm",
+                        "dateFormat": "custom",
+                        "dateFormatCustom": "hh tt"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "datevalue(dcb6f9c43529277a41e1KavyaMallur9@/list/dt;,\"yyyy-MM-dd HH:mm:ss\",\"{{ds.weather.timezone}}\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "dcb6f9c43529277a41e1KavyaMallur9",
+                                             "a": "/list/dt"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd HH:mm:ss"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "{{ds.weather.timezone}}"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "label": "Durations",
+                     "labelAngle": "-45",
+                     "labelStagger": "1",
+                     "labelDrop": "1",
+                     "showLabelTicks": true
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "2eb04975",
+                     "displayName": "Wind",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "2"
+                     },
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Wind",
+                     "showAxis": false,
+                     "labelDrop": 0,
+                     "grid": true
+                  }
+               ],
+               "showLegend": 1
+            }
+         ],
+         "rows": 1,
+         "cols": 6,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "w": 6
+            },
+            {
+               "x": 2,
+               "y": 0
+            },
+            {
+               "x": 4,
+               "y": 0
+            },
+            {
+               "x": 3,
+               "y": 0
+            },
+            {
+               "x": 1,
+               "y": 0
+            }
+         ]
+      },
+      {
+         "type": "panel_grid",
+         "id": "83bab87c-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "bfec7ce2-2",
+               "displayName": "Unit (Hidden)",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"{{ds.weather.unit}}\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "{{ds.weather.unit}}"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            }
+         ],
+         "rows": 1,
+         "cols": 1,
+         "rowHeights": [
+            {
+               "y": 0,
+               "h": 0
+            }
+         ],
+         "widths": [
+            {
+               "x": 0,
+               "w": 0
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0
+            }
+         ]
+      }
+   ]
+}
