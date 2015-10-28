@@ -1,5 +1,5 @@
 {
-	"name" : "Today's Weather (Simple)",
+	"name" : "Today's Weather",
 	"description": "Provides a simple weather report for today. Originates from the Gallery.",
 
 	"datasources" : {
@@ -7,23 +7,53 @@
 			"service": "weather",
 			"type": "simple_rest",
 			"format": "json",
-			"name": "Today's Weather Report",
-			"libraryAlias": "TodaysWeatherReport",
+			"name": "Daily Forecast ({{ds.weather.city}},{{ds.weather.country}} in {{ds.weather.unit}})",
+			"libraryAlias": "DailyForecast({{ds.weather.city}},{{ds.weather.country}}in{{ds.weather.unit}})",
 			"refreshInterval": 14400,
-			"description": "Provide weather report for today. Originates from the Gallery.",
+			"description": "Provide daily weather forecast. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "http://api.openweathermap.org/data/2.5/weather?q=Ottawa&units=metric",
+				"endpoint_url": "http://api.openweathermap.org/data/2.5/forecast/daily?q={{ds.weather.city}},{{ds.weather.country}}&cnt=9&units={{ds.weather.unit}}&appid=4370c2c9df3c07ece0f94d062e2601bf",
 				"method" : "get"
 			}
 		}
 	},
 
 	"dsMappings": {
-		"weather": "624ee42a7ef7d0f57f54KavyaMallur9"		
+		"weather": "f65503294b8a36670e1bKavyaMallur9"		
 	},
 	"services" : [
 		{
 			"service" : "weather"
 		}
+	],
+	"datasourceConfigModel" : [
+
+		{
+			"type" : "text",
+			"id" : "ds.weather.city",
+			"label" : "City",
+			"description" : "Provide the city name.",
+            "isRequired" : true
+		},
+		{
+			"type" : "text",
+			"id" : "ds.weather.country",
+			"label" : "Country",
+			"description" : "Provide the country name.",
+			"isRequired" : true
+		},
+		{
+			"type" : "select",
+			"id" : "ds.weather.unit",
+			"label" : "Units",
+			"description" : "Select the units for weather.",
+			"options": [
+                {"value":"metric","label":"Metric"},
+                {"value":"imperial","label":"Imperial"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "metric"
+		}
+		
 	]
 }
