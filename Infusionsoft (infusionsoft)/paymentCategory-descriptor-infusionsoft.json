@@ -1,0 +1,31 @@
+{
+  "name" : "Infusionsoft Payment by Type (Last 1000 Payments)",
+  "description" : ". Originates from the Gallery.",
+
+  "datasources" : {
+    "infusionsoft-01" : {
+      "service" : "infusionsoft",
+      "libraryAlias" : "Infusionsoft1000Payments",
+      "name": "Infusionsoft Payments (Last 1000 Payments)",
+      "description" : ". Originates from the Gallery.",
+      "type" : "simple_rest",
+      "format" : "xml",
+      "refreshInterval" : 14400,
+      "props" : {
+         "body": "<?xml version='1.0' encoding='UTF-8'?><methodCall><methodName>DataService.query</methodName><params><param><value><string>{{auth.infusionsoft.privateKey}}</string></value></param><param><value><string>Payment</string></value></param><param><value><int>1000</int></value></param><param><value><int>0</int></value></param><param><value><struct><member><name>Id</name><value><string>%</string></value></member></struct></value></param><param><value><array><data><value><string>Id</string></value><value><string>PayAmt</string></value><value><string>PayType</string></value><value><string>RefundId</string></value><value><string>InvoiceId</string></value></data></array></value></param></params></methodCall>",
+         "endpoint_url": "https://m171.infusionsoft.com/api/xmlrpc/",
+               "method": "post"
+      }
+    }
+  },
+
+  "dsMappings" : {
+    "infusionsoft-01" :"411cd91665d6ba4c7cb6natceewzhere"
+  },
+
+  "services" : [
+    {
+      "service" : "infusionsoft"
+    }
+  ]
+}
