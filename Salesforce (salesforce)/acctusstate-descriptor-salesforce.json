@@ -1,43 +1,726 @@
 {
-    "name" : "Accounts by U.S. State",
-    "description" : "See the location of your U.S. Salesforce accounts. Originates from the Gallery.",
-
-    "datasources" : {
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
-            "format" : "json",
-            "name" :"Number of Accounts by US State",
-            "libraryAlias" :"SFAccountsByState",
-            "refreshInterval" : 300,
-            "description" :"See number of Salesforce accounts by US state. Originates from the Gallery.",
-            "props":{
-                "SOQLQuery": "SELECT COUNT(name), BillingState\r\nFROM Account WHERE BillingCountry = 'United States' OR BillingCountry = 'USA' GROUP BY BillingState",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+COUNT%28name%29%2C+BillingState%0D%0AFROM+Account+WHERE+BillingCountry+%3D+%27United+States%27+OR+BillingCountry+%3D+%27USA%27+GROUP+BY+BillingState",
-                "instance": "{{auth.salesforce.instanceName}}"
-            }
-        },
-        "usIds" : {
-            "libraryAlias" : "usIds",
-            "name": "U.S. State IDs",
-            "description" : "A list of U.S. state IDs and their names. Originates from the Gallery.",
-            "type" : "simple_rest",
-            "format" : "xls",
-            "refreshInterval" : 864000,
-            "props" : { 
-                "endpoint_url": "http://static.klipfolio.com/datasources/usa-map-ids.xlsx"
-            }
-        }
+  "name": "Salesforce Accounts by U.S. State",
+  "description": "See the location of your U.S. Salesforce accounts. Originates from the Gallery.",
+  "sampleFormulas": {
+    "0b4cfb95": {
+      "txt": "array(\"AL\",\"AK\",\"AZ\",\"AR\",\"CA\",\"CO\",\"CT\",\"DE\",\"DC\",\"FL\",\"GA\",\"HI\",\"ID\",\"IL\",\"IN\",\"IA\",\"KS\",\"LA\",\"ME\",\"MD\",\"MA\",\"MI\",\"MN\",\"MS\",\"MO\",\"MT\",\"NE\",\"NV\",\"NH\",\"NJ\",\"NM\",\"NY\",\"NC\",\"ND\",\"OH\",\"OK\",\"OR\",\"PA\",\"RI\",\"SC\",\"SD\",\"TN\",\"TX\",\"UT\",\"VT\",\"VA\",\"WA\",\"WV\",\"WI\",\"WY\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "AL"
+              },
+              {
+                "t": "1",
+                "v": "AK"
+              },
+              {
+                "t": "1",
+                "v": "AZ"
+              },
+              {
+                "t": "1",
+                "v": "AR"
+              },
+              {
+                "t": "1",
+                "v": "CA"
+              },
+              {
+                "t": "1",
+                "v": "CO"
+              },
+              {
+                "t": "1",
+                "v": "CT"
+              },
+              {
+                "t": "1",
+                "v": "DE"
+              },
+              {
+                "t": "1",
+                "v": "DC"
+              },
+              {
+                "t": "1",
+                "v": "FL"
+              },
+              {
+                "t": "1",
+                "v": "GA"
+              },
+              {
+                "t": "1",
+                "v": "HI"
+              },
+              {
+                "t": "1",
+                "v": "ID"
+              },
+              {
+                "t": "1",
+                "v": "IL"
+              },
+              {
+                "t": "1",
+                "v": "IN"
+              },
+              {
+                "t": "1",
+                "v": "IA"
+              },
+              {
+                "t": "1",
+                "v": "KS"
+              },
+              {
+                "t": "1",
+                "v": "KY"
+              },
+              {
+                "t": "1",
+                "v": "LA"
+              },
+              {
+                "t": "1",
+                "v": "ME"
+              },
+              {
+                "t": "1",
+                "v": "MD"
+              },
+              {
+                "t": "1",
+                "v": "MA"
+              },
+              {
+                "t": "1",
+                "v": "MI"
+              },
+              {
+                "t": "1",
+                "v": "MN"
+              },
+              {
+                "t": "1",
+                "v": "MS"
+              },
+              {
+                "t": "1",
+                "v": "MO"
+              },
+              {
+                "t": "1",
+                "v": "MT"
+              },
+              {
+                "t": "1",
+                "v": "NE"
+              },
+              {
+                "t": "1",
+                "v": "NV"
+              },
+              {
+                "t": "1",
+                "v": "NH"
+              },
+              {
+                "t": "1",
+                "v": "NJ"
+              },
+              {
+                "t": "1",
+                "v": "NM"
+              },
+              {
+                "t": "1",
+                "v": "NY"
+              },
+              {
+                "t": "1",
+                "v": "NC"
+              },
+              {
+                "t": "1",
+                "v": "ND"
+              },
+              {
+                "t": "1",
+                "v": "OH"
+              },
+              {
+                "t": "1",
+                "v": "OK"
+              },
+              {
+                "t": "1",
+                "v": "OR"
+              },
+              {
+                "t": "1",
+                "v": "PA"
+              },
+              {
+                "t": "1",
+                "v": "RI"
+              },
+              {
+                "t": "1",
+                "v": "SC"
+              },
+              {
+                "t": "1",
+                "v": "SD"
+              },
+              {
+                "t": "1",
+                "v": "TN"
+              },
+              {
+                "t": "1",
+                "v": "TX"
+              },
+              {
+                "t": "1",
+                "v": "UT"
+              },
+              {
+                "t": "1",
+                "v": "VT"
+              },
+              {
+                "t": "1",
+                "v": "VA"
+              },
+              {
+                "t": "1",
+                "v": "WA"
+              },
+              {
+                "t": "1",
+                "v": "WV"
+              },
+              {
+                "t": "1",
+                "v": "WI"
+              },
+              {
+                "t": "1",
+                "v": "WY"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "dsMappings": {
-        "salesforce" : "128378928ae284b8dab8natceewzhere",
-        "usIds" : "3b4e3dc975699b2bff0bniktawuzhere"
+    "d6e739fe": {
+      "txt": "array(\"241\",\"248\",\"10\",\"267\",\"174\",\"115\",\"208\",\"368\",\"155\",\"353\",\"461\",\"42\",\"473\",\"340\",\"323\",\"110\",\"362\",\"231\",\"288\",\"447\",\"475\",\"94\",\"429\",\"387\",\"433\",\"317\",\"13\",\"72\",\"473\",\"216\",\"288\",\"203\",\"316\",\"228\",\"198\",\"82\",\"26\",\"256\",\"361\",\"112\",\"354\",\"9\",\"487\",\"353\",\"135\",\"175\",\"9\",\"390\",\"325\",\"444\",\"248\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "241"
+              },
+              {
+                "t": "1",
+                "v": "248"
+              },
+              {
+                "t": "1",
+                "v": "10"
+              },
+              {
+                "t": "1",
+                "v": "267"
+              },
+              {
+                "t": "1",
+                "v": "174"
+              },
+              {
+                "t": "1",
+                "v": "115"
+              },
+              {
+                "t": "1",
+                "v": "208"
+              },
+              {
+                "t": "1",
+                "v": "368"
+              },
+              {
+                "t": "1",
+                "v": "155"
+              },
+              {
+                "t": "1",
+                "v": "353"
+              },
+              {
+                "t": "1",
+                "v": "461"
+              },
+              {
+                "t": "1",
+                "v": "42"
+              },
+              {
+                "t": "1",
+                "v": "473"
+              },
+              {
+                "t": "1",
+                "v": "340"
+              },
+              {
+                "t": "1",
+                "v": "323"
+              },
+              {
+                "t": "1",
+                "v": "110"
+              },
+              {
+                "t": "1",
+                "v": "362"
+              },
+              {
+                "t": "1",
+                "v": "231"
+              },
+              {
+                "t": "1",
+                "v": "288"
+              },
+              {
+                "t": "1",
+                "v": "447"
+              },
+              {
+                "t": "1",
+                "v": "475"
+              },
+              {
+                "t": "1",
+                "v": "94"
+              },
+              {
+                "t": "1",
+                "v": "429"
+              },
+              {
+                "t": "1",
+                "v": "387"
+              },
+              {
+                "t": "1",
+                "v": "433"
+              },
+              {
+                "t": "1",
+                "v": "317"
+              },
+              {
+                "t": "1",
+                "v": "13"
+              },
+              {
+                "t": "1",
+                "v": "72"
+              },
+              {
+                "t": "1",
+                "v": "473"
+              },
+              {
+                "t": "1",
+                "v": "216"
+              },
+              {
+                "t": "1",
+                "v": "288"
+              },
+              {
+                "t": "1",
+                "v": "203"
+              },
+              {
+                "t": "1",
+                "v": "316"
+              },
+              {
+                "t": "1",
+                "v": "228"
+              },
+              {
+                "t": "1",
+                "v": "198"
+              },
+              {
+                "t": "1",
+                "v": "82"
+              },
+              {
+                "t": "1",
+                "v": "26"
+              },
+              {
+                "t": "1",
+                "v": "256"
+              },
+              {
+                "t": "1",
+                "v": "361"
+              },
+              {
+                "t": "1",
+                "v": "112"
+              },
+              {
+                "t": "1",
+                "v": "354"
+              },
+              {
+                "t": "1",
+                "v": "9"
+              },
+              {
+                "t": "1",
+                "v": "487"
+              },
+              {
+                "t": "1",
+                "v": "353"
+              },
+              {
+                "t": "1",
+                "v": "135"
+              },
+              {
+                "t": "1",
+                "v": "175"
+              },
+              {
+                "t": "1",
+                "v": "9"
+              },
+              {
+                "t": "1",
+                "v": "390"
+              },
+              {
+                "t": "1",
+                "v": "325"
+              },
+              {
+                "t": "1",
+                "v": "444"
+              },
+              {
+                "t": "1",
+                "v": "248"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "services" : [
-        {
-            "service" : "salesforce"
-        }
-    ]
+    "14954066": {
+      "txt": "array(\"11.23\",\"47.65\",\"19.03\",\"34.49\",\"41.20\",\"36.47\",\"4.75\",\"18.42\",\"7.01\",\"33.08\",\"12.45\",\"33.11\",\"10.53\",\"10.02\",\"7.21\",\"9.03\",\"47.80\",\"36.68\",\"21.63\",\"15.73\",\"26.72\",\"21.64\",\"49.79\",\"32.05\",\"37.24\",\"38.74\",\"16.01\",\"44.60\",\"46.16\",\"13.21\",\"44.97\",\"13.89\",\"30.18\",\"32.73\",\"18.67\",\"44.77\",\"2.89\",\"37.21\",\"3.53\",\"14.23\",\"27.49\",\"25.85\",\"45.25\",\"34.18\",\"48.49\",\"1.11\",\"35.73\",\"38.32\",\"22.26\",\"24.59\",\"10.93\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "11.23"
+              },
+              {
+                "t": "1",
+                "v": "47.65"
+              },
+              {
+                "t": "1",
+                "v": "19.03"
+              },
+              {
+                "t": "1",
+                "v": "34.49"
+              },
+              {
+                "t": "1",
+                "v": "41.20"
+              },
+              {
+                "t": "1",
+                "v": "36.47"
+              },
+              {
+                "t": "1",
+                "v": "4.75"
+              },
+              {
+                "t": "1",
+                "v": "18.42"
+              },
+              {
+                "t": "1",
+                "v": "7.01"
+              },
+              {
+                "t": "1",
+                "v": "33.08"
+              },
+              {
+                "t": "1",
+                "v": "12.45"
+              },
+              {
+                "t": "1",
+                "v": "33.11"
+              },
+              {
+                "t": "1",
+                "v": "10.53"
+              },
+              {
+                "t": "1",
+                "v": "10.02"
+              },
+              {
+                "t": "1",
+                "v": "7.21"
+              },
+              {
+                "t": "1",
+                "v": "9.03"
+              },
+              {
+                "t": "1",
+                "v": "47.80"
+              },
+              {
+                "t": "1",
+                "v": "36.68"
+              },
+              {
+                "t": "1",
+                "v": "21.63"
+              },
+              {
+                "t": "1",
+                "v": "15.73"
+              },
+              {
+                "t": "1",
+                "v": "26.72"
+              },
+              {
+                "t": "1",
+                "v": "21.64"
+              },
+              {
+                "t": "1",
+                "v": "49.79"
+              },
+              {
+                "t": "1",
+                "v": "32.05"
+              },
+              {
+                "t": "1",
+                "v": "37.24"
+              },
+              {
+                "t": "1",
+                "v": "38.74"
+              },
+              {
+                "t": "1",
+                "v": "16.01"
+              },
+              {
+                "t": "1",
+                "v": "44.60"
+              },
+              {
+                "t": "1",
+                "v": "46.16"
+              },
+              {
+                "t": "1",
+                "v": "13.21"
+              },
+              {
+                "t": "1",
+                "v": "44.97"
+              },
+              {
+                "t": "1",
+                "v": "13.89"
+              },
+              {
+                "t": "1",
+                "v": "30.18"
+              },
+              {
+                "t": "1",
+                "v": "32.73"
+              },
+              {
+                "t": "1",
+                "v": "18.67"
+              },
+              {
+                "t": "1",
+                "v": "44.77"
+              },
+              {
+                "t": "1",
+                "v": "2.89"
+              },
+              {
+                "t": "1",
+                "v": "37.21"
+              },
+              {
+                "t": "1",
+                "v": "3.53"
+              },
+              {
+                "t": "1",
+                "v": "14.23"
+              },
+              {
+                "t": "1",
+                "v": "27.49"
+              },
+              {
+                "t": "1",
+                "v": "25.85"
+              },
+              {
+                "t": "1",
+                "v": "45.25"
+              },
+              {
+                "t": "1",
+                "v": "34.18"
+              },
+              {
+                "t": "1",
+                "v": "48.49"
+              },
+              {
+                "t": "1",
+                "v": "1.11"
+              },
+              {
+                "t": "1",
+                "v": "35.73"
+              },
+              {
+                "t": "1",
+                "v": "38.32"
+              },
+              {
+                "t": "1",
+                "v": "22.26"
+              },
+              {
+                "t": "1",
+                "v": "24.59"
+              },
+              {
+                "t": "1",
+                "v": "10.93"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "2f094075": {},
+    "2760c486-7": {},
+    "cd322bb1-8": {},
+    "c6157e28-9": {},
+    "4ca4635d-10": {},
+    "f98db464-11": {},
+    "b18b2634-12": {},
+    "e1c451b4-13": {},
+    "64a1ed9f": {
+      "txt": "array(\"Invalid state information provided for 37 of 13124 accounts.\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "Invalid state information provided for 37 of 13124 accounts."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "datasources": {
+    "salesforce": {
+      "service": "salesforce",
+      "type": "salesforce",
+      "format": "json",
+      "name": "Salesforce Number of Accounts by US State",
+      "libraryAlias": "SFAccountsByState",
+      "refreshInterval": 14400,
+      "description": "See number of Salesforce accounts by US state. Originates from the Gallery.",
+      "props": {
+        "SOQLQuery": "SELECT COUNT(name), BillingState\r\nFROM Account WHERE BillingCountry = 'United States' OR BillingCountry = 'USA' GROUP BY BillingState",
+        "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+COUNT%28name%29%2C+BillingState%0D%0AFROM+Account+WHERE+BillingCountry+%3D+%27United+States%27+OR+BillingCountry+%3D+%27USA%27+GROUP+BY+BillingState",
+        "instance": "{{auth.salesforce.instanceName}}"
+      }
+    },
+    "usIds": {
+      "libraryAlias": "usIds",
+      "name": "U.S. State IDs",
+      "description": "A list of U.S. state IDs and their names. Originates from the Gallery.",
+      "type": "simple_rest",
+      "format": "xls",
+      "refreshInterval": 0,
+      "props": {
+        "endpoint_url": "http://static.klipfolio.com/datasources/usa-map-ids.xlsx"
+      }
+    }
+  },
+  "dsMappings": {
+    "salesforce": "128378928ae284b8dab8natceewzhere",
+    "usIds": "3b4e3dc975699b2bff0bniktawuzhere"
+  },
+  "services": [
+    {
+      "service": "salesforce"
+    }
+  ]
 }

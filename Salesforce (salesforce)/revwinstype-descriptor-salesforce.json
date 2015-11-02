@@ -1,31 +1,111 @@
 {
-    "name" : "Revenue and Wins by Type",
-    "description" : "Understand what types of opportunities are bringing in the most revenue. Originates from the Gallery.",
-
-    "datasources" : {
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
-            "format" : "json",
-            "name" :"Opportunities",
-            "libraryAlias" :"SFDCOpportunities",
-            "refreshInterval" : 300,
-            "description" :"Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
-            "props":{
-                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
-                "instance": "{{auth.salesforce.instanceName}}"
-            }
-        }
+  "name": "Salesforce Revenue and Wins by Type",
+  "description": "Understand what types of opportunities are bringing in the most revenue. Originates from the Gallery.",
+  "sampleFormulas": {
+    "874ba0ac-8": {
+      "txt": "array(\"5567\",\"6415\",\"7289\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "5567"
+              },
+              {
+                "t": "1",
+                "v": "6415"
+              },
+              {
+                "t": "1",
+                "v": "7289"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "dsMappings": {
-        "salesforce" : "df7bec64f58ae3dd3336niktawuzhere"
+    "3b871313-11": {
+      "txt": "array(\"1155\",\"1852\",\"1418\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "1155"
+              },
+              {
+                "t": "1",
+                "v": "1852"
+              },
+              {
+                "t": "1",
+                "v": "1418"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "services" : [
-        {
-            "service" : "salesforce"
-        }
-    ]
+    "a9190da7-9": {
+      "txt": "array(\"Existing Business - New Opportunity\",\"Existing Business - Renewal\",\"New Business\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "Existing Business - New Opportunity"
+              },
+              {
+                "t": "1",
+                "v": "Existing Business - Renewal"
+              },
+              {
+                "t": "1",
+                "v": "New Business"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "datasources": {
+    "salesforce": {
+      "service": "salesforce",
+      "type": "salesforce",
+      "format": "json",
+      "name": "Salesforce Opportunities",
+      "libraryAlias": "SFDCOpportunities",
+      "refreshInterval": 14400,
+      "description": "Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
+      "props": {
+        "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
+        "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
+        "instance": "{{auth.salesforce.instanceName}}"
+      }
+    }
+  },
+  "dsMappings": {
+    "salesforce": "df7bec64f58ae3dd3336niktawuzhere"
+  },
+  "services": [
+    {
+      "service": "salesforce"
+    }
+  ]
 }
