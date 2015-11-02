@@ -1,31 +1,106 @@
 {
-    "name" : "Sales This Month",
-    "description" : "Monitor your sales this month and see how it compares to the average of the last 3 months. Originates from the Gallery.",
-
-    "datasources" : {
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
-            "format" : "json",
-            "name" :"Opportunities",
-            "libraryAlias" :"SFDCOpportunities",
-            "refreshInterval" : 300,
-            "description" :"Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
-            "props":{
-                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
-                "instance": "{{auth.salesforce.instanceName}}"
-            }
-        }
+  "name": "Salesforce Sales (This Month)",
+  "description": "Monitor your sales this month and see how it compares to the average of the last 3 months. Originates from the Gallery.",
+  "sampleFormulas": {
+    "41304543": {
+      "txt": "array(\"58592\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "58592"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "dsMappings": {
-        "salesforce" : "df7bec64f58ae3dd3336niktawuzhere"
+    "47e5be28": {
+      "txt": "array(\"68371\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "68371"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "services" : [
-        {
-            "service" : "salesforce"
-        }
-    ]
+    "836d3e31": {
+      "txt": "array(\"0\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "0"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ce34af15": {
+      "txt": "array(\"82045\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "82045"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "datasources": {
+    "salesforce": {
+      "service": "salesforce",
+      "type": "salesforce",
+      "format": "json",
+      "name": "Salesforce Opportunities",
+      "libraryAlias": "SFDCOpportunities",
+      "refreshInterval": 14400,
+      "description": "Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
+      "props": {
+        "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
+        "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
+        "instance": "{{auth.salesforce.instanceName}}"
+      }
+    }
+  },
+  "dsMappings": {
+    "salesforce": "df7bec64f58ae3dd3336niktawuzhere"
+  },
+  "services": [
+    {
+      "service": "salesforce"
+    }
+  ]
 }

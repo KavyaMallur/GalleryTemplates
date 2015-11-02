@@ -1,31 +1,124 @@
 {
-    "name" : "Open Opportunities by Stage",
-    "description" : "Understand what stages your opportunities are in. Originates from the Gallery.",
-
-    "datasources" : {
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
-            "format" : "json",
-            "name" :"Opportunities",
-            "libraryAlias" :"SFDCOpportunities",
-            "refreshInterval" : 300,
-            "description" :"Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
-            "props":{
-                "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
-                "instance": "{{auth.salesforce.instanceName}}"
-            }
-        }
+  "name": "Salesforce Open Opportunities by Stage",
+  "description": "Understand what stages your opportunities are in. Originates from the Gallery.",
+  "sampleFormulas": {
+    "16fc2c18": {
+      "txt": "array(\"61521\",\"39426\",\"36642\",\"29918\",\"13191\",\"9434\",\"7028\",\"4604\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "61521"
+              },
+              {
+                "t": "1",
+                "v": "39426"
+              },
+              {
+                "t": "1",
+                "v": "36642"
+              },
+              {
+                "t": "1",
+                "v": "29918"
+              },
+              {
+                "t": "1",
+                "v": "13191"
+              },
+              {
+                "t": "1",
+                "v": "9434"
+              },
+              {
+                "t": "1",
+                "v": "7028"
+              },
+              {
+                "t": "1",
+                "v": "4604"
+              }
+            ]
+          }
+        ]
+      }
     },
-
-    "dsMappings": {
-        "salesforce" : "df7bec64f58ae3dd3336niktawuzhere"
-    },
-
-    "services" : [
-        {
-            "service" : "salesforce"
-        }
-    ]
+    "1569521d": {
+      "txt": "array(\"Negotiation/Review\",\"Prospecting\",\"Qualification\",\"Confirm\",\"Percetion Analysis\",\"Value Proposition\",\"Proposal/Price Quote\",\"Payment Declined\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "1",
+                "v": "Negotiation/Review"
+              },
+              {
+                "t": "1",
+                "v": "Prospecting"
+              },
+              {
+                "t": "1",
+                "v": "Qualification"
+              },
+              {
+                "t": "1",
+                "v": "Confirm"
+              },
+              {
+                "t": "1",
+                "v": "Percetion Analysis"
+              },
+              {
+                "t": "1",
+                "v": "Value Proposition"
+              },
+              {
+                "t": "1",
+                "v": "Proposal/Price Quote"
+              },
+              {
+                "t": "1",
+                "v": "Payment Declined"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "datasources": {
+    "salesforce": {
+      "service": "salesforce",
+      "type": "salesforce",
+      "format": "json",
+      "name": "Salesforce Opportunities",
+      "libraryAlias": "SFDCOpportunities",
+      "refreshInterval": 14400,
+      "description": "Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
+      "props": {
+        "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
+        "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
+        "instance": "{{auth.salesforce.instanceName}}"
+      }
+    }
+  },
+  "dsMappings": {
+    "salesforce": "df7bec64f58ae3dd3336niktawuzhere"
+  },
+  "services": [
+    {
+      "service": "salesforce"
+    }
+  ]
 }
