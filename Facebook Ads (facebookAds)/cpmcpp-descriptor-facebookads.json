@@ -1,18 +1,122 @@
 {
-    "name" : "Facebook Ads CPM & CPP (Last 7 Days)",
-    "description" : "Compare cost per impressions and cost per 1000 people reached over the past 7 days. Originates from the Gallery.",
-    
+    "name": "Facebook Ads CPM & CPP (Last 7 Days)",
+    "description": "Compare cost per impressions and cost per 1000 people reached over the past 7 days. Originates from the Gallery.",
 
-    "datasources" : {
-        "facebookAds-01" : {
-            "service" : "facebook_ads",
-            "libraryAlias" : "FacebookAdsDailyStats",
+    "sampleFormulas": {
+
+        "11b7dc1d-2": {
+            "txt": "array(\"3221.0037871615605\",\"4412.333147584481\",\"4621.84335298348\",\"4429.409499612881\",\"2809.735099337764\",\"3926.096339980751\",\"4357.07756175748\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "3221.0037871615605"
+                    }, {
+                        "t": "1",
+                        "v": "4412.333147584481"
+                    }, {
+                        "t": "1",
+                        "v": "4621.84335298348"
+                    }, {
+                        "t": "1",
+                        "v": "4429.409499612881"
+                    }, {
+                        "t": "1",
+                        "v": "2809.735099337764"
+                    }, {
+                        "t": "1",
+                        "v": "3926.096339980751"
+                    }, {
+                        "t": "1",
+                        "v": "4357.07756175748"
+                    }]
+                }]
+            }
+        },
+        "bb8e58e5-5": {
+            "txt": "array(\"3537.23761899016\",\"4931.7140076920805\",\"5122.859672354561\",\"4657.07756175748\",\"2881.592839109476\",\"4657.07756175748\",\"4757.45676164729\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "3537.23761899016"
+                    }, {
+                        "t": "1",
+                        "v": "4931.7140076920805"
+                    }, {
+                        "t": "1",
+                        "v": "5122.859672354561"
+                    }, {
+                        "t": "1",
+                        "v": "4657.07756175748"
+                    }, {
+                        "t": "1",
+                        "v": "2881.592839109476"
+                    }, {
+                        "t": "1",
+                        "v": "4657.07756175748"
+                    }, {
+                        "t": "1",
+                        "v": "4757.45676164729"
+                    }]
+                }]
+            }
+        },
+        "f047839b-3": {
+            "txt": "array(\"2015-04-01\",\"2015-04-02\",\"2015-04-03\",\"2015-04-04\",\"2002-04-05\",\"2015-04-06\",\"2015-04-07\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "2015-04-01"
+                    }, {
+                        "t": "1",
+                        "v": "2015-04-02"
+                    }, {
+                        "t": "1",
+                        "v": "2015-04-03"
+                    }, {
+                        "t": "1",
+                        "v": "2015-04-04"
+                    }, {
+                        "t": "1",
+                        "v": "2015-04-05"
+                    }, {
+                        "t": "1",
+                        "v": "2015-04-06"
+                    }, {
+                        "t": "1",
+                        "v": "2015-04-07"
+                    }]
+                }]
+            }
+        }
+
+    },
+
+
+    "datasources": {
+        "facebookAds-01": {
+            "service": "facebook_ads",
+            "libraryAlias": "FacebookAdsDailyStats",
             "name": "Facebook Ads Daily Stats",
-            "description" : "The daily stats of your Facebook Ads (Last 7 Days). Originates from the Gallery.",
-            "type" : "facebook",
-            "format" : "json",
-            "refreshInterval" : 14400,
-            "props" : {
+            "description": "The daily stats of your Facebook Ads (Last 7 Days). Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
                 "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook_ads.accountID}}/insights?date_preset=last_7_days&time_increment=1&fields=account_id,cpm,cpp,spend,impressions,reach",
                 "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook_ads.accountID}}/insights?date_preset=last_7_days&time_increment=1&fields=account_id,cpm,cpp,spend,impressions,reach",
                 "qtype": "Graph API"
@@ -20,46 +124,38 @@
         }
     },
 
-    "dsMappings" : {
-        "facebookAds-01" : "c72b0ebaeb77f4d613fbnatceewzhere" 
+    "dsMappings": {
+        "facebookAds-01": "c72b0ebaeb77f4d613fbnatceewzhere"
     },
 
-    "services" : [
-        {
-            "service" : "facebook_ads"
-        }
-    ],
+    "services": [{
+        "service": "facebook_ads"
+    }],
 
-    "datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.facebook_ads.accountID",
-            "label" : "Account Name",
-            "description":"Select a Facebook Ads Account Name from the list below."
-        }
-    ],
-"queries": [
-        {
-            "errorMessage":"Here are two suggestions:<br><br>1. Make sure the Facebook account you signed in with includes a Facebook Ads account. <br><br>2. From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "facebook_ads",
-                "type": "facebook",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.5/me/adaccounts?fields=name,id",
-                    "graphUrl": "https://graph.facebook.com/v2.5/me/adaccounts?fields=name,id",
-                    "method": "GET",
-                    "qtype": "Graph API"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.facebook_ads.accountID", 
-                    "propField" : "options", 
-                    "labels": "/data/name",  
-                    "values": "/data/id" 
-                }
-            ]
-        }
-    ]
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook_ads.accountID",
+        "label": "Account Name",
+        "description": "Select a Facebook Ads Account Name from the list below."
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure the Facebook account you signed in with includes a Facebook Ads account. <br><br>2. From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook_ads",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/me/adaccounts?fields=name,id",
+                "graphUrl": "https://graph.facebook.com/v2.5/me/adaccounts?fields=name,id",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook_ads.accountID",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
 }
