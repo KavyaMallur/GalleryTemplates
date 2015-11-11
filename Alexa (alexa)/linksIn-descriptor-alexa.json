@@ -1,75 +1,147 @@
 {
-    "name" : "Alexa Links In",
-    "description" : "Track your website's backlinks and compare it to your competitors. Originates from the Gallery.",
-    
+    "name": "Alexa Links In",
+    "description": "Track your website's backlinks and compare it to your competitors. Originates from the Gallery.",
 
-    "datasources" : {
-        "alexa-01" : {
-            "service" : "alexa",
-            "libraryAlias" : "AlexaLinksIn",
+    "sampleFormulas": {
+
+        "a0777b19": {
+            "txt": "\"1232\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1232"
+                }]
+            }
+        },
+
+        "471c42cd": {
+            "txt": "\"Links In for amazingklips.com\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Links In for amazingklips.com"
+                }]
+            }
+        },
+        "0fb597b8": {
+            "txt": "array(\"acme.com\",\"goodklips.com\",\"klipstore.com\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "acme.com"
+                    }, {
+                        "t": "l",
+                        "v": "goodklips.com"
+                    }, {
+                        "t": "l",
+                        "v": "klipstore.com"
+                    }]
+                }]
+            }
+        },
+        "e2d3f469": {
+            "txt": "array(\"700\",\"392\",\"369\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "700"
+                    }, {
+                        "t": "l",
+                        "v": "392"
+                    }, {
+                        "t": "l",
+                        "v": "369"
+                    }]
+                }]
+            }
+        },
+        "97f47701-1": {
+            "txt": "\"700\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "700"
+                }]
+            }
+        }
+    },
+
+    "datasources": {
+        "alexa-01": {
+            "service": "alexa",
+            "libraryAlias": "AlexaLinksIn",
             "name": "Alexa Links In",
-            "description" : "A count of links pointing to your site. Originates from the Gallery.",
-            "type" : "simple_rest",
-            "format" : "xml",
-            "refreshInterval" : 14400,
-            "props" : {
+            "description": "A count of links pointing to your site. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "xml",
+            "refreshInterval": 14400,
+            "props": {
                 "endpoint_url": "http://awis.amazonaws.com/?AWSAccessKeyId={{auth.alexa.apiKey}}&Action=UrlInfo&ResponseGroup=LinksInCount&SignatureMethod=HmacSHA1&SignatureVersion=2&Timestamp={date.addMinutes(10).tz('UTC').format(\"yyyy-MM-dd'T'HH'%3A'mm'%3A'ss'Z'\");}&Url={{ds.alexa.mainUrl}}&Signature={hash.append(\"GET\").appendNewLine().append(\"awis.amazonaws.com\").appendNewLine().append(\"/\").appendNewLine().append(\"AWSAccessKeyId={{auth.alexa.apiKey}}&Action=UrlInfo&ResponseGroup=LinksInCount&SignatureMethod=HmacSHA1&SignatureVersion=2&Timestamp=\"+date.addMinutes(10).tz('UTC').format(\"yyyy-MM-dd'T'HH'%3A'mm'%3A'ss'Z'\")+\"&Url={{ds.alexa.mainUrl}}\").encodeHmacSha1(\"{{auth.alexa.apiSecret}}\").encodeBase64().encodeURL().printDigest();}"
             }
         },
-        "alexa-02" : {
-            "service" : "alexa",
-            "libraryAlias" : "AlexaLinksInCompetitors",
+        "alexa-02": {
+            "service": "alexa",
+            "libraryAlias": "AlexaLinksInCompetitors",
             "name": "Alexa Links In Competitors",
-            "description" : "A count of links pointing to your competitors site. Originates from the Gallery.",
-            "type" : "simple_rest",
-            "format" : "xml",
-            "refreshInterval" : 14400,
-            "props" : {
+            "description": "A count of links pointing to your competitors site. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "xml",
+            "refreshInterval": 14400,
+            "props": {
                 "endpoint_url": "http://awis.amazonaws.com/?AWSAccessKeyId={{auth.alexa.apiKey}}&Action=UrlInfo&SignatureMethod=HmacSHA1&SignatureVersion=2&Timestamp={date.addMinutes(10).tz('UTC').format(\"yyyy-MM-dd'T'HH'%3A'mm'%3A'ss'Z'\");}&UrlInfo.1.Url={{ds.alexa.competitorUrl1}}&UrlInfo.2.Url={{ds.alexa.competitorUrl2}}&UrlInfo.3.Url={{ds.alexa.competitorUrl3}}&UrlInfo.Shared.ResponseGroup=LinksInCount&Signature={hash.append(\"GET\").appendNewLine().append(\"awis.amazonaws.com\").appendNewLine().append(\"/\").appendNewLine().append(\"AWSAccessKeyId={{auth.alexa.apiKey}}&Action=UrlInfo&SignatureMethod=HmacSHA1&SignatureVersion=2&Timestamp=\"+date.addMinutes(10).tz('UTC').format(\"yyyy-MM-dd'T'HH'%3A'mm'%3A'ss'Z'\")+\"&UrlInfo.1.Url={{ds.alexa.competitorUrl1}}&UrlInfo.2.Url={{ds.alexa.competitorUrl2}}&UrlInfo.3.Url={{ds.alexa.competitorUrl3}}&UrlInfo.Shared.ResponseGroup=LinksInCount\").encodeHmacSha1(\"{{auth.alexa.apiSecret}}\").encodeBase64().encodeURL().printDigest();}"
             }
         }
     },
 
-    "dsMappings" : {
-        "alexa-01" : "25de875b045aca78866cnatceewzhere",
-        "alexa-02" : "73a7b2bcc3306a52ceacnatceewzhere" 
+    "dsMappings": {
+        "alexa-01": "25de875b045aca78866cnatceewzhere",
+        "alexa-02": "73a7b2bcc3306a52ceacnatceewzhere"
     },
 
-    "services" : [
-        {
-            "service" : "alexa"
-        }
-    ],
+    "services": [{
+        "service": "alexa"
+    }],
 
-    "datasourceConfigModel" : [
-        {
-            "type" : "text",
-            "id" : "ds.alexa.mainUrl",
-            "label" : "Your URL",
-            "description": "Enter your URL and up to three competitor URLs.",
-            "isRequired" : "true",
-            "urlEncode" : "true"
-        },
-        {
-            "type" : "text",
-            "id" : "ds.alexa.competitorUrl1",
-            "label" : "Competitor URL 1",
-            "description":"",
-            "isRequired" : "true",
-            "urlEncode" : "true"
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.alexa.mainUrl",
+        "label": "Your URL",
+        "description": "Enter your URL and up to three competitor URLs.",
+        "isRequired": "true",
+        "urlEncode": "true"
+    }, {
+        "type": "text",
+        "id": "ds.alexa.competitorUrl1",
+        "label": "Competitor URL 1",
+        "description": "",
+        "isRequired": "true",
+        "urlEncode": "true"
 
-        },
-        {
-            "type" : "text",
-            "id" : "ds.alexa.competitorUrl2",
-            "label" : "Competitor URL 2",
-            "urlEncode" : "true"
-        },
-        {
-            "type" : "text",
-            "id" : "ds.alexa.competitorUrl3",
-            "label" : "Competitor URL 3",
-            "urlEncode" : "true"
-        }
-    ]
+    }, {
+        "type": "text",
+        "id": "ds.alexa.competitorUrl2",
+        "label": "Competitor URL 2",
+        "urlEncode": "true"
+    }, {
+        "type": "text",
+        "id": "ds.alexa.competitorUrl3",
+        "label": "Competitor URL 3",
+        "urlEncode": "true"
+    }]
 }
