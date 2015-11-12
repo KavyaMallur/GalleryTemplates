@@ -1,0 +1,397 @@
+{
+   "title": "Bitly Clicks (Last 7 Days)",
+   "id": "0e53a8c406686030bf122d225e309a3b",
+   "workspace": {
+      "datasources": [
+         "ca42a89148a3de710904niktawuzhere"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "655edea1-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "c142596c-3",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "17d47f3a-4",
+                     "displayName": "Clicks Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "sum(slice(ca42a89148a3de710904niktawuzhere@/data/clicks/clicks;,\"0\",\"7\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ca42a89148a3de710904niktawuzhere",
+                                                   "a": "/data/clicks/clicks"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "7"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "633f04e1-5",
+                     "displayName": "Clicks Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Clicks\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Clicks"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "align": "r",
+                     "font_style": "regular"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "7ff243f8-1",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "1caf01aa-6",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "de8fdb91-7",
+                     "displayName": "Clicks Percentage Change",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "cx": "17d47f3a-4"
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "cx": "1ed587e6-8"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-up-green",
+                                 "pos": "left",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "cx": "17d47f3a-4"
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "cx": "1ed587e6-8"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "cx": "17d47f3a-4"
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "cx": "1ed587e6-8"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-blank"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "(sum(slice(ca42a89148a3de710904niktawuzhere@/data/clicks/clicks;,\"0\",\"7\"))/sum(slice(ca42a89148a3de710904niktawuzhere@/data/clicks/clicks;,\"8\",\"15\"))-\"1\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ca42a89148a3de710904niktawuzhere",
+                                                         "a": "/data/clicks/clicks"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "7"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ca42a89148a3de710904niktawuzhere",
+                                                         "a": "/data/clicks/clicks"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "8"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "15"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "1ed587e6-8",
+                     "displayName": "Clicks Prev Period",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev. 7 days"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum(slice(ca42a89148a3de710904niktawuzhere@/data/clicks/clicks;,\"8\",\"15\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ca42a89148a3de710904niktawuzhere",
+                                                   "a": "/data/clicks/clicks"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "8"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "15"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ]
+            }
+         ],
+         "rows": 1,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 1,
+               "w": 20
+            }
+         ],
+         "cellData": [
+            {
+               "x": 1,
+               "y": 0
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 2
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "alignment": 2
+            }
+         ]
+      }
+   ]
+}
