@@ -1,0 +1,183 @@
+{
+  "name": "Social Media Followers",
+  "description": "See where you stand on three of your social media platforms (Facebook, and YouTube) in a single Klip! Originates from the Gallery.",
+  "sampleFormulas": {
+    "fc2dffa9": {"txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/facebook.png\"",
+      "src": {
+        "v": false,
+        "t": "expr",
+        "c": [
+          {
+            "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/facebook.png",
+            "t": "l"
+          }
+        ]
+      }},
+    "7a504933": {"txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/youtube.png\"",
+      "src": {
+        "v": false,
+        "t": "expr",
+        "c": [
+          {
+            "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/youtube.png",
+            "t": "l"
+          }
+        ]
+      }},
+    "451902c4": {
+      "txt": "\"676407\"",
+      "src": {
+        "v": false,
+        "t": "expr",
+        "c": [
+          {
+            "v": "676407",
+            "t": "l"
+          }
+        ]
+      }
+    },
+    "3adf5200": {
+      "txt": "\"Likes\"",
+      "src": {
+        "v": false,
+        "t": "expr",
+        "c": [
+          {
+            "v": "Likes",
+            "t": "l"
+          }
+        ]
+      }
+    },
+    "815e16be": {
+      "txt": "\"29158\"",
+      "src": {
+        "v": false,
+        "t": "expr",
+        "c": [
+          {
+            "v": "29158",
+            "t": "l"
+          }
+        ]
+      }
+    },
+    "3c1af7c8": {
+      "txt": "\"Subscribers\"",
+      "src": {
+        "v": false,
+        "t": "expr",
+        "c": [
+          {
+            "v": "Subscribers",
+            "t": "l"
+          }
+        ]
+      }
+    }
+  },
+  "datasources": {
+    "facebook": {
+      "service": "facebook",
+      "libraryAlias": "facebookBasicPageInfo",
+      "name": "Facebook Basic Page Info",
+      "description": "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
+      "type": "facebook",
+      "format": "json",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+        "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+        "qtype": "Graph API"
+      }
+    },
+    "youtube": {
+      "service": "youtube",
+      "type": "simple_rest",
+      "format": "json",
+      "name": "YouTube Channel Statistics",
+      "libraryAlias": "YouTubeChannelStatistics",
+      "refreshInterval": 14400,
+      "description": "Retrieves a YouTube's channel statistics. Originates from the Gallery.",
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/youtube/v3/channels?part=statistics&id={{ds.youtube.channelID}}",
+        "method": "get"
+      }
+    }
+  },
+  "dsMappings": {
+    "facebook": "f16161937e640d476ce1natceewzhere",
+    "youtube": "488343c1a23f767296e6natceewzhere"
+  },
+  "services": [
+    {
+      "service": "facebook"
+    },
+    {
+      "service": "youtube"
+    }
+  ],
+  "datasourceConfigModel": [
+    {
+      "type": "select",
+      "id": "ds.facebook.pageId",
+      "label": "Facebook Page",
+      "description": "For Facebook and LinkedIn, select a <b>Company</b> Name or Channel.<br><br>When entering a Twitter Handle, do <b>not</b> include the @ symbol.",
+      "isRequired": true,
+      "onChangeQueries": [
+        "q1"
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ds.youtube.channelID",
+      "label": "YouTube Channel",
+      "isRequired": true
+    }
+  ],
+  "queries": [
+    {
+      "errorMessage": "From time to time, your OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+      "connector": {
+        "service": "facebook",
+        "type": "facebook",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+          "method": "GET",
+          "qtype": "Graph API"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.facebook.pageId",
+          "propField": "options",
+          "labels": "/data/name",
+          "values": "/data/id"
+        }
+      ]
+    },
+    {
+      "id": "q1",
+      "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have admin access to the YouTube channel.<br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+      "connector": {
+        "service": "youtube",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.youtube.channelID",
+          "propField": "options",
+          "labels": "/items/snippet/title",
+          "values": "/items/id"
+        }
+      ]
+    }
+  ]
+}
