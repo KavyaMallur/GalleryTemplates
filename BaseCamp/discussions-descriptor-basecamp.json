@@ -1,85 +1,168 @@
 {
-    "name" : "Basecamp Discussions",
-    "description" : "Stay on top of your Basecamp team discussions! Originates from the Gallery.",
-    
+    "name": "Basecamp Discussions",
+    "description": "Stay on top of your Basecamp team discussions! Originates from the Gallery.",
 
-    "datasources" : {
-        "basecamp-01" : {
-            "service" : "basecamp",
-            "libraryAlias" : "BasecampRecentTopics",
+    "sampleFormulas": {
+
+        "11a7e0d8-11": {
+            "txt": "array(\"Add New Services to the Klip Gallery\",\"Create Facebook campaign\",\"Standardize terminology\",\"Edit the basecamp service in the content\",\"Document the basecamp datasource details\",\"Review basecamp klips with the UX team\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Add New Services to the Klip Gallery"
+                    }, {
+                        "t": "l",
+                        "v": "Create Facebook campaign"
+                    }, {
+                        "t": "l",
+                        "v": "Standardize terminology"
+                    }, {
+                        "t": "l",
+                        "v": "Edit the basecamp service in the content"
+                    }, {
+                        "t": "l",
+                        "v": "Document the basecamp datasource details"
+                    }, {
+                        "t": "l",
+                        "v": "Review basecamp klips with the UX team"
+                    }]
+                }]
+            }
+        },
+        "bfc0557c-13": {
+            "txt": "array(\"Basecamp template creation\",\"Facebook Insights needs to be updated\",\"camelCase is followed while naming the variables\",\"Create basecamp service in the content account\",\"basecamp service project ID and Profile ID steps are documented\",\"Look for the colors. Test the formulas.\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Basecamp template creation"
+                    }, {
+                        "t": "l",
+                        "v": "Facebook Insights needs to be updated"
+                    }, {
+                        "t": "l",
+                        "v": "camelCase is followed while naming the variables"
+                    }, {
+                        "t": "l",
+                        "v": "Create basecamp service in the content account"
+                    }, {
+                        "t": "l",
+                        "v": "basecamp service project ID and Profile ID steps are documented"
+                    }, {
+                        "t": "l",
+                        "v": "Look for the colors. Test the formulas."
+                    }]
+                }]
+            }
+        },
+        "136f71df-15": {
+            "txt": "array(\"Ashley Brown\",\"Ashley Brown\",\"George Grayson\",\"Jim Wells\",\"George Grayson\",\"George Grayson\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Ashley Brown"
+                    }, {
+                        "t": "l",
+                        "v": "Ashley Brown"
+                    }, {
+                        "t": "l",
+                        "v": "George Grayson"
+                    }, {
+                        "t": "l",
+                        "v": "Jim Wells"
+                    }, {
+                        "t": "l",
+                        "v": "George Grayson"
+                    }, {
+                        "t": "l",
+                        "v": "George Grayson"
+                    }]
+                }]
+            }
+        }
+
+    },
+
+
+    "datasources": {
+        "basecamp-01": {
+            "service": "basecamp",
+            "libraryAlias": "BasecampRecentTopics",
             "name": "Basecamp Recent Topics",
-            "description" : "Provide active topics in the specified project. Originates from the Gallery.",
-            "type" : "simple_rest",
-            "format" : "json",
-            "refreshInterval" : 14400,
-            "props" : {
-                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects/{{ds.basecamp.projectID}}/topics.json"          
+            "description": "Provide active topics in the specified project. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects/{{ds.basecamp.projectID}}/topics.json"
             }
         }
     },
 
-    "dsMappings" : {
-        "basecamp-01" : "4ed5892cb77e0fb907baKavyaMallur9" 
+    "dsMappings": {
+        "basecamp-01": "4ed5892cb77e0fb907baKavyaMallur9"
     },
 
-    "services" : [
-        {
-            "service" : "basecamp"
-        }
-    ],
-    "datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.basecamp.accountId",
-            "label" : "Account ID",
-            "description":"Select your Basecamp Account",
-            "onChangeQueries" : [ "q2" ]
+    "services": [{
+        "service": "basecamp"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.basecamp.accountId",
+        "label": "Account ID",
+        "description": "Select your Basecamp Account",
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.basecamp.projectID",
+        "label": "Project ID",
+        "description": "Select your Basecamp Project"
+    }],
+    "queries": [{
+        "errorMessage": "There are two possible reasons: <br><br>1. Your Basecamp OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. Your Basecamp login details has changed. Please re-authorize with the new login details.",
+        "connector": {
+            "service": "basecamp",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://launchpad.37signals.com/authorization.json"
+            }
         },
-        {
-            "type" : "select",
-            "id" : "ds.basecamp.projectID",
-            "label" : "Project ID",
-            "description":"Select your Basecamp Project"
-        }
-    ],
-    "queries": [
-        {
-            "errorMessage":"There are two possible reasons: <br><br>1. Your Basecamp OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. Your Basecamp login details has changed. Please re-authorize with the new login details.",
-            "connector": {
-                "service": "basecamp",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://launchpad.37signals.com/authorization.json"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.basecamp.accountId", 
-                    "propField" : "options", 
-                    "labels": "/accounts/name",  
-                    "values": "/accounts/id" 
-                }
-            ]
+        "results": [{
+            "propId": "ds.basecamp.accountId",
+            "propField": "options",
+            "labels": "/accounts/name[preceding-sibling::href[contains(.,'basecamp.com')]]",
+            "values": "/accounts/id[preceding-sibling::href[contains(.,'basecamp.com')]]"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "basecamp",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects.json"
+            }
         },
-        {   
-            "id": "q2",
-            "connector": {
-                "service": "basecamp",
-                "type": "simple_rest",
-                "format": "json",
-                "props" : { 
-                    "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects.json"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.basecamp.projectID", 
-                    "propField" : "options", 
-                    "labels": "/name",  
-                    "values": "/id" 
-                }
-            ]
-        }
-    ]
+        "results": [{
+            "propId": "ds.basecamp.projectID",
+            "propField": "options",
+            "labels": "/name",
+            "values": "/id"
+        }]
+    }]
 }
