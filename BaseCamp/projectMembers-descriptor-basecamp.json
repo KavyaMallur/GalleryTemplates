@@ -1,85 +1,132 @@
 {
-    "name" : "Basecamp Project Members",
-    "description" : "Let your team shine by displaying a list of members on your dashboard. Originates from the Gallery.",
-    
+    "name": "Basecamp Project Members",
+    "description": "Let your team shine by displaying a list of members on your dashboard. Originates from the Gallery.",
 
-    "datasources" : {
-        "basecamp-01" : {
-            "service" : "basecamp",
-            "libraryAlias" : "BasecampPeoplewithaccesstoproject",
+    "sampleFormulas": {
+
+        "3e41854b-2": {
+            "txt": "array(\"http://static.klipfolio.com/templates/team/square/p37.jpg\",\"http://static.klipfolio.com/templates/team/square/p30.jpg\",\"http://static.klipfolio.com/templates/team/square/p46.jpg\",\"http://static.klipfolio.com/templates/team/square/p31.jpg\",\"http://static.klipfolio.com/templates/team/square/p28.jpg\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "http://static.klipfolio.com/templates/team/square/p37.jpg"
+                    }, {
+                        "t": "l",
+                        "v": "http://static.klipfolio.com/templates/team/square/p30.jpg"
+                    }, {
+                        "t": "l",
+                        "v": "http://static.klipfolio.com/templates/team/square/p46.jpg"
+                    }, {
+                        "t": "l",
+                        "v": "http://static.klipfolio.com/templates/team/square/p31.jpg"
+                    }, {
+                        "t": "l",
+                        "v": "http://static.klipfolio.com/templates/team/square/p28.jpg"
+                    }]
+                }]
+            }
+        },
+        "c506557b-4": {
+            "txt": "array(\"Ashley Brown\",\"George Grayson\",\"Jim Wells\",\"Gillian Edwards\",\"Natalie Yates\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Ashley Brown"
+                    }, {
+                        "t": "l",
+                        "v": "George Grayson"
+                    }, {
+                        "t": "l",
+                        "v": "Jim Wells"
+                    }, {
+                        "t": "l",
+                        "v": "Gillian Edwards"
+                    }, {
+                        "t": "l",
+                        "v": "Natalie Yates"
+                    }]
+                }]
+            }
+        }
+
+    },
+
+
+    "datasources": {
+        "basecamp-01": {
+            "service": "basecamp",
+            "libraryAlias": "BasecampPeoplewithaccesstoproject",
             "name": "Basecamp People with access to project",
-            "description" : "Let your team shine by displaying a list of members on your dashboard. Originates from the Gallery.",
-            "type" : "simple_rest",
-            "format" : "json",
-            "refreshInterval" : 14400,
-            "props" : {
-                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects/{{ds.basecamp.projectID}}/accesses.json"          
+            "description": "Let your team shine by displaying a list of members on your dashboard. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects/{{ds.basecamp.projectID}}/accesses.json"
             }
         }
     },
 
-    "dsMappings" : {
-        "basecamp-01" : "f410a235d444f9cf54d3KavyaMallur9" 
+    "dsMappings": {
+        "basecamp-01": "f410a235d444f9cf54d3KavyaMallur9"
     },
 
-    "services" : [
-        {
-            "service" : "basecamp"
-        }
-    ],
-    "datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.basecamp.accountId",
-            "label" : "Account ID",
-            "description":"Select your Basecamp Account",
-            "onChangeQueries" : [ "q2" ]
+    "services": [{
+        "service": "basecamp"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.basecamp.accountId",
+        "label": "Account ID",
+        "description": "Select your Basecamp Account",
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.basecamp.projectID",
+        "label": "Project ID",
+        "description": "Select your Basecamp Project"
+    }],
+    "queries": [{
+        "errorMessage": "There are two possible reasons: <br><br>1. Your Basecamp OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. Your Basecamp login details has changed. Please re-authorize with the new login details.",
+        "connector": {
+            "service": "basecamp",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://launchpad.37signals.com/authorization.json"
+            }
         },
-        {
-            "type" : "select",
-            "id" : "ds.basecamp.projectID",
-            "label" : "Project ID",
-            "description":"Select your Basecamp Project"
-        }
-    ],
-    "queries": [
-        {
-            "errorMessage":"There are two possible reasons: <br><br>1. Your Basecamp OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. Your Basecamp login details has changed. Please re-authorize with the new login details.",
-            "connector": {
-                "service": "basecamp",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://launchpad.37signals.com/authorization.json"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.basecamp.accountId", 
-                    "propField" : "options", 
-                    "labels": "/accounts/name",  
-                    "values": "/accounts/id" 
-                }
-            ]
+        "results": [{
+            "propId": "ds.basecamp.accountId",
+            "propField": "options",
+            "labels": "/accounts/name[preceding-sibling::href[contains(.,'basecamp.com')]]",
+            "values": "/accounts/id[preceding-sibling::href[contains(.,'basecamp.com')]]"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "basecamp",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects.json"
+            }
         },
-        {   
-            "id": "q2",
-            "connector": {
-                "service": "basecamp",
-                "type": "simple_rest",
-                "format": "json",
-                "props" : { 
-                    "endpoint_url": "https://basecamp.com/{{ds.basecamp.accountId}}/api/v1/projects.json"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.basecamp.projectID", 
-                    "propField" : "options", 
-                    "labels": "/name",  
-                    "values": "/id" 
-                }
-            ]
-        }
-    ]
+        "results": [{
+            "propId": "ds.basecamp.projectID",
+            "propField": "options",
+            "labels": "/name",
+            "values": "/id"
+        }]
+    }]
 }
