@@ -138,53 +138,170 @@
       }
     },
     "1ebc65c4-3": {
-      "txt": "\"Clicks\"",
-      "src": {
-        "t": "expr",
-        "v": false,
-        "c": [
-          {
-            "t": "l",
-            "v": "Clicks"
-          }
-        ]
-      }
-    },
-    "de8fdb91-7": {
-      "txt": "\"0.72\"",
-      "src": {
-        "t": "expr",
-        "v": false,
-        "c": [
-          {
-            "t": "l",
-            "v": "0.72"
-          }
-        ]
-      }
-    }
+                     "txt": "array(\"Oct 18\",\"Oct 19\",\"Oct 20\",\"Oct 21\",\"Oct 22\",\"Oct 23\",\"Oct 24\",\"Oct 25\",\"Oct 26\",\"Oct 27\",\"Oct 28\",\"Oct 29\",\"Oct 30\",\"Oct 31\",\"Nov 1\",\"Nov 2\",\"Nov 3\",\"Nov 4\",\"Nov 5\",\"Nov 6\",\"Nov 7\",\"Nov 8\",\"Nov 9\",\"Nov 10\",\"Nov 11\",\"Nov 12\",\"Nov 13\",\"Nov 14\",\"Nov 15\",\"Nov 16\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "array",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 18"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 19"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 20"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 21"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 22"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 23"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 24"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 25"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 26"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 27"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 28"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 29"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 30"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Oct 31"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 1"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 2"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 3"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 4"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 5"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 6"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 7"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 8"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 9"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 10"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 11"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 12"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 13"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 14"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 15"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Nov 16"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
   },
   "datasources": {
-    "bitly": {
+    "bitly-01": {
       "service": "bitly",
-      "libraryAlias": "bitlyClicksByDayLast30Days",
-      "name": "Bitly Clicks by Day (Last 30 Days)",
-      "description": "Daily clicks to your Bitly links for the last 30 days. Originates from the Gallery.",
+      "libraryAlias": "bitlyLinkClicks",
+      "name": "Bitly Link Clicks for {{ds.bitly.link}} (Last 30 Days)",
+      "description": "Retrieve daily stats for a specific Bitlink. Originates from the Gallery.",
       "type": "simple_rest",
       "format": "json",
       "refreshInterval": 14400,
       "props": {
-        "endpoint_url": "https://api-ssl.bitly.com/v3/user/clicks?days=30",
+        "endpoint_url": "https://api-ssl.bitly.com/v3/link/clicks?link=http://{{ds.bitly.link}}&unit=day&units=30&rollup=false",
         "method": "get"
       }
     }
   },
   "dsMappings": {
-    "bitly": "ca42a89148a3de710904niktawuzhere"
+    "bitly-01": "9918a1654fcbfa9cd3bcnatceewzhere"
   },
   "services": [
     {
       "service": "bitly"
+    }
+  ],
+  "datasourceConfigModel": [
+    {
+      "type": "text",
+      "id": "ds.bitly.link",
+      "label": "Bitlink",
+      "description": "Enter your Bitlink URL"
     }
   ]
 }
