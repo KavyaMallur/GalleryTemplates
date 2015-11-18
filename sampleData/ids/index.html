@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>JavaScript And JSON</title>
+  <meta charset="utf-8" />
+  <title>JavaScript And JSON</title>
 </head>
 <body>
 <textarea id="input"rows="4" cols="50">
     
 </textarea>
 <button onclick="myFunction()">Get IDS</button>
-<div id="output" style="display:iniline; width:100px">
+<div id="output" style="display:iniline; width:500px">
 </div>
    
 
@@ -18,16 +18,26 @@
         var output = '';
         var info = JSON.parse(document.getElementById("input").value);
         for (var i = 0; i < info.components.length; i++) {
-            for (var j = 0; j < info.components[i].components.length; j++) {
+      if (info.components[i].components) {
+        for (var j = 0; j < info.components[i].components.length; j++) {
                    if (info.components[i].components[j].formulas.length > 0){
                    console.log(info.components[i].components[j].id);
                    output += '<span>' +
-                    info.components[i].components[j].id +
+                    info.components[i].components[j].id + ' : ' + info.components[i].components[j].displayName +
                     '</snap></br>';
                    }
                 }
                 
-            }
+            } else {
+        if (info.components[i].formulas){
+                   console.log(info.components[i].id);
+                   output += '<span>' +
+                    info.components[i].id + ' : ' + info.components[i].displayName +
+                    '</snap></br>';
+        }
+      }
+    }
+            
         var update = document.getElementById("output").innerHTML = output;
             
         //}
