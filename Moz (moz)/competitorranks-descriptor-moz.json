@@ -1,0 +1,185 @@
+{
+    "name": "Moz Competitors Ranks",
+    "description": "Display the Social Rank of your Competitors. Originates from the Gallery.",
+
+    "datasources": {
+        "twitter": {
+            "service": "twitter",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Twitter Profile (Competitors)",
+            "libraryAlias": "TwitterProfile(Competitors)",
+            "refreshInterval": 86400,
+            "description": "Show your competitors's Moz URL stats. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
+                "method": "get"
+            }
+        },
+        "moz-01": {
+            "service": "moz",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Moz URL Metrics(Competitors)",
+            "libraryAlias": "MozURLMetrics(Competitors)",
+            "refreshInterval": 86400,
+            "description": "Show your Moz URL stats. Originates from the Gallery.",
+            "props": {
+                "body": "[\"{{ds.twitter.url1}}\",\"{{ds.twitter.url2}}\",\"{{ds.twitter.url3}}\"]",
+                "endpoint_url": "http://lsapi.seomoz.com/linkscape/url-metrics?Cols=141421159907324&AccessID={{auth.moz.apiKey}}&Expires={hash.getExpiryTime(240);}&Signature={hash.append(\"{{auth.moz.apiKey}}\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"{{auth.moz.apiSecret}}\").encodeBase64().encodeURL().printDigest();}",
+                "method": "post"
+            }
+        },
+        "moz-02": {
+            "service": "moz",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Moz Social Authority (Competitors)",
+            "libraryAlias": "MozSocialAuthority(Competitors)",
+            "refreshInterval": 86400,
+            "description": "Show your competitors's Moz URL stats. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.followerwonk.com/social-authority?screen_name={{ds.twitter.screenNames}};AccessID={{auth.mozSocial.accessId}};Timestamp={hash.getExpiryTime(240);};Signature={hash.append(\"{{auth.mozSocial.accessId}}\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"{{auth.mozSocial.secretKey}}\").encodeBase64().encodeURL().printDigest();}",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "twitter": "4af9eae7fc52537d5296doogeraspilk",
+        "moz-01": "9bd7842aefde218284e6doogeraspilk",
+        "moz-02": "faa72cad643910a4350adoogeraspilk"
+    },
+
+    "uiVariables": [{
+        "name": "KTMozSocialAuthorityWeighting",
+        "value": "0.5"
+    }],
+
+    "services": [{
+        "service": "twitter"
+    }, {
+        "service": "moz",
+        "authConfig": {
+            "type": "input",
+            "model": [{
+                "type": "text",
+                "id": "auth.moz.apiKey",
+                "description": "Don't know where to find your API and Secret Keys? Follow these steps to <a href='http://klipfolio.uservoice.com/knowledgebase/articles/640072-klip-gallery-moz#connect' target='_blank'>Find your API Key and Personal Key</a>.",
+                "label": "Moz API Key",
+                "ghostText": "964f68f54153686d0d5c5e063c727b1e",
+                "isRequired": true
+            }, {
+                "type": "text",
+                "id": "auth.moz.apiSecret",
+                "label": "Moz Secret Key",
+                "ghostText": "964f68f54153686d0d5c5e063c727b1e",
+                "isRequired": true
+            }, {
+                "type": "text",
+                "id": "auth.mozSocial.accessId",
+                "label": "Followerwonk Access ID",
+                "ghostText": "964f68f54153686d0d5c5e063c727b1e",
+                "isRequired": true
+            }, {
+                "type": "text",
+                "id": "auth.mozSocial.secretKey",
+                "label": "Followerwonk Secret Key",
+                "ghostText": "964f68f54153686d0d5c5e063c727b1e",
+                "isRequired": true
+            }]
+        }
+    }],
+
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.twitter.screenNames",
+        "label": "Twitter Handle 1",
+        "description": "Show the Social Ranks of your competitors",
+        "isRequired": true,
+        "onChangeQueries" : [ "q1" ]
+    },
+    {
+      "type" : "select",
+      "id" : "ds.twitter.url1",
+      "label" : "URL 1",
+      "description":"Select the Competitors' URLs",
+      "isRequired" : true,
+      "onChangeQueries" : [ "q2" ]
+    },
+    {
+      "type" : "select",
+      "id" : "ds.twitter.url2",
+      "label" : "URL 2",
+      "isRequired" : true,
+      "onChangeQueries" : [ "q3" ]
+    },
+    {
+      "type" : "select",
+      "id" : "ds.twitter.url3",
+      "label" : "URL 3",
+      "isRequired" : true
+    }
+
+    ],
+    
+    "queries": [
+    {
+        "id": "q1",
+        "connector": {
+            "service": "twitter",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.twitter.url1",
+            "propField": "options",
+            "labels": "(/entities/url/urls/display_url)[1]",
+            "values": "(/entities/url/urls/display_url)[1]"
+        }
+      ]
+    },
+    {
+        "id": "q2",
+        "connector": {
+            "service": "twitter",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.twitter.url2",
+            "propField": "options",
+            "labels": "(/entities/url/urls/display_url)[2]",
+            "values": "(/entities/url/urls/display_url)[2]"
+        }
+      ]
+    },
+    {
+        "id": "q3",
+        "connector": {
+            "service": "twitter",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.twitter.url3",
+            "propField": "options",
+            "labels": "(/entities/url/urls/display_url)[3]",
+            "values": "(/entities/url/urls/display_url)[3]"
+        }]
+    }]
+
+}
