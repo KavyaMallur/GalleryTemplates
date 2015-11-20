@@ -1,0 +1,63 @@
+{
+	"name" : "Trello Comments Timeline",
+	"description" : "See the Trello comments timeline. Originates from the Gallery.",
+
+	"datasources" : {
+		"trello" : {
+			"service" : "trello",
+			"libraryAlias" : "TrelloGetActionsforBoard",
+			"name": "Trello Get Actions for Board",
+			"description" : "Provide board actions. Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 3600,
+			"props" : { 
+				"endpoint_url": "https://api.trello.com/1/boards/{{ds.trello.board}}/actions?key={{auth.trello.apiKey}}&token={{auth.trello.apiToken}}",
+            	"method": "get"
+ 			}
+		}
+	},
+
+	"dsMappings" : {
+		"trello" : "1f9470e8c6c78a51fdb9KavyaMallur9"	
+	},
+
+	"services" : [
+		{
+			"service" : "trello"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+            "type" : "select",
+            "id" : "ds.trello.board",
+            "label" : "Board",
+            "description":"Select your Trello board.",
+            "isRequired" : true
+        }
+	],
+
+	"queries": [
+        {
+            "errorMessage":"Make sure you have provided used valid Trello API key and Token combination.",
+            "connector": {
+                "service": "trello",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.trello.com/1/members/me/boards?key={{auth.trello.apiKey}}&token={{auth.trello.apiToken}}",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.trello.board", 
+                    "propField" : "options", 
+                    "labels": "/name",  
+                    "values": "/id" 
+                }
+            ]
+        }
+    ]
+}
