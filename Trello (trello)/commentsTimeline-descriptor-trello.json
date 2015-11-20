@@ -1,46 +1,199 @@
 {
-	"name" : "Trello Comments Timeline",
-	"description" : "See the Trello comments timeline. Originates from the Gallery.",
-
-	"datasources" : {
-		"trello" : {
-			"service" : "trello",
-			"libraryAlias" : "TrelloGetActionsforBoard",
-			"name": "Trello Get Actions for Board",
-			"description" : "Provide board actions. Originates from the Gallery.",
-			"type" : "simple_rest",
-			"format" : "json",
-			"refreshInterval" : 3600,
-			"props" : { 
-				"endpoint_url": "https://api.trello.com/1/boards/{{ds.trello.board}}/actions?key={{auth.trello.apiKey}}&token={{auth.trello.apiToken}}",
-            	"method": "get"
- 			}
-		}
-	},
-
-	"dsMappings" : {
-		"trello" : "1f9470e8c6c78a51fdb9KavyaMallur9"	
-	},
-
-	"services" : [
-		{
-			"service" : "trello"
-		}
-	],
-
-	"datasourceConfigModel" : [
-		{
-            "type" : "select",
-            "id" : "ds.trello.board",
-            "label" : "Board",
-            "description":"Select your Trello board.",
-            "isRequired" : true
+    "name": "Trello Comments Timeline",
+    "description": "See the Trello comments timeline. Originates from the Gallery.",
+    "sampleFormulas": {
+        "a0460df5-4": {
+            "txt": "array(\"Kenneth Lopez\",\"Jose Taylor\",\"Richard Hernandez\",\"John Martinez\",\"William Jupiter\",\"George Young\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Kenneth Lopez"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Jose Taylor"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Richard Hernandez"
+                            },
+                            {
+                                "t": "l",
+                                "v": "John Martinez"
+                            },
+                            {
+                                "t": "l",
+                                "v": "William Jupiter"
+                            },
+                            {
+                                "t": "l",
+                                "v": "George Young"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "c93be82a-1": {
+            "txt": "array(\"Mixpanel Update\",\"Cool possibilities\",\"More saving\",\"Entry in Salesforce\",\"Added to issue list\",\"Sell and love it\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Mixpanel Update"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Cool possibilities"
+                            },
+                            {
+                                "t": "l",
+                                "v": "More saving"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Entry in Salesforce"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Added to issue list"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Sell and love it"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "d5f034aa-2": {
+            "txt": "array(\"2015-04-15\",\"2015-07-26\",\"2015-07-29\",\"2015-11-04\",\"2015-11-04\",\"2015-11-20\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "2015-04-15"
+                            },
+                            {
+                                "t": "l",
+                                "v": "2015-07-26"
+                            },
+                            {
+                                "t": "l",
+                                "v": "2015-07-29"
+                            },
+                            {
+                                "t": "l",
+                                "v": "2015-11-04"
+                            },
+                            {
+                                "t": "l",
+                                "v": "2015-11-04"
+                            },
+                            {
+                                "t": "l",
+                                "v": "2015-11-20"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "e1d72abd-3": {
+            "txt": "array(\"New card created for adding documentation\",\"Invited the customers to discuss about possible UX changes\",\"Stakeholders are provided with the document\",\"Card created for connecting People\",\"Development issue raised\",\"Released the version 10.0\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "New card created for adding documentation"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Invited the customers to discuss about possible UX changes"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Stakeholders are provided with the document"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Card created for connecting People"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Development issue raised"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Released the version 10.0"
+                            }
+                        ]
+                    }
+                ]
+            }
         }
-	],
-
-	"queries": [
+    },
+    "datasources": {
+        "trello": {
+            "service": "trello",
+            "libraryAlias": "TrelloGetActionsforBoard",
+            "name": "Trello Get Actions for Board",
+            "description": "Provide board actions. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 3600,
+            "props": {
+                "endpoint_url": "https://api.trello.com/1/boards/{{ds.trello.board}}/actions?key={{auth.trello.apiKey}}&token={{auth.trello.apiToken}}",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "trello": "1f9470e8c6c78a51fdb9KavyaMallur9"
+    },
+    "services": [
         {
-            "errorMessage":"Make sure you have provided used valid Trello API key and Token combination.",
+            "service": "trello"
+        }
+    ],
+    "datasourceConfigModel": [
+        {
+            "type": "select",
+            "id": "ds.trello.board",
+            "label": "Board",
+            "description": "Select your Trello board.",
+            "isRequired": true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage": "Make sure you have provided used valid Trello API key and Token combination.",
             "connector": {
                 "service": "trello",
                 "type": "simple_rest",
@@ -52,10 +205,10 @@
             },
             "results": [
                 {
-                    "propId" : "ds.trello.board", 
-                    "propField" : "options", 
-                    "labels": "/name",  
-                    "values": "/id" 
+                    "propId": "ds.trello.board",
+                    "propField": "options",
+                    "labels": "/name",
+                    "values": "/id"
                 }
             ]
         }
