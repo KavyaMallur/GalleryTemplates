@@ -422,11 +422,11 @@
             "type": "simple_rest",
             "format": "json",
             "name": "Twitter Profile (Competitors)",
-            "libraryAlias": "TwitterProfile(Competitors)",
+            "libraryAlias": "TwitterProfileCompetitors",
             "refreshInterval": 86400,
             "description": "Show your competitors' Twitter Profile. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.competitor1}},{{ds.twitter.competitor2}},{{ds.twitter.competitor3}}",
                 "method": "get"
             }
         },
@@ -435,11 +435,11 @@
             "type": "simple_rest",
             "format": "json",
             "name": "Moz URL Metrics (Competitors)",
-            "libraryAlias": "MozURLMetrics(Competitors)",
+            "libraryAlias": "MozURLMetricsCompetitors",
             "refreshInterval": 86400,
             "description": "Show your competitors' Moz URL metrics. Originates from the Gallery.",
             "props": {
-                "body": "[\"{{ds.twitter.url1}}\",\"{{ds.twitter.url2}}\",\"{{ds.twitter.url3}}\"]",
+                "body": "[\"{{ds.moz.competitorUrl1}}\",\"{{ds.moz.competitorUrl2}}\",\"{{ds.moz.competitorUrl3}}\"]",
                 "endpoint_url": "http://lsapi.seomoz.com/linkscape/url-metrics?Cols=141421159907324&AccessID={{auth.moz.accessId}}&Expires={hash.getExpiryTime(240);}&Signature={hash.append(\"{{auth.moz.accessId}}\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"{{auth.moz.secretKey}}\").encodeBase64().encodeURL().printDigest();}",
                 "method": "post"
             }
@@ -449,11 +449,11 @@
             "type": "simple_rest",
             "format": "json",
             "name": "Moz Social Authority (Competitors)",
-            "libraryAlias": "MozSocialAuthority(Competitors)",
+            "libraryAlias": "MozSocialAuthorityCompetitors",
             "refreshInterval": 86400,
             "description": "Show your competitors' Moz Social Authority. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.followerwonk.com/social-authority?screen_name={{ds.twitter.screenNames}};AccessID={{auth.mozSocial.accessId}};Timestamp={hash.getExpiryTime(240);};Signature={hash.append(\"{{auth.mozSocial.accessId}}\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"{{auth.mozSocial.secretKey}}\").encodeBase64().encodeURL().printDigest();}",
+                "endpoint_url": "https://api.followerwonk.com/social-authority?screen_name={{ds.twitter.competitor1}},{{ds.twitter.competitor2}},{{ds.twitter.competitor3}};AccessID={{auth.mozSocial.accessId}};Timestamp={hash.getExpiryTime(240);};Signature={hash.append(\"{{auth.mozSocial.accessId}}\").appendNewLine().append(hash.getExpiryTime(240)).encodeHmacSha1(\"{{auth.mozSocial.secretKey}}\").encodeBase64().encodeURL().printDigest();}",
                 "method": "get"
             }
         }
@@ -508,109 +508,43 @@
 
     "datasourceConfigModel": [{
             "type": "text",
-            "id": "ds.twitter.screenNames",
-            "label": "Twitter Handles",
-            "description": "Show the Social Ranks of your competitors",
-            "ghostText": "company1,company2,company3",
+            "id": "ds.twitter.competitor1",
+            "label": "Twitter Handle 1",
+            "description": "Enter Competitor 1's twitter handle and website",
+            "ghostText": "competitor1",
             "isRequired": true
-        }, {
-            "type": "select",
-            "id": "ds.twitter.screenName",
-            "label": "Twitter Profile",
-            "description": "Your Twitter Handle",
-            "isRequired": true,
-            "onChangeQueries": ["q1"]
-        }, {
-            "type": "select",
-            "id": "ds.twitter.url1",
+        },{
+            "type": "text",
+            "id": "ds.moz.competitorUrl1",
             "label": "URL 1",
-            "description": "Select the Competitors' URLs",
-            "isRequired": true,
-            "onChangeQueries": ["q2"]
-        }, {
-            "type": "select",
-            "id": "ds.twitter.url2",
-            "label": "URL 2",
-            "isRequired": true,
-            "onChangeQueries": ["q3"]
-        }, {
-            "type": "select",
-            "id": "ds.twitter.url3",
-            "label": "URL 3",
+            "ghostText": "competitor1.com",
             "isRequired": true
-        }
-
-    ],
-
-    "queries": [{
-            "connector": {
-                "service": "twitter",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.twitter.com/1.1/account/verify_credentials.json",
-                    "method": "get"
-                }
-            },
-            "results": [{
-                "propId": "ds.twitter.screenName",
-                "propField": "options",
-                "labels": "/screen_name",
-                "values": "/screen_name"
-            }]
-        },
-
-        {
-            "id": "q1",
-            "connector": {
-                "service": "twitter",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
-                    "method": "get"
-                }
-            },
-            "results": [{
-                "propId": "ds.twitter.url1",
-                "propField": "options",
-                "labels": "(/entities/url/urls/display_url)[1]",
-                "values": "(/entities/url/urls/display_url)[1]"
-            }]
-        }, {
-            "id": "q2",
-            "connector": {
-                "service": "twitter",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
-                    "method": "get"
-                }
-            },
-            "results": [{
-                "propId": "ds.twitter.url2",
-                "propField": "options",
-                "labels": "(/entities/url/urls/display_url)[2]",
-                "values": "(/entities/url/urls/display_url)[2]"
-            }]
-        }, {
-            "id": "q3",
-            "connector": {
-                "service": "twitter",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenNames}}",
-                    "method": "get"
-                }
-            },
-            "results": [{
-                "propId": "ds.twitter.url3",
-                "propField": "options",
-                "labels": "(/entities/url/urls/display_url)[3]",
-                "values": "(/entities/url/urls/display_url)[3]"
-            }]
+        },{
+            "type": "text",
+            "id": "ds.twitter.competitor2",
+            "label": "Twitter Handle 2",
+            "description": "Enter Competitor 2's twitter handle and website",
+            "ghostText": "competitor2.com",
+            "isRequired": true
+        },{
+            "type": "text",
+            "id": "ds.moz.competitorUrl2",
+            "label": "URL 2",
+            "ghostText": "competitor3.com",
+            "isRequired": true
+        },{
+            "type": "text",
+            "id": "ds.twitter.competitor3",
+            "label": "Twitter Handle 3",
+            "description": "Enter Competitor 3's twitter handle and website",
+            "ghostText": "competitor3",
+            "isRequired": true
+        },{
+            "type": "text",
+            "id": "ds.moz.competitorUrl3",
+            "label": "URL 3",
+            "ghostText": "competitor1.com",
+            "isRequired": true
         }
     ]
 
