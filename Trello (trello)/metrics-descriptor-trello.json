@@ -1,0 +1,176 @@
+{
+    "name": "Trello Metrics",
+    "description": "See the Trello cards metrics for a selected board. Originates from the Gallery.",
+    "sampleFormulas": {
+        "4b78e4aa-2": {
+            "txt": "array(\"56\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "56"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "451503dc-3": {
+            "txt": "array(\"Overdue Cards\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Overdue Cards"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "a484a5d6": {
+            "txt": "array(\"10\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "10"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "1cdf3bf7": {
+            "txt": "array(\"Cards Due Today\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Cards Due Today"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "5965d58f": {
+            "txt": "array(\"22\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "22"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "78e52d4e": {
+            "txt": "array(\"Cards Due This Week\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Cards Due This Week"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+
+    "datasources": {
+        "trello": {
+            "service": "trello",
+            "libraryAlias": "TrelloCardsonBoard({{ds.trello.board}})",
+            "name": "Trello Cards on Board ({{ds.trello.board}})",
+            "description": "Provide board actions. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 3600,
+            "props": {
+                "endpoint_url": "https://api.trello.com/1/boards/{{ds.trello.board}}/cards?key={{auth.trello.apiKey}}&token={{auth.trello.apiToken}}",
+                "method": "get"
+            }
+
+        }
+    },
+    "dsMappings": {
+        "trello": "918c55c563202b0841b3KavyaMallur9"
+    },
+    "services": [
+        {
+            "service": "trello"
+        }
+    ],
+    "datasourceConfigModel": [
+        {
+            "type": "select",
+            "id": "ds.trello.board",
+            "label": "Board",
+            "description": "Select your Trello board.",
+            "isRequired": true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage": "Make sure you have provided used valid Trello API key and Token combination.",
+            "connector": {
+                "service": "trello",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.trello.com/1/members/me/boards?key={{auth.trello.apiKey}}&token={{auth.trello.apiToken}}",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                {
+                    "propId": "ds.trello.board",
+                    "propField": "options",
+                    "labels": "/name",
+                    "values": "/id"
+                }
+            ]
+        }
+    ]
+}
