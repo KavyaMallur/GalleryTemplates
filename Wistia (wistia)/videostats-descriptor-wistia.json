@@ -1,0 +1,169 @@
+{
+    "name": "Wistia Video Stats",
+    "description": "See the statistics of one of your recent Wistia videos. Originates from the Gallery.",
+
+"sampleFormulas": {
+
+        "fb1127ec-2": {
+            "txt": "\"https://embed-ssl.wistia.com/deliveries/7b61f095b3e8935ece17d2a2401fd8a16d4ff762.jpg?image_crop_resized=100x60\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://embed-ssl.wistia.com/deliveries/7b61f095b3e8935ece17d2a2401fd8a16d4ff762.jpg?image_crop_resized=100x60"
+                }]
+            }
+        },
+
+        "b18ab523-5": {
+            "txt": "\"563\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "563"
+                }]
+            }
+        },
+
+        "4e66e1b3-6": {
+            "txt": "\"Play Count\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Play Count"
+                }]
+            }
+        },
+
+        "dfc3f553-8": {
+            "txt": "\"0.745\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.745"
+                }]
+            }
+        },
+
+        "978b3a50-9": {
+            "txt": "\"Engagement\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Engagement"
+                }]
+            }
+        },
+
+        "357ba507-12": {
+            "txt": "\"0.89\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.89"
+                }]
+            }
+        },
+
+        "80768d5f-13": {
+            "txt": "\"Play Rate\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Play Rate"
+                }]
+            }
+        },
+
+        "56cdb7a3-3": {
+            "txt": "\"Building Amazing Klips\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Building Amazing Klips"
+                }]
+            }
+        }
+    },
+
+    "datasources": {
+        "wistia-01": {
+            "service": "wistia",
+            "name": "Wistia Video Metadata",
+            "libraryAlias": "WistiaVideoMetadata",
+            "description": "Retrieve the information of your Wistia video. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.wistia.com/v1/medias/{{ds.wistia.hashedId}}.json",
+                "basic_auth_username": "api",
+                "basic_auth_password": "{{auth.wistia.apiToken}}",
+                "method": "get"
+            }
+        },
+        "wistia-02": {
+            "service": "wistia",
+            "name": "Wistia Video Stats",
+            "libraryAlias": "WistiaVideoStats",
+            "description": "Retrieve the statistics of your Wistia video. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.wistia.com/v1/stats/medias/{{ds.wistia.hashedId}}.json",
+                "basic_auth_username": "api",
+                "basic_auth_password": "{{auth.wistia.apiToken}}",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "wistia-01": "762cfe7c58c574cf9071doogeraspilk",
+        "wistia-02": "61cd01a434cf01c9a994doogeraspilk"
+    },
+    "services": [{
+        "service": "wistia"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.wistia.hashedId",
+        "label": "Video",
+        "description": "Select from the most recent 25 videos in your Wistia account"
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Wistia API Token.",
+        "connector": {
+            "service": "wistia",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.wistia.com/v1/medias.json?sort_by=created&sort_direction=0&per_page=25",
+                "basic_auth_username": "api",
+                "basic_auth_password": "{{auth.wistia.apiToken}}",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.wistia.hashedId",
+            "propField": "options",
+            "labels": "/name",
+            "values": "/hashed_id"
+        }]
+    }]
+}
