@@ -1,0 +1,196 @@
+{
+   "title": "HubSpot Academy RSS Feed",
+   "id": "78472f5ce5ff3c08922e497b550c0264",
+   "workspace": {
+      "datasources": [
+         "7ff664ec27a65892ed43doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 400
+      }
+   },
+   "components": [
+      {
+         "type": "news_reader",
+         "id": "095b37bb-8",
+         "displayName": "News",
+         "components": [
+            {
+               "type": "proxy",
+               "role": "headline",
+               "id": "1cd5fc8c-9",
+               "displayName": "Headline",
+               "formulas": [
+                  {
+                     "txt": "7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/title;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "7ff664ec27a65892ed43doogeraspilk",
+                                 "a": "/rss/channel/item/title"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "abstract",
+               "id": "d23a8fed-10",
+               "displayName": "Content",
+               "formulas": [
+                  {
+                     "txt": "substitute_regex(7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/description;,\"(src=)|(alt=)|(title=)|(style=)|(height=)|(width=)\",\"\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "substitute_regex",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7ff664ec27a65892ed43doogeraspilk",
+                                       "a": "/rss/channel/item/description"
+                                    }
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "(src=)|(alt=)|(title=)|(style=)|(height=)|(width=)"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": ""
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "occurrence",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "href",
+               "id": "34146745-11",
+               "displayName": "Link",
+               "formulas": [
+                  {
+                     "txt": "7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/link;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "7ff664ec27a65892ed43doogeraspilk",
+                                 "a": "/rss/channel/item/link"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "img",
+               "id": "04dc9f64-12",
+               "displayName": "Image",
+               "formulas": [],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "author",
+               "id": "9718f1a8-13",
+               "displayName": "Author",
+               "formulas": [
+                  {
+                     "txt": "lookup(7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/dc:date;,7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/dc:date[preceding-sibling::author];,7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/author;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7ff664ec27a65892ed43doogeraspilk",
+                                       "a": "/rss/channel/item/dc:date"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7ff664ec27a65892ed43doogeraspilk",
+                                       "a": "/rss/channel/item/dc:date[preceding-sibling::author]"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7ff664ec27a65892ed43doogeraspilk",
+                                       "a": "/rss/channel/item/author"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "date",
+               "id": "9a27cb68-14",
+               "displayName": "Date",
+               "formulas": [
+                  {
+                     "txt": "7ff664ec27a65892ed43doogeraspilk@/rss/channel/item/pubDate;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "7ff664ec27a65892ed43doogeraspilk",
+                                 "a": "/rss/channel/item/pubDate"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            }
+         ]
+      }
+   ]
+}
