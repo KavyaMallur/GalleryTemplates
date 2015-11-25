@@ -1,0 +1,184 @@
+{
+    "name": "Buffer Twitter Retweets (Last 7 Days)",
+    "description": "Provide twitter retweets over last 7 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "2d05eae0-1": {
+            "txt": "array(\"100% more\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "100% more"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "adeb9d60-2": {
+            "txt": "array(\"0 vs 193 (last 7 days)\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "0 vs 193 (last 7 days)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "e7d25656": {
+            "txt": "array(\"0\",\"0\",\"193\",\"0\",\"0\",\"0\",\"0\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "0"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0"
+                            },
+                            {
+                                "t": "l",
+                                "v": "193"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "23fc74c2": {
+            "txt": "array(\"Nov 18\",\"Nov 19\",\"Nov 20\",\"Nov 21\",\"Nov 22\",\"Nov 23\",\"Nov 24\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Nov 18"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 19"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 20"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 21"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 22"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 23"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 24"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "buffer": {
+            "service": "buffer",
+            "libraryAlias": "BufferTwitterUpdatesSent",
+            "name": "Buffer Twitter Updates Sent",
+            "description": "Provide twitter reach and posts. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.bufferapp.com/1/profiles/{{ds.buffer.twitterProfile}}/updates/sent.json?since={date.add(-30).format('epochTime')}&count=100",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "buffer": "25fe9cc6d97e80ab7df7KavyaMallur9"
+    },
+    "services": [
+        {
+            "service": "buffer"
+        }
+    ],
+    "datasourceConfigModel": [
+        {
+            "type": "select",
+            "id": "ds.buffer.twitterProfile",
+            "label": "Profile",
+            "description": "Select your twitter profile",
+            "isRequired": true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage": "Make sure you have configured twitter as one of the buffer profiles",
+            "connector": {
+                "service": "buffer",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.bufferapp.com/1/profiles.json",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                {
+                    "propId": "ds.buffer.twitterProfile",
+                    "propField": "options",
+                    "labels": "/formatted_service[following-sibling::service='twitter']",
+                    "values": "/id[following-sibling::service='twitter']"
+                }
+            ]
+        }
+    ]
+}
