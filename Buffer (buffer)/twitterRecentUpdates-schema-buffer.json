@@ -1,5 +1,5 @@
 {
-   "title": "Buffer Twitter Recent Updates (Last 30 Days)",
+   "title": "Buffer Recent Tweets (Last 30 Days)",
    "id": "0476d876588a94fa3d7888fe2307b60a",
    "workspace": {
       "datasources": [
@@ -64,7 +64,7 @@
                "name": "Text",
                "index": 0,
                "fw": "fixed",
-               "w": "40%",
+               "w": "45%",
                "wrap": "active"
             },
             {
@@ -92,241 +92,116 @@
                ],
                "formulas": [
                   {
-                     "txt": "concat(replace(if((contains(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"th\")),(date_convert(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"EEEE dd'th' MMMM\",\"MMM dd\")),if((contains(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"rd\")),(date_convert(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"EEEE dd'rd' MMMM\",\"MMM dd\")),if((contains(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"nd\")),(date_convert(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"EEEE dd'nd' MMMM\",\"MMM dd\")),(date_convert(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"EEEE dd'st' MMMM\",\"MMM dd\"))))),blank(),datevalue(today(),\"MMM dd\")),\", \",25fe9cc6d97e80ab7df7KavyaMallur9@/updates/due_time;)",
+                     "txt": "if((count(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;)>\"0\"),concat(date_convert(substitute_regex(replace(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"Today\",datevalue(today(),\"MMM dd\")),\"th |nd |rd |st \",\" \"),\"EEEE dd MMMM\",\"MMM dd\"),\", \",25fe9cc6d97e80ab7df7KavyaMallur9@/updates/due_time;),date_convert(substitute_regex(replace(25fe9cc6d97e80ab7df7KavyaMallur9@/updates/day;,\"Today\",datevalue(today(),\"MMM dd\")),\"th |nd |rd |st \",\" \"),\"EEEE dd MMMM\",\"MMM dd\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "concat",
+                              "v": "if",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "replace",
+                                    "t": "expr",
+                                    "v": false,
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "if",
+                                          "v": "count",
                                           "c": [
                                              {
-                                                "t": "expr",
-                                                "v": false,
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "contains",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                               "a": "/updates/day"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "th"
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "expr",
-                                                "v": false,
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "date_convert",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                               "a": "/updates/day"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "EEEE dd'th' MMMM"
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "MMM dd"
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "if",
-                                                "c": [
-                                                   {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "contains",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                                     "a": "/updates/day"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "rd"
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "date_convert",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                                     "a": "/updates/day"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "EEEE dd'rd' MMMM"
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "MMM dd"
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "f",
-                                                      "v": "if",
-                                                      "c": [
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "contains",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                                           "a": "/updates/day"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "nd"
-                                                                     }
-                                                                  ]
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "date_convert",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                                           "a": "/updates/day"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "EEEE dd'nd' MMMM"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "MMM dd"
-                                                                     }
-                                                                  ]
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "date_convert",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                                                           "a": "/updates/day"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "EEEE dd'st' MMMM"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "MMM dd"
-                                                                     }
-                                                                  ]
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "blank",
-                                          "c": [
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "count",
-                                                   "optional": true
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
+                                                   "a": "/updates/day"
                                                 }
                                              }
                                           ]
                                        },
                                        {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "concat",
+                                    "c": [
+                                       {
                                           "t": "f",
-                                          "v": "datevalue",
+                                          "v": "date_convert",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "today",
+                                                "v": "substitute_regex",
                                                 "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "replace",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
+                                                               "a": "/updates/day"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Today"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "datevalue",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "MMM dd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "th |nd |rd |st "
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": " "
+                                                   },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "timezone",
+                                                         "placeholder": "occurrence",
                                                          "optional": true
                                                       }
                                                    }
@@ -334,38 +209,119 @@
                                              },
                                              {
                                                 "t": "l",
+                                                "v": "EEEE dd MMMM"
+                                             },
+                                             {
+                                                "t": "l",
                                                 "v": "MMM dd"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ", "
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
+                                             "a": "/updates/due_time"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "substitute_regex",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "replace",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
+                                                         "a": "/updates/day"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "Today"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "MMM dd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "th |nd |rd |st "
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": " "
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
-                                                   "placeholder": "timezone",
+                                                   "placeholder": "occurrence",
                                                    "optional": true
                                                 }
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "EEEE dd MMMM"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM dd"
                                        }
                                     ]
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": ", "
-                                 },
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "25fe9cc6d97e80ab7df7KavyaMallur9",
-                                       "a": "/updates/due_time"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
                                  }
                               ]
                            }
@@ -380,7 +336,10 @@
                ],
                "name": "Sent",
                "index": 1,
-               "align": "left"
+               "fw": "fixed",
+               "w": "15%",
+               "align": "left",
+               "wrap": "active"
             },
             {
                "type": "table_col",
