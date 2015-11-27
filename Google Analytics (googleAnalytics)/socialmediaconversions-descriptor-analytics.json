@@ -1,80 +1,329 @@
-{  
-   "name":"Social Media Conversions",
-   "description":"Compare conversion rates from various social media platforms over the past 30 days. Originates from the Gallery.",
-   "datasources":{  
-      "googleAnalytics-01":{  
-         "service":"google_analytics",
-         "libraryAlias":"GASocialConversion",
-         "name":"GA Social Conversion",
-         "description":"Track sessions to your website via social media for the last 30 days. Originates from the Gallery.",
-         "type":"google_analytics",
-         "format":"csv",
-         "refreshInterval":14400,
-         "props":{
-            "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "endpoint_url":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "max_pages":"1",
-            "mode":"Advanced",
-            "profile":"{{ds.google_analytics.profileId}}",
-            "timePeriod":"&start-date=30daysAgo&end-date=yesterday"
-         }
-      },
-      "googleAnalytics-02":{  
-         "service":"google_analytics",
-         "libraryAlias":"GASocialConversionPrevPeriod",
-         "name":"GA Social Conversion (Prev Period)",
-         "description":"Track sessions to your website via social media for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
-         "type":"google_analytics",
-         "format":"csv",
-         "refreshInterval":14400,
-         "props":{
-            "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "endpoint_url":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "max_pages":"1",
-            "mode":"Advanced",
-            "profile":"{{ds.google_analytics.profileId}}",
-            "timePeriod":"&start-date=60daysAgo&end-date=31daysAgo"
-         }
-      }
-   },
-   "dsMappings":{  
-      "googleAnalytics-01":"587a9bf3d3694112e7cfdoogeraspilk",
-      "googleAnalytics-02":"f6f1b65d86225a03b355doogeraspilk"
-   },
-   "services":[  
-      {  
-         "service":"google_analytics"
-      }
-   ],
-   "datasourceConfigModel":[  
-      {
-            "type" : "select",
-            "id" : "ds.google_analytics.profileId",
-            "label" : "Analytics Account",
-            "description" : "Select an Analytics Account from the drop-down list.",
-            "isRequired" : true
+{
+    "name": "Social Media Conversions",
+    "description": "Compare conversion rates from various social media platforms over the past 30 days. Originates from the Gallery.",
+
+    "sampleFormulas": {
+        "09f09359-11": {
+            "txt": "array(\"Twitter\",\"LinkedIn\",\"Facebook\",\"Quora\",\"Google+\",\"Blogger\",\"Pocket\",\"Youtube\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Twitter"
+                    }, {
+                        "t": "l",
+                        "v": "LinkedIn"
+                    }, {
+                        "t": "l",
+                        "v": "Facebook"
+                    }, {
+                        "t": "l",
+                        "v": "Quora"
+                    }, {
+                        "t": "l",
+                        "v": "Google+"
+                    }, {
+                        "t": "l",
+                        "v": "Blogger"
+                    }, {
+                        "t": "l",
+                        "v": "Pocket"
+                    }, {
+                        "t": "l",
+                        "v": "Youtube"
+                    }]
+                }]
+            }
+        },
+
+        "0a9849f5-13": {
+            "txt": "array(\"76\",\"26\",\"14\",\"12\",\"4\",\"2\",\"2\",\"2\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "76"
+                    }, {
+                        "t": "l",
+                        "v": "26"
+                    }, {
+                        "t": "l",
+                        "v": "14"
+                    }, {
+                        "t": "l",
+                        "v": "12"
+                    }, {
+                        "t": "l",
+                        "v": "4"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }]
+                }]
+            }
+        },
+        "6a52407c-15": {
+            "txt": "array(\"76\",\"26\",\"14\",\"12\",\"4\",\"2\",\"2\",\"2\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "76"
+                    }, {
+                        "t": "l",
+                        "v": "26"
+                    }, {
+                        "t": "l",
+                        "v": "14"
+                    }, {
+                        "t": "l",
+                        "v": "12"
+                    }, {
+                        "t": "l",
+                        "v": "4"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }]
+                }]
+            }
+        },
+        "1fbd5942-17": {
+            "txt": "array(\"64\",\"10\",\"6\",\"-14\",\"-6\",\"2\",\"2\",\"0\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "64"
+                    }, {
+                        "t": "l",
+                        "v": "10"
+                    }, {
+                        "t": "l",
+                        "v": "6"
+                    }, {
+                        "t": "l",
+                        "v": "-14"
+                    }, {
+                        "t": "l",
+                        "v": "-6"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "0"
+                    }]
+                }]
+            }
+        },
+        "00d058a2-19": {
+            "txt": "array(\"1924\",\"728\",\"920\",\"504\",\"188\",\"20\",\"28\",\"12\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1924"
+                    }, {
+                        "t": "l",
+                        "v": "728"
+                    }, {
+                        "t": "l",
+                        "v": "920"
+                    }, {
+                        "t": "l",
+                        "v": "504"
+                    }, {
+                        "t": "l",
+                        "v": "188"
+                    }, {
+                        "t": "l",
+                        "v": "20"
+                    }, {
+                        "t": "l",
+                        "v": "28"
+                    }, {
+                        "t": "l",
+                        "v": "12"
+                    }]
+                }]
+            }
+        },
+        "e2923990-21": {
+            "txt": "array(\"-158\",\"72\",\"-308\",\"-134\",\"-76\",\"10\",\"14\",\"-6\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "-158"
+                    }, {
+                        "t": "l",
+                        "v": "72"
+                    }, {
+                        "t": "l",
+                        "v": "-308"
+                    }, {
+                        "t": "l",
+                        "v": "-134"
+                    }, {
+                        "t": "l",
+                        "v": "-76"
+                    }, {
+                        "t": "l",
+                        "v": "10"
+                    }, {
+                        "t": "l",
+                        "v": "14"
+                    }, {
+                        "t": "l",
+                        "v": "-6"
+                    }]
+                }]
+            }
+        },
+        "2ec5ffe2-3": {
+            "txt": "array(\"0.67\",\"0.40\",\"0.29\",\"0.16\",\"0.14\",\"0.10\",\"0.09\",\"0.06\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "0.67"
+                    }, {
+                        "t": "l",
+                        "v": "0.40"
+                    }, {
+                        "t": "l",
+                        "v": "0.29"
+                    }, {
+                        "t": "l",
+                        "v": "0.16"
+                    }, {
+                        "t": "l",
+                        "v": "0.14"
+                    }, {
+                        "t": "l",
+                        "v": "0.10"
+                    }, {
+                        "t": "l",
+                        "v": "0.09"
+                    }, {
+                        "t": "l",
+                        "v": "0.06"
+                    }]
+                }]
+            }
         }
-   ],
-   "queries": [
-        {
-            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "google_analytics",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
-                    "method": "GET"
-                }
-            },
-            "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
-                }
-            ]
+    },
+
+    "datasources": {
+        "googleAnalytics-01": {
+            "service": "google_analytics",
+            "libraryAlias": "GASocialConversion",
+            "name": "GA Social Conversion",
+            "description": "Track sessions to your website via social media for the last 30 days. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+                "max_pages": "1",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date=30daysAgo&end-date=yesterday"
+            }
+        },
+        "googleAnalytics-02": {
+            "service": "google_analytics",
+            "libraryAlias": "GASocialConversionPrevPeriod",
+            "name": "GA Social Conversion (Prev Period)",
+            "description": "Track sessions to your website via social media for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+                "max_pages": "1",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date=60daysAgo&end-date=31daysAgo"
+            }
         }
-    ]
+    },
+    "dsMappings": {
+        "googleAnalytics-01": "587a9bf3d3694112e7cfdoogeraspilk",
+        "googleAnalytics-02": "f6f1b65d86225a03b355doogeraspilk"
+    },
+    "services": [{
+        "service": "google_analytics"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
 }
