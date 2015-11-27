@@ -1,100 +1,740 @@
 {
-	"name" : "GA: Website Performance (Last 30 Days)",
-	"description" : "Track your website's Avg. Bounce Rate, Avg. Pageviews, New Sessions, and Avg. Time on Site for the last 30 days. Originates from the Gallery.",
+    "name": "GA: Website Performance (Last 30 Days)",
+    "description": "Track your website's Avg. Bounce Rate, Avg. Pageviews, New Sessions, and Avg. Time on Site for the last 30 days. Originates from the Gallery.",
 
-	"datasources" : {
-		"googleAnalytics-01" : {
-			"service" : "google_analytics",
-			"libraryAlias" : "GAKPIs",
-			"name": "GA: KPIs (Last 30 Days)",
-			"description" : "Track your website's KPI's including sessions, pageviews, bounce rate, and more, for the last 30 days. Originates from the Gallery.",
-			"type" : "google_analytics",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : {
-				 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:newUsers,ga:percentNewSessions,ga:sessions,ga:bounces,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviews,ga:pageviewsPerSession&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
-				 "max_pages": "1",
-           		 "mode": "Simple",
-           		 "profile": "{{ds.google_analytics.profileId}}",
-           		  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
-			}
-		},
-		"googleAnalytics-02" : {
-			"service" : "google_analytics",
-			"libraryAlias" : "GAKPIsPrevPeriod",
-			"name": "GA: KPIs (Prev Period)",
-			"description" : "Key Google Analytics KPIs for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
-			"type" : "google_analytics",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:percentNewSessions,ga:sessions,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviewsPerSession,ga:pageviews,ga:newUsers,ga:bounces&start-date=60daysAgo&end-date=31daysAgo&max-results=10000",
-            	"endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:percentNewSessions,ga:sessions,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviewsPerSession,ga:pageviews,ga:newUsers,ga:bounces&start-date=60daysAgo&end-date=31daysAgo&max-results=10000",
-            	"max_pages": "1",
-            	"mode": "Advanced",
-            	"profile": "{{ds.google_analytics.profileId}}",
-            	"timePeriod": "&start-date=60daysAgo&end-date=31daysAgo"
+    "sampleFormulas": {
+
+        "597fb866": {
+            "txt": "\"Bounce Rate (Avg)\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Bounce Rate (Avg)"
+                }]
             }
-		},
-		"googleAnalytics-03" : {
-			"service" : "google_analytics",
-			"libraryAlias" : "KPIsbyDay",
-			"name": "GA: KPI's by Day (Last 30 Days)",
-			"description" : "Shows Users, New Users, Percent New Sessions, Sessions, Bounces, Bounce Rate, Avg. Session Duration, Goal Starts, Pageviews, and Pageviews per Session, by day for the last 30 days. Originates from the Gallery.",
-			"type" : "google_analytics",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : { 
-            	"endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:newUsers,ga:percentNewSessions,ga:sessions,ga:bounces,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviews,ga:pageviewsPerSession&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
-            	"max_pages": "10",
-            	"mode": "Simple",
-            	"profile": "{{ds.google_analytics.profileId}}",
-            	"timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+        },
+
+        "03520316": {
+            "txt": "\"0.4774\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.4774"
+                }]
             }
-		}
-	},
+        },
 
-	"dsMappings" : {
-		"googleAnalytics-01" :"4cd2b29b11d13657a71aniktawuzhere",
-		"googleAnalytics-02" :"d7aa40d101d91c59473dniktawuzhere",
-		"googleAnalytics-03" :"a017497b67d819dac62aniktawuzhere"
-	},
+        "0997a1cc": {
+            "txt": "array(\"42.328\",\"41.840\",\"43.160\",\"48.397\",\"41.944\",\"41.3023\",\"41.950\",\"40.631\",\"44.5985\",\"49.8283\",\"49.577\",\"40.9270\",\"39.998\",\"41.87\",\"42.252\",\"43.557\",\"52.6633\",\"49.143\",\"42.297\",\"47.0777\",\"47.6609\",\"48.6946\",\"52.600\",\"61.1144\",\"57.749\",\"51.151\",\"49.919\",\"51.501\",\"51.736\",\"49.23\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "42.328"
+                    }, {
+                        "t": "l",
+                        "v": "41.840"
+                    }, {
+                        "t": "l",
+                        "v": "43.160"
+                    }, {
+                        "t": "l",
+                        "v": "48.397"
+                    }, {
+                        "t": "l",
+                        "v": "41.944"
+                    }, {
+                        "t": "l",
+                        "v": "41.3023"
+                    }, {
+                        "t": "l",
+                        "v": "41.950"
+                    }, {
+                        "t": "l",
+                        "v": "40.631"
+                    }, {
+                        "t": "l",
+                        "v": "44.5985"
+                    }, {
+                        "t": "l",
+                        "v": "49.8283"
+                    }, {
+                        "t": "l",
+                        "v": "49.577"
+                    }, {
+                        "t": "l",
+                        "v": "40.9270"
+                    }, {
+                        "t": "l",
+                        "v": "39.998"
+                    }, {
+                        "t": "l",
+                        "v": "41.87"
+                    }, {
+                        "t": "l",
+                        "v": "42.252"
+                    }, {
+                        "t": "l",
+                        "v": "43.557"
+                    }, {
+                        "t": "l",
+                        "v": "52.6633"
+                    }, {
+                        "t": "l",
+                        "v": "49.143"
+                    }, {
+                        "t": "l",
+                        "v": "42.297"
+                    }, {
+                        "t": "l",
+                        "v": "47.0777"
+                    }, {
+                        "t": "l",
+                        "v": "47.6609"
+                    }, {
+                        "t": "l",
+                        "v": "48.6946"
+                    }, {
+                        "t": "l",
+                        "v": "52.600"
+                    }, {
+                        "t": "l",
+                        "v": "61.1144"
+                    }, {
+                        "t": "l",
+                        "v": "57.749"
+                    }, {
+                        "t": "l",
+                        "v": "51.151"
+                    }, {
+                        "t": "l",
+                        "v": "49.919"
+                    }, {
+                        "t": "l",
+                        "v": "51.501"
+                    }, {
+                        "t": "l",
+                        "v": "51.736"
+                    }, {
+                        "t": "l",
+                        "v": "49.23"
+                    }]
+                }]
+            }
+        },
+        "df8736a3": {
+            "txt": "\"\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": ""
+                }]
+            }
+        },
 
-	"services" : [
-		{
-			"service" : "google_analytics"
-		}
-	],
+        "e87e3251": {
+            "txt": "\"-0.286\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "-0.286"
+                }]
+            }
+        },
 
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.google_analytics.profileId",
-			"label" : "Analytics Account",
-			"description" : "Select an Analytics Account from the drop-down list.",
-			"isRequired" : true
-		}
-	],
-	"queries": [
-        {
-            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "google_analytics",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
-                    "method": "GET"
-                }
-            },
-            "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
-                }
-            ]
+        "7677a279": {
+            "txt": "\"0.6688\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.6688"
+                }]
+            }
+        },
+        "613c8012": {
+            "txt": "\"Pageviews (Avg)\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Pageviews (Avg)"
+                }]
+            }
+        },
+
+        "ed629719": {
+            "txt": "\"2.15\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "2.15"
+                }]
+            }
+        },
+
+        "65f53e8a": {
+            "txt": "array(\"2.0682\",\"2.181\",\"2.0940\",\"1.9758\",\"2.0457\",\"2.1967\",\"2.196\",\"2.1984\",\"2.206\",\"2.0496\",\"2.0927\",\"2.10\",\"2.271\",\"2.2520\",\"2.2496\",\"2.1486\",\"2.102\",\"1.971\",\"2.1821\",\"2.30\",\"2.066\",\"2.0201\",\"1.9858\",\"1.8471\",\"1.7013\",\"1.8057\",\"1.8734\",\"1.917\",\"1.8588\",\"1.834\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2.0682"
+                    }, {
+                        "t": "l",
+                        "v": "2.181"
+                    }, {
+                        "t": "l",
+                        "v": "2.0940"
+                    }, {
+                        "t": "l",
+                        "v": "1.9758"
+                    }, {
+                        "t": "l",
+                        "v": "2.0457"
+                    }, {
+                        "t": "l",
+                        "v": "2.1967"
+                    }, {
+                        "t": "l",
+                        "v": "2.196"
+                    }, {
+                        "t": "l",
+                        "v": "2.1984"
+                    }, {
+                        "t": "l",
+                        "v": "2.206"
+                    }, {
+                        "t": "l",
+                        "v": "2.0496"
+                    }, {
+                        "t": "l",
+                        "v": "2.0927"
+                    }, {
+                        "t": "l",
+                        "v": "2.10"
+                    }, {
+                        "t": "l",
+                        "v": "2.271"
+                    }, {
+                        "t": "l",
+                        "v": "2.2520"
+                    }, {
+                        "t": "l",
+                        "v": "2.2496"
+                    }, {
+                        "t": "l",
+                        "v": "2.1486"
+                    }, {
+                        "t": "l",
+                        "v": "2.102"
+                    }, {
+                        "t": "l",
+                        "v": "1.971"
+                    }, {
+                        "t": "l",
+                        "v": "2.1821"
+                    }, {
+                        "t": "l",
+                        "v": "2.30"
+                    }, {
+                        "t": "l",
+                        "v": "2.066"
+                    }, {
+                        "t": "l",
+                        "v": "2.0201"
+                    }, {
+                        "t": "l",
+                        "v": "1.9858"
+                    }, {
+                        "t": "l",
+                        "v": "1.8471"
+                    }, {
+                        "t": "l",
+                        "v": "1.7013"
+                    }, {
+                        "t": "l",
+                        "v": "1.8057"
+                    }, {
+                        "t": "l",
+                        "v": "1.8734"
+                    }, {
+                        "t": "l",
+                        "v": "1.917"
+                    }, {
+                        "t": "l",
+                        "v": "1.8588"
+                    }, {
+                        "t": "l",
+                        "v": "1.834"
+                    }]
+                }]
+            }
+        },
+        "41466208": {
+            "txt": "\"\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": ""
+                }]
+            }
+        },
+
+        "898485e9": {
+            "txt": "\"-0.0177\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "-0.0177"
+                }]
+            }
+        },
+
+        "30072b06": {
+            "txt": "\"2.19\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "2.19"
+                }]
+            }
+        },
+        "8036872f": {
+            "txt": "\"New Sessions\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "New Sessions"
+                }]
+            }
+        },
+
+        "026ee758": {
+            "txt": "\"0.764\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.764"
+                }]
+            }
+        },
+
+        "bb6d606b": {
+            "txt": "array(\"76.3783\",\"75.5641\",\"70.7197\",\"69.2795\",\"74.3585\",\"73.1104\",\"75.59\",\"75.523\",\"74.6432\",\"73.1777\",\"70.1012\",\"74.5956\",\"77.0583\",\"77.9275\",\"73.6043\",\"73.3536\",\"70.9437\",\"67.8874\",\"73.9351\",\"73.4992\",\"81.1312\",\"81.2335\",\"82.0796\",\"79.9857\",\"82.7243\",\"82.6397\",\"80.0703\",\"79.5453\",\"78.6146\",\"78.0965\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "76.3783"
+                    }, {
+                        "t": "l",
+                        "v": "75.5641"
+                    }, {
+                        "t": "l",
+                        "v": "70.7197"
+                    }, {
+                        "t": "l",
+                        "v": "69.2795"
+                    }, {
+                        "t": "l",
+                        "v": "74.3585"
+                    }, {
+                        "t": "l",
+                        "v": "73.1104"
+                    }, {
+                        "t": "l",
+                        "v": "75.59"
+                    }, {
+                        "t": "l",
+                        "v": "75.523"
+                    }, {
+                        "t": "l",
+                        "v": "74.6432"
+                    }, {
+                        "t": "l",
+                        "v": "73.1777"
+                    }, {
+                        "t": "l",
+                        "v": "70.1012"
+                    }, {
+                        "t": "l",
+                        "v": "74.5956"
+                    }, {
+                        "t": "l",
+                        "v": "77.0583"
+                    }, {
+                        "t": "l",
+                        "v": "77.9275"
+                    }, {
+                        "t": "l",
+                        "v": "73.6043"
+                    }, {
+                        "t": "l",
+                        "v": "73.3536"
+                    }, {
+                        "t": "l",
+                        "v": "70.9437"
+                    }, {
+                        "t": "l",
+                        "v": "67.8874"
+                    }, {
+                        "t": "l",
+                        "v": "73.9351"
+                    }, {
+                        "t": "l",
+                        "v": "73.4992"
+                    }, {
+                        "t": "l",
+                        "v": "81.1312"
+                    }, {
+                        "t": "l",
+                        "v": "81.2335"
+                    }, {
+                        "t": "l",
+                        "v": "82.0796"
+                    }, {
+                        "t": "l",
+                        "v": "79.9857"
+                    }, {
+                        "t": "l",
+                        "v": "82.7243"
+                    }, {
+                        "t": "l",
+                        "v": "82.6397"
+                    }, {
+                        "t": "l",
+                        "v": "80.0703"
+                    }, {
+                        "t": "l",
+                        "v": "79.5453"
+                    }, {
+                        "t": "l",
+                        "v": "78.6146"
+                    }, {
+                        "t": "l",
+                        "v": "78.0965"
+                    }]
+                }]
+            }
+        },
+        "17e5fa68": {
+            "txt": "\"\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": ""
+                }]
+            }
+        },
+
+        "b07d5a7a": {
+            "txt": "\"0.024\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.024"
+                }]
+            }
+        },
+
+        "7722271c": {
+            "txt": "\"0.746\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.746"
+                }]
+            }
+        },
+        "8738b466": {
+            "txt": "\"Time on Site (Avg)\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Time on Site (Avg)"
+                }]
+            }
+        },
+
+        "8da3c0db": {
+            "txt": "\"135\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "135"
+                }]
+            }
+        },
+
+        "33db7478": {
+            "txt": "array(\"143.4102\",\"146.5384\",\"142.823\",\"128.0948\",\"130.3851\",\"153.1243\",\"146.5846\",\"148.7742\",\"154.9174\",\"137.5769\",\"132.362\",\"129.2819\",\"157.9584\",\"158.370\",\"154.4236\",\"147.280\",\"136.131\",\"111.2444\",\"137.5162\",\"156.4098\",\"137.1268\",\"131.1384\",\"123.902\",\"114.1310\",\"99.0635\",\"111.9177\",\"124.7716\",\"120.9551\",\"119.647\",\"111.8022\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "143.4102"
+                    }, {
+                        "t": "l",
+                        "v": "146.5384"
+                    }, {
+                        "t": "l",
+                        "v": "142.823"
+                    }, {
+                        "t": "l",
+                        "v": "128.0948"
+                    }, {
+                        "t": "l",
+                        "v": "130.3851"
+                    }, {
+                        "t": "l",
+                        "v": "153.1243"
+                    }, {
+                        "t": "l",
+                        "v": "146.5846"
+                    }, {
+                        "t": "l",
+                        "v": "148.7742"
+                    }, {
+                        "t": "l",
+                        "v": "154.9174"
+                    }, {
+                        "t": "l",
+                        "v": "137.5769"
+                    }, {
+                        "t": "l",
+                        "v": "132.362"
+                    }, {
+                        "t": "l",
+                        "v": "129.2819"
+                    }, {
+                        "t": "l",
+                        "v": "157.9584"
+                    }, {
+                        "t": "l",
+                        "v": "158.370"
+                    }, {
+                        "t": "l",
+                        "v": "154.4236"
+                    }, {
+                        "t": "l",
+                        "v": "147.280"
+                    }, {
+                        "t": "l",
+                        "v": "136.131"
+                    }, {
+                        "t": "l",
+                        "v": "111.2444"
+                    }, {
+                        "t": "l",
+                        "v": "137.5162"
+                    }, {
+                        "t": "l",
+                        "v": "156.4098"
+                    }, {
+                        "t": "l",
+                        "v": "137.1268"
+                    }, {
+                        "t": "l",
+                        "v": "131.1384"
+                    }, {
+                        "t": "l",
+                        "v": "123.902"
+                    }, {
+                        "t": "l",
+                        "v": "114.1310"
+                    }, {
+                        "t": "l",
+                        "v": "99.0635"
+                    }, {
+                        "t": "l",
+                        "v": "111.9177"
+                    }, {
+                        "t": "l",
+                        "v": "124.7716"
+                    }, {
+                        "t": "l",
+                        "v": "120.9551"
+                    }, {
+                        "t": "l",
+                        "v": "119.647"
+                    }, {
+                        "t": "l",
+                        "v": "111.8022"
+                    }]
+                }]
+            }
+        },
+        "0df3a2fe": {
+            "txt": "\"\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": ""
+                }]
+            }
+        },
+
+        "1c84745b": {
+            "txt": "\"0.209\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.209"
+                }]
+            }
+        },
+
+        "1643a901": {
+            "txt": "\"111\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "111"
+                }]
+            }
         }
-    ]
+    },
+
+    "datasources": {
+        "googleAnalytics-01": {
+            "service": "google_analytics",
+            "libraryAlias": "GAKPIs",
+            "name": "GA: KPIs (Last 30 Days)",
+            "description": "Track your website's KPI's including sessions, pageviews, bounce rate, and more, for the last 30 days. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:newUsers,ga:percentNewSessions,ga:sessions,ga:bounces,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviews,ga:pageviewsPerSession&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+            }
+        },
+        "googleAnalytics-02": {
+            "service": "google_analytics",
+            "libraryAlias": "GAKPIsPrevPeriod",
+            "name": "GA: KPIs (Prev Period)",
+            "description": "Key Google Analytics KPIs for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:percentNewSessions,ga:sessions,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviewsPerSession,ga:pageviews,ga:newUsers,ga:bounces&start-date=60daysAgo&end-date=31daysAgo&max-results=10000",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:percentNewSessions,ga:sessions,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviewsPerSession,ga:pageviews,ga:newUsers,ga:bounces&start-date=60daysAgo&end-date=31daysAgo&max-results=10000",
+                "max_pages": "1",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date=60daysAgo&end-date=31daysAgo"
+            }
+        },
+        "googleAnalytics-03": {
+            "service": "google_analytics",
+            "libraryAlias": "KPIsbyDay",
+            "name": "GA: KPI's by Day (Last 30 Days)",
+            "description": "Shows Users, New Users, Percent New Sessions, Sessions, Bounces, Bounce Rate, Avg. Session Duration, Goal Starts, Pageviews, and Pageviews per Session, by day for the last 30 days. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:newUsers,ga:percentNewSessions,ga:sessions,ga:bounces,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviews,ga:pageviewsPerSession&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "10",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "googleAnalytics-01": "4cd2b29b11d13657a71aniktawuzhere",
+        "googleAnalytics-02": "d7aa40d101d91c59473dniktawuzhere",
+        "googleAnalytics-03": "a017497b67d819dac62aniktawuzhere"
+    },
+
+    "services": [{
+        "service": "google_analytics"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
 }
