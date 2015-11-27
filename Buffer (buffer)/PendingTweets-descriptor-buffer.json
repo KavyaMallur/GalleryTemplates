@@ -1,0 +1,154 @@
+{
+    "name": "Buffer Pending Tweets",
+    "description": "Provide twitter pending tweets for last 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "2ee71f34-11": {
+            "txt": "array(\"Interested in learning more about how Klipfolio can help you track key #metrics? Join an upcoming webinar: http://bit.ly/20xjPOv\",\"Learn how to get the most from your #dashboards with our Dashboard Journey Guide: http://bit.ly/1Kvu6Tw\",\"Are you tracking the metrics that matter most? Here are some #SaaS #KPI examples you should measure: http://bit.ly/1X9SS42\",\"Get your copy of the Beginner’s Guide to Dashboards today! http://bit.ly/guide-to-dashboards … #dataviz #measure\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Interested in learning more about how Klipfolio can help you track key #metrics? Join an upcoming webinar: http://bit.ly/20xjPOv"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Learn how to get the most from your #dashboards with our Dashboard Journey Guide: http://bit.ly/1Kvu6Tw"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Are you tracking the metrics that matter most? Here are some #SaaS #KPI examples you should measure: http://bit.ly/1X9SS42"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Get your copy of the Beginner’s Guide to Dashboards today! http://bit.ly/guide-to-dashboards … #dataviz #measure"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "0b1d3984-13": {
+            "txt": "array(\"Oct 27, 6:12 am\",\"Oct 28, 3:45 am\",\"Nov 11, 9:42 pm\",\"Nov 16, 11:42 am\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            
+                            {
+                                "t": "l",
+                                "v": "Oct 27, 6:12 am"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Oct 28, 3:45 am"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 11, 9:42 pm"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Nov 16, 11:42 am"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "62ea9a99-15": {
+            "txt": "array(\"Link\",\"Link\",\"Image\",\"Image\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Link"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Link"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Image"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Image"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "buffer": {
+            "service": "buffer",
+            "libraryAlias": "BufferPendingTweets(Last30Days)",
+            "name": "Buffer Pending Tweets (Last 30 Days)",
+            "description": "Provide twitter pending tweets. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.bufferapp.com/1/profiles/{{ds.buffer.twitterProfile}}/updates/pending.json?since={date.add(-30).format('epochTime')}&count=100",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "buffer": "63432d367d0ad4c83a04KavyaMallur9"
+    },
+    "services": [
+        {
+            "service": "buffer"
+        }
+    ],
+    "datasourceConfigModel": [
+        {
+            "type": "select",
+            "id": "ds.buffer.twitterProfile",
+            "label": "Profile",
+            "description": "Select your twitter profile",
+            "isRequired": true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage": "Make sure you have configured twitter as one of the buffer profiles",
+            "connector": {
+                "service": "buffer",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://api.bufferapp.com/1/profiles.json",
+                    "method": "GET"
+                }
+            },
+            "results": [
+                {
+                    "propId": "ds.buffer.twitterProfile",
+                    "propField": "options",
+                    "labels": "/formatted_service[following-sibling::service='twitter']",
+                    "values": "/id[following-sibling::service='twitter']"
+                }
+            ]
+        }
+    ]
+}
