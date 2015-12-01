@@ -1,59 +1,162 @@
 {
-	"name" : "Insightly Wins By Category",
-	"description": "See a list of your latest wins by category. Originates from the Gallery.",
-
-	"datasources" : {
-		"insightly-01" : {
-			"service": "insightly",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Insightly Opportunities",
-			"libraryAlias": "InsightlyOpportunities",
-			"refreshInterval": 14400,
-			"description": "Get a list of all opportunities. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://api.insight.ly/v2.1/opportunities?Brief=True",
-				"auth_method" : "basic",
-				"basic_auth_username" : "{{ds.insightly.apiKey}}",
-				"basic_auth_password" : "",
-				"method" : "get"
-			}
-		},
-			"insightly-02" : {
-			"service": "insightly",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Insightly Opportunity Categories",
-			"libraryAlias": "InsightlyOpportunityCategories",
-			"refreshInterval": 14400,
-			"description": "Get a list of opportunity categories. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://api.insight.ly/v2.1/opportunitycategories",
-				"auth_method" : "basic",
-				"basic_auth_username" : "{{ds.insightly.apiKey}}",
-				"basic_auth_password" : "",
-				"method" : "get"
-			}
-		}
-	},
-
-	"dsMappings": {
-		"insightly-01": "7e7b790e70110dbb4cbfdoogeraspilk",
-		"insightly-02": "0e0208b2295286b6f49bdoogeraspilk"			
-	},
-	"services" : [
-		{
-			"service" : "insightly"
-		}
-	],
-
-	"datasourceConfigModel" : [
+    "name": "Insightly Wins By Category",
+    "description": "See a list of your latest wins by category. Originates from the Gallery.",
+    "sampleFormulas": {
+        "cc5e7267": {
+            "txt": "array(\"Information Technology\",\"Manufacturing\",\"Telecommunications\",\"Sales\",\"Marketing\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Information Technology"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Manufacturing"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Telecommunications"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Sales"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Marketing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "c9754d2b": {
+            "txt": "array(\"1202\",\"910\",\"675\",\"415\",\"99\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "1202"
+                            },
+                            {
+                                "t": "l",
+                                "v": "910"
+                            },
+                            {
+                                "t": "l",
+                                "v": "675"
+                            },
+                            {
+                                "t": "l",
+                                "v": "415"
+                            },
+                            {
+                                "t": "l",
+                                "v": "99"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "689e341c": {
+            "txt": "array(\"1202\",\"910\",\"675\",\"415\",\"99\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "1202"
+                            },
+                            {
+                                "t": "l",
+                                "v": "910"
+                            },
+                            {
+                                "t": "l",
+                                "v": "675"
+                            },
+                            {
+                                "t": "l",
+                                "v": "415"
+                            },
+                            {
+                                "t": "l",
+                                "v": "99"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "insightly-01": {
+            "service": "insightly",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Insightly Opportunities",
+            "libraryAlias": "InsightlyOpportunities",
+            "refreshInterval": 14400,
+            "description": "Get a list of all opportunities. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.insight.ly/v2.1/opportunities?Brief=True",
+                "auth_method": "basic",
+                "basic_auth_username": "{{ds.insightly.apiKey}}",
+                "basic_auth_password": "",
+                "method": "get"
+            }
+        },
+        "insightly-02": {
+            "service": "insightly",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Insightly Opportunity Categories",
+            "libraryAlias": "InsightlyOpportunityCategories",
+            "refreshInterval": 14400,
+            "description": "Get a list of opportunity categories. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.insight.ly/v2.1/opportunitycategories",
+                "auth_method": "basic",
+                "basic_auth_username": "{{ds.insightly.apiKey}}",
+                "basic_auth_password": "",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "insightly-01": "7e7b790e70110dbb4cbfdoogeraspilk",
+        "insightly-02": "0e0208b2295286b6f49bdoogeraspilk"
+    },
+    "services": [
         {
-            "type" : "text",
-            "id" : "ds.insightly.apiKey",
-            "label" : "Your API Key",
-            "description":"Enter your Insightly API Key. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/693573-klip-gallery-insightly#connect' target='_blank'>Klip Gallery: Insightly</a>."   
+            "service": "insightly"
+        }
+    ],
+    "datasourceConfigModel": [
+        {
+            "type": "text",
+            "id": "ds.insightly.apiKey",
+            "label": "Your API Key",
+            "description": "Enter your Insightly API Key. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/693573-klip-gallery-insightly#connect' target='_blank'>Klip Gallery: Insightly</a>."
         }
     ]
-
-} 
+}
