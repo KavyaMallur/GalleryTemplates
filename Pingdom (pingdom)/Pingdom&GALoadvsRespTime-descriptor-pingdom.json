@@ -1,137 +1,924 @@
 {
-    "name" : "Pingdom & Google Analytics: Load Time vs Response Time",
+    "name": "Pingdom & Google Analytics: Load Time vs Response Time",
     "description": "Mash up your Google Analytics and Pingdom data by comparing your website's load time and response time. Originates from the Gallery.",
-
-    "datasources" : {
-        "pingdom-01" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Service Checks",
-            "libraryAlias" :"pingdomServiceChecks",
-            "refreshInterval" : 3600,
-            "description" :"See an overview of all Pingdom checks. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/checks",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+    "sampleFormulas": {
+        "fd9b48ab": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/google-analytics.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/google-analytics.png"
+                            }
+                        ]
+                    }
+                ]
             }
-
         },
-        "pingdom-02" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Average Response Time (Last 24 hours)",
-            "libraryAlias" :"PingdomAverageResponseTimeLast24Hours",
-            "refreshInterval" : 3600,
-            "description" :"Provides the average response time for your specified server over the last 24 hours. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=hour&from={date.addHours(-24).format('epochTime')}&to={date.addHours(-1).format('epochTime')}",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+        "8a4c5319": {
+            "txt": "\"+\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "+"
+                            }
+                        ]
+                    }
+                ]
             }
-
         },
-        "google_analytics-01" : {
-            "service" : "google_analytics",
-            "type" : "google_analytics",
-            "format" : "csv",
-            "name" :"GA Site Speed Stats (Last 24 hours)",
-            "libraryAlias" :"GASiteSpeedStatsLast24Hours",
-            "refreshInterval" : 3600,
-            "description" :"Provides google analytics site speed stats over last 24 hours. Originates from the Gallery.",
-            "props":{
-                "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:hour&metrics=ga:sessions,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.yesterday}&end-date={date.today}&max-results=10000",
-                "endpoint_url" : "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:hour&metrics=ga:sessions,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.yesterday}&end-date={date.today}&max-results=10000",
+        "31197e44": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "8238dc3c": {
+            "txt": "\"Web Site\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Web Site"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "f27d7dd1": {
+            "txt": "array(\"46.96\",\"48.39\",\"23.30\",\"3.61\",\"48.27\",\"40.13\",\"32.91\",\"18.15\",\"31.41\",\"4.77\",\"29.24\",\"39.50\",\"26.50\",\"10.86\",\"24.11\",\"48.44\",\"2.18\",\"27.20\",\"32.75\",\"47.57\",\"7.95\",\"34.52\",\"23.82\",\"40.06\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "46.96"
+                            },
+                            {
+                                "t": "l",
+                                "v": "48.39"
+                            },
+                            {
+                                "t": "l",
+                                "v": "23.30"
+                            },
+                            {
+                                "t": "l",
+                                "v": "3.61"
+                            },
+                            {
+                                "t": "l",
+                                "v": "48.27"
+                            },
+                            {
+                                "t": "l",
+                                "v": "40.13"
+                            },
+                            {
+                                "t": "l",
+                                "v": "32.91"
+                            },
+                            {
+                                "t": "l",
+                                "v": "18.15"
+                            },
+                            {
+                                "t": "l",
+                                "v": "31.41"
+                            },
+                            {
+                                "t": "l",
+                                "v": "4.77"
+                            },
+                            {
+                                "t": "l",
+                                "v": "29.24"
+                            },
+                            {
+                                "t": "l",
+                                "v": "39.50"
+                            },
+                            {
+                                "t": "l",
+                                "v": "26.50"
+                            },
+                            {
+                                "t": "l",
+                                "v": "10.86"
+                            },
+                            {
+                                "t": "l",
+                                "v": "24.11"
+                            },
+                            {
+                                "t": "l",
+                                "v": "48.44"
+                            },
+                            {
+                                "t": "l",
+                                "v": "2.18"
+                            },
+                            {
+                                "t": "l",
+                                "v": "27.20"
+                            },
+                            {
+                                "t": "l",
+                                "v": "32.75"
+                            },
+                            {
+                                "t": "l",
+                                "v": "47.57"
+                            },
+                            {
+                                "t": "l",
+                                "v": "7.95"
+                            },
+                            {
+                                "t": "l",
+                                "v": "34.52"
+                            },
+                            {
+                                "t": "l",
+                                "v": "23.82"
+                            },
+                            {
+                                "t": "l",
+                                "v": "40.06"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "95b00ee9-1": {
+            "txt": "array(\"61.94\",\"46.52\",\"37.70\",\"36.85\",\"17.70\",\"14.51\",\"27.05\",\"5.24\",\"19.96\",\"23.62\",\"31.81\",\"23.48\",\"27.51\",\"49.30\",\"15.42\",\"3.58\",\"38.42\",\"45.40\",\"28.23\",\"55.97\",\"45.67\",\"35.91\",\"31.30\",\"66.05\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "61.94"
+                            },
+                            {
+                                "t": "l",
+                                "v": "46.52"
+                            },
+                            {
+                                "t": "l",
+                                "v": "37.70"
+                            },
+                            {
+                                "t": "l",
+                                "v": "36.85"
+                            },
+                            {
+                                "t": "l",
+                                "v": "17.70"
+                            },
+                            {
+                                "t": "l",
+                                "v": "14.51"
+                            },
+                            {
+                                "t": "l",
+                                "v": "27.05"
+                            },
+                            {
+                                "t": "l",
+                                "v": "5.24"
+                            },
+                            {
+                                "t": "l",
+                                "v": "19.96"
+                            },
+                            {
+                                "t": "l",
+                                "v": "23.62"
+                            },
+                            {
+                                "t": "l",
+                                "v": "31.81"
+                            },
+                            {
+                                "t": "l",
+                                "v": "23.48"
+                            },
+                            {
+                                "t": "l",
+                                "v": "27.51"
+                            },
+                            {
+                                "t": "l",
+                                "v": "49.30"
+                            },
+                            {
+                                "t": "l",
+                                "v": "15.42"
+                            },
+                            {
+                                "t": "l",
+                                "v": "3.58"
+                            },
+                            {
+                                "t": "l",
+                                "v": "38.42"
+                            },
+                            {
+                                "t": "l",
+                                "v": "45.40"
+                            },
+                            {
+                                "t": "l",
+                                "v": "28.23"
+                            },
+                            {
+                                "t": "l",
+                                "v": "55.97"
+                            },
+                            {
+                                "t": "l",
+                                "v": "45.67"
+                            },
+                            {
+                                "t": "l",
+                                "v": "35.91"
+                            },
+                            {
+                                "t": "l",
+                                "v": "31.30"
+                            },
+                            {
+                                "t": "l",
+                                "v": "66.05"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "662618f8-2": {
+            "txt": "array(\"4.92\",\"3.80\",\"0.40\",\"3.96\",\"0.21\",\"0.75\",\"0.14\",\"6.60\",\"1.23\",\"0.31\",\"0.05\",\"5.03\",\"7.63\",\"0.51\",\"0.79\",\"9.47\",\"1.61\",\"0.59\",\"0.44\",\"0.45\",\"1.48\",\"0.19\",\"0.56\",\"1.99\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "4.92"
+                            },
+                            {
+                                "t": "l",
+                                "v": "3.80"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.40"
+                            },
+                            {
+                                "t": "l",
+                                "v": "3.96"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.21"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.75"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.14"
+                            },
+                            {
+                                "t": "l",
+                                "v": "6.60"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1.23"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.31"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.05"
+                            },
+                            {
+                                "t": "l",
+                                "v": "5.03"
+                            },
+                            {
+                                "t": "l",
+                                "v": "7.63"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.51"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.79"
+                            },
+                            {
+                                "t": "l",
+                                "v": "9.47"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1.61"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.59"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.44"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.45"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1.48"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.19"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.56"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1.99"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "78d1850a-1": {
+            "txt": "array(\"597\",\"807\",\"616\",\"739\",\"980\",\"635\",\"724\",\"977\",\"1086\",\"808\",\"944\",\"577\",\"990\",\"811\",\"521\",\"837\",\"515\",\"898\",\"709\",\"1039\",\"718\",\"998\",\"508\",\"586\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "597"
+                            },
+                            {
+                                "t": "l",
+                                "v": "807"
+                            },
+                            {
+                                "t": "l",
+                                "v": "616"
+                            },
+                            {
+                                "t": "l",
+                                "v": "739"
+                            },
+                            {
+                                "t": "l",
+                                "v": "980"
+                            },
+                            {
+                                "t": "l",
+                                "v": "635"
+                            },
+                            {
+                                "t": "l",
+                                "v": "724"
+                            },
+                            {
+                                "t": "l",
+                                "v": "977"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1086"
+                            },
+                            {
+                                "t": "l",
+                                "v": "808"
+                            },
+                            {
+                                "t": "l",
+                                "v": "944"
+                            },
+                            {
+                                "t": "l",
+                                "v": "577"
+                            },
+                            {
+                                "t": "l",
+                                "v": "990"
+                            },
+                            {
+                                "t": "l",
+                                "v": "811"
+                            },
+                            {
+                                "t": "l",
+                                "v": "521"
+                            },
+                            {
+                                "t": "l",
+                                "v": "837"
+                            },
+                            {
+                                "t": "l",
+                                "v": "515"
+                            },
+                            {
+                                "t": "l",
+                                "v": "898"
+                            },
+                            {
+                                "t": "l",
+                                "v": "709"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1039"
+                            },
+                            {
+                                "t": "l",
+                                "v": "718"
+                            },
+                            {
+                                "t": "l",
+                                "v": "998"
+                            },
+                            {
+                                "t": "l",
+                                "v": "508"
+                            },
+                            {
+                                "t": "l",
+                                "v": "586"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "b3ea531c": {
+            "txt": "array(\"1448985600\",\"1448989200\",\"1448992800\",\"1448996400\",\"1449000000\",\"1449003600\",\"1449007200\",\"1449010800\",\"1449014400\",\"1449018000\",\"1449021600\",\"1449025200\",\"1449028800\",\"1449032400\",\"1449036000\",\"1449039600\",\"1449043200\",\"1449046800\",\"1449050400\",\"1449054000\",\"1449057600\",\"1449061200\",\"1449064800\",\"1449066800\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "1448985600"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1448989200"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1448992800"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1448996400"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449000000"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449003600"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449007200"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449010800"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449014400"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449018000"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449021600"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449025200"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449028800"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449032400"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449036000"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449039600"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449043200"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449046800"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449050400"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449054000"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449057600"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449061200"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449064800"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1449066800"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "d2ba1ed0": {
+            "txt": "\"Dec 1, 12:00 PM\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Dec 1, 12:00 PM"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "e2a78614": {
+            "txt": "\"to\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "to"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "47b6b631": {
+            "txt": "\"Dec 2, 10:00 AM\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Dec 2, 10:00 AM"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "pingdom-01": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Service Checks",
+            "libraryAlias": "pingdomServiceChecks",
+            "refreshInterval": 3600,
+            "description": "See an overview of all Pingdom checks. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/checks",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+        },
+        "pingdom-02": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Average Response Time (Last 24 hours)",
+            "libraryAlias": "PingdomAverageResponseTimeLast24Hours",
+            "refreshInterval": 3600,
+            "description": "Provides the average response time for your specified server over the last 24 hours. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=hour&from={date.addHours(-24).format('epochTime')}&to={date.addHours(-1).format('epochTime')}",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+        },
+        "google_analytics-01": {
+            "service": "google_analytics",
+            "type": "google_analytics",
+            "format": "csv",
+            "name": "GA Site Speed Stats (Last 24 hours)",
+            "libraryAlias": "GASiteSpeedStatsLast24Hours",
+            "refreshInterval": 3600,
+            "description": "Provides google analytics site speed stats over last 24 hours. Originates from the Gallery.",
+            "props": {
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:hour&metrics=ga:sessions,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.yesterday}&end-date={date.today}&max-results=10000",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:hour&metrics=ga:sessions,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.yesterday}&end-date={date.today}&max-results=10000",
                 "max_pages": "1",
                 "mode": "Advanced",
                 "profile": "{{ds.google_analytics.profileId}}",
                 "timePeriod": "&start-date={date.add(-7).format()}&end-date={date.today}"
             }
-
         }
     },
     "dsMappings": {
-        "pingdom-01" : "b4fe50b45c834d192174KavyaMallur9",
-        "pingdom-02" : "bc45bc2429076c589a02KavyaMallur9",
-        "google_analytics-01" : "f1115f5d0c6c8a76440dKavyaMallur9"
+        "pingdom-01": "b4fe50b45c834d192174KavyaMallur9",
+        "pingdom-02": "bc45bc2429076c589a02KavyaMallur9",
+        "google_analytics-01": "f1115f5d0c6c8a76440dKavyaMallur9"
     },
-
-    "services" : [
+    "services": [
         {
-            "service" : "pingdom"
+            "service": "pingdom"
         },
         {
-            "service" : "google_analytics"
+            "service": "google_analytics"
         }
     ],
-
-	"datasourceConfigModel" : [
+    "datasourceConfigModel": [
         {
-            "type" : "select",
-            "id" : "ds.pingdom.serverId",
-            "label" : "Pingdom Check",
-            "isRequired" : true,
-            "onChangeQueries" : [ "meow" ]      
-
+            "type": "select",
+            "id": "ds.pingdom.serverId",
+            "label": "Pingdom Check",
+            "isRequired": true,
+            "onChangeQueries": [
+                "meow"
+            ]
         },
         {
-            "type" : "select",
-            "id" : "ds.google_analytics.profileId",
-            "label" : "Google Analytics Profile",
-            "isRequired" : true
+            "type": "select",
+            "id": "ds.google_analytics.profileId",
+            "label": "Google Analytics Profile",
+            "isRequired": true
         },
         {
             "type": "select",
             "id": "ds.pingdom.timeZone",
             "label": "Time Zone",
-            "description": "Select your time zone", 
+            "description": "Select your time zone",
             "options": [
-                {"value":"GMT-1","label":"GMT-01:00 (Cape Verde Standard Time)"},
-                {"value":"GMT-2","label":"GMT-02:00 (Mid-Atlantic Standard Time)"},
-                {"value":"GMT-3","label":"GMT-03:00 (Greenland Standard Time)"},
-                {"value":"GMT-3:30","label":"GMT-03:30 (Newfoundland Standard Time)"},
-                {"value":"GMT-4","label":"GMT-04:00 (Atlantic Standard Time)"},
-                {"value":"GMT-4:30","label":"GMT-04:30 (Venezuela Standard Time)"},
-                {"value":"GMT-5","label":"GMT-05:00 (Eastern Standard Time)"},
-                {"value":"GMT-6","label":"GMT-06:00 (Central Standard Time)"},
-                {"value":"GMT-7","label":"GMT-07:00 (Mountain Standard Time)"},
-                {"value":"GMT-8","label":"GMT-08:00 (Pacific Standard Time)"},
-                {"value":"GMT-9","label":"GMT-09:00 (Alaskan Standard Time)"},
-                {"value":"GMT-10","label":"GMT-10:00 (Hawaiian Standard Time)"},
-                {"value":"GMT-11","label":"GMT-11:00 (Samoa Standard Time)"},
-                {"value":"GMT-12","label":"GMT-12:00 (Dateline Standard Time)"},
-                {"value":"GMT","label":"GMT (Greenwich Standard Time)"},
-                {"value":"GMT+1","label":"GMT+01:00 (Central European Standard Time)"},
-                {"value":"GMT+2","label":"GMT+02:00 (E. Europe Standard Time)"},
-                {"value":"GMT+3","label":"GMT+03:00 (Georgian Standard Time)"},
-                {"value":"GMT+3:30","label":"GMT+03:30 (Iran Standard Time)"},
-                {"value":"GMT+4","label":"GMT+04:00 (Arabian Standard Time)"},
-                {"value":"GMT4+30","label":"GMT+04:30 (Afghanistan Standard Time)"},
-                {"value":"GMT+5","label":"GMT+05:00 (West Asia Standard Time)"},
-                {"value":"GMT+5:30","label":"GMT+05:30 (India Standard Time)"},
-                {"value":"GMT+5:45","label":"GMT+05:45 (Nepal Standard Time)"},
-                {"value":"GMT+6","label":"GMT+06:00 (Central Asia Standard Time)"},
-                {"value":"GMT+6:30","label":"GMT+06:30 (Myanmar Standard Time)"},
-                {"value":"GMT+7","label":"GMT+07:00 (SE Asia Standard Time)"},
-                {"value":"GMT+8","label":"GMT+08:00 (China Standard Time)"},
-                {"value":"GMT+9","label":"GMT+09:00 (Tokyo Standard Time)"},
-                {"value":"GMT+9:30","label": "GMT+09:30 (Cen. Australia Standard Time)"},
-                {"value":"GMT+10","label":"GMT+10:00 (West Pacific Standard Time)"},
-                {"value":"GMT+11","label":"GMT+11:00 (Central Pacific Standard Time)"},
-                {"value":"GMT+12","label":"GMT+12:00 (Fiji Standard Time)"},
-                {"value":"GMT+13","label":"GMT+13:00 (Tonga Standard Time)"}
+                {
+                    "value": "GMT-1",
+                    "label": "GMT-01:00 (Cape Verde Standard Time)"
+                },
+                {
+                    "value": "GMT-2",
+                    "label": "GMT-02:00 (Mid-Atlantic Standard Time)"
+                },
+                {
+                    "value": "GMT-3",
+                    "label": "GMT-03:00 (Greenland Standard Time)"
+                },
+                {
+                    "value": "GMT-3:30",
+                    "label": "GMT-03:30 (Newfoundland Standard Time)"
+                },
+                {
+                    "value": "GMT-4",
+                    "label": "GMT-04:00 (Atlantic Standard Time)"
+                },
+                {
+                    "value": "GMT-4:30",
+                    "label": "GMT-04:30 (Venezuela Standard Time)"
+                },
+                {
+                    "value": "GMT-5",
+                    "label": "GMT-05:00 (Eastern Standard Time)"
+                },
+                {
+                    "value": "GMT-6",
+                    "label": "GMT-06:00 (Central Standard Time)"
+                },
+                {
+                    "value": "GMT-7",
+                    "label": "GMT-07:00 (Mountain Standard Time)"
+                },
+                {
+                    "value": "GMT-8",
+                    "label": "GMT-08:00 (Pacific Standard Time)"
+                },
+                {
+                    "value": "GMT-9",
+                    "label": "GMT-09:00 (Alaskan Standard Time)"
+                },
+                {
+                    "value": "GMT-10",
+                    "label": "GMT-10:00 (Hawaiian Standard Time)"
+                },
+                {
+                    "value": "GMT-11",
+                    "label": "GMT-11:00 (Samoa Standard Time)"
+                },
+                {
+                    "value": "GMT-12",
+                    "label": "GMT-12:00 (Dateline Standard Time)"
+                },
+                {
+                    "value": "GMT",
+                    "label": "GMT (Greenwich Standard Time)"
+                },
+                {
+                    "value": "GMT+1",
+                    "label": "GMT+01:00 (Central European Standard Time)"
+                },
+                {
+                    "value": "GMT+2",
+                    "label": "GMT+02:00 (E. Europe Standard Time)"
+                },
+                {
+                    "value": "GMT+3",
+                    "label": "GMT+03:00 (Georgian Standard Time)"
+                },
+                {
+                    "value": "GMT+3:30",
+                    "label": "GMT+03:30 (Iran Standard Time)"
+                },
+                {
+                    "value": "GMT+4",
+                    "label": "GMT+04:00 (Arabian Standard Time)"
+                },
+                {
+                    "value": "GMT4+30",
+                    "label": "GMT+04:30 (Afghanistan Standard Time)"
+                },
+                {
+                    "value": "GMT+5",
+                    "label": "GMT+05:00 (West Asia Standard Time)"
+                },
+                {
+                    "value": "GMT+5:30",
+                    "label": "GMT+05:30 (India Standard Time)"
+                },
+                {
+                    "value": "GMT+5:45",
+                    "label": "GMT+05:45 (Nepal Standard Time)"
+                },
+                {
+                    "value": "GMT+6",
+                    "label": "GMT+06:00 (Central Asia Standard Time)"
+                },
+                {
+                    "value": "GMT+6:30",
+                    "label": "GMT+06:30 (Myanmar Standard Time)"
+                },
+                {
+                    "value": "GMT+7",
+                    "label": "GMT+07:00 (SE Asia Standard Time)"
+                },
+                {
+                    "value": "GMT+8",
+                    "label": "GMT+08:00 (China Standard Time)"
+                },
+                {
+                    "value": "GMT+9",
+                    "label": "GMT+09:00 (Tokyo Standard Time)"
+                },
+                {
+                    "value": "GMT+9:30",
+                    "label": "GMT+09:30 (Cen. Australia Standard Time)"
+                },
+                {
+                    "value": "GMT+10",
+                    "label": "GMT+10:00 (West Pacific Standard Time)"
+                },
+                {
+                    "value": "GMT+11",
+                    "label": "GMT+11:00 (Central Pacific Standard Time)"
+                },
+                {
+                    "value": "GMT+12",
+                    "label": "GMT+12:00 (Fiji Standard Time)"
+                },
+                {
+                    "value": "GMT+13",
+                    "label": "GMT+13:00 (Tonga Standard Time)"
+                }
             ],
-            "isRequired" : "true",
+            "isRequired": "true",
             "selectedValue": "GMT"
         }
     ],
     "queries": [
         {
-            "errorMessage":"Check your Pingdom credentials and try again.",
+            "errorMessage": "Check your Pingdom credentials and try again.",
             "connector": {
                 "service": "pingdom",
                 "type": "simple_rest",
@@ -145,16 +932,16 @@
             },
             "results": [
                 {
-                    "propId" : "ds.pingdom.serverId", 
-                    "propField" : "options", 
-                    "labels": "/checks/name",  
-                    "values": "/checks/id" 
+                    "propId": "ds.pingdom.serverId",
+                    "propField": "options",
+                    "labels": "/checks/name",
+                    "values": "/checks/id"
                 }
             ]
         },
         {
-            "id":"meow",
-            "errorMessage":"There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
+            "id": "meow",
+            "errorMessage": "There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
             "connector": {
                 "service": "google_analytics",
                 "type": "simple_rest",
@@ -165,14 +952,13 @@
                 }
             },
             "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
+                {
+                    "propId": "ds.google_analytics.profileId",
+                    "propField": "options",
+                    "labels": "/items/name",
+                    "values": "/items/id"
                 }
             ]
-        }        
-   
+        }
     ]
 }
