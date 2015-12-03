@@ -1,134 +1,698 @@
 {
-    "name" : "Pingdom & Google Analytics: Sessions vs Response Time",
+    "name": "Pingdom & Google Analytics: Sessions vs Response Time",
     "description": "Compare your website sessions and response time using Pingdom and Google Analytics. Originates from the Gallery.",
-
-    "datasources" : {
-        "pingdom-01" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Service Checks",
-            "libraryAlias" :"pingdomServiceChecks",
-            "refreshInterval" : 3600,
-            "description" :"See an overview of all Pingdom checks. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/checks",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+    "sampleFormulas": {
+        "0e9a4ef7-2": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/google-analytics.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/google-analytics.png"
+                            }
+                        ]
+                    }
+                ]
             }
         },
-
-        "pingdom-02" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Average Response Time (Last 24 hours)",
-            "libraryAlias" :"PingdomAverageResponseTimeLast24Hours",
-            "refreshInterval" : 3600,
-            "description" :"Provides the average response time for your specified server over the last 24 hours. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=hour&from={date.addHours(-24).format('epochTime')}&to={date.addHours(-1).format('epochTime')}",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+        "14f6262c-1": {
+            "txt": "\"+\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "+"
+                            }
+                        ]
+                    }
+                ]
             }
         },
-
-        "google_analytics-01" : {
-            "service" : "google_analytics",
-            "type" : "google_analytics",
-            "format" : "csv",
-            "name" :"GA Site Speed Stats (Last 24 hours)",
-            "libraryAlias" :"GASiteSpeedStatsLast24Hours",
-            "refreshInterval" : 3600,
-            "description" :"Provides google analytics site speed stats over last 24 hours. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:hour&metrics=ga:sessions,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.yesterday}&end-date={date.today}&max-results=10000",
+        "bc221f51": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "281577f1": {
+            "txt": "\"Web Site\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Web Site"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "5aebaee9-1": {
+            "txt": "array(\"932\",\"1186\",\"851\",\"944\",\"808\",\"1093\",\"771\",\"983\",\"639\",\"814\",\"656\",\"522\",\"736\",\"697\",\"603\",\"557\",\"1119\",\"821\",\"1173\",\"579\",\"1021\",\"500\",\"638\",\"1013\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "932"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1186"
+                            },
+                            {
+                                "t": "l",
+                                "v": "851"
+                            },
+                            {
+                                "t": "l",
+                                "v": "944"
+                            },
+                            {
+                                "t": "l",
+                                "v": "808"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1093"
+                            },
+                            {
+                                "t": "l",
+                                "v": "771"
+                            },
+                            {
+                                "t": "l",
+                                "v": "983"
+                            },
+                            {
+                                "t": "l",
+                                "v": "639"
+                            },
+                            {
+                                "t": "l",
+                                "v": "814"
+                            },
+                            {
+                                "t": "l",
+                                "v": "656"
+                            },
+                            {
+                                "t": "l",
+                                "v": "522"
+                            },
+                            {
+                                "t": "l",
+                                "v": "736"
+                            },
+                            {
+                                "t": "l",
+                                "v": "697"
+                            },
+                            {
+                                "t": "l",
+                                "v": "603"
+                            },
+                            {
+                                "t": "l",
+                                "v": "557"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1119"
+                            },
+                            {
+                                "t": "l",
+                                "v": "821"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1173"
+                            },
+                            {
+                                "t": "l",
+                                "v": "579"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1021"
+                            },
+                            {
+                                "t": "l",
+                                "v": "500"
+                            },
+                            {
+                                "t": "l",
+                                "v": "638"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1013"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "d33d6aff": {
+            "txt": "array(\"127\",\"491\",\"182\",\"397\",\"363\",\"347\",\"196\",\"212\",\"454\",\"420\",\"235\",\"416\",\"475\",\"174\",\"238\",\"201\",\"286\",\"319\",\"342\",\"361\",\"404\",\"452\",\"324\",\"190\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "127"
+                            },
+                            {
+                                "t": "l",
+                                "v": "491"
+                            },
+                            {
+                                "t": "l",
+                                "v": "182"
+                            },
+                            {
+                                "t": "l",
+                                "v": "397"
+                            },
+                            {
+                                "t": "l",
+                                "v": "363"
+                            },
+                            {
+                                "t": "l",
+                                "v": "347"
+                            },
+                            {
+                                "t": "l",
+                                "v": "196"
+                            },
+                            {
+                                "t": "l",
+                                "v": "212"
+                            },
+                            {
+                                "t": "l",
+                                "v": "454"
+                            },
+                            {
+                                "t": "l",
+                                "v": "420"
+                            },
+                            {
+                                "t": "l",
+                                "v": "235"
+                            },
+                            {
+                                "t": "l",
+                                "v": "416"
+                            },
+                            {
+                                "t": "l",
+                                "v": "475"
+                            },
+                            {
+                                "t": "l",
+                                "v": "174"
+                            },
+                            {
+                                "t": "l",
+                                "v": "238"
+                            },
+                            {
+                                "t": "l",
+                                "v": "201"
+                            },
+                            {
+                                "t": "l",
+                                "v": "286"
+                            },
+                            {
+                                "t": "l",
+                                "v": "319"
+                            },
+                            {
+                                "t": "l",
+                                "v": "342"
+                            },
+                            {
+                                "t": "l",
+                                "v": "361"
+                            },
+                            {
+                                "t": "l",
+                                "v": "404"
+                            },
+                            {
+                                "t": "l",
+                                "v": "452"
+                            },
+                            {
+                                "t": "l",
+                                "v": "324"
+                            },
+                            {
+                                "t": "l",
+                                "v": "190"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "4f93f625": {
+            "txt": "array(\"15:00\",\"16:00\",\"17:00\",\"18:00\",\"19:00\",\"20:00\",\"21:00\",\"22:00\",\"23:00\",\"00:00\",\"01:00\",\"02:00\",\"03:00\",\"04:00\",\"05:00\",\"06:00\",\"07:00\",\"08:00\",\"09:00\",\"10:00\",\"11:00\",\"12:00\",\"13:00\",\"14:00\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "15:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "16:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "17:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "18:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "19:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "20:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "21:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "22:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "23:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "00:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "01:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "02:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "03:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "04:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "05:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "06:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "07:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "08:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "09:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "10:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "11:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "12:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "13:00"
+                            },
+                            {
+                                "t": "l",
+                                "v": "14:00"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "b3b92155": {
+            "txt": "\"Dec 1, 03:00 PM\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Dec 1, 03:00 PM"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "7494bc94": {
+            "txt": "\"to\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "to"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "b6d5ea7a": {
+            "txt": "\"Dec 2, 02:00 PM\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Dec 2, 02:00 PM"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "pingdom-01": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Service Checks",
+            "libraryAlias": "pingdomServiceChecks",
+            "refreshInterval": 3600,
+            "description": "See an overview of all Pingdom checks. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/checks",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+        },
+        "pingdom-02": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Average Response Time (Last 24 hours)",
+            "libraryAlias": "PingdomAverageResponseTimeLast24Hours",
+            "refreshInterval": 3600,
+            "description": "Provides the average response time for your specified server over the last 24 hours. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=hour&from={date.addHours(-24).format('epochTime')}&to={date.addHours(-1).format('epochTime')}",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
+        },
+        "google_analytics-01": {
+            "service": "google_analytics",
+            "type": "google_analytics",
+            "format": "csv",
+            "name": "GA Site Speed Stats (Last 24 hours)",
+            "libraryAlias": "GASiteSpeedStatsLast24Hours",
+            "refreshInterval": 3600,
+            "description": "Provides google analytics site speed stats over last 24 hours. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:hour&metrics=ga:sessions,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.yesterday}&end-date={date.today}&max-results=10000",
                 "max_pages": "1",
                 "mode": "Advanced"
             }
-
         }
     },
-
     "dsMappings": {
-        "pingdom-01" : "b4fe50b45c834d192174KavyaMallur9",
-        "pingdom-02" : "bc45bc2429076c589a02KavyaMallur9",
-        "google_analytics-01" : "f1115f5d0c6c8a76440dKavyaMallur9"
+        "pingdom-01": "b4fe50b45c834d192174KavyaMallur9",
+        "pingdom-02": "bc45bc2429076c589a02KavyaMallur9",
+        "google_analytics-01": "f1115f5d0c6c8a76440dKavyaMallur9"
     },
-
-    "services" : [
+    "services": [
         {
-            "service" : "pingdom"
+            "service": "pingdom"
         },
         {
-            "service" : "google_analytics"
+            "service": "google_analytics"
         }
     ],
-
-    "datasourceConfigModel" : [
+    "datasourceConfigModel": [
         {
-            "type" : "select",
-            "id" : "ds.pingdom.serverId",
-            "label" : "Pingdom Check",
-            "isRequired" : true,
-            "onChangeQueries" : [ "meow2" ]      
-
+            "type": "select",
+            "id": "ds.pingdom.serverId",
+            "label": "Pingdom Check",
+            "isRequired": true,
+            "onChangeQueries": [
+                "meow2"
+            ]
         },
         {
-            "type" : "select",
-            "id" : "ds.google_analytics.profileId",
-            "label" : "Google Analytics Profile",
-            "isRequired" : true
+            "type": "select",
+            "id": "ds.google_analytics.profileId",
+            "label": "Analytics Account",
+            "isRequired": true
         },
         {
             "type": "select",
             "id": "ds.pingdom.timeZone",
             "label": "Time Zone",
             "options": [
-                {"value":"GMT-1","label":"GMT-01:00 (Cape Verde Standard Time)"},
-                {"value":"GMT-2","label":"GMT-02:00 (Mid-Atlantic Standard Time)"},
-                {"value":"GMT-3","label":"GMT-03:00 (Greenland Standard Time)"},
-                {"value":"GMT-3:30","label":"GMT-03:30 (Newfoundland Standard Time)"},
-                {"value":"GMT-4","label":"GMT-04:00 (Atlantic Standard Time)"},
-                {"value":"GMT-4:30","label":"GMT-04:30 (Venezuela Standard Time)"},
-                {"value":"GMT-5","label":"GMT-05:00 (Eastern Standard Time)"},
-                {"value":"GMT-6","label":"GMT-06:00 (Central Standard Time)"},
-                {"value":"GMT-7","label":"GMT-07:00 (Mountain Standard Time)"},
-                {"value":"GMT-8","label":"GMT-08:00 (Pacific Standard Time)"},
-                {"value":"GMT-9","label":"GMT-09:00 (Alaskan Standard Time)"},
-                {"value":"GMT-10","label":"GMT-10:00 (Hawaiian Standard Time)"},
-                {"value":"GMT-11","label":"GMT-11:00 (Samoa Standard Time)"},
-                {"value":"GMT-12","label":"GMT-12:00 (Dateline Standard Time)"},
-                {"value":"GMT","label":"GMT (Greenwich Standard Time)"},
-                {"value":"GMT+1","label":"GMT+01:00 (Central European Standard Time)"},
-                {"value":"GMT+2","label":"GMT+02:00 (E. Europe Standard Time)"},
-                {"value":"GMT+3","label":"GMT+03:00 (Georgian Standard Time)"},
-                {"value":"GMT+3:30","label":"GMT+03:30 (Iran Standard Time)"},
-                {"value":"GMT+4","label":"GMT+04:00 (Arabian Standard Time)"},
-                {"value":"GMT4+30","label":"GMT+04:30 (Afghanistan Standard Time)"},
-                {"value":"GMT+5","label":"GMT+05:00 (West Asia Standard Time)"},
-                {"value":"GMT+5:30","label":"GMT+05:30 (India Standard Time)"},
-                {"value":"GMT+5:45","label":"GMT+05:45 (Nepal Standard Time)"},
-                {"value":"GMT+6","label":"GMT+06:00 (Central Asia Standard Time)"},
-                {"value":"GMT+6:30","label":"GMT+06:30 (Myanmar Standard Time)"},
-                {"value":"GMT+7","label":"GMT+07:00 (SE Asia Standard Time)"},
-                {"value":"GMT+8","label":"GMT+08:00 (China Standard Time)"},
-                {"value":"GMT+9","label":"GMT+09:00 (Tokyo Standard Time)"},
-                {"value":"GMT+9:30","label": "GMT+09:30 (Cen. Australia Standard Time)"},
-                {"value":"GMT+10","label":"GMT+10:00 (West Pacific Standard Time)"},
-                {"value":"GMT+11","label":"GMT+11:00 (Central Pacific Standard Time)"},
-                {"value":"GMT+12","label":"GMT+12:00 (Fiji Standard Time)"},
-                {"value":"GMT+13","label":"GMT+13:00 (Tonga Standard Time)"}
+                {
+                    "value": "GMT-1",
+                    "label": "GMT-01:00 (Cape Verde Standard Time)"
+                },
+                {
+                    "value": "GMT-2",
+                    "label": "GMT-02:00 (Mid-Atlantic Standard Time)"
+                },
+                {
+                    "value": "GMT-3",
+                    "label": "GMT-03:00 (Greenland Standard Time)"
+                },
+                {
+                    "value": "GMT-3:30",
+                    "label": "GMT-03:30 (Newfoundland Standard Time)"
+                },
+                {
+                    "value": "GMT-4",
+                    "label": "GMT-04:00 (Atlantic Standard Time)"
+                },
+                {
+                    "value": "GMT-4:30",
+                    "label": "GMT-04:30 (Venezuela Standard Time)"
+                },
+                {
+                    "value": "GMT-5",
+                    "label": "GMT-05:00 (Eastern Standard Time)"
+                },
+                {
+                    "value": "GMT-6",
+                    "label": "GMT-06:00 (Central Standard Time)"
+                },
+                {
+                    "value": "GMT-7",
+                    "label": "GMT-07:00 (Mountain Standard Time)"
+                },
+                {
+                    "value": "GMT-8",
+                    "label": "GMT-08:00 (Pacific Standard Time)"
+                },
+                {
+                    "value": "GMT-9",
+                    "label": "GMT-09:00 (Alaskan Standard Time)"
+                },
+                {
+                    "value": "GMT-10",
+                    "label": "GMT-10:00 (Hawaiian Standard Time)"
+                },
+                {
+                    "value": "GMT-11",
+                    "label": "GMT-11:00 (Samoa Standard Time)"
+                },
+                {
+                    "value": "GMT-12",
+                    "label": "GMT-12:00 (Dateline Standard Time)"
+                },
+                {
+                    "value": "GMT",
+                    "label": "GMT (Greenwich Standard Time)"
+                },
+                {
+                    "value": "GMT+1",
+                    "label": "GMT+01:00 (Central European Standard Time)"
+                },
+                {
+                    "value": "GMT+2",
+                    "label": "GMT+02:00 (E. Europe Standard Time)"
+                },
+                {
+                    "value": "GMT+3",
+                    "label": "GMT+03:00 (Georgian Standard Time)"
+                },
+                {
+                    "value": "GMT+3:30",
+                    "label": "GMT+03:30 (Iran Standard Time)"
+                },
+                {
+                    "value": "GMT+4",
+                    "label": "GMT+04:00 (Arabian Standard Time)"
+                },
+                {
+                    "value": "GMT4+30",
+                    "label": "GMT+04:30 (Afghanistan Standard Time)"
+                },
+                {
+                    "value": "GMT+5",
+                    "label": "GMT+05:00 (West Asia Standard Time)"
+                },
+                {
+                    "value": "GMT+5:30",
+                    "label": "GMT+05:30 (India Standard Time)"
+                },
+                {
+                    "value": "GMT+5:45",
+                    "label": "GMT+05:45 (Nepal Standard Time)"
+                },
+                {
+                    "value": "GMT+6",
+                    "label": "GMT+06:00 (Central Asia Standard Time)"
+                },
+                {
+                    "value": "GMT+6:30",
+                    "label": "GMT+06:30 (Myanmar Standard Time)"
+                },
+                {
+                    "value": "GMT+7",
+                    "label": "GMT+07:00 (SE Asia Standard Time)"
+                },
+                {
+                    "value": "GMT+8",
+                    "label": "GMT+08:00 (China Standard Time)"
+                },
+                {
+                    "value": "GMT+9",
+                    "label": "GMT+09:00 (Tokyo Standard Time)"
+                },
+                {
+                    "value": "GMT+9:30",
+                    "label": "GMT+09:30 (Cen. Australia Standard Time)"
+                },
+                {
+                    "value": "GMT+10",
+                    "label": "GMT+10:00 (West Pacific Standard Time)"
+                },
+                {
+                    "value": "GMT+11",
+                    "label": "GMT+11:00 (Central Pacific Standard Time)"
+                },
+                {
+                    "value": "GMT+12",
+                    "label": "GMT+12:00 (Fiji Standard Time)"
+                },
+                {
+                    "value": "GMT+13",
+                    "label": "GMT+13:00 (Tonga Standard Time)"
+                }
             ],
-            "isRequired" : "true",
+            "isRequired": "true",
             "selectedValue": "GMT"
         }
     ],
     "queries": [
         {
-            "errorMessage":"Check your Pingdom credentials and try again.",
+            "errorMessage": "Check your Pingdom credentials and try again.",
             "connector": {
                 "service": "pingdom",
                 "type": "simple_rest",
@@ -142,16 +706,16 @@
             },
             "results": [
                 {
-                    "propId" : "ds.pingdom.serverId", 
-                    "propField" : "options", 
-                    "labels": "/checks/name",  
-                    "values": "/checks/id" 
+                    "propId": "ds.pingdom.serverId",
+                    "propField": "options",
+                    "labels": "/checks/name",
+                    "values": "/checks/id"
                 }
             ]
         },
         {
-            "id":"meow2",
-            "errorMessage":"There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
+            "id": "meow2",
+            "errorMessage": "There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
             "connector": {
                 "service": "google_analytics",
                 "type": "simple_rest",
@@ -162,14 +726,13 @@
                 }
             },
             "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
+                {
+                    "propId": "ds.google_analytics.profileId",
+                    "propField": "options",
+                    "labels": "/items/name",
+                    "values": "/items/id"
                 }
             ]
-        }        
-   
+        }
     ]
 }

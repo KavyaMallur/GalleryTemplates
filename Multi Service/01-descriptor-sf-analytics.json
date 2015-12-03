@@ -1,95 +1,217 @@
 {
-	"name" : "Marketing Funnel (GA+SFDC)",
-	"description" : "Combine the power of Google Analytics with Salesforce! Gain insight on how prospects advance through your marketing funnel over the past 30 days. Originates from the Gallery.",
-
-	"datasources" : {
-		"googleAnalytics" : {
-			"service" : "google_analytics",
-			"libraryAlias" : "",
-			"name": "GA: Users (Last 30 Days)",
-			"description" : "See the number of users who visited your website, rolled up for the past 30 days. Originates from the Gallery.",
-			"type" : "google_analytics",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : {
-				 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
-				 "max_pages": "1",
-           		 "mode": "Simple",
-           		 "profile": "{{ds.google_analytics.profileId}}",
-           		  "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
-			}
-		},
-		"salesforce-01" : {
-			"service" : "salesforce",
-			"libraryAlias" : "",
-			"name": "Leads (Last 30 Days)",
-			"description" : "See your Salesforce leads from the last 30 days. Originates from the Gallery.",
-			"type" : "salesforce",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"SOQLQuery": "SELECT Name\r\nFROM Lead\r\nWHERE CreatedDate = LAST_N_DAYS:30",
-            	"endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Lead%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
-				"instance": "{{auth.salesforce.instanceName}}"
+    "name": "Marketing Funnel (GA+SFDC)",
+    "description": "Combine the power of Google Analytics with Salesforce! Gain insight on how prospects advance through your marketing funnel over the past 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "4ff0809d-1": {
+            "txt": "array(\"178845\",\"56256\",\"6560\",\"1256\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "290449"
+                            },
+                            {
+                                "t": "l",
+                                "v": "210042"
+                            },
+                            {
+                                "t": "l",
+                                "v": "996"
+                            },
+                            {
+                                "t": "l",
+                                "v": "549"
+                            }
+                        ]
+                    }
+                ]
             }
-		},
-		"salesforce-02" : {
-			"service" : "salesforce",
-			"libraryAlias" : "",
-			"name": "New Accounts (Last 30 Days)",
-			"description" : "See all accounts that were created in the last 30 days. Originates from the Gallery.",
-			"type" : "salesforce",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"SOQLQuery": "SELECT Name\r\nFROM Account\r\nWHERE CreatedDate = LAST_N_DAYS:30",
-            	"endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Account%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
-				"instance": "{{auth.salesforce.instanceName}}"
+        },
+        "5c76d710": {
+            "txt": "array(\"Users\",\"Leads\",\"Opportunities\",\"Wins\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Users"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Leads"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Opportunities"
+                            },
+                            {
+                                "t": "l",
+                                "v": "Wins"
+                            }
+                        ]
+                    }
+                ]
             }
-		},
-		"salesforce-03" : {
-			"service" : "salesforce",
-			"libraryAlias" : "",
-			"name": "Opportunities (Last 30 Days)",
-			"description" : "See all opportunities that were created in the last 30 days. Originates from the Gallery.",
-			"type" : "salesforce",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"SOQLQuery": "SELECT Name\r\nFROM Opportunity\r\nWHERE CreatedDate = LAST_N_DAYS:30",
-            	"endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Opportunity%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
-				"instance": "{{auth.salesforce.instanceName}}"
+        },
+        "700897e0": {
+            "txt": "array(\"178845\",\"56256\",\"6560\",\"1256\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "178845"
+                            },
+                            {
+                                "t": "l",
+                                "v": "56256"
+                            },
+                            {
+                                "t": "l",
+                                "v": "6560"
+                            },
+                            {
+                                "t": "l",
+                                "v": "1256"
+                            }
+                        ]
+                    }
+                ]
             }
-		}
-	},
-
-	"dsMappings" : {
-		"googleAnalytics" :"0cd7232f25991691d0d1niktawuzhere",
-		"salesforce-01" :"6e9aaf435597c36fd833niktawuzhere",
-		"salesforce-02" :"a1e3b6310c4a33644648niktawuzhere",
-		"salesforce-03" :"4df8712cd2d66b2e7b5eniktawuzhere"
-	},
-
-	"services" : [
-		{
-			"service" : "google_analytics"
-		},
-		{
-			"service" : "salesforce"
-		}
-	],
-
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.google_analytics.profileId",
-			"label" : "Profile Id",
-			"isRequired" : true
-		}
-	],
-	"queries": [
+        },
+        "fb063949": {
+            "txt": "array(\"\",\"0.3146\",\"0.1166\",\"0.1915\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": ""
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.3146"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.1166"
+                            },
+                            {
+                                "t": "l",
+                                "v": "0.1915"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "datasources": {
+        "googleAnalytics": {
+            "service": "google_analytics",
+            "libraryAlias": "GAUsers(Last30Days)",
+            "name": "GA Users (Last 30 Days)",
+            "description": "See the number of users who visited your website, rolled up for the past 30 days. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+            }
+        },
+        "salesforce-01": {
+            "service": "salesforce",
+            "libraryAlias": "Leads(Last30Days)",
+            "name": "SF Leads (Last 30 Days)",
+            "description": "See your Salesforce leads from the last 30 days. Originates from the Gallery.",
+            "type": "salesforce",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "SOQLQuery": "SELECT Name\r\nFROM Lead\r\nWHERE CreatedDate = LAST_N_DAYS:30",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Lead%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-02": {
+            "service": "salesforce",
+            "libraryAlias": "NewAccounts(Last30Days)",
+            "name": "SF New Accounts (Last 30 Days)",
+            "description": "See all accounts that were created in the last 30 days. Originates from the Gallery.",
+            "type": "salesforce",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "SOQLQuery": "SELECT Name\r\nFROM Account\r\nWHERE CreatedDate = LAST_N_DAYS:30",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Account%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-03": {
+            "service": "salesforce",
+            "libraryAlias": "Opportunities(Last30Days)",
+            "name": "SF Opportunities (Last 30 Days)",
+            "description": "See all opportunities that were created in the last 30 days. Originates from the Gallery.",
+            "type": "salesforce",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "SOQLQuery": "SELECT Name\r\nFROM Opportunity\r\nWHERE CreatedDate = LAST_N_DAYS:30",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%0D%0AFROM+Opportunity%0D%0AWHERE+CreatedDate+%3D+LAST_N_DAYS%3A30",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        }
+    },
+    "dsMappings": {
+        "googleAnalytics": "0cd7232f25991691d0d1niktawuzhere",
+        "salesforce-01": "6e9aaf435597c36fd833niktawuzhere",
+        "salesforce-02": "a1e3b6310c4a33644648niktawuzhere",
+        "salesforce-03": "4df8712cd2d66b2e7b5eniktawuzhere"
+    },
+    "services": [
         {
-            "errorMessage":"There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
+            "service": "google_analytics"
+        },
+        {
+            "service": "salesforce"
+        }
+    ],
+    "datasourceConfigModel": [
+        {
+            "type": "select",
+            "id": "ds.google_analytics.profileId",
+            "label": "Analytics Account",
+            "isRequired": true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage": "There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
             "connector": {
                 "service": "google_analytics",
                 "type": "simple_rest",
@@ -100,11 +222,11 @@
                 }
             },
             "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
+                {
+                    "propId": "ds.google_analytics.profileId",
+                    "propField": "options",
+                    "labels": "/items/name",
+                    "values": "/items/id"
                 }
             ]
         }

@@ -1,108 +1,1066 @@
 {
-    "name" : "Pingdom & Google Analytics: Site Speed",
+    "name": "Pingdom & Google Analytics: Site Speed",
     "description": "Track your site speed using Google Analytics and Pingdom over the past 30 days. Originates from the Gallery.",
-
-    "datasources" : {
-        "pingdom-01" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Server Summary Status (Last 30 Days)",
-            "libraryAlias" :"pingdomServerSummaryStatusLast30Daysv2",
-            "refreshInterval" : 3600,
-            "description" :"Provides high level server statistics over the past 30 days. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.last30Days.format('epochTime')}",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
-            }
-        },        
-        "pingdom-02" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Server Summary Status (31-60 Days Ago)",
-            "libraryAlias" :"pingdomServerSummaryStatus3160DaysAgov2",
-            "refreshInterval" : 3600,
-            "description" :"Provides high level server statistics for 31-60 days ago. Can be used for comparison. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.add(-60).format('epochTime')}&to={date.add(-31).format('epochTime')}",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+    "sampleFormulas": {
+        "24aa6bc3-1": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/pingdom.png"
+                            }
+                        ]
+                    }
+                ]
             }
         },
-        "google_analytics-01" : {
-            "service" : "google_analytics",
-            "type" : "google_analytics",
-            "format" : "csv",
-            "name" :"GA Site Speed Stats (Last 60 Days)",
-            "libraryAlias" :"GASiteSpeedStatsLast60Days",
-            "refreshInterval" : 3600,
-            "description" :"Provides google analytics for last 60 days. Can be used for comparison. Originates from the Gallery.",
-            "props" : {
-                 "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:pageviews,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
-                 "max_pages": "1",
-                 "mode": "Simple",
-                 "profile": "{{ds.google_analytics.profileId}}",
-                 "timePeriod": "&start-date={date.add(-60).format()}&end-date={date.today}"
+        "6499e9adf1997f7ba94fb4307569960b7b677e1f": {
+            "txt": "\"Avg Response Time\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Avg Response Time"
+                            }
+                        ]
+                    }
+                ]
             }
         },
-        "pingdom-04" : {
-            "service" : "pingdom",
-            "type" : "simple_rest",
-            "format" : "json",
-            "name" :"Pingdom Average Response Time (Last 30 Days)",
-            "libraryAlias" :"PingdomAverageResponseTimeLast30Days",
-            "refreshInterval" : 3600,
-            "description" :"Provides server's average responste time on a daily basis for the last 30 days. Originates from the Gallery.",
-            "props":{
-                "endpoint_url" : "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=day&from={date.last30Days.format('epochTime')}",
-                "method" : "GET",
-                "auth_method" : "basic",
-                "parameters" : "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+        "a95f15bd059da022eaeab2d34b56bb2126a24202": {
+            "txt": "\"640\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "640"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "955ce6e0": {
+            "txt": "array(\"849\",\"697\",\"649\",\"782\",\"797\",\"670\",\"784\",\"692\",\"735\",\"674\",\"847\",\"607\",\"671\",\"872\",\"796\",\"666\",\"623\",\"841\",\"648\",\"754\",\"658\",\"720\",\"840\",\"667\",\"894\",\"839\",\"893\",\"754\",\"822\",\"639\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "849"
+                            },
+                            {
+                                "t": "l",
+                                "v": "697"
+                            },
+                            {
+                                "t": "l",
+                                "v": "649"
+                            },
+                            {
+                                "t": "l",
+                                "v": "782"
+                            },
+                            {
+                                "t": "l",
+                                "v": "797"
+                            },
+                            {
+                                "t": "l",
+                                "v": "670"
+                            },
+                            {
+                                "t": "l",
+                                "v": "784"
+                            },
+                            {
+                                "t": "l",
+                                "v": "692"
+                            },
+                            {
+                                "t": "l",
+                                "v": "735"
+                            },
+                            {
+                                "t": "l",
+                                "v": "674"
+                            },
+                            {
+                                "t": "l",
+                                "v": "847"
+                            },
+                            {
+                                "t": "l",
+                                "v": "607"
+                            },
+                            {
+                                "t": "l",
+                                "v": "671"
+                            },
+                            {
+                                "t": "l",
+                                "v": "872"
+                            },
+                            {
+                                "t": "l",
+                                "v": "796"
+                            },
+                            {
+                                "t": "l",
+                                "v": "666"
+                            },
+                            {
+                                "t": "l",
+                                "v": "623"
+                            },
+                            {
+                                "t": "l",
+                                "v": "841"
+                            },
+                            {
+                                "t": "l",
+                                "v": "648"
+                            },
+                            {
+                                "t": "l",
+                                "v": "754"
+                            },
+                            {
+                                "t": "l",
+                                "v": "658"
+                            },
+                            {
+                                "t": "l",
+                                "v": "720"
+                            },
+                            {
+                                "t": "l",
+                                "v": "840"
+                            },
+                            {
+                                "t": "l",
+                                "v": "667"
+                            },
+                            {
+                                "t": "l",
+                                "v": "894"
+                            },
+                            {
+                                "t": "l",
+                                "v": "839"
+                            },
+                            {
+                                "t": "l",
+                                "v": "893"
+                            },
+                            {
+                                "t": "l",
+                                "v": "754"
+                            },
+                            {
+                                "t": "l",
+                                "v": "822"
+                            },
+                            {
+                                "t": "l",
+                                "v": "639"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "bbb24e96": {
+            "txt": "\"4.74\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "4.74"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "22661466b12d862e648e54584f563db6b99e83ec": {
+            "txt": "\"-0.983\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "-0.983"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "b7dabf749e04070ba221babd1c09ba7d2b429502": {
+            "txt": "\"651\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "651"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "3deef20c": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/pingdom/google-analytics.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "https://static.klipfolio.com/static/klips/saas/templates/pingdom/google-analytics.png"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "87e15472": {
+            "txt": "\"Avg Server Response Time\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Avg Server Response Time"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "3e1b6fed": {
+            "txt": "\"329.22\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "329.22"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "55bc2863": {
+            "txt": "array(\"313.81\",\"333.31\",\"348.87\",\"639.30\",\"243.90\",\"37.58\",\"249.98\",\"025.70\",\"922.44\",\"243.50\",\"840.26\",\"546.47\",\"312.23\",\"214.85\",\"749.48\",\"536.32\",\"145.43\",\"514.65\",\"535.95\",\"649.54\",\"84.96\",\"813.96\",\"147.12\",\"038.59\",\"628.78\",\"88.90\",\"923.07\",\"639.94\",\"845.95\",\"65.05\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "313.81"
+                            },
+                            {
+                                "t": "l",
+                                "v": "333.31"
+                            },
+                            {
+                                "t": "l",
+                                "v": "348.87"
+                            },
+                            {
+                                "t": "l",
+                                "v": "639.30"
+                            },
+                            {
+                                "t": "l",
+                                "v": "243.90"
+                            },
+                            {
+                                "t": "l",
+                                "v": "37.58"
+                            },
+                            {
+                                "t": "l",
+                                "v": "249.98"
+                            },
+                            {
+                                "t": "l",
+                                "v": "025.70"
+                            },
+                            {
+                                "t": "l",
+                                "v": "922.44"
+                            },
+                            {
+                                "t": "l",
+                                "v": "243.50"
+                            },
+                            {
+                                "t": "l",
+                                "v": "840.26"
+                            },
+                            {
+                                "t": "l",
+                                "v": "546.47"
+                            },
+                            {
+                                "t": "l",
+                                "v": "312.23"
+                            },
+                            {
+                                "t": "l",
+                                "v": "214.85"
+                            },
+                            {
+                                "t": "l",
+                                "v": "749.48"
+                            },
+                            {
+                                "t": "l",
+                                "v": "536.32"
+                            },
+                            {
+                                "t": "l",
+                                "v": "145.43"
+                            },
+                            {
+                                "t": "l",
+                                "v": "514.65"
+                            },
+                            {
+                                "t": "l",
+                                "v": "535.95"
+                            },
+                            {
+                                "t": "l",
+                                "v": "649.54"
+                            },
+                            {
+                                "t": "l",
+                                "v": "84.96"
+                            },
+                            {
+                                "t": "l",
+                                "v": "813.96"
+                            },
+                            {
+                                "t": "l",
+                                "v": "147.12"
+                            },
+                            {
+                                "t": "l",
+                                "v": "038.59"
+                            },
+                            {
+                                "t": "l",
+                                "v": "628.78"
+                            },
+                            {
+                                "t": "l",
+                                "v": "88.90"
+                            },
+                            {
+                                "t": "l",
+                                "v": "923.07"
+                            },
+                            {
+                                "t": "l",
+                                "v": "639.94"
+                            },
+                            {
+                                "t": "l",
+                                "v": "845.95"
+                            },
+                            {
+                                "t": "l",
+                                "v": "65.05"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "d66f4372": {
+            "txt": "\"4.22\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "4.22"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "3fed80d4": {
+            "txt": "\"0.144\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "0.144"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "e407898e": {
+            "txt": "\"370.96\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "370.96"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "4e82cbe0fb609d7913fe9ebfec8f3723f570578c": {
+            "txt": "\"Avg Redirection Time\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Avg Redirection Time"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "020eceb3": {
+            "txt": "\"120.96\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "120.96"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "7cd21b3fac77f1554d4ad2218140f9c41fd7fee9": {
+            "txt": "array(\"83.16\",\"64.56\",\"424.56\",\"048.16\",\"220.22\",\"039.20\",\"44.44\",\"17.56\",\"027.27\",\"737.09\",\"21.61\",\"98.08\",\"76.68\",\"612.78\",\"325.33\",\"843.89\",\"825.17\",\"27.67\",\"334.33\",\"613.97\",\"623.64\",\"817.57\",\"311.27\",\"331.23\",\"333.14\",\"625.80\",\"211.41\",\"329.18\",\"233.04\",\"06.89\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "83.16"
+                            },
+                            {
+                                "t": "l",
+                                "v": "64.56"
+                            },
+                            {
+                                "t": "l",
+                                "v": "424.56"
+                            },
+                            {
+                                "t": "l",
+                                "v": "048.16"
+                            },
+                            {
+                                "t": "l",
+                                "v": "220.22"
+                            },
+                            {
+                                "t": "l",
+                                "v": "039.20"
+                            },
+                            {
+                                "t": "l",
+                                "v": "44.44"
+                            },
+                            {
+                                "t": "l",
+                                "v": "17.56"
+                            },
+                            {
+                                "t": "l",
+                                "v": "027.27"
+                            },
+                            {
+                                "t": "l",
+                                "v": "737.09"
+                            },
+                            {
+                                "t": "l",
+                                "v": "21.61"
+                            },
+                            {
+                                "t": "l",
+                                "v": "98.08"
+                            },
+                            {
+                                "t": "l",
+                                "v": "76.68"
+                            },
+                            {
+                                "t": "l",
+                                "v": "612.78"
+                            },
+                            {
+                                "t": "l",
+                                "v": "325.33"
+                            },
+                            {
+                                "t": "l",
+                                "v": "843.89"
+                            },
+                            {
+                                "t": "l",
+                                "v": "825.17"
+                            },
+                            {
+                                "t": "l",
+                                "v": "27.67"
+                            },
+                            {
+                                "t": "l",
+                                "v": "334.33"
+                            },
+                            {
+                                "t": "l",
+                                "v": "613.97"
+                            },
+                            {
+                                "t": "l",
+                                "v": "623.64"
+                            },
+                            {
+                                "t": "l",
+                                "v": "817.57"
+                            },
+                            {
+                                "t": "l",
+                                "v": "311.27"
+                            },
+                            {
+                                "t": "l",
+                                "v": "331.23"
+                            },
+                            {
+                                "t": "l",
+                                "v": "333.14"
+                            },
+                            {
+                                "t": "l",
+                                "v": "625.80"
+                            },
+                            {
+                                "t": "l",
+                                "v": "211.41"
+                            },
+                            {
+                                "t": "l",
+                                "v": "329.18"
+                            },
+                            {
+                                "t": "l",
+                                "v": "233.04"
+                            },
+                            {
+                                "t": "l",
+                                "v": "06.89"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "a855be2301840244a4459415561e74e2f046c62a": {
+            "txt": "\"4.25\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "4.25"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "0ce67837": {
+            "txt": "\"0.494464\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "0.494464"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "eca3a7ca": {
+            "txt": "\"122.994454\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "122.994454"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "49f69ec5cc74517a246f64132ce413ebc2d29759": {
+            "txt": "\"Avg Page Load Time\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "Avg Page Load Time"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "cd37296d": {
+            "txt": "\"15.5679\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "15.5679"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "13ceebb46205a47b2ba2883d56678ae68bbd5e53": {
+            "txt": "array(\"43.28\",\"27.89\",\"22.16\",\"3.82\",\"14.60\",\"45.19\",\"36.50\",\"9.73\",\"46.91\",\"37.33\",\"4.35\",\"18.45\",\"3.59\",\"36.25\",\"39.47\",\"42.89\",\"15.38\",\"43.50\",\"46.46\",\"46.95\",\"4.47\",\"6.40\",\"13.63\",\"7.33\",\"8.36\",\"39.05\",\"33.21\",\"30.48\",\"34.84\",\"6.68\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "43.28"
+                            },
+                            {
+                                "t": "l",
+                                "v": "27.89"
+                            },
+                            {
+                                "t": "l",
+                                "v": "22.16"
+                            },
+                            {
+                                "t": "l",
+                                "v": "3.82"
+                            },
+                            {
+                                "t": "l",
+                                "v": "14.60"
+                            },
+                            {
+                                "t": "l",
+                                "v": "45.19"
+                            },
+                            {
+                                "t": "l",
+                                "v": "36.50"
+                            },
+                            {
+                                "t": "l",
+                                "v": "9.73"
+                            },
+                            {
+                                "t": "l",
+                                "v": "46.91"
+                            },
+                            {
+                                "t": "l",
+                                "v": "37.33"
+                            },
+                            {
+                                "t": "l",
+                                "v": "4.35"
+                            },
+                            {
+                                "t": "l",
+                                "v": "18.45"
+                            },
+                            {
+                                "t": "l",
+                                "v": "3.59"
+                            },
+                            {
+                                "t": "l",
+                                "v": "36.25"
+                            },
+                            {
+                                "t": "l",
+                                "v": "39.47"
+                            },
+                            {
+                                "t": "l",
+                                "v": "42.89"
+                            },
+                            {
+                                "t": "l",
+                                "v": "15.38"
+                            },
+                            {
+                                "t": "l",
+                                "v": "43.50"
+                            },
+                            {
+                                "t": "l",
+                                "v": "46.46"
+                            },
+                            {
+                                "t": "l",
+                                "v": "46.95"
+                            },
+                            {
+                                "t": "l",
+                                "v": "4.47"
+                            },
+                            {
+                                "t": "l",
+                                "v": "6.40"
+                            },
+                            {
+                                "t": "l",
+                                "v": "13.63"
+                            },
+                            {
+                                "t": "l",
+                                "v": "7.33"
+                            },
+                            {
+                                "t": "l",
+                                "v": "8.36"
+                            },
+                            {
+                                "t": "l",
+                                "v": "39.05"
+                            },
+                            {
+                                "t": "l",
+                                "v": "33.21"
+                            },
+                            {
+                                "t": "l",
+                                "v": "30.48"
+                            },
+                            {
+                                "t": "l",
+                                "v": "34.84"
+                            },
+                            {
+                                "t": "l",
+                                "v": "6.68"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "51c83dbd504174a857e1cb12e99530f79e45dced": {
+            "txt": "\"4.747\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "4.747"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "76df18a7": {
+            "txt": "\"-0.2946\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "-0.2946"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "981f7c2f": {
+            "txt": "\"16.6624\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [
+                    {
+                        "t": "f",
+                        "v": "array",
+                        "c": [
+                            {
+                                "t": "l",
+                                "v": "16.6624"
+                            }
+                        ]
+                    }
+                ]
             }
         }
     },
-
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.pingdom.serverId",
-            "label" : "Pingdom Check",
-			"isRequired" : true,
-            "onChangeQueries" : [ "meow1" ]      
-		},
-        {
-            "type" : "select",
-            "id" : "ds.google_analytics.profileId",
-            "label" : "Google Analytics Profile",
-            "isRequired" : true
+    "datasources": {
+        "pingdom-01": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Server Summary Status (Last 30 Days)",
+            "libraryAlias": "pingdomServerSummaryStatusLast30Daysv2",
+            "refreshInterval": 3600,
+            "description": "Provides high level server statistics over the past 30 days. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.last30Days.format('epochTime')}",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+            }
+        },
+        "pingdom-02": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Server Summary Status (31-60 Days Ago)",
+            "libraryAlias": "pingdomServerSummaryStatus3160DaysAgov2",
+            "refreshInterval": 3600,
+            "description": "Provides high level server statistics for 31-60 days ago. Can be used for comparison. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/summary.average/{{ds.pingdom.serverId}}?from={date.add(-60).format('epochTime')}&to={date.add(-31).format('epochTime')}",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"},{\"name\":\"includeuptime\",\"value\":\"true\",\"type\":\"query\"}]"
+            }
+        },
+        "google_analytics-01": {
+            "service": "google_analytics",
+            "type": "google_analytics",
+            "format": "csv",
+            "name": "GA Site Speed Stats (Last 60 Days)",
+            "libraryAlias": "GASiteSpeedStatsLast60Days",
+            "refreshInterval": 3600,
+            "description": "Provides google analytics for last 60 days. Can be used for comparison. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:pageviews,ga:avgPageLoadTime,ga:avgRedirectionTime,ga:avgServerResponseTime&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-60).format()}&end-date={date.today}"
+            }
+        },
+        "pingdom-04": {
+            "service": "pingdom",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Pingdom Average Response Time (Last 30 Days)",
+            "libraryAlias": "PingdomAverageResponseTimeLast30Days",
+            "refreshInterval": 3600,
+            "description": "Provides server's average responste time on a daily basis for the last 30 days. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.pingdom.com/api/2.0/summary.performance/{{ds.pingdom.serverId}}?resolution=day&from={date.last30Days.format('epochTime')}",
+                "method": "GET",
+                "auth_method": "basic",
+                "parameters": "[{\"name\":\"App-Key\",\"value\":\"inab7669wia1jffg80gn28fkczmc9r2y\",\"type\":\"header\"}]"
+            }
         }
-	],	
-
+    },
+    "datasourceConfigModel": [
+        {
+            "type": "select",
+            "id": "ds.pingdom.serverId",
+            "label": "Pingdom Check",
+            "isRequired": true,
+            "onChangeQueries": [
+                "meow1"
+            ]
+        },
+        {
+            "type": "select",
+            "id": "ds.google_analytics.profileId",
+            "label": "Analytics Account",
+            "isRequired": true
+        }
+    ],
     "dsMappings": {
-        "pingdom-01" : "639abbccaa4e2d870f70KavyaMallur9",
-		"pingdom-02" : "3ac202b3d931a2d373d3KavyaMallur9",
-        "google_analytics-01" : "e172dcc230b35e273facKavyaMallur9",
-        "pingdom-04" : "25606ba6eb6016826497KavyaMallur9"
+        "pingdom-01": "639abbccaa4e2d870f70KavyaMallur9",
+        "pingdom-02": "3ac202b3d931a2d373d3KavyaMallur9",
+        "google_analytics-01": "e172dcc230b35e273facKavyaMallur9",
+        "pingdom-04": "25606ba6eb6016826497KavyaMallur9"
     },
-
-    "services" : [
+    "services": [
         {
-            "service" : "pingdom"
+            "service": "pingdom"
         },
         {
-            "service" : "google_analytics"
+            "service": "google_analytics"
         }
     ],
     "queries": [
         {
-            "errorMessage":"Check your Pingdom credentials and try again.",
+            "errorMessage": "Check your Pingdom credentials and try again.",
             "connector": {
                 "service": "pingdom",
-                "errorMessage":"There seems to be a problem accessing your Pingdom data. Check your credentials and try again.",
+                "errorMessage": "There seems to be a problem accessing your Pingdom data. Check your credentials and try again.",
                 "type": "simple_rest",
                 "format": "json",
                 "props": {
@@ -114,16 +1072,16 @@
             },
             "results": [
                 {
-                    "propId" : "ds.pingdom.serverId", 
-                    "propField" : "options", 
-                    "labels": "/checks/name",  
-                    "values": "/checks/id" 
+                    "propId": "ds.pingdom.serverId",
+                    "propField": "options",
+                    "labels": "/checks/name",
+                    "values": "/checks/id"
                 }
             ]
         },
         {
-            "id":"meow1",
-            "errorMessage":"There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
+            "id": "meow1",
+            "errorMessage": "There are two possible reasons: <br><br>1. Your Google Analytics OAuth token has expired. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>How do I re-authorize my OAuth token?</a> <br><br>2. You don't have access to a Google Analytics account. Ask an administrator to grant you access.",
             "connector": {
                 "service": "google_analytics",
                 "type": "simple_rest",
@@ -134,14 +1092,13 @@
                 }
             },
             "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
+                {
+                    "propId": "ds.google_analytics.profileId",
+                    "propField": "options",
+                    "labels": "/items/name",
+                    "values": "/items/id"
                 }
             ]
-        }        
-   
+        }
     ]
 }
