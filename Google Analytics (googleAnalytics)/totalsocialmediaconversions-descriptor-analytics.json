@@ -1,9 +1,74 @@
-{  
-   "name":"GA Total Social Media Conversions",
-   "description":"See a summary of total social media lead conversions over the past 30 days. Originates from the Gallery.",
+{
+    "name": "Google Analytics Total Social Media Conversions",
+    "description": "See a summary of total social media lead conversions. Originates from the Gallery.",
 
-       "sampleFormulas": {
-
+    "sampleFormulas": {
+        "f5fcbecf": {
+            "txt": "\"20150401\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150401"
+                }]
+            }
+        },
+        "61e6c3a0": {
+            "txt": "\"20150302\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150302"
+                }]
+            }
+        },
+        "0c25aae8": {
+            "txt": "\"20150430\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150430"
+                }]
+            }
+        },
+        "41b5500e": {
+            "txt": "\"20150331\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150331"
+                }]
+            }
+        },
+        "b535f885": {
+            "txt": "\"-30\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "-30"
+                }]
+            }
+        },
+        "82634619": {
+            "txt": "\"Last 30 Days\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Last 30 Days"
+                }]
+            }
+        },
         "3473ace2-3": {
             "txt": "\"1513\"",
             "src": {
@@ -28,7 +93,7 @@
             }
         },
 
-                "35fff484-5": {
+        "35fff484-5": {
             "txt": "\"0.05\"",
             "src": {
                 "t": "expr",
@@ -40,7 +105,7 @@
             }
         },
 
-                "e93c7419-6": {
+        "e93c7419-6": {
             "txt": "\"1446\"",
             "src": {
                 "t": "expr",
@@ -124,80 +189,54 @@
         }
     },
 
-   "datasources":{  
-      "googleAnalytics-01":{  
-         "service":"google_analytics",
-         "libraryAlias":"GASocialConversion",
-         "name":"GA Social Conversion",
-         "description":"Track sessions to your website via social media for the last 30 days. Originates from the Gallery.",
-         "type":"google_analytics",
-         "format":"csv",
-         "refreshInterval":14400,
-         "props":{
-            "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "endpoint_url":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "max_pages":"1",
-            "mode":"Advanced",
-            "profile":"{{ds.google_analytics.profileId}}",
-            "timePeriod":"&start-date=30daysAgo&end-date=yesterday"
-         }
-      },
-      "googleAnalytics-02":{  
-         "service":"google_analytics",
-         "libraryAlias":"GASocialConversionPrevPeriod",
-         "name":"GA Social Conversion (Prev 30 Days)",
-         "description":"Track sessions to your website via social media for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
-         "type":"google_analytics",
-         "format":"csv",
-         "refreshInterval":14400,
-         "props":{
-            "advancedQuery":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "endpoint_url":"https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-            "max_pages":"1",
-            "mode":"Advanced",
-            "profile":"{{ds.google_analytics.profileId}}",
-            "timePeriod":"&start-date=60daysAgo&end-date=31daysAgo"
-         }
-      }
-   },
-   "dsMappings":{  
-      "googleAnalytics-01":"587a9bf3d3694112e7cfdoogeraspilk",
-      "googleAnalytics-02":"f6f1b65d86225a03b355doogeraspilk"
-   },
-   "services":[  
-      {  
-         "service":"google_analytics"
-      }
-   ],
-   "datasourceConfigModel":[  
-      {  
-          "type":"select",
-          "id":"ds.google_analytics.profileId",
-          "label" : "Analytics Account",
-          "description" : "Select an Analytics Account from the drop-down list.",
-          "isRequired":true
-      }
-   ],
-   "queries": [
-        {
-            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "google_analytics",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
-                    "method": "GET"
-                }
-            },
-            "results": [
-                { 
-                    "propId" : "ds.google_analytics.profileId",
-                    "propField" : "options", 
-                    "labels": "/items/name",  
-                    "values": "/items/id" 
-                }
-            ]
+    "datasources": {
+        "googleAnalytics": {
+            "service": "google_analytics",
+            "libraryAlias": "GASocialConversion731Days",
+            "name": "GA Social Conversion (731 Days)",
+            "description": "Track sessions to your website via social media for the last 730 Days till date. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date={date.add(-730).format()}&end-date={date.today}&metrics=ga:sessions,ga:goalCompletionsAll&dimensions=ga:date,ga:socialNetwork&max-results=10000&sort=-ga:date&filters=ga%3AsocialNetwork!%3D(not%20set)",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date={date.add(-730).format()}&end-date={date.today}&metrics=ga:sessions,ga:goalCompletionsAll&dimensions=ga:date,ga:socialNetwork&max-results=10000&sort=-ga:date&filters=ga%3AsocialNetwork!%3D(not%20set)",
+                "max_pages": "1",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-730).format()}&end-date={date.today}"
+            }
         }
-    ]
+    },
+    "dsMappings": {
+        "googleAnalytics": "27654a33e1b3bd30ca95doogeraspilk"
+    },
+    "services": [{
+        "service": "google_analytics"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
 }

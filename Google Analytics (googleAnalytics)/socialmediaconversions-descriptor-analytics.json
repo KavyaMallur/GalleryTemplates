@@ -1,8 +1,74 @@
 {
-    "name": "Social Media Conversions (Last 30 Days)",
-    "description": "Compare conversion rates from various social media platforms over the past 30 days. Originates from the Gallery.",
+    "name": "Google Analytics Social Media Conversions",
+    "description": "Compare conversion rates from various social media platforms. Originates from the Gallery.",
 
     "sampleFormulas": {
+        "c84b0e93": {
+            "txt": "\"20150401\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150401"
+                }]
+            }
+        },
+        "277443ef": {
+            "txt": "\"20150302\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150302"
+                }]
+            }
+        },
+        "b554e3f6": {
+            "txt": "\"20150430\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150430"
+                }]
+            }
+        },
+        "00f7d61b": {
+            "txt": "\"20150331\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20150331"
+                }]
+            }
+        },
+        "af50e1b6": {
+            "txt": "\"-30\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "-30"
+                }]
+            }
+        },
+        "041d7476": {
+            "txt": "\"Last 30 Days\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Last 30 Days"
+                }]
+            }
+        },
         "09f09359-11": {
             "txt": "array(\"Twitter\",\"LinkedIn\",\"Facebook\",\"Quora\",\"Google+\",\"Blogger\",\"Pocket\",\"Youtube\")",
             "src": {
@@ -221,7 +287,7 @@
             }
         },
         "2ec5ffe2-3": {
-            "txt": "array(\"0.67\",\"0.40\",\"0.29\",\"0.16\",\"0.14\",\"0.10\",\"0.09\",\"0.06\")",
+            "txt": "array(\"0.039\",\"0.035\",\"0.015\",\"0.023\",\"0.021\",\"0.10\",\"0.071\",\"0.167\")",
             "src": {
                 "t": "expr",
                 "v": false,
@@ -230,28 +296,28 @@
                     "v": "array",
                     "c": [{
                         "t": "l",
-                        "v": "0.67"
+                        "v": "0.039"
                     }, {
                         "t": "l",
-                        "v": "0.40"
+                        "v": "0.035"
                     }, {
                         "t": "l",
-                        "v": "0.29"
+                        "v": "0.015"
                     }, {
                         "t": "l",
-                        "v": "0.16"
+                        "v": "0.023"
                     }, {
                         "t": "l",
-                        "v": "0.14"
+                        "v": "0.021"
                     }, {
                         "t": "l",
                         "v": "0.10"
                     }, {
                         "t": "l",
-                        "v": "0.09"
+                        "v": "0.071"
                     }, {
                         "t": "l",
-                        "v": "0.06"
+                        "v": "0.167"
                     }]
                 }]
             }
@@ -259,44 +325,26 @@
     },
 
     "datasources": {
-        "googleAnalytics-01": {
+        "googleAnalytics": {
             "service": "google_analytics",
-            "libraryAlias": "GASocialConversion(Last30Days)",
-            "name": "GA Social Conversion (Last 30 Days)",
-            "description": "Track sessions to your website via social media for the last 30 days. Originates from the Gallery.",
+            "libraryAlias": "GASocialConversion731Days",
+            "name": "GA Social Conversion (731 Days)",
+            "description": "Track sessions to your website via social media for the last 730 Days till date. Originates from the Gallery.",
             "type": "google_analytics",
             "format": "csv",
             "refreshInterval": 14400,
             "props": {
-                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=30daysAgo&end-date=yesterday&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date={date.add(-730).format()}&end-date={date.today}&metrics=ga:sessions,ga:goalCompletionsAll&dimensions=ga:date,ga:socialNetwork&max-results=10000&sort=-ga:date&filters=ga%3AsocialNetwork!%3D(not%20set)",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date={date.add(-730).format()}&end-date={date.today}&metrics=ga:sessions,ga:goalCompletionsAll&dimensions=ga:date,ga:socialNetwork&max-results=10000&sort=-ga:date&filters=ga%3AsocialNetwork!%3D(not%20set)",
                 "max_pages": "1",
                 "mode": "Advanced",
                 "profile": "{{ds.google_analytics.profileId}}",
-                "timePeriod": "&start-date=30daysAgo&end-date=yesterday"
-            }
-        },
-        "googleAnalytics-02": {
-            "service": "google_analytics",
-            "libraryAlias": "GASocialConversion(Prev 30 Days)",
-            "name": "GA Social Conversion (Prev 30 Days)",
-            "description": "Track sessions to your website via social media for 30 days as of 30 days ago. Used for a comparison. Originates from the Gallery.",
-            "type": "google_analytics",
-            "format": "csv",
-            "refreshInterval": 14400,
-            "props": {
-                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=60daysAgo&end-date=31daysAgo&metrics=ga:sessions,ga:avgSessionDuration,ga:goalCompletionsAll&dimensions=ga:socialNetwork&filters=ga:socialNetwork!=(not+set);ga:goalCompletionsAll>0",
-                "max_pages": "1",
-                "mode": "Advanced",
-                "profile": "{{ds.google_analytics.profileId}}",
-                "timePeriod": "&start-date=60daysAgo&end-date=31daysAgo"
+                "timePeriod": "&start-date={date.add(-730).format()}&end-date={date.today}"
             }
         }
     },
     "dsMappings": {
-        "googleAnalytics-01": "587a9bf3d3694112e7cfdoogeraspilk",
-        "googleAnalytics-02": "f6f1b65d86225a03b355doogeraspilk"
+        "googleAnalytics": "27654a33e1b3bd30ca95doogeraspilk"
     },
     "services": [{
         "service": "google_analytics"
