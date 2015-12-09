@@ -4,18 +4,18 @@
    "workspace": {
       "datasources": [
          "453ec69fd5e28295de72doogeraspilk",
-         "1e04019bcbb8ff18d84cdoogeraspilk",
          "a7c7f93fb01b100fd6f2doogeraspilk",
-         "f4a388b20138845be6dddoogeraspilk",
          "a77856261be17377a2d6doogeraspilk",
-         "443220abdf5eacc7c985doogeraspilk",
          "6968e12e30a07c6902dfdoogeraspilk",
-         "5e3443e6b57f3c4144f7doogeraspilk",
          "d7e8da42c262bfe312bedoogeraspilk",
-         "2784415a9353974a8c1adoogeraspilk",
          "30ba708cde6a3ae2ce15doogeraspilk",
-         "2fd7f2a04efefd3cdccedoogeraspilk",
          "12b6888fb1fffcbbff5ddoogeraspilk",
+         "1e04019bcbb8ff18d84cdoogeraspilk",
+         "f4a388b20138845be6dddoogeraspilk",
+         "443220abdf5eacc7c985doogeraspilk",
+         "5e3443e6b57f3c4144f7doogeraspilk",
+         "2784415a9353974a8c1adoogeraspilk",
+         "2fd7f2a04efefd3cdccedoogeraspilk",
          "1530010e015764951babdoogeraspilk"
       ],
       "dimensions": {
@@ -1568,7 +1568,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "if(($gaUserTarget!=\"\"),($gaUserTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@A2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@A2;,\"-30\",443220abdf5eacc7c985doogeraspilk@A2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@A2;,\"-90\",2784415a9353974a8c1adoogeraspilk@A2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@A2;,\"-365\",1530010e015764951babdoogeraspilk@A2;))",
+                           "txt": "if(($gaUserTarget!=\"\"),($gaUserTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@A2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@A2;,\"-30\",443220abdf5eacc7c985doogeraspilk@A2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@A2;,\"-90\",2784415a9353974a8c1adoogeraspilk@A2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@A2;,\"-365\",1530010e015764951babdoogeraspilk@A2;))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1608,8 +1608,310 @@
                                                 "v": "*"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "30"
+                                                "t": "f",
+                                                "v": "switch",
+                                                "c": [
+                                                   {
+                                                      "t": "var",
+                                                      "v": "KTPeriod"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MTD"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "relative value",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "lastmonth"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_endof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "YTD"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "relative value",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "_default_"
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "var",
+                                                            "v": "KTPeriod"
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "*"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "case",
+                                                         "repeats": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "case",
+                                                         "repeats": true
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
@@ -1763,7 +2065,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "if((((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@A2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@A2;,\"-30\",a77856261be17377a2d6doogeraspilk@A2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@A2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@A2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@A2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@A2;))*\"1.25\")>=(if(($gaUserTarget!=\"\"),($gaUserTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@A2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@A2;,\"-30\",443220abdf5eacc7c985doogeraspilk@A2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@A2;,\"-90\",2784415a9353974a8c1adoogeraspilk@A2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@A2;,\"-365\",1530010e015764951babdoogeraspilk@A2;)))),((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@A2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@A2;,\"-30\",a77856261be17377a2d6doogeraspilk@A2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@A2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@A2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@A2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@A2;))*\"1.25\"),((if(($gaUserTarget!=\"\"),($gaUserTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@A2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@A2;,\"-30\",443220abdf5eacc7c985doogeraspilk@A2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@A2;,\"-90\",2784415a9353974a8c1adoogeraspilk@A2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@A2;,\"-365\",1530010e015764951babdoogeraspilk@A2;)))*\"1.25\"))",
+                           "txt": "if((((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@A2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@A2;,\"-30\",a77856261be17377a2d6doogeraspilk@A2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@A2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@A2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@A2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@A2;))*\"1.25\")>=(if(($gaUserTarget!=\"\"),($gaUserTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@A2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@A2;,\"-30\",443220abdf5eacc7c985doogeraspilk@A2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@A2;,\"-90\",2784415a9353974a8c1adoogeraspilk@A2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@A2;,\"-365\",1530010e015764951babdoogeraspilk@A2;)))),((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@A2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@A2;,\"-30\",a77856261be17377a2d6doogeraspilk@A2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@A2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@A2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@A2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@A2;))*\"1.25\"),((if(($gaUserTarget!=\"\"),($gaUserTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@A2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@A2;,\"-30\",443220abdf5eacc7c985doogeraspilk@A2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@A2;,\"-90\",2784415a9353974a8c1adoogeraspilk@A2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@A2;,\"-365\",1530010e015764951babdoogeraspilk@A2;)))*\"1.25\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -2055,7 +2357,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "if(($gaSessionsTarget!=\"\"),($gaSessionsTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@B2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@B2;,\"-30\",443220abdf5eacc7c985doogeraspilk@B2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@B2;,\"-90\",2784415a9353974a8c1adoogeraspilk@B2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@B2;,\"-365\",1530010e015764951babdoogeraspilk@B2;))",
+                           "txt": "if(($gaSessionsTarget!=\"\"),($gaSessionsTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@B2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@B2;,\"-30\",443220abdf5eacc7c985doogeraspilk@B2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@B2;,\"-90\",2784415a9353974a8c1adoogeraspilk@B2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@B2;,\"-365\",1530010e015764951babdoogeraspilk@B2;))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -2095,8 +2397,310 @@
                                                 "v": "*"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "30"
+                                                "t": "f",
+                                                "v": "switch",
+                                                "c": [
+                                                   {
+                                                      "t": "var",
+                                                      "v": "KTPeriod"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MTD"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "relative value",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "lastmonth"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_endof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "YTD"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "relative value",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "_default_"
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "var",
+                                                            "v": "KTPeriod"
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "*"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "case",
+                                                         "repeats": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "case",
+                                                         "repeats": true
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
@@ -2250,7 +2854,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "if((((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@B2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@B2;,\"-30\",a77856261be17377a2d6doogeraspilk@B2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@B2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@B2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@B2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@B2;))*\"1.25\")>=(if(($gaSessionsTarget!=\"\"),($gaSessionsTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@B2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@B2;,\"-30\",443220abdf5eacc7c985doogeraspilk@B2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@B2;,\"-90\",2784415a9353974a8c1adoogeraspilk@B2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@B2;,\"-365\",1530010e015764951babdoogeraspilk@B2;)))),((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@B2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@B2;,\"-30\",a77856261be17377a2d6doogeraspilk@B2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@B2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@B2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@B2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@B2;))*\"1.25\"),((if(($gaSessionsTarget!=\"\"),($gaSessionsTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@B2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@B2;,\"-30\",443220abdf5eacc7c985doogeraspilk@B2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@B2;,\"-90\",2784415a9353974a8c1adoogeraspilk@B2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@B2;,\"-365\",1530010e015764951babdoogeraspilk@B2;)))*\"1.25\"))",
+                           "txt": "if((((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@B2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@B2;,\"-30\",a77856261be17377a2d6doogeraspilk@B2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@B2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@B2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@B2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@B2;))*\"1.25\")>=(if(($gaSessionsTarget!=\"\"),($gaSessionsTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@B2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@B2;,\"-30\",443220abdf5eacc7c985doogeraspilk@B2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@B2;,\"-90\",2784415a9353974a8c1adoogeraspilk@B2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@B2;,\"-365\",1530010e015764951babdoogeraspilk@B2;)))),((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@B2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@B2;,\"-30\",a77856261be17377a2d6doogeraspilk@B2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@B2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@B2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@B2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@B2;))*\"1.25\"),((if(($gaSessionsTarget!=\"\"),($gaSessionsTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@B2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@B2;,\"-30\",443220abdf5eacc7c985doogeraspilk@B2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@B2;,\"-90\",2784415a9353974a8c1adoogeraspilk@B2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@B2;,\"-365\",1530010e015764951babdoogeraspilk@B2;)))*\"1.25\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -2546,7 +3150,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "if(($gaPageviewsTarget!=\"\"),($gaPageviewsTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@C2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@C2;,\"-30\",443220abdf5eacc7c985doogeraspilk@C2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@C2;,\"-90\",2784415a9353974a8c1adoogeraspilk@C2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@C2;,\"-365\",1530010e015764951babdoogeraspilk@C2;))",
+                           "txt": "if(($gaPageviewsTarget!=\"\"),($gaPageviewsTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@C2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@C2;,\"-30\",443220abdf5eacc7c985doogeraspilk@C2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@C2;,\"-90\",2784415a9353974a8c1adoogeraspilk@C2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@C2;,\"-365\",1530010e015764951babdoogeraspilk@C2;))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -2586,8 +3190,310 @@
                                                 "v": "*"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "30"
+                                                "t": "f",
+                                                "v": "switch",
+                                                "c": [
+                                                   {
+                                                      "t": "var",
+                                                      "v": "KTPeriod"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MTD"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "relative value",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "lastmonth"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_endof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "3"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "YTD"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "count_days",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date_startof",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "opt",
+                                                                  "v": "1"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "relative value",
+                                                                     "optional": true
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "first",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "exclude DOW",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "holidays",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "_default_"
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "var",
+                                                            "v": "KTPeriod"
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "*"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "case",
+                                                         "repeats": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "case",
+                                                         "repeats": true
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
@@ -2741,7 +3647,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "if((((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@C2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@C2;,\"-30\",a77856261be17377a2d6doogeraspilk@C2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@C2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@C2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@C2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@C2;))*\"1.25\")>=(if(($gaPageviewsTarget!=\"\"),($gaPageviewsTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@C2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@C2;,\"-30\",443220abdf5eacc7c985doogeraspilk@C2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@C2;,\"-90\",2784415a9353974a8c1adoogeraspilk@C2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@C2;,\"-365\",1530010e015764951babdoogeraspilk@C2;)))),((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@C2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@C2;,\"-30\",a77856261be17377a2d6doogeraspilk@C2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@C2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@C2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@C2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@C2;))*\"1.25\"),((if(($gaPageviewsTarget!=\"\"),($gaPageviewsTarget*\"30\"),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@C2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@C2;,\"-30\",443220abdf5eacc7c985doogeraspilk@C2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@C2;,\"-90\",2784415a9353974a8c1adoogeraspilk@C2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@C2;,\"-365\",1530010e015764951babdoogeraspilk@C2;)))*\"1.25\"))",
+                           "txt": "if((((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@C2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@C2;,\"-30\",a77856261be17377a2d6doogeraspilk@C2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@C2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@C2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@C2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@C2;))*\"1.25\")>=(if(($gaPageviewsTarget!=\"\"),($gaPageviewsTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@C2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@C2;,\"-30\",443220abdf5eacc7c985doogeraspilk@C2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@C2;,\"-90\",2784415a9353974a8c1adoogeraspilk@C2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@C2;,\"-365\",1530010e015764951babdoogeraspilk@C2;)))),((switch($KTPeriod,\"-7\",453ec69fd5e28295de72doogeraspilk@C2;,\"MTD\",a7c7f93fb01b100fd6f2doogeraspilk@C2;,\"-30\",a77856261be17377a2d6doogeraspilk@C2;,\"lastmonth\",6968e12e30a07c6902dfdoogeraspilk@C2;,\"-90\",d7e8da42c262bfe312bedoogeraspilk@C2;,\"YTD\",30ba708cde6a3ae2ce15doogeraspilk@C2;,\"-365\",12b6888fb1fffcbbff5ddoogeraspilk@C2;))*\"1.25\"),((if(($gaPageviewsTarget!=\"\"),($gaPageviewsTarget*switch($KTPeriod,\"MTD\",count_days(date_startof(today(),\"3\"),today()),\"lastmonth\",count_days(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"YTD\",count_days(date_startof(today(),\"1\"),today()),\"_default_\",($KTPeriod*\"-1\"))),switch($KTPeriod,\"-7\",1e04019bcbb8ff18d84cdoogeraspilk@C2;,\"MTD\",f4a388b20138845be6dddoogeraspilk@C2;,\"-30\",443220abdf5eacc7c985doogeraspilk@C2;,\"lastmonth\",5e3443e6b57f3c4144f7doogeraspilk@C2;,\"-90\",2784415a9353974a8c1adoogeraspilk@C2;,\"YTD\",2fd7f2a04efefd3cdccedoogeraspilk@C2;,\"-365\",1530010e015764951babdoogeraspilk@C2;)))*\"1.25\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
