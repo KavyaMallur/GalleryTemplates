@@ -1,12 +1,13 @@
 {
-   "title": "Bitly Top 10 Countries by Clicks",
+   "title": "Bitly Top 10 Countries by Clicks (Last 30 Days)",
    "id": "89146a64a858875abee3ee841f746999",
    "workspace": {
       "dimensions": {
          "w": 732
       },
       "datasources": [
-         "ed0d2d809543a52c4528niktawuzhere"
+         "ed0d2d809543a52c4528niktawuzhere",
+         "75a9136c5ac6fdc99755niktawuzhere"
       ]
    },
    "components": [
@@ -94,10 +95,11 @@
                ],
                "data": [
                   [
-                    
+
                   ]
                ],
                "seriesName": "Clicks",
+               "showValues": true,
                "axis": "99ceb432-4"
             },
             {
@@ -108,73 +110,93 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "slice(sort(groupby(ed0d2d809543a52c4528niktawuzhere@/data/countries/country;,ed0d2d809543a52c4528niktawuzhere@/data/countries/clicks;),\"descnumeric\",group(ed0d2d809543a52c4528niktawuzhere@/data/countries/country;)),\"0\",\"10\")",
+                     "txt": "lookup(slice(sort(groupby(ed0d2d809543a52c4528niktawuzhere@/data/countries/country;,ed0d2d809543a52c4528niktawuzhere@/data/countries/clicks;),\"descnumeric\",group(ed0d2d809543a52c4528niktawuzhere@/data/countries/country;)),\"0\",\"10\"),75a9136c5ac6fdc99755niktawuzhere@Sheet1,A:A;,75a9136c5ac6fdc99755niktawuzhere@Sheet1,B:B;)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "slice",
+                              "v": "lookup",
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "groupby",
+                                          "v": "sort",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "ed0d2d809543a52c4528niktawuzhere",
-                                                   "a": "/data/countries/country"
-                                                }
+                                                "t": "f",
+                                                "v": "groupby",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ed0d2d809543a52c4528niktawuzhere",
+                                                         "a": "/data/countries/country"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ed0d2d809543a52c4528niktawuzhere",
+                                                         "a": "/data/countries/clicks"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "method",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "ed0d2d809543a52c4528niktawuzhere",
-                                                   "a": "/data/countries/clicks"
-                                                }
+                                                "t": "opt",
+                                                "v": "descnumeric"
                                              },
                                              {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "method",
-                                                   "optional": true
-                                                }
+                                                "t": "f",
+                                                "v": "group",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ed0d2d809543a52c4528niktawuzhere",
+                                                         "a": "/data/countries/country"
+                                                      }
+                                                   }
+                                                ]
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "l",
+                                          "v": "0"
                                        },
                                        {
-                                          "t": "f",
-                                          "v": "group",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "ed0d2d809543a52c4528niktawuzhere",
-                                                   "a": "/data/countries/country"
-                                                }
-                                             }
-                                          ]
+                                          "t": "l",
+                                          "v": "10"
                                        }
                                     ]
                                  },
                                  {
-                                    "t": "l",
-                                    "v": "0"
+                                    "t": "d",
+                                    "v": {
+                                       "id": "75a9136c5ac6fdc99755niktawuzhere",
+                                       "a": "Sheet1,A:A"
+                                    }
                                  },
                                  {
-                                    "t": "l",
-                                    "v": "10"
+                                    "t": "d",
+                                    "v": {
+                                       "id": "75a9136c5ac6fdc99755niktawuzhere",
+                                       "a": "Sheet1,B:B"
+                                    }
                                  }
                               ]
                            }
@@ -184,12 +206,11 @@
                ],
                "data": [
                   [
-                   
+
                   ]
                ],
                "label": "Country",
-               "labelDrop": "1",
-               "showLabelTicks": true
+               "labelDrop": "1"
             },
             {
                "type": "chart_axis",
@@ -201,11 +222,13 @@
                "data": [],
                "dataDisabled": true,
                "label": "Clicks",
-               "labelDrop": 0,
-               "grid": true
+               "showAxis": false,
+               "showAxisScale": false,
+               "labelDrop": 0
             }
          ],
          "height": "3",
+         "showLegend": false,
          "invertAxes": 1
       }
    ]
