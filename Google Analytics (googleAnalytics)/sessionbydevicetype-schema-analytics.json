@@ -1,15 +1,749 @@
 {
-   "title": "Sessions by Device Type (Last 30 Days)",
+   "title": "GA Sessions by Device Type",
    "id": "3583e13988bd10e19e9885709d9b09ea",
    "workspace": {
       "datasources": [
          "a642ac05589ee13aa503niktawuzhere"
       ],
       "dimensions": {
-         "w": 386
+         "w": 559
       }
    },
    "components": [
+      {
+         "type": "panel_grid",
+         "id": "5ac5ed8f",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "b3bcd592-1",
+               "displayName": "Start Date",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateInputFormat": "yyyyMMdd",
+                  "dateFormat": "MMM dd, yyyy",
+                  "suffix": " to "
+               },
+               "formulas": [
+                  {
+                     "txt": "if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "count",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "a642ac05589ee13aa503niktawuzhere",
+                                                         "a": "A:A"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "switch",
+                                          "c": [
+                                             {
+                                                "t": "var",
+                                                "v": "KTPeriod"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "MTD"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_startof",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "3"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "relative value",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "lastmonth"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_startof",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "3"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-1"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "YTD"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_startof",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "1"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "relative value",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "_default_"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "var",
+                                                            "v": "KTPeriod"
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "+"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "case",
+                                                   "repeats": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "case",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMMdd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "blank",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "29ee4f3c-2",
+               "displayName": "End Date",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateInputFormat": "yyyyMMdd",
+                  "dateFormat": "MMM dd, yyyy",
+                  "prefix": ""
+               },
+               "formulas": [
+                  {
+                     "txt": "if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "count",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "a642ac05589ee13aa503niktawuzhere",
+                                                         "a": "A:A"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "switch",
+                                          "c": [
+                                             {
+                                                "t": "var",
+                                                "v": "KTPeriod"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "MTD"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "lastmonth"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_endof",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "3"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-1"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "YTD"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "_default_"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "case",
+                                                   "repeats": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "case",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMMdd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "blank",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "input",
+               "id": "ae3c16a6-2",
+               "displayName": "Drop-Down List",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "proxy",
+                     "role": "values",
+                     "id": "1bde92b9-3",
+                     "displayName": "Period Values",
+                     "renamed": true,
+                     "formulas": [
+                        {
+                           "txt": "array(\"-7\",\"MTD\",\"-30\",\"lastmonth\",\"-90\",\"YTD\",\"-365\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "array",
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "-7"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MTD"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-30"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "lastmonth"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-90"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "YTD"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-365"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "proxy",
+                     "role": "labels",
+                     "id": "b6418a1b-4",
+                     "displayName": "Period Labels",
+                     "renamed": true,
+                     "formulas": [
+                        {
+                           "txt": "array(\"Last 7 Days\",\"Current Month (MTD)\",\"Last 30 Days\",\"Last Month\",\"Last 90 Days\",\"Current Year (YTD)\",\"Last 365 Days\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "array",
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "Last 7 Days"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Current Month (MTD)"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Last 30 Days"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Last Month"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Last 90 Days"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Current Year (YTD)"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Last 365 Days"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  }
+               ],
+               "scope": 1,
+               "propName": "KTPeriod",
+               "inputType": 1,
+               "controlWidth": true,
+               "width": "100%"
+            }
+         ],
+         "rows": 1,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 2,
+               "w": "40%"
+            },
+            {
+               "x": 0,
+               "w": 100
+            }
+         ],
+         "cellData": [
+            {
+               "x": 1,
+               "y": 0,
+               "alignment": 1,
+               "cellPadding": [
+                  0,
+                  0,
+                  0,
+                  5
+               ]
+            },
+            {
+               "x": 2,
+               "y": 0
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 1,
+               "cellPadding": [
+                  0,
+                  0,
+                  0,
+                  5
+               ]
+            }
+         ]
+      },
       {
          "type": "panel_grid",
          "id": "195e9a8d-1",
@@ -128,7 +862,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"desktop\"))))/sum((sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"desktop\")))),(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"mobile\")))),(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"tablet\"))))))",
+                           "txt": "((sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"desktop\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))/sum((sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"desktop\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))),(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"mobile\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))),(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"tablet\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -202,7 +936,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"desktop\"))))",
+                           "txt": "(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"desktop\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -247,7 +981,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"mobile\"))))/sum((sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"desktop\")))),(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"mobile\")))),(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"tablet\"))))))",
+                           "txt": "((sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"mobile\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))/sum((sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"desktop\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))),(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"mobile\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))),(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"tablet\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -321,7 +1055,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"mobile\"))))",
+                           "txt": "(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"mobile\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -366,7 +1100,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"tablet\"))))/sum((sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"desktop\")))),(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"mobile\")))),(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"tablet\"))))))",
+                           "txt": "((sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"tablet\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))/sum((sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"desktop\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))),(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"mobile\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))),(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"tablet\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -440,7 +1174,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "(sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"tablet\"))))",
+                           "txt": "(sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"tablet\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;)))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -480,36 +1214,51 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"desktop\")))",
+                           "txt": "sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"desktop\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sum",
+                                    "v": "sumif",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "select",
+                                          "v": "and",
                                           "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "a642ac05589ee13aa503niktawuzhere",
-                                                   "a": "C:C"
-                                                }
-                                             },
                                              {
                                                 "t": "expr",
                                                 "v": false,
                                                 "c": [
                                                    {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "a642ac05589ee13aa503niktawuzhere",
-                                                         "a": "A:A"
-                                                      }
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a642ac05589ee13aa503niktawuzhere",
+                                                               "a": "A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "o",
@@ -520,16 +1269,94 @@
                                                       "v": "desktop"
                                                    }
                                                 ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "between",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a642ac05589ee13aa503niktawuzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b3bcd592-1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "29ee4f3c-2"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a642ac05589ee13aa503niktawuzhere",
+                                                   "a": "C:C"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
                                        }
                                     ]
                                  }
@@ -549,36 +1376,51 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"mobile\")))",
+                           "txt": "sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"mobile\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sum",
+                                    "v": "sumif",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "select",
+                                          "v": "and",
                                           "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "a642ac05589ee13aa503niktawuzhere",
-                                                   "a": "C:C"
-                                                }
-                                             },
                                              {
                                                 "t": "expr",
                                                 "v": false,
                                                 "c": [
                                                    {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "a642ac05589ee13aa503niktawuzhere",
-                                                         "a": "A:A"
-                                                      }
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a642ac05589ee13aa503niktawuzhere",
+                                                               "a": "A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "o",
@@ -589,16 +1431,94 @@
                                                       "v": "mobile"
                                                    }
                                                 ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "between",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a642ac05589ee13aa503niktawuzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b3bcd592-1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "29ee4f3c-2"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a642ac05589ee13aa503niktawuzhere",
+                                                   "a": "C:C"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
                                        }
                                     ]
                                  }
@@ -618,36 +1538,51 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "sum(select(a642ac05589ee13aa503niktawuzhere@C:C;,(a642ac05589ee13aa503niktawuzhere@A:A;=\"tablet\")))",
+                           "txt": "sumif(and((slice(a642ac05589ee13aa503niktawuzhere@A:A;)=\"tablet\"),between(slice(a642ac05589ee13aa503niktawuzhere@B:B;),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(a642ac05589ee13aa503niktawuzhere@A:A;))),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),slice(a642ac05589ee13aa503niktawuzhere@C:C;))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sum",
+                                    "v": "sumif",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "select",
+                                          "v": "and",
                                           "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "a642ac05589ee13aa503niktawuzhere",
-                                                   "a": "C:C"
-                                                }
-                                             },
                                              {
                                                 "t": "expr",
                                                 "v": false,
                                                 "c": [
                                                    {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "a642ac05589ee13aa503niktawuzhere",
-                                                         "a": "A:A"
-                                                      }
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a642ac05589ee13aa503niktawuzhere",
+                                                               "a": "A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "o",
@@ -658,16 +1593,94 @@
                                                       "v": "tablet"
                                                    }
                                                 ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "between",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a642ac05589ee13aa503niktawuzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b3bcd592-1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "29ee4f3c-2"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a642ac05589ee13aa503niktawuzhere",
+                                                   "a": "C:C"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
                                        }
                                     ]
                                  }
