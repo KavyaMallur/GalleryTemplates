@@ -1,5 +1,5 @@
 {
-    "name": "GA: Audience Metrics (Last 30 Days)",
+    "name": "Google Analytics Audience Metrics",
     "description": "See how your Users, Sessions, and Pageviews trend over time. Originates from the Gallery.",
     "sampleFormulas": {
         "9c38e957": {
@@ -560,25 +560,76 @@
         }
     },
     "datasources": {
-        "googleAnalytics": {
+        "googleAnalytics-01": {
             "service": "google_analytics",
-            "libraryAlias": "KPIsbyDay",
-            "name": "GA: KPIs by Day (Last 30 Days)",
-            "description": "Shows KPI's including Users, Sessions, Bounce Rate, Avg. Session Duration, and more, for the last 30 days. Originates from the Gallery.",
+            "libraryAlias": "GAWebsiteKpiLast731Days",
+            "name": "Google Analytics KPIs by Day (Last 731 Days)",
+            "description": "Shows KPI's including Users, Sessions, Bounce Rate, Avg. Session Duration, and more, for the last 731 days. Originates from the Gallery.",
             "type": "google_analytics",
             "format": "csv",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:newUsers,ga:percentNewSessions,ga:sessions,ga:bounces,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviews,ga:pageviewsPerSession&start-date={date.add(-30).format()}&end-date={date.today}&max-results=10000",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:newUsers,ga:percentNewSessions,ga:sessions,ga:bounces,ga:bounceRate,ga:avgSessionDuration,ga:goalStartsAll,ga:pageviews,ga:pageviewsPerSession&start-date={date.add(-730).format()}&end-date={date.today}&max-results=10000",
                 "max_pages": "1",
                 "mode": "Simple",
-                "profile": "{{ds.google_analytics.profileId}}",
-                "timePeriod": "&start-date={date.add(-30).format()}&end-date={date.today}"
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-02": {
+            "service": "google_analytics",
+            "libraryAlias": "GAWebsiteKpiLast90Days",
+            "name": "Google Analytics KPIs by Month (Last 90 Days)",
+            "description": "Users, Sessions and Pageviews by month for the last 90 days. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:sessions,ga:pageviews&start-date={date.add(-90).format()}&end-date={date.yesterday}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-03": {
+            "service": "google_analytics",
+            "libraryAlias": "GAWebsiteKpiCurrentYear",
+            "name": "Google Analytics KPIs by Month (This Year)",
+            "description": "Users, Sessions and Pageviews by month for the current year. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:sessions,ga:pageviews&start-date={date.startOfYear.format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-04": {
+            "service": "google_analytics",
+            "libraryAlias": "GAWebsiteKpiLast365Days",
+            "name": "Google Analytics KPIs by Month (Last 365 Days)",
+            "description": "Users, sessions and pageviews by month for the last 365 days. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date&metrics=ga:users,ga:sessions,ga:pageviews&start-date={date.add(-365).format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Simple",
+                "profile": "{{ds.google_analytics.profileId}}"
             }
         }
     },
+    "uiVariables": [{
+        "name": "KTPeriod",
+        "value": "-30"
+    }],
     "dsMappings": {
-        "googleAnalytics": "0193756a0de928883cefniktawuzhere"
+        "googleAnalytics-01": "c6b3e6cd35cadfb3bd71natceewzhere",
+        "googleAnalytics-02": "9b0e6dee9e56a3039130natceewzhere",
+        "googleAnalytics-03": "ad7dbc438e0c5d4792fdnatceewzhere",
+        "googleAnalytics-04": "4b4f3b4f2f5140e7982anatceewzhere"
     },
     "services": [
         {
