@@ -1,0 +1,985 @@
+{
+   "title": "Localytics Usage Stats (Last 30 Days)",
+   "id": "2f578f2b8ec2d517f933f730b8852988",
+   "workspace": {
+      "dimensions": {
+         "w": 445
+      },
+      "datasources": [
+         "faf2364e653f34e25dd2KavyaMallur9"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "03b13f89-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "d132bf38-3",
+               "displayName": "Users Last 30 Days",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()),faf2364e653f34e25dd2KavyaMallur9@/results/users;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sumif",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "between",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                                   "a": "/results/day"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-29"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                       "a": "/results/users"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "separator",
+               "id": "8644300e-2",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "label",
+               "id": "0078d7ea-8",
+               "displayName": "Users Delta",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "pct",
+               "fmtArgs": {
+                  "precision": "1"
+               },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-down-red",
+                           "isScalar": true,
+                           "pos": "left"
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green",
+                           "pos": "left",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "if(((sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")),faf2364e653f34e25dd2KavyaMallur9@/results/users;))!=\"0\"),(((sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()),faf2364e653f34e25dd2KavyaMallur9@/results/users;))/(sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")),faf2364e653f34e25dd2KavyaMallur9@/results/users;)))-\"1\"),\"\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "f06ebd0c-7"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "!="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "d132bf38-3"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "f06ebd0c-7"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": ""
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "494079c7-5",
+               "displayName": "Users Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Users\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Users"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "f06ebd0c-7",
+               "displayName": "Users Prev 30 Days",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "fmtArgs": {
+                  "prefix": "vs ",
+                  "suffix": " prev. 30 days"
+               },
+               "formulas": [
+                  {
+                     "txt": "sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")),faf2364e653f34e25dd2KavyaMallur9@/results/users;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sumif",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "between",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                                   "a": "/results/day"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-59"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-30"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                       "a": "/results/users"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "a6c634e2-6",
+               "displayName": "Sessions Last 30 Days",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()),faf2364e653f34e25dd2KavyaMallur9@/results/sessions;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sumif",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "between",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                                   "a": "/results/day"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-29"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                       "a": "/results/sessions"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "separator",
+               "id": "d2714090-1",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 2
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "label",
+               "id": "230c68c9-9",
+               "displayName": "Sessions Delta",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 2
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "pct",
+               "fmtArgs": {
+                  "precision": "1"
+               },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-down-red",
+                           "pos": "left",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "0"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-triangle-up-green",
+                           "isScalar": true,
+                           "pos": "left"
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "if(((sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")),faf2364e653f34e25dd2KavyaMallur9@/results/sessions;))!=\"0\"),(((sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()),faf2364e653f34e25dd2KavyaMallur9@/results/sessions;))/(sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")),faf2364e653f34e25dd2KavyaMallur9@/results/sessions;)))-\"1\"),\"\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "f003a876-11"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "!="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "a6c634e2-6"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "f003a876-11"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": ""
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "9713e310-10",
+               "displayName": "Sessions Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Sessions\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Sessions"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "f003a876-11",
+               "displayName": "Sessions Prev 30 Days",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 3
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "fmtArgs": {
+                  "prefix": "vs ",
+                  "suffix": " prev. 30 days"
+               },
+               "formulas": [
+                  {
+                     "txt": "sumif(between(date(faf2364e653f34e25dd2KavyaMallur9@/results/day;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")),faf2364e653f34e25dd2KavyaMallur9@/results/sessions;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sumif",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "between",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                                   "a": "/results/day"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-59"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-30"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "faf2364e653f34e25dd2KavyaMallur9",
+                                       "a": "/results/sessions"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": 4,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 1,
+               "w": 20
+            }
+         ],
+         "cellData": [
+            {
+               "x": 1,
+               "y": 0,
+               "h": 2
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 2
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "alignment": 2
+            },
+            {
+               "x": 0,
+               "y": 2,
+               "alignment": 2
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 2,
+               "y": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 2,
+               "y": 2,
+               "alignment": 2
+            },
+            {
+               "x": 2,
+               "y": 3,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 3,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 2,
+               "h": 2
+            }
+         ]
+      }
+   ]
+}
