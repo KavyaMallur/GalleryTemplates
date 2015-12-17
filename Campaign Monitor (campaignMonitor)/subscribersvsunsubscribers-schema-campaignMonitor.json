@@ -1,0 +1,1078 @@
+{
+   "title": "Campaign Monitor Subscribers vs Unsubscribers (Last 30 Days)",
+   "id": "d939eecd482dc47dd00516d3f1651c18",
+   "workspace": {
+      "dimensions": {
+         "w": 780
+      },
+      "datasources": [
+         "b9f77fe315ff0ad8373fdoogeraspilk",
+         "da00e77423c0f905adb8doogeraspilk",
+         "80c5606234bdbe7f7df5doogeraspilk"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "4150d86e-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "ef2e7097-3",
+               "displayName": "List Name",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "prefix": "<div class style=\"display:inline; font-weight:normal;\">List: </div>"
+               },
+               "formulas": [
+                  {
+                     "txt": "80c5606234bdbe7f7df5doogeraspilk@/Name[preceding-sibling::ListID='{{ds.campaignMonitor.campaignId}}'];",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "80c5606234bdbe7f7df5doogeraspilk",
+                                 "a": "/Name[preceding-sibling::ListID='{{ds.campaignMonitor.campaignId}}']"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "c",
+               "wrap": true
+            }
+         ],
+         "rows": 1,
+         "cols": 1
+      },
+      {
+         "type": "panel_grid",
+         "id": "78878efe-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "1088efd9-8",
+               "displayName": "Subscribers Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Subscribers\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Subscribers"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "c71ef0a1",
+               "displayName": "Subscribers Max Value",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "max((lookup(datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\"),group(date_convert(b9f77fe315ff0ad8373fdoogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(b9f77fe315ff0ad8373fdoogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),b9f77fe315ff0ad8373fdoogeraspilk@/Results/EmailAddress;))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "max",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "b6f0f492-3"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "values",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "mini_series",
+               "id": "159e7b6d-2",
+               "displayName": "Sparkline",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 1
+               },
+               "size": 3,
+               "components": [
+                  {
+                     "type": "mini_data",
+                     "role": "series",
+                     "id": "b6f0f492-3",
+                     "displayName": "Subscribers",
+                     "renamed": true,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "lookup(datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\"),group(date_convert(b9f77fe315ff0ad8373fdoogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(b9f77fe315ff0ad8373fdoogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),b9f77fe315ff0ad8373fdoogeraspilk@/Results/EmailAddress;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "yesterday",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-29"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "MMM d"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "group",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "b9f77fe315ff0ad8373fdoogeraspilk",
+                                                         "a": "/Results/Date"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MMM d"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "groupby",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "b9f77fe315ff0ad8373fdoogeraspilk",
+                                                         "a": "/Results/Date"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MMM d"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "b9f77fe315ff0ad8373fdoogeraspilk",
+                                                   "a": "/Results/EmailAddress"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "method",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesId": 1,
+                     "chartType": "bar"
+                  },
+                  {
+                     "type": "label",
+                     "role": "last-value",
+                     "id": "040d8d2e-4",
+                     "displayName": "Last Value",
+                     "size": 3,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "dataDisabled": true
+                  }
+               ],
+               "lastValueSeries": "hidden"
+            },
+            {
+               "type": "label",
+               "id": "2a875e68-11",
+               "displayName": "Subscribers Min Value",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "\"0\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "dde925c6",
+               "displayName": "Subscribers Start Date",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 3
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "MMM d",
+                  "dateInputFormat": "custom",
+                  "dateInputFormatCustom": ""
+               },
+               "formulas": [
+                  {
+                     "txt": "datevalue(date_add(yesterday(),\"5\",\"-29\"),\"MMM d\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "5"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-29"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "MMM d"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "9e05db38",
+               "displayName": "Subscribers End Date",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 3
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "datevalue(yesterday(),\"MMM d\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "MMM d"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "4b737dfa-9",
+               "displayName": "Unsubscribers Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 4
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"Unsubscribers\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Unsubscribers"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "3c6991e7-12",
+               "displayName": "Unsubscribers Max Value",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 5
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "max((lookup(datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\"),group(date_convert(da00e77423c0f905adb8doogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(da00e77423c0f905adb8doogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),da00e77423c0f905adb8doogeraspilk@/Results/EmailAddress;))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "max",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "4f2cb819-6"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "values",
+                                       "repeats": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "mini_series",
+               "id": "599b9562-5",
+               "displayName": "Sparkline",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 5
+               },
+               "size": 3,
+               "components": [
+                  {
+                     "type": "mini_data",
+                     "role": "series",
+                     "id": "4f2cb819-6",
+                     "displayName": "Unsubscribers",
+                     "renamed": true,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "lookup(datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\"),group(date_convert(da00e77423c0f905adb8doogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(da00e77423c0f905adb8doogeraspilk@/Results/Date;,\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),da00e77423c0f905adb8doogeraspilk@/Results/EmailAddress;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "yesterday",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-29"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "MMM d"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "group",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "da00e77423c0f905adb8doogeraspilk",
+                                                         "a": "/Results/Date"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MMM d"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "groupby",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "da00e77423c0f905adb8doogeraspilk",
+                                                         "a": "/Results/Date"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MMM d"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "da00e77423c0f905adb8doogeraspilk",
+                                                   "a": "/Results/EmailAddress"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "method",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesId": 1,
+                     "chartType": "bar",
+                     "posBarColor": "cx-theme_green_3"
+                  },
+                  {
+                     "type": "label",
+                     "role": "last-value",
+                     "id": "7c1801e3-7",
+                     "displayName": "Last Value",
+                     "size": 3,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "dataDisabled": true
+                  }
+               ],
+               "lastValueSeries": "hidden"
+            },
+            {
+               "type": "label",
+               "id": "44b719ef-13",
+               "displayName": "Unsubscribers Min Value",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 6
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "\"0\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "b7195f2a",
+               "displayName": "Unsubscribers Start Date",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 7
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "datevalue(date_add(yesterday(),\"5\",\"-29\"),\"MMM d\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "opt",
+                                          "v": "5"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-29"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "MMM d"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "18fbadbf",
+               "displayName": "Unsubscribers End Date",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 7
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "formulas": [
+                  {
+                     "txt": "datevalue(yesterday(),\"MMM d\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "MMM d"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_style": "regular",
+               "wrap": true
+            }
+         ],
+         "rows": 8,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 0,
+               "w": 75
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "w": 3
+            },
+            {
+               "x": 0,
+               "y": 4,
+               "w": 3,
+               "cellPadding": [
+                  10,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 5,
+               "h": 2,
+               "w": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  8,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 1,
+               "h": 2,
+               "w": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  8,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 2,
+               "alignment": 2,
+               "cellPadding": 0
+            },
+            {
+               "x": 0,
+               "y": 6,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 5,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 2,
+               "y": 7,
+               "cellPadding": [
+                  0,
+                  16,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 7,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            }
+         ]
+      }
+   ]
+}
