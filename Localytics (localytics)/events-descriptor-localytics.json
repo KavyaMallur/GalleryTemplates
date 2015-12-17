@@ -1,0 +1,201 @@
+{
+    "name": "Localytics Usage Stats (Last 30 Days)",
+    "description": "Track the number of times your users triggered an event over the past 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "59038545-11": {
+            "txt": "array(\"Browsed online for products\",\"Added products to Cart\",\"Checkedin the shopping cart\",\"Removed items from the shopping cart\",\"Processed payment\",\"Received complaints on the delivered products\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "Browsed online for products"
+                    }, {
+                        "t": "1",
+                        "v": "Added products to Cart"
+                    }, {
+                        "t": "1",
+                        "v": "Checkedin the shopping cart"
+                    }, {
+                        "t": "1",
+                        "v": "Removed items from the shopping cart"
+                    }, {
+                        "t": "1",
+                        "v": "Processed payment"
+                    }, {
+                        "t": "1",
+                        "v": "Received complaints on the delivered products"
+                    }]
+                }]
+            }
+        },
+        "745ae7b9-13": {
+            "txt": "array(\"92299\",\"66552\",\"55599\",\"32210\",\"29996\",\"924\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "92299"
+                    }, {
+                        "t": "1",
+                        "v": "66552"
+                    }, {
+                        "t": "1",
+                        "v": "55599"
+                    }, {
+                        "t": "1",
+                        "v": "32210"
+                    }, {
+                        "t": "1",
+                        "v": "29996"
+                    }, {
+                        "t": "1",
+                        "v": "924"
+                    }]
+                }]
+            }
+        },
+        "65ad60c4-15": {
+            "txt": "array(\"92299\",\"66552\",\"55599\",\"32210\",\"29996\",\"924\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "92299"
+                    }, {
+                        "t": "1",
+                        "v": "66552"
+                    }, {
+                        "t": "1",
+                        "v": "55599"
+                    }, {
+                        "t": "1",
+                        "v": "32210"
+                    }, {
+                        "t": "1",
+                        "v": "29996"
+                    }, {
+                        "t": "1",
+                        "v": "924"
+                    }]
+                }]
+            }
+        },
+        "a7b8a2dd-17": {
+            "txt": "array(\"0.17764\",\"0.99245\",\"\",\"0.22169\",\"1.001224\",\"-0.0456\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "0.17764"
+                    }, {
+                        "t": "1",
+                        "v": "0.99245"
+                    }, {
+                        "t": "1",
+                        "v": ""
+                    }, {
+                        "t": "1",
+                        "v": "0.22169"
+                    }, {
+                        "t": "1",
+                        "v": "1.001224"
+                    }, {
+                        "t": "1",
+                        "v": "-0.0456"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "localytics-01": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Localytics Events (Last 30 Days)",
+            "libraryAlias": "LocalyticsEventsLast30Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve events for last 30 days. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=occurrences,users&dimensions=event_name,day&conditions=%7B%22day%22%3A%5B%22between%22%2C%22{date.add(-30).format()}%22%2C%22{date.yesterday}%22%5D%7D",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "localytics-02": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Localytics Events (Prev 30 Days)",
+            "libraryAlias": "LocalyticsEventsPrev30Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve events for prev 30 days. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=occurrences,users&dimensions=event_name,day&conditions=%7B%22day%22%3A%5B%22between%22%2C%22{date.add(-60).format()}%22%2C%22{date.add(-31).format()}%22%5D%7D",
+                "method": "get",
+                "parameters": "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "localytics-01": "a3e4ec30854baaebac7cKavyaMallur9",
+        "localytics-02": "012a59777f3a1e4f95b0KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "localytics"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.localytics.appId",
+        "label": "App",
+        "description": "Select your Localytics App.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Localytics API Key and API Secret.",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/apps",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.appId",
+            "propField": "options",
+            "labels": "//*/apps/name",
+            "values": "//*/apps/app_id"
+        }]
+    }]
+}
