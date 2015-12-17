@@ -1,6 +1,6 @@
 {
-    "name" : "Campaign Monitor Subscribers vs Unsubscribers (Last 30 Days)",
-    "description" : "Show the subscribers and unsubscribers in your Campaign Monitor for the last 30 days. Originates from the Gallery.",
+    "name" : "Campaign Monitor Subscribers Stats (Last 30 Days)",
+    "description" : "Show the subscribers and unsubscribers stats in your Campaign Monitor for the last 30 days. Originates from the Gallery.",
 
     "datasources" : {
         "campaignMonitor-01" : {
@@ -50,13 +50,64 @@
                 "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/unsubscribed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
                 "method": "get"
             }
+        },
+        "campaignMonitor-04" : {
+            "service" : "campaign_monitor",
+            "type": "simple_rest",
+            "libraryAlias" : "CampaignMonitorBouncedSubscribersLast30Days",
+            "name": "Campaign Monitor Bounced Subscribers (Last 30 Days)",
+            "description" : "Provide the bounced subscribers in your Campaign Monitor account",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password" : "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/bounced.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "method": "get"
+            }
+        },
+        "campaignMonitor-05" : {
+            "service" : "campaign_monitor",
+            "type": "simple_rest",
+            "libraryAlias" : "CampaignMonitorDeletedSubscribersLast30Days",
+            "name": "Campaign Monitor Deleted Subscribers (Last 30 Days)",
+            "description" : "Provide the subscribers that have been deleted from your Campaign Monitor account",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password" : "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/deleted.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "method": "get"
+            }
+        },
+        "campaignMonitor-06" : {
+            "service" : "campaign_monitor",
+            "type": "simple_rest",
+            "libraryAlias" : "CampaignMonitorUnconfirmedSubscribersLast30Days",
+            "name": "Campaign Monitor Unconfirmed Subscribers(Last 30 Days)",
+            "description" : "Provide the unconfirmed subscribers in your Campaign Monitor account",
+            "format" : "json",
+            "refreshInterval" : 14400,
+            "props":{
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password" : "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/unconfirmed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "method": "get"
+            }
         }
     },
 
     "dsMappings" : {
         "campaignMonitor-01" : "80c5606234bdbe7f7df5doogeraspilk",
         "campaignMonitor-02" : "b9f77fe315ff0ad8373fdoogeraspilk",
-        "campaignMonitor-03" : "da00e77423c0f905adb8doogeraspilk"
+        "campaignMonitor-03" : "da00e77423c0f905adb8doogeraspilk",
+        "campaignMonitor-04" : "12707f41d782f9e3810ddoogeraspilk",
+        "campaignMonitor-05" : "f16177b2bb7472df1bf6doogeraspilk",
+        "campaignMonitor-06" : "b8f51867d2a24be21043doogeraspilk"
     },
 
     "services" : [

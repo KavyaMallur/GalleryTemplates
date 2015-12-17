@@ -1,6 +1,6 @@
 {
-    "name" : "Campaign Monitor Subscribers vs Unsubscribers (Last 30 Days)",
-    "description" : "Show the subscribers and unsubscribers in your Campaign Monitor for the last 30 days. Originates from the Gallery.",
+    "name" : "Campaign Monitor List Stats",
+    "description" : "Show the statistics of your Campaign Monitor List. Originates from the Gallery.",
 
     "datasources" : {
         "campaignMonitor-01" : {
@@ -22,32 +22,16 @@
         "campaignMonitor-02" : {
             "service" : "campaign_monitor",
             "type": "simple_rest",
-            "libraryAlias" : "CampaignMonitorActiveSubscribersLast30Days",
-            "name": "Campaign Monitor Active Subscribers (Last 30 Days)",
-            "description" : "Provide the active subscribers in your Campaign Monitor account",
+            "libraryAlias" : "CampaignMonitorListStats",
+            "name": "Campaign Monitor List Stats",
+            "description" : "Provide the statistics of your Campaign Monitor list",
             "format" : "json",
             "refreshInterval" : 14400,
             "props":{
                 "auth_method" : "basic",
                 "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/active.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
-                "method": "get"
-            }
-        },
-        "campaignMonitor-03" : {
-            "service" : "campaign_monitor",
-            "type": "simple_rest",
-            "libraryAlias" : "CampaignMonitorUnsubscribersLast30Days",
-            "name": "Campaign Monitor Unsubscribers (Last 30 Days)",
-            "description" : "Provide the unsubscribers in your Campaign Monitor account",
-            "format" : "json",
-            "refreshInterval" : 14400,
-            "props":{
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
-                "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/unsubscribed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/stats.json",
                 "method": "get"
             }
         }
@@ -55,8 +39,7 @@
 
     "dsMappings" : {
         "campaignMonitor-01" : "80c5606234bdbe7f7df5doogeraspilk",
-        "campaignMonitor-02" : "b9f77fe315ff0ad8373fdoogeraspilk",
-        "campaignMonitor-03" : "da00e77423c0f905adb8doogeraspilk"
+        "campaignMonitor-02" : "02bd58beb8e92b4ba90cdoogeraspilk"
     },
 
     "services" : [
