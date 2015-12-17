@@ -5,7 +5,7 @@
 
     "datasources" : {
         "campaignMonitor-01" : {
-            "service" : "campaignMonitor",
+            "service" : "campaign_monitor",
             "type": "simple_rest",
             "libraryAlias" : "CampaignMonitorLists",
             "name": "Campaign Monitor Lists",
@@ -14,14 +14,14 @@
             "refreshInterval" : 14400,
             "props":{
                 "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.campaignMonitor.apiKey}}",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaignMonitor.clientId}}/lists.json",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaign_monitor.clientId}}/lists.json",
                 "method": "get"
             }
         },
         "campaignMonitor-02" : {
-            "service" : "campaignMonitor",
+            "service" : "campaign_monitor",
             "type": "simple_rest",
             "libraryAlias" : "CampaignMonitorActiveSubscribersLast30Days",
             "name": "Campaign Monitor Active Subscribers (Last 30 Days)",
@@ -30,14 +30,14 @@
             "refreshInterval" : 14400,
             "props":{
                 "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.campaignMonitor.apiKey}}",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaignMonitor.clientId}}/active.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.clientId}}/active.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
                 "method": "get"
             }
         },
         "campaignMonitor-03" : {
-            "service" : "campaignMonitor",
+            "service" : "campaign_monitor",
             "type": "simple_rest",
             "libraryAlias" : "CampaignMonitorUnsubscribersLast30Days",
             "name": "Campaign Monitor Unsubscribers (Last 30 Days)",
@@ -46,9 +46,9 @@
             "refreshInterval" : 14400,
             "props":{
                 "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.campaignMonitor.apiKey}}",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaignMonitor.clientId}}/unsubscribed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.clientId}}/unsubscribed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
                 "method": "get"
             }
         }
@@ -62,13 +62,13 @@
 
     "services" : [
         {
-            "service" : "campaignMonitor"
+            "service" : "campaign_monitor"
         }
     ],
     "datasourceConfigModel" : [
         {
             "type" : "select",
-            "id" : "ds.campaignMonitor.clientId",
+            "id" : "ds.campaign_monitor.clientId",
             "label" : "Client Name",
             "description":"Select your Campaign Monitor Client Name"
         }
@@ -77,7 +77,7 @@
         {
             "errorMessage":"Make sure you have the correct Campaign Monitor API Key.",
             "connector": {
-                "service": "campaignMonitor",
+                "service": "campaign_monitor",
                 "type": "simple_rest",
                 "format": "json",
                 "props": {
@@ -86,7 +86,7 @@
             },
             "results": [
                 {
-                    "propId" : "ds.campaignMonitor.clientId",
+                    "propId" : "ds.campaign_monitor.clientId",
                     "propField" : "options",
                     "labels": "/Name",
                     "values": "/ClientID"
