@@ -31,7 +31,7 @@
                 "auth_method" : "basic",
                 "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.clientId}}/active.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/active.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
                 "method": "get"
             }
         },
@@ -47,7 +47,7 @@
                 "auth_method" : "basic",
                 "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password" : "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.clientId}}/unsubscribed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/unsubscribed.json?date={date.last30Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
                 "method": "get"
             }
         }
@@ -69,7 +69,16 @@
             "type" : "select",
             "id" : "ds.campaign_monitor.clientId",
             "label" : "Client Name",
-            "description":"Select your Campaign Monitor Client Name"
+            "description":"Select your Campaign Monitor Client Name.",
+            "isRequired" : true,
+            "onChangeQueries" : [ "q2" ]
+        },
+        {
+            "type" : "select",
+            "id" : "ds.campaign_monitor.listId",
+            "label" : "List",
+            "description":"Select your Campaign Monitor List Name.",
+            "isRequired" : true
         }
     ],
     "queries": [
@@ -80,7 +89,10 @@
                 "type": "simple_rest",
                 "format": "json",
                 "props": {
-                    "endpoint_url": "https://api.createsend.com/api/v3.1/clients.json"
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password" : "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients.json"
                 }
             },
             "results": [
@@ -89,6 +101,28 @@
                     "propField" : "options",
                     "labels": "/Name",
                     "values": "/ClientID"
+                }
+            ]
+        },
+        {
+            "id": "q2",
+            "connector": {
+                "service": "campaign_monitor",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                "auth_method" : "basic",
+                "basic_auth_username" : "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password" : "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaign_monitor.clientId}}/lists.json"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.campaign_monitor.listId",
+                    "propField" : "options",
+                    "labels": "/Name",
+                    "values": "/ListID"
                 }
             ]
         }
