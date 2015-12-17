@@ -1,0 +1,245 @@
+{
+    "name": "Localytics Loyalty (Last 30 Days)",
+    "description": "Monitor the loyalty of your website visitors by tracking the number of repeat visits. Originates from the Gallery.",
+    "sampleFormulas": {
+        "dbb6311c-6": {
+            "txt": "array(\"625\",\"1297\",\"965\",\"1544\",\"982\",\"1474\",\"612\",\"749\",\"1626\",\"610\",\"872\",\"1245\",\"1348\",\"1507\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "625"
+                    }, {
+                        "t": "l",
+                        "v": "1297"
+                    }, {
+                        "t": "l",
+                        "v": "965"
+                    }, {
+                        "t": "l",
+                        "v": "1544"
+                    }, {
+                        "t": "l",
+                        "v": "982"
+                    }, {
+                        "t": "l",
+                        "v": "1474"
+                    }, {
+                        "t": "l",
+                        "v": "612"
+                    }, {
+                        "t": "l",
+                        "v": "749"
+                    }, {
+                        "t": "l",
+                        "v": "1626"
+                    }, {
+                        "t": "l",
+                        "v": "610"
+                    }, {
+                        "t": "l",
+                        "v": "872"
+                    }, {
+                        "t": "l",
+                        "v": "1245"
+                    }, {
+                        "t": "l",
+                        "v": "1348"
+                    }, {
+                        "t": "l",
+                        "v": "1507"
+                    }]
+                }]
+            }
+        },
+        "aa5451b6-9": {
+            "txt": "array(\"574\",\"1167\",\"627\",\"976\",\"1656\",\"680\",\"1957\",\"1648\",\"1954\",\"1169\",\"1553\",\"518\",\"1685\",\"1178\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "574"
+                    }, {
+                        "t": "l",
+                        "v": "1167"
+                    }, {
+                        "t": "l",
+                        "v": "627"
+                    }, {
+                        "t": "l",
+                        "v": "976"
+                    }, {
+                        "t": "l",
+                        "v": "1656"
+                    }, {
+                        "t": "l",
+                        "v": "680"
+                    }, {
+                        "t": "l",
+                        "v": "1957"
+                    }, {
+                        "t": "l",
+                        "v": "1648"
+                    }, {
+                        "t": "l",
+                        "v": "1954"
+                    }, {
+                        "t": "l",
+                        "v": "1169"
+                    }, {
+                        "t": "l",
+                        "v": "1553"
+                    }, {
+                        "t": "l",
+                        "v": "518"
+                    }, {
+                        "t": "l",
+                        "v": "1685"
+                    }, {
+                        "t": "l",
+                        "v": "1178"
+                    }]
+                }]
+            }
+        },
+        "1233e99f-7": {
+            "txt": "array(\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9-14\",\"15-25\",\"26-50\",\"51-100\",\"101-200\",\">200\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "3"
+                    }, {
+                        "t": "l",
+                        "v": "4"
+                    }, {
+                        "t": "l",
+                        "v": "5"
+                    }, {
+                        "t": "l",
+                        "v": "6"
+                    }, {
+                        "t": "l",
+                        "v": "7"
+                    }, {
+                        "t": "l",
+                        "v": "8"
+                    }, {
+                        "t": "l",
+                        "v": "9-14"
+                    }, {
+                        "t": "l",
+                        "v": "15-25"
+                    }, {
+                        "t": "l",
+                        "v": "26-50"
+                    }, {
+                        "t": "l",
+                        "v": "51-100"
+                    }, {
+                        "t": "l",
+                        "v": "101-200"
+                    }, {
+                        "t": "l",
+                        "v": ">200"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "localytics-01": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Localytics Loyalty (Last 30 Days)",
+            "libraryAlias": "LocalyticsLoyaltyLast30Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve the number of times users have returned in the last 30 days. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=sessions&dimensions=visit_number&conditions=%7B%22day%22%3A%5B%22between%22%2C%22{date.add(-30).format()}%22%2C%22{date.yesterday}%22%5D%7D",
+
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "localytics-02": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Localytics Loyalty (Prev 30 Days)",
+            "libraryAlias": "LocalyticsLoyaltyPrev30Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve the number of times users have returned in the previous 30 days. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=sessions&dimensions=visit_number&conditions=%7B%22day%22%3A%5B%22between%22%2C%22{date.add(-60).format()}%22%2C%22{date.add(-31).format()}%22%5D%7D",
+
+                "method": "get",
+                "parameters": "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "localytics-01": "5014d0875ce09df91de0KavyaMallur9",
+        "localytics-02": "361f91a311245fa907d0KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "localytics"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.localytics.appId",
+        "label": "App",
+        "description": "Select your Localytics App.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Localytics API Key and API Secret.",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/apps",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.appId",
+            "propField": "options",
+            "labels": "//*/apps/name",
+            "values": "//*/apps/app_id"
+        }]
+    }]
+}
