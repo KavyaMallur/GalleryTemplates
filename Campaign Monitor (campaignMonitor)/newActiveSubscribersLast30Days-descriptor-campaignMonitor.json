@@ -1,0 +1,177 @@
+{
+    "name": "Campaign Monitor New Active Subscribers (Last 30 Days)",
+    "description": "Watch the number of new and active subscribers grow over the past 30 days, and compare it to the previous 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "8b0075df": {
+            "txt": "\"Christmas Boganza\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "Christmas Boganza"
+                    }]
+                }]
+            }
+        },
+        "76ed90de-3": {
+            "txt": "\"21664\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "21664"
+                    }]
+                }]
+            }
+        },
+        "88e6e7a7-5": {
+            "txt": "\"0.0874410199779139\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "0.0874410199779139"
+                    }]
+                }]
+            }
+        },
+        "d03f6d22-4": {
+            "txt": "\"New Active Subscribers\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "New Active Subscribers"
+                    }]
+                }]
+            }
+        },
+        "89bdeca6-7": {
+            "txt": "\"19922\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "1",
+                        "v": "19922"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "campaign_monitor-01": {
+            "service": "campaign_monitor",
+            "type": "simple_rest",
+            "libraryAlias": "CampaignMonitorActiveSubscribersLast60Days",
+            "name": "Campaign Monitor Active Subscribers (Last 60 Days)",
+            "description": "Provide active subscribers of a list for the last 60 days.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/lists/{{ds.campaign_monitor.listId}}/active.json?date={date.last60Days.format('yyyy-MM-dd')}&orderfield=date&orderdirection=desc",
+                "method": "get"
+            }
+        },
+        "campaign_monitor-02": {
+            "service": "campaign_monitor",
+            "type": "simple_rest",
+            "libraryAlias": "CompaignMonitorLists",
+            "name": "Compaign Monitor Lists",
+            "description": "Provide lists for a given client.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaign_monitor.clientId}}/lists.json",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "campaign_monitor-01": "6af7b10b906d8f8863d0KavyaMallur9",
+        "campaign_monitor-02": "80c5606234bdbe7f7df5KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "campaign_monitor"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.campaign_monitor.clientId",
+        "label": "Client Name",
+        "description": "Select your Campaign Monitor Client Name.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.campaign_monitor.listId",
+        "label": "List",
+        "description": "Select your Campaign Monitor List Name.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Campaign Monitor API Key.",
+        "connector": {
+            "service": "campaign_monitor",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients.json"
+            }
+        },
+        "results": [{
+            "propId": "ds.campaign_monitor.clientId",
+            "propField": "options",
+            "labels": "/Name",
+            "values": "/ClientID"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "campaign_monitor",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaign_monitor.clientId}}/lists.json"
+            }
+        },
+        "results": [{
+            "propId": "ds.campaign_monitor.listId",
+            "propField": "options",
+            "labels": "/Name",
+            "values": "/ListID"
+        }]
+    }]
+}
