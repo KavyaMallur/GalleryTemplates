@@ -1,41 +1,63 @@
 {
-    "name": "Campaign Monitor Delivery and Engagement Statistics",
-    "description": "Show the delivery and engagement statistics of your Campaign Monitor client. Originates from the Gallery.",
+    "name": "Campaign Monitor Campaign Performance",
+    "description": "Show the performance of your Campaign Monitor campaign. Originates from the Gallery.",
     "sampleFormulas": {
-        "f972a64e-7": {
-            "txt": "\"91009\"",
+        "2d4a7e23-32": {
+            "txt": "\"181267\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "91009"
+                    "v": "181267"
                 }]
             }
         },
-        "06e9439b-8": {
-            "txt": "\"Sent\"",
+        "2570666d-33": {
+            "txt": "\"Recipients\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "Sent"
+                    "v": "Recipients"
                 }]
             }
         },
-        "fa51408a": {
-            "txt": "\"89\"",
+        "3082e40c-6": {
+            "txt": "\"101267\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "89"
+                    "v": "101267"
                 }]
             }
         },
-        "0ad23419": {
+        "7cac91e8-7": {
+            "txt": "\"Total Opens\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Total Opens"
+                }]
+            }
+        },
+        "f9118e66-15": {
+            "txt": "\"271\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "271"
+                }]
+            }
+        },
+        "5888e9b1-16": {
             "txt": "\"Bounces\"",
             "src": {
                 "t": "expr",
@@ -46,80 +68,80 @@
                 }]
             }
         },
-        "31fa5000": {
-            "txt": "\"90920\"",
+        "6377fc96-35": {
+            "txt": "\"23\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "90920"
+                    "v": "23"
                 }]
             }
         },
-        "af425dcd": {
-            "txt": "\"Delivered\"",
+        "48fcf953-36": {
+            "txt": "\"Unsubscribes\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "Delivered"
+                    "v": "Unsubscribes"
                 }]
             }
         },
-        "4798a2df": {
-            "txt": "\"90012\"",
+        "4fb4a832-18": {
+            "txt": "\"98267\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "90012"
+                    "v": "98267"
                 }]
             }
         },
-        "27fc77b7": {
-            "txt": "\"Opened\"",
+        "9c0116ec-19": {
+            "txt": "\"Unique Opens\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "Opened"
+                    "v": "Unique Opens"
                 }]
             }
         },
-        "349f1976": {
-            "txt": "\"89013\"",
+        "d673e74e-9": {
+            "txt": "\"99267\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "89013"
+                    "v": "99267"
                 }]
             }
         },
-        "15f6113d": {
-            "txt": "\"Clicked\"",
+        "3fdfe141-10": {
+            "txt": "\"Clicks\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "Clicked"
+                    "v": "Clicks"
                 }]
             }
         },
-        "eb5ff93f": {
-            "txt": "\"Acme Klip Builders\"",
+        "fe69b785": {
+            "txt": "\"Build amazing Klips!\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "Acme Klip Builders"
+                    "v": "Build amazing Klips!"
                 }]
             }
         }
@@ -128,40 +150,40 @@
         "campaignMonitor-01": {
             "service": "campaign_monitor",
             "type": "simple_rest",
-            "libraryAlias": "CampaignMonitorClients",
-            "name": "Campaign Monitor Clients",
-            "description": "Provide Your Campaign Monitor Clients",
+            "libraryAlias": "CampaignMonitorSentCampaigns",
+            "name": "Campaign Monitor Sent Campaigns",
+            "description": "Provide Your Campaign Monitor Campaigns",
             "format": "json",
             "refreshInterval": 14400,
             "props": {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password": "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/clients.json",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaign_monitor.clientId}}/campaigns.json",
                 "method": "get"
             }
         },
         "campaignMonitor-02": {
             "service": "campaign_monitor",
             "type": "simple_rest",
-            "libraryAlias": "CampaignMonitorClientStats",
-            "name": "Campaign Monitor Client Stats",
-            "description": "Provide the statistics of your Campaign Monitor Client",
+            "libraryAlias": "CampaignMonitorCampaignSummary",
+            "name": "Campaign Monitor Campaign Summary",
+            "description": "Provide the summary of your Campaign Monitor Campaign",
             "format": "json",
             "refreshInterval": 14400,
             "props": {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
                 "basic_auth_password": "x",
-                "endpoint_url": "https://api.createsend.com/api/v3.1/transactional/statistics?clientID={{ds.campaign_monitor.clientId}}",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/campaigns/{{ds.campaign_monitor.clientId}}//summary.json",
                 "method": "get"
             }
         }
     },
 
     "dsMappings": {
-        "campaignMonitor-01": "9c2a904cf9806e6ef0f8doogeraspilk",
-        "campaignMonitor-02": "6abd1a6871bd84f7716edoogeraspilk"
+        "campaignMonitor-01": "0d8df61f75ef23caa0f8doogeraspilk",
+        "campaignMonitor-02": "73b9619f8d9992f39266doogeraspilk"
     },
 
     "services": [{
@@ -172,6 +194,13 @@
         "id": "ds.campaign_monitor.clientId",
         "label": "Client Name",
         "description": "Select your Campaign Monitor Client Name.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.campaign_monitor.campaignId",
+        "label": "Campaign",
+        "description": "Select your Campaign Monitor Campaign Name.",
         "isRequired": true
     }],
     "queries": [{
@@ -192,6 +221,25 @@
             "propField": "options",
             "labels": "/Name",
             "values": "/ClientID"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "campaign_monitor",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.campaign_monitor.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.createsend.com/api/v3.1/clients/{{ds.campaign_monitor.clientId}}/campaigns.json"
+            }
+        },
+        "results": [{
+            "propId": "ds.campaign_monitor.campaignId",
+            "propField": "options",
+            "labels": "/Name",
+            "values": "/ListID"
         }]
     }]
 }
