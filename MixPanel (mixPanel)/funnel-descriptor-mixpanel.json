@@ -1,7 +1,7 @@
 {
     "name" : "Mixpanel Funnel (Last 30 Days)",
     "description" : "Track the 30 days conversion rate between event stages of a Mixpanel funnel. Originates from the Gallery.",
-    
+
 
     "datasources" : {
         "mixpanel" : {
@@ -13,7 +13,7 @@
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
-                "endpoint_url": "http://mixpanel.com/api/2.0/funnels/?expire={hash.getExpiryTime(240)}&funnel_id={{ds.mixpanel.funnelId}}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"funnel_id={{ds.mixpanel.funnelId}}\").append(\"interval=29\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&interval=29&api_key={{auth.mixpanel.apiKey}}"
+                "endpoint_url": "http://mixpanel.com/api/2.0/funnels/?expire={hash.getExpiryTime(240)}&funnel_id={{ds.mixpanel.funnelId}}&from_date={date.add(-29).format()}&to_date={date.today}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"from_date=\").append(date.add(-29).format()).append(\"funnel_id={{ds.mixpanel.funnelId}}\").append(\"interval=30\").append(\"to_date=\").append(date.today.format()).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&interval=30&api_key={{auth.mixpanel.apiKey}}"
             }
         }
     },
@@ -48,10 +48,10 @@
             },
             "results": [
                 {
-                    "propId" : "ds.mixpanel.funnelId", 
-                    "propField" : "options", 
-                    "labels": "/name",  
-                    "values": "/funnel_id" 
+                    "propId" : "ds.mixpanel.funnelId",
+                    "propField" : "options",
+                    "labels": "/name",
+                    "values": "/funnel_id"
                 }
             ]
         }
