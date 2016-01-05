@@ -1,6 +1,113 @@
 {
     "name": "Localytics Funnel (Last 30 Days)",
     "description": "Show the funnel from events in your Localytics account. Originates from the Gallery.",
+    "sampleFormulas": {
+        "e64766b6-11": {
+            "txt": "array(\"Item Added to Cart\",\"Begin Checkout\",\"Complete Checkout\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Item Added to Cart"
+                    }, {
+                        "t": "l",
+                        "v": "Begin Checkout"
+                    }, {
+                        "t": "l",
+                        "v": "Complete Checkout"
+                    }]
+                }]
+            }
+        },
+        "24876f43-13": {
+            "txt": "array(\"1492.5\",\"1125\",\"825\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1492.5"
+                    }, {
+                        "t": "l",
+                        "v": "1125"
+                    }, {
+                        "t": "l",
+                        "v": "825"
+                    }]
+                }]
+            }
+        },
+        "79a9f82e-15": {
+            "txt": "array(\"1492.5\",\"1125\",\"825\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1492.5"
+                    }, {
+                        "t": "l",
+                        "v": "1125"
+                    }, {
+                        "t": "l",
+                        "v": "825"
+                    }]
+                }]
+            }
+        },
+        "d204adb2-17": {
+            "txt": "array(\"\",\"0.7535\",\"0.7333\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "0.7535"
+                    }, {
+                        "t": "l",
+                        "v": "0.7333"
+                    }]
+                }]
+            }
+        },
+        "9a6ce67e-19": {
+            "txt": "array(\"\",\"0.7535\",\"0.5528\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "0.7535"
+                    }, {
+                        "t": "l",
+                        "v": "0.5528"
+                    }]
+                }]
+            }
+        }
+    },
     "datasources": {
         "localytics": {
             "service": "localytics",
@@ -14,7 +121,7 @@
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.localytics.apiKey}}",
                 "basic_auth_password": "{{auth.localytics.apiSecret}}",
-                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=occurrences&dimensions=step_number,step_name&conditions={\"event_name\":[\"funnel\",{\"event_name\":\"{{ds.localytics.event1}}\"},{\"event_name\":\"{{ds.localytics.event2}}\"},{\"event_name\":\"{{ds.localytics.event3}}\"},{\"event_name\":\"{{ds.localytics.event4}}\"},{\"event_name\":\"{{ds.localytics.event5}}\"}],\"day\":[\"between\",\"{date.add(-29).format()}\",\"{date.today}\"]}&order=step_number",
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=occurrences&dimensions=step_number,step_name&conditions={\"event_name\":[\"funnel\",{\"event_name\":\"{{ds.localytics.event1}}\"},{\"event_name\":\"{{ds.localytics.event2}}\"},{\"event_name\":\"{{ds.localytics.event3}}\"}],\"day\":[\"between\",\"{date.add(-29).format()}\",\"{date.today}\"]}&order=step_number",
                 "method": "get",
                 "parameters": "[]"
             }
@@ -46,22 +153,13 @@
         "type": "select",
         "id": "ds.localytics.event2",
         "label": "Event Two",
-        "selectedValue": "",
+        "isRequired": true,
         "onChangeQueries": ["e3"]
     }, {
         "type": "select",
         "id": "ds.localytics.event3",
         "label": "Event Three",
-        "onChangeQueries": ["e4"]
-    }, {
-        "type": "select",
-        "id": "ds.localytics.event4",
-        "label": "Event Four",
-        "onChangeQueries": ["e5"]
-    }, {
-        "type": "select",
-        "id": "ds.localytics.event5",
-        "label": "Event Five"
+        "isRequired": true
     }],
     "queries": [{
         "errorMessage": "Make sure you have the correct Localytics API Key and API Secret.",
@@ -81,8 +179,8 @@
         "results": [{
             "propId": "ds.localytics.appId",
             "propField": "options",
-            "labels": "//*/apps/name",
-            "values": "//*/apps/app_id"
+            "labels": "//*/apps/name[following-sibling::stats/events>0 and following-sibling::stats/closes>0]",
+            "values": "//*/apps/app_id[following-sibling::stats/events>0 and following-sibling::stats/closes>0]"
         }]
     }, {
         "id": "e1",
@@ -143,48 +241,6 @@
         },
         "results": [{
             "propId": "ds.localytics.event3",
-            "propField": "options",
-            "labels": "/results/event_name",
-            "values": "/results/event_name"
-        }]
-    }, {
-        "id": "e4",
-        "connector": {
-            "service": "localytics",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
-                "auth_method": "basic",
-                "basic_auth_username": "{{auth.localytics.apiKey}}",
-                "basic_auth_password": "{{auth.localytics.apiSecret}}",
-                "method": "get",
-                "parameters": "[]"
-            }
-        },
-        "results": [{
-            "propId": "ds.localytics.event4",
-            "propField": "options",
-            "labels": "/results/event_name",
-            "values": "/results/event_name"
-        }]
-    }, {
-        "id": "e5",
-        "connector": {
-            "service": "localytics",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
-                "auth_method": "basic",
-                "basic_auth_username": "{{auth.localytics.apiKey}}",
-                "basic_auth_password": "{{auth.localytics.apiSecret}}",
-                "method": "get",
-                "parameters": "[]"
-            }
-        },
-        "results": [{
-            "propId": "ds.localytics.event5",
             "propField": "options",
             "labels": "/results/event_name",
             "values": "/results/event_name"
