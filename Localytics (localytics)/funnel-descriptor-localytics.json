@@ -1,0 +1,193 @@
+{
+    "name": "Localytics Funnel (Last 30 Days)",
+    "description": "Show the funnel from events in your Localytics account. Originates from the Gallery.",
+    "datasources": {
+        "localytics": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Localytics Funnel (Last 30 Days)",
+            "libraryAlias": "LocalyticsFunnelLast30Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve funnel event occurrence from your localytics accounts. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&metrics=occurrences&dimensions=step_number,step_name&conditions={\"event_name\":[\"funnel\",{\"event_name\":\"{{ds.localytics.event1}}\"},{\"event_name\":\"{{ds.localytics.event2}}\"},{\"event_name\":\"{{ds.localytics.event3}}\"},{\"event_name\":\"{{ds.localytics.event4}}\"},{\"event_name\":\"{{ds.localytics.event5}}\"}],\"day\":[\"between\",\"{date.add(-29).format()}\",\"{date.today}\"]}&order=step_number",
+                "method": "get",
+                "parameters": "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "localytics": "2d02033e47a9e9397667doogeraspilk"
+    },
+
+    "services": [{
+        "service": "localytics"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.localytics.appId",
+        "label": "App",
+        "description": "Select your Localytics App.",
+        "onChangeQueries": ["e1"],
+        "isRequired": true
+    }, {
+        "type": "select",
+        "id": "ds.localytics.event1",
+        "label": "Event One",
+        "onChangeQueries": ["e2"],
+        "isRequired": true
+    }, {
+        "type": "select",
+        "id": "ds.localytics.event2",
+        "label": "Event Two",
+        "selectedValue": "",
+        "onChangeQueries": ["e3"]
+    }, {
+        "type": "select",
+        "id": "ds.localytics.event3",
+        "label": "Event Three",
+        "onChangeQueries": ["e4"]
+    }, {
+        "type": "select",
+        "id": "ds.localytics.event4",
+        "label": "Event Four",
+        "onChangeQueries": ["e5"]
+    }, {
+        "type": "select",
+        "id": "ds.localytics.event5",
+        "label": "Event Five"
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Localytics API Key and API Secret.",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.localytics.com/v1/apps",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.appId",
+            "propField": "options",
+            "labels": "//*/apps/name",
+            "values": "//*/apps/app_id"
+        }]
+    }, {
+        "id": "e1",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.event1",
+            "propField": "options",
+            "labels": "/results/event_name",
+            "values": "/results/event_name"
+        }]
+    }, {
+        "id": "e2",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.event2",
+            "propField": "options",
+            "labels": "/results/event_name",
+            "values": "/results/event_name"
+        }]
+    }, {
+        "id": "e3",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.event3",
+            "propField": "options",
+            "labels": "/results/event_name",
+            "values": "/results/event_name"
+        }]
+    }, {
+        "id": "e4",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.event4",
+            "propField": "options",
+            "labels": "/results/event_name",
+            "values": "/results/event_name"
+        }]
+    }, {
+        "id": "e5",
+        "connector": {
+            "service": "localytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.localytics.com/v1/query?app_id={{ds.localytics.appId}}&dimensions=event_name",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.localytics.apiKey}}",
+                "basic_auth_password": "{{auth.localytics.apiSecret}}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "results": [{
+            "propId": "ds.localytics.event5",
+            "propField": "options",
+            "labels": "/results/event_name",
+            "values": "/results/event_name"
+        }]
+    }]
+}
