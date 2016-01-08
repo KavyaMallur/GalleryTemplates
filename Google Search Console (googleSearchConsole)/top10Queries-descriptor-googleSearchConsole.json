@@ -1,0 +1,55 @@
+{
+    "name": "Google Search Console Top 10 Queries (30 Days)",
+    "description": "Get top 10 queries by clicks. Originates from the Gallery.",
+
+    "datasources": {
+        "google_searchConsole": {
+            "service": "google_searchConsole",
+            "libraryAlias": "GoogleSearchConsoleTop10Queries(30Days)",
+            "name": "Google Search Console Top 10 Queries (30 Days)",
+            "description": "Retrieve top 10 queries by clicks. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "{\"startDate\": \"{date.add(-32).format('yyyy-MM-dd')}\", \"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \"dimensions\": [\"query\"], \"rowLimit\":10}",
+                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
+                "method": "post",
+                "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
+            }
+        }
+    },
+    "dsMappings": {
+        "google_searchConsole": "aaaafa966ce853015cadKavyaMallur9"
+    },
+    "services": [{
+        "service": "google_searchConsole"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_searchConsole.siteURL",
+        "label": "Site URL",
+        "description": "Select a Site URL from the drop-down list.",
+        "isRequired": true,
+        "urlEncode": "true"
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have right permission level to access the site data. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_searchConsole",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_searchConsole.siteURL",
+            "propField": "options",
+            "labels": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']",
+            "values": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']"
+        }]
+    }]
+    
+}
