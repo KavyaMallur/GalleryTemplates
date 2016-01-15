@@ -1,0 +1,75 @@
+{
+    "name" : "Hubspot List Growth (Last 30 Days)",
+    "description" : "Select one of your HubSpot lists and see how it has grown over the past 30 days. Originates from the Gallery.",
+
+    "datasources" : {
+        "hubspot-01" : {
+            "service" : "hubspot",
+            "type" : "hubspot",
+            "format" : "json",
+            "name" :"Hubspot Lists",
+            "libraryAlias" :"HubspotLists",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve hubspot lists. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://api.hubapi.com/contacts/v1/lists?limit=1000",
+                "method": "get",
+                "portalId":"{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string"
+            }
+        },
+        "hubspot-02" : {
+            "service" : "hubspot",
+            "type" : "hubspot",
+            "format" : "json",
+            "name" :"Hubspot List History",
+            "libraryAlias" :"HubspotListHistory",
+            "refreshInterval" : 14400,
+            "description" :"Retrieve the size and edits history for last 30 days of hubspot list. Originates from the Gallery.",
+            "props":{
+                "endpoint_url": "https://api.hubapi.com/contacts/v1/lists/{{ds.hubspot.listID}}/sizeAndEditsHistory/between?startDate={date.add(-29).format('yyyy-MM-dd')}&endDate={date.today.format('yyyy-MM-dd')}",
+                "method": "get",
+                "portalId":"{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "hubspot-01" : "00f8b9a342297d5d24b9KavyaMallur9",
+        "hubspot-02" : "2e9bad97bf0b8a7640eeKavyaMallur9"
+    },
+
+    "services" : [
+        {
+            "service" : "hubspot"
+        }
+    ],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.hubspot.listID",
+        "label": "Landing Page",
+        "description": "Select an Hubspot Landing Page from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Hubspot OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service" : "hubspot",
+            "type" : "hubspot",
+            "format" : "json",
+            "props":{
+                "endpoint_url": "https://api.hubapi.com/content/api/v2/pages?limit=1000&subcategory=landing_page",
+                "method": "get",
+                "portalId":"{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string"
+            }
+        },
+        "results": [{
+            "propId": "ds.hubspot.landingPageID",
+            "propField": "options",
+            "labels": "/objects/name",
+            "values": "/objects/page_id"
+        }]
+    }]
+}
