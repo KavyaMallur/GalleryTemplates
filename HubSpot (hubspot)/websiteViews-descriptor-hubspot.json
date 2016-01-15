@@ -1,9 +1,9 @@
 {
-    "name": "Hubspot Landing Page Submissions (This Month)",
-    "description": "Track submissions on your chosen landing page this month. Originates from the Gallery.",
+    "name": "Hubspot Website Views (This Month)",
+    "description": "Make sure your website is generating interest by tracking the number of views this month. Originates from the Gallery.",
     "sampleFormulas": {
-        "618b05b8": {
-            "txt": "\"Creating killer klips for Hubspot\"",
+        "3ecf6f62": {
+            "txt": "\"Klipfolio Gallery Klips\"",
             "src": {
                 "t": "expr",
                 "v": false,
@@ -12,13 +12,13 @@
                     "v": "array",
                     "c": [{
                         "t": "l",
-                        "v": "Creating killer klips for Hubspot"
+                        "v": "Klipfolio Gallery Klips"
                     }]
                 }]
             }
         },
-        "3e645e5d": {
-            "txt": "array(\"20\", \"26\", \"19\", \"16\", \"22\", \"34\")",
+        "cde1c96a-2": {
+            "txt": "array(\"210\", \"216\", \"219\", \"196\", \"129\", \"177\", \"164\", \"164\", \"169\", \"199\")",
             "src": {
                 "t": "expr",
                 "v": false,
@@ -27,28 +27,40 @@
                     "v": "array",
                     "c": [{
                         "t": "l",
-                        "v": "20"
+                        "v": "210"
                     }, {
                         "t": "l",
-                        "v": "26"
+                        "v": "216"
                     }, {
                         "t": "l",
-                        "v": "19"
+                        "v": "219"
                     }, {
                         "t": "l",
-                        "v": "16"
+                        "v": "196"
                     }, {
                         "t": "l",
-                        "v": "22"
+                        "v": "129"
                     }, {
                         "t": "l",
-                        "v": "34"
+                        "v": "177"
+                    }, {
+                        "t": "l",
+                        "v": "164"
+                    }, {
+                        "t": "l",
+                        "v": "164"
+                    }, {
+                        "t": "l",
+                        "v": "169"
+                    }, {
+                        "t": "l",
+                        "v": "199"
                     }]
                 }]
             }
         },
-        "a6012904": {
-            "txt": "array(\"Jan 1\", \"Jan 2\", \"Jan 3\", \"Jan 4\", \"Jan 5\", \"Jan 6\")",
+        "77df83f6-3": {
+            "txt": "array(\"Jan 1\", \"Jan 2\", \"Jan 3\", \"Jan 4\", \"Jan 5\", \"Jan 6\", \"Jan 7\", \"Jan 8\", \"Jan 9\", \"Jan 10\")",
             "src": {
                 "t": "expr",
                 "v": false,
@@ -73,22 +85,34 @@
                     }, {
                         "t": "l",
                         "v": "Jan 6"
+                    }, {
+                        "t": "l",
+                        "v": "Jan 7"
+                    }, {
+                        "t": "l",
+                        "v": "Jan 8"
+                    }, {
+                        "t": "l",
+                        "v": "Jan 9"
+                    }, {
+                        "t": "l",
+                        "v": "Jan 10"
                     }]
                 }]
             }
-        }
+        },
     },
     "datasources": {
         "hubspot-01": {
             "service": "hubspot",
             "type": "hubspot",
             "format": "json",
-            "name": "Hubspot Landing Pages",
-            "libraryAlias": "HubspotLandingPages",
+            "name": "Hubspot Sites",
+            "libraryAlias": "HubspotSites",
             "refreshInterval": 14400,
-            "description": "Retrieve hubspot landing pages. Originates from the Gallery.",
+            "description": "Retrieve hubspot sites. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.hubapi.com/content/api/v2/pages?limit=1000&subcategory=landing_page",
+                "endpoint_url": "https://api.hubapi.com/content/api/v4/sites/list/www.bluebirdstrat.com/all?",
                 "method": "get",
                 "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
@@ -98,12 +122,12 @@
             "service": "hubspot",
             "type": "hubspot",
             "format": "json",
-            "name": "Hubspot Page Summary (Current Month)",
-            "libraryAlias": "HubspotPageSummary(CurrentMonth)",
+            "name": "Hubspot Page Summary (This Month)",
+            "libraryAlias": "HubspotPageSummary(ThisMonth)",
             "refreshInterval": 14400,
             "description": "Retrieve hubspot page summary for this month. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.hubapi.com/analytics/v2/sources/summary/d?start={date.startOfMonth.format('epochTime')}000&end={date.today.format('epochTime')}000&pageId={{ds.hubspot.landingPageID}}",
+                "endpoint_url": "https://api.hubapi.com/analytics/v2/sources/summary/d?start={date.startOfMonth.format('epochTime')}000&end={date.today.format('epochTime')}000&pageId={{ds.hubspot.siteID}}",
                 "method": "get",
                 "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
@@ -112,7 +136,7 @@
     },
 
     "dsMappings": {
-        "hubspot-01": "00f8b9a342297d5d24b9KavyaMallur9",
+        "hubspot-01": "5d29b9edbc0a10240dfcKavyaMallur9",
         "hubspot-02": "adafc51cf38ad978366fKavyaMallur9"
     },
 
@@ -120,14 +144,14 @@
         "service": "hubspot"
     }],
     "uiVariables": [{
-        "name": "KTdateRange",
+        "name": "KTdateValue",
         "value": ""
     }],
     "datasourceConfigModel": [{
         "type": "select",
-        "id": "ds.hubspot.landingPageID",
-        "label": "Landing Page",
-        "description": "Select an Hubspot Landing Page from the drop-down list.",
+        "id": "ds.hubspot.siteID",
+        "label": "Website",
+        "description": "Select an Hubspot Website from the drop-down list.",
         "isRequired": true
     }],
     "queries": [{
@@ -137,17 +161,17 @@
             "type": "hubspot",
             "format": "json",
             "props": {
-                "endpoint_url": "https://api.hubapi.com/content/api/v2/pages?limit=1000&subcategory=landing_page",
+                "endpoint_url": "https://api.hubapi.com/content/api/v4/sites/list/www.bluebirdstrat.com/all?",
                 "method": "get",
                 "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
             }
         },
         "results": [{
-            "propId": "ds.hubspot.landingPageID",
+            "propId": "ds.hubspot.siteID",
             "propField": "options",
-            "labels": "/objects/name[preceding-sibling::is_draft!='true']",
-            "values": "/objects/page_id[preceding-sibling::is_draft!='true']"
+            "labels": "/results/name",
+            "values": "/results/id"
         }]
     }]
 }

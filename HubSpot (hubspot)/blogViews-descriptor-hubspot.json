@@ -1,6 +1,6 @@
 {
-    "name" : "HubSpot Blog Views (This Month)",
-    "description" : "Compare how many people looked at your blog this month and last month, and use the handy indicator to quickly see if the percentage of views is up or down. Originates from the Gallery.",
+    "name": "HubSpot Blog Views (This Month)",
+    "description": "Compare how many people looked at your blog this month and last month, and use the handy indicator to quickly see if the percentage of views is up or down. Originates from the Gallery.",
     "sampleFormulas": {
         "2df66538-1": {
             "txt": "\"Amazing klips for January\"",
@@ -226,8 +226,7 @@
                     }, {
                         "t": "l",
                         "v": "674"
-                    }
-                    ]
+                    }]
                 }]
             }
         },
@@ -332,71 +331,68 @@
                     }, {
                         "t": "l",
                         "v": "Jan 31"
-                    }
-                    ]
+                    }]
                 }]
             }
         }
     },
-    "datasources" : {
-        "hubspot-01" : {
-            "service" : "hubspot",
-            "type" : "hubspot",
-            "format" : "json",
-            "name" :"Hubspot Blog Details",
-            "libraryAlias" :"HubspotBlogDetails",
-            "refreshInterval" : 14400,
-            "description" :"Retrieve hubspot blog details for a selected blog. Originates from the Gallery.",
-            "props":{
+    "datasources": {
+        "hubspot-01": {
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "name": "Hubspot Blog Details",
+            "libraryAlias": "HubspotBlogDetails",
+            "refreshInterval": 14400,
+            "description": "Retrieve hubspot blog details for a selected blog. Originates from the Gallery.",
+            "props": {
                 "endpoint_url": "https://api.hubapi.com/content/api/v2/blogs/{{ds.hubspot.blogID}}",
                 "method": "get",
-                "portalId":"{{auth.hubspot.portalId}}",
+                "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
             }
         },
-        "hubspot-02" : {
-            "service" : "hubspot",
-            "type" : "hubspot",
-            "format" : "json",
-            "name" :"Hubspot Blog Views (Current Month)",
-            "libraryAlias" :"HubspotBlogViews(CurrentMonth)",
-            "refreshInterval" : 14400,
-            "description" :"Retrieve blog views for the current month. Originates from the Gallery.",
-            "props":{
+        "hubspot-02": {
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "name": "Hubspot Blog Views (This Month)",
+            "libraryAlias": "HubspotBlogViews(ThisMonth)",
+            "refreshInterval": 14400,
+            "description": "Retrieve blog views for the current month. Originates from the Gallery.",
+            "props": {
                 "endpoint_url": "https://api.hubapi.com/blogs/v3/blogs/{{ds.hubspot.blogID}}/views/d?startDate={date.startOfMonth.format('epochTime')}000&endDate={date.today.format('epochTime')}000",
                 "method": "get",
-                "portalId":"{{auth.hubspot.portalId}}",
+                "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
             }
         },
-        "hubspot-03" : {
-            "service" : "hubspot",
-            "type" : "hubspot",
-            "format" : "json",
-            "name" :"Hubspot Blog Views (Last Month)",
-            "libraryAlias" :"HubspotBlogViews(LastMonth)",
-            "refreshInterval" : 14400,
-            "description" :"Retrieve blog views for the last month. Originates from the Gallery.",
-            "props":{
+        "hubspot-03": {
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "name": "Hubspot Blog Views (Last Month)",
+            "libraryAlias": "HubspotBlogViews(LastMonth)",
+            "refreshInterval": 14400,
+            "description": "Retrieve blog views for the last month. Originates from the Gallery.",
+            "props": {
                 "endpoint_url": "https://api.hubapi.com/blogs/v3/blogs/{{ds.hubspot.blogID}}/views/d?startDate={date.addMonths(-1).startOfMonth.format('epochTime')}000&endDate={date.addMonths(-1).endOfMonth.format('epochTime')}000",
                 "method": "get",
-                "portalId":"{{auth.hubspot.portalId}}",
+                "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
             }
         }
     },
 
     "dsMappings": {
-        "hubspot-01" : "3f988b8a1d539a9ddda7KavyaMallur9",
-        "hubspot-02" : "f82d17f2e4f0b7b048ceKavyaMallur9",
-        "hubspot-03" : "3efbbf2701877e4c57edKavyaMallur9"
+        "hubspot-01": "3f988b8a1d539a9ddda7KavyaMallur9",
+        "hubspot-02": "f82d17f2e4f0b7b048ceKavyaMallur9",
+        "hubspot-03": "3efbbf2701877e4c57edKavyaMallur9"
     },
 
-    "services" : [
-        {
-            "service" : "hubspot"
-        }
-    ],
+    "services": [{
+        "service": "hubspot"
+    }],
     "datasourceConfigModel": [{
         "type": "select",
         "id": "ds.hubspot.blogID",
@@ -407,13 +403,13 @@
     "queries": [{
         "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have hubspot blogs configured in your account <br><br>2. From time to time, your Hubspot OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
         "connector": {
-            "service" : "hubspot",
-            "type" : "hubspot",
-            "format" : "json",
-            "props":{
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "props": {
                 "endpoint_url": "https://api.hubapi.com/blogs/v3/blogs?limit=100",
                 "method": "get",
-                "portalId":"{{auth.hubspot.portalId}}",
+                "portalId": "{{auth.hubspot.portalId}}",
                 "oauth_sign_query_string": "oauth_sign_query_string"
             }
         },

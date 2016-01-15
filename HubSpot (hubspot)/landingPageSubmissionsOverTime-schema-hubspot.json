@@ -1,236 +1,338 @@
 {
-   "title": "Hubspot Landing Page Submissions over Time",
-   "id": "6f174b50f13fed24fc91067630941827",
-   "workspace": {
-      "dimensions": {
-         "w": 445
-      },
-      "datasources": [
-         "adafc51cf38ad978366fKavyaMallur9",
-         "00f8b9a342297d5d24b9KavyaMallur9"
-      ]
-   },
-   "components": [
-      {
-         "type": "panel_grid",
-         "id": "2556a9d3-1",
-         "displayName": "Layout Grid",
-         "components": [
-            {
-               "type": "label",
-               "id": "618b05b8",
-               "displayName": "Label",
-               "layoutConfig": {
-                  "x": 0,
-                  "y": 0
-               },
-               "size": "1",
-               "fmt": "txt",
-               "fmtArgs": {
-                  "prefix": "<div class style=\"display:inline; font-weight:normal;\">Landing Page: </div>"
-               },
-               "formulas": [
-                  {
-                     "txt": "00f8b9a342297d5d24b9KavyaMallur9@/objects/name[following-sibling::page_id='{{ds.hubspot.landingPageID}}'];",
-                     "src": {
+    "title": "Hubspot Landing Page Submissions (This Month)",
+    "id": "6f174b50f13fed24fc91067630941827",
+    "workspace": {
+        "dimensions": {
+            "w": 445
+        },
+        "datasources": [
+            "adafc51cf38ad978366fKavyaMallur9",
+            "00f8b9a342297d5d24b9KavyaMallur9"
+        ]
+    },
+    "components": [{
+        "type": "panel_grid",
+        "id": "2556a9d3-1",
+        "displayName": "Layout Grid",
+        "components": [{
+            "type": "label",
+            "id": "618b05b8",
+            "displayName": "Landing Page",
+            "layoutConfig": {
+                "x": 0,
+                "y": 0
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "txt",
+            "fmtArgs": {
+                "prefix": "<div class style=\"display:inline; font-weight:normal;\">Landing Page: </div>"
+            },
+            "formulas": [{
+                "txt": "00f8b9a342297d5d24b9KavyaMallur9@/objects/name[following-sibling::page_id='{{ds.hubspot.landingPageID}}'];",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "d",
+                        "v": {
+                            "id": "00f8b9a342297d5d24b9KavyaMallur9",
+                            "a": "/objects/name[following-sibling::page_id='3540396788']"
+                        }
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ],
+            "align": "c",
+            "wrap": "active"
+        }, {
+            "type": "chart_series",
+            "id": "e6575af6",
+            "displayName": "Series Chart",
+            "layoutConfig": {
+                "x": 0,
+                "y": 1
+            },
+            "components": [{
+                "type": "series_data",
+                "role": "series",
+                "id": "3e645e5d",
+                "displayName": "Submissions",
+                "fmt": "num",
+                "formulas": [{
+                    "txt": "lookup(datevalue(daterange(date_startof(today(),\"3\"),today()),\"yyyy-MM-dd\"),adafc51cf38ad978366fKavyaMallur9@kf:names(/.);,map(adafc51cf38ad978366fKavyaMallur9@kf:names(/.);,\"dateRange\",sum(datasource(\"adafc51cf38ad978366fKavyaMallur9\",concat(\"/*[name()='\",$dateRange,\"']/submissions\")))))",
+                    "src": {
                         "t": "expr",
                         "v": false,
-                        "c": [
-                           {
-                              "t": "d",
-                              "v": {
-                                 "id": "00f8b9a342297d5d24b9KavyaMallur9",
-                                 "a": "/objects/name[following-sibling::page_id='{{ds.hubspot.landingPageID}}']"
-                              }
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-
-                  ]
-               ],
-               "align": "c",
-               "wrap": "active"
-            },
-            {
-               "type": "chart_series",
-               "id": "e6575af6",
-               "displayName": "Series Chart",
-               "layoutConfig": {
-                  "x": 0,
-                  "y": 1
-               },
-               "components": [
-                  {
-                     "type": "series_data",
-                     "role": "series",
-                     "id": "3e645e5d",
-                     "displayName": "Submissions",
-                     "fmt": "num",
-                     "formulas": [
-                        {
-                           "txt": "map(adafc51cf38ad978366fKavyaMallur9@kf:names(/.);,\"KTdateRange\",sum(datasource(\"adafc51cf38ad978366fKavyaMallur9\",concat(\"/*[name()='\",$KTdateRange,\"']/submissions\"))))",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
+                        "c": [{
+                            "t": "f",
+                            "v": "lookup",
+                            "c": [{
+                                "t": "f",
+                                "v": "datevalue",
+                                "c": [{
                                     "t": "f",
-                                    "v": "map",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "adafc51cf38ad978366fKavyaMallur9",
-                                             "a": "kf:names(/.)"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "KTdateRange"
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "sum",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "datasource",
-                                                "c": [
-                                                   {
-                                                      "t": "l",
-                                                      "v": "adafc51cf38ad978366fKavyaMallur9"
-                                                   },
-                                                   {
-                                                      "t": "f",
-                                                      "v": "concat",
-                                                      "c": [
-                                                         {
-                                                            "t": "l",
-                                                            "v": "/*[name()='"
-                                                         },
-                                                         {
-                                                            "t": "var",
-                                                            "v": "KTdateRange"
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "']/submissions"
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "data",
-                                                               "repeats": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_startof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
-                                                   "placeholder": "data",
-                                                   "repeats": true
+                                                    "placeholder": "timezone",
+                                                    "optional": true
                                                 }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        }
-                     ],
-                     "data": [
-                        [
-
-                        ]
-                     ],
-                     "seriesName": "Submissions",
-                     "renderer": "line",
-                     "chartStyle": "points_area",
-                     "axis": "4283a0fd",
-                     "overrideColor": true,
-                     "color": "cx-theme_green_3"
-                  },
-                  {
-                     "type": "chart_axis",
-                     "role": "axis_x",
-                     "id": "a6012904",
-                     "displayName": "Date",
-                     "fmt": "dat",
-                     "fmtArgs": {
-                        "dateFormat": "custom",
-                        "dateFormatCustom": "MMM, dd"
-                     },
-                     "formulas": [
-                        {
-                           "txt": "adafc51cf38ad978366fKavyaMallur9@kf:names(/.);",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "3"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "timezone",
+                                        "optional": true
+                                    }
+                                }]
+                            }, {
+                                "t": "d",
+                                "v": {
+                                    "id": "adafc51cf38ad978366fKavyaMallur9",
+                                    "a": "kf:names(/.)"
+                                }
+                            }, {
+                                "t": "f",
+                                "v": "map",
+                                "c": [{
                                     "t": "d",
                                     "v": {
-                                       "id": "adafc51cf38ad978366fKavyaMallur9",
-                                       "a": "kf:names(/.)"
+                                        "id": "adafc51cf38ad978366fKavyaMallur9",
+                                        "a": "kf:names(/.)"
                                     }
-                                 }
-                              ]
-                           }
-                        }
-                     ],
-                     "data": [
-                        [
+                                }, {
+                                    "t": "l",
+                                    "v": "dateRange"
+                                }, {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "datasource",
+                                        "c": [{
+                                            "t": "l",
+                                            "v": "adafc51cf38ad978366fKavyaMallur9"
+                                        }, {
+                                            "t": "f",
+                                            "v": "concat",
+                                            "c": [{
+                                                "t": "l",
+                                                "v": "/*[name()='"
+                                            }, {
+                                                "t": "var",
+                                                "v": "dateRange"
+                                            }, {
+                                                "t": "l",
+                                                "v": "']/submissions"
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "data",
+                                                    "repeats": true
+                                                }
+                                            }]
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "data",
+                                            "repeats": true
+                                        }
+                                    }]
+                                }]
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
 
-                        ]
-                     ],
-                     "label": "Date",
-                     "labelAngle": "-45",
-                     "labelDrop": "1"
-                  },
-                  {
-                     "type": "chart_axis",
-                     "role": "axis_y",
-                     "id": "4283a0fd",
-                     "displayName": "Submissions Count",
-                     "fmt": "num",
-                     "fmtArgs": {
-                        "precision": "0"
-                     },
-                     "formulas": [],
-                     "data": [],
-                     "dataDisabled": true,
-                     "label": "Submissions Count",
-                     "showAxis": false,
-                     "labelDrop": 0,
-                     "grid": true
-                  }
-               ]
-            }
-         ],
-         "rows": 2,
-         "cols": 1,
-         "cellData": [
-            {
-               "x": 0,
-               "y": 0,
-               "w": 1
-            },
-            {
-               "x": 0,
-               "y": 1,
-               "w": 1
-            }
-         ]
-      }
-   ]
+                    ]
+                ],
+                "seriesName": "Submissions",
+                "renderer": "line",
+                "chartStyle": "points_area",
+                "axis": "4283a0fd",
+                "overrideColor": true,
+                "color": "cx-theme_green_3"
+            }, {
+                "type": "chart_axis",
+                "role": "axis_x",
+                "id": "a6012904",
+                "displayName": "Date",
+                "fmt": "dat",
+                "fmtArgs": {
+                    "dateFormat": "custom",
+                    "dateFormatCustom": "MMM d"
+                },
+                "formulas": [{
+                    "txt": "datevalue(daterange(date_startof(today(),\"3\"),today()),\"MMM d\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "daterange",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "relative value",
+                                            "optional": true
+                                        }
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "f",
+                                    "v": "today",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "format",
+                                        "optional": true
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "MMM d"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "optional": true
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "label": "Date",
+                "labelAngle": "-45",
+                "labelDrop": "4"
+            }, {
+                "type": "chart_axis",
+                "role": "axis_y",
+                "id": "4283a0fd",
+                "displayName": "Submissions Count",
+                "fmt": "num",
+                "fmtArgs": {
+                    "precision": "0"
+                },
+                "formulas": [],
+                "data": [],
+                "dataDisabled": true,
+                "label": "Submissions Count",
+                "showAxis": false,
+                "labelDrop": 0,
+                "grid": true
+            }]
+        }],
+        "rows": 2,
+        "cols": 1,
+        "cellData": [{
+            "x": 0,
+            "y": 0,
+            "w": 1
+        }, {
+            "x": 0,
+            "y": 1,
+            "w": 1
+        }]
+    }]
 }

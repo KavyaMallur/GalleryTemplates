@@ -1,23 +1,23 @@
 {
-    "title": "Hubspot List Growth (30 Days)",
-    "id": "c6a8a26ea55da858417876f099e22fce",
+    "title": "Hubspot Website Views (This Month)",
+    "id": "774bb767a176e0ac68de854835370efd",
     "workspace": {
         "datasources": [
-            "aabeb7103fd6c9af7483KavyaMallur9",
-            "84d3fdedc60aca10fcd4KavyaMallur9"
+            "adafc51cf38ad978366fKavyaMallur9",
+            "5d29b9edbc0a10240dfcKavyaMallur9"
         ],
         "dimensions": {
-            "w": 562
+            "w": 500
         }
     },
     "components": [{
         "type": "panel_grid",
-        "id": "c38418e6-1",
+        "id": "f0217d9f-9",
         "displayName": "Layout Grid",
         "components": [{
             "type": "label",
-            "id": "243bdf69",
-            "displayName": "List",
+            "id": "3ecf6f62",
+            "displayName": "Website",
             "layoutConfig": {
                 "x": 0,
                 "y": 0
@@ -26,18 +26,18 @@
             "size": "1",
             "fmt": "txt",
             "fmtArgs": {
-                "prefix": "<div class style=\"display:inline; font-weight:normal;\">List: </div>"
+                "prefix": "<div class style=\"display:inline; font-weight:normal;\">Website: </div>"
             },
             "formulas": [{
-                "txt": "84d3fdedc60aca10fcd4KavyaMallur9@/lists/name[preceding-sibling::listId='{{ds.hubspot.listID}}'];",
+                "txt": "5d29b9edbc0a10240dfcKavyaMallur9@/results/name[preceding-sibling::id='{{ds.hubspot.siteID}}'];",
                 "src": {
                     "t": "expr",
                     "v": false,
                     "c": [{
                         "t": "d",
                         "v": {
-                            "id": "84d3fdedc60aca10fcd4KavyaMallur9",
-                            "a": "/lists/name[preceding-sibling::listId='853']"
+                            "id": "5d29b9edbc0a10240dfcKavyaMallur9",
+                            "a": "/results/name[preceding-sibling::id='2887191858']"
                         }
                     }]
                 }
@@ -51,7 +51,7 @@
             "wrap": "active"
         }, {
             "type": "chart_series",
-            "id": "beae81ef-5",
+            "id": "b75c72d4-1",
             "displayName": "Series Chart",
             "layoutConfig": {
                 "x": 0,
@@ -60,11 +60,11 @@
             "components": [{
                 "type": "series_data",
                 "role": "series",
-                "id": "432f46fc-6",
-                "displayName": "Contacts Added",
+                "id": "cde1c96a-2",
+                "displayName": "Views",
                 "fmt": "num",
                 "formulas": [{
-                    "txt": "lookup(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"MMM d\"),date_convert(aabeb7103fd6c9af7483KavyaMallur9@/sizes/dateInt;,\"yyyyMMdd\",\"MMM d\"),aabeb7103fd6c9af7483KavyaMallur9@/sizes/size;)",
+                    "txt": "lookup(datevalue(daterange(date_startof(today(),\"3\"),today()),\"yyyy-MM-dd\"),adafc51cf38ad978366fKavyaMallur9@kf:names(/.);,map(adafc51cf38ad978366fKavyaMallur9@kf:names(/.);,\"KTdateValue\",sum(datasource(\"adafc51cf38ad978366fKavyaMallur9\",concat(\" /*[name()='\",$KTdateValue,\"']/rawViews\")))))",
                     "src": {
                         "t": "expr",
                         "v": false,
@@ -79,7 +79,7 @@
                                     "v": "daterange",
                                     "c": [{
                                         "t": "f",
-                                        "v": "date_add",
+                                        "v": "date_startof",
                                         "c": [{
                                             "t": "f",
                                             "v": "today",
@@ -93,10 +93,21 @@
                                             }]
                                         }, {
                                             "t": "opt",
-                                            "v": "5"
+                                            "v": "3"
                                         }, {
-                                            "t": "l",
-                                            "v": "-29"
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "optional": true
+                                            }
                                         }]
                                     }, {
                                         "t": "f",
@@ -119,7 +130,7 @@
                                     }]
                                 }, {
                                     "t": "l",
-                                    "v": "MMM d"
+                                    "v": "yyyy-MM-dd"
                                 }, {
                                     "t": "a",
                                     "v": null,
@@ -129,27 +140,62 @@
                                     }
                                 }]
                             }, {
+                                "t": "d",
+                                "v": {
+                                    "id": "adafc51cf38ad978366fKavyaMallur9",
+                                    "a": "kf:names(/.)"
+                                }
+                            }, {
                                 "t": "f",
-                                "v": "date_convert",
+                                "v": "map",
                                 "c": [{
                                     "t": "d",
                                     "v": {
-                                        "id": "aabeb7103fd6c9af7483KavyaMallur9",
-                                        "a": "/sizes/dateInt"
+                                        "id": "adafc51cf38ad978366fKavyaMallur9",
+                                        "a": "kf:names(/.)"
                                     }
                                 }, {
                                     "t": "l",
-                                    "v": "yyyyMMdd"
+                                    "v": "dateValue"
                                 }, {
-                                    "t": "l",
-                                    "v": "MMM d"
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "datasource",
+                                        "c": [{
+                                            "t": "l",
+                                            "v": "adafc51cf38ad978366fKavyaMallur9"
+                                        }, {
+                                            "t": "f",
+                                            "v": "concat",
+                                            "c": [{
+                                                "t": "l",
+                                                "v": " /*[name()='"
+                                            }, {
+                                                "t": "var",
+                                                "v": "dateValue"
+                                            }, {
+                                                "t": "l",
+                                                "v": "']/rawViews"
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "data",
+                                                    "repeats": true
+                                                }
+                                            }]
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "data",
+                                            "repeats": true
+                                        }
+                                    }]
                                 }]
-                            }, {
-                                "t": "d",
-                                "v": {
-                                    "id": "aabeb7103fd6c9af7483KavyaMallur9",
-                                    "a": "/sizes/size"
-                                }
                             }]
                         }]
                     }
@@ -159,24 +205,19 @@
 
                     ]
                 ],
-                "seriesName": "Contacts Added",
+                "seriesName": "Views",
                 "renderer": "line",
                 "chartStyle": "points_area",
-                "axis": "8ad17e00-8",
-                "overrideColor": true
+                "lineWeight": "3",
+                "axis": "a558e379-4"
             }, {
                 "type": "chart_axis",
                 "role": "axis_x",
-                "id": "12d68320-7",
+                "id": "77df83f6-3",
                 "displayName": "Date",
-                "fmt": "dat",
-                "fmtArgs": {
-                    "dateFormat": "custom",
-                    "dateInputFormat": "default",
-                    "dateFormatCustom": "MMM d"
-                },
+                "fmt": "txt",
                 "formulas": [{
-                    "txt": "datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"MMM d\")",
+                    "txt": "datevalue(daterange(date_startof(today(),\"3\"),today()),\"MMM d\")",
                     "src": {
                         "t": "expr",
                         "v": false,
@@ -188,7 +229,7 @@
                                 "v": "daterange",
                                 "c": [{
                                     "t": "f",
-                                    "v": "date_add",
+                                    "v": "date_startof",
                                     "c": [{
                                         "t": "f",
                                         "v": "today",
@@ -202,10 +243,21 @@
                                         }]
                                     }, {
                                         "t": "opt",
-                                        "v": "5"
+                                        "v": "3"
                                     }, {
-                                        "t": "l",
-                                        "v": "-29"
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "relative value",
+                                            "optional": true
+                                        }
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "optional": true
+                                        }
                                     }]
                                 }, {
                                     "t": "f",
@@ -246,24 +298,35 @@
                     ]
                 ],
                 "label": "Date",
+                "showAxis": false,
                 "labelAngle": "-45",
-                "labelDrop": "5"
+                "labelDrop": "4"
             }, {
                 "type": "chart_axis",
                 "role": "axis_y",
-                "id": "8ad17e00-8",
-                "displayName": "List Growth",
+                "id": "a558e379-4",
+                "displayName": "Count",
                 "fmt": "num",
                 "formulas": [],
                 "data": [],
                 "dataDisabled": true,
-                "label": "List Growth",
+                "label": "Count",
                 "showAxis": false,
+                "originLine": false,
                 "labelDrop": 0,
                 "grid": true
             }]
         }],
         "rows": 2,
-        "cols": 1
+        "cols": 3,
+        "cellData": [{
+            "x": 0,
+            "y": 0,
+            "w": 3
+        }, {
+            "x": 0,
+            "y": 1,
+            "w": 3
+        }]
     }]
 }
