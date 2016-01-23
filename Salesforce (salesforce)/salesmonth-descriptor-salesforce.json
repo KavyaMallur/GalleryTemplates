@@ -1,6 +1,6 @@
 {
   "name": "Salesforce Sales (This Month)",
-  "description": "Monitor your sales this month and see how it compares to the average of the last 3 months. Originates from the Gallery.",
+  "description": "Monitor your sales this month and see how it compares to last month. Originates from the Gallery.",
   "sampleFormulas": {
     "41304543": {
       "txt": "array(\"58592\")",
@@ -85,12 +85,12 @@
       "type": "salesforce",
       "format": "json",
       "name": "Salesforce Opportunities",
-      "libraryAlias": "SFDCOpportunities",
+      "libraryAlias": "SFDCOpportunitiesByType",
       "refreshInterval": 14400,
-      "description": "Opportunities for the past 2 quarters or this year. Originates from the Gallery.",
+      "description": "Number of opportunities grouped by type for the past 2 quarters or this year. Originates from the Gallery.",
       "props": {
-        "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability\r\nFROM Opportunity\r\nWHERE CloseDate = LAST_N_QUARTERS:2 OR CloseDate = THIS_YEAR",
-        "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3D+LAST_N_QUARTERS%3A2+OR+CloseDate+%3D+THIS_YEAR",
+        "SOQLQuery": "SELECT SUM(Amount) Amount, COUNT(amount) Total_Count, CALENDAR_MONTH(Closedate) Month, CALENDAR_YEAR(Closedate) Year, StageName, isClosed, isWon, Type\r\nFROM Opportunity\r\nWHERE Closedate = THIS_YEAR OR Closedate = LAST_N_QUARTERS:1\r\nGROUP BY CALENDAR_MONTH(Closedate), CALENDAR_YEAR(Closedate), StageName, isClosed, isWon,Type",
+        "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+SUM%28Amount%29+Amount%2C+COUNT%28amount%29+Total_Count%2C+CALENDAR_MONTH%28Closedate%29+Month%2C+CALENDAR_YEAR%28Closedate%29+Year%2C+StageName%2C+isClosed%2C+isWon%2C+Type+FROM+Opportunity+%0D%0AWHERE+Closedate+%3D+THIS_YEAR+OR+Closedate+%3D+LAST_N_QUARTERS%3A1%0D%0AGROUP+BY+CALENDAR_MONTH%28Closedate%29%2C+CALENDAR_YEAR%28Closedate%29%2C+StageName%2C+isClosed%2C+isWon%2CType",
         "instance": "{{auth.salesforce.instanceName}}"
       }
     }
