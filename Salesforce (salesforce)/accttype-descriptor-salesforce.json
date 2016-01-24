@@ -8,12 +8,12 @@
             "type" : "salesforce",
             "format" : "json",
             "name" :"Accounts",
-            "libraryAlias" :"SFDCAccounts",
-            "refreshInterval" : 300,
-            "description" :"See information for all your Salesforce accounts including date created, billing country, owner, and more. Originates from the Gallery.",
+            "libraryAlias" :"SFDCAccountsCount",
+            "refreshInterval" : 14400,
+            "description" :"See the number of your Salesforce accounts. Originates from the Gallery.",
             "props":{
-                "SOQLQuery": "SELECT Name, Owner.Name, BillingCountry, BillingState, Type, CreatedDate\r\nFROM Account",
-                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v20.0/query/?q=SELECT+Name%2C+Owner.Name%2C+BillingCountry%2C+BillingState%2C+Type%2C+CreatedDate%0D%0AFROM+Account",
+                "SOQLQuery": "SELECT COUNT(Id) Total_Count, Type\nFROM Account WHERE isDeleted=false\nGROUP BY Type",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+COUNT%28Id%29+Total_Count%2C+Type%0D%0AFROM+Account+WHERE+isDeleted%3Dfalse%0D%0AGROUP+BY+Type",
                 "instance": "{{auth.salesforce.instanceName}}"
             }
         }

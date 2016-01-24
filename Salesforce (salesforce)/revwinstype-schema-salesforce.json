@@ -23,7 +23,7 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "(groupby(select(df7bec64f58ae3dd3336niktawuzhere@/records/Type;,(numberformat(df7bec64f58ae3dd3336niktawuzhere@/records/Probability;)=\"100\")),select(df7bec64f58ae3dd3336niktawuzhere@/records/Amount;,(numberformat(df7bec64f58ae3dd3336niktawuzhere@/records/Probability;)=\"100\")))/\"1000\")",
+                     "txt": "(groupby(select(df7bec64f58ae3dd3336niktawuzhere@/records/Type;,and((df7bec64f58ae3dd3336niktawuzhere@/records/IsWon;=\"true\"),(df7bec64f58ae3dd3336niktawuzhere@/records/IsClosed;=\"true\"),(concat(df7bec64f58ae3dd3336niktawuzhere@/records/Year;,\"-\",df7bec64f58ae3dd3336niktawuzhere@/records/Month;)=datevalue(today(),\"yyyy-M\")))),select(df7bec64f58ae3dd3336niktawuzhere@/records/Amount;,and((df7bec64f58ae3dd3336niktawuzhere@/records/IsWon;=\"true\"),(df7bec64f58ae3dd3336niktawuzhere@/records/IsClosed;=\"true\"),(concat(df7bec64f58ae3dd3336niktawuzhere@/records/Year;,\"-\",df7bec64f58ae3dd3336niktawuzhere@/records/Month;)=datevalue(today(),\"yyyy-M\")))))/\"1000\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -48,45 +48,132 @@
                                                 }
                                              },
                                              {
-                                                "t": "expr",
-                                                "v": false,
+                                                "t": "f",
+                                                "v": "and",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "numberformat",
+                                                      "t": "expr",
+                                                      "v": false,
                                                       "c": [
                                                          {
                                                             "t": "d",
                                                             "v": {
                                                                "id": "df7bec64f58ae3dd3336niktawuzhere",
-                                                               "a": "/records/Probability"
+                                                               "a": "/records/IsWon"
                                                             }
                                                          },
                                                          {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "precision",
-                                                               "optional": true
-                                                            }
+                                                            "t": "o",
+                                                            "v": "="
                                                          },
                                                          {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "separator",
-                                                               "optional": true
-                                                            }
+                                                            "t": "l",
+                                                            "v": "true"
                                                          }
                                                       ]
                                                    },
                                                    {
-                                                      "t": "o",
-                                                      "v": "="
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                               "a": "/records/IsClosed"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "true"
+                                                         }
+                                                      ]
                                                    },
                                                    {
-                                                      "t": "l",
-                                                      "v": "100"
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "concat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                                     "a": "/records/Year"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-"
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                                     "a": "/records/Month"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "datevalue",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-M"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "condition",
+                                                         "repeats": true
+                                                      }
                                                    }
                                                 ]
                                              }
@@ -104,45 +191,132 @@
                                                 }
                                              },
                                              {
-                                                "t": "expr",
-                                                "v": false,
+                                                "t": "f",
+                                                "v": "and",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "numberformat",
+                                                      "t": "expr",
+                                                      "v": false,
                                                       "c": [
                                                          {
                                                             "t": "d",
                                                             "v": {
                                                                "id": "df7bec64f58ae3dd3336niktawuzhere",
-                                                               "a": "/records/Probability"
+                                                               "a": "/records/IsWon"
                                                             }
                                                          },
                                                          {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "precision",
-                                                               "optional": true
-                                                            }
+                                                            "t": "o",
+                                                            "v": "="
                                                          },
                                                          {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "separator",
-                                                               "optional": true
-                                                            }
+                                                            "t": "l",
+                                                            "v": "true"
                                                          }
                                                       ]
                                                    },
                                                    {
-                                                      "t": "o",
-                                                      "v": "="
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                               "a": "/records/IsClosed"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "true"
+                                                         }
+                                                      ]
                                                    },
                                                    {
-                                                      "t": "l",
-                                                      "v": "100"
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "concat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                                     "a": "/records/Year"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "-"
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                                     "a": "/records/Month"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "datevalue",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "today",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "timezone",
+                                                                           "optional": true
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-M"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "condition",
+                                                         "repeats": true
+                                                      }
                                                    }
                                                 ]
                                              }
@@ -184,7 +358,7 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "countdistinct(select(df7bec64f58ae3dd3336niktawuzhere@/records/Type;,(numberformat(df7bec64f58ae3dd3336niktawuzhere@/records/Probability;)=\"100\")))",
+                     "txt": "countdistinct(select(df7bec64f58ae3dd3336niktawuzhere@/records/Type;,and((df7bec64f58ae3dd3336niktawuzhere@/records/IsWon;=\"true\"),(df7bec64f58ae3dd3336niktawuzhere@/records/IsClosed;=\"true\"),(concat(df7bec64f58ae3dd3336niktawuzhere@/records/Year;,\"-\",df7bec64f58ae3dd3336niktawuzhere@/records/Month;)=datevalue(today(),\"yyyy-M\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -205,45 +379,132 @@
                                           }
                                        },
                                        {
-                                          "t": "expr",
-                                          "v": false,
+                                          "t": "f",
+                                          "v": "and",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "numberformat",
+                                                "t": "expr",
+                                                "v": false,
                                                 "c": [
                                                    {
                                                       "t": "d",
                                                       "v": {
                                                          "id": "df7bec64f58ae3dd3336niktawuzhere",
-                                                         "a": "/records/Probability"
+                                                         "a": "/records/IsWon"
                                                       }
                                                    },
                                                    {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "precision",
-                                                         "optional": true
-                                                      }
+                                                      "t": "o",
+                                                      "v": "="
                                                    },
                                                    {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "separator",
-                                                         "optional": true
-                                                      }
+                                                      "t": "l",
+                                                      "v": "true"
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "="
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                         "a": "/records/IsClosed"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "true"
+                                                   }
+                                                ]
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "100"
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "concat",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                               "a": "/records/Year"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-"
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                               "a": "/records/Month"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "data",
+                                                               "repeats": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-M"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
                                              }
                                           ]
                                        }
@@ -269,7 +530,7 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "group(select(df7bec64f58ae3dd3336niktawuzhere@/records/Type;,(numberformat(df7bec64f58ae3dd3336niktawuzhere@/records/Probability;)=\"100\")))",
+                     "txt": "group(select(df7bec64f58ae3dd3336niktawuzhere@/records/Type;,and((df7bec64f58ae3dd3336niktawuzhere@/records/IsWon;=\"true\"),(df7bec64f58ae3dd3336niktawuzhere@/records/IsClosed;=\"true\"),(concat(df7bec64f58ae3dd3336niktawuzhere@/records/Year;,\"-\",df7bec64f58ae3dd3336niktawuzhere@/records/Month;)=datevalue(today(),\"yyyy-M\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -290,45 +551,132 @@
                                           }
                                        },
                                        {
-                                          "t": "expr",
-                                          "v": false,
+                                          "t": "f",
+                                          "v": "and",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "numberformat",
+                                                "t": "expr",
+                                                "v": false,
                                                 "c": [
                                                    {
                                                       "t": "d",
                                                       "v": {
                                                          "id": "df7bec64f58ae3dd3336niktawuzhere",
-                                                         "a": "/records/Probability"
+                                                         "a": "/records/IsWon"
                                                       }
                                                    },
                                                    {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "precision",
-                                                         "optional": true
-                                                      }
+                                                      "t": "o",
+                                                      "v": "="
                                                    },
                                                    {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "separator",
-                                                         "optional": true
-                                                      }
+                                                      "t": "l",
+                                                      "v": "true"
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "="
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                         "a": "/records/IsClosed"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "true"
+                                                   }
+                                                ]
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "100"
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "concat",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                               "a": "/records/Year"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-"
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "df7bec64f58ae3dd3336niktawuzhere",
+                                                               "a": "/records/Month"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "data",
+                                                               "repeats": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "datevalue",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-M"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true
+                                                }
                                              }
                                           ]
                                        }
