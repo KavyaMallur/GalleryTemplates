@@ -1,0 +1,193 @@
+{
+    "name": "QuickBooks AP Balance",
+    "description": "Track AP balance",
+    "sampleFormulas": {
+        "a5941c96-1": {
+            "txt": "\"Feb 01, 2015 to Jan 22, 2016\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Feb 01, 2015 to Jan 22, 2016"
+                }]
+            }
+        },
+        "f2b292f2": {
+            "txt": "\"Current Fiscal YTD\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Current Fiscal YTD"
+                }]
+            }
+        },
+        "b5658464": {
+            "txt": "\"Current Fiscal YTD\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Current Fiscal YTD"
+                }]
+            }
+        },
+        "67fa3245": {
+            "txt": "array(\"799.94\", \"862.24\", \"994.49\", \"771.12\", \"902.22\")",
+            "src": {
+                "t": "expr",
+                "v": "array",
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "799.94"
+                    }, {
+                        "t": "l",
+                        "v": "862.24"
+                    }, {
+                        "t": "l",
+                        "v": "994.49"
+                    }, {
+                        "t": "l",
+                        "v": "771.12"
+                    }, {
+                        "t": "l",
+                        "v": "902.22"
+                    }]
+                }]
+            }
+        },
+        "1090259b": {
+            "txt": "array(\"Current\", \"1 - 30\", \"31 - 60\", \"61 - 90\", \"91+\")",
+            "src": {
+                "t": "expr",
+                "v": "array",
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Current"
+                    }, {
+                        "t": "l",
+                        "v": "1 - 30"
+                    }, {
+                        "t": "l",
+                        "v": "31 - 60"
+                    }, {
+                        "t": "l",
+                        "v": "61 - 90"
+                    }, {
+                        "t": "l",
+                        "v": "91+"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "quickbooks-1": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Aged Payables (MTD)",
+            "libraryAlias": "QuickbooksAgedPayables(MTD)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/AgedPayables?minorversion=5&date_macro=This%20Month-to-date"
+            }
+        },
+        "quickbooks-2": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Aged Payables (Fiscal QTD)",
+            "libraryAlias": "QuickbooksAgedPayables(FiscalQTD)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/AgedPayables?minorversion=5&date_macro=This%20Fiscal%20Quarter-to-date"
+            }
+        },
+        "quickbooks-3": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Aged Payables (Fiscal YTD)",
+            "libraryAlias": "QuickbooksAgedPayables(FiscalYTD)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/AgedPayables?minorversion=5&date_macro=This%20Fiscal%20Year-to-date"
+            }
+        },
+        "quickbooks-4": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Aged Payables (Last Month)",
+            "libraryAlias": "QuickbooksAgedPayables(LastMonth)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/AgedPayables?minorversion=5&date_macro=Last%20Month"
+            }
+        },
+        "quickbooks-5": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Aged Payables (Last Fiscal Qtr)",
+            "libraryAlias": "QuickbooksAgedPayables(LastFiscalQtr)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/AgedPayables?minorversion=5&date_macro=Last%20Fiscal%20Quarter"
+            }
+        },
+        "quickbooks-6": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Aged Payables (Last FY)",
+            "libraryAlias": "QuickbooksAgedPayables(LastFY)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/AgedPayables?minorversion=5&date_macro=Last%20Fiscal%20Year"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "quickbooks-1": "11c9d486df08eb557063KavyaMallur9",
+        "quickbooks-2": "cbb9b3ef1cf169e40ed2KavyaMallur9",
+        "quickbooks-3": "20e74a5999f4755c4707KavyaMallur9",
+        "quickbooks-4": "549ce48867d89b95b57bKavyaMallur9",
+        "quickbooks-5": "3775061c4b1e5e92f856KavyaMallur9",
+        "quickbooks-6": "ecad38c42cc7635bd124KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "quickbooks"
+    }],
+    "uiVariables": [{
+        "name": "KTdate",
+        "value": "Current Fiscal YTD"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.quickbooks.companyID",
+        "description": "Enter your QuickBooks Company ID. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/' target='_blank'>Klip Gallery: QuickBooks</a>.",
+        "label": "Company ID",
+        "ghostText": "12345678910",
+        "isRequired": true
+    }]
+}
