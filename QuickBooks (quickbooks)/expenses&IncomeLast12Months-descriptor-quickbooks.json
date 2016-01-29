@@ -1,0 +1,40 @@
+{
+    "name": "QuickBooks Income and Expenses (Last 12 Month)",
+    "description": "Track income and expenses",
+    "datasources": {
+        
+        "quickbooks-1": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Profit and Loss (Last 12 Months)",
+            "libraryAlias": "QuickbooksProfitAndLoss(Last12Months)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/ProfitAndLoss?minorversion=5&start_date={date.addMonths(-12).startOfMonth}&end_date={date.addMonths(-1).endOfMonth}&summarize_column_by=Month"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "quickbooks-1": "1f55ccfb3fd1cc7bc52bKavyaMallur9"
+    },
+
+    "services": [{
+        "service": "quickbooks"
+    }],
+    "uiVariables": [{
+        "name": "KTdate",
+        "value": "Current Fiscal YTD"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.quickbooks.companyID",
+        "description": "Enter your QuickBooks Company ID. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/' target='_blank'>Klip Gallery: QuickBooks</a>.",
+        "label": "Company ID",
+        "ghostText": "12345678910",
+        "isRequired": true
+    }]
+}
