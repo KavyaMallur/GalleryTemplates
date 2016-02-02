@@ -1,0 +1,94 @@
+{
+    "name": "QuickBooks & Google Analytics: Marketing Expenses and Traffic (Last 30 Days)",
+    "description": "Mash up your QuickBooks and Google Analytics data to see how your marketing expenses affect your website traffic within the last 30 days. Originates from the Gallery.",
+
+    "datasources": {
+        "quickbooks-01": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Profit and Loss (Last 30 Days)",
+            "libraryAlias": "QuickbooksProfitAndLoss(Last30Days)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/ProfitAndLoss?minorversion=5&start_date={date.add(-30).format('yyyy-MM-dd')}&end_date={date.add(-1).format('yyyy-MM-dd')}&summarize_column_by=Days"
+            }
+        },
+        "quickbooks-02": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "name": "Quickbooks Profit and Loss (Prev 30 Days)",
+            "libraryAlias": "QuickbooksProfitAndLoss(Prev30Days)",
+            "description": "  ",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/ProfitAndLoss?minorversion=5&start_date={date.add(-60).format('yyyy-MM-dd')}&end_date={date.add(-31).format('yyyy-MM-dd')}&summarize_column_by=Days"
+            }
+        },
+        "googleAnalytics": {
+            "service": "google_analytics",
+            "libraryAlias": "GoogleAnalyticsChannelDefaultGrouping731 Days",
+            "name": "Google Analytics Channel Default Grouping (731 Days)",
+            "description": "Shows the number of sessions by day, broken down by traffic channels for the last 730 days to date. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:channelGrouping,ga:date&metrics=ga:sessions&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:channelGrouping,ga:date&metrics=ga:sessions&start-date={date.add(-60).format()}&end-date={date.today}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-60).format()}&end-date={date.today}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "quickbooks-01": "af02ff08d70da8afe008doogeraspilk",
+        "quickbooks-02": "46657a0a25e76e967252doogeraspilk",
+        "salesforce": "8dc8bc7ed326578c5403doogeraspilk"
+
+    },
+
+    "services": [{
+        "service": "quickbooks"
+    }, {
+        "service": "salesforce"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.quickbooks.companyID",
+        "description": "Enter your QuickBooks Company ID. Need help? See <a href='http://klipfolio.uservoice.com/knowledgebase/articles/' target='_blank'>Klip Gallery: QuickBooks</a>.",
+        "label": "Company ID",
+        "ghostText": "12345678910",
+        "isRequired": true
+    },
+    {
+        "type": "select",
+        "id": "ds.quickbooks.expenseName",
+        "label": "Name of Expense",
+        "description": "Please select the name of your marketing expense.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "quickbooks",
+            "type": "quickbooks",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/ProfitAndLoss?minorversion=5&start_date={date.add(-30).format('yyyy-MM-dd')}&end_date={date.add(-1).format('yyyy-MM-dd')}&summarize_column_by=Days"
+            }
+        },
+        "results": [{
+            "propId": "ds.quickbooks.expenseName",
+            "propField": "options",
+            "labels": "//Rows[preceding-sibling::Header//value='Expenses']/Row/ColData[1]/value | //Rows[preceding-sibling::Header//value='Expenses']//Summary/ColData[1]/value",
+            "values": "//Rows[preceding-sibling::Header//value='Expenses']/Row/ColData[1]/value | //Rows[preceding-sibling::Header//value='Expenses']//Summary/ColData[1]/value"
+        }]
+    }]
+}
