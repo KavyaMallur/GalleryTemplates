@@ -1,0 +1,854 @@
+{
+    "title": "QuickBooks & Shopify: Marketing Expenses and Sales (Last 30 Days)",
+    "id": "eb4a4fec77f261621c6f706e1d8bffea",
+    "workspace": {
+        "datasources": [
+            "0da3864b7e6d0c63ad64natceewzhere",
+            "278a2f3636db4b581846KavyaMallur9",
+            "af02ff08d70da8afe008KavyaMallur9",
+            "46657a0a25e76e967252KavyaMallur9"
+        ],
+        "dimensions": {
+            "w": 573
+        }
+    },
+    "components": [{
+        "type": "label",
+        "id": "7d25f7bd-1",
+        "displayName": "Label",
+        "size": "1",
+        "fmt": "txt",
+        "formulas": [{
+            "txt": "af02ff08d70da8afe008KavyaMallur9@//Rows[preceding-sibling::Header//value='Expenses']/Row/ColData[1]/value | //Rows[preceding-sibling::Header//value='Expenses']//Summary/ColData[1]/value;",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "d",
+                    "v": {
+                        "id": "af02ff08d70da8afe008KavyaMallur9",
+                        "a": "//Rows[preceding-sibling::Header//value='Expenses']/Row/ColData[1]/value | //Rows[preceding-sibling::Header//value='Expenses']//Summary/ColData[1]/value"
+                    }
+                }]
+            }
+        }],
+        "data": [
+            [
+
+            ]
+        ],
+        "wrap": true
+    }, {
+        "type": "panel_grid",
+        "id": "272c43f5a5087788e6f280ed0c9831d363615d73",
+        "displayName": "Layout Grid",
+        "components": [{
+            "type": "image",
+            "id": "4daab177",
+            "displayName": "Quickbooks Logo",
+            "layoutConfig": {
+                "y": 0,
+                "x": 0
+            },
+            "renamed": true,
+            "formulas": [{
+                "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/quickbooks.png\"",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "l",
+                        "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/quickbooks.png"
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ]
+        }, {
+            "type": "label",
+            "id": "99792528",
+            "displayName": "Expense Label",
+            "layoutConfig": {
+                "y": 0,
+                "x": 1
+            },
+            "renamed": true,
+            "size": "2",
+            "fmt": "txt",
+            "formulas": [{
+                "txt": "\"{{ds.quickbooks.expenseName}}\"",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "l",
+                        "v": "{{ds.quickbooks.expenseName}}"
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ],
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "a8bed880",
+            "displayName": "Expenses (Last 30 Days)",
+            "layoutConfig": {
+                "y": 0,
+                "x": 3
+            },
+            "renamed": true,
+            "size": "2",
+            "fmt": "cur",
+            "formulas": [{
+                "txt": "af02ff08d70da8afe008KavyaMallur9@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "d",
+                        "v": {
+                            "id": "af02ff08d70da8afe008KavyaMallur9",
+                            "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value"
+                        }
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ],
+            "align": "r",
+            "wrap": true
+        }, {
+            "type": "mini_series",
+            "id": "45d4a3ac",
+            "displayName": "Sparkline",
+            "layoutConfig": {
+                "x": 1,
+                "y": 1
+            },
+            "size": "2",
+            "components": [{
+                "type": "mini_data",
+                "role": "series",
+                "id": "fa51227c",
+                "displayName": "Shopify Sales ",
+                "renamed": true,
+                "fmt": "num",
+                "fmtArgs": {
+                    "precision": "0"
+                },
+                "formulas": [{
+                    "txt": "slice(af02ff08d70da8afe008KavyaMallur9@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData/value;,\"1\",\"-1\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "slice",
+                            "c": [{
+                                "t": "d",
+                                "v": {
+                                    "id": "af02ff08d70da8afe008KavyaMallur9",
+                                    "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData/value"
+                                }
+                            }, {
+                                "t": "l",
+                                "v": "1"
+                            }, {
+                                "t": "l",
+                                "v": "-1"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "seriesId": 1
+            }, {
+                "type": "label",
+                "role": "last-value",
+                "id": "ff311585",
+                "displayName": "Last Value",
+                "size": 3,
+                "fmt": "num",
+                "formulas": [{
+                    "txt": "648",
+                    "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [{
+                            "v": "648",
+                            "t": "l"
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "dataDisabled": true
+            }],
+            "lastValueSeries": "hidden"
+        }, {
+            "type": "simple_value",
+            "id": "0a740ac7",
+            "displayName": "Value Pair",
+            "layoutConfig": {
+                "y": 1,
+                "x": 3
+            },
+            "components": [{
+                "type": "label",
+                "role": "primary",
+                "id": "0ee8a343",
+                "displayName": "Expenses Delta",
+                "renamed": true,
+                "size": "1",
+                "fmt": "pct",
+                "conditions": [{
+                    "predicates": [{
+                        "left": {
+                            "self": 1
+                        },
+                        "type": "lt",
+                        "right": {
+                            "raw": "0"
+                        }
+                    }],
+                    "reactions": [{
+                        "value": "ind-triangle-down-green",
+                        "isScalar": true,
+                        "type": "icon",
+                        "pos": "right"
+                    }]
+                }, {
+                    "predicates": [{
+                        "left": {
+                            "self": 1
+                        },
+                        "type": "gt",
+                        "right": {
+                            "raw": "0"
+                        }
+                    }],
+                    "reactions": [{
+                        "value": "ind-triangle-up-red",
+                        "isScalar": true,
+                        "type": "icon",
+                        "pos": "right"
+                    }]
+                }, {
+                    "predicates": [{
+                        "left": {
+                            "self": 1
+                        },
+                        "type": "eq",
+                        "right": {
+                            "raw": "0"
+                        }
+                    }],
+                    "reactions": [{
+                        "value": "ind-even-grey",
+                        "type": "icon",
+                        "pos": "right"
+                    }]
+                }],
+                "formulas": [{
+                    "txt": "((af02ff08d70da8afe008KavyaMallur9@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;)-(46657a0a25e76e967252KavyaMallur9@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;))/(46657a0a25e76e967252KavyaMallur9@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;)",
+                    "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [{
+                            "v": false,
+                            "t": "expr",
+                            "c": [{
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "a8bed880"
+                                },
+                                "t": "ref"
+                            }, {
+                                "v": "-",
+                                "t": "o"
+                            }, {
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "acd1d2d5"
+                                },
+                                "t": "ref"
+                            }]
+                        }, {
+                            "v": "/",
+                            "t": "o"
+                        }, {
+                            "v": {
+                                "r": "cx",
+                                "cx": "acd1d2d5"
+                            },
+                            "t": "ref"
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "align": "r"
+            }, {
+                "type": "label",
+                "role": "secondary",
+                "id": "acd1d2d5",
+                "displayName": "Expenses (Previous 30 Days)",
+                "renamed": true,
+                "size": 1,
+                "fmt": "cur",
+                "fmtArgs": {
+                    "prefix": "vs ",
+                    "suffix": " (Prev)"
+                },
+                "formulas": [{
+                    "txt": "46657a0a25e76e967252KavyaMallur9@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "d",
+                            "v": {
+                                "id": "46657a0a25e76e967252KavyaMallur9",
+                                "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value"
+                            }
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "align": "r",
+                "font_colour": "cx-color_888",
+                "font_style": "regular"
+            }]
+        }, {
+            "type": "separator",
+            "id": "3ca51010",
+            "displayName": "Separator",
+            "layoutConfig": {
+                "y": 2,
+                "x": 0
+            },
+            "line_style": "ShortDot"
+        }, {
+            "type": "image",
+            "id": "2b6391cf",
+            "displayName": "Shopify Logo",
+            "layoutConfig": {
+                "y": 3,
+                "x": 0
+            },
+            "renamed": true,
+            "formulas": [{
+                "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/shopify.png\"",
+                "src": {
+                    "v": false,
+                    "t": "expr",
+                    "c": [{
+                        "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/shopify.png",
+                        "t": "l"
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ]
+        }, {
+            "type": "label",
+            "id": "165c662f",
+            "displayName": "Amount Sold",
+            "layoutConfig": {
+                "y": 3,
+                "x": 1
+            },
+            "renamed": true,
+            "size": "2",
+            "fmt": "txt",
+            "formulas": [{
+                "txt": "\"Amount Sold\"",
+                "src": {
+                    "v": false,
+                    "t": "expr",
+                    "c": [{
+                        "v": "Amount Sold",
+                        "t": "l"
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ],
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "451f4408",
+            "displayName": "Shopify Sales (Last 30 days)",
+            "layoutConfig": {
+                "y": 3,
+                "x": 3
+            },
+            "renamed": true,
+            "size": "2",
+            "fmt": "cur",
+            "formulas": [{
+                "txt": "sum(0da3864b7e6d0c63ad64natceewzhere@/total_price_usd;)",
+                "src": {
+                    "v": false,
+                    "t": "expr",
+                    "c": [{
+                        "v": "sum",
+                        "t": "f",
+                        "c": [{
+                            "v": {
+                                "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                "a": "/total_price_usd"
+                            },
+                            "t": "d"
+                        }, {
+                            "v": null,
+                            "t": "a",
+                            "arg_obj": {
+                                "placeholder": "data",
+                                "repeats": true
+                            }
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+
+                ]
+            ],
+            "align": "r",
+            "wrap": true
+        }, {
+            "type": "mini_series",
+            "id": "176241c2",
+            "displayName": "Sparkline",
+            "layoutConfig": {
+                "y": 4,
+                "x": 1
+            },
+            "size": "2",
+            "components": [{
+                "type": "mini_data",
+                "role": "series",
+                "id": "9a786885",
+                "displayName": "Shopify Sales ",
+                "renamed": true,
+                "fmt": "num",
+                "fmtArgs": {
+                    "precision": "0"
+                },
+                "formulas": [{
+                    "txt": "lookup(datevalue(daterange(date_add(today(),\"5\",\"-30\"),yesterday()),\"yyyy-MM-dd\"),group(date_convert(0da3864b7e6d0c63ad64natceewzhere@/created_at;,\"yyyy-MM-dd'T'HH:mm:ss\",\"yyyy-MM-dd\")),groupby(date_convert(0da3864b7e6d0c63ad64natceewzhere@/created_at;,\"yyyy-MM-dd'T'HH:mm:ss\",\"yyyy-MM-dd\"),0da3864b7e6d0c63ad64natceewzhere@/total_price_usd;))",
+                    "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [{
+                            "v": "lookup",
+                            "t": "f",
+                            "c": [{
+                                "v": "datevalue",
+                                "t": "f",
+                                "c": [{
+                                    "v": "daterange",
+                                    "t": "f",
+                                    "c": [{
+                                        "v": "date_add",
+                                        "t": "f",
+                                        "c": [{
+                                            "v": "today",
+                                            "t": "f",
+                                            "c": [{
+                                                "v": null,
+                                                "t": "a",
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true
+                                                }
+                                            }]
+                                        }, {
+                                            "v": "5",
+                                            "t": "opt"
+                                        }, {
+                                            "v": "-30",
+                                            "t": "l"
+                                        }]
+                                    }, {
+                                        "v": "yesterday",
+                                        "t": "f",
+                                        "c": [{
+                                            "v": null,
+                                            "t": "a",
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "v": null,
+                                        "t": "a",
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "v": "yyyy-MM-dd",
+                                    "t": "l"
+                                }, {
+                                    "v": null,
+                                    "t": "a",
+                                    "arg_obj": {
+                                        "placeholder": "timezone",
+                                        "optional": true
+                                    }
+                                }]
+                            }, {
+                                "v": "group",
+                                "t": "f",
+                                "c": [{
+                                    "v": "date_convert",
+                                    "t": "f",
+                                    "c": [{
+                                        "v": {
+                                            "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                            "a": "/created_at"
+                                        },
+                                        "t": "d"
+                                    }, {
+                                        "v": "yyyy-MM-dd'T'HH:mm:ss",
+                                        "t": "l"
+                                    }, {
+                                        "v": "yyyy-MM-dd",
+                                        "t": "l"
+                                    }]
+                                }]
+                            }, {
+                                "v": "groupby",
+                                "t": "f",
+                                "c": [{
+                                    "v": "date_convert",
+                                    "t": "f",
+                                    "c": [{
+                                        "v": {
+                                            "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                            "a": "/created_at"
+                                        },
+                                        "t": "d"
+                                    }, {
+                                        "v": "yyyy-MM-dd'T'HH:mm:ss",
+                                        "t": "l"
+                                    }, {
+                                        "v": "yyyy-MM-dd",
+                                        "t": "l"
+                                    }]
+                                }, {
+                                    "v": {
+                                        "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                        "a": "/total_price_usd"
+                                    },
+                                    "t": "d"
+                                }, {
+                                    "v": null,
+                                    "t": "a",
+                                    "arg_obj": {
+                                        "placeholder": "method",
+                                        "optional": true
+                                    }
+                                }]
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "seriesId": 1
+            }, {
+                "type": "label",
+                "role": "last-value",
+                "id": "c828400b",
+                "displayName": "Last Value",
+                "size": 3,
+                "fmt": "num",
+                "formulas": [{
+                    "txt": "648",
+                    "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [{
+                            "v": "648",
+                            "t": "l"
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "dataDisabled": true
+            }],
+            "lastValueSeries": "hidden"
+        }, {
+            "type": "simple_value",
+            "id": "3c2d7f1f",
+            "displayName": "Value Pair",
+            "layoutConfig": {
+                "y": 4,
+                "x": 3
+            },
+            "components": [{
+                "type": "label",
+                "role": "primary",
+                "id": "83be907c",
+                "displayName": "Shopify Sales Delta",
+                "renamed": true,
+                "size": "1",
+                "fmt": "pct",
+                "conditions": [{
+                    "predicates": [{
+                        "left": {
+                            "self": 1
+                        },
+                        "type": "gt",
+                        "right": {
+                            "raw": "0"
+                        }
+                    }],
+                    "reactions": [{
+                        "value": "ind-triangle-up-green",
+                        "isScalar": true,
+                        "type": "icon",
+                        "pos": "right"
+                    }]
+                }, {
+                    "predicates": [{
+                        "left": {
+                            "self": 1
+                        },
+                        "type": "lt",
+                        "right": {
+                            "raw": "0"
+                        }
+                    }],
+                    "reactions": [{
+                        "value": "ind-triangle-down-red",
+                        "isScalar": true,
+                        "type": "icon",
+                        "pos": "right"
+                    }]
+                }, {
+                    "predicates": [{
+                        "left": {
+                            "self": 1
+                        },
+                        "type": "eq",
+                        "right": {
+                            "raw": "0"
+                        }
+                    }],
+                    "reactions": [{
+                        "value": "ind-even-grey",
+                        "isScalar": true,
+                        "type": "icon",
+                        "pos": "right"
+                    }]
+                }],
+                "formulas": [{
+                    "txt": "((sum(0da3864b7e6d0c63ad64natceewzhere@/total_price_usd;))-(sum(278a2f3636db4b581846KavyaMallur9@/total_price_usd;)))/(sum(278a2f3636db4b581846KavyaMallur9@/total_price_usd;))",
+                    "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [{
+                            "v": false,
+                            "t": "expr",
+                            "c": [{
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "451f4408"
+                                },
+                                "t": "ref"
+                            }, {
+                                "v": "-",
+                                "t": "o"
+                            }, {
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "e0158b21"
+                                },
+                                "t": "ref"
+                            }]
+                        }, {
+                            "v": "/",
+                            "t": "o"
+                        }, {
+                            "v": {
+                                "r": "cx",
+                                "cx": "e0158b21"
+                            },
+                            "t": "ref"
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "align": "r"
+            }, {
+                "type": "label",
+                "role": "secondary",
+                "id": "e0158b21",
+                "displayName": "Shopify Sales (Previous 30 Days)",
+                "renamed": true,
+                "size": 1,
+                "fmt": "cur",
+                "fmtArgs": {
+                    "prefix": "vs ",
+                    "suffix": " (Prev)"
+                },
+                "formulas": [{
+                    "txt": "sum(278a2f3636db4b581846KavyaMallur9@/total_price_usd;)",
+                    "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [{
+                            "v": "sum",
+                            "t": "f",
+                            "c": [{
+                                "v": {
+                                    "id": "278a2f3636db4b581846KavyaMallur9",
+                                    "a": "/total_price_usd"
+                                },
+                                "t": "d"
+                            }, {
+                                "v": null,
+                                "t": "a",
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+
+                    ]
+                ],
+                "align": "r",
+                "font_colour": "cx-color_888",
+                "font_style": "regular"
+            }]
+        }],
+        "rows": 5,
+        "cols": 4,
+        "rowHeights": [{
+            "h": 60,
+            "y": 3
+        }, {
+            "h": 60,
+            "y": 0
+        }],
+        "widths": [{
+            "w": 40,
+            "x": 0
+        }],
+        "cellData": [{
+            "y": 4,
+            "x": 0
+        }, {
+            "alignment": 1,
+            "y": 3,
+            "x": 0
+        }, {
+            "w": 2,
+            "y": 4,
+            "x": 1
+        }, {
+            "w": 2,
+            "alignment": 1,
+            "y": 3,
+            "x": 1
+        }, {
+            "w": 4,
+            "y": 2,
+            "x": 0
+        }, {
+            "w": 2,
+            "alignment": 1,
+            "y": 0,
+            "x": 1
+        }, {
+            "w": 2,
+            "y": 1,
+            "cellPadding": [
+                5,
+                5,
+                5,
+                5
+            ],
+            "x": 1
+        }, {
+            "alignment": 1,
+            "y": 0,
+            "cellPadding": [
+                5,
+                5,
+                0,
+                5
+            ],
+            "x": 3
+        }, {
+            "alignment": 1,
+            "y": 0,
+            "x": 0
+        }, {
+            "alignment": 1,
+            "y": 3,
+            "cellPadding": [
+                5,
+                5,
+                0,
+                5
+            ],
+            "x": 3
+        }]
+    }]
+}
