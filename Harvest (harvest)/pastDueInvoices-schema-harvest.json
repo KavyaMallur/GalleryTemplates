@@ -1,0 +1,330 @@
+{
+   "title": "Harvest Past Due Invoices",
+   "id": "62d13935d3c9f1864aa1420d02c037c0",
+   "workspace": {
+      "datasources": [
+         "c3a4c8fc2573580c0d4eKavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 665
+      }
+   },
+   "components": [
+      {
+         "type": "table",
+         "id": "2960b069-10",
+         "displayName": "Table",
+         "components": [
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "7c47950e-19",
+               "displayName": "Client",
+               "size": 1,
+               "fmt": "txt",
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "b0b96d2f-20",
+                     "displayName": "New Column Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "c3a4c8fc2573580c0d4eKavyaMallur9@/invoices/client_name;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "c3a4c8fc2573580c0d4eKavyaMallur9",
+                                 "a": "/invoices/client_name"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "Client",
+               "index": 0,
+               "fw": "fixed",
+               "w": "40%",
+               "align": "left"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "8a459681-17",
+               "displayName": "Amount Due",
+               "size": 1,
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "2"
+               },
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "1221406e-18",
+                     "displayName": "Unnamed 4 Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "c3a4c8fc2573580c0d4eKavyaMallur9@/invoices/due_amount;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "c3a4c8fc2573580c0d4eKavyaMallur9",
+                                 "a": "/invoices/due_amount"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "Amount Due",
+               "index": 1,
+               "fw": "fixed",
+               "w": "25%"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "9f175e9c-13",
+               "displayName": "Due Date",
+               "size": 1,
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "MMM d, yyyy"
+               },
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "31000007-14",
+                     "displayName": "Unnamed 2 Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "c3a4c8fc2573580c0d4eKavyaMallur9@/invoices/due_at;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "c3a4c8fc2573580c0d4eKavyaMallur9",
+                                 "a": "/invoices/due_at"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "Due Date",
+               "index": 2,
+               "fw": "fixed",
+               "w": "18%"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "03be96bf-11",
+               "displayName": "Days Overdue",
+               "size": 1,
+               "fmt": "txt",
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "gt",
+                           "right": {
+                              "raw": "7"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "icon",
+                           "value": "ind-circle-warning-red",
+                           "pos": "left"
+                        },
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_3"
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "self": 1
+                           },
+                           "type": "lteq",
+                           "right": {
+                              "raw": "7"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_orange_3",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "4f803d4a-12",
+                     "displayName": "Unnamed 1 Result",
+                     "size": 1,
+                     "formulas": [],
+                     "data": [
+                        []
+                     ],
+                     "mixin": "label",
+                     "align": "l",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "count_days(date(c3a4c8fc2573580c0d4eKavyaMallur9@/invoices/due_at;,\"yyyy-MM-dd\"),today(c3a4c8fc2573580c0d4eKavyaMallur9@/invoices/due_at;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "count_days",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "c3a4c8fc2573580c0d4eKavyaMallur9",
+                                             "a": "/invoices/due_at"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "today",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "c3a4c8fc2573580c0d4eKavyaMallur9",
+                                             "a": "/invoices/due_at"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "exclude DOW",
+                                       "optional": true
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "holidays",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "name": "Days Overdue",
+               "index": 3
+            }
+         ]
+      }
+   ]
+}

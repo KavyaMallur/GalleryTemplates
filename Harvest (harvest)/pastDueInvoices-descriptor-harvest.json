@@ -1,0 +1,32 @@
+{
+    "name": "Harvest Past Due Invoices",
+    "description": " ",
+    
+    "datasources": {
+        "harvest-01": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Past Due Invoices",
+            "libraryAlias": "HarvestPastDueInvoices",
+            "refreshInterval": 14400,
+            "description": "Retrieve past due invoices. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.baseURL}}.harvestapp.com/invoices.json?status=pastdue",
+                "method": "get",
+                "parameters": "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "harvest-01": "c3a4c8fc2573580c0d4eKavyaMallur9"
+    },
+
+    "services": [{
+        "service": "harvest"
+    }]
+}
