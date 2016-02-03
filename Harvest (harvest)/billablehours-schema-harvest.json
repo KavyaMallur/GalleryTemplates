@@ -1,0 +1,496 @@
+{
+   "title": "Harvest Billable Hours",
+   "id": "6cfee64571f089f5f58312ff4038defb",
+   "workspace": {
+      "datasources": [
+         "6f1451f8fb69e3cc884adoogeraspilk",
+         "81e3b042351106493b90doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 470
+      }
+   },
+   "components": [
+      {
+         "type": "label",
+         "id": "57d7cd00",
+         "displayName": "Label",
+         "size": "1",
+         "fmt": "txt",
+         "formulas": [
+            {
+               "txt": "lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@/project/name;)",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "lookup",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "{{ds.harvest.projectId}}"
+                           },
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                 "a": "/project/id"
+                              }
+                           },
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                 "a": "/project/name"
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "wrap": true
+      },
+      {
+         "type": "panel_grid",
+         "id": "b3632132",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "dee10bf0",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "f3d14f30",
+                     "displayName": "Billable Hours Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "sum(select(81e3b042351106493b90doogeraspilk@/tasks/total_hours;,(81e3b042351106493b90doogeraspilk@/tasks/billable;=\"true\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "81e3b042351106493b90doogeraspilk",
+                                                   "a": "/tasks/total_hours"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "81e3b042351106493b90doogeraspilk",
+                                                         "a": "/tasks/billable"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "true"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "a62e41c1",
+                     "displayName": "Billable Hours Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Billable Hours\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Billable Hours"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "815865d6-1",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "184eefee",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "7627c7a4",
+                     "displayName": "Non Billable Hours Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum(select(81e3b042351106493b90doogeraspilk@/tasks/total_hours;,(81e3b042351106493b90doogeraspilk@/tasks/billable;=\"false\")))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "81e3b042351106493b90doogeraspilk",
+                                                   "a": "/tasks/total_hours"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "81e3b042351106493b90doogeraspilk",
+                                                         "a": "/tasks/billable"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "false"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "7cfefdd9",
+                     "displayName": "Non-Billable Hours Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Non-Billable Hours\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Non-Billable Hours"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "40e7ab2e-2",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "9c634a53",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 4
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "3631860d",
+                     "displayName": "Percentage Billable Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "substitute((((sum(select(81e3b042351106493b90doogeraspilk@/tasks/total_hours;,(81e3b042351106493b90doogeraspilk@/tasks/billable;=\"true\")))))/((sum(select(81e3b042351106493b90doogeraspilk@/tasks/total_hours;,(81e3b042351106493b90doogeraspilk@/tasks/billable;=\"true\"))))+(sum(select(81e3b042351106493b90doogeraspilk@/tasks/total_hours;,(81e3b042351106493b90doogeraspilk@/tasks/billable;=\"false\")))))),\"Infinity\",\"\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "substitute",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "f3d14f30"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "f3d14f30"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "+"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "7627c7a4"
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Infinity"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "2c05d5eb",
+                     "displayName": "Percentage Billable Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Percentage of Billable Hours\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Percentage of Billable Hours"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            }
+         ],
+         "rows": 5,
+         "cols": 1,
+         "rowHeights": [
+            {
+               "y": 1,
+               "h": 20
+            },
+            {
+               "y": 3,
+               "h": 20
+            }
+         ],
+         "cellData": [
+            {
+               "alignment": 2,
+               "y": 0,
+               "x": 0
+            },
+            {
+               "alignment": 1,
+               "y": 1,
+               "cellPadding": 0,
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 2,
+               "x": 0
+            },
+            {
+               "x": 0,
+               "y": 3,
+               "cellPadding": 0,
+               "alignment": 1
+            },
+            {
+               "x": 0,
+               "y": 4,
+               "alignment": 2
+            }
+         ]
+      }
+   ]
+}

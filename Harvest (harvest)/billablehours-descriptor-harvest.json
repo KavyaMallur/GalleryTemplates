@@ -1,0 +1,78 @@
+{
+    "name": "Harvest Billable Hours",
+    "description": " ",
+
+    "datasources": {
+        "harvest-01": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Projects",
+            "libraryAlias": "HarvestProjects",
+            "refreshInterval": 14400,
+            "description": "Retrieve the projects in your harvest account. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "harvest-02": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Project Analysis (Lifespan)",
+            "libraryAlias": "HarvestAnalysisLifespan",
+            "refreshInterval": 14400,
+            "description": "Retrieve the analysis of your Harvest project. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/analysis.json?period=lifespan",
+                "method": "get",
+                "parameters": "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "harvest-01": "6f1451f8fb69e3cc884adoogeraspilk",
+        "harvest-02": "81e3b042351106493b90doogeraspilk"
+    },
+
+    "services": [{
+        "service": "harvest"
+    }],
+
+"datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.harvest.projectId",
+        "label": "Project",
+        "description": "Please select your project.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "harvest",
+            "type": "harvest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json"
+            }
+        },
+        "results": [{
+            "propId": "ds.harvest.projectId",
+            "propField": "options",
+            "labels": "/project/id",
+            "values": "/project/name"
+        }]
+    }]
+}
