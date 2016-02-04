@@ -1,0 +1,411 @@
+{
+   "title": "Harvest Hours Spent (Last 7 Days)",
+   "id": "7facf605e59e5a22b14ee2c9ce5f5cff",
+   "workspace": {
+      "datasources": [
+         "7b638077f9f512d7cd57KavyaMallur9",
+         "6f1451f8fb69e3cc884aKavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 719
+      }
+   },
+   "components": [
+      {
+         "type": "label",
+         "id": "c1f95919-1",
+         "displayName": "Project",
+         "renamed": true,
+         "size": "1",
+         "fmt": "txt",
+         "fmtArgs": {
+            "prefix": "<div class style=\"display:inline; font-weight:normal;\">Project: </div>"
+         },
+         "formulas": [
+            {
+               "txt": "lookup(\"9806205\",6f1451f8fb69e3cc884aKavyaMallur9@/project/id;,6f1451f8fb69e3cc884aKavyaMallur9@/project/name;)",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "lookup",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "9806205"
+                           },
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "6f1451f8fb69e3cc884aKavyaMallur9",
+                                 "a": "/project/id"
+                              }
+                           },
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "6f1451f8fb69e3cc884aKavyaMallur9",
+                                 "a": "/project/name"
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [
+            [
+
+            ]
+         ],
+         "align": "c",
+         "wrap": true
+      },
+      {
+         "type": "chart_series",
+         "id": "3d0fd6af-5",
+         "displayName": "Series Chart",
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "d6d2d478-6",
+               "displayName": "Billable",
+               "renamed": true,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"yyyy-MM-dd\")),select(7b638077f9f512d7cd57KavyaMallur9@/day_entry/spent_at;,(7b638077f9f512d7cd57KavyaMallur9@/day_entry/is_billed;=\"true\")),select(7b638077f9f512d7cd57KavyaMallur9@/day_entry/hours;,(7b638077f9f512d7cd57KavyaMallur9@/day_entry/is_billed;=\"true\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "85b5fcd7-7"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                             "a": "/day_entry/spent_at"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                                   "a": "/day_entry/is_billed"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "true"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                             "a": "/day_entry/hours"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                                   "a": "/day_entry/is_billed"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "true"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "seriesName": "Billable",
+               "axis": "57589c03-8"
+            },
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "45b32d50-9",
+               "displayName": "Non-Billable",
+               "renamed": true,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"yyyy-MM-dd\")),select(7b638077f9f512d7cd57KavyaMallur9@/day_entry/spent_at;,(7b638077f9f512d7cd57KavyaMallur9@/day_entry/is_billed;=\"false\")),select(7b638077f9f512d7cd57KavyaMallur9@/day_entry/hours;,(7b638077f9f512d7cd57KavyaMallur9@/day_entry/is_billed;=\"false\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "85b5fcd7-7"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                             "a": "/day_entry/spent_at"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                                   "a": "/day_entry/is_billed"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "false"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                             "a": "/day_entry/hours"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7b638077f9f512d7cd57KavyaMallur9",
+                                                   "a": "/day_entry/is_billed"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "false"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "seriesName": "Non-Billable",
+               "axis": "57589c03-8"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "85b5fcd7-7",
+               "displayName": "Date",
+               "renamed": true,
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateInputFormat": "default",
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "MMM d"
+               },
+               "formulas": [
+                  {
+                     "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"yyyy-MM-dd\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-6"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "format",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "label": "Date",
+               "showAxis": false,
+               "labelAngle": "-45",
+               "labelDrop": 0
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "57589c03-8",
+               "displayName": "Hours Spent",
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "Hours Spent",
+               "showAxis": false,
+               "labelDrop": 0,
+               "grid": true
+            }
+         ],
+         "stackBars": "1"
+      }
+   ]
+}

@@ -1,0 +1,82 @@
+{
+    "name": "Harvest Hours Spent (Last 7 Days)",
+    "description": " ",
+    "datasources": {
+        "harvest-01": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Projects",
+            "libraryAlias": "HarvestProjects",
+            "refreshInterval": 14400,
+            "description": "Retrieve all the harvest projects. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "harvest-02": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Past Due Invoices",
+            "libraryAlias": "HarvestPastDueInvoices",
+            "refreshInterval": 14400,
+            "description": "Retrieve past due invoices. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectID}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}",
+                "method": "get",
+                "parameters": "[]"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "harvest-01": "6f1451f8fb69e3cc884aKavyaMallur9",
+        "harvest-01": "7b638077f9f512d7cd57KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "harvest"
+    }],
+
+    "datasourceConfigModel": [
+    {
+        "type": "select",
+        "id": "ds.harvest.projectID",
+        "label": "List",
+        "description": "Select an harvest project from the drop-down list.",
+        "isRequired": true
+    }],
+
+    "queries": [{
+        "errorMessage": "Please ensure you have provided right credentials and subdomain. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "connector": {
+                "service": "harvest",
+                "type": "simple_rest",
+                "format": "json",
+                "props": {
+                    "auth_method": "basic",
+                    "basic_auth_username": "api@klipfolio.com",
+                    "basic_auth_password": "d4shb0ard",
+                    "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json",
+                    "method": "get"
+                }
+            }
+        },
+        "results": [{
+            "propId": "ds.harvest.projectID",
+            "propField": "options",
+            "labels": "/project/name",
+            "values": "/project/id"
+        }]
+    }]
+}
