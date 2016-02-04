@@ -1,0 +1,45 @@
+{
+	"name" : "Optimizely Experiment Results",
+	"description" : "See the results of your Optimizely experiments at a glance. Originates from the Gallery.",
+
+	"datasources" : { 
+		"optimizely-01" : {
+			"service" : "optimizely",
+			"libraryAlias" : "",
+			"name": "DDS Experiments by Hardcoded Project",
+			"description" : "Retrieve a list of experiments in project {{ds.optimizely.projectId}} Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://www.optimizelyapis.com/experiment/v1/projects/739880420/experiments/",
+            	"method": "get",
+            	"parameters": "[{\"name\":\"token\",\"value\":\"{{auth.optimizely.token}}\",\"type\":\"header\"}]"
+			}
+		},
+		"optimizely-02" : {
+			"service" : "optimizely",
+			"libraryAlias" : "",
+			"name": "DDS Experiments results by props",
+			"description" : "Retrieve a list of experiments in project {{ds.optimizely.projectId}} Originates from the Gallery.",
+			"type" : "simple_rest",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://www.optimizelyapis.com/experiment/v1/experiments/{props.expID}/results",
+            	"method": "get",
+            	"parameters": "[{\"name\":\"token\",\"value\":\"{{auth.optimizely.token}}\",\"type\":\"header\"}]"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"optimizely-01" : "bbc0e68cd67534c540e1doogeraspilk"	
+	},
+
+	"services" : [
+		{
+			"service" : "optimizely"
+		}
+	]
+}
