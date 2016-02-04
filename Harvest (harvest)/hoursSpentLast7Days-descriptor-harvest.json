@@ -1,6 +1,7 @@
 {
     "name": "Harvest Hours Spent (Last 7 Days)",
     "description": " ",
+
     "datasources": {
         "harvest-01": {
             "service": "harvest",
@@ -9,7 +10,7 @@
             "name": "Harvest Projects",
             "libraryAlias": "HarvestProjects",
             "refreshInterval": 14400,
-            "description": "Retrieve all the harvest projects. Originates from the Gallery.",
+            "description": "Retrieve the projects in your harvest account. Originates from the Gallery.",
             "props": {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.harvest.userName}}",
@@ -23,15 +24,15 @@
             "service": "harvest",
             "type": "simple_rest",
             "format": "json",
-            "name": "Harvest Past Due Invoices",
-            "libraryAlias": "HarvestPastDueInvoices",
+            "name": "Harvest Past Due Invoices (Last 7 Days)",
+            "libraryAlias": "HarvestPastDueInvoicesLast7Days",
             "refreshInterval": 14400,
             "description": "Retrieve past due invoices. Originates from the Gallery.",
             "props": {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.harvest.userName}}",
                 "basic_auth_password": "{{auth.harvest.password}}",
-                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectID}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}",
                 "method": "get",
                 "parameters": "[]"
             }
@@ -39,41 +40,36 @@
     },
 
     "dsMappings": {
-        "harvest-01": "6f1451f8fb69e3cc884aKavyaMallur9",
-        "harvest-01": "7b638077f9f512d7cd57KavyaMallur9"
+        "harvest-01": "6f1451f8fb69e3cc884adoogeraspilk",
+        "harvest-02": "7b638077f9f512d7cd57KavyaMallur9"
     },
 
     "services": [{
         "service": "harvest"
     }],
 
-    "datasourceConfigModel": [
-    {
+"datasourceConfigModel": [{
         "type": "select",
-        "id": "ds.harvest.projectID",
+        "id": "ds.harvest.projectId",
         "label": "Project",
-        "description": "Select an harvest project from the drop-down list.",
+        "description": "Please select your project.",
         "isRequired": true
     }],
-
     "queries": [{
-        "errorMessage": "Please ensure you have provided right credentials and subdomain. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "errorMessage": "Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
         "connector": {
-            "connector": {
-                "service": "harvest",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "auth_method": "basic",
-                    "basic_auth_username": "{{auth.harvest.userName}}",
-                    "basic_auth_password": "{{auth.harvest.password}}",
-                    "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json",
-                    "method": "get"
-                }
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json"
             }
         },
         "results": [{
-            "propId": "ds.harvest.projectID",
+            "propId": "ds.harvest.projectId",
             "propField": "options",
             "labels": "/project/name",
             "values": "/project/id"
