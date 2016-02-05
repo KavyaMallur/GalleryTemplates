@@ -1,0 +1,337 @@
+{
+   "title": "Harvest Hours by Task (Last 7 Days)",
+   "id": "846ff72cb1744ae880452a2a6658e3cc",
+   "workspace": {
+      "datasources": [
+         "6f1451f8fb69e3cc884adoogeraspilk",
+         "7b638077f9f512d7cd57doogeraspilk",
+         "a14518d67758a41dd0c0doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 500
+      }
+   },
+   "components": [
+      {
+         "type": "label",
+         "id": "01bf6c1a",
+         "displayName": "Project",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
+         "renamed": true,
+         "size": "1",
+         "fmt": "txt",
+         "fmtArgs": {
+            "prefix": "<div class style=\"display:inline; font-weight:normal;\">Task: </div>"
+         },
+         "formulas": [
+            {
+               "txt": "concat(lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@/project/name;),\" | \",lookup(\"{{ds.harvest.taskId}}\",a14518d67758a41dd0c0doogeraspilk@/task/id;,a14518d67758a41dd0c0doogeraspilk@/task/name;))",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.harvest.projectId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                       "a": "/project/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                       "a": "/project/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": " | "
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.harvest.taskId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "a14518d67758a41dd0c0doogeraspilk",
+                                       "a": "/task/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "a14518d67758a41dd0c0doogeraspilk",
+                                       "a": "/task/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "wrap": true
+      },
+      {
+         "type": "chart_series",
+         "id": "88ad67bc-5",
+         "displayName": "Series Chart",
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "0a390f88-6",
+               "displayName": "Task",
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"yyyy-MM-dd\")),select(7b638077f9f512d7cd57doogeraspilk@/day_entry/spent_at;,(7b638077f9f512d7cd57doogeraspilk@/day_entry/task_id;=\"{{ds.harvest.taskId}}\")),select(7b638077f9f512d7cd57doogeraspilk@/day_entry/hours;,(7b638077f9f512d7cd57doogeraspilk@/day_entry/task_id;=\"{{ds.harvest.taskId}}\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "bcf1b6c9-7"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7b638077f9f512d7cd57doogeraspilk",
+                                             "a": "/day_entry/spent_at"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7b638077f9f512d7cd57doogeraspilk",
+                                                   "a": "/day_entry/task_id"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "{{ds.harvest.taskId}}"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7b638077f9f512d7cd57doogeraspilk",
+                                             "a": "/day_entry/hours"
+                                          }
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7b638077f9f512d7cd57doogeraspilk",
+                                                   "a": "/day_entry/task_id"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "{{ds.harvest.taskId}}"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "seriesName": "Task",
+               "axis": "d4ed8615-8"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "bcf1b6c9-7",
+               "displayName": "Date",
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "MMM d"
+               },
+               "formulas": [
+                  {
+                     "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"yyyy-MM-dd\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-6"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "format",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "label": "Date",
+               "labelAngle": "-45",
+               "labelDrop": 0
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "d4ed8615-8",
+               "displayName": "Hours",
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "Hours",
+               "showLabel": true,
+               "showAxis": false,
+               "labelDrop": 0,
+               "grid": true
+            }
+         ],
+         "showLegend": false,
+         "stackBars": "1"
+      }
+   ]
+}
