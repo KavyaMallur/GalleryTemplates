@@ -3,13 +3,13 @@
     "description": " ",
     "sampleFormulas": {
         "c1f95919-1": {
-            "txt": "\"Creating killer klips for 2016\"",
+            "txt": "\"Creating amazing klips for 2016\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "Creating killer klips for 2016"
+                    "v": "Creating amazing klips for 2016"
                 }]
             }
         },
@@ -135,24 +135,40 @@
             "service": "harvest",
             "type": "simple_rest",
             "format": "json",
-            "name": "Harvest Past Due Invoices (Last 7 Days)",
-            "libraryAlias": "HarvestPastDueInvoicesLast7Days",
+            "name": "Harvest Billable Hours for Project (Last 7 Days)",
+            "libraryAlias": "HarvestBillableHoursforProjectLast7Days",
             "refreshInterval": 14400,
-            "description": "Retrieve past due invoices. Originates from the Gallery.",
+            "description": "Retrieve the daily billable entries to your Harvest project. Originates from the Gallery.",
             "props": {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.harvest.userName}}",
                 "basic_auth_password": "{{auth.harvest.password}}",
-                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}",
-                "method": "get",
-                "parameters": "[]"
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}&billable=yes",
+                "method": "get"
+            }
+        },
+        "harvest-03": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Non-Billable Hours for Project (Last 7 Days)",
+            "libraryAlias": "HarvestNonBillableHoursforProjectLast7Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve the daily non-billable entries to your Harvest project. Originates from the Gallery.",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.harvest.userName}}",
+                "basic_auth_password": "{{auth.harvest.password}}",
+                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}&billable=no",
+                "method": "get"
             }
         }
     },
 
     "dsMappings": {
         "harvest-01": "6f1451f8fb69e3cc884adoogeraspilk",
-        "harvest-02": "7b638077f9f512d7cd57KavyaMallur9"
+        "harvest-02": "7b638077f9f512d7cd57KavyaMallur9",
+        "harvest-03": "a59c42d2c8459afb4f00KavyaMallur9"
     },
 
     "services": [{
