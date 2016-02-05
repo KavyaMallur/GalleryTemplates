@@ -1,0 +1,623 @@
+{
+   "title": "Harvest Time on Project",
+   "id": "824317cacaa7d8016d91f58f55e440d3",
+   "workspace": {
+      "dimensions": {
+         "w": 445
+      },
+      "datasources": [
+         "6f1451f8fb69e3cc884adoogeraspilk",
+         "81e3b042351106493b90doogeraspilk"
+      ]
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "2d847346-2",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "618afb02",
+               "displayName": "Project",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "prefix": "<div class style=\"display:inline; font-weight:normal;\">Project: </div>"
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@/project/name;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.harvest.projectId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                       "a": "/project/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                       "a": "/project/name"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "c",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "f8ec197d",
+               "displayName": "Remaining Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "renamed": true,
+               "size": "2",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "suffix": "",
+                  "prefix": ""
+               },
+               "formulas": [
+                  {
+                     "txt": "if(((lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))>(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;))),\"Budget Remaining:\",\"Budget Exceeded by:\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ebe04d5a"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "106a7577"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Budget Remaining:"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Budget Exceeded by:"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "f07f6ff1",
+               "displayName": "Remaining",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 2
+               },
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "fmtArgs": {
+                  "suffix": " hours",
+                  "precision": "2"
+               },
+               "conditions": [
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "cx": "ebe04d5a"
+                           },
+                           "type": "lt",
+                           "right": {
+                              "cx": "106a7577"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_2",
+                           "isScalar": true
+                        }
+                     ]
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "abs(((lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))-(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "abs",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ebe04d5a"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "106a7577"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "gauge",
+               "id": "88b27a5d",
+               "displayName": "Gauge",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "size": 2,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "106a7577",
+                     "displayName": "Current Value",
+                     "size": 3,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "2"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "81e3b042351106493b90doogeraspilk",
+                                             "a": "/tasks/budget_spent"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "ebe04d5a",
+                     "displayName": "Target Value",
+                     "size": "1",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "Budgeted Hours: ",
+                        "precision": "2"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "{{ds.harvest.projectId}}"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                             "a": "/project/id"
+                                          }
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6f1451f8fb69e3cc884adoogeraspilk",
+                                             "a": "kf:fill_elements(/project,'budget')"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "9ae67321",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "6a1efd2e",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "if(((lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))>(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;))),(lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');)),(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;)))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "ebe04d5a"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": ">"
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "106a7577"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ebe04d5a"
+                                          }
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "106a7577"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "d5588c4b",
+                     "displayName": "Range 1",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "68968418",
+                           "displayName": "Min",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(0)",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "9ae67321"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "1f0fbfa4",
+                           "displayName": "Target",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ebe04d5a"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 1
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "b32d55df-3",
+                     "displayName": "Range 2",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "5c4a2b59-4",
+                           "displayName": "Target",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ebe04d5a"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "040862ed-5",
+                           "displayName": "Max",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(if(((lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))>(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;))),(lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');)),(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;))))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "6a1efd2e"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 2,
+                     "color": "cx-theme_red_2"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "52903929-4",
+                     "displayName": "Range 4",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "cd240603-5",
+                           "displayName": "Current",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(sum(81e3b042351106493b90doogeraspilk@/tasks/budget_spent;))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "106a7577"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "1e334bbc-6",
+                           "displayName": "Target",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(lookup(\"{{ds.harvest.projectId}}\",6f1451f8fb69e3cc884adoogeraspilk@/project/id;,6f1451f8fb69e3cc884adoogeraspilk@kf:fill_elements(/project,'budget');))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "ebe04d5a"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 4,
+                     "color": "cx-theme_ccc"
+                  }
+               ],
+               "gaugeStyle": "hg"
+            }
+         ],
+         "rows": 4,
+         "cols": 1
+      }
+   ]
+}
