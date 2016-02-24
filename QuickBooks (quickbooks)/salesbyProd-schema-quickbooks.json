@@ -416,11 +416,29 @@
                            "type": "table_results",
                            "role": "result",
                            "id": "de718b96",
-                           "displayName": "Unnamed 1 Result",
+                           "displayName": "Total Label",
+                           "renamed": true,
                            "size": 1,
-                           "formulas": [],
+                           "fmt": "txt",
+                           "formulas": [
+                              {
+                                 "txt": "\"Total\"",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "Total"
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
                            "data": [
-                              []
+                              [
+
+                              ]
                            ],
                            "mixin": "label",
                            "align": "l",
@@ -667,7 +685,8 @@
                      ],
                      "name": "Product",
                      "index": 0,
-                     "w": "40%"
+                     "w": "40%",
+                     "resultFmt": "custom"
                   },
                   {
                      "type": "table_col",
@@ -678,7 +697,7 @@
                      "size": 1,
                      "fmt": "cur",
                      "fmtArgs": {
-                        "precision": "2"
+                        "precision": "0"
                      },
                      "components": [
                         {
@@ -687,12 +706,46 @@
                            "id": "6a8dc997-2",
                            "displayName": "Amount Result",
                            "size": 1,
-                           "formulas": [],
+                           "fmt": "cur",
+                           "formulas": [
+                              {
+                                 "txt": "sum((sort(slice(switch($KTdate,\"Current MTD\",785b79210ee7174f0db2KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal QTD\",0d91cfbbb14922fed6faKavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal YTD\",b9a3639af8f336d9b9e1KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Month\",3363896f049f6aac05d7KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Quarter\",8c8274c3792a23838d66KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Year\",be0162403c303741d9b5KavyaMallur9@/Rows/Row/ColData[3]/value;),\"0\",\"-1\"),\"descnumeric\")))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "e44e69fd-1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
                            "data": [
-                              []
+                              [
+
+                              ]
                            ],
                            "mixin": "label",
-                           "align": "l",
+                           "align": "r",
                            "font_style": "bold"
                         }
                      ],
@@ -838,6 +891,7 @@
                      ],
                      "name": "Amount",
                      "index": 1,
+                     "resultFmt": "custom",
                      "align": "left"
                   },
                   {
@@ -846,7 +900,7 @@
                      "id": "886b994e",
                      "displayName": "% Sold",
                      "size": 1,
-                     "fmt": "txt",
+                     "fmt": "pct",
                      "fmtArgs": {
                         "precision": "2"
                      },
@@ -868,131 +922,39 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "sort(slice(switch($KTdate,\"Current MTD\",785b79210ee7174f0db2KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Current Fiscal QTD\",0d91cfbbb14922fed6faKavyaMallur9@/Rows/Row/ColData[4]/value;,\"Current Fiscal YTD\",b9a3639af8f336d9b9e1KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Last Month\",3363896f049f6aac05d7KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Last Fiscal Quarter\",8c8274c3792a23838d66KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Last Fiscal Year\",be0162403c303741d9b5KavyaMallur9@/Rows/Row/ColData[4]/value;),\"0\",\"-1\"),\"descnumeric\")",
+                           "txt": "(sort(slice(switch($KTdate,\"Current MTD\",785b79210ee7174f0db2KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal QTD\",0d91cfbbb14922fed6faKavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal YTD\",b9a3639af8f336d9b9e1KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Month\",3363896f049f6aac05d7KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Quarter\",8c8274c3792a23838d66KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Year\",be0162403c303741d9b5KavyaMallur9@/Rows/Row/ColData[3]/value;),\"0\",\"-1\"),\"descnumeric\"))/sum((sort(slice(switch($KTdate,\"Current MTD\",785b79210ee7174f0db2KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal QTD\",0d91cfbbb14922fed6faKavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal YTD\",b9a3639af8f336d9b9e1KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Month\",3363896f049f6aac05d7KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Quarter\",8c8274c3792a23838d66KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Year\",be0162403c303741d9b5KavyaMallur9@/Rows/Row/ColData[3]/value;),\"0\",\"-1\"),\"descnumeric\")))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "e44e69fd-1"
+                                    }
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "sum",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "switch",
-                                                "c": [
-                                                   {
-                                                      "t": "var",
-                                                      "v": "KTdate"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Current MTD"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "785b79210ee7174f0db2KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Current Fiscal QTD"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "0d91cfbbb14922fed6faKavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Current Fiscal YTD"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "b9a3639af8f336d9b9e1KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Last Month"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "3363896f049f6aac05d7KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Last Fiscal Quarter"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "8c8274c3792a23838d66KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Last Fiscal Year"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "be0162403c303741d9b5KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "case",
-                                                         "repeats": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "case",
-                                                         "repeats": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "0"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "-1"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "e44e69fd-1"
+                                          }
                                        },
                                        {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
-                                             "placeholder": "return values",
-                                             "optional": true
+                                             "placeholder": "data",
+                                             "repeats": true
                                           }
                                        }
                                     ]
@@ -1021,8 +983,8 @@
                      "size": 1,
                      "fmt": "hrz",
                      "fmtArgs": {
-                        "minVal": -0.87,
-                        "maxVal": 24.08,
+                        "minVal": -90,
+                        "maxVal": 2475,
                         "hideRange": true
                      },
                      "components": [
@@ -1043,130 +1005,31 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "sort(slice(switch($KTdate,\"Current MTD\",785b79210ee7174f0db2KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Current Fiscal QTD\",0d91cfbbb14922fed6faKavyaMallur9@/Rows/Row/ColData[4]/value;,\"Current Fiscal YTD\",b9a3639af8f336d9b9e1KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Last Month\",3363896f049f6aac05d7KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Last Fiscal Quarter\",8c8274c3792a23838d66KavyaMallur9@/Rows/Row/ColData[4]/value;,\"Last Fiscal Year\",be0162403c303741d9b5KavyaMallur9@/Rows/Row/ColData[4]/value;),\"0\",\"-1\"),\"descnumeric\")",
+                           "txt": "numberformat((sort(slice(switch($KTdate,\"Current MTD\",785b79210ee7174f0db2KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal QTD\",0d91cfbbb14922fed6faKavyaMallur9@/Rows/Row/ColData[3]/value;,\"Current Fiscal YTD\",b9a3639af8f336d9b9e1KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Month\",3363896f049f6aac05d7KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Quarter\",8c8274c3792a23838d66KavyaMallur9@/Rows/Row/ColData[3]/value;,\"Last Fiscal Year\",be0162403c303741d9b5KavyaMallur9@/Rows/Row/ColData[3]/value;),\"0\",\"-1\"),\"descnumeric\")),\"0\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "numberformat",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "switch",
-                                                "c": [
-                                                   {
-                                                      "t": "var",
-                                                      "v": "KTdate"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Current MTD"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "785b79210ee7174f0db2KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Current Fiscal QTD"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "0d91cfbbb14922fed6faKavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Current Fiscal YTD"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "b9a3639af8f336d9b9e1KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Last Month"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "3363896f049f6aac05d7KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Last Fiscal Quarter"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "8c8274c3792a23838d66KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "Last Fiscal Year"
-                                                   },
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "be0162403c303741d9b5KavyaMallur9",
-                                                         "a": "/Rows/Row/ColData[4]/value"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "case",
-                                                         "repeats": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "case",
-                                                         "repeats": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "0"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "-1"
-                                             }
-                                          ]
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "e44e69fd-1"
+                                          }
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "l",
+                                          "v": "0"
                                        },
                                        {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
-                                             "placeholder": "return values",
+                                             "placeholder": "separator",
                                              "optional": true
                                           }
                                        }
