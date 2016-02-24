@@ -5,21 +5,21 @@
 	"datasources" : {
 		"newRelic-01" : {
 			"service" : "new_relic",
-			"libraryAlias" : "newRelicAppApdex({{ds.new_relic.appid}})",
+			"libraryAlias" : "newRelicAppApdexV2({{ds.new_relic.appid}})",
 			"name": "New Relic Application Apdex ({{ds.new_relic.appid}})",
 			"description" : "Application apdex for the last 30 minutes. Originates from the Gallery.",
 			"type" : "simple_rest",
 			"format" : "xml",
 			"refreshInterval" : 300,
 			"props" : { 
-				"endpoint_url": "https://api.newrelic.com/v2/applications/{{ds.new_relic.appid}}/metrics/data.xml?names[]=Apdex&values[]=score,s,f,t&from={date.tz(\"UTC\").addMinutes(-30).format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}&to={date.tz(\"UTC\").today.format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}",
+				"endpoint_url": "https://api.newrelic.com/v2/applications/{{ds.new_relic.appid}}/metrics/data.xml?names[]=Apdex&from={date.tz(\"UTC\").addMinutes(-30).format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}&to={date.tz(\"UTC\").today.format(\"yyyy-MM-dd'T'HH:mm:ss'+00:00'\")}",
 				"method": "get",
 				"parameters": "[{\"name\":\"X-Api-Key\",\"value\":\"{{auth.new_relic.apikey}}\",\"type\":\"header\"}]"
   			}
 		},
 		"newRelic-02" : {
 			"service" : "new_relic",
-			"libraryAlias" : "",
+			"libraryAlias" : "NewRelicApplicationThroughput",
 			"name": "New Relic Application Throughput",
 			"description" : "Application throughput for the last 30 minutes. Originates from the Gallery.",
 			"type" : "simple_rest",
