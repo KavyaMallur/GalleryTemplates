@@ -3,7 +3,7 @@
    "id": "ec95a60aad7de3e8d4c6f2eda4929b86",
    "workspace": {
       "datasources": [
-         "b1bb65a498066ceb68c9nateewzhere"
+         "b1bb65a498066ceb68c9natceewzhere"
       ],
       "dimensions": {
          "w": 646
@@ -11,42 +11,179 @@
    },
    "components": [
       {
-         "type": "chart_series",
-         "id": "3fee7478-5",
-         "displayName": "Series Chart",
+         "type": "panel_grid",
+         "id": "f7148e13-1",
+         "displayName": "Layout Grid",
          "components": [
             {
-               "type": "series_data",
-               "role": "series",
-               "id": "918e5248-6",
-               "displayName": "New Subscribers",
-               "fmt": "num",
-               "formulas": [
+               "type": "html_tpl2",
+               "id": "8ab594fa",
+               "displayName": "Connect to Zapier",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
                   {
-                     "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\")),group(date_convert(slice(b1bb65a498066ceb68c9nateewzhere@B:B;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(slice(b1bb65a498066ceb68c9nateewzhere@B:B;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),slice(b1bb65a498066ceb68c9nateewzhere@A:A;),\"COUNT(values)\"))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "lookup",
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "a830528a",
+                     "displayName": "Series1",
+                     "formulas": [
+                        {
+                           "txt": "b1bb65a498066ceb68c9natceewzhere@A:A;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
                               "c": [
                                  {
-                                    "t": "ref",
+                                    "t": "d",
                                     "v": {
-                                       "r": "cx",
-                                       "cx": "2c5eed06-7"
+                                       "id": "b1bb65a498066ceb68c9natceewzhere",
+                                       "a": "A:A"
                                     }
-                                 },
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series1"
+                  }
+               ],
+               "tpl": "{{if data.length  == 1}}\n<p>This Klip relies on Zapier to update the data source. To get started, click <b>USE THIS ZAP.</b></p><br>\n\n<a target='_blank' href='https://zapier.com/app/min/9691/start?utm_source=widget&utm_medium=embed&utm_campaign=Widget'><p style='text-align:center;'><img src='https://static.klipfolio.com/templates/images/zapier/newsubscribers_mailchimp.png' alt='Connect to Zapier'style='width:200px;height:200px;'></p></a>\n\n<br><p>The data will begin accumulating once you setup the Zap.</p>\n{{/if}}\n"
+            },
+            {
+               "type": "chart_series",
+               "id": "3fee7478-5",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "918e5248-6",
+                     "displayName": "New Subscribers",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\")),group(date_convert(slice(b1bb65a498066ceb68c9natceewzhere@B:B;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(slice(b1bb65a498066ceb68c9natceewzhere@B:B;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),slice(b1bb65a498066ceb68c9natceewzhere@A:A;),\"COUNT(values)\"))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
                                  {
                                     "t": "f",
-                                    "v": "group",
+                                    "v": "lookup",
                                     "c": [
                                        {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "2c5eed06-7"
+                                          }
+                                       },
+                                       {
                                           "t": "f",
-                                          "v": "date_convert",
+                                          "v": "group",
                                           "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "b1bb65a498066ceb68c9natceewzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MMM d"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "groupby",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_convert",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "b1bb65a498066ceb68c9natceewzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd HH:mm:ss"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "MMM d"
+                                                   }
+                                                ]
+                                             },
                                              {
                                                 "t": "f",
                                                 "v": "slice",
@@ -54,8 +191,8 @@
                                                    {
                                                       "t": "d",
                                                       "v": {
-                                                         "id": "b1bb65a498066ceb68c9nateewzhere",
-                                                         "a": "B:B"
+                                                         "id": "b1bb65a498066ceb68c9natceewzhere",
+                                                         "a": "A:A"
                                                       }
                                                    },
                                                    {
@@ -78,133 +215,69 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "yyyy-MM-dd HH:mm:ss"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "MMM d"
+                                                "v": "COUNT(values)"
                                              }
                                           ]
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "groupby",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "date_convert",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "slice",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "b1bb65a498066ceb68c9nateewzhere",
-                                                         "a": "B:B"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "start",
-                                                         "optional": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "end",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "yyyy-MM-dd HH:mm:ss"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "MMM d"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "b1bb65a498066ceb68c9nateewzhere",
-                                                   "a": "A:A"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "COUNT(values)"
                                        }
                                     ]
                                  }
                               ]
                            }
-                        ]
-                     }
-                  }
-               ],
-               "data": [],
-               "seriesName": "New Subscribers",
-               "axis": "cfb09a9c-8"
-            },
-            {
-               "type": "chart_axis",
-               "role": "axis_x",
-               "id": "2c5eed06-7",
-               "displayName": "Date",
-               "fmt": "txt",
-               "formulas": [
+                        }
+                     ],
+                     "data": [],
+                     "seriesName": "New Subscribers",
+                     "axis": "cfb09a9c-8"
+                  },
                   {
-                     "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\")",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "datevalue",
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "2c5eed06-7",
+                     "displayName": "Date",
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "daterange",
+                                    "v": "datevalue",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "date_add",
+                                          "v": "daterange",
                                           "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
                                              {
                                                 "t": "f",
                                                 "v": "yesterday",
@@ -220,76 +293,75 @@
                                                 ]
                                              },
                                              {
-                                                "t": "opt",
-                                                "v": "5"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "-29"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "yesterday",
-                                          "c": [
-                                             {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
-                                                   "placeholder": "timezone",
+                                                   "placeholder": "format",
                                                    "optional": true
                                                 }
                                              }
                                           ]
                                        },
                                        {
+                                          "t": "l",
+                                          "v": "MMM d"
+                                       },
+                                       {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
-                                             "placeholder": "format",
+                                             "placeholder": "timezone",
                                              "optional": true
                                           }
                                        }
                                     ]
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "MMM d"
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "timezone",
-                                       "optional": true
-                                    }
                                  }
                               ]
                            }
-                        ]
-                     }
+                        }
+                     ],
+                     "data": [],
+                     "label": "Date",
+                     "labelAngle": "-45",
+                     "labelDrop": "3"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "cfb09a9c-8",
+                     "displayName": "Count",
+                     "renamed": true,
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Untitled",
+                     "showAxis": false,
+                     "labelDrop": 0,
+                     "grid": true
                   }
+               ]
+            }
+         ],
+         "rows": 2,
+         "cols": 1,
+         "cellData": [
+            {
+               "x": 0,
+               "y": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  0,
+                  5
                ],
-               "data": [],
-               "label": "Date",
-               "labelAngle": "-45",
-               "labelDrop": "3"
+               "alignment": 1
             },
             {
-               "type": "chart_axis",
-               "role": "axis_y",
-               "id": "cfb09a9c-8",
-               "displayName": "Count",
-               "renamed": true,
-               "fmt": "num",
-               "formulas": [],
-               "data": [],
-               "dataDisabled": true,
-               "label": "Untitled",
-               "showAxis": false,
-               "labelDrop": 0,
-               "grid": true
+               "x": 0,
+               "y": 0,
+               "alignment": 1,
+               "cellPadding": 0
             }
          ]
       }

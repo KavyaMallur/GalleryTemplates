@@ -16,11 +16,51 @@
          "displayName": "Layout Grid",
          "components": [
             {
+               "type": "html_tpl2",
+               "id": "fd814d2c-1",
+               "displayName": "Connect to Zapier",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "faa4f1cc-2",
+                     "displayName": "Series1",
+                     "formulas": [
+                        {
+                           "txt": "ef7db64d1dcec9be18e6natceewzhere@A:A;",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                       "a": "A:A"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series1"
+                  }
+               ],
+               "tpl": "{{if data.length == 1}}\n<p>This Klip relies on Zapier to update the data source. To get started, click <b>USE THIS ZAP.</b></p><br><a target='_blank' href='https://zapier.com/app/min/9676/start?utm_source=widget&utm_medium=embed&utm_campaign=Widget'><p style='text-align:center;'><img src='https://static.klipfolio.com/templates/images/zapier/newfollowers_twitter.png' alt='Connect to Zapier'style='width:200px;height:200px;'></p></a>\n\n<br><p>The data will begin accumulating once you setup the Zap.</p>\n\n{{/if}}"
+            },
+            {
                "type": "label",
                "id": "e081267b",
                "displayName": "New Followers (Last 30 Days)",
                "layoutConfig": {
-                  "y": 0,
+                  "y": 1,
                   "x": 0
                },
                "renamed": true,
@@ -28,7 +68,7 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today()))))",
+                     "txt": "count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -131,7 +171,7 @@
                                                       "c": [
                                                          {
                                                             "t": "f",
-                                                            "v": "today",
+                                                            "v": "yesterday",
                                                             "c": [
                                                                {
                                                                   "t": "a",
@@ -149,13 +189,13 @@
                                                          },
                                                          {
                                                             "t": "l",
-                                                            "v": "-30"
+                                                            "v": "-29"
                                                          }
                                                       ]
                                                    },
                                                    {
                                                       "t": "f",
-                                                      "v": "today",
+                                                      "v": "yesterday",
                                                       "c": [
                                                          {
                                                             "t": "a",
@@ -188,7 +228,7 @@
                "id": "c70435ac",
                "displayName": "Separator",
                "layoutConfig": {
-                  "y": 0,
+                  "y": 1,
                   "x": 1
                },
                "orientation": "v",
@@ -199,12 +239,15 @@
                "id": "151851f3",
                "displayName": "New Followers Delta",
                "layoutConfig": {
-                  "y": 0,
+                  "y": 1,
                   "x": 2
                },
                "renamed": true,
                "size": "2",
                "fmt": "pct",
+               "fmtArgs": {
+                  "precision": "1"
+               },
                "conditions": [
                   {
                      "predicates": [
@@ -251,7 +294,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "substitute((((count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today())))))/(count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\")))))))-\"1\"),\"Infinity\",\"\")",
+                     "txt": "substitute((((count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-29\"),yesterday())))))/(count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")))))))-\"1\"),\"Infinity\",\"\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -328,7 +371,7 @@
                "id": "63c5585e",
                "displayName": "New Followers Label",
                "layoutConfig": {
-                  "y": 1,
+                  "y": 2,
                   "x": 0
                },
                "renamed": true,
@@ -336,14 +379,14 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "\"New Followers Label\"",
+                     "txt": "\"New Followers\"",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "l",
-                              "v": "New Followers Label"
+                              "v": "New Followers"
                            }
                         ]
                      }
@@ -359,7 +402,7 @@
                "id": "f387a859",
                "displayName": "New Followers (Previous 30 Days)",
                "layoutConfig": {
-                  "y": 1,
+                  "y": 2,
                   "x": 2
                },
                "renamed": true,
@@ -371,7 +414,7 @@
                },
                "formulas": [
                   {
-                     "txt": "count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\")))))",
+                     "txt": "count(group(select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-59\"),date_add(yesterday(),\"5\",\"-30\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -474,7 +517,7 @@
                                                       "c": [
                                                          {
                                                             "t": "f",
-                                                            "v": "today",
+                                                            "v": "yesterday",
                                                             "c": [
                                                                {
                                                                   "t": "a",
@@ -492,7 +535,7 @@
                                                          },
                                                          {
                                                             "t": "l",
-                                                            "v": "-60"
+                                                            "v": "-59"
                                                          }
                                                       ]
                                                    },
@@ -502,7 +545,7 @@
                                                       "c": [
                                                          {
                                                             "t": "f",
-                                                            "v": "today",
+                                                            "v": "yesterday",
                                                             "c": [
                                                                {
                                                                   "t": "a",
@@ -520,7 +563,7 @@
                                                          },
                                                          {
                                                             "t": "l",
-                                                            "v": "-31"
+                                                            "v": "-30"
                                                          }
                                                       ]
                                                    }
@@ -540,9 +583,748 @@
                "font_colour": "cx-color_aaa",
                "font_style": "regular",
                "wrap": true
+            },
+            {
+               "type": "table",
+               "id": "7218ce82-10",
+               "displayName": "Table",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 3
+               },
+               "components": [
+                  {
+                     "type": "table_col",
+                     "role": "tcol",
+                     "id": "3c3c18d9-11",
+                     "displayName": "Image",
+                     "size": 1,
+                     "fmt": "img",
+                     "fmtArgs": {
+                        "scale": "fd",
+                        "imgFixWidth": "30",
+                        "imgFixHeight": "30"
+                     },
+                     "components": [
+                        {
+                           "type": "table_results",
+                           "role": "result",
+                           "id": "31a61d25-12",
+                           "displayName": "Unnamed 1 Result",
+                           "size": 1,
+                           "formulas": [],
+                           "data": [],
+                           "mixin": "label",
+                           "align": "l",
+                           "font_style": "bold"
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "select(slice(ef7db64d1dcec9be18e6natceewzhere@C:C;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                   "a": "C:C"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                               "a": "E:E"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "EEE MMM dd HH:mm:ssZ yyyy"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "name": "Image",
+                     "index": 0,
+                     "fw": "fixed",
+                     "w": "70",
+                     "align": "c"
+                  },
+                  {
+                     "type": "table_col",
+                     "role": "tcol",
+                     "id": "d2b15871-17",
+                     "displayName": "Screen Name",
+                     "size": 1,
+                     "fmt": "hyp",
+                     "components": [
+                        {
+                           "type": "table_results",
+                           "role": "result",
+                           "id": "962cb5a6-18",
+                           "displayName": "Unnamed 4 Result",
+                           "size": 1,
+                           "formulas": [],
+                           "data": [],
+                           "mixin": "label",
+                           "align": "l",
+                           "font_style": "bold"
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "select(concat(\"@\",slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),\"|\",\"http://twitter.com/\",slice(ef7db64d1dcec9be18e6natceewzhere@A:A;)),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "concat",
+                                          "c": [
+                                             {
+                                                "t": "l",
+                                                "v": "@"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                         "a": "A:A"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "|"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "http://twitter.com/"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                         "a": "A:A"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                               "a": "E:E"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "EEE MMM dd HH:mm:ssZ yyyy"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "name": "Screen Name",
+                     "index": 1
+                  },
+                  {
+                     "type": "table_col",
+                     "role": "tcol",
+                     "id": "8feb2b3d-13",
+                     "displayName": "Name",
+                     "size": 1,
+                     "fmt": "txt",
+                     "components": [
+                        {
+                           "type": "table_results",
+                           "role": "result",
+                           "id": "3687d0dc-14",
+                           "displayName": "Unnamed 2 Result",
+                           "size": 1,
+                           "formulas": [],
+                           "data": [],
+                           "mixin": "label",
+                           "align": "l",
+                           "font_style": "bold"
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "select(slice(ef7db64d1dcec9be18e6natceewzhere@B:B;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                   "a": "B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                               "a": "E:E"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "EEE MMM dd HH:mm:ssZ yyyy"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "name": "Name",
+                     "index": 2
+                  },
+                  {
+                     "type": "table_col",
+                     "role": "tcol",
+                     "id": "2af1c957-15",
+                     "displayName": "Followers",
+                     "size": 1,
+                     "fmt": "num",
+                     "components": [
+                        {
+                           "type": "table_results",
+                           "role": "result",
+                           "id": "0b6352ab-16",
+                           "displayName": "Unnamed 3 Result",
+                           "size": 1,
+                           "formulas": [],
+                           "data": [],
+                           "mixin": "label",
+                           "align": "l",
+                           "font_style": "bold"
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "select(slice(ef7db64d1dcec9be18e6natceewzhere@D:D;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(yesterday(),\"5\",\"-29\"),yesterday()))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                   "a": "D:D"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ef7db64d1dcec9be18e6natceewzhere",
+                                                               "a": "E:E"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "EEE MMM dd HH:mm:ssZ yyyy"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "name": "Followers",
+                     "index": 3
+                  }
+               ],
+               "maxRows": "5"
             }
          ],
-         "rows": 2,
+         "rows": 4,
          "cols": 3,
          "widths": [
             {
@@ -552,16 +1334,22 @@
          ],
          "cellData": [
             {
-               "y": 0,
+               "y": 1,
                "h": 2,
-               "x": 1
+               "x": 1,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
             },
             {
                "alignment": 2,
-               "y": 0,
+               "y": 1,
                "x": 0,
                "cellPadding": [
-                  5,
+                  0,
                   12,
                   0,
                   5
@@ -569,17 +1357,17 @@
             },
             {
                "alignment": 2,
-               "y": 0,
+               "y": 1,
                "x": 2,
                "cellPadding": [
-                  5,
+                  0,
                   5,
                   4,
                   12
                ]
             },
             {
-               "y": 1,
+               "y": 2,
                "x": 2,
                "cellPadding": [
                   0,
@@ -589,7 +1377,7 @@
                ]
             },
             {
-               "y": 1,
+               "y": 2,
                "x": 0,
                "cellPadding": [
                   0,
@@ -597,844 +1385,19 @@
                   5,
                   5
                ]
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "w": 3,
+               "cellPadding": 0
+            },
+            {
+               "x": 0,
+               "y": 3,
+               "w": 3
             }
          ]
-      },
-      {
-         "type": "table",
-         "id": "7218ce82-10",
-         "displayName": "Table",
-         "components": [
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "3c3c18d9-11",
-               "displayName": "Image",
-               "size": 1,
-               "fmt": "img",
-               "fmtArgs": {
-                  "scale": "fd",
-                  "imgFixWidth": "30",
-                  "imgFixHeight": "30"
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "31a61d25-12",
-                     "displayName": "Unnamed 1 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "select(slice(ef7db64d1dcec9be18e6natceewzhere@C:C;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today()))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "select",
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                             "a": "C:C"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "between",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "date",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "slice",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                         "a": "E:E"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "start",
-                                                         "optional": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "end",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "EEE MMM dd HH:mm:ssZ yyyy"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "date_add",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "today",
-                                                "c": [
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "opt",
-                                                "v": "5"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "-30"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "today",
-                                          "c": [
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [],
-               "name": "Image",
-               "index": 0,
-               "fw": "fixed",
-               "w": "70",
-               "align": "c"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "d2b15871-17",
-               "displayName": "Screen Name",
-               "size": 1,
-               "fmt": "hyp",
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "962cb5a6-18",
-                     "displayName": "Unnamed 4 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "concat(\"@\",select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today())),\"|\",\"http://twitter.com/\",select(slice(ef7db64d1dcec9be18e6natceewzhere@A:A;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today())))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "concat",
-                              "c": [
-                                 {
-                                    "t": "l",
-                                    "v": "@"
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "select",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                   "a": "A:A"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "between",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "date",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "slice",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                               "a": "E:E"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "start",
-                                                               "optional": true
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "end",
-                                                               "optional": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "EEE MMM dd HH:mm:ssZ yyyy"
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "date_add",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "today",
-                                                      "c": [
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "timezone",
-                                                               "optional": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "opt",
-                                                      "v": "5"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "-30"
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "today",
-                                                "c": [
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "|"
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": "http://twitter.com/"
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "select",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                   "a": "A:A"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "between",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "date",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "slice",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                               "a": "E:E"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "start",
-                                                               "optional": true
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "end",
-                                                               "optional": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "EEE MMM dd HH:mm:ssZ yyyy"
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "date_add",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "today",
-                                                      "c": [
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "timezone",
-                                                               "optional": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "opt",
-                                                      "v": "5"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "-30"
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "today",
-                                                "c": [
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [],
-               "name": "Screen Name",
-               "index": 1
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "8feb2b3d-13",
-               "displayName": "Name",
-               "size": 1,
-               "fmt": "txt",
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "3687d0dc-14",
-                     "displayName": "Unnamed 2 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "select(slice(ef7db64d1dcec9be18e6natceewzhere@B:B;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today()))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "select",
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                             "a": "B:B"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "between",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "date",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "slice",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                         "a": "E:E"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "start",
-                                                         "optional": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "end",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "EEE MMM dd HH:mm:ssZ yyyy"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "date_add",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "today",
-                                                "c": [
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "opt",
-                                                "v": "5"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "-30"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "today",
-                                          "c": [
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [],
-               "name": "Name",
-               "index": 2
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "2af1c957-15",
-               "displayName": "Followers",
-               "size": 1,
-               "fmt": "num",
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "0b6352ab-16",
-                     "displayName": "Unnamed 3 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "select(slice(ef7db64d1dcec9be18e6natceewzhere@D:D;),between(date(slice(ef7db64d1dcec9be18e6natceewzhere@E:E;),\"EEE MMM dd HH:mm:ssZ yyyy\"),date_add(today(),\"5\",\"-30\"),today()))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "select",
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                             "a": "D:D"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "between",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "date",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "slice",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "ef7db64d1dcec9be18e6natceewzhere",
-                                                         "a": "E:E"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "start",
-                                                         "optional": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "end",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "EEE MMM dd HH:mm:ssZ yyyy"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "date_add",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "today",
-                                                "c": [
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "opt",
-                                                "v": "5"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "-30"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "today",
-                                          "c": [
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "timezone",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [],
-               "name": "Followers",
-               "index": 3
-            }
-         ],
-         "maxRows": "5"
       }
    ]
 }
