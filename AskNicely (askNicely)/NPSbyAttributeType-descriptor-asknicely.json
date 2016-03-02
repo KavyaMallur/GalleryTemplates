@@ -1,0 +1,193 @@
+{
+    "name": "AskNicely Net Promoter Scores",
+    "description": "Provide NPS for top leaderboards. Originates from the Gallery.",
+    "sampleFormulas": {
+        "0757a771-2": {
+            "txt": "array(\"Country\", \"Canada\", \"United States\", \"China\", \"India\", \"Denmark\", \"United Kingdom\", \"Netherlands\", \"Australia\", \"Bangladesh\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Country"
+                    }, {
+                        "t": "l",
+                        "v": "Canada"
+                    }, {
+                        "t": "l",
+                        "v": "United States"
+                    }, {
+                        "t": "l",
+                        "v": "China"
+                    }, {
+                        "t": "l",
+                        "v": "India"
+                    }, {
+                        "t": "l",
+                        "v": "Denmark"
+                    }, {
+                        "t": "l",
+                        "v": "United Kingdom"
+                    }, {
+                        "t": "l",
+                        "v": "Netherlands"
+                    }, {
+                        "t": "l",
+                        "v": "Australia"
+                    }, {
+                        "t": "l",
+                        "v": "Bangladesh"
+                    }]
+                }]
+            }
+        },
+        "0603cdc5-4": {
+            "txt": "array(\"NPS\", \"100.0\", \"96.5\", \"52.6\", \"32.0\", \"19.0\", \"15.0\", \"11.0\", \"6.0\", \"1.0\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "NPS"
+                    }, {
+                        "t": "l",
+                        "v": "100.0"
+                    }, {
+                        "t": "l",
+                        "v": "96.5"
+                    }, {
+                        "t": "l",
+                        "v": "52.6"
+                    }, {
+                        "t": "l",
+                        "v": "32.0"
+                    }, {
+                        "t": "l",
+                        "v": "19.0"
+                    }, {
+                        "t": "l",
+                        "v": "15.0"
+                    }, {
+                        "t": "l",
+                        "v": "11.0"
+                    }, {
+                        "t": "l",
+                        "v": "6.0"
+                    }, {
+                        "t": "l",
+                        "v": "1.0"
+                    }]
+                }]
+            }
+        },
+        "98257782-1": {
+            "txt": "array(\"\", \"100.0\", \"96.5\", \"52.6\", \"32.0\", \"19.0\", \"15.0\", \"11.0\", \"6.0\", \"1.0\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "100.0"
+                    }, {
+                        "t": "l",
+                        "v": "96.5"
+                    }, {
+                        "t": "l",
+                        "v": "52.6"
+                    }, {
+                        "t": "l",
+                        "v": "32.0"
+                    }, {
+                        "t": "l",
+                        "v": "19.0"
+                    }, {
+                        "t": "l",
+                        "v": "15.0"
+                    }, {
+                        "t": "l",
+                        "v": "11.0"
+                    }, {
+                        "t": "l",
+                        "v": "6.0"
+                    }, {
+                        "t": "l",
+                        "v": "1.0"
+                    }]
+                }]
+            }
+        },
+        "73f74877-2": {
+            "txt": "array(\"Country\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Country"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "asknicely-01": {
+            "service": "asknicely",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "AskNicely Top NPS by {{ds.asknicely.attribute}}",
+            "libraryAlias": "asknicelyTopNPSby{{ds.asknicely.attribute}}",
+            "refreshInterval": 14400,
+            "description": "Monitor NPS for leaderboards. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{auth.asknicely.domain}}.asknice.ly/datafeed/v1/leaderboard/{{ds.asknicely.attribute}}/90?apikey={{auth.asknicely.apiKey}}",
+                "method": "GET"
+            }
+        }
+    },
+    "dsMappings": {
+        "asknicely-01": "06d08c8b3530f022688cKavyaMallur9"
+    },
+    "services": [{
+        "service": "asknicely"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.asknicely.attribute",
+        "label": "Attribute Type",
+        "description": "Select an Attribute from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have provided right API and Domain keys. <br><br>2. Ensure you have attribute lists configured in your AskNicely account.",
+        "connector": {
+            "service": "asknicely",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.asknicely.domain}}.asknice.ly/datafeed/v1/typelist?apikey={{auth.asknicely.apiKey}}",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.asknicely.attribute",
+            "propField": "options",
+            "labels": "/",
+            "values": "/"
+        }]
+    }]
+}

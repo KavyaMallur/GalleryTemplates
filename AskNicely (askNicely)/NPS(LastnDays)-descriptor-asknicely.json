@@ -1,0 +1,81 @@
+{
+    "name": "AskNicely Net Promoter Scores (Last {{ds.asknicely.days}} Days)",
+    "description": "Provide NPS for last n days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "19aa1dfc-5": {
+            "txt": "\"29.0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "29.0"
+                }]
+            }
+        },
+        "b0ade3f7-3": {
+            "txt": "\"0.09\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.09"
+                }]
+            }
+        },
+        "26cacc2e-4": {
+            "txt": "\"24\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "24"
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "asknicely-01": {
+            "service": "asknicely",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "AskNicely NPS (Last {{ds.asknicely.days}} Days)",
+            "libraryAlias": "AskNicelyNPS(Last{{ds.asknicely.days}}Days)",
+            "refreshInterval": 14400,
+            "description": "Monitor NPS for last n days. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{auth.asknicely.domain}}.asknice.ly/datafeed/v1/numberstat/{{ds.asknicely.days}}?apikey={{auth.asknicely.apiKey}}",
+                "method": "GET"
+            }
+        },
+        "asknicely-02": {
+            "service": "asknicely",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "AskNicely NPS (Previous {{ds.asknicely.days}} Days)",
+            "libraryAlias": "AskNicelyNPS(Previous{{ds.asknicely.days}}Days)",
+            "refreshInterval": 14400,
+            "description": "Monitor NPS for previous n days. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{auth.asknicely.domain}}.asknice.ly/datafeed/v1/numberstat/{{ds.asknicely.days}}/{{ds.asknicely.days}}?apikey={{auth.asknicely.apiKey}}",
+                "method": "GET"
+            }
+        }
+    },
+    "dsMappings": {
+        "asknicely-01": "53e8df973a0cd4d2d19aKavyaMallur9",
+        "asknicely-02": "74496775e6a6368f8326KavyaMallur9"
+    },
+    "services": [{
+        "service": "asknicely"
+    }],
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.asknicely.days",
+        "label": "Days",
+        "description": "Provide the number of days.",
+        "isRequired": true
+    }]
+}

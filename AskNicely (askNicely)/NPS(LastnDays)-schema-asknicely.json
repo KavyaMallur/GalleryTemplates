@@ -1,0 +1,291 @@
+{
+   "title": "AskNicely Net Promoter Scores (Last {{ds.asknicely.days}} Days)",
+   "id": "ea78016afbe228bc94499b87e70fdf87",
+   "workspace": {
+      "datasources": [
+         "53e8df973a0cd4d2d19aKavyaMallur9",
+         "74496775e6a6368f8326KavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 478
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "0d57d3fc-1",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "19aa1dfc-5",
+               "displayName": "Current NPS",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "fmtArgs": {
+                  "precision": "1"
+               },
+               "formulas": [
+                  {
+                     "txt": "53e8df973a0cd4d2d19aKavyaMallur9@/item/value;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "53e8df973a0cd4d2d19aKavyaMallur9",
+                                 "a": "/item/value"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+
+                  ]
+               ],
+               "align": "r",
+               "wrap": true
+            },
+            {
+               "type": "separator",
+               "id": "0c62a1a7-1",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "351d6e0a-2",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "b0ade3f7-3",
+                     "displayName": "Percent Change",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-blank"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "((53e8df973a0cd4d2d19aKavyaMallur9@/item/value;)-(if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;)))/(if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "19aa1dfc-5"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "-"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "26cacc2e-4"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "26cacc2e-4"
+                                    }
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "26cacc2e-4",
+                     "displayName": "Previous NPS",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " prev. period"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "if",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "74496775e6a6368f8326KavyaMallur9",
+                                                   "a": "/item/value"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "="
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": ""
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "N/A"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "74496775e6a6368f8326KavyaMallur9",
+                                             "a": "/item/value"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular"
+                  }
+               ]
+            }
+         ],
+         "rows": 1,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 1,
+               "w": 25
+            }
+         ],
+         "cellData": [
+            {
+               "x": 1,
+               "y": 0
+            }
+         ]
+      }
+   ]
+}
