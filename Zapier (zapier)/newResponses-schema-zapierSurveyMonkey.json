@@ -53,7 +53,7 @@
                      "dataId": "Series1"
                   }
                ],
-               "tpl": "{{if data.length  == 1}}\n<p>This Klip relies on Zapier to update the data source. To get started, click <b>USE THIS ZAP.</b></p><br>\n\n<a target='_blank' href='https://zapier.com/app/min/9690/start?utm_source=widget&utm_medium=embed&utm_campaign=Widget'><p style='text-align:center;'><img src='https://static.klipfolio.com/templates/images/zapier/response_surveymonkey.png' alt='Connect to Zapier'style='width:200px;height:200px;'></p></a>\n\n<br><p>The data will begin accumulating once you setup the Zap.</p>\n{{/if}}\n"
+               "tpl": "{{if data.length == 1}}\n<p>This Klip relies on Zapier to update the data source. To get started, click on the Zap below.<br><br>\n\n<a target='_blank' href='https://zapier.com/app/min/9690/start?utm_source=widget&utm_medium=embed&utm_campaign=Widget'><p style='text-align:center;'><img src='https://static.klipfolio.com/templates/images/zapier/newresponses_surveymonkey.png' alt='Connect to Zapier'style='width:665px;height:80px;'></p></a><br>\n\n<br><p>The data will begin accumulating once you setup the Zap.</p>\n{{/if}}\n"
             },
             {
                "type": "chart_series",
@@ -72,7 +72,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\")),group(date_convert(slice(dba73c1022cdda97fc5cnatceewzhere@A:A;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),groupby(date_convert(slice(dba73c1022cdda97fc5cnatceewzhere@A:A;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\"),slice(dba73c1022cdda97fc5cnatceewzhere@B:B;),\"COUNT(values)\"))",
+                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"MMM d\")),group(date_convert(slice(dba73c1022cdda97fc5cnatceewzhere@A:A;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")),countdistinct(date_convert(slice(dba73c1022cdda97fc5cnatceewzhere@A:A;),\"yyyy-MM-dd HH:mm:ss\",\"MMM d\")))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -112,7 +112,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "start",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
                                                             }
                                                          },
                                                          {
@@ -120,7 +122,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "end",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
                                                             }
                                                          }
                                                       ]
@@ -139,7 +143,7 @@
                                        },
                                        {
                                           "t": "f",
-                                          "v": "groupby",
+                                          "v": "countdistinct",
                                           "c": [
                                              {
                                                 "t": "f",
@@ -161,7 +165,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "start",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
                                                             }
                                                          },
                                                          {
@@ -169,7 +175,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "end",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
                                                             }
                                                          }
                                                       ]
@@ -183,39 +191,6 @@
                                                       "v": "MMM d"
                                                    }
                                                 ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "slice",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "dba73c1022cdda97fc5cnatceewzhere",
-                                                         "a": "B:B"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "start",
-                                                         "optional": true
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "end",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "COUNT(values)"
                                              }
                                           ]
                                        }
