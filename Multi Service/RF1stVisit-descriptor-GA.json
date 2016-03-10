@@ -1,0 +1,119 @@
+{
+  "name": "Rand Fishkin First Visit",
+  "description": ". Originates from the Gallery.",
+  "sampleFormulas": {
+    "85110ba0-1": {},
+    "a3b22f97-39": {},
+    "388e31ac-12": {},
+    "b3bf37cd-13": {},
+    "8d0ddb0d-1": {},
+    "76498290-15": {},
+    "ca6bc8b7-2": {},
+    "f8936129-3": {},
+    "97464e32-4": {},
+    "1b96dd4c-5": {},
+    "919caf08-6": {},
+    "d2639663-7": {},
+    "aa61783f-7": {},
+    "10c14a51-8": {},
+    "bd03d009-8": {},
+    "b753837b-9": {},
+    "949054b3-9": {},
+    "ba077727-10": {},
+    "5678003d-2": {},
+    "843efb1c-4": {},
+    "49a86ef8-6": {},
+    "0e1accd4-8": {}
+  },
+  "datasources": {
+    "googleAnalytics-01": {
+      "service": "google_analytics",
+      "libraryAlias": "GASessionsbyChannelCurrentMonth",
+      "name": "Google Analytics Sessions by Channel (Current Month)",
+      "description": ". Originates from the Gallery.",
+      "type": "google_analytics",
+      "format": "csv",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:sessionDurationBucket,ga:channelGrouping&metrics=ga:sessions,ga:newUsers,ga:timeOnPage,ga:pageviewsPerSession,ga:sessionDuration&start-date={date.startOfMonth}&end-date={date.today}&max-results=10000",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:sessionDurationBucket,ga:channelGrouping&metrics=ga:sessions,ga:newUsers,ga:timeOnPage,ga:pageviewsPerSession,ga:sessionDuration&start-date={date.startOfMonth}&end-date={date.today}&max-results=10000",
+        "max_pages": "1",
+        "mode": "Advanced",
+        "profile": "{{ds.google_analytics.profileId}}"
+      }
+    },
+    "googleAnalytics-02": {
+      "service": "google_analytics",
+      "libraryAlias": "GASessionsbyChannelCurrentMonth",
+      "name": "Google Analytics Sessions by Channel (Last Month)",
+      "description": ". Originates from the Gallery.",
+      "type": "google_analytics",
+      "format": "csv",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:sessionDurationBucket,ga:channelGrouping&metrics=ga:sessions,ga:newUsers,ga:timeOnPage,ga:pageviewsPerSession,ga:sessionDuration&start-date={date.addMonths(-1).startOfMonth}&end-date={date.addMonths(-1).endOfMonth}&max-results=10000",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:sessionDurationBucket,ga:channelGrouping&metrics=ga:sessions,ga:newUsers,ga:timeOnPage,ga:pageviewsPerSession,ga:sessionDuration&start-date={date.addMonths(-1).startOfMonth}&end-date={date.addMonths(-1).endOfMonth}&max-results=10000",
+        "max_pages": "1",
+        "mode": "Advanced",
+        "profile": "{{ds.google_analytics.profileId}}"
+      }
+    },
+    "googleAnalytics-03": {
+      "service": "google_analytics",
+      "libraryAlias": "GoogleAnalyticsAdWordsKeywordPerformanceLast30Days",
+      "name": "Google Analytics Sessions by Channel (Current Month)",
+      "description": ". Originates from the Gallery.",
+      "type": "google_analytics",
+      "format": "csv",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:sessionDurationBucket,ga:channelGrouping&metrics=ga:sessions,ga:newUsers,ga:timeOnPage,ga:pageviewsPerSession,ga:sessionDuration&start-date={date.addMonths(-2).startOfMonth}&end-date={date.addMonths(-2).endOfMonth}&max-results=10000",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:sessionDurationBucket,ga:channelGrouping&metrics=ga:sessions,ga:newUsers,ga:timeOnPage,ga:pageviewsPerSession,ga:sessionDuration&start-date={date.addMonths(-2).startOfMonth}&end-date={date.addMonths(-2).endOfMonth}&max-results=10000",
+        "max_pages": "1",
+        "mode": "Advanced",
+        "profile": "{{ds.google_analytics.profileId}}"
+      }
+    }
+  },
+  "dsMappings": {
+    "googleAnalytics-01": "b969e81c97975fc448bbnatceewzhere",
+    "googleAnalytics-02": "d5511a3c45a1f2b35ce0natceewzhere",
+    "googleAnalytics-03": "b94fa1ec9bea1f488082natceewzhere"
+  },
+  "services": [
+    {
+      "service": "google_analytics"
+    }
+  ],
+  "datasourceConfigModel": [
+    {
+      "type": "select",
+      "id": "ds.google_analytics.profileId",
+      "label": "Analytics Account",
+      "description": "Select an Analytics Account from the drop-down list.",
+      "isRequired": true
+    }
+  ],
+  "queries": [
+    {
+      "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+      "connector": {
+        "service": "google_analytics",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.google_analytics.profileId",
+          "propField": "options",
+          "labels": "/items/name",
+          "values": "/items/id"
+        }
+      ]
+    }
+  ]
+}
