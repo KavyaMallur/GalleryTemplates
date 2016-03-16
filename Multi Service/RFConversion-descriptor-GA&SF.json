@@ -1,0 +1,293 @@
+{
+    "name": "Rand Fishkin Conversion",
+    "description": ". Originates from the Gallery.",
+    "datasources": {
+        "googleAnalytics-01": {
+            "service": "google_analytics",
+            "libraryAlias": "GAPageSessionsbyPaths(6 Months)",
+            "name": "Google Analytics Page Sessions by Paths (6 Months)",
+            "description": ". Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&filters=ga:pagePath=~{{ds.google_analytics.pagePath}}*",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&filters=ga:pagePath=~{{ds.google_analytics.pagePath}}*",
+                "max_pages": "10",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-02": {
+            "service": "google_analytics",
+            "libraryAlias": "GAGoalConversion(6 Months)",
+            "name": "Google Analytics Goal Conversion (6 Months)",
+            "description": ". Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:sessions,ga:bounceRate,ga:goal12Starts,ga:goalCompletionsAll,ga:goalConversionRateAll,ga:avgTimeOnPage&dimensions=ga:yearMonth&max-results=10000&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&metrics=ga:users,ga:sessions,ga:bounceRate,ga:goal12Starts,ga:goalCompletionsAll,ga:goalConversionRateAll,ga:avgTimeOnPage&dimensions=ga:yearMonth&max-results=10000&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}",
+                "max_pages": "10",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "salesforce-03" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Month 1)",
+            "libraryAlias" :"SFNewCustomers(Month1)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:5 and max(closedate) < last_n_months:4) and count(id) = 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A5+and+max%28closedate%29+%3C+last_n_months%3A4%29+and+count%28id%29+%3D+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-04" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Month 2)",
+            "libraryAlias" :"SFNewCustomers(Month2)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:4 and max(closedate) < last_n_months:3) and count(id) = 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A4+and+max%28closedate%29+%3C+last_n_months%3A3%29+and+count%28id%29+%3D+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-05" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Month 3)",
+            "libraryAlias" :"SFNewCustomers(Month3)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:3 and max(closedate) < last_n_months:2) and count(id) = 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A3+and+max%28closedate%29+%3C+last_n_months%3A2%29+and+count%28id%29+%3D+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-06" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Month 4)",
+            "libraryAlias" :"SFNewCustomers(Month4)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:2 and max(closedate) < last_n_months:1) and count(id) = 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A2+and+max%28closedate%29+%3C+last_n_months%3A1%29+and+count%28id%29+%3D+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-07" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Month 5)",
+            "libraryAlias" :"SFNewCustomers(Month5)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:1 and max(closedate) < this_month) and count(id) = 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A1+and+max%28closedate%29+%3C+this_month%29+and+count%28id%29+%3D+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-08" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce New Customers (Month 6)",
+            "libraryAlias" :"SFNewCustomers(Month6)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having max(closedate) = this_month and count(id) = 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+max%28closedate%29+%3D+this_month+and+count%28id%29+%3D+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-09" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Returning Customers (Month 1)",
+            "libraryAlias" :"SFReturningCustomers(Month1)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:5 and max(closedate) < last_n_months:4) and count(id) > 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A5+and+max%28closedate%29+%3C+last_n_months%3A4%29+and+count%28id%29+%3E+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-10" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Returning Customers (Month 2)",
+            "libraryAlias" :"SFReturningCustomers(Month2)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:4 and max(closedate) < last_n_months:3) and count(id) > 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A4+and+max%28closedate%29+%3C+last_n_months%3A3%29+and+count%28id%29+%3E+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-11" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Returning Customers (Month 3)",
+            "libraryAlias" :"SFReturningCustomers(Month3)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:3 and max(closedate) < last_n_months:2) and count(id) > 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A3+and+max%28closedate%29+%3C+last_n_months%3A2%29+and+count%28id%29+%3E+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-12" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Returning Customers (Month 4)",
+            "libraryAlias" :"SFReturningCustomers(Month4)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:2 and max(closedate) < last_n_months:1) and count(id) > 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A2+and+max%28closedate%29+%3C+last_n_months%3A1%29+and+count%28id%29+%3E+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-13" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Returning Customers (Month 5)",
+            "libraryAlias" :"SFReturningCustomers(Month5)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having ( max(closedate) >= last_n_months:1 and max(closedate) < this_month) and count(id) > 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+%28+max%28closedate%29+%3E%3D+last_n_months%3A1+and+max%28closedate%29+%3C+this_month%29+and+count%28id%29+%3E+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-14" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Returning Customers (Month 6)",
+            "libraryAlias" :"SFReturningCustomers(Month6)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(id) id_count, max(closedate) max_date from opportunity where isclosed=true and iswon=true group by accountid having max(closedate) = this_month and count(id) > 1 order by max(closedate) desc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28id%29+id_count%2C+max%28closedate%29+max_date+from+opportunity%0D%0Awhere+isclosed%3Dtrue+and+iswon%3Dtrue%0D%0Agroup++by+accountid%0D%0Ahaving+max%28closedate%29+%3D+this_month+and+count%28id%29+%3E+1%0D%0Aorder+by+max%28closedate%29+desc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-15" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Total Transactions (6 Months)",
+            "libraryAlias" :"SFTotalTransactions(6Months)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "select count(Id) transaction_count, calendar_month(closeDate) month, calendar_year(closeDate) year from opportunity where isWon =true and isClosed = true and (CloseDate = last_n_months:5 or closeDate = this_month) group by calendar_month(closeDate), calendar_year(closeDate) order by calendar_year(closeDate) asc, calendar_month(closeDate) asc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=select+count%28Id%29+transaction_count%2C++calendar_month%28closeDate%29+month%2C+calendar_year%28closeDate%29+year+from+opportunity%0D%0A+where+isWon+%3Dtrue+and+isClosed+%3D+true+and+%28CloseDate+%3D+last_n_months%3A5+or+closeDate+%3D+this_month%29%0D%0Agroup+by+calendar_month%28closeDate%29%2C+calendar_year%28closeDate%29%0D%0Aorder+by+calendar_year%28closeDate%29+asc%2C+calendar_month%28closeDate%29+asc",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        },
+        "salesforce-16" : {
+            "service" : "salesforce",
+            "type" : "salesforce",
+            "format" : "json",
+            "name" :"Salesforce Total Revenue (6 Months)",
+            "libraryAlias" :"SFTotalRevenue(6Months)",
+            "refreshInterval" : 14400,
+            "description" :".Originates from the Gallery.",
+            "props":{
+                "SOQLQuery": "SELECT sum(amount) total_amount, calendar_month(closeDate) month, calendar_year(closeDate) year from opportunity where isWon =true and isClosed = true and (CloseDate = last_n_months:5 or closeDate = this_month) group by calendar_month(closeDate), calendar_year(closeDate) order by calendar_year(closeDate) asc, calendar_month(closeDate) asc",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+sum%28amount%29+total_amount%2C++calendar_month%28closeDate%29+month%2C+calendar_year%28closeDate%29+year+from+opportunity%0D%0A+where+isWon+%3Dtrue+and+isClosed+%3D+true+and+%28CloseDate+%3D+last_n_months%3A5+or+closeDate+%3D+this_month%29%0D%0Agroup+by+calendar_month%28closeDate%29%2C+calendar_year%28closeDate%29%0D%0Aorder+by+calendar_year%28closeDate%29+asc%2C+calendar_month%28closeDate%29+asc%0D%0A%0D%0A",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        }
+
+    },
+    "dsMappings": {
+        "googleAnalytics-01": "cd076ffd6401cf6191ecKavyaMallur9",
+        "googleAnalytics-02": "0c067fcd0983a2640d99KavyaMallur9",
+        "salesforce-03": "231c3238e51b485638b2KavyaMallur9",
+        "salesforce-04": "788118e48246a53982d4KavyaMallur9",
+        "salesforce-05": "6979f35ae72488193b8bKavyaMallur9",
+        "salesforce-06": "9417906b1d56264aadb4KavyaMallur9",
+        "salesforce-07": "ba0c637f1461b47d9263KavyaMallur9",
+        "salesforce-08": "1f02f4e202f5226daa3eKavyaMallur9",
+        "salesforce-09": "04fbc1e96ca809695f0dKavyaMallur9",
+        "salesforce-10": "c8bc7e426554271e197cKavyaMallur9",
+        "salesforce-11": "babb3e234f9888df7be1KavyaMallur9",
+        "salesforce-12": "23f276043739bfc55c5bKavyaMallur9",
+        "salesforce-13": "b478bef61c9977036174KavyaMallur9",
+        "salesforce-14": "3fb103cc0387913a1fa7KavyaMallur9",
+        "salesforce-15": "4d60d939df1b2a643f6eKavyaMallur9",
+        "salesforce-16": "e2b7c24239a362fe5761KavyaMallur9"
+    },
+    "services": 
+    [{
+        "service": "google_analytics"
+    },
+    {
+        "service": "salesforce"  
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    },
+    {
+            "type" : "text",
+            "id" : "ds.google_analytics.pagePath",
+            "label" : "Google Analytics Page Path",
+            "description" : "Enter the Page Path.",
+            "isRequired" : true,
+            "urlEncode": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
+}

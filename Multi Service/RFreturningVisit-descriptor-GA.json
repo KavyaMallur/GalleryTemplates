@@ -1,0 +1,104 @@
+{
+    "name": "Rand Fishkin Returning Visit",
+    "description": ". Originates from the Gallery.",
+    "datasources": {
+        "googleAnalytics-01": {
+            "service": "google_analytics",
+            "libraryAlias": "GASessions2nd&3rdVisit(6 Months)",
+            "name": "Google Analytics Sessions 2nd & 3rd Visit (6 Months)",
+            "description": ". Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount<>2_3&max-results=10000",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount<>2_3&max-results=10000",
+                "max_pages": "2",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-02": {
+            "service": "google_analytics",
+            "libraryAlias": "GASessions4thto9thVisit(6 Months)",
+            "name": "Google Analytics Sessions 4th - 9th Visit (6 Months)",
+            "description": ". Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount<>4_10&max-results=10000",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount<>4_10&max-results=10000",
+                "max_pages": "2",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-03": {
+            "service": "google_analytics",
+            "libraryAlias": "GASessions10+Visit(6 Months)",
+            "name": "Google Analytics Sessions 10+ Visit (6 Months)",
+            "description": ". Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount>10&max-results=10000",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount>10&max-results=10000",
+                "max_pages": "2",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-04": {
+            "service": "google_analytics",
+            "libraryAlias": "GAMetricsForReturningVisits(6 Months)",
+            "name": "Google Analytics Metrics for Returning Visitors (6 Months)",
+            "description": ". Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions,ga:pageviewsPerSession,ga:avgTimeOnPage&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount>1&max-results=10000",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:yearMonth&metrics=ga:sessions,ga:pageviewsPerSession,ga:avgTimeOnPage&start-date={date.addMonths(-5).startOfMonth}&end-date={date.today}&segment=sessions::condition::ga:sessionCount>1&max-results=10000",
+                "max_pages": "2",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        }
+    },
+    "dsMappings": {
+        "googleAnalytics-01": "251a6df6f7a2eae2b98aKavyaMallur9",
+        "googleAnalytics-02": "aed2504c1a6775c260e4KavyaMallur9",
+        "googleAnalytics-03": "6e8288ba09f1a4eeaad2KavyaMallur9",
+        "googleAnalytics-04": "707dc305fe5d40ac0d8bKavyaMallur9"
+    },
+    "services": [{
+        "service": "google_analytics"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
+}
