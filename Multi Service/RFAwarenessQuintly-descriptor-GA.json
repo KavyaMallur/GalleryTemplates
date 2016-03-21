@@ -1,24 +1,396 @@
 {
-	"name" : "Rand Fishkin Awareness",
-	"description": " .Originates from the Gallery.",
-
-	"datasources" : {
-		"quintly-01" : {
-			"service": "quintly",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Facebook Metrics (Month 1)",
-			"libraryAlias": "FacebookMetrics(Month1)",
-			"refreshInterval": 14400,
-			"description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.addMonths(-5).startOfMonth.format()}&endTime={date.addMonths(-5).endOfMonth.format()}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
-				"auth_method" : "basic",
-				"basic_auth_username" : "{{auth.quintly.clientId}}",
-				"basic_auth_password" : "{{auth.quintly.apiSecret}}"
-			}
-		},
-        "quintly-02" : {
+    "name": "Rand Fishkin Awareness",
+    "description": "Are people thinking about my brand on the web? Track your monthly social media metrics, press and brand mentions, referring links, and branded search volume with Google Analytics and Quintly. Originates from the Gallery.",
+    "sampleFormulas": {
+        "23888371": {
+            "txt": "array(\"\",\"-0.76152073732718894572002454879111610352993011474609375\",\"-0.80725097341481644175331666701822541654109954833984375\",\"-0.8103550360737703517344243664410896599292755126953125\",\"-0.7620797604464406571622703268076293170452117919921875\",\"-0.79482606643932574019828507516649551689624786376953125\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "-0.76152073732718894572002454879111610352993011474609375"
+                    }, {
+                        "t": "l",
+                        "v": "-0.80725097341481644175331666701822541654109954833984375"
+                    }, {
+                        "t": "l",
+                        "v": "-0.8103550360737703517344243664410896599292755126953125"
+                    }, {
+                        "t": "l",
+                        "v": "-0.7620797604464406571622703268076293170452117919921875"
+                    }, {
+                        "t": "l",
+                        "v": "-0.79482606643932574019828507516649551689624786376953125"
+                    }]
+                }]
+            }
+        },
+        "41570996": {
+            "txt": "array(\"Jan 16\",\"6.94399999999999995026200849679298698902130126953125\",\"620.4959999999999809006112627685070037841796875\",\"1459.23199999999997089616954326629638671875\",\"117.551999999999992496668710373342037200927734375\",\"8985.039999999999054125510156154632568359375\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Jan 16"
+                    }, {
+                        "t": "l",
+                        "v": "6.94399999999999995026200849679298698902130126953125"
+                    }, {
+                        "t": "l",
+                        "v": "620.4959999999999809006112627685070037841796875"
+                    }, {
+                        "t": "l",
+                        "v": "1459.23199999999997089616954326629638671875"
+                    }, {
+                        "t": "l",
+                        "v": "117.551999999999992496668710373342037200927734375"
+                    }, {
+                        "t": "l",
+                        "v": "8985.039999999999054125510156154632568359375"
+                    }]
+                }]
+            }
+        },
+        "31a147b3": {
+            "txt": "\"https://static.klipfolio.com/images/rand-fishkin-dashboard/awareness.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/images/rand-fishkin-dashboard/awareness.png"
+                }]
+            }
+        },
+        "f4146c66": {
+            "txt": "array(\"\",\"Facebook Posts\",\"Facebook Fans\",\"Twitter Followers\",\"Brand Mentions\",\"Branded Search\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "Facebook Posts"
+                    }, {
+                        "t": "l",
+                        "v": "Facebook Fans"
+                    }, {
+                        "t": "l",
+                        "v": "Twitter Followers"
+                    }, {
+                        "t": "l",
+                        "v": "Brand Mentions"
+                    }, {
+                        "t": "l",
+                        "v": "Branded Search"
+                    }]
+                }]
+            }
+        },
+        "983b6e0f": {
+            "txt": "array(\"Oct 15\",\"23.29599999999999937472239253111183643341064453125\",\"1941.8879999999999199644662439823150634765625\",\"4526.079999999999927240423858165740966796875\",\"432.6399999999999863575794734060764312744140625\",\"12586.495999999999185092747211456298828125\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Oct 15"
+                    }, {
+                        "t": "l",
+                        "v": "23.29599999999999937472239253111183643341064453125"
+                    }, {
+                        "t": "l",
+                        "v": "1941.8879999999999199644662439823150634765625"
+                    }, {
+                        "t": "l",
+                        "v": "4526.079999999999927240423858165740966796875"
+                    }, {
+                        "t": "l",
+                        "v": "432.6399999999999863575794734060764312744140625"
+                    }, {
+                        "t": "l",
+                        "v": "12586.495999999999185092747211456298828125"
+                    }]
+                }]
+            }
+        },
+        "ea5328c7": {
+            "txt": "array(\"Nov 15\",\"26.10000000000000142108547152020037174224853515625\",\"1244.448000000000092768459580838680267333984375\",\"2913.80400000000008731149137020111083984375\",\"201.49200000000001864464138634502887725830078125\",\"16116.228000000000974978320300579071044921875\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Nov 15"
+                    }, {
+                        "t": "l",
+                        "v": "26.10000000000000142108547152020037174224853515625"
+                    }, {
+                        "t": "l",
+                        "v": "1244.448000000000092768459580838680267333984375"
+                    }, {
+                        "t": "l",
+                        "v": "2913.80400000000008731149137020111083984375"
+                    }, {
+                        "t": "l",
+                        "v": "201.49200000000001864464138634502887725830078125"
+                    }, {
+                        "t": "l",
+                        "v": "16116.228000000000974978320300579071044921875"
+                    }]
+                }]
+            }
+        },
+        "f617a07c": {
+            "txt": "array(\"\",\"0.12036401098901107487026962417075992561876773834228515625\",\"-0.359155625865137384522540742182172834873199462890625\",\"-0.356219068156108542577698017339571379125118255615234375\",\"-0.53427329881656804300149588016211055219173431396484375\",\"0.28043801865110051796392554024350829422473907470703125\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "0.12036401098901107487026962417075992561876773834228515625"
+                    }, {
+                        "t": "l",
+                        "v": "-0.359155625865137384522540742182172834873199462890625"
+                    }, {
+                        "t": "l",
+                        "v": "-0.356219068156108542577698017339571379125118255615234375"
+                    }, {
+                        "t": "l",
+                        "v": "-0.53427329881656804300149588016211055219173431396484375"
+                    }, {
+                        "t": "l",
+                        "v": "0.28043801865110051796392554024350829422473907470703125"
+                    }]
+                }]
+            }
+        },
+        "8e0b8cee": {
+            "txt": "array(\"Dec 15\",\"25.4849999999999994315658113919198513031005859375\",\"2060.88700000000017098500393331050872802734375\",\"4901.614999999999781721271574497222900390625\",\"382.27500000000003410605131648480892181396484375\",\"24344.97100000000136788003146648406982421875\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Dec 15"
+                    }, {
+                        "t": "l",
+                        "v": "25.4849999999999994315658113919198513031005859375"
+                    }, {
+                        "t": "l",
+                        "v": "2060.88700000000017098500393331050872802734375"
+                    }, {
+                        "t": "l",
+                        "v": "4901.614999999999781721271574497222900390625"
+                    }, {
+                        "t": "l",
+                        "v": "382.27500000000003410605131648480892181396484375"
+                    }, {
+                        "t": "l",
+                        "v": "24344.97100000000136788003146648406982421875"
+                    }]
+                }]
+            }
+        },
+        "11f9c0cb": {
+            "txt": "array(\"\",\"-0.0235632183908046737019770233700910466723144054412841796875\",\"0.6560651790994882492924489270080812275409698486328125\",\"0.6822047742401340375550944372662343084812164306640625\",\"0.8972217259246024756436099778511561453342437744140625\",\"0.5105874029580619311019518136163242161273956298828125\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "-0.0235632183908046737019770233700910466723144054412841796875"
+                    }, {
+                        "t": "l",
+                        "v": "0.6560651790994882492924489270080812275409698486328125"
+                    }, {
+                        "t": "l",
+                        "v": "0.6822047742401340375550944372662343084812164306640625"
+                    }, {
+                        "t": "l",
+                        "v": "0.8972217259246024756436099778511561453342437744140625"
+                    }, {
+                        "t": "l",
+                        "v": "0.5105874029580619311019518136163242161273956298828125"
+                    }]
+                }]
+            }
+        },
+        "d00afbbb": {
+            "txt": "array(\"\",\"-0.72752599568373554905775790757616050541400909423828125\",\"-0.69891799016637012886832280855742283165454864501953125\",\"-0.7022956719366983957542061034473590552806854248046875\",\"-0.6924936237002159433728820658870972692966461181640625\",\"-0.63092829315754783703340535794268362224102020263671875\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "-0.72752599568373554905775790757616050541400909423828125"
+                    }, {
+                        "t": "l",
+                        "v": "-0.69891799016637012886832280855742283165454864501953125"
+                    }, {
+                        "t": "l",
+                        "v": "-0.7022956719366983957542061034473590552806854248046875"
+                    }, {
+                        "t": "l",
+                        "v": "-0.6924936237002159433728820658870972692966461181640625"
+                    }, {
+                        "t": "l",
+                        "v": "-0.63092829315754783703340535794268362224102020263671875"
+                    }]
+                }]
+            }
+        },
+        "6c1ebc7d": {
+            "txt": "array(\"Feb 16\",\"1.6559999999999999165112285481882281601428985595703125\",\"119.599999999999994315658113919198513031005859375\",\"276.7359999999999899955582804977893829345703125\",\"27.967999999999999971578290569595992565155029296875\",\"1843.495999999999867213773541152477264404296875\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Feb 16"
+                    }, {
+                        "t": "l",
+                        "v": "1.6559999999999999165112285481882281601428985595703125"
+                    }, {
+                        "t": "l",
+                        "v": "119.599999999999994315658113919198513031005859375"
+                    }, {
+                        "t": "l",
+                        "v": "276.7359999999999899955582804977893829345703125"
+                    }, {
+                        "t": "l",
+                        "v": "27.967999999999999971578290569595992565155029296875"
+                    }, {
+                        "t": "l",
+                        "v": "1843.495999999999867213773541152477264404296875"
+                    }]
+                }]
+            }
+        },
+        "94fb366a": {
+            "txt": "array(\"Mar 16\",\"0.80477182351827314388259537736303173005580902099609375\",\"62.3461465631509241802632459439337253570556640625\",\"146.610490437417155362709308974444866180419921875\",\"13.3024048475667502344776949030347168445587158203125\",\"616.3605377769362121398444287478923797607421875\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Mar 16"
+                    }, {
+                        "t": "l",
+                        "v": "0.80477182351827314388259537736303173005580902099609375"
+                    }, {
+                        "t": "l",
+                        "v": "62.3461465631509241802632459439337253570556640625"
+                    }, {
+                        "t": "l",
+                        "v": "146.610490437417155362709308974444866180419921875"
+                    }, {
+                        "t": "l",
+                        "v": "13.3024048475667502344776949030347168445587158203125"
+                    }, {
+                        "t": "l",
+                        "v": "616.3605377769362121398444287478923797607421875"
+                    }]
+                }]
+            }
+        },
+        "6404e768": {
+            "txt": "array(\"\",\"-0.51402667661940026899713984676054678857326507568359375\",\"-0.478711149137534042186103988569811917841434478759765625\",\"-0.470215329998926179211338194363634102046489715576171875\",\"-0.5243705360566808248989900675951503217220306396484375\",\"-0.66565669913200997687141580172465182840824127197265625\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": ""
+                    }, {
+                        "t": "l",
+                        "v": "-0.51402667661940026899713984676054678857326507568359375"
+                    }, {
+                        "t": "l",
+                        "v": "-0.478711149137534042186103988569811917841434478759765625"
+                    }, {
+                        "t": "l",
+                        "v": "-0.470215329998926179211338194363634102046489715576171875"
+                    }, {
+                        "t": "l",
+                        "v": "-0.5243705360566808248989900675951503217220306396484375"
+                    }, {
+                        "t": "l",
+                        "v": "-0.66565669913200997687141580172465182840824127197265625"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "quintly-01": {
+            "service": "quintly",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Facebook Metrics (Month 1)",
+            "libraryAlias": "FacebookMetrics(Month1)",
+            "refreshInterval": 14400,
+            "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.addMonths(-5).startOfMonth.format()}&endTime={date.addMonths(-5).endOfMonth.format()}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
+            }
+        },
+        "quintly-02": {
             "service": "quintly",
             "type": "simple_rest",
             "format": "json",
@@ -28,12 +400,12 @@
             "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
             "props": {
                 "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.addMonths(-4).startOfMonth.format()}&endTime={date.addMonths(-4).endOfMonth.format()}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
             }
         },
-        "quintly-03" : {
+        "quintly-03": {
             "service": "quintly",
             "type": "simple_rest",
             "format": "json",
@@ -43,12 +415,12 @@
             "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
             "props": {
                 "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.addMonths(-3).startOfMonth.format()}&endTime={date.addMonths(-3).endOfMonth.format()}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
             }
         },
-        "quintly-04" : {
+        "quintly-04": {
             "service": "quintly",
             "type": "simple_rest",
             "format": "json",
@@ -58,12 +430,12 @@
             "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
             "props": {
                 "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.addMonths(-2).startOfMonth.format()}&endTime={date.addMonths(-2).endOfMonth.format()}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
             }
         },
-        "quintly-05" : {
+        "quintly-05": {
             "service": "quintly",
             "type": "simple_rest",
             "format": "json",
@@ -73,12 +445,12 @@
             "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
             "props": {
                 "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.addMonths(-1).startOfMonth.format()}&endTime={date.addMonths(-1).endOfMonth.format()}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
             }
         },
-        "quintly-06" : {
+        "quintly-06": {
             "service": "quintly",
             "type": "simple_rest",
             "format": "json",
@@ -88,83 +460,135 @@
             "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
             "props": {
                 "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT+profileId+AS+dim1%2C+fans%2C+name%2C+ownPosts%2C+%28ownPostsLikes%2BownPostsComments%2BownPostsShares%29+AS+interactions%2C+%28%28%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h%2A1.0%29%2F%28responseTime0To2h+%2B+responseTime2To8h+%2B+responseTime8To24h+%2B+responseTimeLongerThan24h+%2B+responseTimeNotResponded%2A1.0%29%29%2A100%29+AS+responseRate%2C+%28%28%28%28ownPostsLikes%2BownPostsComments%2BownPostsShares%2A1.0%29%2FownPosts%29%2F%28%28fansBefore%2Bfans%29%2F2%29%29%2A100%29+AS+interactionRate%2C+peopleTalkingAboutAverageRate%2C+%28%28%28%28fans-fansBefore%29%2A1.0%29%2FfansBefore%29%2A100%29+AS+fansChangeRate+FROM+facebook+INNER+JOIN+profiles+ON facebook.profileId=profiles.id&startTime={date.startOfMonth.format()}&endTime={date.today}&interval=total&profileIds={{ds.quintly.FBprofileId}}",
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
             }
         },
-        "quintly-07" : {
+        "quintly-07": {
             "service": "quintly",
             "type": "simple_rest",
             "format": "json",
-            "name": "Facebook Metrics (Month 6)",
-            "libraryAlias": "FacebookMetrics(Month6)",
+            "name": "Twitter Metrics (6 Months)",
+            "libraryAlias": "TwitterMetrics(6Months)",
             "refreshInterval": 14400,
-            "description": "Get Facebook metrics from Quintly. Originates from the Gallery.",
+            "description": "Get Twitter metrics from Quintly. Originates from the Gallery.",
             "props": {
                 "endpoint_url": "https://api.quintly.com/v0.9/qql?qqlQuery=SELECT%20name%20AS%20pageName,%20time,%20profileId,%20mentions,%20followers%20FROM%20twitter%20INNER%20JOIN%20profiles%20ON%20twitter.profileId=profiles.id&startTime={date.add(-200).format()}&endTime={date.today}&interval=daily&profileIds={{ds.quintly.TWprofileId}}",
-                "auth_method" : "basic",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
+            }
+        },
+        "google_analytics-08": {
+            "service": "google_analytics",
+            "type": "google_analytics",
+            "name": "RF_GA_Branded Search (6 Months)",
+            "libraryAlias": "RF_GA_BrandedSearch(6Months)",
+            "description": "  ",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date={date.addMonths(-5).format()}&end-date={date.today.format()}&metrics=ga:users,ga:bounceRate,ga:goalStartsAll,ga:avgTimeOnPage,ga:sessions&dimensions=ga:landingPagePath,ga:yearMonth&filters=ga:landingPagePath=={{ds.google_analytics.pagePath}}&segment=gaid::-5",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date={date.addMonths(-5).format()}&end-date={date.today.format()}&metrics=ga:users,ga:bounceRate,ga:goalStartsAll,ga:avgTimeOnPage,ga:sessions&dimensions=ga:landingPagePath,ga:yearMonth&filters=ga:landingPagePath=={{ds.google_analytics.pagePath}}&segment=gaid::-5",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
             }
         }
-	},
-
-	"dsMappings": {
-		"quintly-01": "de3ed6a4af43f83a9f39KavyaMallur9",
+    },
+    "dsMappings": {
+        "quintly-01": "de3ed6a4af43f83a9f39KavyaMallur9",
         "quintly-02": "8a3faaf688cde6168321KavyaMallur9",
         "quintly-03": "e196dbee82378b9e270fKavyaMallur9",
         "quintly-04": "760128f099bd09fababcKavyaMallur9",
         "quintly-05": "234a251228125e9be0f2KavyaMallur9",
-        "quintly-06": "bc26848ec0c13699a063KavyaMallur9"
-						
-
-	},
-	"services" : [
-		{
-			"service" : "quintly"
-		}
-	],
-	"datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.quintly.FBprofileId",
-            "label" : "Your Profile",
-            "description":"Select your <b>Quintly Facebook Profile</b> and your <b>Quintly Twitter Profile</b>."   
+        "quintly-06": "bc26848ec0c13699a063KavyaMallur9",
+        "quintly-07": "83c2ea4d0e26ce62b197KavyaMallur9",
+        "google_analytics-08": "fb1aab94dc7a68521384spilkemosewa"
+    },
+    "services": [{
+        "service": "quintly"
+    }, {
+        "service": "google_analytics"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.quintly.FBprofileId",
+        "label": "Facebook Profile",
+        "description": "Select your <b>Quintly Facebook Profile</b> and your <b>Quintly Twitter Profile</b>.",
+        "onChangeQueries": ["q3"]
+    }, {
+        "type": "select",
+        "id": "ds.quintly.TWprofileId",
+        "label": "Twitter Profile"
+    }, {
+        "type": "text",
+        "id": "ds.google_analytics.pagePath",
+        "label": "Homepage Path",
+        "ghostText": "/index.php",
+        "description": "Enter your website homepage path (you set this in Google Analytics).",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
         },
-        {
-            "type" : "select",
-            "id" : "ds.quintly.TWprofileId",
-            "label" : "Competitor Profile"
-        }
-    ],
-    "queries": [
-        {
-            "errorMessage":"Make sure you have the correct Quintly Client ID and API Secret.",
-            "connector": {
-                "service": "quintly",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.quintly.com/v0.9/list-profiles",
-                "basic_auth_username" : "{{auth.quintly.clientId}}",
-                "basic_auth_password" : "{{auth.quintly.apiSecret}}"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.quintly.profileId1", 
-                    "propField" : "options", 
-                    "labels": "/data/platformUsername[preceding-sibling::platformType='facebook']",  
-                    "values": "/data/id[following-sibling::platformType='facebook']" 
-                },
-                {
-                    "propId" : "ds.quintly.profileId2", 
-                    "propField" : "options", 
-                    "labels": "/data/platformUsername[preceding-sibling::platformType='facebook']",  
-                    "values": "/data/id[following-sibling::platformType='facebook']" 
-                }
-            ]
-        }
-    ]
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }, {
+        "id": "q2",
+        "errorMessage": "Make sure you have the correct Quintly Client ID and API Secret.",
+        "connector": {
+            "service": "quintly",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.quintly.com/v0.9/list-profiles",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
+            }
+        },
+        "results": [{
+            "propId": "ds.quintly.FBprofileId",
+            "propField": "options",
+            "labels": "/data/platformUsername[preceding-sibling::platformType='facebook']",
+            "values": "/data/id[following-sibling::platformType='facebook']"
+        }]
+    }, {
+        "id": "q3",
+        "errorMessage": "Make sure you have the correct Quintly Client ID and API Secret.",
+        "connector": {
+            "service": "quintly",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.quintly.com/v0.9/list-profiles",
+                "basic_auth_username": "{{auth.quintly.clientId}}",
+                "basic_auth_password": "{{auth.quintly.apiSecret}}"
+            }
+        },
+        "results": [{
+            "propId": "ds.quintly.TWprofileId",
+            "propField": "options",
+            "labels": "/data/platformUsername[preceding-sibling::platformType='twitter']",
+            "values": "/data/id[following-sibling::platformType='twitter']"
+        }]
+    }]
 }
