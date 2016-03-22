@@ -1,5 +1,5 @@
 {
-	"name" : "Swrve Revenue",
+	"name" : "Swrve Avg Revenue Per User and Paying User",
 	"description": "Show daily revenue, average revenue per user and average revenue per paying user. Originates from the Gallery.",
 
 	"datasources" : {
@@ -12,7 +12,7 @@
 			"refreshInterval": 14400,
 			"description": "See your app's daily average revenue per paying user. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/kpi/arppu_daily.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/arppu_daily.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
 				"method": "GET"
 			}
 		},
@@ -25,7 +25,7 @@
 			"refreshInterval": 14400,
 			"description": "See your app's daily average revenue per user. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/kpi/arpu_daily.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/arpu_daily.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
 				"method": "GET"
 			}
 		}
@@ -38,6 +38,20 @@
 	"services" : [
 		{
 			"service" : "swrve"
+		}
+	],
+	"datasourceConfigModel" : [
+		{
+			"type" : "select",
+			"id" : "ds.swrve.dataCenter",
+			"label" : "Data Center",
+			"description" : "Select data center.",
+			"options": [
+                {"value":"dashboard","label":"US"},
+                {"value":"eu-dashboard","label":"EU"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "metric"
 		}
 	]
 

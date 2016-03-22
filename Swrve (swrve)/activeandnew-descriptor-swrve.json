@@ -12,7 +12,7 @@
 			"refreshInterval": 14400,
 			"description": "See the daily new users of your mobile app. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/kpi/new_users.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/new_users.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
 				"method": "GET"
 			}
 		},
@@ -25,7 +25,7 @@
 			"refreshInterval": 14400,
 			"description": "See the daily active users of your mobile app. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/kpi/dau.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/dau.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
 				"method": "GET"
 			}
 		}
@@ -40,6 +40,21 @@
 	"services" : [
 		{
 			"service" : "swrve"
+		}
+	],
+
+	"datasourceConfigModel" : [
+		{
+			"type" : "select",
+			"id" : "ds.swrve.dataCenter",
+			"label" : "Data Center",
+			"description" : "Select data center.",
+			"options": [
+                {"value":"dashboard","label":"US"},
+                {"value":"eu-dashboard","label":"EU"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "metric"
 		}
 	]
 

@@ -12,7 +12,7 @@
 			"refreshInterval": 14400,
 			"description": "Monitor Swrve event activity over the past 30 days. Originates from the Gallery.",
 			"props": {
-				"endpoint_url": "https://dashboard.swrve.com/api/1/exporter/event/count.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&name={{ds.swrve.eventName}}",
+				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/event/count.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&name={{ds.swrve.eventName}}",
 				"method": "GET"
 			}
 		}
@@ -20,8 +20,6 @@
 
 	"dsMappings": {
 		"swrve-01": "aa70e4303a62991f0957natceewzhere"
-		
-
 	},
 
 
@@ -32,6 +30,18 @@
 	],
 	"datasourceConfigModel" : [
 		{
+			"type" : "select",
+			"id" : "ds.swrve.dataCenter",
+			"label" : "Data Center",
+			"description" : "Select data center.",
+			"options": [
+                {"value":"dashboard","label":"US"},
+                {"value":"eu-dashboard","label":"EU"}
+            ],
+            "isRequired" : true,
+            "selectedValue": "metric"
+		},
+		{
 			"type" : "text",
 			"id" : "ds.swrve.eventName",
 			"label" : "Event Name",
@@ -39,5 +49,4 @@
 			"isRequired" : true
 		}
 	]
-
 }
