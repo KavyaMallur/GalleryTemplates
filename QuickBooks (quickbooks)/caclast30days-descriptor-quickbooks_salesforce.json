@@ -2,6 +2,86 @@
     "name": "Quickbooks & Salesforce: CAC (Last 30 Days)",
     "description": "Mash up your Quickbooks and Salesforce data to compute your Customer Acquisition Cost for the last 30 days. Originates from the Gallery.",
 
+    "sampleFormulas": {
+        "9c58bca6-1": {
+            "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/quickbooks.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/quickbooks.png"
+                }]
+            }
+        },
+        "92d4b2e3-4": {
+            "txt": "\"+\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "+"
+                }]
+            }
+        },
+        "a9ab9de5-1": {
+            "txt": "\" https://static.klipfolio.com/static/klips/saas/templates/badges/salesforce.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": " https://static.klipfolio.com/static/klips/saas/templates/badges/salesforce.png"
+                }]
+            }
+        },
+        "c238e798-5": {
+            "txt": "\"15085.001\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 15085.001
+                }]
+            }
+        },
+        "215cfdea-6": {
+            "txt": "\"CAC Value\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "CAC Value"
+                }]
+            }
+        },
+        "4425ddf4": {
+            "txt": "\"-0.29994125261454629427504414707073010504245758056640625\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "-0.29994125261454629427504414707073010504245758056640625"
+                }]
+            }
+        },
+        "8d487d8a": {
+            "txt": "\"21548.193\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 21548.193
+                }]
+            }
+        }
+    },
+
     "datasources": {
         "quickbooks-01": {
             "service": "quickbooks",
@@ -27,15 +107,15 @@
                 "endpoint_url": "https://quickbooks.api.intuit.com/v3/company/{{ds.quickbooks.companyID}}/reports/ProfitAndLoss?minorversion=5&start_date={date.add(-60).format('yyyy-MM-dd')}&end_date={date.add(-31).format('yyyy-MM-dd')}&summarize_column_by=Days"
             }
         },
-        "salesforce" : {
-            "service" : "salesforce",
-            "type" : "salesforce",
-            "format" : "json",
-            "name" :"Salesforce New Customers (Last 60 Days)",
-            "libraryAlias" :"SalesforceNewCustomers(Last60Days)",
-            "refreshInterval" : 14400,
-            "description" :"Retrieve the list of New Customer in the last 60 Days. Originates from the Gallery.",
-            "props":{
+        "salesforce": {
+            "service": "salesforce",
+            "type": "salesforce",
+            "format": "json",
+            "name": "Salesforce New Customers (Last 60 Days)",
+            "libraryAlias": "SalesforceNewCustomers(Last60Days)",
+            "refreshInterval": 14400,
+            "description": "Retrieve the list of New Customer in the last 60 Days. Originates from the Gallery.",
+            "props": {
                 "SOQLQuery": "SELECT Type, StageName, CloseDate, Amount, Probability FROM Opportunity WHERE CloseDate < Today AND CloseDate >= LAST_N_DAYS:60 AND Probability = 100",
                 "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Type%2C+StageName%2C+CloseDate%2C+Amount%2C+Probability%0D%0AFROM+Opportunity%0D%0AWHERE+CloseDate+%3C+Today+AND+CloseDate+%3E%3D+LAST_N_DAYS%3A60+AND+Probability+%3D+100",
                 "instance": "{{auth.salesforce.instanceName}}"
@@ -62,9 +142,10 @@
         "description": "Enter your QuickBooks Company ID. Need help? See <a href='https://support.klipfolio.com/hc/en-us/' target='_blank'>Klip Gallery: QuickBooks</a>.",
         "label": "Company ID",
         "ghostText": "12345678910",
-        "isRequired": true
-    },
-    {
+        "isRequired": true,
+        "debounceEnabled": true,
+        "onChangeQueries": ["q1"]
+    }, {
         "type": "select",
         "id": "ds.quickbooks.expenseName",
         "label": "Name of Expense",
@@ -72,6 +153,7 @@
         "isRequired": true
     }],
     "queries": [{
+        "id": "q1",
         "errorMessage": "Every time you log into your account while adding a Klip, you are creating a new OAuth token.<br><br>1. Be sure to select the newest token for each service, because old tokens become invalid when new tokens are created.<br><br>2. From time to time, your OAuth tokens will expire. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
         "connector": {
             "service": "quickbooks",

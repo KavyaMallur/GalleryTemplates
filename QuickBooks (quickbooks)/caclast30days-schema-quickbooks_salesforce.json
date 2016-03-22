@@ -41,8 +41,7 @@
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [],
                "horizAlign": 2
             },
             {
@@ -71,8 +70,7 @@
                      }
                   }
                ],
-               "data": [
-               ],
+               "data": [],
                "align": "c",
                "wrap": true
             },
@@ -100,8 +98,7 @@
                      }
                   }
                ],
-               "data": [
-               ]
+               "data": []
             },
             {
                "type": "simple_value",
@@ -121,11 +118,11 @@
                      "size": "3",
                      "fmt": "cur",
                      "fmtArgs": {
-                        "precision": "2"
+                        "precision": "0"
                      },
                      "formulas": [
                         {
-                           "txt": "(af02ff08d70da8afe008doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='Advertising & Promotion']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-30\"),yesterday())))",
+                           "txt": "(af02ff08d70da8afe008doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-30\"),yesterday())))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -138,7 +135,7 @@
                                           "t": "d",
                                           "v": {
                                              "id": "af02ff08d70da8afe008doogeraspilk",
-                                             "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='Advertising & Promotion']/ColData[last()]/value"
+                                             "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value"
                                           }
                                        },
                                        {
@@ -173,7 +170,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "timezone",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
                                                             }
                                                          }
                                                       ]
@@ -191,7 +190,9 @@
                                                                   "v": null,
                                                                   "arg_obj": {
                                                                      "placeholder": "timezone",
-                                                                     "optional": true
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
                                                                   }
                                                                }
                                                             ]
@@ -215,7 +216,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "timezone",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
                                                             }
                                                          }
                                                       ]
@@ -230,8 +233,7 @@
                            }
                         }
                      ],
-                     "data": [
-                     ],
+                     "data": [],
                      "align": "r"
                   },
                   {
@@ -262,8 +264,7 @@
                            }
                         }
                      ],
-                     "data": [
-                     ],
+                     "data": [],
                      "align": "r",
                      "font_style": "regular",
                      "wrap": "active"
@@ -299,7 +300,7 @@
                      "size": "2",
                      "fmt": "pct",
                      "fmtArgs": {
-                        "precision": "0"
+                        "precision": "2"
                      },
                      "conditions": [
                         {
@@ -366,49 +367,78 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "(((af02ff08d70da8afe008doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='Advertising & Promotion']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-30\"),yesterday()))))/((46657a0a25e76e967252doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='Advertising & Promotion']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\"))))))-\"1\"",
+                           "txt": "substitute(((((af02ff08d70da8afe008doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(yesterday(),\"5\",\"-30\"),yesterday()))))/((46657a0a25e76e967252doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\"))))))-\"1\"),\"Infinity\",\"\")",
                            "src": {
-                              "v": false,
                               "t": "expr",
+                              "v": false,
                               "c": [
                                  {
-                                    "v": false,
-                                    "t": "expr",
+                                    "t": "f",
+                                    "v": "substitute",
                                     "c": [
                                        {
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "c238e798-5"
-                                          },
-                                          "t": "ref"
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "c238e798-5"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "8d487d8a"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1"
+                                             }
+                                          ]
                                        },
                                        {
-                                          "v": "/",
-                                          "t": "o"
+                                          "t": "l",
+                                          "v": "Infinity"
                                        },
                                        {
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "8d487d8a"
-                                          },
-                                          "t": "ref"
+                                          "t": "l",
+                                          "v": ""
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true,
+                                             "description": "Occurrence of substitution.",
+                                             "default": "all"
+                                          }
                                        }
                                     ]
-                                 },
-                                 {
-                                    "v": "-",
-                                    "t": "o"
-                                 },
-                                 {
-                                    "v": "1",
-                                    "t": "l"
                                  }
                               ]
                            }
                         }
                      ],
-                     "data": [
-                     ]
+                     "data": []
                   },
                   {
                      "type": "label",
@@ -419,13 +449,13 @@
                      "size": 1,
                      "fmt": "cur",
                      "fmtArgs": {
-                        "precision": "2",
+                        "precision": "0",
                         "prefix": "vs ",
-                        "suffix": " prev 30 days"
+                        "suffix": " prev. 30 days"
                      },
                      "formulas": [
                         {
-                           "txt": "(46657a0a25e76e967252doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='Advertising & Promotion']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\"))))",
+                           "txt": "(46657a0a25e76e967252doogeraspilk@ //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value;/countif(between(date(8dc8bc7ed326578c5403doogeraspilk@/records/CloseDate;,\"yyyy-MM-dd\"),date_add(today(),\"5\",\"-60\"),date_add(today(),\"5\",\"-31\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -438,7 +468,7 @@
                                           "t": "d",
                                           "v": {
                                              "id": "46657a0a25e76e967252doogeraspilk",
-                                             "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='Advertising & Promotion']/ColData[last()]/value"
+                                             "a": " //Rows[preceding-sibling::Header//value='Expenses']//*[descendant::value='{{ds.quickbooks.expenseName}}']/ColData[last()]/value"
                                           }
                                        },
                                        {
@@ -473,7 +503,9 @@
                                                             "v": null,
                                                             "arg_obj": {
                                                                "placeholder": "timezone",
-                                                               "optional": true
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
                                                             }
                                                          }
                                                       ]
@@ -491,7 +523,9 @@
                                                                   "v": null,
                                                                   "arg_obj": {
                                                                      "placeholder": "timezone",
-                                                                     "optional": true
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
                                                                   }
                                                                }
                                                             ]
@@ -519,7 +553,9 @@
                                                                   "v": null,
                                                                   "arg_obj": {
                                                                      "placeholder": "timezone",
-                                                                     "optional": true
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
                                                                   }
                                                                }
                                                             ]
@@ -544,8 +580,7 @@
                            }
                         }
                      ],
-                     "data": [
-                     ],
+                     "data": [],
                      "font_colour": "cx-color_888",
                      "font_style": "regular"
                   }
