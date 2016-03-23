@@ -91,10 +91,7 @@
             "refreshInterval": 14400,
             "description": "Retrieve the projects in your harvest account. Originates from the Gallery.",
             "props": {
-                "auth_method": "basic",
-                "basic_auth_username": "{{auth.harvest.userName}}",
-                "basic_auth_password": "{{auth.harvest.password}}",
-                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json",
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects.json",
                 "method": "get"
             }
         },
@@ -107,10 +104,7 @@
             "refreshInterval": 14400,
             "description": "Retrieve the analysis of your Harvest project. Originates from the Gallery.",
             "props": {
-                "auth_method": "basic",
-                "basic_auth_username": "{{auth.harvest.userName}}",
-                "basic_auth_password": "{{auth.harvest.password}}",
-                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/analysis.json?period=lifespan",
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/analysis.json?period=lifespan",
                 "method": "get"
             }
         }
@@ -126,6 +120,15 @@
     }],
 
     "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.harvest.subDomain",
+        "description": "Enter your Harvest subdomain. Your subdomain is the first part of your Harvest web address (and it's usually your company name). <br>For example, https://<b>companyname</b>.harvestapp.com.",
+        "label": "Subdomain",
+        "ghostText": "companyname",
+        "isRequired": true,
+        "debounceEnabled": true,
+        "onChangeQueries": ["q1"]
+    },{
         "type": "select",
         "id": "ds.harvest.projectId",
         "label": "Project",
@@ -133,16 +136,14 @@
         "isRequired": true
     }],
     "queries": [{
+        "id": "q1",
         "errorMessage": "Make sure you have the correct Harvest username, password and subdomain. <br><br> When entering your Harvest subdomain, do <b>not</b> enter the whole URL: https://<b>OnlyEnterThisPart</b>.harvestapp.com.",
         "connector": {
             "service": "harvest",
             "type": "simple_rest",
             "format": "json",
             "props": {
-                "auth_method": "basic",
-                "basic_auth_username": "{{auth.harvest.userName}}",
-                "basic_auth_password": "{{auth.harvest.password}}",
-                "endpoint_url": "https://{{auth.harvest.subDomain}}.harvestapp.com/projects.json"
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects.json"
             }
         },
         "results": [{
