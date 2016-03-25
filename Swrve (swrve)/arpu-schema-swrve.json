@@ -1,9 +1,9 @@
 {
-   "title": "Swrve Avg Revenue Per User and Paying User",
+   "title": "Swrve Avg Revenue Per User and Paying User (Last 30 Days)",
    "id": "e8e82592e05b43ad758675e101bcffb8",
    "workspace": {
       "dimensions": {
-         "w": 445
+         "w": 896
       },
       "datasources": [
          "f1e56f704bb784cd7766natceewzhere",
@@ -28,15 +28,22 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "groupby(date_convert(f1e56f704bb784cd7766natceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),f1e56f704bb784cd7766natceewzhere@kf:element_at(/data,2);)",
+                     "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")),date_convert(f1e56f704bb784cd7766natceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),f1e56f704bb784cd7766natceewzhere@kf:element_at(/data,2);)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "groupby",
+                              "v": "lookup",
                               "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "ee8a01d5"
+                                    }
+                                 },
                                  {
                                     "t": "f",
                                     "v": "date_convert",
@@ -64,14 +71,6 @@
                                        "id": "f1e56f704bb784cd7766natceewzhere",
                                        "a": "kf:element_at(/data,2)"
                                     }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "method",
-                                       "optional": true
-                                    }
                                  }
                               ]
                            }
@@ -98,15 +97,22 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "groupby(date_convert(4ae4df24926a03f7cda4natceewzhere @kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),4ae4df24926a03f7cda4natceewzhere @kf:element_at(/data,2);)",
+                     "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")),date_convert(4ae4df24926a03f7cda4natceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),4ae4df24926a03f7cda4natceewzhere@kf:element_at(/data,2);)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "groupby",
+                              "v": "lookup",
                               "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "ee8a01d5"
+                                    }
+                                 },
                                  {
                                     "t": "f",
                                     "v": "date_convert",
@@ -114,7 +120,7 @@
                                        {
                                           "t": "d",
                                           "v": {
-                                             "id": "4ae4df24926a03f7cda4natceewzhere ",
+                                             "id": "4ae4df24926a03f7cda4natceewzhere",
                                              "a": "kf:element_at(/data,1)"
                                           }
                                        },
@@ -131,16 +137,8 @@
                                  {
                                     "t": "d",
                                     "v": {
-                                       "id": "4ae4df24926a03f7cda4natceewzhere ",
+                                       "id": "4ae4df24926a03f7cda4natceewzhere",
                                        "a": "kf:element_at(/data,2)"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "method",
-                                       "optional": true
                                     }
                                  }
                               ]
@@ -168,41 +166,95 @@
                "fmt": "dat",
                "fmtArgs": {
                   "dateFormat": "custom",
-                  "dateFormatCustom": "d.MMM",
-                  "dateInputFormat": "custom",
+                  "dateFormatCustom": "MMM d",
+                  "dateInputFormat": "default",
                   "dateInputFormatCustom": "yyyy-MM-dd"
                },
                "formulas": [
                   {
-                     "txt": "group(date_convert(24ae621d194d7a8efe4b80d57552cf1b@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"))",
+                     "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "group",
+                              "v": "datevalue",
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "date_convert",
+                                    "v": "daterange",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "24ae621d194d7a8efe4b80d57552cf1b",
-                                             "a": "kf:element_at(/data,1)"
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-29"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true,
+                                                   "description": "",
+                                                   "default": "GMT"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "format",
+                                             "description": "required if start and end dates are in a format other than the default (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                             "optional": true
                                           }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "'D-'yyyy-MM-dd"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "yyyy-MM-dd"
                                        }
                                     ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "description": "",
+                                       "default": "GMT",
+                                       "optional": true
+                                    }
                                  }
                               ]
                            }
@@ -212,19 +264,19 @@
                ],
                "data": [
                   [
-                    
+                     
                   ]
                ],
                "label": "Date",
+               "showAxis": false,
                "labelAngle": "-45",
-               "labelDrop": "3",
-               "showLabelTicks": true
+               "labelDrop": "3"
             },
             {
                "type": "chart_axis",
                "role": "axis_y",
                "id": "a9b8713b",
-               "displayName": "ARPU",
+               "displayName": "Amount",
                "fmt": "cur",
                "fmtArgs": {
                   "precision": "2"
@@ -232,7 +284,7 @@
                "formulas": [],
                "data": [],
                "dataDisabled": true,
-               "label": "ARPU",
+               "label": "Amount",
                "showAxis": false,
                "labelDrop": 0,
                "grid": true

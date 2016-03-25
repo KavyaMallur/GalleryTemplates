@@ -1,44 +1,176 @@
 {
-	"name" : "Swrve Daily Sessions",
-	"description": "See the daily session count of your mobile app. Originates from the Gallery.",
+    "name": "Swrve Daily Sessions",
+    "description": "See the daily session count of your mobile app. Originates from the Gallery.",
+    "sampleFormulas": {
+        "2efea173-8": {
+            "txt": "\"1944.1020\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1944.1020"
+                }]
+            }
+        },
+        "f5db99de-9": {
+            "txt": "\"Avg Daily Sessions\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Avg Daily Sessions"
+                }]
+            }
+        },
+        "45a2792c-5": {
+            "txt": "array(\"1105.5600\",\"1119.5040\",\"1108.5480\",\"1119.5040\",\"1117.5120\",\"1119.5040\",\"1103.5680\",\"1087.6320\",\"1116.5160\",\"1109.5440\",\"1125.4800\",\"1115.5200\",\"1114.5240\",\"1113.5280\",\"1113.5280\",\"1127.4720\",\"1138.4280\",\"1104.5640\",\"1124.4840\",\"1102.5720\",\"1093.6080\",\"1096.5960\",\"1121.4960\",\"1129.4640\",\"1111.5360\",\"1119.5040\",\"1113.5280\",\"1098.5880\",\"1093.6080\",\"1119.5040\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1105.5600"
+                    }, {
+                        "t": "l",
+                        "v": "1119.5040"
+                    }, {
+                        "t": "l",
+                        "v": "1108.5480"
+                    }, {
+                        "t": "l",
+                        "v": "1119.5040"
+                    }, {
+                        "t": "l",
+                        "v": "1117.5120"
+                    }, {
+                        "t": "l",
+                        "v": "1119.5040"
+                    }, {
+                        "t": "l",
+                        "v": "1103.5680"
+                    }, {
+                        "t": "l",
+                        "v": "1087.6320"
+                    }, {
+                        "t": "l",
+                        "v": "1116.5160"
+                    }, {
+                        "t": "l",
+                        "v": "1109.5440"
+                    }, {
+                        "t": "l",
+                        "v": "1125.4800"
+                    }, {
+                        "t": "l",
+                        "v": "1115.5200"
+                    }, {
+                        "t": "l",
+                        "v": "1114.5240"
+                    }, {
+                        "t": "l",
+                        "v": "1113.5280"
+                    }, {
+                        "t": "l",
+                        "v": "1113.5280"
+                    }, {
+                        "t": "l",
+                        "v": "1127.4720"
+                    }, {
+                        "t": "l",
+                        "v": "1138.4280"
+                    }, {
+                        "t": "l",
+                        "v": "1104.5640"
+                    }, {
+                        "t": "l",
+                        "v": "1124.4840"
+                    }, {
+                        "t": "l",
+                        "v": "1102.5720"
+                    }, {
+                        "t": "l",
+                        "v": "1093.6080"
+                    }, {
+                        "t": "l",
+                        "v": "1096.5960"
+                    }, {
+                        "t": "l",
+                        "v": "1121.4960"
+                    }, {
+                        "t": "l",
+                        "v": "1129.4640"
+                    }, {
+                        "t": "l",
+                        "v": "1111.5360"
+                    }, {
+                        "t": "l",
+                        "v": "1119.5040"
+                    }, {
+                        "t": "l",
+                        "v": "1113.5280"
+                    }, {
+                        "t": "l",
+                        "v": "1098.5880"
+                    }, {
+                        "t": "l",
+                        "v": "1093.6080"
+                    }, {
+                        "t": "l",
+                        "v": "1119.5040"
+                    }]
+                }]
+            }
+        },
+        "03e9b92b-6": {
+            "txt": "\"1117.3000\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1117.3000"
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "swrve-01": {
+            "service": "swrve",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Swrve Daily Session Count",
+            "libraryAlias": "SwrveDailySessionCount",
+            "refreshInterval": 14400,
+            "description": "See the daily session count of your mobile app. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/session_count.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+                "method": "GET"
+            }
+        }
+    },
 
-	"datasources" : {
-		"swrve-01" : {
-			"service": "swrve",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Swrve Daily Session Count",
-			"libraryAlias": "SwrveDailySessionCount",
-			"refreshInterval": 14400,
-			"description": "See the daily session count of your mobile app. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/session_count.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
-				"method": "GET"
-			}
-		}
-	},
-
-	"dsMappings": {
-		"swrve-01": "0ca909c364edf0dbaba8natceewzhere"
-	},
-	"services" : [
-		{
-			"service" : "swrve"
-		}
-	],
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.swrve.dataCenter",
-			"label" : "Swrve Data Center",
-			"description" : "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
-			"options": [
-                {"value":"dashboard","label":"US"},
-                {"value":"eu-dashboard","label":"EU"}
-            ],
-            "isRequired" : true,
-            "selectedValue": "metric"
-		}
-	]
+    "dsMappings": {
+        "swrve-01": "0ca909c364edf0dbaba8natceewzhere"
+    },
+    "services": [{
+        "service": "swrve"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.swrve.dataCenter",
+        "label": "Swrve Data Center",
+        "description": "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
+        "options": [
+            { "value": "dashboard", "label": "US" },
+            { "value": "eu-dashboard", "label": "EU" }
+        ],
+        "isRequired": true,
+        "selectedValue": "metric"
+    }]
 
 }

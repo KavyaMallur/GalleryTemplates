@@ -1,133 +1,43 @@
 {
-   "title": "Swrve Events ({{ds.swrve.eventName}})",
-   "id": "dc021098f5f5c8966ac1c013b953c50f",
+   "title": "Swrve Event Stats (Last 30 Days)",
+   "id": "66e6dcd73ac4806149790791e938d637",
    "workspace": {
       "datasources": [
-         "aa70e4303a62991f0957natceewzhere"
+         "64bc521e01e8b5f1a6d8KavyaMallur9"
       ],
       "dimensions": {
-         "w": 500
+         "w": 782
       }
    },
    "components": [
       {
-         "type": "chart_series",
-         "id": "8487c378-5",
-         "displayName": "Series Chart",
+         "type": "panel_grid",
+         "id": "4f0c4fb9-1",
+         "displayName": "Layout Grid",
          "components": [
             {
-               "type": "series_data",
-               "role": "series",
-               "id": "544acfe1-6",
-               "displayName": "Events",
-               "fmt": "num",
-               "formulas": [
-                  {
-                     "txt": "groupby(date_convert(aa70e4303a62991f0957natceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),aa70e4303a62991f0957natceewzhere@kf:element_at(/data,2);)",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "groupby",
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "date_convert",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "aa70e4303a62991f0957natceewzhere",
-                                             "a": "kf:element_at(/data,1)"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "'D-'yyyy-MM-dd"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "yyyy-MM-dd"
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "aa70e4303a62991f0957natceewzhere",
-                                       "a": "kf:element_at(/data,2)"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "method",
-                                       "optional": true
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                     
-                  ]
-               ],
-               "seriesName": "Events",
-               "chartStyle": "line",
-               "axis": "476de5e4-8"
-            },
-            {
-               "type": "chart_axis",
-               "role": "axis_x",
-               "id": "56de2e07-7",
-               "displayName": "Date",
-               "fmt": "dat",
+               "type": "label",
+               "id": "113d983a-2",
+               "displayName": "Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "size": "1",
+               "fmt": "txt",
                "fmtArgs": {
-                  "dateInputFormat": "custom",
-                  "dateInputFormatCustom": "yyyy-MM-dd",
-                  "dateFormat": "custom",
-                  "dateFormatCustom": "d.MMM"
+                  "prefix": "<div class style=\"display:inline; font-weight:normal;\">Event: </div>"
                },
                "formulas": [
                   {
-                     "txt": "group(date_convert(aa70e4303a62991f0957natceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"))",
+                     "txt": "\"{{ds.swrve.eventName}}\"",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "f",
-                              "v": "group",
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "date_convert",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "aa70e4303a62991f0957natceewzhere",
-                                             "a": "kf:element_at(/data,1)"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "'D-'yyyy-MM-dd"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "yyyy-MM-dd"
-                                       }
-                                    ]
-                                 }
-                              ]
+                              "t": "l",
+                              "v": "{{ds.swrve.eventName}}"
                            }
                         ]
                      }
@@ -135,30 +45,221 @@
                ],
                "data": [
                   [
-                    
+
                   ]
                ],
-               "label": "Date",
-               "labelAngle": "-45",
-               "labelDrop": "3",
-               "showLabelTicks": true
+               "align": "c",
+               "wrap": true
             },
             {
-               "type": "chart_axis",
-               "role": "axis_y",
-               "id": "476de5e4-8",
-               "displayName": "Number of Events",
-               "fmt": "num",
-               "formulas": [],
-               "data": [],
-               "dataDisabled": true,
-               "label": "Number of Events",
-               "showLabel": true,
-               "showAxis": false,
-               "labelDrop": 0,
-               "grid": true
+               "type": "chart_series",
+               "id": "8487c378-5",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "544acfe1-6",
+                     "displayName": "Event Count",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")),date_convert(64bc521e01e8b5f1a6d8KavyaMallur9@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),64bc521e01e8b5f1a6d8KavyaMallur9@kf:element_at(/data,2);)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "56de2e07-7"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "date_convert",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "64bc521e01e8b5f1a6d8KavyaMallur9",
+                                                   "a": "kf:element_at(/data,1)"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "'D-'yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "64bc521e01e8b5f1a6d8KavyaMallur9",
+                                             "a": "kf:element_at(/data,2)"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                          
+                        ]
+                     ],
+                     "seriesName": "Event Count",
+                     "chartStyle": "line",
+                     "axis": "476de5e4-8"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "56de2e07-7",
+                     "displayName": "Date",
+                     "fmt": "dat",
+                     "fmtArgs": {
+                        "dateInputFormat": "default",
+                        "dateInputFormatCustom": "yyyy-MM-dd",
+                        "dateFormat": "custom",
+                        "dateFormatCustom": "MMM d"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "daterange",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "format",
+                                                   "description": "required if start and end dates are in a format other than the default (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                          
+                        ]
+                     ],
+                     "label": "Date",
+                     "showAxis": false,
+                     "labelAngle": "-45",
+                     "labelDrop": "3"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "476de5e4-8",
+                     "displayName": "Number of Events",
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Number of Events",
+                     "showAxis": false,
+                     "labelDrop": 0,
+                     "grid": true
+                  }
+               ]
             }
-         ]
+         ],
+         "rows": 2,
+         "cols": 1
       }
    ]
 }

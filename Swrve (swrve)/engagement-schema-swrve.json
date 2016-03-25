@@ -29,11 +29,12 @@
                      "type": "label",
                      "role": "primary",
                      "id": "e5ad5510-4",
-                     "displayName": "Primary Value",
+                     "displayName": "Avg Session Length Value",
+                     "renamed": true,
                      "size": "3",
                      "fmt": "num",
                      "fmtArgs": {
-                        "precision": "3"
+                        "precision": "2"
                      },
                      "formulas": [
                         {
@@ -72,7 +73,8 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "data",
-                                             "repeats": true
+                                             "repeats": true,
+                                             "description": ""
                                           }
                                        }
                                     ]
@@ -83,7 +85,7 @@
                      ],
                      "data": [
                         [
-                           
+
                         ]
                      ],
                      "align": "c",
@@ -93,19 +95,20 @@
                      "type": "label",
                      "role": "secondary",
                      "id": "c258172d-5",
-                     "displayName": "Secondary Value",
+                     "displayName": "Avg Session Length Label",
+                     "renamed": true,
                      "size": 1,
                      "fmt": "txt",
                      "formulas": [
                         {
-                           "txt": "\"Avg Session Length in Minutes\"",
+                           "txt": "\"Avg Session Length\"",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "l",
-                                    "v": "Avg Session Length in Minutes"
+                                    "v": "Avg Session Length"
                                  }
                               ]
                            }
@@ -113,7 +116,7 @@
                      ],
                      "data": [
                         [
-                           "Avg Session Length in Minutes"
+
                         ]
                      ],
                      "align": "c",
@@ -134,11 +137,12 @@
                      "type": "label",
                      "role": "primary",
                      "id": "42a8808b-11",
-                     "displayName": "Primary Value",
+                     "displayName": "Avg Playtime Value",
+                     "renamed": true,
                      "size": "3",
                      "fmt": "num",
                      "fmtArgs": {
-                        "precision": "3"
+                        "precision": "2"
                      },
                      "formulas": [
                         {
@@ -177,7 +181,8 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "data",
-                                             "repeats": true
+                                             "repeats": true,
+                                             "description": ""
                                           }
                                        }
                                     ]
@@ -188,7 +193,7 @@
                      ],
                      "data": [
                         [
-                          
+
                         ]
                      ],
                      "align": "c",
@@ -198,19 +203,20 @@
                      "type": "label",
                      "role": "secondary",
                      "id": "3794bcf3-12",
-                     "displayName": "Secondary Value",
+                     "displayName": "Avg Playtime Label",
+                     "renamed": true,
                      "size": 1,
                      "fmt": "txt",
                      "formulas": [
                         {
-                           "txt": "\"Avg Playtime in Minutes\"",
+                           "txt": "\"Avg Playtime\"",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "l",
-                                    "v": "Avg Playtime in Minutes"
+                                    "v": "Avg Playtime"
                                  }
                               ]
                            }
@@ -218,7 +224,7 @@
                      ],
                      "data": [
                         [
-                           "Avg Playtime in Minutes"
+
                         ]
                      ],
                      "align": "c",
@@ -233,7 +239,8 @@
                "layoutConfig": {
                   "x": 0,
                   "y": 1
-               }
+               },
+               "line_style": "ShortDot"
             },
             {
                "type": "chart_series",
@@ -253,15 +260,22 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "groupby(date_convert(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,2);-average(slice(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,2);,\"0\",\"-1\"))))",
+                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")),date_convert(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,2);-average(slice(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,2);,\"0\",\"-1\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "groupby",
+                                    "v": "lookup",
                                     "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "5975c22e-3"
+                                          }
+                                       },
                                        {
                                           "t": "f",
                                           "v": "date_convert",
@@ -269,7 +283,7 @@
                                              {
                                                 "t": "d",
                                                 "v": {
-                                                   "id": "79d53f9b4b76c32330ebniktawuzhere",
+                                                   "id": "b43746e7a42542c3712dniktawuzhere",
                                                    "a": "kf:element_at(/data,1)"
                                                 }
                                              },
@@ -328,20 +342,13 @@
                                                       "v": null,
                                                       "arg_obj": {
                                                          "placeholder": "data",
-                                                         "repeats": true
+                                                         "repeats": true,
+                                                         "description": ""
                                                       }
                                                    }
                                                 ]
                                              }
                                           ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "method",
-                                             "optional": true
-                                          }
                                        }
                                     ]
                                  }
@@ -351,7 +358,7 @@
                      ],
                      "data": [
                         [
-                          
+
                         ]
                      ],
                      "seriesName": "Session Length (Deviation from 30 Day Avg)",
@@ -372,35 +379,89 @@
                      },
                      "formulas": [
                         {
-                           "txt": "group(date_convert(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"))",
+                           "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "group",
+                                    "v": "datevalue",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "date_convert",
+                                          "v": "daterange",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "b43746e7a42542c3712dniktawuzhere",
-                                                   "a": "kf:element_at(/data,1)"
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "format",
+                                                   "description": "required if start and end dates are in a format other than the default (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                   "optional": true
                                                 }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "'D-'yyyy-MM-dd"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "yyyy-MM-dd"
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
                                        }
                                     ]
                                  }
@@ -458,15 +519,22 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "groupby(date_convert(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,2);-average(slice(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,2);,\"0\",\"-1\"))))",
+                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")),date_convert(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,2);-average(slice(79d53f9b4b76c32330ebniktawuzhere@kf:element_at(/data,2);,\"0\",\"-1\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "groupby",
+                                    "v": "lookup",
                                     "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "5975c22e-3"
+                                          }
+                                       },
                                        {
                                           "t": "f",
                                           "v": "date_convert",
@@ -533,20 +601,13 @@
                                                       "v": null,
                                                       "arg_obj": {
                                                          "placeholder": "data",
-                                                         "repeats": true
+                                                         "repeats": true,
+                                                         "description": ""
                                                       }
                                                    }
                                                 ]
                                              }
                                           ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "method",
-                                             "optional": true
-                                          }
                                        }
                                     ]
                                  }
@@ -556,7 +617,7 @@
                      ],
                      "data": [
                         [
-                           
+
                         ]
                      ],
                      "seriesName": "Playtime (Deviation from 30 Day Avg)",
@@ -575,39 +636,93 @@
                         "dateInputFormat": "custom",
                         "dateInputFormatCustom": "yyyy-MM-dd",
                         "dateFormat": "custom",
-                        "dateFormatCustom": "d.MMM"
+                        "dateFormatCustom": "MMM d"
                      },
                      "formulas": [
                         {
-                           "txt": "group(date_convert(b43746e7a42542c3712dniktawuzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"))",
+                           "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "group",
+                                    "v": "datevalue",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "date_convert",
+                                          "v": "daterange",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "b43746e7a42542c3712dniktawuzhere",
-                                                   "a": "kf:element_at(/data,1)"
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "format",
+                                                   "description": "required if start and end dates are in a format other than the default (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                   "optional": true
                                                 }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "'D-'yyyy-MM-dd"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "yyyy-MM-dd"
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
                                        }
                                     ]
                                  }
@@ -617,13 +732,13 @@
                      ],
                      "data": [
                         [
-                          
+                           
                         ]
                      ],
                      "label": "Date",
+                     "showAxis": false,
                      "labelAngle": "-45",
-                     "labelDrop": "3",
-                     "showLabelTicks": true
+                     "labelDrop": "3"
                   },
                   {
                      "type": "chart_axis",
@@ -648,8 +763,8 @@
                "zoom": "y"
             }
          ],
-         "rows": "4",
-         "cols": "2",
+         "rows": 4,
+         "cols": 2,
          "widths": [
             {
                "x": 0,

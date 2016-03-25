@@ -1,52 +1,260 @@
 {
-	"name" : "Swrve Events ({{ds.swrve.eventName}})",
-	"description": "Monitor Swrve event activity over the past 30 days. Originates from the Gallery.",
-
-	"datasources" : {
-		"swrve-01" : {
-			"service": "swrve",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Swrve Event Count",
-			"libraryAlias": "SwrveEventCount",
-			"refreshInterval": 14400,
-			"description": "Monitor Swrve event activity over the past 30 days. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/event/count.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&name={{ds.swrve.eventName}}",
-				"method": "GET"
-			}
-		}
-	},
-
-	"dsMappings": {
-		"swrve-01": "aa70e4303a62991f0957natceewzhere"
-	},
-
-
-	"services" : [
-		{
-			"service" : "swrve"
-		}
-	],
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.swrve.dataCenter",
-			"label" : "Swrve Data Center",
-			"description" : "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
-			"options": [
-                {"value":"dashboard","label":"US"},
-                {"value":"eu-dashboard","label":"EU"}
-            ],
-            "isRequired" : true,
-            "selectedValue": "metric"
-		},
-		{
-			"type" : "text",
-			"id" : "ds.swrve.eventName",
-			"label" : "Event Name",
-			"description" : "Still have your Swrve account open? Great. In Swrve, you can find a list of Events on the <b>Events</b> page under <b>Reports</b>. Copy an Event and paste it here in the exact same format.",
-			"isRequired" : true
-		}
-	]
+    "name": "Swrve Events stats (Last 30 Days)",
+    "description": "Monitor Swrve event activity over the past 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "113d983a-2": {
+            "txt": "\"Count Accounts\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Count Accounts"
+                }]
+            }
+        },
+        "544acfe1-6": {
+            "txt": "array(\"42.2400\",\"41.8000\",\"41.8000\",\"41.8000\",\"42.2400\",\"41.3600\",\"40.9200\",\"41.8000\",\"43.1200\",\"40.0400\",\"41.3600\",\"43.1200\",\"43.1200\",\"42.2400\",\"42.6800\",\"43.1200\",\"40.9200\",\"41.8000\",\"40.9200\",\"41.8000\",\"41.3600\",\"42.6800\",\"42.6800\",\"33.4400\",\"42.2400\",\"40.9200\",\"40.9200\",\"41.3600\",\"42.2400\",\"30.8000\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "42.2400"
+                    }, {
+                        "t": "l",
+                        "v": "41.8000"
+                    }, {
+                        "t": "l",
+                        "v": "41.8000"
+                    }, {
+                        "t": "l",
+                        "v": "41.8000"
+                    }, {
+                        "t": "l",
+                        "v": "42.2400"
+                    }, {
+                        "t": "l",
+                        "v": "41.3600"
+                    }, {
+                        "t": "l",
+                        "v": "40.9200"
+                    }, {
+                        "t": "l",
+                        "v": "41.8000"
+                    }, {
+                        "t": "l",
+                        "v": "43.1200"
+                    }, {
+                        "t": "l",
+                        "v": "40.0400"
+                    }, {
+                        "t": "l",
+                        "v": "41.3600"
+                    }, {
+                        "t": "l",
+                        "v": "43.1200"
+                    }, {
+                        "t": "l",
+                        "v": "43.1200"
+                    }, {
+                        "t": "l",
+                        "v": "42.2400"
+                    }, {
+                        "t": "l",
+                        "v": "42.6800"
+                    }, {
+                        "t": "l",
+                        "v": "43.1200"
+                    }, {
+                        "t": "l",
+                        "v": "40.9200"
+                    }, {
+                        "t": "l",
+                        "v": "41.8000"
+                    }, {
+                        "t": "l",
+                        "v": "40.9200"
+                    }, {
+                        "t": "l",
+                        "v": "41.8000"
+                    }, {
+                        "t": "l",
+                        "v": "41.3600"
+                    }, {
+                        "t": "l",
+                        "v": "42.6800"
+                    }, {
+                        "t": "l",
+                        "v": "42.6800"
+                    }, {
+                        "t": "l",
+                        "v": "33.4400"
+                    }, {
+                        "t": "l",
+                        "v": "42.2400"
+                    }, {
+                        "t": "l",
+                        "v": "40.9200"
+                    }, {
+                        "t": "l",
+                        "v": "40.9200"
+                    }, {
+                        "t": "l",
+                        "v": "41.3600"
+                    }, {
+                        "t": "l",
+                        "v": "42.2400"
+                    }, {
+                        "t": "l",
+                        "v": "30.8000"
+                    }]
+                }]
+            }
+        },
+        "56de2e07-7": {
+            "txt": "array(\"2016-02-24\",\"2016-02-25\",\"2016-02-26\",\"2016-02-27\",\"2016-02-28\",\"2016-02-29\",\"2016-03-01\",\"2016-03-02\",\"2016-03-03\",\"2016-03-04\",\"2016-03-05\",\"2016-03-06\",\"2016-03-07\",\"2016-03-08\",\"2016-03-09\",\"2016-03-10\",\"2016-03-11\",\"2016-03-12\",\"2016-03-13\",\"2016-03-14\",\"2016-03-15\",\"2016-03-16\",\"2016-03-17\",\"2016-03-18\",\"2016-03-19\",\"2016-03-20\",\"2016-03-21\",\"2016-03-22\",\"2016-03-23\",\"2016-03-24\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2016-02-24"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-25"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-26"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-27"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-28"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-29"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-01"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-02"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-03"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-04"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-05"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-06"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-07"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-08"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-09"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-10"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-11"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-12"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-13"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-14"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-15"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-16"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-17"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-18"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-19"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-20"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-21"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-22"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-23"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-24"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "swrve-01": {
+            "service": "swrve",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Swrve Event Count (Last 30 Days)",
+            "libraryAlias": "SwrveEventCount(Last30Days)",
+            "refreshInterval": 14400,
+            "description": "Monitor Swrve event activity over the past 30 days. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/event/count.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&name={{ds.swrve.eventName}}",
+                "method": "GET"
+            }
+        }
+    },
+    "dsMappings": {
+        "swrve-01": "64bc521e01e8b5f1a6d8KavyaMallur9"
+    },
+    "services": [{
+        "service": "swrve"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.swrve.dataCenter",
+        "label": "Swrve Data Center",
+        "description": "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
+        "options": [
+            { "value": "dashboard", "label": "US" },
+            { "value": "eu-dashboard", "label": "EU" }
+        ],
+        "isRequired": true,
+        "selectedValue": "metric"
+    }, {
+        "type": "text",
+        "id": "ds.swrve.eventName",
+        "label": "Event Name",
+        "description": "Still have your Swrve account open? Great. In Swrve, you can find a list of Events on the <b>Events</b> page under <b>Reports</b>. Copy an Event and paste it here in the exact same format.",
+        "isRequired": true
+    }]
 }

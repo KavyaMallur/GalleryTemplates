@@ -1,5 +1,5 @@
 {
-   "title": "Swrve Revenue",
+   "title": "Swrve Revenue (Last 30 Days)",
    "id": "023ac18085c37937faf05b082311853f",
    "innerPadding": "0",
    "workspace": {
@@ -7,7 +7,7 @@
          "24ae621d194d7a8efe4bnatceewzhere"
       ],
       "dimensions": {
-         "w": 544
+         "w": 966
       }
    },
    "components": [
@@ -33,15 +33,22 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "groupby(date_convert(24ae621d194d7a8efe4bnatceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),24ae621d194d7a8efe4bnatceewzhere@kf:element_at(/data,2);)",
+                           "txt": "lookup((datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")),date_convert(24ae621d194d7a8efe4bnatceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"),24ae621d194d7a8efe4bnatceewzhere@kf:element_at(/data,2);)",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "groupby",
+                                    "v": "lookup",
                                     "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "a6d8a8a5"
+                                          }
+                                       },
                                        {
                                           "t": "f",
                                           "v": "date_convert",
@@ -69,14 +76,6 @@
                                              "id": "24ae621d194d7a8efe4bnatceewzhere",
                                              "a": "kf:element_at(/data,2)"
                                           }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "method",
-                                             "optional": true
-                                          }
                                        }
                                     ]
                                  }
@@ -86,7 +85,7 @@
                      ],
                      "data": [
                         [
-                          
+                           
                         ]
                      ],
                      "seriesName": "Revenue",
@@ -100,41 +99,95 @@
                      "fmt": "dat",
                      "fmtArgs": {
                         "dateFormat": "custom",
-                        "dateInputFormat": "custom",
+                        "dateInputFormat": "default",
                         "dateInputFormatCustom": "yyyy-MM-dd",
-                        "dateFormatCustom": "d.MMM"
+                        "dateFormatCustom": "MMM d"
                      },
                      "formulas": [
                         {
-                           "txt": "group(date_convert(24ae621d194d7a8efe4bnatceewzhere@kf:element_at(/data,1);,\"'D-'yyyy-MM-dd\",\"yyyy-MM-dd\"))",
+                           "txt": "datevalue(daterange(date_add(yesterday(),\"5\",\"-29\"),yesterday()),\"yyyy-MM-dd\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "group",
+                                    "v": "datevalue",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "date_convert",
+                                          "v": "daterange",
                                           "c": [
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "24ae621d194d7a8efe4bnatceewzhere",
-                                                   "a": "kf:element_at(/data,1)"
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "format",
+                                                   "description": "required if start and end dates are in a format other than the default (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                   "optional": true
                                                 }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "'D-'yyyy-MM-dd"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "yyyy-MM-dd"
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
                                        }
                                     ]
                                  }
@@ -144,11 +197,11 @@
                      ],
                      "data": [
                         [
-                          
+                           
                         ]
                      ],
                      "label": "Date",
-                     "showAxisScale": false,
+                     "showAxis": false,
                      "labelAngle": "-45",
                      "labelDrop": "3"
                   },
@@ -156,12 +209,12 @@
                      "type": "chart_axis",
                      "role": "axis_y",
                      "id": "dbe399bc",
-                     "displayName": "Revenue",
+                     "displayName": "Amount",
                      "fmt": "cur",
                      "formulas": [],
                      "data": [],
                      "dataDisabled": true,
-                     "label": "Revenue",
+                     "label": "Amount",
                      "showAxis": false,
                      "labelDrop": 0,
                      "grid": true
@@ -171,7 +224,7 @@
             }
          ],
          "rows": 1,
-         "cols": "1"
+         "cols": 1
       }
    ]
 }

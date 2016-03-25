@@ -1,61 +1,359 @@
 {
-	"name" : "Swrve Active and New Users",
-	"description": "Monitor and compare daily active users with new users. Originates from the Gallery.",
-
-	"datasources" : {
-		"swrve-01" : {
-			"service": "swrve",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Swrve Daily New Users",
-			"libraryAlias": "SwrveDailyNewUsers",
-			"refreshInterval": 14400,
-			"description": "See the daily new users of your mobile app. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/new_users.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
-				"method": "GET"
-			}
-		},
-		"swrve-02" : {
-			"service": "swrve",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Swrve Daily Active Users",
-			"libraryAlias": "SwrveDailyActiveUsers",
-			"refreshInterval": 14400,
-			"description": "See the daily active users of your mobile app. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/dau.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
-				"method": "GET"
-			}
-		}
-	},
-
-	"dsMappings": {
-		"swrve-01": "32ff30a8464791b01a0bnatceewzhere",
-		"swrve-02": "900c218a25342cd379d3natceewzhere"
-		
-
-	},
-	"services" : [
-		{
-			"service" : "swrve"
-		}
-	],
-
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.swrve.dataCenter",
-			"label" : "Swrve Data Center",
-			"description" : "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
-			"options": [
-                {"value":"dashboard","label":"US"},
-                {"value":"eu-dashboard","label":"EU"}
-            ],
-            "isRequired" : true,
-            "selectedValue": "metric"
-		}
-	]
-
+    "name": "Swrve Active and New Users (Last 30 Days)",
+    "description": "Monitor and compare daily active users with new users. Originates from the Gallery.",
+    "sampleFormulas": {
+        "bc7f042e-6": {
+            "txt": "array(\"3431.9600\",\"3988.6000\",\"3457.4400\",\"3480.9600\",\"3482.9200\",\"3445.6800\",\"3477.0400\",\"3475.0800\",\"3471.1600\",\"3473.1200\",\"3475.0800\",\"3506.4400\",\"3533.8800\",\"3500.5600\",\"3529.9600\",\"3577\",\"3590.7200\",\"3567.2000\",\"3555.4400\",\"3565.2400\",\"3586.8000\",\"3571.1200\",\"3594.6400\",\"3539.7600\",\"3578.9600\",\"3612.2800\",\"3604.4400\",\"3598.5600\",\"3624.0400\",\"3563.2800\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "3431.9600"
+                    }, {
+                        "t": "l",
+                        "v": "3988.6000"
+                    }, {
+                        "t": "l",
+                        "v": "3457.4400"
+                    }, {
+                        "t": "l",
+                        "v": "3480.9600"
+                    }, {
+                        "t": "l",
+                        "v": "3482.9200"
+                    }, {
+                        "t": "l",
+                        "v": "3445.6800"
+                    }, {
+                        "t": "l",
+                        "v": "3477.0400"
+                    }, {
+                        "t": "l",
+                        "v": "3475.0800"
+                    }, {
+                        "t": "l",
+                        "v": "3471.1600"
+                    }, {
+                        "t": "l",
+                        "v": "3473.1200"
+                    }, {
+                        "t": "l",
+                        "v": "3475.0800"
+                    }, {
+                        "t": "l",
+                        "v": "3506.4400"
+                    }, {
+                        "t": "l",
+                        "v": "3533.8800"
+                    }, {
+                        "t": "l",
+                        "v": "3500.5600"
+                    }, {
+                        "t": "l",
+                        "v": "3529.9600"
+                    }, {
+                        "t": "l",
+                        "v": 3577
+                    }, {
+                        "t": "l",
+                        "v": "3590.7200"
+                    }, {
+                        "t": "l",
+                        "v": "3567.2000"
+                    }, {
+                        "t": "l",
+                        "v": "3555.4400"
+                    }, {
+                        "t": "l",
+                        "v": "3565.2400"
+                    }, {
+                        "t": "l",
+                        "v": "3586.8000"
+                    }, {
+                        "t": "l",
+                        "v": "3571.1200"
+                    }, {
+                        "t": "l",
+                        "v": "3594.6400"
+                    }, {
+                        "t": "l",
+                        "v": "3539.7600"
+                    }, {
+                        "t": "l",
+                        "v": "3578.9600"
+                    }, {
+                        "t": "l",
+                        "v": "3612.2800"
+                    }, {
+                        "t": "l",
+                        "v": "3604.4400"
+                    }, {
+                        "t": "l",
+                        "v": "3598.5600"
+                    }, {
+                        "t": "l",
+                        "v": "3624.0400"
+                    }, {
+                        "t": "l",
+                        "v": "3563.2800"
+                    }]
+                }]
+            }
+        },
+        "687b78a0-1": {
+            "txt": "array(\"1208.8100\",\"1245.5700\",\"1218\",\"1227.1900\",\"1218\",\"1208.8100\",\"1218\",\"1218\",\"1227.1900\",\"1208.8100\",\"1218\",\"1218\",\"1218\",\"1218\",\"1218\",\"1236.3800\",\"1245.5700\",\"1218\",\"1181.2400\",\"1218\",\"1236.3800\",\"1208.8100\",\"1218\",\"1006.6300\",\"1227.1900\",\"1208.8100\",\"1218\",\"1218\",\"1218\",\"1052.5800\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1208.8100"
+                    }, {
+                        "t": "l",
+                        "v": "1245.5700"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1227.1900"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1208.8100"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1227.1900"
+                    }, {
+                        "t": "l",
+                        "v": "1208.8100"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1236.3800"
+                    }, {
+                        "t": "l",
+                        "v": "1245.5700"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1181.2400"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1236.3800"
+                    }, {
+                        "t": "l",
+                        "v": "1208.8100"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1006.6300"
+                    }, {
+                        "t": "l",
+                        "v": "1227.1900"
+                    }, {
+                        "t": "l",
+                        "v": "1208.8100"
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": 1218
+                    }, {
+                        "t": "l",
+                        "v": "1052.5800"
+                    }]
+                }]
+            }
+        },
+        "c6a23d20-7": {
+            "txt": "array(\"2016-02-24\",\"2016-02-25\",\"2016-02-26\",\"2016-02-27\",\"2016-02-28\",\"2016-02-29\",\"2016-03-01\",\"2016-03-02\",\"2016-03-03\",\"2016-03-04\",\"2016-03-05\",\"2016-03-06\",\"2016-03-07\",\"2016-03-08\",\"2016-03-09\",\"2016-03-10\",\"2016-03-11\",\"2016-03-12\",\"2016-03-13\",\"2016-03-14\",\"2016-03-15\",\"2016-03-16\",\"2016-03-17\",\"2016-03-18\",\"2016-03-19\",\"2016-03-20\",\"2016-03-21\",\"2016-03-22\",\"2016-03-23\",\"2016-03-24\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2016-02-24"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-25"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-26"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-27"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-28"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-29"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-01"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-02"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-03"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-04"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-05"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-06"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-07"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-08"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-09"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-10"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-11"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-12"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-13"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-14"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-15"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-16"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-17"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-18"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-19"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-20"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-21"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-22"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-23"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-24"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "swrve-01": {
+            "service": "swrve",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Swrve Daily New Users (Last 30 Days)",
+            "libraryAlias": "SwrveDailyNewUsers(Last30Days)",
+            "refreshInterval": 14400,
+            "description": "See the daily new users of your mobile app. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/new_users.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+                "method": "GET"
+            }
+        },
+        "swrve-02": {
+            "service": "swrve",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Swrve Daily Active Users (Last 30 Days)",
+            "libraryAlias": "SwrveDailyActiveUsers(Last30Days)",
+            "refreshInterval": 14400,
+            "description": "See the daily active users of your mobile app. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/dau.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+                "method": "GET"
+            }
+        }
+    },
+    "dsMappings": {
+        "swrve-01": "b2eca4269f5de10d8770KavyaMallur9",
+        "swrve-02": "ff4a9f35ae67b83fcffbKavyaMallur9"
+    },
+    "services": [{
+        "service": "swrve"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.swrve.dataCenter",
+        "label": "Swrve Data Center",
+        "description": "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
+        "options": [
+            { "value": "dashboard", "label": "US" },
+            { "value": "eu-dashboard", "label": "EU" }
+        ],
+        "isRequired": true,
+        "selectedValue": "metric"
+    }]
 }

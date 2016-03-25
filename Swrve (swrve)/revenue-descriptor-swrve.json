@@ -1,45 +1,244 @@
 {
-	"name" : "Swrve Revenue",
-	"description": "Keep track of the revenue brought in by your mobile app for the last 30 days. Originates from the Gallery.",
-
-	"datasources" : {
-	
-		"swrve" : {
-			"service": "swrve",
-			"type": "simple_rest",
-			"format": "json",
-			"name": "Swrve Daily Revenue",
-			"libraryAlias": "SwrveDailyRevenue",
-			"refreshInterval": 14400,
-			"description": "See your app's daily revenue. Originates from the Gallery.",
-			"props": {
-				"endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/dollar_revenue.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
-				"method": "GET"
-			}
-		}
-	},
-
-	"dsMappings": {
-		"swrve": "24ae621d194d7a8efe4bnatceewzhere"
-	},
-	"services" : [
-		{
-			"service" : "swrve"
-		}
-	],
-	"datasourceConfigModel" : [
-		{
-			"type" : "select",
-			"id" : "ds.swrve.dataCenter",
-			"label" : "Swrve Data Center",
-			"description" : "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
-			"options": [
-                {"value":"dashboard","label":"US"},
-                {"value":"eu-dashboard","label":"EU"}
-            ],
-            "isRequired" : true,
-            "selectedValue": "metric"
-		}
-	]
+    "name": "Swrve Revenue (Last 30 Days)",
+    "description": "Keep track of the revenue brought in by your mobile app for the last 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "72cc06ac": {
+            "txt": "array(\"3406.2076\",\"3439.3916\",\"3395.3084\",\"3436.9404\",\"3133.0876\",\"3500.1532\",\"3247.3596\",\"3442.0412\",\"3438.8284\",\"3380.5372\",\"3291.2316\",\"3487.2828\",\"3272.0060\",\"3631.1548\",\"3218.9436\",\"3538.6428\",\"3278.4508\",\"3534.1116\",\"3027.8780\",\"3213.0428\",\"3377.7084\",\"3264.9468\",\"3105.1516\",\"2977.7980\",\"3034.7964\",\"3234.2844\",\"3158.1116\",\"3330.0604\",\"3435.7884\",\"2364.2620\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "3406.2076"
+                    }, {
+                        "t": "l",
+                        "v": "3439.3916"
+                    }, {
+                        "t": "l",
+                        "v": "3395.3084"
+                    }, {
+                        "t": "l",
+                        "v": "3436.9404"
+                    }, {
+                        "t": "l",
+                        "v": "3133.0876"
+                    }, {
+                        "t": "l",
+                        "v": "3500.1532"
+                    }, {
+                        "t": "l",
+                        "v": "3247.3596"
+                    }, {
+                        "t": "l",
+                        "v": "3442.0412"
+                    }, {
+                        "t": "l",
+                        "v": "3438.8284"
+                    }, {
+                        "t": "l",
+                        "v": "3380.5372"
+                    }, {
+                        "t": "l",
+                        "v": "3291.2316"
+                    }, {
+                        "t": "l",
+                        "v": "3487.2828"
+                    }, {
+                        "t": "l",
+                        "v": "3272.0060"
+                    }, {
+                        "t": "l",
+                        "v": "3631.1548"
+                    }, {
+                        "t": "l",
+                        "v": "3218.9436"
+                    }, {
+                        "t": "l",
+                        "v": "3538.6428"
+                    }, {
+                        "t": "l",
+                        "v": "3278.4508"
+                    }, {
+                        "t": "l",
+                        "v": "3534.1116"
+                    }, {
+                        "t": "l",
+                        "v": "3027.8780"
+                    }, {
+                        "t": "l",
+                        "v": "3213.0428"
+                    }, {
+                        "t": "l",
+                        "v": "3377.7084"
+                    }, {
+                        "t": "l",
+                        "v": "3264.9468"
+                    }, {
+                        "t": "l",
+                        "v": "3105.1516"
+                    }, {
+                        "t": "l",
+                        "v": "2977.7980"
+                    }, {
+                        "t": "l",
+                        "v": "3034.7964"
+                    }, {
+                        "t": "l",
+                        "v": "3234.2844"
+                    }, {
+                        "t": "l",
+                        "v": "3158.1116"
+                    }, {
+                        "t": "l",
+                        "v": "3330.0604"
+                    }, {
+                        "t": "l",
+                        "v": "3435.7884"
+                    }, {
+                        "t": "l",
+                        "v": "2364.2620"
+                    }]
+                }]
+            }
+        },
+        "a6d8a8a5": {
+            "txt": "array(\"2016-02-24\",\"2016-02-25\",\"2016-02-26\",\"2016-02-27\",\"2016-02-28\",\"2016-02-29\",\"2016-03-01\",\"2016-03-02\",\"2016-03-03\",\"2016-03-04\",\"2016-03-05\",\"2016-03-06\",\"2016-03-07\",\"2016-03-08\",\"2016-03-09\",\"2016-03-10\",\"2016-03-11\",\"2016-03-12\",\"2016-03-13\",\"2016-03-14\",\"2016-03-15\",\"2016-03-16\",\"2016-03-17\",\"2016-03-18\",\"2016-03-19\",\"2016-03-20\",\"2016-03-21\",\"2016-03-22\",\"2016-03-23\",\"2016-03-24\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2016-02-24"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-25"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-26"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-27"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-28"
+                    }, {
+                        "t": "l",
+                        "v": "2016-02-29"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-01"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-02"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-03"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-04"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-05"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-06"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-07"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-08"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-09"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-10"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-11"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-12"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-13"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-14"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-15"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-16"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-17"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-18"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-19"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-20"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-21"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-22"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-23"
+                    }, {
+                        "t": "l",
+                        "v": "2016-03-24"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "swrve": {
+            "service": "swrve",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Swrve Daily Revenue (Last 30 Days)",
+            "libraryAlias": "SwrveDailyRevenue(Last30Days)",
+            "refreshInterval": 14400,
+            "description": "See your app's daily revenue. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.swrve.dataCenter}}.swrve.com/api/1/exporter/kpi/dollar_revenue.json?api_key={{auth.swrve.apiKey}}&personal_key={{auth.swrve.personalKey}}&start={date.add(-30).format()}&granularity=day",
+                "method": "GET"
+            }
+        }
+    },
+    "dsMappings": {
+        "swrve": "24ae621d194d7a8efe4bnatceewzhere"
+    },
+    "services": [{
+        "service": "swrve"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.swrve.dataCenter",
+        "label": "Swrve Data Center",
+        "description": "Select the default <b>US Data Center</b>, unless you have deliberately changed to the <b>EU Data Center</b>.",
+        "options": [
+            { "value": "dashboard", "label": "US" },
+            { "value": "eu-dashboard", "label": "EU" }
+        ],
+        "isRequired": true,
+        "selectedValue": "metric"
+    }]
 
 }
