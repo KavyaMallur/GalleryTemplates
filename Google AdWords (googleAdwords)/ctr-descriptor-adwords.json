@@ -1,81 +1,153 @@
 {
-	"name" : "AdWords Clickthrough Rate (Last 30 Days)",
-	"description" : "Compare your clickthrough rate to typed-in targets, or delete targets to compare to the previous period. Originates from the Gallery.",
-
-	"datasources" : {
-		"googleAdwords-01" : {
-			"service" : "google_adwords",
-			"libraryAlias" : "AdWordsCampaignList",
-			"name": "Adwords Campaign List",
-			"description" : "See your AdWords campaigns and impressions. Originates from the Gallery.",
-			"type" : "google_adwords",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : {
-				 "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
-				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
-           		 "method": "post",
-           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
-			}
-		},
-		"googleAdwords-02" : {
-			"service" : "google_adwords",
-			"libraryAlias" : "AdWordsCampaignPerformance30Days",
-			"name": "AdWords Campaign Performance",
-			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the last 30 days. Originates from the Gallery.",
-			"type" : "google_adwords",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
-				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
-           		 "method": "post",
-           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+    "name": "AdWords Clickthrough Rate (Last 30 Days)",
+    "description": "Compare your clickthrough rate to typed-in targets, or delete targets to compare to the previous period. Originates from the Gallery.",
+    "sampleFormulas": {
+        "2def3cdf": {
+            "txt": "array(\"All\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "All"
+                    }]
+                }]
             }
-		},
-		"googleAdwords-03" : {
-			"service" : "google_adwords",
-			"libraryAlias" : "AdWordsCampaignPerformancePrev",
-			"name": "AdWords Campaign Performance (Prev Period)",
-			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the 30 days prior to the last 30 days. Originates from the Gallery.",
-			"type" : "google_adwords",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING {date.add(-60).format('yyyyMMdd')},{date.add(-31).format('yyyyMMdd')}&__fmt=CSV&mode=Standard",
-				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
-           		 "method": "post",
-           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+        },
+        "d7e7bd51": {
+            "txt": "array(\"All Campaigns\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "All Campaigns"
+                    }]
+                }]
             }
-		}
-	},
-
-	"dsMappings" : {
-		"googleAdwords-01" :"8b76bb7bdc738ba6efeaniktawuzhere",
-		"googleAdwords-02" :"ee9eac7727c93ad62453niktawuzhere",
-		"googleAdwords-03" :"a5dfa37d651e58da8e49niktawuzhere"
-	},
-
-	"uiVariables": [
-        {
-        	"name":"AWKTCampaign", 
-        	"value":"All" 
+        },
+        "98ab5dda": {
+            "txt": "\"0.0219\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.0219"
+                }]
+            }
+        },
+        "4dcb4349": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "27b13d8f": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "816dff2d": {
+            "txt": "\"0.0273\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.0273"
+                }]
+            }
         }
-    ],
-    
-   "datasourceConfigModel" : [
-		{
-			"type" : "text",
-			"id" : "ds.google_adwords.customerId",
-			"label" : "Customer ID",
-			"description" : "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
-			"isRequired" : true
-		}
-	],
+    },
+    "datasources": {
+        "googleAdwords-01": {
+            "service": "google_adwords",
+            "libraryAlias": "AdWordsCampaignList",
+            "name": "Adwords Campaign List",
+            "description": "See your AdWords campaigns and impressions. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        },
+        "googleAdwords-02": {
+            "service": "google_adwords",
+            "libraryAlias": "AdWordsCampaignPerformance30Days",
+            "name": "AdWords Campaign Performance",
+            "description": "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the last 30 days. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRate,Cost,CostPerConversion,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        },
+        "googleAdwords-03": {
+            "service": "google_adwords",
+            "libraryAlias": "AdWordsCampaignPerformancePrev",
+            "name": "AdWords Campaign Performance (Prev Period)",
+            "description": "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the 30 days prior to the last 30 days. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRate,Cost,CostPerConversion,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING {date.add(-60).format('yyyyMMdd')},{date.add(-31).format('yyyyMMdd')}&__fmt=CSV&mode=Standard",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        }
+    },
 
-	"services" : [
-		{
-			"service" : "google_adwords"
-		}
-	]
+    "dsMappings": {
+        "googleAdwords-01": "8b76bb7bdc738ba6efeaniktawuzhere",
+        "googleAdwords-02": "ee9eac7727c93ad62453niktawuzhere",
+        "googleAdwords-03": "a5dfa37d651e58da8e49niktawuzhere"
+    },
+
+    "uiVariables": [{
+        "name": "AWKTCampaign",
+        "value": "All"
+    }, {
+        "name": "AWKTCTR_Target",
+        "value": ""
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.google_adwords.customerId",
+        "label": "Customer ID",
+        "description": "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
+        "isRequired": true
+    }],
+
+    "services": [{
+        "service": "google_adwords"
+    }]
 }

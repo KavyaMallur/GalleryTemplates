@@ -1,81 +1,412 @@
 {
-	"name" : "AdWords Ad Cost over Time (Last 30 Days)",
-	"description" : "Keep track of your AdWords spending over time and compare to the previous period. Originates from the Gallery.",
-
-	"datasources" : {
-		"googleAdwords-01" : {
-			"service" : "google_adwords",
-			"libraryAlias" : "AdWordsCampaignList",
-			"name": "Adwords Campaign List",
-			"description" : "See your AdWords campaigns and impressions. Originates from the Gallery.",
-			"type" : "google_adwords",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : {
-				 "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
-				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
-           		 "method": "post",
-           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
-			}
-		},
-		"googleAdwords-02" : {
-			"service" : "google_adwords",
-			"libraryAlias" : "AdWordsCampaignPerformance30Days",
-			"name": "AdWords Campaign Performance",
-			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the last 30 days. Originates from the Gallery.",
-			"type" : "google_adwords",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
-				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
-           		 "method": "post",
-           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+    "name": "AdWords Ad Cost over Time (Last 30 Days)",
+    "description": "Keep track of your AdWords spending over time and compare to the previous period. Originates from the Gallery.",
+    "sampleFormulas": {
+        "8b87402e": {
+            "txt": "array(\"All\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "All"
+                    }]
+                }]
             }
-		},
-		"googleAdwords-03" : {
-			"service" : "google_adwords",
-			"libraryAlias" : "AdWordsCampaignPerformancePrev",
-			"name": "AdWords Campaign Performance (Prev Period)",
-			"description" : "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the 30 days prior to the last 30 days. Originates from the Gallery.",
-			"type" : "google_adwords",
-			"format" : "csv",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRateManyPerClick,Cost,CostPerConversionManyPerClick,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING {date.add(-60).format('yyyyMMdd')},{date.add(-31).format('yyyyMMdd')}&__fmt=CSV&mode=Standard",
-				 "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201506",
-           		 "method": "post",
-           		 "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+        },
+        "adcbd428": {
+            "txt": "array(\"All Campaigns\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "All Campaigns"
+                    }]
+                }]
             }
-		}
-	},
-
-	"dsMappings" : {
-		"googleAdwords-01" :"8b76bb7bdc738ba6efeaniktawuzhere",
-		"googleAdwords-02" :"ee9eac7727c93ad62453niktawuzhere",
-		"googleAdwords-03" :"a5dfa37d651e58da8e49niktawuzhere"
-	},
-	
-	"uiVariables": [
-        {
-        	"name":"AWKTCampaign", 
-        	"value":"All" 
+        },
+        "540f9f12": {
+            "txt": "array(\"1130.5340\",\"1173.3708\",\"1090.4360\",\"999.9080\",\"981.5400\",\"1066.7708\",\"1092.4860\",\"1305.6368\",\"1323.3160\",\"1329.9908\",\"1286.2684\",\"1185.2116\",\"1392.8684\",\"1431.3592\",\"1438.9688\",\"1432.3268\",\"1301.6516\",\"1136.1264\",\"1095.6348\",\"1020.4900\",\"1267.7200\",\"1158.3648\",\"1149.6400\",\"1197.1836\",\"1157.7416\",\"1189.7052\",\"1123.0228\",\"1227.6548\",\"1135.9624\",\"1049.3212\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1130.5340"
+                    }, {
+                        "t": "l",
+                        "v": "1173.3708"
+                    }, {
+                        "t": "l",
+                        "v": "1090.4360"
+                    }, {
+                        "t": "l",
+                        "v": "999.9080"
+                    }, {
+                        "t": "l",
+                        "v": "981.5400"
+                    }, {
+                        "t": "l",
+                        "v": "1066.7708"
+                    }, {
+                        "t": "l",
+                        "v": "1092.4860"
+                    }, {
+                        "t": "l",
+                        "v": "1305.6368"
+                    }, {
+                        "t": "l",
+                        "v": "1323.3160"
+                    }, {
+                        "t": "l",
+                        "v": "1329.9908"
+                    }, {
+                        "t": "l",
+                        "v": "1286.2684"
+                    }, {
+                        "t": "l",
+                        "v": "1185.2116"
+                    }, {
+                        "t": "l",
+                        "v": "1392.8684"
+                    }, {
+                        "t": "l",
+                        "v": "1431.3592"
+                    }, {
+                        "t": "l",
+                        "v": "1438.9688"
+                    }, {
+                        "t": "l",
+                        "v": "1432.3268"
+                    }, {
+                        "t": "l",
+                        "v": "1301.6516"
+                    }, {
+                        "t": "l",
+                        "v": "1136.1264"
+                    }, {
+                        "t": "l",
+                        "v": "1095.6348"
+                    }, {
+                        "t": "l",
+                        "v": "1020.4900"
+                    }, {
+                        "t": "l",
+                        "v": "1267.7200"
+                    }, {
+                        "t": "l",
+                        "v": "1158.3648"
+                    }, {
+                        "t": "l",
+                        "v": "1149.6400"
+                    }, {
+                        "t": "l",
+                        "v": "1197.1836"
+                    }, {
+                        "t": "l",
+                        "v": "1157.7416"
+                    }, {
+                        "t": "l",
+                        "v": "1189.7052"
+                    }, {
+                        "t": "l",
+                        "v": "1123.0228"
+                    }, {
+                        "t": "l",
+                        "v": "1227.6548"
+                    }, {
+                        "t": "l",
+                        "v": "1135.9624"
+                    }, {
+                        "t": "l",
+                        "v": "1049.3212"
+                    }]
+                }]
+            }
+        },
+        "c5284131": {
+            "txt": "array(\"1014.6103\",\"965.1362\",\"895.8823\",\"929.7259\",\"1017.4133\",\"921.9902\",\"913.7772\",\"788.6844\",\"868.7218\",\"853.9848\",\"825.6002\",\"906.5066\",\"846.3838\",\"827.6933\",\"707.9983\",\"834.2662\",\"799.8718\",\"804.5107\",\"876.2371\",\"855.7596\",\"853.6298\",\"745.1590\",\"871.9898\",\"868.5137\",\"915.4541\",\"932.5778\",\"869.0033\",\"738.9043\",\"812.1362\",\"703.5185\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1014.6103"
+                    }, {
+                        "t": "l",
+                        "v": "965.1362"
+                    }, {
+                        "t": "l",
+                        "v": "895.8823"
+                    }, {
+                        "t": "l",
+                        "v": "929.7259"
+                    }, {
+                        "t": "l",
+                        "v": "1017.4133"
+                    }, {
+                        "t": "l",
+                        "v": "921.9902"
+                    }, {
+                        "t": "l",
+                        "v": "913.7772"
+                    }, {
+                        "t": "l",
+                        "v": "788.6844"
+                    }, {
+                        "t": "l",
+                        "v": "868.7218"
+                    }, {
+                        "t": "l",
+                        "v": "853.9848"
+                    }, {
+                        "t": "l",
+                        "v": "825.6002"
+                    }, {
+                        "t": "l",
+                        "v": "906.5066"
+                    }, {
+                        "t": "l",
+                        "v": "846.3838"
+                    }, {
+                        "t": "l",
+                        "v": "827.6933"
+                    }, {
+                        "t": "l",
+                        "v": "707.9983"
+                    }, {
+                        "t": "l",
+                        "v": "834.2662"
+                    }, {
+                        "t": "l",
+                        "v": "799.8718"
+                    }, {
+                        "t": "l",
+                        "v": "804.5107"
+                    }, {
+                        "t": "l",
+                        "v": "876.2371"
+                    }, {
+                        "t": "l",
+                        "v": "855.7596"
+                    }, {
+                        "t": "l",
+                        "v": "853.6298"
+                    }, {
+                        "t": "l",
+                        "v": "745.1590"
+                    }, {
+                        "t": "l",
+                        "v": "871.9898"
+                    }, {
+                        "t": "l",
+                        "v": "868.5137"
+                    }, {
+                        "t": "l",
+                        "v": "915.4541"
+                    }, {
+                        "t": "l",
+                        "v": "932.5778"
+                    }, {
+                        "t": "l",
+                        "v": "869.0033"
+                    }, {
+                        "t": "l",
+                        "v": "738.9043"
+                    }, {
+                        "t": "l",
+                        "v": "812.1362"
+                    }, {
+                        "t": "l",
+                        "v": "703.5185"
+                    }]
+                }]
+            }
+        },
+        "f0921328": {
+            "txt": "array(\"2016-01-01\",\"2016-01-02\",\"2016-01-03\",\"2016-01-04\",\"2016-01-05\",\"2016-01-06\",\"2016-01-07\",\"2016-01-08\",\"2016-01-09\",\"2016-01-10\",\"2016-01-11\",\"2016-01-12\",\"2016-01-13\",\"2016-01-14\",\"2016-01-15\",\"2016-01-16\",\"2016-01-17\",\"2016-01-18\",\"2016-01-19\",\"2016-01-20\",\"2016-01-21\",\"2016-01-22\",\"2016-01-23\",\"2016-01-24\",\"2016-01-25\",\"2016-01-26\",\"2016-01-27\",\"2016-01-28\",\"2016-01-29\",\"2016-01-30\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2016-01-01"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-02"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-03"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-04"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-05"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-06"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-07"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-08"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-09"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-10"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-11"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-12"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-13"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-14"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-15"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-16"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-17"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-18"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-19"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-20"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-21"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-22"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-23"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-24"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-25"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-26"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-27"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-28"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-29"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-30"
+                    }]
+                }]
+            }
         }
-    ],
+    },
+    "datasources": {
+        "googleAdwords-01": {
+            "service": "google_adwords",
+            "libraryAlias": "AdWordsCampaignList(Last30Days)",
+            "name": "Adwords Campaign List (Last 30 Days)",
+            "description": "See your AdWords campaigns and impressions. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        },
+        "googleAdwords-02": {
+            "service": "google_adwords",
+            "libraryAlias": "AdWordsCampaignPerformance30Days",
+            "name": "AdWords Campaign Performance (Last 30 Days)",
+            "description": "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the last 30 days. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRate,Cost,CostPerConversion,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        },
+        "googleAdwords-03": {
+            "service": "google_adwords",
+            "libraryAlias": "AdWordsCampaignPerformancePrev(Previous30Days)",
+            "name": "AdWords Campaign Performance (Previous 30 Days)",
+            "description": "See your key AdWords metrics (e.g. CPC, Clicks, Conversion Rate, etc.) by day for the 30 days prior to the last 30 days. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT AverageCpc,Amount,Period,Ctr,CampaignId,Clicks,ConversionRate,Cost,CostPerConversion,Date,Impressions,AdNetworkType1,ConversionValue\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING {date.add(-60).format('yyyyMMdd')},{date.add(-31).format('yyyyMMdd')}&__fmt=CSV&mode=Standard",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        }
+    },
 
-       "datasourceConfigModel" : [
-		{
-			"type" : "text",
-			"id" : "ds.google_adwords.customerId",
-			"label" : "Customer ID",
-			"description" : "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
-			"isRequired" : true
-		}
-	],
+    "dsMappings": {
+        "googleAdwords-01": "8b76bb7bdc738ba6efeaniktawuzhere",
+        "googleAdwords-02": "ee9eac7727c93ad62453niktawuzhere",
+        "googleAdwords-03": "a5dfa37d651e58da8e49niktawuzhere"
+    },
 
-	"services" : [
-		{
-			"service" : "google_adwords"
-		}
-	]
+    "uiVariables": [{
+        "name": "AWKTCampaign",
+        "value": "All"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.google_adwords.customerId",
+        "label": "Customer ID",
+        "description": "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
+        "isRequired": true
+    }],
+
+    "services": [{
+        "service": "google_adwords"
+    }]
 }
