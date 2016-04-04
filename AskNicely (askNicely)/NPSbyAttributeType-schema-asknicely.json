@@ -1,9 +1,9 @@
 {
-   "title": "AskNicely Net Promoter Scores",
+   "title": "AskNicely Net Promoter Scores by Attribute Type (Last {{ds.asknicely.days}} Days)",
    "id": "86db433489d667afd8366971487c974e",
    "workspace": {
       "dimensions": {
-         "w": 445
+         "w": 552
       },
       "datasources": [
          "06d08c8b3530f022688cKavyaMallur9"
@@ -23,6 +23,7 @@
                   "x": 0,
                   "y": 0
                },
+               "renamed": true,
                "size": "1",
                "fmt": "txt",
                "fmtArgs": {
@@ -36,8 +37,14 @@
                         "v": false,
                         "c": [
                            {
-                              "t": "l",
-                              "v": "{{ds.asknicely.attribute}}"
+                              "t": "f",
+                              "v": "capitalize",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.asknicely.attribute}}"
+                                 }
+                              ]
                            }
                         ]
                      }
@@ -154,6 +161,92 @@
                   {
                      "type": "table_col",
                      "role": "tcol",
+                     "id": "36d8b379-3",
+                     "displayName": "Responded",
+                     "size": 1,
+                     "fmt": "num",
+                     "components": [
+                        {
+                           "type": "table_results",
+                           "role": "result",
+                           "id": "67e602fd-4",
+                           "displayName": "New Column Result",
+                           "size": 1,
+                           "formulas": [],
+                           "data": [
+                              []
+                           ],
+                           "mixin": "label",
+                           "align": "l",
+                           "font_style": "bold"
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "array(\"Responded\",sort(06d08c8b3530f022688cKavyaMallur9@/items/value;,\"descnumeric\",06d08c8b3530f022688cKavyaMallur9@/items/responded;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "array",
+                                    "c": [
+                                       {
+                                          "t": "l",
+                                          "v": "Responded"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "06d08c8b3530f022688cKavyaMallur9",
+                                                   "a": "/items/value"
+                                                }
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "descnumeric"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "06d08c8b3530f022688cKavyaMallur9",
+                                                   "a": "/items/responded"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "0 or more items."
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "name": "Responded",
+                     "index": 1,
+                     "align": "left"
+                  },
+                  {
+                     "type": "table_col",
+                     "role": "tcol",
                      "id": "0603cdc5-4",
                      "displayName": "NPS",
                      "size": 1,
@@ -237,8 +330,8 @@
                         ]
                      ],
                      "name": "NPS",
-                     "index": 1,
-                     "fw": "fixed",
+                     "index": 2,
+                     "borderRight": "0",
                      "w": "100"
                   },
                   {
@@ -330,7 +423,7 @@
                         ]
                      ],
                      "name": "NPS Chart",
-                     "index": 2,
+                     "index": 3,
                      "borderLeft": "0",
                      "fw": "fixed",
                      "w": "40%",
