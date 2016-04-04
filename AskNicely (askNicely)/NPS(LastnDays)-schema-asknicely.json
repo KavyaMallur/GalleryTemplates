@@ -1,6 +1,6 @@
 {
-   "title": "AskNicely Net Promoter Scores (Last {{ds.asknicely.days}} Days)",
-   "id": "ea78016afbe228bc94499b87e70fdf87",
+   "title": "AskNicely Net Promoter Score (Last {{ds.asknicely.days}} Days)",
+   "id": "9caed6a82278584e85f8ad5a15b316aa",
    "workspace": {
       "datasources": [
          "53e8df973a0cd4d2d19aKavyaMallur9",
@@ -13,13 +13,13 @@
    "components": [
       {
          "type": "panel_grid",
-         "id": "0d57d3fc-1",
+         "id": "c4ed070a",
          "displayName": "Layout Grid",
          "components": [
             {
                "type": "label",
-               "id": "19aa1dfc-5",
-               "displayName": "Current NPS",
+               "id": "011cd0be",
+               "displayName": "Last NPS",
                "layoutConfig": {
                   "x": 0,
                   "y": 0
@@ -58,7 +58,7 @@
             },
             {
                "type": "separator",
-               "id": "0c62a1a7-1",
+               "id": "b4699667",
                "displayName": "Separator",
                "layoutConfig": {
                   "x": 1,
@@ -69,7 +69,7 @@
             },
             {
                "type": "simple_value",
-               "id": "351d6e0a-2",
+               "id": "31424287",
                "displayName": "Value Pair",
                "layoutConfig": {
                   "x": 2,
@@ -79,8 +79,8 @@
                   {
                      "type": "label",
                      "role": "primary",
-                     "id": "b0ade3f7-3",
-                     "displayName": "Percent Change",
+                     "id": "8afe35b9",
+                     "displayName": "NPS % Change",
                      "renamed": true,
                      "size": 2,
                      "fmt": "pct",
@@ -150,45 +150,81 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "((53e8df973a0cd4d2d19aKavyaMallur9@/item/value;)-(if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;)))/(if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;))",
+                           "txt": "substitute((((53e8df973a0cd4d2d19aKavyaMallur9@/item/value;)-(if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;)))/abs((if((74496775e6a6368f8326KavyaMallur9@/item/value;=\"\"),\"N/A\",74496775e6a6368f8326KavyaMallur9@/item/value;)))),\"Infinity\",\" \")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
-                                    "t": "expr",
-                                    "v": false,
+                                    "t": "f",
+                                    "v": "substitute",
                                     "c": [
                                        {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "19aa1dfc-5"
-                                          }
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "011cd0be"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "-"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "3e91742c"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "abs",
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "3e91742c"
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "-"
+                                          "t": "l",
+                                          "v": "Infinity"
                                        },
                                        {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "26cacc2e-4"
+                                          "t": "l",
+                                          "v": " "
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true,
+                                             "description": "Occurrence of substitution.",
+                                             "default": "all"
                                           }
                                        }
                                     ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "/"
-                                 },
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "26cacc2e-4"
-                                    }
                                  }
                               ]
                            }
@@ -203,13 +239,13 @@
                   {
                      "type": "label",
                      "role": "secondary",
-                     "id": "26cacc2e-4",
+                     "id": "3e91742c",
                      "displayName": "Previous NPS",
                      "renamed": true,
                      "size": 1,
                      "fmt": "txt",
                      "fmtArgs": {
-                        "prefix": "vs ",
+                        "prefix": "vs. ",
                         "suffix": " prev. period"
                      },
                      "formulas": [

@@ -28,7 +28,7 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "concat(datevalue(date_startof(date_add(today(),\"3\",\"-12\"),\"3\"),\"MMM d, yyyy\"),\" to \",datevalue(date_endof(date_add(today(),\"3\",\"-1\"),\"3\"),\"MMM d, yyyy\"))",
+                     "txt": "concat(datevalue(date_startof(today(),\"3\",\"-12\"),\"MMM d, yyyy\"),\" to \",datevalue(date_endof(today(),\"3\",\"-1\"),\"MMM d, yyyy\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -47,29 +47,17 @@
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "date_add",
+                                                "v": "today",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "today",
-                                                      "c": [
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "timezone",
-                                                               "optional": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "opt",
-                                                      "v": "3"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "-12"
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
                                                    }
                                                 ]
                                              },
@@ -78,18 +66,16 @@
                                                 "v": "3"
                                              },
                                              {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "relative value",
-                                                   "optional": true
-                                                }
+                                                "t": "l",
+                                                "v": "-12"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "first",
+                                                   "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                   "default": "Sunday (week) or January (year)",
                                                    "optional": true
                                                 }
                                              }
@@ -104,6 +90,8 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
                                              "optional": true
                                           }
                                        }
@@ -123,29 +111,17 @@
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "date_add",
+                                                "v": "today",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "today",
-                                                      "c": [
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "timezone",
-                                                               "optional": true
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "opt",
-                                                      "v": "3"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "-1"
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
                                                    }
                                                 ]
                                              },
@@ -154,18 +130,16 @@
                                                 "v": "3"
                                              },
                                              {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "relative value",
-                                                   "optional": true
-                                                }
+                                                "t": "l",
+                                                "v": "-1"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "first",
+                                                   "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                   "default": "Sunday (week) or January (year)",
                                                    "optional": true
                                                 }
                                              }
@@ -180,6 +154,8 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
                                              "optional": true
                                           }
                                        }
@@ -190,7 +166,8 @@
                                     "v": null,
                                     "arg_obj": {
                                        "placeholder": "data",
-                                       "repeats": true
+                                       "repeats": true,
+                                       "description": "1 or more items."
                                     }
                                  }
                               ]
@@ -230,25 +207,6 @@
                                  "left": {
                                     "self": 1
                                  },
-                                 "type": "gteq",
-                                 "right": {
-                                    "raw": "0"
-                                 }
-                              }
-                           ],
-                           "reactions": [
-                              {
-                                 "type": "color",
-                                 "value": "cx-theme_666"
-                              }
-                           ]
-                        },
-                        {
-                           "predicates": [
-                              {
-                                 "left": {
-                                    "self": 1
-                                 },
                                  "type": "lt",
                                  "right": {
                                     "raw": "0"
@@ -265,7 +223,7 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "slice(94798a26977c78f77078KavyaMallur9@/series/data;)",
+                           "txt": "slice(94798a26977c78f77078KavyaMallur9@/series/data;,\"0\",\"-1\")",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -282,20 +240,12 @@
                                           }
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
+                                          "t": "l",
+                                          "v": "0"
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
+                                          "t": "l",
+                                          "v": "-1"
                                        }
                                     ]
                                  }
@@ -309,47 +259,147 @@
                         ]
                      ],
                      "seriesName": "NPS",
-                     "axis": "99035f3a-8"
+                     "axis": "99035f3a-8",
+                     "overrideColor": true,
+                     "color": "cx-theme_666"
                   },
                   {
                      "type": "chart_axis",
                      "role": "axis_x",
                      "id": "47202eb7-7",
-                     "displayName": "Months",
-                     "fmt": "txt",
+                     "displayName": "Month",
+                     "fmt": "dat",
+                     "fmtArgs": {
+                        "dateInputFormat": "custom",
+                        "dateInputFormatCustom": "yyyyMM",
+                        "dateFormat": "custom",
+                        "dateFormatCustom": "MMM yy"
+                     },
                      "formulas": [
                         {
-                           "txt": "slice(94798a26977c78f77078KavyaMallur9@/x_axis/labels;)",
+                           "txt": "group(datevalue(daterange(date_startof(today(),\"3\",\"-12\"),date_endof(today(),\"3\",\"-1\")),\"yyyyMM\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "slice",
+                                    "v": "group",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "94798a26977c78f77078KavyaMallur9",
-                                             "a": "/x_axis/labels"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_startof",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "3"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-12"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "first",
+                                                               "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                               "default": "Sunday (week) or January (year)",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_endof",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "3"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-1"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "first",
+                                                               "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                               "default": "Sunday (week) or January (year)",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "description": "required if start and end dates are in a format other than the default (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyyMM"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "description": "",
+                                                   "default": "GMT",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
                                        }
                                     ]
                                  }

@@ -1,5 +1,5 @@
 {
-    "name": "AskNicely Net Promoter Scores",
+    "name": "AskNicely Net Promoter Scores by Attribute Type (Last {{ds.asknicely.days}} Days)",
     "description": "Provide NPS for top leaderboards. Originates from the Gallery.",
     "sampleFormulas": {
         "0757a771-2": {
@@ -128,6 +128,48 @@
                 }]
             }
         },
+        "36d8b379-3": {
+            "txt": "array(\"Responded\", \"7\", \"11\", \"4\", \"13\", \"2\", \"17\", \"6\", \"2\", \"4\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Responded"
+                    }, {
+                        "t": "l",
+                        "v": "7"
+                    }, {
+                        "t": "l",
+                        "v": "11"
+                    }, {
+                        "t": "l",
+                        "v": "4"
+                    }, {
+                        "t": "l",
+                        "v": "13"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "17"
+                    }, {
+                        "t": "l",
+                        "v": "6"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "4"
+                    }]
+                }]
+            }
+        },
         "73f74877-2": {
             "txt": "array(\"Country\")",
             "src": {
@@ -149,12 +191,12 @@
             "service": "asknicely",
             "type": "simple_rest",
             "format": "json",
-            "name": "AskNicely Top NPS by {{ds.asknicely.attribute}}",
-            "libraryAlias": "asknicelyTopNPSby{{ds.asknicely.attribute}}",
+            "name": "AskNicely Top NPS by {{ds.asknicely.attribute}} (Last {{ds.asknicely.days}} Days)",
+            "libraryAlias": "asknicelyTopNPSby{{ds.asknicely.attribute}}(Last {{ds.asknicely.days}} Days)",
             "refreshInterval": 14400,
             "description": "Monitor NPS for leaderboards. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://{{auth.asknicely.domain}}.asknice.ly/datafeed/v1/leaderboard/{{ds.asknicely.attribute}}/90?apikey={{auth.asknicely.apiKey}}",
+                "endpoint_url": "https://{{auth.asknicely.domain}}.asknice.ly/datafeed/v1/leaderboard/{{ds.asknicely.attribute}}/{{ds.asknicely.days}}?apikey={{auth.asknicely.apiKey}}",
                 "method": "GET"
             }
         }
@@ -170,6 +212,13 @@
         "id": "ds.asknicely.attribute",
         "label": "Attribute Type",
         "description": "Select an Attribute from the drop-down list.",
+        "isRequired": true
+    },
+    {
+        "type": "text",
+        "id": "ds.asknicely.days",
+        "label": "Days",
+        "description": "Provide the number of days.",
         "isRequired": true
     }],
     "queries": [{
