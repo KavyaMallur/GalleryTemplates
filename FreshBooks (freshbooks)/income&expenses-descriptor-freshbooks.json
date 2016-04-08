@@ -1,0 +1,36 @@
+{
+    "name": "FreshBooks Income and Expenses",
+    "description": "Bring your key accounting puzzle pieces - Income, Expenses, and Profit - together to help you make actionable decisions. Choose the time period of your choice from the drop-down menu, and compare to the previous period. Originates from the Gallery.",
+
+    "datasources": {
+        "freshbooks": {
+            "service": "freshbooks",
+            "type": "simple_rest",
+            "name": "Freshbooks Profit and Loss Details (36 MTD)",
+            "libraryAlias": "FreshbooksProfitandLossDetails(36MTD)",
+            "description": "Returns profit & loss details.",
+            "format": "xml",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.freshbooks.subdomain}}.freshbooks.com/api/2.1/xml-in",
+                "body": "<?xml version='1.0' encoding='utf-8'?>\r\n<request method='report.getProfitDetails'>\r\n<date_from>{date.addMonths(-36).format()}</date_from>\r\n<date_to>{date.today}</date_to>\r\n<group_by>date</group_by>\r\n</request>",
+                "basic_auth_username": "{{auth.freshbooks.token}}",
+                "basic_auth_password": "x",
+                "auth_method": "basic",
+                "method": "post"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "freshbooks": "2e44c60a3af5cc275d56doogeraspilk"
+    },
+
+    "services": [{
+        "service": "freshbooks"
+    }],
+    "uiVariables": [{
+        "name": "KTdate",
+        "value": "Last Month"
+    }]
+}
