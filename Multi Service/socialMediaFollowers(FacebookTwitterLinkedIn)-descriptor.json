@@ -1,156 +1,223 @@
 {
-	"name" : "Social Media Followers",
-	"description" : "See where you stand on three of your social media platforms (Facebook, Twitter, and LinkedIn) in a single Klip! Originates from the Gallery.",
-	
+    "name": "Social Media Followers",
+    "description": "See where you stand on three of your social media platforms (Facebook, Twitter, and LinkedIn) in a single Klip! Originates from the Gallery.",
 
-	"datasources" : {
-		"facebook" : {
-			"service" : "facebook",
-			"libraryAlias" : "facebookBasicPageInfo",
-			"name": "Facebook Basic Page Info",
-			"description" : "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
-			"type" : "facebook",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
-            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
-            	"qtype": "Graph API"
-			}
-		},
-		"linkedin" : {
-			"service" : "linkedin",
-			"libraryAlias" : "LinkedInCompStats",
-			"name": "LinkedIn Company Statistics",
-			"description" : "LinkedIn company statistics and follower count by month for the past 12 months. Originates from the Gallery.",
-			"type" : "simple_rest",
-			"format" : "xml",
-			"refreshInterval" : 14400,
-			"props" : {
-				 "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
-            	 "method": "get"
-			}
-		},
-		"twitter" : {
-			"service" : "twitter",
-			"libraryAlias" : "TwitterAccountStats",
-			"name": "Twitter Account Stats",
-			"description" : "Retrieves the details of the specified Tweet ID. Originates from the Gallery.",
-			"type" : "simple_rest",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : { 
-				"endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
-            	"method": "get"
- 			}
-		}
-
-	},
-
-	"dsMappings" : {
-		"facebook" : "f16161937e640d476ce1natceewzhere",
-		"linkedin" : "b7dd33285b2861bc9a8anatceewzhere",
-		"twitter" : "0413e68d77e3158c9ba8natceewzhere"
-	},
-
-	"services" : [
-		{
-			"service" : "facebook"
-		},
-		{
-			"service" : "linkedin"
-		},
-		{
-			"service" : "twitter"
-		}
-	],
-
-	"datasourceConfigModel" : [
-		{
-            "type" : "select",
-            "id" : "ds.facebook.pageId",
-            "label" : "Facebook Page",
-			"description":"For Facebook and LinkedIn, select a <b>Company</b> Name or Channel.<br><br>When entering a Twitter Handle, do <b>not</b> include the @ symbol.",
-			"isRequired" : true,
-			"onChangeQueries" : [ "q2" ]
-		},
-		{
-			"type" : "select",
-			"id" : "ds.linkedin.companyId",
-			"label" : "LinkedIn Page",
-			"isRequired" : true,
-			"onChangeQueries" : [ "q3" ]
-		},
-		{
-			"type" : "select",
-			"id" : "ds.twitter.screenName",
-			"label" : "Twitter Handle",
-			"isRequired" : true
-		}
-	],
-	"queries": [
-	{
-            "errorMessage":"From time to time, your OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "facebook",
-                "type": "facebook",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
-                    "method": "GET",
-                    "qtype": "Graph API"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.facebook.pageId",
-                    "propField" : "options",
-                    "labels": "/data/name",
-                    "values": "/data/id"
-                }
-            ]
+    "temp_sampleFormulas": {
+        "a5e387efd95d551a44b5bdeff1de6db2b3d0af2d": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/facebook.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/facebook.png"
+                }]
+            }
         },
-        {   
-        	"id": "q2",
-            "errorMessage":"Here are two suggestions:<br><br>1. Make sure you have admin access to a LinkedIn Company Page. <br><br>2. From time to time, your LinkedIn OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "linkedin",
-                "type": "simple_rest",
-                "format": "xml",
-                "props": {
-                    "endpoint_url": "https://api.linkedin.com/v1/companies?is-company-admin=true",
-                    "method": "GET"
-                }
-            },
-            "results": [
-                { 
-                    "propId" : "ds.linkedin.companyId",
-                    "propField" : "options", 
-                    "labels": "/companies/company/name",  
-                    "values": "/companies/company/id"
-                }
-            ]
+        "a798dfbfbd4687971fd6c92a2ade73ff86ac3b46": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/twitter.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/twitter.png"
+                }]
+            }
         },
-        {
-        	"id": "q3",
-            "errorMessage":"From time to time, your Twitter OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "twitter",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.twitter.com/1.1/statuses/user_timeline.json",
-                    "method": "GET"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.twitter.screenName",
-                    "propField" : "options",
-                    "labels": "(/user/screen_name)[1]",
-                    "values": "(/user/screen_name)[1]"
-                }
-            ]
-        }    
-    ]
+        "bc62786ce599283692677298984417555be95aca": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/linkedin.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/linkedin.png"
+                }]
+            }
+        },
+        "41459773a25e678ae8bafe632b632e777f529ffd": {
+            "txt": "\"26472\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "26472"
+                }]
+            }
+        },
+        "c3ffb568d9ba5e39ee348d63c45d5ef2fcf9658b": {
+            "txt": "\"Likes\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Likes"
+                }]
+            }
+        },
+        "bbcaabfcb87678fe3a41cba17ab6368de74ec1c4": {
+            "txt": "\"45322\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "45322"
+                }]
+            }
+        },
+        "74d2c28cda2d5347eeabec522f6e432cc71de097": {
+            "txt": "\"Followers\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Followers"
+                }]
+            }
+        },
+        "716998721449f2c8885d0609678c60d4f13d1f5a": {
+            "txt": "\"1,765\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1,765"
+                }]
+            }
+        },
+        "1c3eef9fdea49c0cb7d5d86ee9b3736538684250": {
+            "txt": "\"Followers\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Followers"
+                }]
+            }
+        }
+    },
+
+
+    "datasources": {
+        "facebook": {
+            "service": "facebook",
+            "libraryAlias": "facebookBasicPageInfo",
+            "name": "Facebook Basic Page Info",
+            "description": "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+                "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+                "qtype": "Graph API"
+            }
+        },
+        "linkedin": {
+            "service": "linkedin",
+            "libraryAlias": "LinkedInCompStats",
+            "name": "LinkedIn Company Statistics",
+            "description": "LinkedIn company statistics and follower count by month for the past 12 months. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "xml",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "http://api.linkedin.com/v1/companies/{{ds.linkedin.companyId}}/company-statistics",
+                "method": "get"
+            }
+        },
+        "twitter": {
+            "service": "twitter",
+            "libraryAlias": "TwitterAccountStats",
+            "name": "Twitter Account Stats",
+            "description": "Retrieves the details of the specified Tweet ID. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
+                "method": "get"
+            }
+        }
+
+    },
+
+    "dsMappings": {
+        "facebook": "3f69b8893603d13c57dbnatceewzhere",
+        "linkedin": "63d269a79ddf0d99b02anatceewzhere",
+        "twitter": "d91c22d5a5f4c21d8302natceewzhere"
+    },
+
+    "services": [{
+        "service": "facebook"
+    }, {
+        "service": "linkedin"
+    }, {
+        "service": "twitter"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook.pageId",
+        "label": "Facebook Page",
+        "description": "For Facebook and LinkedIn, select a <b>Company</b> Name or Channel.<br><br>When entering a Twitter Handle, do <b>not</b> include the @ symbol.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.linkedin.companyId",
+        "label": "LinkedIn Page",
+        "isRequired": true,
+        "onChangeQueries": ["q3"]
+    }, {
+        "type": "text",
+        "id": "ds.twitter.screenName",
+        "label": "Twitter Handle",
+        "ghostText": "companyname",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook.pageId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }, {
+        "id": "q2",
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have admin access to a LinkedIn Company Page. <br><br>2. From time to time, your LinkedIn OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "linkedin",
+            "type": "simple_rest",
+            "format": "xml",
+            "props": {
+                "endpoint_url": "https://api.linkedin.com/v1/companies?is-company-admin=true",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.linkedin.companyId",
+            "propField": "options",
+            "labels": "/companies/company/name",
+            "values": "/companies/company/id"
+        }]
+    }]
 }

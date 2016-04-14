@@ -1,128 +1,197 @@
 {
-	"name" : "Social Media Followers",
-	"description" : "See where you stand on three of your social media platforms (Facebook, Twitter and Instagram) in a single Klip! Originates from the Gallery.",
+    "name": "Social Media Followers",
+    "description": "See where you stand on three of your social media platforms (Facebook, Twitter and Instagram) in a single Klip! Originates from the Gallery.",
 
-
-	"datasources" : {
-		"facebook" : {
-			"service" : "facebook",
-			"libraryAlias" : "facebookBasicPageInfo",
-			"name": "Facebook Basic Page Info",
-			"description" : "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
-			"type" : "facebook",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
-            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
-            	"qtype": "Graph API"
-			}
-		},
-		"instagram" : {
-			"service" : "instagram",
-			"libraryAlias" : "InstagramSelfMetrics",
-			"name": "Instagram Account Metrics",
-			"description" : "See the KPIs associated with your Instagram account such as the number of followers, post numbers, etc. Originates from the Gallery.",
-			"type" : "simple_rest",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://api.instagram.com/v1/users/self",
-				"method": "get"
-  			}
-		},
-        "twitter" : {
-			"service" : "twitter",
-			"libraryAlias" : "TwitterAccountStats",
-			"name": "Twitter Account Stats",
-			"description" : "Retrieves the details of the specified Tweet ID. Originates from the Gallery.",
-			"type" : "simple_rest",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
-            	"method": "get"
- 			}
-		}
-	},
-
-	"dsMappings" : {
-		"facebook" : "f16161937e640d476ce1gooderaspilk",
-		"instagram" : "ed4c0707e81884d0625agooderaspilk",
-		"twitter" : "0413e68d77e3158c9ba8gooderaspilk"
-	},
-
-	"services" : [
-		{
-			"service" : "facebook"
-		},
-		{
-			"service" : "instagram"
-		},
-		{
-			"service" : "twitter"
-		}
-	],
-
-	"datasourceConfigModel" : [
-		{
-            "type" : "select",
-            "id" : "ds.facebook.pageId",
-            "label" : "Facebook Page",
-			"description":"Select your Facebook company page and your Twitter handle.",
-			"isRequired" : true,
-			"onChangeQueries" : [ "q2" ]
-		},
-		{
-			"type" : "select",
-			"id" : "ds.twitter.screenName",
-			"label" : "Twitter Handle",
-            "ghostText": "Klipfolio",
-			"isRequired" : true
-		}
-	],
-	"queries": [
-		{
-            "errorMessage":"From time to time, your Facebook OAuth tokens will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "facebook",
-                "type": "facebook",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
-                    "method": "GET",
-                    "qtype": "Graph API"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.facebook.pageId",
-                    "propField" : "options",
-                    "labels": "/data/name",
-                    "values": "/data/id"
-                }
-            ]
+    "temp_sampleFormulas": {
+        "4ab76c9749ed59d98e4981d33ef0bf8ded653874": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/facebook.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/facebook.png"
+                }]
+            }
         },
-        {
-        	"id": "q2",
-            "errorMessage":"From time to time, your Twitter OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "twitter",
-                "type": "simple_rest",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://api.twitter.com/1.1/statuses/user_timeline.json",
-                    "method": "GET"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.twitter.screenName",
-                    "propField" : "options",
-                    "labels": "(/user/screen_name)[1]",
-                    "values": "(/user/screen_name)[1]"
-                }
-            ]
+        "683fe27dbe34fb2107b82ac764e0a1e9b3f8e9ac": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/twitter.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/twitter.png"
+                }]
+            }
+        },
+        "4305c45bb5a5268baf5f3d19a5b0bf326a1a3504": {
+            "txt": "\"https://static.klipfolio.com/static/klips/saas/templates/badges/instagram.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/static/klips/saas/templates/badges/instagram.png"
+                }]
+            }
+        },
+        "3f374e57e6bdb637f8a19ea9537bc6893603dc99": {
+            "txt": "\"26472\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "26472"
+                }]
+            }
+        },
+        "0aa330724599cfb5f791e6e1f8dfb5282f70a860": {
+            "txt": "\"Likes\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Likes"
+                }]
+            }
+        },
+        "e262f7066ae59c8bd7728869f03aa97e36a7e62c": {
+            "txt": "\"45322\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "45322"
+                }]
+            }
+        },
+        "677404d18d23c64ba1bbaf42e47a32eb6fa6f106": {
+            "txt": "\"Followers\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Followers"
+                }]
+            }
+        },
+        "2da7315e93a3a86cb1913a50213e3f9fbb1f7cb0": {
+            "txt": "\"6524\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "6524"
+                }]
+            }
+        },
+        "eaa556047c7554a896d4f17f420a24ef00829a5c": {
+            "txt": "\"Followers\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Followers"
+                }]
+            }
         }
-    ]
+    },
+
+    "datasources": {
+        "facebook": {
+            "service": "facebook",
+            "libraryAlias": "facebookBasicPageInfo",
+            "name": "Facebook Basic Page Info",
+            "description": "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+                "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+                "qtype": "Graph API"
+            }
+        },
+        "instagram": {
+            "service": "instagram",
+            "libraryAlias": "InstagramAccountMetrics",
+            "name": "Instagram Account Metrics",
+            "description": "See the KPIs associated with your Instagram account such as the number of followers, post numbers, etc. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.instagram.com/v1/users/self",
+                "method": "get"
+            }
+        },
+        "twitter": {
+            "service": "twitter",
+            "libraryAlias": "TwitterAccountStats",
+            "name": "Twitter Account Stats",
+            "description": "Retrieves the details of the specified Tweet ID. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/users/lookup.json?screen_name={{ds.twitter.screenName}}",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "facebook": "3f69b8893603d13c57dbgooderaspilk",
+        "instagram": "4f3646bd637f417a7b7fgooderaspilk",
+        "twitter": "d91c22d5a5f4c21d8302gooderaspilk"
+    },
+
+    "services": [{
+        "service": "facebook"
+    }, {
+        "service": "instagram"
+    }, {
+        "service": "twitter"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook.pageId",
+        "label": "Facebook Page",
+        "description": "Select your Facebook company page and your Twitter handle.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "text",
+        "id": "ds.twitter.screenName",
+        "label": "Twitter Handle",
+        "ghostText": "companyname",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Facebook OAuth tokens will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook.pageId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
 }
