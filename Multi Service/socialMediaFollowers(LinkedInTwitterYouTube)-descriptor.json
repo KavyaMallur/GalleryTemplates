@@ -157,20 +157,18 @@
     }],
     "datasourceConfigModel": [{
         "type": "select",
-        "id": "ds.youtube.channelID",
-        "label": "YouTube Channel",
+        "id": "ds.linkedin.companyId",
+        "label": "LinkedIn Page",
+        "description": "For LinkedIn and YouTube, select your <b>Company</b> page or channel. <br> <br>When entering the Twitter Handle, do <b>not</b> include the @ symbol.",
         "isRequired": true,
         "onChangeQueries": [
             "q2"
         ]
     }, {
         "type": "select",
-        "id": "ds.linkedin.companyId",
-        "label": "LinkedIn Page",
-        "isRequired": true,
-        "onChangeQueries": [
-            "q3"
-        ]
+        "id": "ds.youtube.channelID",
+        "label": "YouTube Channel",
+        "isRequired": true
     }, {
         "type": "text",
         "id": "ds.twitter.screenName",
@@ -179,24 +177,6 @@
         "isRequired": true
     }],
     "queries": [{
-        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have admin access to the YouTube channel.<br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-        "connector": {
-            "service": "youtube",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "endpoint_url": "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true",
-                "method": "GET"
-            }
-        },
-        "results": [{
-            "propId": "ds.youtube.channelID",
-            "propField": "options",
-            "labels": "/items/snippet/title",
-            "values": "/items/id"
-        }]
-    }, {
-        "id": "q2",
         "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have admin access to a LinkedIn Company Page. <br><br>2. From time to time, your LinkedIn OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
         "connector": {
             "service": "linkedin",
@@ -212,6 +192,24 @@
             "propField": "options",
             "labels": "/companies/company/name",
             "values": "/companies/company/id"
+        }]
+    }, {
+        "id": "q2",
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have admin access to the YouTube channel.<br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "youtube",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.youtube.channelID",
+            "propField": "options",
+            "labels": "/items/snippet/title",
+            "values": "/items/id"
         }]
     }]
 }
