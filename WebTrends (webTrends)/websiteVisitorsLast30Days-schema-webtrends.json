@@ -20,7 +20,8 @@
                "type": "proxy",
                "role": "values",
                "id": "d2cc8a93-2",
-               "displayName": "Values",
+               "displayName": "Profile Value",
+               "renamed": true,
                "formulas": [
                   {
                      "txt": "3c05a8b0246b164d6408KavyaMallur9@definition/profileID;",
@@ -49,7 +50,8 @@
                "type": "proxy",
                "role": "labels",
                "id": "6abcf078-3",
-               "displayName": "Labels",
+               "displayName": "Profile Label",
+               "renamed": true,
                "formulas": [
                   {
                      "txt": "3c05a8b0246b164d6408KavyaMallur9@definition/profileName;",
@@ -88,11 +90,12 @@
             {
                "type": "label",
                "id": "2b814054",
-               "displayName": "Label",
+               "displayName": "Visitors LAbel",
                "layoutConfig": {
                   "y": 0,
                   "x": 0
                },
+               "renamed": true,
                "size": "2",
                "fmt": "txt",
                "formulas": [
@@ -121,7 +124,7 @@
             {
                "type": "label",
                "id": "ddfbaa0d",
-               "displayName": "Visitors",
+               "displayName": "Visitors (Last 30 Days)",
                "layoutConfig": {
                   "x": 1,
                   "y": 0
@@ -134,7 +137,7 @@
                },
                "formulas": [
                   {
-                     "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/Visitors\"))",
+                     "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/Visitors\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -153,7 +156,7 @@
                                     "c": [
                                        {
                                           "t": "l",
-                                          "v": "/data/"
+                                          "v": "/data/*[name()='"
                                        },
                                        {
                                           "t": "var",
@@ -161,14 +164,15 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "/measures/Visitors"
+                                          "v": "']/measures/Visitors"
                                        },
                                        {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "data",
-                                             "repeats": true
+                                             "repeats": true,
+                                             "description": "1 or more items."
                                           }
                                        }
                                     ]
@@ -206,7 +210,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/SubRows/measures/Visitors\"))",
+                           "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/SubRows/measures/Visitors\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -225,7 +229,7 @@
                                           "c": [
                                              {
                                                 "t": "l",
-                                                "v": "/data/"
+                                                "v": "/data/*[name()='"
                                              },
                                              {
                                                 "t": "var",
@@ -233,14 +237,15 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "/SubRows/measures/Visitors"
+                                                "v": "']/SubRows/measures/Visitors"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "data",
-                                                   "repeats": true
+                                                   "repeats": true,
+                                                   "description": "1 or more items."
                                                 }
                                              }
                                           ]
@@ -377,7 +382,7 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "(((datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/Visitors\")))-(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/Visitors\"))))/(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/Visitors\"))))",
+                           "txt": "(((datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/Visitors\")))-(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/Visitors\"))))/(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/Visitors\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -438,7 +443,7 @@
                      "type": "label",
                      "role": "secondary",
                      "id": "e99e38f0",
-                     "displayName": "Visitors Prev",
+                     "displayName": "Visitors (Prev 30 Days)",
                      "renamed": true,
                      "size": 1,
                      "fmt": "num",
@@ -449,7 +454,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/Visitors\"))",
+                           "txt": "datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/Visitors\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -468,7 +473,7 @@
                                           "c": [
                                              {
                                                 "t": "l",
-                                                "v": "/data/"
+                                                "v": "/data/*[name()='"
                                              },
                                              {
                                                 "t": "var",
@@ -476,14 +481,15 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "/measures/Visitors"
+                                                "v": "']/measures/Visitors"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "data",
-                                                   "repeats": true
+                                                   "repeats": true,
+                                                   "description": "1 or more items."
                                                 }
                                              }
                                           ]
@@ -507,7 +513,7 @@
             }
          ],
          "rows": 2,
-         "cols": "2",
+         "cols": 2,
          "widths": [
             {
                "w": "65%",
@@ -543,11 +549,12 @@
             {
                "type": "label",
                "id": "f4c480ff",
-               "displayName": "Label",
+               "displayName": "New Visitors",
                "layoutConfig": {
                   "y": 0,
                   "x": 0
                },
+               "renamed": true,
                "size": "2",
                "fmt": "txt",
                "formulas": [
@@ -576,7 +583,7 @@
             {
                "type": "label",
                "id": "87d02a82",
-               "displayName": "New Visitors",
+               "displayName": "New Visitors (Last 30 Days)",
                "layoutConfig": {
                   "x": 1,
                   "y": 0
@@ -589,7 +596,7 @@
                },
                "formulas": [
                   {
-                     "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/NewVisitors\"))",
+                     "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/NewVisitors\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -608,7 +615,7 @@
                                     "c": [
                                        {
                                           "t": "l",
-                                          "v": "/data/"
+                                          "v": "/data/*[name()='"
                                        },
                                        {
                                           "t": "var",
@@ -616,14 +623,15 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "/measures/NewVisitors"
+                                          "v": "']/measures/NewVisitors"
                                        },
                                        {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "data",
-                                             "repeats": true
+                                             "repeats": true,
+                                             "description": "1 or more items."
                                           }
                                        }
                                     ]
@@ -661,7 +669,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/SubRows/measures/NewVisitors\"))",
+                           "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/SubRows/measures/NewVisitors\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -680,7 +688,7 @@
                                           "c": [
                                              {
                                                 "t": "l",
-                                                "v": "/data/"
+                                                "v": "/data/*[name()='"
                                              },
                                              {
                                                 "t": "var",
@@ -688,14 +696,15 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "/SubRows/measures/NewVisitors"
+                                                "v": "']/SubRows/measures/NewVisitors"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "data",
-                                                   "repeats": true
+                                                   "repeats": true,
+                                                   "description": "1 or more items."
                                                 }
                                              }
                                           ]
@@ -832,7 +841,7 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "(((datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/NewVisitors\")))-(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/NewVisitors\"))))/(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/NewVisitors\"))))",
+                           "txt": "(((datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/NewVisitors\")))-(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/NewVisitors\"))))/(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/NewVisitors\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -893,7 +902,7 @@
                      "type": "label",
                      "role": "secondary",
                      "id": "cc6c231a",
-                     "displayName": "New Visitors Prev",
+                     "displayName": "New Visitors (Prev 30 Days)",
                      "renamed": true,
                      "size": 1,
                      "fmt": "num",
@@ -904,7 +913,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/NewVisitors\"))",
+                           "txt": "datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/NewVisitors\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -923,7 +932,7 @@
                                           "c": [
                                              {
                                                 "t": "l",
-                                                "v": "/data/"
+                                                "v": "/data/*[name()='"
                                              },
                                              {
                                                 "t": "var",
@@ -931,14 +940,15 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "/measures/NewVisitors"
+                                                "v": "']/measures/NewVisitors"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "data",
-                                                   "repeats": true
+                                                   "repeats": true,
+                                                   "description": "1 or more items."
                                                 }
                                              }
                                           ]
@@ -962,7 +972,7 @@
             }
          ],
          "rows": 2,
-         "cols": "2",
+         "cols": 2,
          "widths": [
             {
                "w": "65%",
@@ -998,11 +1008,12 @@
             {
                "type": "label",
                "id": "756ce2ac",
-               "displayName": "Label",
+               "displayName": "Average Visitors per Day Label",
                "layoutConfig": {
                   "y": 0,
                   "x": 0
                },
+               "renamed": true,
                "size": "2",
                "fmt": "txt",
                "formulas": [
@@ -1031,7 +1042,7 @@
             {
                "type": "label",
                "id": "bb016d4c",
-               "displayName": "Average Visitors per Day",
+               "displayName": "Average Visitors per Day (Last 30 Days)",
                "layoutConfig": {
                   "x": 1,
                   "y": 0
@@ -1044,7 +1055,7 @@
                },
                "formulas": [
                   {
-                     "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/AvgVisitorsperDay\"))",
+                     "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/AvgVisitorsperDay\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -1063,7 +1074,7 @@
                                     "c": [
                                        {
                                           "t": "l",
-                                          "v": "/data/"
+                                          "v": "/data/*[name()='"
                                        },
                                        {
                                           "t": "var",
@@ -1071,14 +1082,15 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "/measures/AvgVisitorsperDay"
+                                          "v": "']/measures/AvgVisitorsperDay"
                                        },
                                        {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "data",
-                                             "repeats": true
+                                             "repeats": true,
+                                             "description": "1 or more items."
                                           }
                                        }
                                     ]
@@ -1116,7 +1128,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/SubRows/measures/AvgVisitorsperDay\"))",
+                           "txt": "datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/SubRows/measures/AvgVisitorsperDay\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1135,7 +1147,7 @@
                                           "c": [
                                              {
                                                 "t": "l",
-                                                "v": "/data/"
+                                                "v": "/data/*[name()='"
                                              },
                                              {
                                                 "t": "var",
@@ -1143,14 +1155,15 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "/SubRows/measures/AvgVisitorsperDay"
+                                                "v": "']/SubRows/measures/AvgVisitorsperDay"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "data",
-                                                   "repeats": true
+                                                   "repeats": true,
+                                                   "description": "1 or more items."
                                                 }
                                              }
                                           ]
@@ -1287,7 +1300,7 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "(((datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/AvgVisitorsperDay\")))-(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/AvgVisitorsperDay\"))))/(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/AvgVisitorsperDay\"))))",
+                           "txt": "(((datasource(\"3c05a8b0246b164d6408KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/AvgVisitorsperDay\")))-(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/AvgVisitorsperDay\"))))/(datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/AvgVisitorsperDay\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1348,7 +1361,7 @@
                      "type": "label",
                      "role": "secondary",
                      "id": "f0970e99",
-                     "displayName": "Average Visitors per Day Prev",
+                     "displayName": "Average Visitors per Day (Prev 30 Days)",
                      "renamed": true,
                      "size": 1,
                      "fmt": "num",
@@ -1359,7 +1372,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/\",$KTprofileID,\"/measures/AvgVisitorsperDay\"))",
+                           "txt": "datasource(\"03f42a92893adf315612KavyaMallur9\",concat(\"/data/*[name()='\",$KTprofileID,\"']/measures/AvgVisitorsperDay\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1378,7 +1391,7 @@
                                           "c": [
                                              {
                                                 "t": "l",
-                                                "v": "/data/"
+                                                "v": "/data/*[name()='"
                                              },
                                              {
                                                 "t": "var",
@@ -1386,14 +1399,15 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "/measures/AvgVisitorsperDay"
+                                                "v": "']/measures/AvgVisitorsperDay"
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
                                                    "placeholder": "data",
-                                                   "repeats": true
+                                                   "repeats": true,
+                                                   "description": "1 or more items."
                                                 }
                                              }
                                           ]
@@ -1417,7 +1431,7 @@
             }
          ],
          "rows": 2,
-         "cols": "2",
+         "cols": 2,
          "widths": [
             {
                "w": "65%",
