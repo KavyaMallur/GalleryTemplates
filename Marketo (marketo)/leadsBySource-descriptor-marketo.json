@@ -1,0 +1,71 @@
+{
+    "name": "Marketo Leads by Source",
+    "description": "How many leads have you gotten so far, today? Originates from the Gallery.",
+    "datasources": {
+        "marketo": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoMCL(2Months)",
+            "name": "Marketo MCL (2 Months)",
+            "description": "Marketing captured leads from Marketo for last two months.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "marketo": "95254ec72be87e269ac6KavyaMallur9"
+    },
+    "services": [{
+        "service": "marketo"
+    }],
+    "uiVariables": [{
+        "name": "KTdatePicker",
+        "value": "This Month"
+    }],
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.marketo.programName",
+        "label": "Program Name",
+        "description": "Enter the Program Name and select your Marketing Captured lists",
+        "isRequired": true,
+        "debounceEnabled": true,
+        "onChangeQueries": ["q1"],
+        "ghostText": "Klipfolio Lifecycle Performance"
+    }, {
+        "type": "select",
+        "id": "ds.marketo.MCLID",
+        "label": "Marketing Captured List"
+    }],
+    "queries": [{
+        "id": "q1",
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/lists.json?programName={{ds.marketo.programName}}",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget": 200,
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MCLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }]
+}

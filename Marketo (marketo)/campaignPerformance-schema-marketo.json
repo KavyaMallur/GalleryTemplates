@@ -1,0 +1,1387 @@
+{
+   "title": "Marketo Campaign Performance (Today)",
+   "id": "468f5a8c01eef70286756616373b2798",
+   "workspace": {
+      "datasources": [
+         "261b4abdf331446384d6KavyaMallur9",
+         "7551acd9fdc9d6023605KavyaMallur9",
+         "fde164d48ade048a3579KavyaMallur9",
+         "2732603d743e3bac0990KavyaMallur9",
+         "8e4b73e1295a800ac719KavyaMallur9",
+         "0637be96fa076364ec99KavyaMallur9",
+         "58415f9de8e597a74ca2KavyaMallur9",
+         "a382b483fb1afc7ab42cKavyaMallur9"
+      ],
+      "dimensions": {
+         "w": 1048
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "1796cf40",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "9672669d",
+               "displayName": "Delivered",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "09f397a7",
+                     "displayName": "Delivered (Today)",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "count(58415f9de8e597a74ca2KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "58415f9de8e597a74ca2KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "b87e1c80",
+                     "displayName": "Delivered Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Delivered\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Delivered"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "bb590c5e",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "1689d11a",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "e67ba9e9",
+                     "displayName": "Delivered Delta",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-even-grey",
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "substitute((((count(58415f9de8e597a74ca2KavyaMallur9@/result/id;))/(count(a382b483fb1afc7ab42cKavyaMallur9@/result/id;)))-\"1\"),\"Infinity\",\"\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "substitute",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "09f397a7"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "a96836d6"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Infinity"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true,
+                                             "description": "Occurrence of substitution.",
+                                             "default": "all"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "a96836d6",
+                     "displayName": "Delivered (Yesterday)",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " yesterday"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "count(a382b483fb1afc7ab42cKavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "a382b483fb1afc7ab42cKavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "simple_value",
+               "id": "5d14bee7",
+               "displayName": "Opened",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "b297d831",
+                     "displayName": "Opened (Today)",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "cx-theme_green_3",
+                                 "type": "color"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "count(261b4abdf331446384d6KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "261b4abdf331446384d6KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "5a259bd3",
+                     "displayName": "Opened Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Opened\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Opened"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "096f530d",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "787badab",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "6ad5285e",
+                     "displayName": "Opened Delta",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-green",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-even-grey",
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "substitute((((count(261b4abdf331446384d6KavyaMallur9@/result/id;))/(count(7551acd9fdc9d6023605KavyaMallur9@/result/id;)))-\"1\"),\"Infinity\",\"\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "substitute",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b297d831"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "0f2087a9"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Infinity"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true,
+                                             "description": "Occurrence of substitution.",
+                                             "default": "all"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "0f2087a9",
+                     "displayName": "Opened (Yesterday)",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " yesterday"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "count(7551acd9fdc9d6023605KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "7551acd9fdc9d6023605KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "simple_value",
+               "id": "aaa2e7a5",
+               "displayName": "Clicked",
+               "layoutConfig": {
+                  "y": 2,
+                  "x": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "8b700177",
+                     "displayName": "Clicked (Today)",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "count(fde164d48ade048a3579KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "fde164d48ade048a3579KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "9081bd43",
+                     "displayName": "Clicked Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Clicked\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Clicked"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "ca82542e",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 2,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "70af6f2a",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "y": 2,
+                  "x": 2
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "4c49962b",
+                     "displayName": "Clicked Delta",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-green",
+                                 "type": "icon",
+                                 "pos": "left",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-red",
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-even-grey",
+                                 "type": "icon",
+                                 "isScalar": true,
+                                 "pos": "left"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "substitute((((count(fde164d48ade048a3579KavyaMallur9@/result/id;))/(count(2732603d743e3bac0990KavyaMallur9@/result/id;)))-\"1\"),\"Infinity\",\"\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "substitute",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "8b700177"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "76b6b7ae"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Infinity"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true,
+                                             "description": "Occurrence of substitution.",
+                                             "default": "all"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "76b6b7ae",
+                     "displayName": "Clicked (Yesterday)",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " yesterday"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "count(2732603d743e3bac0990KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "2732603d743e3bac0990KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "simple_value",
+               "id": "1ac02bcc",
+               "displayName": "UnSubscribed",
+               "layoutConfig": {
+                  "y": 3,
+                  "x": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "8586bded",
+                     "displayName": "UnSubscribed (Today)",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "num",
+                     "formulas": [
+                        {
+                           "txt": "count(8e4b73e1295a800ac719KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "8e4b73e1295a800ac719KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "ecbffb71",
+                     "displayName": "UnSubscribed Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Unsubscribed\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Unsubscribed"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "align": "r",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            },
+            {
+               "type": "separator",
+               "id": "65d673e6",
+               "displayName": "Separator",
+               "layoutConfig": {
+                  "y": 3,
+                  "x": 1
+               },
+               "orientation": "v",
+               "line_style": "ShortDot"
+            },
+            {
+               "type": "simple_value",
+               "id": "5d0d7e5f",
+               "displayName": "Value Pair",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 3
+               },
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "276a236b",
+                     "displayName": "UnSubscribed Delta",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-up-red",
+                                 "isScalar": true,
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-down-green",
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "eq",
+                                 "right": {
+                                    "raw": "0"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-even-grey",
+                                 "type": "icon",
+                                 "pos": "left"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "substitute((((count(8e4b73e1295a800ac719KavyaMallur9@/result/id;))/(count(0637be96fa076364ec99KavyaMallur9@/result/id;)))-\"1\"),\"Infinity\",\"\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "substitute",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "8586bded"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "/"
+                                                   },
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "81fe07d3"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "-"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Infinity"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "occurrence",
+                                             "optional": true,
+                                             "description": "Occurrence of substitution.",
+                                             "default": "all"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ]
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "81fe07d3",
+                     "displayName": "UnSubscribed (Yesterday)",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "prefix": "vs ",
+                        "suffix": " yesterday"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "count(0637be96fa076364ec99KavyaMallur9@/result/id;)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0637be96fa076364ec99KavyaMallur9",
+                                             "a": "/result/id"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+
+                        ]
+                     ],
+                     "font_colour": "cx-color_aaa",
+                     "font_style": "regular",
+                     "wrap": "active"
+                  }
+               ]
+            }
+         ],
+         "rows": 4,
+         "cols": 3,
+         "widths": [
+            {
+               "w": 20,
+               "x": 1
+            }
+         ],
+         "cellData": [
+            {
+               "y": 1,
+               "x": 1
+            },
+            {
+               "y": 2,
+               "x": 1
+            },
+            {
+               "alignment": 2,
+               "y": 1,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 2,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "alignment": 2,
+               "y": 3,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ],
+               "x": 0
+            },
+            {
+               "y": 3,
+               "x": 1
+            },
+            {
+               "alignment": 2,
+               "y": 2,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2
+            },
+            {
+               "alignment": 2,
+               "y": 1,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2
+            },
+            {
+               "y": 3,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "x": 2,
+               "alignment": 2
+            },
+            {
+               "x": 2,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  12
+               ],
+               "alignment": 2
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "alignment": 2,
+               "cellPadding": [
+                  5,
+                  12,
+                  5,
+                  5
+               ]
+            }
+         ]
+      }
+   ]
+}
