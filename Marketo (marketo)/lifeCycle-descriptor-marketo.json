@@ -1,0 +1,255 @@
+{
+    "name": "Marketo LifeCycle",
+    "description": "View the marketo leads lifecycle. Originates from the Gallery.",
+    "datasources": {
+        "marketo-01": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoMCL(2Months)",
+            "name": "Marketo MCL (2 Months)",
+            "description": "Marketing captured leads from Marketo for last two months.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "marketo-02": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoMQL(2Months)",
+            "name": "Marketo MQL (2 Months)",
+            "description": "Marketing qualified leads from Marketo for last two months.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MQLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "marketo-03": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoSAL(2Months)",
+            "name": "Marketo SAL (2 Months)",
+            "description": "Sales accepted leads from Marketo for last two months.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SALID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "marketo-04": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoSQL(2Months)",
+            "name": "Marketo SQL (2 Months)",
+            "description": "Sales qualified leads from Marketo for last two months.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SQLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "marketo-05": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoWon(2Months)",
+            "name": "Marketo Won (2 Months)",
+            "description": "Customers from Marketo for last two months.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.customerID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "marketo-01": "95254ec72be87e269ac6KavyaMallur9",
+        "marketo-02": "c9059168ddc74ce7278bKavyaMallur9",
+        "marketo-03": "9e98296d585f55e81f5fKavyaMallur9",
+        "marketo-04": "ca25bf017f8067f1cc85KavyaMallur9",
+        "marketo-05": "59e65494cfd97ed86eb9KavyaMallur9"
+    },
+    "services": [{
+        "service": "marketo"
+    }],
+    "uiVariables": [{
+        "name": "KTdatePicker",
+        "value": "This Month"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.marketo.MCLID",
+        "label": "List",
+        "description": "Select your Marketing Captured List.",
+        "onChangeQueries": ["q2"]
+    },{
+        "type": "select",
+        "id": "ds.marketo.MQLID",
+        "label": "List",
+        "description": "Select your Marketing Qualified List.",
+        "onChangeQueries": ["q3"]
+    },{
+        "type": "select",
+        "id": "ds.marketo.SALID",
+        "label": "List",
+        "description": "Select your Sales Accepted List.",
+        "onChangeQueries": ["q4"]
+    },{
+        "type": "select",
+        "id": "ds.marketo.SQLID",
+        "label": "List",
+        "description": "Select your Sales Qualified List.",
+        "onChangeQueries": ["q5"]
+    },{
+        "type": "select",
+        "id": "ds.marketo.customerID",
+        "label": "List",
+        "description": "Select your Customer List."
+    }],
+    "queries": [{
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/lists.json?programName=Klipfolio%20Lifecycle%20Performance",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MCLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    },{
+        "id": "q2",
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/lists.json?programName=Klipfolio%20Lifecycle%20Performance",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MQLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    },{
+        "id": "q3",
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/lists.json?programName=Klipfolio%20Lifecycle%20Performance",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.SALID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    },{
+        "id": "q4",
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/lists.json?programName=Klipfolio%20Lifecycle%20Performance",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.SQLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    },{
+        "id": "q5",
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{auth.marketo.identityURL}}/rest/v1/lists.json?programName=Klipfolio%20Lifecycle%20Performance",
+                "identity_url": "https://{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget":200,
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.customerID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }]
+}
