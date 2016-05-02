@@ -1,23 +1,24 @@
 {
-   "title": "Marketo Leads by Source",
-   "id": "7b6a5fc51ce1cf4ff7b820cd68ffdb34",
+   "title": "Marketo Leads by Region",
+   "id": "a631ccc5ec2c4f7e1fc78d8a9067ab57",
    "workspace": {
       "datasources": [
+         "533a3a37fc25f4e3068cnatceewzhere",
          "95254ec72be87e269ac6KavyaMallur9"
       ],
       "dimensions": {
-         "w": 673
+         "w": 589
       }
    },
    "components": [
       {
          "type": "panel_grid",
-         "id": "d7cf4bed",
+         "id": "5397409c",
          "displayName": "Layout Grid",
          "components": [
             {
                "type": "label",
-               "id": "d7328147",
+               "id": "9f359812",
                "displayName": "Start Date",
                "layoutConfig": {
                   "x": 0,
@@ -320,14 +321,16 @@
                ],
                "data": [
                   [
+
                   ]
                ],
+               "align": "r",
                "font_style": "regular",
                "wrap": true
             },
             {
                "type": "label",
-               "id": "54ce2444",
+               "id": "2f963851",
                "displayName": "End Date",
                "layoutConfig": {
                   "x": 1,
@@ -353,7 +356,7 @@
                            },
                            "type": "eq",
                            "right": {
-                              "cx": "d7328147"
+                              "cx": "9f359812"
                            }
                         }
                      ],
@@ -653,6 +656,7 @@
                ],
                "data": [
                   [
+
                   ]
                ],
                "font_style": "regular",
@@ -660,7 +664,7 @@
             },
             {
                "type": "input",
-               "id": "17cc38ab",
+               "id": "975b56b4",
                "displayName": "Date Range",
                "layoutConfig": {
                   "x": 3,
@@ -671,7 +675,7 @@
                   {
                      "type": "proxy",
                      "role": "values",
-                     "id": "6755ef35",
+                     "id": "1356fad9",
                      "displayName": "Values",
                      "formulas": [
                         {
@@ -705,47 +709,18 @@
                      ],
                      "data": [
                         [
+
                         ]
                      ]
                   },
                   {
                      "type": "proxy",
                      "role": "labels",
-                     "id": "b7459d38",
+                     "id": "a2c4044c",
                      "displayName": "Labels",
-                     "formulas": [
-                        {
-                           "txt": "array(\"Today,Yesterday,This Week,Last Week,This Month,Last Month\")",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "array",
-                                    "c": [
-                                       {
-                                          "t": "l",
-                                          "v": "Today,Yesterday,This Week,Last Week,This Month,Last Month"
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true,
-                                             "description": "0 or more items."
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        }
-                     ],
+                     "formulas": [],
                      "data": [
-                        [
-                        ]
+                        []
                      ]
                   }
                ],
@@ -794,65 +769,145 @@
             },
             {
                "x": 3,
-               "y": 0
+               "y": 0,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
             }
          ]
       },
       {
          "type": "panel_grid",
-         "id": "ba1ba791-1",
+         "id": "86336ff1-1",
          "displayName": "Layout Grid",
          "components": [
             {
-               "type": "table",
-               "id": "90797512-1",
-               "displayName": "Table",
+               "type": "tile_map",
+               "id": "f430f073",
+               "displayName": "Map",
                "layoutConfig": {
                   "x": 0,
                   "y": 0
                },
+               "size": "3",
                "components": [
                   {
-                     "type": "table_col",
-                     "role": "tcol",
-                     "id": "7b5a5fb2-2",
-                     "displayName": "Source",
-                     "size": 1,
-                     "fmt": "txt",
+                     "type": "map_region",
+                     "role": "tile_regions",
+                     "id": "33205961",
+                     "displayName": "Regions",
                      "components": [
                         {
-                           "type": "table_results",
-                           "role": "result",
-                           "id": "9126fbc4-3",
-                           "displayName": "Unnamed 1 Result",
-                           "size": 1,
-                           "formulas": [],
-                           "data": [
-                              []
-                           ],
-                           "mixin": "label",
-                           "align": "l",
-                           "font_style": "bold"
-                        }
-                     ],
-                     "formulas": [
-                        {
-                           "txt": "replace(sort(countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/leadSource;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),\"descnumeric\",group(select(95254ec72be87e269ac6KavyaMallur9@/result/leadSource;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))))))),\"\",\"N/A\")",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "replace",
+                           "type": "proxy",
+                           "role": "region_id",
+                           "id": "c7ff8b0a",
+                           "displayName": "ID",
+                           "formulas": [
+                              {
+                                 "txt": "slice(533a3a37fc25f4e3068cnatceewzhere@A:A;)",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "sort",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "533a3a37fc25f4e3068cnatceewzhere",
+                                                   "a": "A:A"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true,
+                                                   "description": "Indicates the number of items sliced off the top.",
+                                                   "default": "1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true,
+                                                   "description": "Indicates the position of the last item to be returned.",
+                                                   "default": "length of the list"
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                                 
+                              ]
+                           ]
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "region_color",
+                           "id": "d8c5cf8f",
+                           "displayName": "Color",
+                           "fmt": "num",
+                           "formulas": [
+                              {
+                                 "txt": "lookup(slice(533a3a37fc25f4e3068cnatceewzhere@B:B;),group(select(95254ec72be87e269ac6KavyaMallur9@/result/inferredCountry;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/inferredCountry;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "lookup",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "countdistinct",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "533a3a37fc25f4e3068cnatceewzhere",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "group",
                                                 "c": [
                                                    {
                                                       "t": "f",
@@ -862,7 +917,7 @@
                                                             "t": "d",
                                                             "v": {
                                                                "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                               "a": "/result/leadSource"
+                                                               "a": "/result/inferredCountry"
                                                             }
                                                          },
                                                          {
@@ -953,7 +1008,7 @@
                                                                         "t": "ref",
                                                                         "v": {
                                                                            "r": "cx",
-                                                                           "cx": "d7328147"
+                                                                           "cx": "9f359812"
                                                                         }
                                                                      }
                                                                   ]
@@ -987,14 +1042,487 @@
                                                                         "t": "ref",
                                                                         "v": {
                                                                            "r": "cx",
-                                                                           "cx": "d7328147"
+                                                                           "cx": "9f359812"
                                                                         }
                                                                      },
                                                                      {
                                                                         "t": "ref",
                                                                         "v": {
                                                                            "r": "cx",
-                                                                           "cx": "54ce2444"
+                                                                           "cx": "2f963851"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "countdistinct",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "select",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                               "a": "/result/inferredCountry"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "or",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Today"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Yesterday"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "condition",
+                                                                           "repeats": true,
+                                                                           "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "expr",
+                                                                  "v": false,
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "="
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "between",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "2f963851"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                                 
+                              ]
+                           ],
+                           "valueType": "color"
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "region_desc",
+                           "id": "8098d287",
+                           "displayName": "Description",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ]
+                        },
+                        {
+                           "type": "map_link",
+                           "role": "region_xref",
+                           "id": "80081023",
+                           "displayName": "Link",
+                           "formulas": [],
+                           "data": []
+                        }
+                     ]
+                  },
+                  {
+                     "type": "map_marker",
+                     "role": "tile_markers",
+                     "id": "c6824276",
+                     "displayName": "Markers",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "marker_lat",
+                           "id": "cd49c704",
+                           "displayName": "Latitude",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ]
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "marker_lng",
+                           "id": "21b2ad8e",
+                           "displayName": "Longitude",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ]
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_name",
+                           "id": "78e7046e",
+                           "displayName": "Name",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ]
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_color",
+                           "id": "c7f3283e",
+                           "displayName": "Color",
+                           "fmt": "num",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ],
+                           "valueType": "color"
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_size",
+                           "id": "3b6bbee2",
+                           "displayName": "Size",
+                           "fmt": "num",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ],
+                           "valueType": "size"
+                        },
+                        {
+                           "type": "map_tooltip_prop",
+                           "role": "marker_desc",
+                           "id": "9de0b689",
+                           "displayName": "Description",
+                           "formulas": [],
+                           "data": [
+                              []
+                           ]
+                        },
+                        {
+                           "type": "map_link",
+                           "role": "marker_xref",
+                           "id": "01cbe720",
+                           "displayName": "Link",
+                           "formulas": [],
+                           "data": []
+                        }
+                     ]
+                  }
+               ],
+               "mapId": "world_en"
+            },
+            {
+               "type": "table",
+               "id": "f941f77c",
+               "displayName": "Table",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "components": [
+                  {
+                     "type": "table_col",
+                     "role": "tcol",
+                     "id": "30a78af6",
+                     "displayName": "Top 10 Regions",
+                     "size": 1,
+                     "fmt": "txt",
+                     "components": [
+                        {
+                           "type": "table_results",
+                           "role": "result",
+                           "id": "76a9647e",
+                           "displayName": "Unnamed 1 Result",
+                           "size": 1,
+                           "formulas": [],
+                           "data": [
+                              []
+                           ],
+                           "mixin": "label",
+                           "align": "l",
+                           "font_style": "bold"
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "slice(sort(countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/inferredCountry;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),\"descnumeric\",group(select(95254ec72be87e269ac6KavyaMallur9@/result/inferredCountry;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))))))),\"0\",\"10\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sort",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "countdistinct",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "select",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                               "a": "/result/inferredCountry"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "or",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Today"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Yesterday"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "condition",
+                                                                           "repeats": true,
+                                                                           "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "expr",
+                                                                  "v": false,
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "="
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "between",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "2f963851"
                                                                         }
                                                                      }
                                                                   ]
@@ -1021,7 +1549,7 @@
                                                             "t": "d",
                                                             "v": {
                                                                "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                               "a": "/result/leadSource"
+                                                               "a": "/result/inferredCountry"
                                                             }
                                                          },
                                                          {
@@ -1112,7 +1640,7 @@
                                                                         "t": "ref",
                                                                         "v": {
                                                                            "r": "cx",
-                                                                           "cx": "d7328147"
+                                                                           "cx": "9f359812"
                                                                         }
                                                                      }
                                                                   ]
@@ -1146,14 +1674,14 @@
                                                                         "t": "ref",
                                                                         "v": {
                                                                            "r": "cx",
-                                                                           "cx": "d7328147"
+                                                                           "cx": "9f359812"
                                                                         }
                                                                      },
                                                                      {
                                                                         "t": "ref",
                                                                         "v": {
                                                                            "r": "cx",
-                                                                           "cx": "54ce2444"
+                                                                           "cx": "2f963851"
                                                                         }
                                                                      }
                                                                   ]
@@ -1168,11 +1696,11 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": ""
+                                          "v": "0"
                                        },
                                        {
                                           "t": "l",
-                                          "v": "N/A"
+                                          "v": "10"
                                        }
                                     ]
                                  }
@@ -1181,26 +1709,28 @@
                         }
                      ],
                      "data": [
-                        []
+                        [
+
+                        ]
                      ],
-                     "name": "Source",
+                     "name": "Top 10 Regions",
                      "index": 0,
-                     "w": "175px"
+                     "fw": "fixed",
+                     "w": "175"
                   },
                   {
                      "type": "table_col",
                      "role": "tcol",
-                     "id": "de0ea0b7-4",
-                     "displayName": "Leads Value",
-                     "renamed": true,
+                     "id": "11d1b60a",
+                     "displayName": "Leads",
                      "size": 1,
                      "fmt": "num",
                      "components": [
                         {
                            "type": "table_results",
                            "role": "result",
-                           "id": "da9d8ec0-5",
-                           "displayName": "Leads Value Result",
+                           "id": "9867d819",
+                           "displayName": "Unnamed 2 Result",
                            "size": 1,
                            "formulas": [],
                            "data": [
@@ -1213,183 +1743,197 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "sort(countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/leadSource;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),\"descnumeric\")",
+                           "txt": "slice(sort(countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/inferredCountry;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),\"descnumeric\"),\"0\",\"10\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "countdistinct",
+                                          "v": "sort",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "select",
+                                                "v": "countdistinct",
                                                 "c": [
                                                    {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                         "a": "/result/leadSource"
-                                                      }
-                                                   },
-                                                   {
                                                       "t": "f",
-                                                      "v": "if",
+                                                      "v": "select",
                                                       "c": [
                                                          {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                               "a": "/result/inferredCountry"
+                                                            }
+                                                         },
+                                                         {
                                                             "t": "f",
-                                                            "v": "or",
+                                                            "v": "if",
                                                             "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "or",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Today"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Yesterday"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "condition",
+                                                                           "repeats": true,
+                                                                           "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
                                                                {
                                                                   "t": "expr",
                                                                   "v": false,
                                                                   "c": [
                                                                      {
-                                                                        "t": "var",
-                                                                        "v": "KTdatePicker"
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
                                                                      },
                                                                      {
                                                                         "t": "o",
                                                                         "v": "="
                                                                      },
                                                                      {
-                                                                        "t": "l",
-                                                                        "v": "Today"
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
+                                                                        }
                                                                      }
                                                                   ]
                                                                },
-                                                               {
-                                                                  "t": "expr",
-                                                                  "v": false,
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "var",
-                                                                        "v": "KTdatePicker"
-                                                                     },
-                                                                     {
-                                                                        "t": "o",
-                                                                        "v": "="
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "Yesterday"
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "condition",
-                                                                     "repeats": true,
-                                                                     "description": "1 or more true/false values, typically the result of a comparison or formula."
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
                                                                {
                                                                   "t": "f",
-                                                                  "v": "date_convert",
+                                                                  "v": "between",
                                                                   "c": [
                                                                      {
-                                                                        "t": "d",
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
                                                                         "v": {
-                                                                           "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                                           "a": "/result/timestampMarketingCapturedLead"
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
                                                                         }
                                                                      },
                                                                      {
-                                                                        "t": "l",
-                                                                        "v": "yyyy-MM-dd"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "yyyyMMdd"
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "="
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "d7328147"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "date_convert",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
+                                                                        "t": "ref",
                                                                         "v": {
-                                                                           "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                                           "a": "/result/timestampMarketingCapturedLead"
+                                                                           "r": "cx",
+                                                                           "cx": "2f963851"
                                                                         }
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "yyyy-MM-dd"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "yyyyMMdd"
                                                                      }
                                                                   ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "d7328147"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "54ce2444"
-                                                                  }
                                                                }
                                                             ]
                                                          }
                                                       ]
                                                    }
                                                 ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "descnumeric"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "return values",
+                                                   "description": "1 or more (must be same number as values) items.",
+                                                   "optional": true,
+                                                   "default": "values"
+                                                }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "l",
+                                          "v": "0"
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "return values",
-                                             "description": "1 or more (must be same number as values) items.",
-                                             "optional": true,
-                                             "default": "values"
-                                          }
+                                          "t": "l",
+                                          "v": "10"
                                        }
                                     ]
                                  }
@@ -1398,33 +1942,35 @@
                         }
                      ],
                      "data": [
-                        []
+                        [
+
+                        ]
                      ],
                      "name": "Leads",
                      "index": 1,
                      "borderRight": "0",
                      "fw": "fixed",
-                     "w": "100px"
+                     "w": "95",
+                     "font_style": "bold"
                   },
                   {
                      "type": "table_col",
                      "role": "tcol",
-                     "id": "0c63d117-6",
+                     "id": "64b924eb-1",
                      "displayName": "Leads Chart",
                      "renamed": true,
                      "size": 1,
                      "fmt": "hrz",
                      "fmtArgs": {
-                        "minVal": null,
-                        "maxVal": null,
-                        "hideRange": true,
-                        "chart_size": "0"
+                        "minVal": 32,
+                        "maxVal": 247,
+                        "hideRange": true
                      },
                      "components": [
                         {
                            "type": "table_results",
                            "role": "result",
-                           "id": "44ed3e7f-7",
+                           "id": "432d965b-2",
                            "displayName": "Leads Chart Result",
                            "size": 1,
                            "formulas": [],
@@ -1438,183 +1984,197 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "sort(countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/leadSource;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),\"descnumeric\")",
+                           "txt": "slice(sort(countdistinct(select(95254ec72be87e269ac6KavyaMallur9@/result/inferredCountry;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))),\"descnumeric\"),\"0\",\"10\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "countdistinct",
+                                          "v": "sort",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "select",
+                                                "v": "countdistinct",
                                                 "c": [
                                                    {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                         "a": "/result/leadSource"
-                                                      }
-                                                   },
-                                                   {
                                                       "t": "f",
-                                                      "v": "if",
+                                                      "v": "select",
                                                       "c": [
                                                          {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                               "a": "/result/inferredCountry"
+                                                            }
+                                                         },
+                                                         {
                                                             "t": "f",
-                                                            "v": "or",
+                                                            "v": "if",
                                                             "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "or",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Today"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "var",
+                                                                              "v": "KTdatePicker"
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "="
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "Yesterday"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "condition",
+                                                                           "repeats": true,
+                                                                           "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
                                                                {
                                                                   "t": "expr",
                                                                   "v": false,
                                                                   "c": [
                                                                      {
-                                                                        "t": "var",
-                                                                        "v": "KTdatePicker"
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
                                                                      },
                                                                      {
                                                                         "t": "o",
                                                                         "v": "="
                                                                      },
                                                                      {
-                                                                        "t": "l",
-                                                                        "v": "Today"
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
+                                                                        }
                                                                      }
                                                                   ]
                                                                },
-                                                               {
-                                                                  "t": "expr",
-                                                                  "v": false,
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "var",
-                                                                        "v": "KTdatePicker"
-                                                                     },
-                                                                     {
-                                                                        "t": "o",
-                                                                        "v": "="
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "Yesterday"
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "condition",
-                                                                     "repeats": true,
-                                                                     "description": "1 or more true/false values, typically the result of a comparison or formula."
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
                                                                {
                                                                   "t": "f",
-                                                                  "v": "date_convert",
+                                                                  "v": "between",
                                                                   "c": [
                                                                      {
-                                                                        "t": "d",
+                                                                        "t": "f",
+                                                                        "v": "date_convert",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                                                 "a": "/result/timestampMarketingCapturedLead"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyy-MM-dd"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "yyyyMMdd"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "ref",
                                                                         "v": {
-                                                                           "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                                           "a": "/result/timestampMarketingCapturedLead"
+                                                                           "r": "cx",
+                                                                           "cx": "9f359812"
                                                                         }
                                                                      },
                                                                      {
-                                                                        "t": "l",
-                                                                        "v": "yyyy-MM-dd"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "yyyyMMdd"
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "="
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "d7328147"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "date_convert",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
+                                                                        "t": "ref",
                                                                         "v": {
-                                                                           "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                                           "a": "/result/timestampMarketingCapturedLead"
+                                                                           "r": "cx",
+                                                                           "cx": "2f963851"
                                                                         }
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "yyyy-MM-dd"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "yyyyMMdd"
                                                                      }
                                                                   ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "d7328147"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "54ce2444"
-                                                                  }
                                                                }
                                                             ]
                                                          }
                                                       ]
                                                    }
                                                 ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "descnumeric"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "return values",
+                                                   "description": "1 or more (must be same number as values) items.",
+                                                   "optional": true,
+                                                   "default": "values"
+                                                }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "l",
+                                          "v": "0"
                                        },
                                        {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "return values",
-                                             "description": "1 or more (must be same number as values) items.",
-                                             "optional": true,
-                                             "default": "values"
-                                          }
+                                          "t": "l",
+                                          "v": "10"
                                        }
                                     ]
                                  }
@@ -1623,18 +2183,20 @@
                         }
                      ],
                      "data": [
-                        []
+                        [
+
+                        ]
                      ],
                      "name": "",
                      "index": 2,
                      "borderLeft": "0",
-                     "fw": "fixed",
-                     "w": "40%"
+                     "align": "left"
                   }
-               ]
+               ],
+               "maxRows": "10"
             }
          ],
-         "rows": 1,
+         "rows": 2,
          "cols": 1
       }
    ]
