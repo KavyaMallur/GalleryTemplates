@@ -1,0 +1,252 @@
+{
+    "name": "Marketo Current Leads by Stage",
+    "description": "View the details of leads for the selected stage. Originates from the Gallery.",
+    "datasources": {
+        "marketo-01": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoMCL(Today)",
+            "name": "Marketo MCL (Today)",
+            "description": "Today's Marketing captured leads from Marketo.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=Lifecycle_Status__c,firstName,lastName,phone,email,company,leadScore,demographicScore,behaviorScore,inferredCountry,leadSource,behaviorScore,demographicScore",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget": 200,
+                "method": "get"
+            }
+        },
+        "marketo-02": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoMQL(Today)",
+            "name": "Marketo MQL (Today)",
+            "description": "Today's Marketing qualified leads from Marketo.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MQLID}}/leads.json?fields=Lifecycle_Status__c,firstName,lastName,phone,email,company,leadScore,demographicScore,behaviorScore,inferredCountry,leadSource,behaviorScore,demographicScore",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget": 200,
+                "method": "get"
+            }
+        },
+        "marketo-03": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoSAL(Today)",
+            "name": "Marketo SAL (Today)",
+            "description": "Today's Sales Accepted Leads from Marketo.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SALID}}/leads.json?fields=Lifecycle_Status__c,firstName,lastName,phone,email,company,leadScore,demographicScore,behaviorScore,inferredCountry,leadSource,behaviorScore,demographicScore",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget": 200,
+                "method": "get"
+            }
+        },
+        "marketo-04": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoSQL(Today)",
+            "name": "Marketo SQL (Today)",
+            "description": "Today's Sales Qualified Leads from Marketo.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SQLID}}/leads.json?fields=Lifecycle_Status__c,firstName,lastName,phone,email,company,leadScore,demographicScore,behaviorScore,inferredCountry,leadSource,behaviorScore,demographicScore",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget": 200,
+                "method": "get"
+            }
+        },
+        "marketo-05": {
+            "service": "marketo",
+            "type": "marketo",
+            "libraryAlias": "MarketoWon(Today)",
+            "name": "Marketo Won (Today)",
+            "description": "Today's Customers from Marketo.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.customerID}}/leads.json?fields=Lifecycle_Status__c,firstName,lastName,phone,email,company,leadScore,demographicScore,behaviorScore,inferredCountry,leadSource,behaviorScore,demographicScore",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "prop:LeadsTarget": 200,
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "marketo-01": "31a3351d445b543eb640KavyaMallur9",
+        "marketo-02": "757165e545bef10b255fKavyaMallur9",
+        "marketo-03": "630a6921d800caf00ea5KavyaMallur9",
+        "marketo-04": "486a8de0819af83fa600KavyaMallur9",
+        "marketo-05": "bd3a59eb30dba829cb01KavyaMallur9"
+    },
+    "services": [{
+        "service": "marketo"
+    }],
+    "uiVariables": [{
+        "name": "KTStage",
+        "value": "MCL"
+    }],
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.marketo.programName",
+        "label": "Program Name",
+        "description": "Enter your Marketo Program Name",
+        "isRequired": true,
+        "debounceEnabled": true,
+        "onChangeQueries": ["q1"],
+        "ghostText": "Klipfolio Lifecycle Performance"
+    }, {
+        "type": "select",
+        "id": "ds.marketo.MCLID",
+        "label": "Marketing Captured",
+        "description": "Select today's Marketo Lists",
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.MQLID",
+        "label": "Marketing Qualified",
+        "onChangeQueries": ["q3"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.SALID",
+        "label": "Sales Accepted",
+        "onChangeQueries": ["q4"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.SQLID",
+        "label": "Sales Qualified",
+        "onChangeQueries": ["q5"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.customerID",
+        "label": "Customer"
+    }],
+    "queries": [{
+        "id": "q1",
+        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/lists.json?programName={{ds.marketo.programName}}",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MCLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/lists.json?programName={{ds.marketo.programName}}",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MQLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }, {
+        "id": "q3",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/lists.json?programName={{ds.marketo.programName}}",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.SALID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }, {
+        "id": "q4",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/lists.json?programName={{ds.marketo.programName}}",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.SQLID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }, {
+        "id": "q5",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/lists.json?programName={{ds.marketo.programName}}",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.customerID",
+            "propField": "options",
+            "labels": "/result/name",
+            "values": "/result/id"
+        }]
+    }]
+}

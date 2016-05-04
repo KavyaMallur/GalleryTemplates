@@ -1,0 +1,2213 @@
+{
+    "title": "Marketo Current Leads by Stage",
+    "id": "3b63d74037df1fc7354f46ec9220309b",
+    "workspace": {
+        "datasources": [
+            "31a3351d445b543eb640KavyaMallur9",
+            "757165e545bef10b255fKavyaMallur9",
+            "630a6921d800caf00ea5KavyaMallur9",
+            "bd3a59eb30dba829cb01KavyaMallur9",
+            "486a8de0819af83fa600KavyaMallur9"
+        ],
+        "dimensions": {
+            "w": 1176
+        }
+    },
+    "components": [{
+        "type": "panel_grid",
+        "id": "77caf978-1",
+        "displayName": "Layout Grid",
+        "components": [{
+            "type": "input",
+            "id": "c57f4763-19",
+            "displayName": "Stage",
+            "layoutConfig": {
+                "x": 2,
+                "y": 0
+            },
+            "renamed": true,
+            "components": [{
+                "type": "proxy",
+                "role": "values",
+                "id": "70a1c372-20",
+                "displayName": "Start Date",
+                "renamed": true,
+                "formulas": [{
+                    "txt": "array(\"MCL\",\"MQL\",\"SAL\",\"SQL\",\"Won\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "array",
+                            "c": [{
+                                "t": "l",
+                                "v": "MCL"
+                            }, {
+                                "t": "l",
+                                "v": "MQL"
+                            }, {
+                                "t": "l",
+                                "v": "SAL"
+                            }, {
+                                "t": "l",
+                                "v": "SQL"
+                            }, {
+                                "t": "l",
+                                "v": "Won"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "0 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": []
+            }, {
+                "type": "proxy",
+                "role": "labels",
+                "id": "abf1cfdb-21",
+                "displayName": "End Date",
+                "renamed": true,
+                "formulas": [{
+                    "txt": "array(\"Marketing Captured Lead\",\"Marketing Qualified Lead\",\"Sales Accepted Lead\",\"Sales Qualified Lead\",\"Won\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "array",
+                            "c": [{
+                                "t": "l",
+                                "v": "Marketing Captured Lead"
+                            }, {
+                                "t": "l",
+                                "v": "Marketing Qualified Lead"
+                            }, {
+                                "t": "l",
+                                "v": "Sales Accepted Lead"
+                            }, {
+                                "t": "l",
+                                "v": "Sales Qualified Lead"
+                            }, {
+                                "t": "l",
+                                "v": "Won"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "0 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": []
+            }],
+            "scope": 2,
+            "propName": "KTStage",
+            "inputType": 1,
+            "inputLabel": "Stage"
+        }],
+        "rows": 1,
+        "cols": 3,
+        "widths": [{
+            "x": 2,
+            "w": 275
+        }],
+        "cellData": [{
+            "x": 0,
+            "y": 0,
+            "w": 2
+        }, {
+            "x": 2,
+            "y": 0
+        }]
+    }, {
+        "type": "panel_grid",
+        "id": "7285d700-1",
+        "displayName": "Layout Grid",
+        "components": [{
+            "type": "table",
+            "id": "5814b35b",
+            "displayName": "Table",
+            "layoutConfig": {
+                "x": 0,
+                "y": 0
+            },
+            "components": [{
+                "type": "table_col",
+                "role": "tcol",
+                "id": "57a05c16",
+                "displayName": "Name",
+                "size": 1,
+                "fmt": "hyp",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "c88f158c",
+                    "displayName": "Unnamed 1 Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "concat(replace(concat(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/firstName;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/firstName;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/firstName;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/firstName;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/firstName;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\" \",switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/lastName;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/lastName;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/lastName;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/lastName;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/lastName;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\")))),\"\",\"N/A\"),\"|\",\"https://app-ab04.marketo.com/leadDatabase/loadLeadDetail?leadId=\",switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/id;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/id;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/id;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/id;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/id;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))))",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "concat",
+                            "c": [{
+                                "t": "f",
+                                "v": "replace",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "concat",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "switch",
+                                        "c": [{
+                                            "t": "var",
+                                            "v": "KTStage"
+                                        }, {
+                                            "t": "l",
+                                            "v": "MCL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "31a3351d445b543eb640KavyaMallur9",
+                                                    "a": "/result/firstName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "31a3351d445b543eb640KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Marketing Captured Lead"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "MQL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "757165e545bef10b255fKavyaMallur9",
+                                                    "a": "/result/firstName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "757165e545bef10b255fKavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Marketing Qualified Lead"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "SAL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                    "a": "/result/firstName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Sales Accepted Lead"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "SQL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "486a8de0819af83fa600KavyaMallur9",
+                                                    "a": "/result/firstName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "486a8de0819af83fa600KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Sales Qualified Opportunity"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "Won"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                    "a": "/result/firstName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Customer"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "case",
+                                                "repeats": true,
+                                                "description": ""
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "case",
+                                                "repeats": true,
+                                                "description": ""
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "l",
+                                        "v": " "
+                                    }, {
+                                        "t": "f",
+                                        "v": "switch",
+                                        "c": [{
+                                            "t": "var",
+                                            "v": "KTStage"
+                                        }, {
+                                            "t": "l",
+                                            "v": "MCL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "31a3351d445b543eb640KavyaMallur9",
+                                                    "a": "/result/lastName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "31a3351d445b543eb640KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Marketing Captured Lead"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "MQL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "757165e545bef10b255fKavyaMallur9",
+                                                    "a": "/result/lastName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "757165e545bef10b255fKavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Marketing Qualified Lead"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "SAL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                    "a": "/result/lastName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Sales Accepted Lead"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "SQL"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "486a8de0819af83fa600KavyaMallur9",
+                                                    "a": "/result/lastName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "486a8de0819af83fa600KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Sales Qualified Opportunity"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "Won"
+                                        }, {
+                                            "t": "f",
+                                            "v": "select",
+                                            "c": [{
+                                                "t": "d",
+                                                "v": {
+                                                    "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                    "a": "/result/lastName"
+                                                }
+                                            }, {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [{
+                                                    "t": "d",
+                                                    "v": {
+                                                        "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                        "a": "/result/Lifecycle_Status__c"
+                                                    }
+                                                }, {
+                                                    "t": "o",
+                                                    "v": "="
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "Customer"
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "case",
+                                                "repeats": true,
+                                                "description": ""
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "case",
+                                                "repeats": true,
+                                                "description": ""
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "data",
+                                            "repeats": true,
+                                            "description": "1 or more items."
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": ""
+                                }, {
+                                    "t": "l",
+                                    "v": "N/A"
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "|"
+                            }, {
+                                "t": "l",
+                                "v": "https://app-ab04.marketo.com/leadDatabase/loadLeadDetail?leadId="
+                            }, {
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/id"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/id"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/id"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/id"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/id"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "1 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Name",
+                "index": 0,
+                "fw": "fixed",
+                "w": "18%"
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "808b1ba9",
+                "displayName": "E-mail",
+                "size": 1,
+                "fmt": "txt",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "031174d3",
+                    "displayName": "Unnamed 2 Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/email;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/email;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/email;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/email;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/email;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"N/A\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/email"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/email"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/email"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/email"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/email"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "N/A"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "E-mail",
+                "index": 1
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "f40e02fe",
+                "displayName": "Country",
+                "size": 1,
+                "fmt": "txt",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "83ed848a",
+                    "displayName": "New Column Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/inferredCountry;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/inferredCountry;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/inferredCountry;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/inferredCountry;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/inferredCountry;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"N/A\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/inferredCountry"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/inferredCountry"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/inferredCountry"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/inferredCountry"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/inferredCountry"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "N/A"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Country",
+                "index": 2,
+                "align": "left"
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "77ace482",
+                "displayName": "Lead Source",
+                "size": 1,
+                "fmt": "txt",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "1f151dd9",
+                    "displayName": "Unnamed 4 Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/leadSource;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/leadSource;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/leadSource;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/leadSource;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/leadSource;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"N/A\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/leadSource"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/leadSource"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/leadSource"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/leadSource"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/leadSource"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "N/A"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Lead Source",
+                "index": 3,
+                "fw": "fixed",
+                "w": "12%"
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "bb5368d9",
+                "displayName": "Company",
+                "size": 1,
+                "fmt": "txt",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "519aa89e",
+                    "displayName": "Unnamed 3 Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/company;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/company;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/company;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/company;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/company;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"N/A\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/company"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/company"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/company"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/company"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/company"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "N/A"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Company",
+                "index": 4
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "98c811ba",
+                "displayName": "Lead Score",
+                "size": 1,
+                "fmt": "num",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "c3611541",
+                    "displayName": "New Column Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/leadScore;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/leadScore;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/leadScore;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/leadScore;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/leadScore;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"-\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/leadScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/leadScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/leadScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/leadScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/leadScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "-"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Lead Score",
+                "index": 5,
+                "fw": "fixed",
+                "w": "10%",
+                "align": "left"
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "0f97aa43",
+                "displayName": "Demographic Score",
+                "size": 1,
+                "fmt": "num",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "30ff1a71",
+                    "displayName": "New Column Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/demographicScore;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/demographicScore;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/demographicScore;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/demographicScore;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/demographicScore;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"-\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/demographicScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/demographicScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/demographicScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/demographicScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/demographicScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "-"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Demographic Score",
+                "index": 6,
+                "fw": "fixed",
+                "w": "12%",
+                "align": "left"
+            }, {
+                "type": "table_col",
+                "role": "tcol",
+                "id": "e1869191",
+                "displayName": "Behavior Score",
+                "size": 1,
+                "fmt": "num",
+                "components": [{
+                    "type": "table_results",
+                    "role": "result",
+                    "id": "09009600",
+                    "displayName": "New Column Result",
+                    "size": 1,
+                    "formulas": [],
+                    "data": [
+                        []
+                    ],
+                    "mixin": "label",
+                    "align": "l",
+                    "font_style": "bold"
+                }],
+                "formulas": [{
+                    "txt": "replace(switch($KTStage,\"MCL\",select(31a3351d445b543eb640KavyaMallur9@/result/behaviorScore;,(31a3351d445b543eb640KavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Captured Lead\")),\"MQL\",select(757165e545bef10b255fKavyaMallur9@/result/behaviorScore;,(757165e545bef10b255fKavyaMallur9@/result/Lifecycle_Status__c;=\"Marketing Qualified Lead\")),\"SAL\",select(630a6921d800caf00ea5KavyaMallur9@/result/behaviorScore;,(630a6921d800caf00ea5KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Accepted Lead\")),\"SQL\",select(486a8de0819af83fa600KavyaMallur9@/result/behaviorScore;,(486a8de0819af83fa600KavyaMallur9@/result/Lifecycle_Status__c;=\"Sales Qualified Opportunity\")),\"Won\",select(bd3a59eb30dba829cb01KavyaMallur9@/result/behaviorScore;,(bd3a59eb30dba829cb01KavyaMallur9@/result/Lifecycle_Status__c;=\"Customer\"))),\"\",\"-\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "replace",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "KTStage"
+                                }, {
+                                    "t": "l",
+                                    "v": "MCL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "31a3351d445b543eb640KavyaMallur9",
+                                            "a": "/result/behaviorScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "31a3351d445b543eb640KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Captured Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "MQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "757165e545bef10b255fKavyaMallur9",
+                                            "a": "/result/behaviorScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "757165e545bef10b255fKavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Marketing Qualified Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SAL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "630a6921d800caf00ea5KavyaMallur9",
+                                            "a": "/result/behaviorScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "630a6921d800caf00ea5KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Accepted Lead"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "SQL"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "486a8de0819af83fa600KavyaMallur9",
+                                            "a": "/result/behaviorScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "486a8de0819af83fa600KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Sales Qualified Opportunity"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Won"
+                                }, {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                            "a": "/result/behaviorScore"
+                                        }
+                                    }, {
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "bd3a59eb30dba829cb01KavyaMallur9",
+                                                "a": "/result/Lifecycle_Status__c"
+                                            }
+                                        }, {
+                                            "t": "o",
+                                            "v": "="
+                                        }, {
+                                            "t": "l",
+                                            "v": "Customer"
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "l",
+                                "v": "-"
+                            }]
+                        }]
+                    }
+                }],
+                "data": [],
+                "name": "Behavior Score",
+                "index": 7,
+                "fw": "fixed",
+                "w": "10%",
+                "align": "left"
+            }]
+        }],
+        "rows": 1,
+        "cols": 1
+    }]
+}
