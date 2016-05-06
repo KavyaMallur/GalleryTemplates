@@ -2,7 +2,7 @@
    "title": "Marketo Leads",
    "id": "0ddbeb808f5a188ef0bd2b7d6eced81d",
    "padding": "15",
-   "innerPadding": "0",
+   "innerPadding": "15",
    "workspace": {
       "datasources": [
          "95254ec72be87e269ac6KavyaMallur9"
@@ -665,7 +665,7 @@
                "id": "35a3f36a",
                "displayName": "Date Range",
                "layoutConfig": {
-                  "x": 3,
+                  "x": 2,
                   "y": 0
                },
                "renamed": true,
@@ -758,10 +758,10 @@
             {
                "type": "html_tpl2",
                "id": "3312e6bf",
-               "displayName": "Set a Target (HTML Template)",
+               "displayName": "Set Target (Button)",
                "layoutConfig": {
-                  "x": 3,
-                  "y": 1
+                  "x": 4,
+                  "y": 0
                },
                "renamed": true,
                "components": [
@@ -769,7 +769,7 @@
                      "type": "html_data",
                      "role": "data",
                      "id": "b5ba4b5a",
-                     "displayName": "MCLTarget",
+                     "displayName": "Series 1",
                      "formulas": [
                         {
                            "txt": "$KTMCLTarget",
@@ -787,26 +787,35 @@
                      ],
                      "data": [
                         [
+                           "800"
                         ]
                      ],
                      "mixin": "label",
-                     "dataId": "MCLTarget"
+                     "dataId": "Series 1"
                   }
                ],
-               "tpl": "<div id=\"gmyBtn\" style=\"width:100%; float:right;cursor:pointer;\" class=\"btn btn-info\"; data-toggle=\"collapse\">\n\t<button id=\"gTarget\" title= \"Set Monthly Targets\" data-toggle=\"collapse\"\" style=\"height:32px; float:right; width:120px; background-color:#7395e5; margin:5px; line-height:0;\">Set a Target</button>\n</div>",
-               "script_tpl": "document.getElementById(%22gmyBtn%22).addEventListener(%22click%22,%20function()%7B%0A%09%09if%20(document.getElementById(%22gcontent%22).style.display%20==%20%22block%22)%0A%09%09%7B%0A%09%09%09document.getElementById(%22gcontent%22).style.display%20=%20%22none%22;%0A%09%09%7D%0A%09%09else%20%0A%09%09%7B%0A%09%09%09document.getElementById(%22gcontent%22).style.display%20=%20%22block%22;%0A%09%09%7D%0A%7D);%0A%0A",
+               "tpl": "<div id=\"gTargetDiv\" style=\"width:100%; float:right;cursor:pointer;\" class=\"btn btn-info\"; data-toggle=\"collapse\">\n\t<button id=\"gTargetBtn\" title= \"Set Monthly Targets\" data-toggle=\"collapse\"\" style=\"height:32px; float:right; width:120px; background-color:#7395e5; margin:5px; line-height:0;\">Set a Target</button>\n</div>",
+               "script_tpl": "document.getElementById(%22gTargetBtn%22).addEventListener(%22click%22,%20function()%7B%0A%09%09if%20(document.getElementById(%22gContent%22).style.display%20==%20%22block%22)%0A%09%09%7B%0A%09%09%09document.getElementById(%22gContent%22).style.display%20=%20%22none%22;%0A%09%09%7D%0A%09%09else%20%0A%09%09%7B%0A%09%09%09document.getElementById(%22gContent%22).style.display%20=%20%22block%22;%0A%09%09%7D%0A%7D);%0A%0A",
                "overflow": "ns"
             }
          ],
-         "rows": 2,
-         "cols": 4,
+         "rows": 1,
+         "cols": 5,
          "widths": [
             {
                "x": 0,
                "w": 80
             },
             {
-               "x": 3,
+               "x": 1,
+               "w": 120
+            },
+            {
+               "x": 2,
+               "w": 175
+            },
+            {
+               "x": 4,
                "w": 175
             }
          ],
@@ -847,13 +856,17 @@
                   5,
                   0
                ]
+            },
+            {
+               "x": 4,
+               "y": 0
             }
          ]
       },
       {
          "type": "html_tpl2",
          "id": "5bffb93c",
-         "displayName": "Apply Target Value (HTML Template)",
+         "displayName": "Target Popup",
          "layoutConfig": {
             "x": 2,
             "y": 0
@@ -866,15 +879,13 @@
                "id": "2e041999",
                "displayName": "Series1",
                "formulas": [],
-               "data": [
-                  []
-               ],
+               "data": [],
                "mixin": "label",
                "dataId": "Series1"
             }
          ],
-         "tpl": "<div id=\"gcontent\" style=\"display:none; position: absolute; left:50%; top:50%; transform: translate(-50%, -50%); padding: 20px; width: 290px; height: 40px; color: #4F4A4A; background-color: #f7f7f8; border-radius: 0.5em; box-shadow: 0 0 10px 0 rgba(0,0,0,0.3); z-index: 20;\" class=\"collapse\"> Set monthly target:\n\t<input id=\"gtarget\" name=\"\" type=text size=\"10\" style=\"width:70px; height:25px; border: 1px solid #b2b2b2; border-radius:0.25em; margin: 5px\" />\n\t<button id=\"gapply\" style=\"height:32px; margin:5px; line-height:0;\">Apply</button><br />\n</div>",
-         "script_tpl": "document.getElementById(%22gapply%22).addEventListener(%22click%22,%20function()%7B%0A%09%09var%20temp;%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20gtemp=document.getElementById(%22gtarget%22).value;%0A%09%09dashboard.setDashboardProp(2,%22KTMCLTarget%22,gtemp,dashboard.activeTab.id);%20%0A%09%09document.getElementById(%22gcontent%22).style.display%20=%20%22none%22;%0A%7D);"
+         "tpl": "<style>\ndiv#gContent {\n  display: none;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  padding: 20px;\n  height: 40px;\n  color: #4F4A4A;\n  background-color: #f7f7f8;\n  border-radius: 0.5em;\n  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);\n  z-index: 20; \n  margin-top: 30px\n}\n</style>\n\n<div id=\"gContent\"> Set monthly target:\n<div class=\"overlay-close\" style=\"right: -33px; top: -32px;\" id=\"gClose\"></div>\n\t<input id=\"gTargetTxt\" type=\"text\" size=\"10\" style=\"width:70px; height:25px; border: 1px solid #b2b2b2; border-radius:0.25em; margin: 5px\" />\n\t<button id=\"gApply\" style=\"height:32px; margin:5px; line-height:0;\">Apply</button><br />\n</div>",
+         "script_tpl": "document.getElementById(%22gApply%22).addEventListener(%22click%22,%20function()%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20var%20gtemp=document.getElementById(%22gTargetTxt%22).value;%0A%09%09dashboard.setDashboardProp(2,%22KTMCLTarget%22,gtemp,dashboard.activeTab.id);%20%0A%09%09document.getElementById(%22gContent%22).style.display%20=%20%22none%22;%0A%7D);%0A%0Adocument.getElementById(%22gClose%22).addEventListener(%22click%22,%20function()%7B%0A%09if%20(document.getElementById(%22gContent%22).style.display%20==%20%22block%22)%7B%0A%09%09document.getElementById(%22gContent%22).style.display%20=%20%22none%22;%0A%09%7D%0A%7D);"
       },
       {
          "type": "panel_grid",
@@ -943,7 +954,7 @@
                      "fmt": "num",
                      "formulas": [
                         {
-                           "txt": "count(select(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\")=(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))),between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\"))))))",
+                           "txt": "count(select(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,between(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),(datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -965,137 +976,42 @@
                                              },
                                              {
                                                 "t": "f",
-                                                "v": "if",
+                                                "v": "between",
                                                 "c": [
                                                    {
                                                       "t": "f",
-                                                      "v": "or",
+                                                      "v": "date_convert",
                                                       "c": [
                                                          {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "var",
-                                                                  "v": "KTdatePicker"
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "="
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "Today"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "var",
-                                                                  "v": "KTdatePicker"
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "="
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "Yesterday"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "condition",
-                                                               "repeats": true,
-                                                               "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "95254ec72be87e269ac6KavyaMallur9",
+                                                               "a": "/result/timestampMarketingCapturedLead"
                                                             }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
                                                          }
                                                       ]
                                                    },
                                                    {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "date_convert",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                                     "a": "/result/timestampMarketingCapturedLead"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "yyyy-MM-dd"
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "yyyyMMdd"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "ref",
-                                                            "v": {
-                                                               "r": "cx",
-                                                               "cx": "3878246c"
-                                                            }
-                                                         }
-                                                      ]
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "3878246c"
+                                                      }
                                                    },
                                                    {
-                                                      "t": "f",
-                                                      "v": "between",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "date_convert",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "95254ec72be87e269ac6KavyaMallur9",
-                                                                     "a": "/result/timestampMarketingCapturedLead"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "yyyy-MM-dd"
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "yyyyMMdd"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "ref",
-                                                            "v": {
-                                                               "r": "cx",
-                                                               "cx": "3878246c"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "ref",
-                                                            "v": {
-                                                               "r": "cx",
-                                                               "cx": "0ff52c0d"
-                                                            }
-                                                         }
-                                                      ]
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "0ff52c0d"
+                                                      }
                                                    }
                                                 ]
                                              }
@@ -1109,6 +1025,7 @@
                      ],
                      "data": [
                         [
+                           2
                         ]
                      ]
                   },
@@ -1121,11 +1038,11 @@
                      "size": "1",
                      "fmt": "num",
                      "fmtArgs": {
-                        "prefix": "Moving Target: "
+                        "prefix": "Moving: "
                      },
                      "formulas": [
                         {
-                           "txt": "if((or(contains($KTdatePicker,\"This\"),($KTdatePicker=\"Today\"))),switch($KTdatePicker,\"Today\",(((($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),\"1\",count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\")))))/\"24\"*(max(select(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd'T'HH:mm\",\"HH\"),(date(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\")=today())))+\"1\")),\"_default_\",((((($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),\"1\",count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\")))))/count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"))*count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),today())))),((($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),\"1\",count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"))))))",
+                           "txt": "if((or(contains($KTdatePicker,\"This\"),($KTdatePicker=\"Today\"))),switch($KTdatePicker,\"Today\",(((($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"))))/\"24\"*ceiling(max(select(date_convert(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd'T'HH:mm\",\"HH.mm\"),(date(95254ec72be87e269ac6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"yyyy-MM-dd\")=today()))))),\"_default_\",((((($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"))))/count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"))*count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),today())))),((($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\")))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1223,8 +1140,8 @@
                                                       "v": "*"
                                                    },
                                                    {
-                                                      "t": "expr",
-                                                      "v": false,
+                                                      "t": "f",
+                                                      "v": "ceiling",
                                                       "c": [
                                                          {
                                                             "t": "f",
@@ -1251,7 +1168,7 @@
                                                                            },
                                                                            {
                                                                               "t": "l",
-                                                                              "v": "HH"
+                                                                              "v": "HH.mm"
                                                                            }
                                                                         ]
                                                                      },
@@ -1322,12 +1239,14 @@
                                                             ]
                                                          },
                                                          {
-                                                            "t": "o",
-                                                            "v": "+"
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "1"
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "significance",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "1"
+                                                            }
                                                          }
                                                       ]
                                                    }
@@ -1544,6 +1463,7 @@
                      ],
                      "data": [
                         [
+                           25.806451612903224
                         ]
                      ],
                      "font_colour": "cx-color_888",
@@ -1573,6 +1493,7 @@
                      ],
                      "data": [
                         [
+                           0
                         ]
                      ],
                      "font_colour": "cx-color_888",
@@ -1590,7 +1511,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "(($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*if(or(($KTdatePicker=\"Today\"),($KTdatePicker=\"Yesterday\")),\"1\",count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"))))",
+                           "txt": "(($KTMCLTarget/count_days(date_startof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\"),date_endof(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),\"3\")))*count_days(date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_startof(today(),\"4\"),\"Last Week\",date_startof(today(),\"4\",\"-1\"),\"This Month\",date_startof(today(),\"3\"),\"Last Month\",date_startof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\"),date((datevalue(switch($KTdatePicker,\"Today\",today(),\"Yesterday\",yesterday(),\"This Week\",date_endof(today(),\"4\"),\"Last Week\",date_endof(today(),\"4\",\"-1\"),\"This Month\",date_endof(today(),\"3\"),\"Last Month\",date_endof(today(),\"3\",\"-1\")),\"yyyyMMdd\")),\"yyyyMMdd\")))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1755,140 +1676,79 @@
                                        },
                                        {
                                           "t": "f",
-                                          "v": "if",
+                                          "v": "count_days",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "or",
+                                                "v": "date",
                                                 "c": [
                                                    {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "var",
-                                                            "v": "KTdatePicker"
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "Today"
-                                                         }
-                                                      ]
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "3878246c"
+                                                      }
                                                    },
                                                    {
-                                                      "t": "expr",
-                                                      "v": false,
-                                                      "c": [
-                                                         {
-                                                            "t": "var",
-                                                            "v": "KTdatePicker"
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "Yesterday"
-                                                         }
-                                                      ]
+                                                      "t": "l",
+                                                      "v": "yyyyMMdd"
                                                    },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "condition",
-                                                         "repeats": true,
-                                                         "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "The time zone.",
+                                                         "default": "GMT"
                                                       }
                                                    }
                                                 ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "1"
                                              },
                                              {
                                                 "t": "f",
-                                                "v": "count_days",
+                                                "v": "date",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "date",
-                                                      "c": [
-                                                         {
-                                                            "t": "ref",
-                                                            "v": {
-                                                               "r": "cx",
-                                                               "cx": "3878246c"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "yyyyMMdd"
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "timezone",
-                                                               "optional": true,
-                                                               "description": "The time zone.",
-                                                               "default": "GMT"
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "f",
-                                                      "v": "date",
-                                                      "c": [
-                                                         {
-                                                            "t": "ref",
-                                                            "v": {
-                                                               "r": "cx",
-                                                               "cx": "0ff52c0d"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": "yyyyMMdd"
-                                                         },
-                                                         {
-                                                            "t": "a",
-                                                            "v": null,
-                                                            "arg_obj": {
-                                                               "placeholder": "timezone",
-                                                               "optional": true,
-                                                               "description": "The time zone.",
-                                                               "default": "GMT"
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "exclude DOW",
-                                                         "description": "1 or more days of week to exclude from the count.",
-                                                         "optional": true
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "0ff52c0d"
                                                       }
                                                    },
                                                    {
+                                                      "t": "l",
+                                                      "v": "yyyyMMdd"
+                                                   },
+                                                   {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "holidays",
+                                                         "placeholder": "timezone",
                                                          "optional": true,
-                                                         "description": "1 or more epoch dates to exclude from count."
+                                                         "description": "The time zone.",
+                                                         "default": "GMT"
                                                       }
                                                    }
                                                 ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "exclude DOW",
+                                                   "description": "1 or more days of week to exclude from the count.",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "holidays",
+                                                   "optional": true,
+                                                   "description": "1 or more epoch dates to exclude from count."
+                                                }
                                              }
                                           ]
                                        }
@@ -1900,6 +1760,7 @@
                      ],
                      "data": [
                         [
+                           25.806451612903224
                         ]
                      ],
                      "font_colour": "cx-color_888",
