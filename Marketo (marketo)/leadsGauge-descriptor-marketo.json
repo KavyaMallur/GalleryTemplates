@@ -1,6 +1,115 @@
 {
-    "name": "Marketo Leads Test",
-    "description": "Use this Map to see the concentration of leads in each region of the world. Originates from the Gallery.",
+    "name": "Marketo Leads",
+    "description": "Set your your gauge to show your marketing leads target on and always reach your goals. Originates from gallery.",
+    "sampleFormulas": {
+        "3878246c": {
+            "txt": "\"20160501\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20160501"
+                }]
+            }
+        },
+        "0ff52c0d": {
+            "txt": "\"20160531\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20160531"
+                }]
+            }
+        },
+        "17dd5f26": {
+            "txt": "array(\"This Month\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "This Month"
+                    }]
+                }]
+            }
+        },
+        "ba3299c0": {
+            "txt": "array(\"This Month\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "This Month"
+                    }]
+                }]
+            }
+        },
+        "b5ba4b5a": {
+            "txt": "\"800\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "800"
+                }]
+            }
+        },
+        "ad4ba929": {
+            "txt": "\"605\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 605
+                }]
+            }
+        },
+        "e09874b2": {
+            "txt": "\"800\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 800
+                }]
+            }
+        },
+        "0f74eee0": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "32c43223": {
+            "txt": "\"1200\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1200
+                }]
+            }
+        }
+    },
     "datasources": {
         "marketo": {
             "service": "marketo",
@@ -11,7 +120,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource,Lifecycle_Status__c",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -29,17 +138,19 @@
     "uiVariables": [{
         "name": "KTdatePicker",
         "value": "This Month"
+    }, {
+        "name": "KTMCLTarget",
+        "value": "1500"
     }],
     "datasourceConfigModel": [{
         "type": "text",
         "id": "ds.marketo.programName",
         "label": "Program Name",
-        "description": "Enter your Marketo Program Name and List",
+        "description": "Enter your Marketo Program Name.",
         "isRequired": true,
         "debounceEnabled": true,
-        "ghostText": "Klipfolio Lifecycle Performance",
-        "onChangeQueries": ["q1"]
-
+        "onChangeQueries": ["q1"],
+        "ghostText": "Klipfolio Lifecycle Performance"
     }, {
         "type": "select",
         "id": "ds.marketo.MCLID",
@@ -47,7 +158,7 @@
     }],
     "queries": [{
         "id": "q1",
-        "errorMessage": "Please ensure you have provided right marketo access client Secret, client ID, identity URL, and program name.",
+        "errorMessage": "Click <b>Try Again</b> and make sure that you entered right Marketo LaunchPoint Client Secret, Client ID, and REST API URL.",
         "connector": {
             "service": "marketo",
             "type": "marketo",
