@@ -1,0 +1,565 @@
+{
+   "title": "New Account Wins (This Month)",
+   "id": "ab28a367580b42a209ad513c7fdcac7f",
+   "workspace": {
+      "datasources": [
+         "3f8a1f1bc7085270dfb7e35e4351eb3d",
+         "bda7580a60759cf55aafa1084f7e2090"
+      ],
+      "dimensions": {
+         "w": 666
+      }
+   },
+   "components": [
+      {
+         "type": "gauge",
+         "id": "03b2a8b0-6",
+         "displayName": "Gauge",
+         "size": 2,
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "bca35d92-7"
+                     },
+                     "type": "gt",
+                     "right": {
+                        "cx": "364c94dd-8"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_green_3",
+                     "isScalar": true
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "bca35d92-7"
+                     },
+                     "type": "lt",
+                     "right": {
+                        "cx": "364c94dd-8"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "type": "color",
+                     "value": "cx-theme_red_3",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "bca35d92-7",
+               "displayName": "Wins (This Month)",
+               "renamed": true,
+               "size": "3",
+               "fmt": "num",
+               "fmtArgs": {
+                  "suffix": " Wins"
+               },
+               "formulas": [
+                  {
+                     "txt": "count(select(slice(3f8a1f1bc7085270dfb7e35e4351eb3d@A:A;),and(date_in(date(slice(3f8a1f1bc7085270dfb7e35e4351eb3d@F:F;),\"yyyy-MM-dd\"),\"3\"),(slice(3f8a1f1bc7085270dfb7e35e4351eb3d@E:E;)=\"New Business\"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "count",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "3f8a1f1bc7085270dfb7e35e4351eb3d",
+                                                   "a": "A:A"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true,
+                                                   "description": "Indicates the number of items sliced off the top.",
+                                                   "default": "1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true,
+                                                   "description": "Indicates the position of the last item to be returned.",
+                                                   "default": "length of the list"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "and",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_in",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "3f8a1f1bc7085270dfb7e35e4351eb3d",
+                                                                     "a": "F:F"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true,
+                                                                     "description": "Indicates the number of items sliced off the top.",
+                                                                     "default": "1"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true,
+                                                                     "description": "Indicates the position of the last item to be returned.",
+                                                                     "default": "length of the list"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "3"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "relative value",
+                                                         "description": "Number of units to add or subtract.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                         "default": "Sunday (week) or January (year)",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "description": "",
+                                                         "default": "GMT",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "3f8a1f1bc7085270dfb7e35e4351eb3d",
+                                                               "a": "E:E"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "New Business"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "condition",
+                                                   "repeats": true,
+                                                   "description": "1 or more true/false values, typically the result of a comparison or formula."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     180
+                  ]
+               ]
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "364c94dd-8",
+               "displayName": "Target",
+               "renamed": true,
+               "size": 2,
+               "fmt": "num",
+               "fmtArgs": {
+                  "prefix": "Moving Target: ",
+                  "suffix": " Wins"
+               },
+               "formulas": [
+                  {
+                     "txt": "((bda7580a60759cf55aafa1084f7e2090@B2;)*(date_unitvalue(today(),\"5\")/count_days(date_startof(today(),\"3\"),date_endof(today(),\"3\"))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "e1cd7928-10"
+                                    }
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "*"
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_unitvalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "first",
+                                                   "description": "when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                   "default": "Sunday (week) or January (year)",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "count_days",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_startof",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "3"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "relative value",
+                                                         "description": "Number of units to add or subtract.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                         "default": "Sunday (week) or January (year)",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "date_endof",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "3"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "relative value",
+                                                         "description": "Optional, number of units to add or subtract.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                         "default": "Sunday (week) or January (year)",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "exclude DOW",
+                                                   "description": "1 or more days of week to exclude from the count.",
+                                                   "optional": true
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "holidays",
+                                                   "optional": true,
+                                                   "description": "1 or more epoch dates to exclude from count."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     278.8916666666667
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "99c1320b-9",
+               "displayName": "Min Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "0"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     0
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "e1cd7928-10",
+               "displayName": "Max Value",
+               "size": 1,
+               "fmt": "num",
+               "formulas": [
+                  {
+                     "txt": "bda7580a60759cf55aafa1084f7e2090@B2;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "bda7580a60759cf55aafa1084f7e2090",
+                                 "a": "B2"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
+                  [
+                     "334.67"
+                  ]
+               ],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            }
+         ],
+         "gaugeStyle": "hg"
+      }
+   ]
+}

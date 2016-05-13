@@ -1,0 +1,53 @@
+{
+    "name": "Salesforce Sales Summary (Today)",
+    "description": "Check today's total sales. Originates from the Gallery.",
+    "datasources": {
+        "salesforce": {
+            "service": "salesforce",
+            "type": "salesforce",
+            "format": "csv",
+            "name": "Sales Summary (This Month)",
+            "libraryAlias": "SalesSummary(ThisMonth)",
+            "refreshInterval": 1400,
+            "description": "See sales for this month. Originates from the Gallery.",
+            "props": {
+                "SalesforceMode": "Salesforce Reports",
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/analytics/reports/{{ds.salesforce.reportID}}?includeDetails=true",
+                "instance": "{{auth.salesforce.instanceName}}"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "salesforce": "3f8a1f1bc7085270dfb7KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "salesforce"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.salesforce.reportID",
+        "description": "Select your Salesforce Report.",
+        "label": "Report",
+        "ghostText": "companyname",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure your Salesforce token is valid.",
+        "connector": {
+            "service": "salesforce",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/analytics/reports"
+            }
+        },
+        "results": [{
+            "propId": "ds.salesforce.reportID",
+            "propField": "options",
+            "labels": "/name",
+            "values": "/id"
+        }]
+    }]
+}
