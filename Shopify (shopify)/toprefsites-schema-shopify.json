@@ -1,12 +1,12 @@
 {
-   "title": "Shopify Top 5 Referring Sites (Last 30 days)",
+   "title": "Shopify Top 5 Referring Sites (Last 30 Days)",
    "id": "3012785ca02b84f63e877351a37ee54a",
    "workspace": {
       "datasources": [
          "0da3864b7e6d0c63ad64natceewzhere"
       ],
       "dimensions": {
-         "w": 500
+         "w": 647
       }
    },
    "components": [
@@ -24,7 +24,7 @@
                "fmt": "num",
                "formulas": [
                   {
-                     "txt": "slice(sort(groupby(select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")),select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")),\"COUNT(values)\"),\"desc\"),\"0\",\"5\")",
+                     "txt": "slice(sort(countdistinct(substring(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,(indexof(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,\"/\",\"2\")+\"1\"),indexof(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,\".\",\"1\"))),\"desc\"),\"0\",\"5\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -39,106 +39,24 @@
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "groupby",
+                                          "v": "countdistinct",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "select",
+                                                "v": "substring",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "substring",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                               "a": "/referring_site"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "indexof",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "."
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "1"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "indexof",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "."
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "2"
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                         "a": "/orders/referring_site"
+                                                      }
                                                    },
                                                    {
                                                       "t": "expr",
                                                       "v": false,
                                                       "c": [
                                                          {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                               "a": "/referring_site"
-                                                            }
-                                                         },
-                                                         {
-                                                            "t": "o",
-                                                            "v": "!="
-                                                         },
-                                                         {
-                                                            "t": "l",
-                                                            "v": ""
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "select",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "substring",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                               "a": "/referring_site"
-                                                            }
-                                                         },
-                                                         {
                                                             "t": "f",
                                                             "v": "indexof",
                                                             "c": [
@@ -146,68 +64,51 @@
                                                                   "t": "d",
                                                                   "v": {
                                                                      "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
+                                                                     "a": "/orders/referring_site"
                                                                   }
                                                                },
                                                                {
                                                                   "t": "l",
-                                                                  "v": "."
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "1"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "indexof",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "."
+                                                                  "v": "/"
                                                                },
                                                                {
                                                                   "t": "l",
                                                                   "v": "2"
                                                                }
                                                             ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "+"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
                                                          }
                                                       ]
                                                    },
                                                    {
-                                                      "t": "expr",
-                                                      "v": false,
+                                                      "t": "f",
+                                                      "v": "indexof",
                                                       "c": [
                                                          {
                                                             "t": "d",
                                                             "v": {
                                                                "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                               "a": "/referring_site"
+                                                               "a": "/orders/referring_site"
                                                             }
                                                          },
                                                          {
-                                                            "t": "o",
-                                                            "v": "!="
+                                                            "t": "l",
+                                                            "v": "."
                                                          },
                                                          {
                                                             "t": "l",
-                                                            "v": ""
+                                                            "v": "1"
                                                          }
                                                       ]
                                                    }
                                                 ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "COUNT(values)"
                                              }
                                           ]
                                        },
@@ -220,7 +121,9 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "return values",
-                                             "optional": true
+                                             "description": "1 or more (must be same number as values) items.",
+                                             "optional": true,
+                                             "default": "values"
                                           }
                                        }
                                     ]
@@ -240,7 +143,8 @@
                   }
                ],
                "data": [
-                  []
+                  [
+                  ]
                ],
                "seriesName": "Orders",
                "axis": "da3ee587"
@@ -254,30 +158,30 @@
                "fmt": "txt",
                "formulas": [
                   {
-                     "txt": "slice(substring(sort(groupby(select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),(indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")+\"1\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")),select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),(indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")+\"1\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")),\"COUNT(values)\"),\"desc\",group(select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),(indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")+\"1\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")))),(indexof(sort(groupby(select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),(indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")+\"1\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")),select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),(indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")+\"1\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")),\"COUNT(values)\"),\"desc\",group(select(substring(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"1\"),(indexof(0da3864b7e6d0c63ad64natceewzhere@/referring_site;,\".\",\"2\")+\"1\")),(0da3864b7e6d0c63ad64natceewzhere@/referring_site;!=\"\")))),\"/\",\"2\")+\"1\"),\"-1\"),\"0\",\"5\")",
+                     "txt": "replace(capitalize(slice(sort(countdistinct(substring(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,(indexof(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,\"/\",\"2\")+\"1\"),indexof(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,\".\",\"1\"))),\"desc\",group(substring(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,(indexof(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,\"/\",\"2\")+\"1\"),indexof(0da3864b7e6d0c63ad64natceewzhere@/orders/referring_site;,\".\",\"1\")))),\"0\",\"5\")),\"\",\"Unknown\")",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "slice",
+                              "v": "replace",
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "substring",
+                                    "v": "capitalize",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "sort",
+                                          "v": "slice",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "groupby",
+                                                "v": "sort",
                                                 "c": [
                                                    {
                                                       "t": "f",
-                                                      "v": "select",
+                                                      "v": "countdistinct",
                                                       "c": [
                                                          {
                                                             "t": "f",
@@ -287,29 +191,8 @@
                                                                   "t": "d",
                                                                   "v": {
                                                                      "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
+                                                                     "a": "/orders/referring_site"
                                                                   }
-                                                               },
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "indexof",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                           "a": "/referring_site"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "."
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "1"
-                                                                     }
-                                                                  ]
                                                                },
                                                                {
                                                                   "t": "expr",
@@ -323,12 +206,12 @@
                                                                               "t": "d",
                                                                               "v": {
                                                                                  "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
+                                                                                 "a": "/orders/referring_site"
                                                                               }
                                                                            },
                                                                            {
                                                                               "t": "l",
-                                                                              "v": "."
+                                                                              "v": "/"
                                                                            },
                                                                            {
                                                                               "t": "l",
@@ -345,46 +228,6 @@
                                                                         "v": "1"
                                                                      }
                                                                   ]
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "!="
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": ""
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "substring",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
                                                                },
                                                                {
                                                                   "t": "f",
@@ -394,7 +237,7 @@
                                                                         "t": "d",
                                                                         "v": {
                                                                            "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                           "a": "/referring_site"
+                                                                           "a": "/orders/referring_site"
                                                                         }
                                                                      },
                                                                      {
@@ -406,6 +249,29 @@
                                                                         "v": "1"
                                                                      }
                                                                   ]
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "desc"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "group",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "substring",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
+                                                                     "a": "/orders/referring_site"
+                                                                  }
                                                                },
                                                                {
                                                                   "t": "expr",
@@ -419,12 +285,12 @@
                                                                               "t": "d",
                                                                               "v": {
                                                                                  "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
+                                                                                 "a": "/orders/referring_site"
                                                                               }
                                                                            },
                                                                            {
                                                                               "t": "l",
-                                                                              "v": "."
+                                                                              "v": "/"
                                                                            },
                                                                            {
                                                                               "t": "l",
@@ -441,60 +307,6 @@
                                                                         "v": "1"
                                                                      }
                                                                   ]
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "!="
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": ""
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "COUNT(values)"
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "opt",
-                                                "v": "desc"
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "group",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "substring",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
                                                                },
                                                                {
                                                                   "t": "f",
@@ -504,7 +316,7 @@
                                                                         "t": "d",
                                                                         "v": {
                                                                            "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                           "a": "/referring_site"
+                                                                           "a": "/orders/referring_site"
                                                                         }
                                                                      },
                                                                      {
@@ -516,426 +328,32 @@
                                                                         "v": "1"
                                                                      }
                                                                   ]
-                                                               },
-                                                               {
-                                                                  "t": "expr",
-                                                                  "v": false,
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "f",
-                                                                        "v": "indexof",
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "l",
-                                                                              "v": "."
-                                                                           },
-                                                                           {
-                                                                              "t": "l",
-                                                                              "v": "2"
-                                                                           }
-                                                                        ]
-                                                                     },
-                                                                     {
-                                                                        "t": "o",
-                                                                        "v": "+"
-                                                                     },
-                                                                     {
-                                                                        "t": "l",
-                                                                        "v": "1"
-                                                                     }
-                                                                  ]
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "expr",
-                                                            "v": false,
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                     "a": "/referring_site"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "o",
-                                                                  "v": "!="
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": ""
                                                                }
                                                             ]
                                                          }
                                                       ]
                                                    }
                                                 ]
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "indexof",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "sort",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "groupby",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "select",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "f",
-                                                                        "v": "substring",
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "f",
-                                                                              "v": "indexof",
-                                                                              "c": [
-                                                                                 {
-                                                                                    "t": "d",
-                                                                                    "v": {
-                                                                                       "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                       "a": "/referring_site"
-                                                                                    }
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "."
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "1"
-                                                                                 }
-                                                                              ]
-                                                                           },
-                                                                           {
-                                                                              "t": "expr",
-                                                                              "v": false,
-                                                                              "c": [
-                                                                                 {
-                                                                                    "t": "f",
-                                                                                    "v": "indexof",
-                                                                                    "c": [
-                                                                                       {
-                                                                                          "t": "d",
-                                                                                          "v": {
-                                                                                             "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                             "a": "/referring_site"
-                                                                                          }
-                                                                                       },
-                                                                                       {
-                                                                                          "t": "l",
-                                                                                          "v": "."
-                                                                                       },
-                                                                                       {
-                                                                                          "t": "l",
-                                                                                          "v": "2"
-                                                                                       }
-                                                                                    ]
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "o",
-                                                                                    "v": "+"
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "1"
-                                                                                 }
-                                                                              ]
-                                                                           }
-                                                                        ]
-                                                                     },
-                                                                     {
-                                                                        "t": "expr",
-                                                                        "v": false,
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "o",
-                                                                              "v": "!="
-                                                                           },
-                                                                           {
-                                                                              "t": "l",
-                                                                              "v": ""
-                                                                           }
-                                                                        ]
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "select",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "f",
-                                                                        "v": "substring",
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "f",
-                                                                              "v": "indexof",
-                                                                              "c": [
-                                                                                 {
-                                                                                    "t": "d",
-                                                                                    "v": {
-                                                                                       "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                       "a": "/referring_site"
-                                                                                    }
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "."
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "1"
-                                                                                 }
-                                                                              ]
-                                                                           },
-                                                                           {
-                                                                              "t": "expr",
-                                                                              "v": false,
-                                                                              "c": [
-                                                                                 {
-                                                                                    "t": "f",
-                                                                                    "v": "indexof",
-                                                                                    "c": [
-                                                                                       {
-                                                                                          "t": "d",
-                                                                                          "v": {
-                                                                                             "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                             "a": "/referring_site"
-                                                                                          }
-                                                                                       },
-                                                                                       {
-                                                                                          "t": "l",
-                                                                                          "v": "."
-                                                                                       },
-                                                                                       {
-                                                                                          "t": "l",
-                                                                                          "v": "2"
-                                                                                       }
-                                                                                    ]
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "o",
-                                                                                    "v": "+"
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "1"
-                                                                                 }
-                                                                              ]
-                                                                           }
-                                                                        ]
-                                                                     },
-                                                                     {
-                                                                        "t": "expr",
-                                                                        "v": false,
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "o",
-                                                                              "v": "!="
-                                                                           },
-                                                                           {
-                                                                              "t": "l",
-                                                                              "v": ""
-                                                                           }
-                                                                        ]
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "l",
-                                                                  "v": "COUNT(values)"
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "opt",
-                                                            "v": "desc"
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "group",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "select",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "f",
-                                                                        "v": "substring",
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "f",
-                                                                              "v": "indexof",
-                                                                              "c": [
-                                                                                 {
-                                                                                    "t": "d",
-                                                                                    "v": {
-                                                                                       "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                       "a": "/referring_site"
-                                                                                    }
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "."
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "1"
-                                                                                 }
-                                                                              ]
-                                                                           },
-                                                                           {
-                                                                              "t": "expr",
-                                                                              "v": false,
-                                                                              "c": [
-                                                                                 {
-                                                                                    "t": "f",
-                                                                                    "v": "indexof",
-                                                                                    "c": [
-                                                                                       {
-                                                                                          "t": "d",
-                                                                                          "v": {
-                                                                                             "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                             "a": "/referring_site"
-                                                                                          }
-                                                                                       },
-                                                                                       {
-                                                                                          "t": "l",
-                                                                                          "v": "."
-                                                                                       },
-                                                                                       {
-                                                                                          "t": "l",
-                                                                                          "v": "2"
-                                                                                       }
-                                                                                    ]
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "o",
-                                                                                    "v": "+"
-                                                                                 },
-                                                                                 {
-                                                                                    "t": "l",
-                                                                                    "v": "1"
-                                                                                 }
-                                                                              ]
-                                                                           }
-                                                                        ]
-                                                                     },
-                                                                     {
-                                                                        "t": "expr",
-                                                                        "v": false,
-                                                                        "c": [
-                                                                           {
-                                                                              "t": "d",
-                                                                              "v": {
-                                                                                 "id": "0da3864b7e6d0c63ad64natceewzhere",
-                                                                                 "a": "/referring_site"
-                                                                              }
-                                                                           },
-                                                                           {
-                                                                              "t": "o",
-                                                                              "v": "!="
-                                                                           },
-                                                                           {
-                                                                              "t": "l",
-                                                                              "v": ""
-                                                                           }
-                                                                        ]
-                                                                     }
-                                                                  ]
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "/"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "2"
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "+"
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "1"
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "5"
                                              }
                                           ]
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "-1"
                                        }
                                     ]
                                  },
                                  {
                                     "t": "l",
-                                    "v": "0"
+                                    "v": ""
                                  },
                                  {
                                     "t": "l",
-                                    "v": "5"
+                                    "v": "Unknown"
                                  }
                               ]
                            }
@@ -944,7 +362,8 @@
                   }
                ],
                "data": [
-                  []
+                  [
+                  ]
                ],
                "label": "Number of Orders",
                "labelDrop": "1"
