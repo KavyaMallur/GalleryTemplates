@@ -1,7 +1,18 @@
 {
     "name": "CallRail Calls by Medium (Last 1000 Calls)",
-    "description": "Track and compare lead sources for the past 1000 calls. Originates from the Gallery.",
+    "description": "Track and compare lead sources for the past 1000 calls for {ds.callrail.companyId}}. Originates from the Gallery.",
     "sampleFormulas": {
+        "9fcf648a-1": {
+            "txt": "\"The Klip Factory\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "The Klip Factory"
+                }]
+            }
+        },
         "6d3b9497-6": {
             "txt": "array(\"334\",\"236\",\"161\",\"150\",\"119\")",
             "src": {
@@ -63,12 +74,12 @@
             "service": "callrail",
             "type": "simple_rest",
             "format": "json",
-            "name": "CallRail Most Recent Calls (Page 1)",
-            "libraryAlias": "CallRailMostRecentCalls(Page1)",
+            "name": "CallRail Most Recent Calls - {ds.callrail.companyId}} (Page 1)",
+            "libraryAlias": "CallRailMostRecentCalls{ds.callrail.companyId}}(Page1)",
             "refreshInterval": 14400,
             "description": "Monitor the metadata of the recent 250 calls. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&page=1&order=desc",
+                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&company_id={{ds.callrail.companyId}}&page=1&order=desc",
                 "method": "GET",
                 "parameters": "[{\"name\":\"Authorization\",\"value\":\"Token token={{auth.callrail.apiKey}}\",\"type\":\"header\"}]"
             }
@@ -77,12 +88,12 @@
             "service": "callrail",
             "type": "simple_rest",
             "format": "json",
-            "name": "CallRail Most Recent Calls (Page 2)",
-            "libraryAlias": "CallRailMostRecentCalls(Page2)",
+            "name": "CallRail Most Recent Calls - {ds.callrail.companyId}} (Page 2)",
+            "libraryAlias": "CallRailMostRecentCalls{ds.callrail.companyId}}(Page2)",
             "refreshInterval": 14400,
             "description": "Monitor the metadata of the 250 calls in the second page. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&page=2&order=desc",
+                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&company_id={{ds.callrail.companyId}}&page=2&order=desc",
                 "method": "GET",
                 "parameters": "[{\"name\":\"Authorization\",\"value\":\"Token token={{auth.callrail.apiKey}}\",\"type\":\"header\"}]"
             }
@@ -91,12 +102,12 @@
             "service": "callrail",
             "type": "simple_rest",
             "format": "json",
-            "name": "CallRail Most Recent Calls (Page 3)",
-            "libraryAlias": "CallRailMostRecentCalls(Page3)",
+            "name": "CallRail Most Recent Calls - {ds.callrail.companyId}} (Page 3)",
+            "libraryAlias": "CallRailMostRecentCalls{ds.callrail.companyId}}(Page3)",
             "refreshInterval": 14400,
             "description": "Monitor the metadata of the 250 calls in the third page. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&page=3&order=desc",
+                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&company_id={{ds.callrail.companyId}}&page=3&order=desc",
                 "method": "GET",
                 "parameters": "[{\"name\":\"Authorization\",\"value\":\"Token token={{auth.callrail.apiKey}}\",\"type\":\"header\"}]"
             }
@@ -105,12 +116,26 @@
             "service": "callrail",
             "type": "simple_rest",
             "format": "json",
-            "name": "CallRail Most Recent Calls (Page 4)",
-            "libraryAlias": "CallRailMostRecentCalls(Page4)",
+            "name": "CallRail Most Recent Calls - {ds.callrail.companyId}} (Page 4)",
+            "libraryAlias": "CallRailMostRecentCalls{ds.callrail.companyId}}(Page4)",
             "refreshInterval": 14400,
             "description": "Monitor the metadata of the 250 calls in the fourth page. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&page=4&order=desc",
+                "endpoint_url": "https://api.callrail.com/v1/calls.json?per_page=250&company_id={{ds.callrail.companyId}}&page=4&order=desc",
+                "method": "GET",
+                "parameters": "[{\"name\":\"Authorization\",\"value\":\"Token token={{auth.callrail.apiKey}}\",\"type\":\"header\"}]"
+            }
+        },
+        "callrail-05": {
+            "service": "callrail",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "CallRail Companies",
+            "libraryAlias": "CallRailCompanies",
+            "refreshInterval": 14400,
+            "description": "Retrieve the list of your Callrail Companies. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.callrail.com/v1/companies.json",
                 "method": "GET",
                 "parameters": "[{\"name\":\"Authorization\",\"value\":\"Token token={{auth.callrail.apiKey}}\",\"type\":\"header\"}]"
             }
@@ -121,12 +146,38 @@
         "callrail-01": "9164a12028b14640c858ssilbsissilb",
         "callrail-02": "d9e8ae274205997bcfabKavyaMallur9",
         "callrail-03": "783a10ea98aa57fbdec0KavyaMallur9",
-        "callrail-04": "d723e71fa5923fb8bfb7KavyaMallur9"
+        "callrail-04": "d723e71fa5923fb8bfb7KavyaMallur9",
+        "callrail-05": "9c62442db188232503bfdoogeraspilk"
 
 
     },
     "services": [{
         "service": "callrail"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.callrail.companyId",
+        "label": "Company",
+        "description": "Select a Company",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct CallRail API Key. Check out <a href='https://support.klipfolio.com/hc/en-us/articles/215546108-Klip-Gallery-CallRail#connect' target='_blank'>Klip Gallery: CallRail</a> for more information.",
+        "connector": {
+            "service": "callrail",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.callrail.com/v1/companies.json",
+                "method": "GET",
+                "parameters": "[{\"name\":\"Authorization\",\"value\":\"Token token={{auth.callrail.apiKey}}\",\"type\":\"header\"}]"
+            }
+        },
+        "results": [{
+            "propId": "ds.callrail.companyId",
+            "propField": "options",
+            "labels": "/companies/name",
+            "values": "/companies/id"
+        }]
     }]
-
 }
