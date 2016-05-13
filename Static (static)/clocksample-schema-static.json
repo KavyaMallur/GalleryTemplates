@@ -1,0 +1,34 @@
+{
+   "title": "Analog Clock",
+   "id": "2d469c91ead8dcac52f4cee4823c7068",
+   "workspace": {
+      "datasources": [],
+      "dimensions": {
+         "w": 500
+      }
+   },
+   "components": [
+      {
+         "type": "html_tpl2",
+         "id": "50dfa19b-2",
+         "displayName": "HTML Template",
+         "components": [
+            {
+               "type": "html_data",
+               "role": "data",
+               "id": "31ebb702-4",
+               "displayName": "KTzone",
+               "renamed": true,
+               "formulas": [],
+               "data": [
+                  []
+               ],
+               "mixin": "label",
+               "dataId": "KTzone"
+            }
+         ],
+         "tpl": "<body>\n<canvas id=\"canvas\" width=\"400\" height=\"400\">\n</canvas>\n</body>",
+         "script_tpl": "var%20canvas%20=%20document.getElementById(%22canvas%22);%0Avar%20ctx%20=%20canvas.getContext(%222d%22);%0Avar%20radius%20=%20canvas.height%20/%202;%0Actx.translate(radius,%20radius);%0Aradius%20=%20radius%20*%200.90%0AsetInterval(drawClock,%201000);%0A%0Avar%20yourTimeZoneFrom%20=%20{{ds.analogClock.timeZone}};%20//time%20zone%20value%20where%20you%20are%20at%0A%0Avar%20d%20=%20new%20Date();%20%20%0A//get%20the%20timezone%20offset%20from%20local%20time%20in%20minutes%0Avar%20tzDifference%20=%20yourTimeZoneFrom%20*%2060%20+%20d.getTimezoneOffset();%0A//convert%20the%20offset%20to%20milliseconds,%20add%20to%20targetTime,%20and%20make%20a%20new%20Date%0Avar%20offset%20=%20tzDifference%20*%2060%20*%201000;%0A%0A%0Afunction%20drawClock()%20%7B%0AdrawFace(ctx,%20radius);%0AdrawNumbers(ctx,%20radius);%0AdrawTime(ctx,%20radius);%0A%7D%0A%0Afunction%20drawFace(ctx,%20radius)%20%7B%0Avar%20grad;%0Actx.beginPath();%0Actx.arc(0,%200,%20radius,%200,%202*Math.PI);%0Actx.fillStyle%20=%20'white';%0Actx.fill();%0Agrad%20=%20ctx.createRadialGradient(0,0,radius*0.95,%200,0,radius*1.05);%0Agrad.addColorStop(0,%20'#333');%0Agrad.addColorStop(0.5,%20'white');%0Agrad.addColorStop(1,%20'#333');%0Actx.strokeStyle%20=%20grad;%0Actx.lineWidth%20=%20radius*0.1;%0Actx.stroke();%0Actx.beginPath();%0Actx.arc(0,%200,%20radius*0.1,%200,%202*Math.PI);%0Actx.fillStyle%20=%20'#333';%0Actx.fill();%0A%7D%0A%0Afunction%20drawNumbers(ctx,%20radius)%20%7B%0Avar%20ang;%0Avar%20num;%0Actx.font%20=%20radius*0.15%20+%20%22px%20arial%22;%0Actx.textBaseline=%22middle%22;%0Actx.textAlign=%22center%22;%0Afor(num%20=%201;%20num%20%3C%2013;%20num++)%7B%0Aang%20=%20num%20*%20Math.PI%20/%206;%0Actx.rotate(ang);%0Actx.translate(0,%20-radius*0.85);%0Actx.rotate(-ang);%0Actx.fillText(num.toString(),%200,%200);%0Actx.rotate(ang);%0Actx.translate(0,%20radius*0.85);%0Actx.rotate(-ang);%0A%7D%0A%7D%0A%0Afunction%20drawTime(ctx,%20radius)%7B%0Avar%20now%20=%20new%20Date(new%20Date().getTime()+offset);%0Avar%20hour%20=%20now.getHours();%0Avar%20minute%20=%20now.getMinutes();%0Avar%20second%20=%20now.getSeconds();%0A//hour%0Ahour=hour%2512;%0Ahour=(hour*Math.PI/6)+%0A(minute*Math.PI/(6*60))+%0A(second*Math.PI/(360*60));%0AdrawHand(ctx,%20hour,%20radius*0.5,%20radius*0.07);%0A//minute%0Aminute=(minute*Math.PI/30)+(second*Math.PI/(30*60));%0AdrawHand(ctx,%20minute,%20radius*0.8,%20radius*0.07);%0A//%20second%0Asecond=(second*Math.PI/30);%0AdrawHand(ctx,%20second,%20radius*0.9,%20radius*0.02);%0A%7D%0A%0Afunction%20drawHand(ctx,%20pos,%20length,%20width)%20%7B%0Actx.beginPath();%0Actx.lineWidth%20=%20width;%0Actx.lineCap%20=%20%22round%22;%0Actx.moveTo(0,0);%0Actx.rotate(pos);%0Actx.lineTo(0,%20-length);%0Actx.stroke();%0Actx.rotate(-pos);%0A%7D"
+      }
+   ]
+}
