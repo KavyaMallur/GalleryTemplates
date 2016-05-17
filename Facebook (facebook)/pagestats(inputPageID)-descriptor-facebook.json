@@ -1,0 +1,65 @@
+{
+	"name" : "Facebook Page Stats",
+	"description" : "Monitor key metrics for your Facebook page at a glance. Originates from the Gallery.",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookBasicPageInfo",
+			"name": "Facebook Basic Page Info",
+			"description" : "A snapshot of key metrics that reflect the current status of your Facebook page. Originates from the Gallery.",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}?fields=name,likes,talking_about_count,new_like_count",
+            	"qtype": "Graph API"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"facebook" : "3246822217eb4a8e8db8niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		}
+	],
+
+	"datasourceConfigModel" : [
+        {
+            "type" : "text",
+            "id" : "ds.facebook.pageId",
+            "label" : "Facebook Page",
+            "description":"Enter your company Facebook page from the drop-down list.",
+            "isRequired": true
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "facebook",
+                "type": "facebook",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                    "method": "GET",
+                    "qtype": "Graph API"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.facebook.pageId",
+                    "propField" : "options",
+                    "labels": "/data/name",
+                    "values": "/data/id"
+                }
+            ]
+        }   
+    ]
+}
