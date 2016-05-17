@@ -1,0 +1,147 @@
+{
+    "name": "Unbounce Leads (Last 30 Days)",
+    "description": "Track the number leads you have gained in this last 30 days and compare to the previous 30 days. Originates from the Gallery.",
+    "sampleFormulas": {
+        "11ecb36170e573cb96ff7f0a5069baed70e2581c": {
+            "txt": "\"114\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 114
+                }]
+            }
+        },
+        "434ed9949e95f408edfec8937c7d657bc8105617": {
+            "txt": "\"0.15151515151515152\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0.15151515151515152
+                }]
+            }
+        },
+        "992bab63552cf2244bd6e7386b571145572589b5": {
+            "txt": "\"Leads\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Leads"
+                }]
+            }
+        },
+        "dc03aa5f45e902b9f9527cacf2ee1de1249f8b5e": {
+            "txt": "\"99\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 99
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "unbounce-01": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "libraryAlias": "unbounceLeads(Last30Days)",
+            "name": "Unbounce Leads (Last 30 Days)",
+            "description": "Provide unbounce leads count for last 30 days.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.unbounce.com/sub_accounts/{{ds.unbounce.subAccountID}}/leads?from={date.add(-29).format(\"yyyy-MM-dd'T'00:00:00'Z'\")}&to={date.today.format(\"yyyy-MM-dd'T'23:59:59'Z'\")}&count=true",
+                "method": "get"
+            }
+        },
+        "unbounce-02": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "libraryAlias": "unbounceLeads(Previous30Days)",
+            "name": "Unbounce Leads (Previous 30 Days)",
+            "description": "Provide unbounce leads count for previous 30 days.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.unbounce.com/sub_accounts/{{ds.unbounce.subAccountID}}/leads?from={date.add(-59).format(\"yyyy-MM-dd'T'00:00:00'Z'\")}&to={date.add(-30).format(\"yyyy-MM-dd'T'23:59:59'Z'\")}&count=true",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "unbounce-01": "f8a86a5d5539ee954657KavyaMallur9",
+        "unbounce-02": "4c90160cfaee9b85e837KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "unbounce"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.unbounce.accountID",
+        "label": "Account Name",
+        "description": "Select your Unbounce Account and Sub-Account Names.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.unbounce.subAccountID",
+        "label": "Sub-Account Name",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Campaign Monitor API Key. Check out <a href='https://support.klipfolio.com/hc/en-us/articles/216181207-Klip-Gallery-Campaign-Monitor#connect' target='_blank'>Klip Gallery: Campaign Monitor</a> for more information.",
+        "connector": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.unbounce.com/accounts",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.unbounce.accountID",
+            "propField": "options",
+            "labels": "/accounts/name",
+            "values": "/accounts/id"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.unbounce.com/accounts/{{ds.unbounce.accountID}}/sub_accounts",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.unbounce.subAccountID",
+            "propField": "options",
+            "labels": "/subAccounts/name",
+            "values": "/subAccounts/id"
+        }]
+    }]
+}

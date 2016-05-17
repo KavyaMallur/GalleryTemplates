@@ -1,0 +1,202 @@
+{
+    "name": "Unbounce Page Stats",
+    "description": "Monitor the key metrics of your Unbounce page. Originates from the Gallery.",
+    "sampleFormulas": {
+        "91b26427-14": {
+            "txt": "\"Klipfolio Service Intergrations |https://www.klipfolio.com/integrations#All\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Klipfolio Service Intergrations |https://www.klipfolio.com/integrations#All"
+                }]
+            }
+        },
+        "44a480d1-12": {
+            "txt": "\"1500\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1500
+                }]
+            }
+        },
+        "e5e2b2ce-13": {
+            "txt": "\"Visits\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Visits"
+                }]
+            }
+        },
+        "987737ee-9": {
+            "txt": "\"570\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 570
+                }]
+            }
+        },
+        "43336502-10": {
+            "txt": "\"Conversions\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Conversions"
+                }]
+            }
+        },
+        "52d3f492-3": {
+            "txt": "\"1102\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1102
+                }]
+            }
+        },
+        "047d4b4d-4": {
+            "txt": "\"Clicks\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Clicks"
+                }]
+            }
+        },
+        "9369558f": {
+            "txt": "\"2040\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 2040
+                }]
+            }
+        },
+        "dcb72ee1": {
+            "txt": "\"Visitors\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Visitors"
+                }]
+            }
+        },
+        "5ff0b949-6": {
+            "txt": "\"0.7295\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0.7295
+                }]
+            }
+        },
+        "ebe2171e-7": {
+            "txt": "\"Conversion Rate\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Conversion Rate"
+                }]
+            }
+        },
+        "76df2878": {
+            "txt": "\"1140\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1140
+                }]
+            }
+        },
+        "e1e2fd89": {
+            "txt": "\"Form Submits\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Form Submits"
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "unbounce-01": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "libraryAlias": "unbounceLeads(Last30Days)",
+            "name": "Unbounce Page Stats",
+            "description": "Obtain page stats for a selected unbounce page.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.unbounce.com/pages/{{ds.unbounce.pageID}}?with_stats=true",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "unbounce-01": "5d9996f5be95f07c7ccaKavyaMallur9"
+    },
+
+    "services": [{
+        "service": "unbounce"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.unbounce.pageID",
+        "label": "Page Name",
+        "description": "Select your Unbounce Page Name.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the correct Unbounce API Key. Check out <a href='#' target='_blank'>Klip Gallery: Unbounce</a> for more information.",
+        "connector": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "basic_auth_password": "x",
+                "endpoint_url": "https://api.unbounce.com/pages",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.unbounce.pageID",
+            "propField": "options",
+            "labels": "/pages/name",
+            "values": "/pages/id"
+        }]
+    }]
+}
