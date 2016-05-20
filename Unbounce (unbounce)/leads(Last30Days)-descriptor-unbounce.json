@@ -2,6 +2,17 @@
     "name": "Unbounce Leads (Last 30 Days)",
     "description": "Track the number leads you have gained in this last 30 days and compare to the previous 30 days. Originates from the Gallery.",
     "sampleFormulas": {
+        "e051ae3f-1": {
+            "txt": "\"Skynet\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "Skynet",
+                    "v": 114
+                }]
+            }
+        },
         "11ecb36170e573cb96ff7f0a5069baed70e2581c": {
             "txt": "\"114\"",
             "src": {
@@ -77,12 +88,28 @@
                 "endpoint_url": "https://api.unbounce.com/sub_accounts/{{ds.unbounce.subAccountID}}/leads?from={date.add(-59).format(\"yyyy-MM-dd'T'00:00:00'Z'\")}&to={date.add(-30).format(\"yyyy-MM-dd'T'23:59:59'Z'\")}&count=true",
                 "method": "get"
             }
+        },
+        "unbounce-03": {
+            "service": "unbounce",
+            "type": "simple_rest",
+            "libraryAlias": "unbounceSubAccounts",
+            "name": "Unbounce Sub-Accounts",
+            "description": "Provide sub-accounts for the selected account.",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.unbounce.apiKey}}",
+                "endpoint_url": "https://api.unbounce.com/accounts/{{ds.unbounce.accountID}}/sub_accounts",
+                "method": "get"
+            }
         }
     },
 
     "dsMappings": {
         "unbounce-01": "f8a86a5d5539ee954657KavyaMallur9",
-        "unbounce-02": "4c90160cfaee9b85e837KavyaMallur9"
+        "unbounce-02": "4c90160cfaee9b85e837KavyaMallur9",
+        "unbounce-03": "b639c3b84026eafb4297KavyaMallur9"
     },
 
     "services": [{
