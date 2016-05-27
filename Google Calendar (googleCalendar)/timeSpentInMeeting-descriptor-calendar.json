@@ -1,0 +1,182 @@
+{
+    "name": "Time Spent in Meetings (Previous Week)",
+    "description": "Monitor the time spent in meetings based on your Google Calendar.<br>Originates from the Gallery. (v1.1)",
+    "sampleFormulas": {
+        "7af38e96-1": {
+            "txt": "\"Sun May 15 to Sat May 21\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Sun May 15 to Sat May 21"
+                }]
+            }
+        },
+        "4f956e88-7": {
+            "txt": "\"17.583333333333332\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 17.583333333333332
+                }]
+            }
+        },
+        "4efcc684-9": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "22c5c900-10": {
+            "txt": "\"37.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 37.5
+                }]
+            }
+        },
+        "29b4b69b-5": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0"
+                }]
+            }
+        },
+        "3607ba0a-6": {
+            "txt": "\"17.583333333333332\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 17.583333333333332
+                }]
+            }
+        },
+        "54beb7cd-5": {
+            "txt": "\"63300\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 63300
+                }]
+            }
+        },
+        "8163936c-6": {
+            "txt": "\"Hours in Meetings\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Hours in Meetings"
+                }]
+            }
+        },
+        "85a1baef-9": {
+            "txt": "\"0.46888888888888886\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0.46888888888888886
+                }]
+            }
+        },
+        "5f5ab297-10": {
+            "txt": "\"% of Total Work Hours\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "% of Total Work Hours"
+                }]
+            }
+        },
+        "04dbc89a-7": {
+            "txt": "\"Weekly Work Hours:\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Weekly Work Hours:"
+                }]
+            }
+        }
+    },
+
+    "datasources": {
+        "googleCalendar": {
+            "service": "google_calendar",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Google Calendar Events (Previous Week)",
+            "libraryAlias": "GoogleCalendarEventsPreviousWeek",
+            "refreshInterval": 14400,
+            "description": "Retrieves last week's events for a specified Google Calendar ID. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/calendar/v3/calendars/{{ds.google_calendar.calendarID}}/events?timeMin={date.addWeeks(-1).startOfWeek.format(\"yyyy-MM-dd'T'HH:mm:ss.SSZ\")}&timeMax={date.addWeeks(-1).endOfWeek.format(\"yyyy-MM-dd'T'HH:mm:ss.SSZ\")}&singleEvents=true&orderBy=startTime",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "googleCalendar": "d3608049f824bdadf24dnatceewzhere"
+    },
+
+    "services": [{
+        "service": "google_calendar"
+    }],
+
+    "uiVariables": [{
+        "name": "gCalendarWkWorkHrs",
+        "value": "37.5"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_calendar.calendarID",
+        "label": "Calendar",
+        "description": "Select a calendar from the list below.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_calendar",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/calendar/v3/users/me/calendarList",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_calendar.calendarID",
+            "propField": "options",
+            "labels": "/items/id[not(contains(.,'#'))]/following-sibling::summary",
+            "values": "/items/id[not(contains(.,'#'))]"
+        }]
+    }]
+}

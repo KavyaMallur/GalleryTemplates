@@ -1,0 +1,161 @@
+{
+    "name": "My Calendar Today",
+    "description": "Retrieves Google Calendar events for today.<br>Originates from the Gallery. (v1.1)",
+    "sampleFormulas": {
+        "62304398-1": {
+            "txt": "\"Friday, May 27\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Friday, May 27"
+                }]
+            }
+        },
+        "89fea490-1": {
+            "txt": "\"America/Toronto\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "America/Toronto"
+                }]
+            }
+        },
+        "c5b2190b-2": {
+            "txt": "array(\"#\",\"#\",\"#\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "#"
+                    }, {
+                        "t": "l",
+                        "v": "#"
+                    }, {
+                        "t": "l",
+                        "v": "#"
+                    }]
+                }]
+            }
+        },
+        "c5ab6415-3": {
+            "txt": "array(\"9:00 AM\",\" 12:00 PM\",\" 1:00 PM\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "9:00 AM"
+                    }, {
+                        "t": "l",
+                        "v": " 12:00 PM"
+                    }, {
+                        "t": "l",
+                        "v": " 1:00 PM"
+                    }]
+                }]
+            }
+        },
+        "059a0665-4": {
+            "txt": "array(\"Weekly Support Team Meeting\",\" Lunch and Learn\",\" Weekly Release Pulse\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Weekly Support Team Meeting"
+                    }, {
+                        "t": "l",
+                        "v": " Lunch and Learn"
+                    }, {
+                        "t": "l",
+                        "v": " Weekly Release Pulse"
+                    }]
+                }]
+            }
+        },
+        "4748bea7-1": {
+            "txt": "array(\"10:00 AM\",\" 12:30 PM\",\" 1:30 PM\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "10:00 AM"
+                    }, {
+                        "t": "l",
+                        "v": " 12:30 PM"
+                    }, {
+                        "t": "l",
+                        "v": " 1:30 PM"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "googleCalendar": {
+            "service": "google_calendar",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Google Calendar Today",
+            "libraryAlias": "GoogleCalendarToday",
+            "refreshInterval": 14400,
+            "description": "Retrieves today's events for a specified Google Calendar ID. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/calendar/v3/calendars/{{ds.google_calendar.calendarID}}/events?timeMin={date.format(\"yyyy-MM-dd'T'00:00:00Z\")}&timeMax={date.format(\"yyyy-MM-dd'T'23:59:59Z\")}&singleEvents=true",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "googleCalendar": "6f4352b2ddf541b85b14natceewzhere"
+    },
+
+    "services": [{
+        "service": "google_calendar"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_calendar.calendarID",
+        "label": "Calendar",
+        "description": "Select a calendar from the list below.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='http://klipfolio.uservoice.com/knowledgebase/articles/404228-oauth-token-expired' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_calendar",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/calendar/v3/users/me/calendarList",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_calendar.calendarID",
+            "propField": "options",
+            "labels": "/items/id[not(contains(.,'#'))]/following-sibling::summary",
+            "values": "/items/id[not(contains(.,'#'))]"
+        }]
+    }]
+}
