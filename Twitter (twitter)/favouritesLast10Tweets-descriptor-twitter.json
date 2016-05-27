@@ -1,0 +1,82 @@
+{
+    "name": "Twitter Favorites of Last 10 Tweets (@{{ds.twitter.screenName}})",
+    "description": "See the number of times that an account's latest 10 tweets have been favourited, and compare to the previous 10 tweets.<br>Originates from the Gallery. (1.1)",
+    "sampleFormulas": {
+        "7be2b4bb": {
+            "txt": "\"26\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "26"
+                }]
+            }
+        },
+        "7d5c3245": {
+            "txt": "\"Favorites\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Favorites"
+                }]
+            }
+        },
+        "0f589dac": {
+            "txt": "\"7\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 7
+                }]
+            }
+        },
+        "c6010664": {
+            "txt": "\"19\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "19"
+                }]
+            }
+        }
+    },
+
+    "datasources": {
+        "twitter": {
+            "service": "twitter",
+            "libraryAlias": "TwitterUserTimeline",
+            "name": "Twitter User Timeline",
+            "description": "The most recent 20 tweets posted by @{{ds.twitter.screenName}}. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name={{ds.twitter.screenName}}",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "twitter": "ebff6c5df3ae732598d8niktawuzhere"
+    },
+
+    "services": [{
+        "service": "twitter"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.twitter.screenName",
+        "label": "Twitter Handle",
+        "description": "Enter the handle for the account you would like to track. <span class='strong'>Do not include the @ symbol.</span>",
+        "isRequired": true
+    }]
+}
