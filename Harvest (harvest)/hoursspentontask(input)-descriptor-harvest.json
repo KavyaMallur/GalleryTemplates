@@ -1,0 +1,224 @@
+{
+    "name": "Harvest Hours Spent on Task (Last 7 Days)",
+    "description": "Let this stacked bar chart make it easy to regularly check your project’s billable and non-billable hours. Originates from the Gallery.",
+    "sampleFormulas": {
+        "01bf6c1a": {
+            "txt": "\"Make Awesome Klips! | Graphics Design\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Make Awesome Klips! | Graphics Design"
+                }]
+            }
+        },
+        "0a390f88-6": {
+            "txt": "array(\"5\", \"10\", \"15\", \"15\", \"10\", \"5\", \"10\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "5"
+                    }, {
+                        "t": "l",
+                        "v": "10"
+                    }, {
+                        "t": "l",
+                        "v": "15"
+                    }, {
+                        "t": "l",
+                        "v": "15"
+                    }, {
+                        "t": "l",
+                        "v": "10"
+                    }, {
+                        "t": "l",
+                        "v": "5"
+                    }, {
+                        "t": "l",
+                        "v": "10"
+                    }]
+                }]
+            }
+        },
+        "222eb539-1": {
+            "txt": "array(\"2\", \"3\", \"1\", \"2\", \"0\", \"1\", \"2\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "3"
+                    }, {
+                        "t": "l",
+                        "v": "1"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }, {
+                        "t": "l",
+                        "v": "0"
+                    }, {
+                        "t": "l",
+                        "v": "1"
+                    }, {
+                        "t": "l",
+                        "v": "2"
+                    }]
+                }]
+            }
+        },
+        "bcf1b6c9-7": {
+            "txt": "array(\"2016-01-01\", \"2016-01-02\", \"2016-01-03\", \"2016-01-04\", \"2016-01-05\", \"2016-01-06\", \"2016-01-07\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2016-01-01"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-02"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-03"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-04"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-05"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-06"
+                    }, {
+                        "t": "l",
+                        "v": "2016-01-07"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "harvest-01": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Projects",
+            "libraryAlias": "HarvestProjects",
+            "refreshInterval": 14400,
+            "description": "Retrieve the projects in your Harvest account. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects.json",
+                "method": "get"
+            }
+        },
+        "harvest-02": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Tasks",
+            "libraryAlias": "HarvestTasks",
+            "refreshInterval": 14400,
+            "description": "Retrieve the tasks in your harvest account. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/tasks.json",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "harvest-03": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Billable Hours for Project (Last 7 Days)",
+            "libraryAlias": "HarvestBillableHoursforProjectLast7Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve the daily billable entries to your Harvest project. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}&billable=yes",
+                "method": "get"
+            }
+        },
+        "harvest-04": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Non-Billable Hours for Project (Last 7 Days)",
+            "libraryAlias": "HarvestNonBillableHoursforProjectLast7Days",
+            "refreshInterval": 14400,
+            "description": "Retrieve the daily non-billable entries to your Harvest project. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/entries.json?from={date.add(-7).format()}&to={date.yesterday}&billable=no",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "harvest-01": "6f1451f8fb69e3cc884adoogeraspilk",
+        "harvest-02": "a14518d67758a41dd0c0doogeraspilk",
+        "harvest-03": "7b638077f9f512d7cd57doogeraspilk",
+        "harvest-04": "a59c42d2c8459afb4f00doogeraspilk"
+    },
+
+    "services": [{
+        "service": "harvest"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.harvest.subDomain",
+        "description": "Enter your Harvest subdomain. Your subdomain is the first part of your Harvest web address (and it's usually your company name). <br>For example, https://<b>companyname</b>.harvestapp.com.",
+        "label": "Subdomain",
+        "ghostText": "companyname",
+        "isRequired": true,
+        "debounceEnabled": true
+    },{
+        "type": "text",
+        "id": "ds.harvest.projectId",
+        "label": "Project",
+        "description": "Enter your Project ID.",
+        "isRequired": true,
+		"debounceEnabled": true,
+        "onChangeQueries": ["q1"]
+    }, {
+        "type": "select",
+        "id": "ds.harvest.taskId",
+		"description": "Select your task.",
+        "label": "Task",
+        "isRequired": true
+    }],
+    "queries": [{
+        "id": "q1",
+        "errorMessage": "Make sure you have the correct Harvest username, password and subdomain. <br><br> When entering your Harvest subdomain, do <b>not</b> enter the whole URL: https://<b>OnlyEnterThisPart</b>.harvestapp.com.", 
+        "connector": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/tasks.json"
+            }
+        },
+        "results": [{
+            "propId": "ds.harvest.taskId",
+            "propField": "options",
+            "labels": "/task/name",
+            "values": "/task/id"
+        }]
+    }]
+}

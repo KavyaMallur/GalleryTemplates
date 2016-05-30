@@ -1,0 +1,202 @@
+{
+    "name": "Harvest Time on Project",
+    "description": "Whether your project is big or small, always keep track of your hours. Use this Klip to compare your budgeted hours to the total amount of time you’ve spent on the project. Originates from the Gallery.",
+    "sampleFormulas": {
+        "68968418": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "618afb02": {
+            "txt": "\"Make Awesome Charts!\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Make Awesome Charts!"
+                }]
+            }
+        },
+        "f8ec197d": {
+            "txt": "\"Budget Exceeded by:\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Budget Exceeded by:"
+                }]
+            }
+        },
+        "f07f6ff1": {
+            "txt": "\"44.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 44.5
+                }]
+            }
+        },
+        "106a7577": {
+            "txt": "\"100.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 100.5
+                }]
+            }
+        },
+        "ebe04d5a": {
+            "txt": "\"56.0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "56.0"
+                }]
+            }
+        },
+        "9ae67321": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "6a1efd2e": {
+            "txt": "\"100.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 100.5
+                }]
+            }
+        },
+        "1f0fbfa4": {
+            "txt": "\"56.0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "56.0"
+                }]
+            }
+        },
+        "5c4a2b59-4": {
+            "txt": "\"56.0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "56.0"
+                }]
+            }
+        },
+        "040862ed-5": {
+            "txt": "\"100.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 100.5
+                }]
+            }
+        },
+        "cd240603-5": {
+            "txt": "\"100.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 100.5
+                }]
+            }
+        },
+        "1e334bbc-6": {
+            "txt": "\"56.0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "56.0"
+                }]
+            }
+        }
+    },
+
+    "datasources": {
+        "harvest-01": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Projects",
+            "libraryAlias": "HarvestProjects",
+            "refreshInterval": 14400,
+            "description": "Retrieve the projects in your harvest account. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects.json",
+                "method": "get"
+            }
+        },
+        "harvest-02": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Project Analysis (Lifespan)",
+            "libraryAlias": "HarvestAnalysisLifespan",
+            "refreshInterval": 14400,
+            "description": "Retrieve the analysis of your Harvest project. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/analysis.json?period=lifespan",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "harvest-01": "6f1451f8fb69e3cc884adoogeraspilk",
+        "harvest-02": "81e3b042351106493b90doogeraspilk"
+    },
+
+    "services": [{
+        "service": "harvest"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.harvest.subDomain",
+        "description": "Enter your Harvest subdomain. Your subdomain is the first part of your Harvest web address (and it's usually your company name). <br>For example, https://<b>companyname</b>.harvestapp.com.",
+        "label": "Subdomain",
+        "ghostText": "companyname",
+        "isRequired": true
+    },{
+        "type": "text",
+        "id": "ds.harvest.projectId",
+        "label": "Project",
+        "description": "Enter your Project ID.",
+        "isRequired": true
+    }]
+}

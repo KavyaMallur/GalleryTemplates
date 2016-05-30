@@ -1,0 +1,184 @@
+{
+    "name": "Harvest Non-Billable Tasks",
+    "description": "Projects are more than just the sum of their hours. Lunch with a client, brainstorming, writing a brilliant blog post... all of these important, yet non-billable hours can be tracked on your dashboard. Originates from the Gallery.",
+    "sampleFormulas": {
+        "1afa47af": {
+            "txt": "\"Creating amazing klips for 2016\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Creating amazing klips for 2016"
+                }]
+            }
+        },
+        "236c9356": {
+            "txt": "array(\"Brainstorming\", \"API Doc Review\", \"Implement UX Comments\", \"Publish Templates\", \"Marketing Blog\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "Brainstorming"
+                    }, {
+                        "t": "l",
+                        "v": "API Doc Review"
+                    }, {
+                        "t": "l",
+                        "v": "Implement UX Comments"
+                    }, {
+                        "t": "l",
+                        "v": "Publish Templates"
+                    }, {
+                        "t": "l",
+                        "v": "Marketing Blog"
+                    }]
+                }]
+            }
+        },
+        "5d4af168": {
+            "txt": "array(\"10.5\", \"12.5\", \"2.75\", \"4.25\", \"4.00\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "10.5"
+                    }, {
+                        "t": "l",
+                        "v": "12.5"
+                    }, {
+                        "t": "l",
+                        "v": "2.75"
+                    }, {
+                        "t": "l",
+                        "v": "4.25"
+                    }, {
+                        "t": "l",
+                        "v": "4.00"
+                    }]
+                }]
+            }
+        },
+        "004b49fc": {
+            "txt": "array(\"0.00\", \"0.00\", \"0.00\", \"0.00\", \"0.00\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "0.00"
+                    }, {
+                        "t": "l",
+                        "v": "0.00"
+                    }, {
+                        "t": "l",
+                        "v": "0.00"
+                    }, {
+                        "t": "l",
+                        "v": "0.00"
+                    }, {
+                        "t": "l",
+                        "v": "0.00"
+                    }]
+                }]
+            }
+        },
+        "d72ffef6": {
+            "txt": "\"Total\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Total"
+                }]
+            }
+        },
+        "ace9a285": {
+            "txt": "\"34.00\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "34.00"
+                }]
+            }
+        },
+        "4150b45a": {
+            "txt": "\"0.00\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0.00"
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "harvest-01": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Projects",
+            "libraryAlias": "HarvestProjects",
+            "refreshInterval": 14400,
+            "description": "Retrieve the projects in your harvest account. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects.json",
+                "method": "get",
+                "parameters": "[]"
+            }
+        },
+        "harvest-02": {
+            "service": "harvest",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Harvest Project Analysis (Lifespan)",
+            "libraryAlias": "HarvestAnalysisLifespan",
+            "refreshInterval": 14400,
+            "description": "Retrieve the analysis of your Harvest project. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://{{ds.harvest.subDomain}}.harvestapp.com/projects/{{ds.harvest.projectId}}/analysis.json?period=lifespan",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "harvest-01": "6f1451f8fb69e3cc884adoogeraspilk",
+        "harvest-02": "81e3b042351106493b90doogeraspilk"
+    },
+
+    "services": [{
+        "service": "harvest"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.harvest.subDomain",
+        "description": "Enter your Harvest subdomain. Your subdomain is the first part of your Harvest web address (and it's usually your company name). <br>For example, https://<b>companyname</b>.harvestapp.com.",
+        "label": "Subdomain",
+        "ghostText": "companyname",
+        "isRequired": true
+    },{
+        "type": "text",
+        "id": "ds.harvest.projectId",
+        "label": "Project",
+        "description": "Enter your Project ID.",
+        "isRequired": true
+    }]
+}
