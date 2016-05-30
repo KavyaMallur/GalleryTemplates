@@ -1,8 +1,6 @@
 {
     "name" : "Mixpanel Top 5 {{ds.mixpanel.event}} by {{ds.mixpanel.name}}",
-    "description" : "Track your top five Mixpanel properties and the total number of their events. Originates from the Gallery.",
-    
-
+    "description" : "Track your top five Mixpanel properties and the total number of their events. <br>Originates from the Gallery. (v1.1)",
     "datasources" : {
         "mixpanel" : {
             "service" : "mixpanel",
@@ -13,7 +11,9 @@
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
-                "endpoint_url": "http://mixpanel.com/api/2.0/events/properties?expire={hash.getExpiryTime(240)}&event={{ds.mixpanel.event}}&interval=0&name={{ds.mixpanel.name}}&type=general&unit=day&api_key={{auth.mixpanel.apiKey}}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=0\").append(\"name={{ds.mixpanel.name}}\").append(\"type=general\").append(\"unit=day\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
+                "endpoint_url": "https://mixpanel.com/api/2.0/events/properties?event={{ds.mixpanel.event}}&interval=0&name={{ds.mixpanel.name}}&type=general&unit=day"
             }
         }
     },
@@ -43,13 +43,15 @@
     ],
     "queries": [
         {
-            "errorMessage":"Mixpanel Event Error",
+            "errorMessage":"Make sure you have the correct Mixpanel API Secret.",
             "connector": {
                 "service": "mixpanel",
                 "type": "simple_rest",
                 "format": "json",
                 "props": {
-                    "endpoint_url": "http://mixpanel.com/api/2.0/events/names/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}"
+                    "auth_method": "basic",
+                    "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
+                    "endpoint_url": "https://mixpanel.com/api/2.0/events/names/?"
                 }
             },
             "results": [
@@ -68,22 +70,24 @@
                 "type": "simple_rest",
                 "format": "json",
                 "props" : { 
-                    "endpoint_url": "http://mixpanel.com/api/2.0/events/properties/top?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event={{ds.mixpanel.event}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"limit=100\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}&event={{ds.mixpanel.event}}&limit=100"
+                    "auth_method": "basic",
+                    "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
+                    "endpoint_url": "https://mixpanel.com/api/2.0/events/properties/top?event={{ds.mixpanel.event}}&limit=100"
                 }
             },
             "results": [
                 {
                     "propId" : "ds.mixpanel.name", 
                     "propField" : "options", 
-                    "labels": "/name",  
-                    "values": "/id" 
+                    "labels": "kf:names(.)",  
+                    "values": "kf:names(.)" 
                 }
             ]
         }
     ],
     "uiVariables": [
         {
-            "name":"KTtemp", 
+            "name":"Mixpaneltemp", 
             "value":"1"
         }
     ]

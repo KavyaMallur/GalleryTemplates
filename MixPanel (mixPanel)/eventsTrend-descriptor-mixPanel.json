@@ -1,8 +1,6 @@
 {
-    "name" : "Mixpanel Events Trend",
-    "description" : "Track your Mixpanel events by monitoring the 30 day trend, and compare the totals from yesterday with a week prior to yesterday. Originates from the Gallery.",
-    
-
+    "name" : "Mixpanel Events Trend (Last 30 Days)",
+    "description" : "Track your Mixpanel events by monitoring the 30 day trend, and compare the totals from yesterday with a week prior to yesterday. <br>Originates from the Gallery. (v1.1)",
     "datasources" : {
         "mixpanel" : {
             "service" : "mixpanel",
@@ -13,7 +11,9 @@
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
-                "endpoint_url": "http://mixpanel.com/api/2.0/events/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"event=[\\\"{{ds.mixpanel.event1}}\\\",\\\"{{ds.mixpanel.event2}}\\\"]\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"interval=30\").append(\"type=general\").append(\"unit=day\").append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&event=[\"{{ds.mixpanel.event1}}\",\"{{ds.mixpanel.event2}}\"]&interval=30&type=general&unit=day&api_key={{auth.mixpanel.apiKey}}"
+                "auth_method": "basic",
+                "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
+                "endpoint_url": "https://mixpanel.com/api/2.0/events/?event=[\"{{ds.mixpanel.event1}}\",\"{{ds.mixpanel.event2}}\"]&interval=30&type=general&unit=day"
             }
         }
     },
@@ -42,13 +42,15 @@
     ],
     "queries": [
         {
-            "errorMessage":"Make sure you have the correct Mixpanel API Key and API Secret.",
+            "errorMessage":"Make sure you have the correct Mixpanel API Secret.",
             "connector": {
                 "service": "mixpanel",
                 "type": "simple_rest",
                 "format": "json",
                 "props": {
-                    "endpoint_url": "http://mixpanel.com/api/2.0/events/names/?expire={hash.getExpiryTime(240)}&sig={hash.append(\"api_key={{auth.mixpanel.apiKey}}\").append(\"expire=\").append(hash.getExpiryTime(240)).append(\"{{auth.mixpanel.apiSecret}}\").encodeMd5().toHex().printDigest()}&api_key={{auth.mixpanel.apiKey}}"
+                    "auth_method": "basic",
+                    "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
+                    "endpoint_url": "https://mixpanel.com/api/2.0/events/names/?"
                 }
             },
             "results": [
