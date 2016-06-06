@@ -1,19 +1,19 @@
 {
     "name" : "Mixpanel Events Trend (Last 30 Days)",
-    "description" : "Track your Mixpanel events by monitoring the 30 day trend, and compare the totals from yesterday with a week prior to yesterday. <br>Originates from the Gallery. (v1.1)",
+    "description" : "Track your Mixpanel events by monitoring the 30 day trend, and compare the totals from yesterday with a week prior to yesterday. <br>Originates from the Gallery. (v1.2)",
     "datasources" : {
         "mixpanel" : {
             "service" : "mixpanel",
             "libraryAlias" : "MixpanelEvents30Days",
-            "name": "Mixpanel Events ({{ds.mixpanel.event1}},{{ds.mixpanel.event2}}) (30 days)",
-            "description" : "Provide events for the last 30 days. Originates from the Gallery.",
+            "name": "Mixpanel Events: {{ds.mixpanel.event1}} & {{ds.mixpanel.event2}} (Last 30 days)",
+            "description" : "Provide events for the last 30 days.",
             "type" : "simple_rest",
             "format" : "json",
             "refreshInterval" : 14400,
             "props" : {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
-                "endpoint_url": "https://mixpanel.com/api/2.0/events/?event=[\"{{ds.mixpanel.event1}}\",\"{{ds.mixpanel.event2}}\"]&interval=30&type=general&unit=day"
+                "endpoint_url": "https://mixpanel.com/api/2.0/events/?event={hash.append(\"[\\\"{{ds.mixpanel.event1}}\\\",\\\"{{ds.mixpanel.event2}}\\\"]\").encodeURL().printDigest();}&interval=30&type=general&unit=day"
             }
         }
     },
