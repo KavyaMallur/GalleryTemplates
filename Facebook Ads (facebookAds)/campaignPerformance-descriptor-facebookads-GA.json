@@ -1,7 +1,20 @@
 {
-    "name": "Campaign Performance for {{ds.google_analytics.campaignName}}",
+    "name": "Campaign Performance",
     "description": "See how your campaigns are performing for the selected date range. Originates from the Gallery.",
     "sampleFormulas": {
+    "6c97d258-1": {
+        "txt": "\"<span style='font-size:1.4em;'>Campaign Performance for Klip Manufacturing</span>\"",
+        "src": {
+            "t": "expr",
+            "v": false,
+            "c": [
+                {
+                    "t": "l",
+                    "v": "<span style='font-size:1.4em;'>Campaign Performance for Klip Manufacturing</span>"
+                }
+            ]
+        }
+    },
     "bcde8dae": {
         "txt": "\"thismonth\"",
         "src": {
@@ -1337,6 +1350,20 @@
     "datasources": {
         "facebookAds-01": {
             "service": "facebook_ads",
+            "libraryAlias": "FacebooksAdsActiveCampaigns",
+            "name": "Facebooks Ads Active Campaigns",
+            "description": "Retrieve the list of active campaigns in your Facebook Ads account. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.6/{{ds.facebook_ads.accountId}}/campaigns?fields=id,name,created_time,effective_status&effective_status=['ACTIVE']",
+                "graphUrl": "https://graph.facebook.com/v2.6/{{ds.facebook_ads.accountId}}/campaigns?fields=id,name,created_time,effective_status&effective_status=['ACTIVE']",
+                "qtype": "Graph API"
+            }
+        },
+        "facebookAds-02": {
+            "service": "facebook_ads",
             "libraryAlias": "FacebooksAdsCampaignAdsetsBudget",
             "name": "Facebooks Ads Campaign Adsets Budgets",
             "description": "Retrieve the budget details of the Adsets in a Facebook Ads Campaign. Originates from the Gallery.",
@@ -1349,7 +1376,7 @@
                 "qtype": "Graph API"
             }
         },
-        "facebookAds-02": {
+        "facebookAds-03": {
             "service": "facebook_ads",
             "libraryAlias": "FacebooksAdsCampaignMetrics",
             "name": "Facebooks Ads Campaign Metrics",
@@ -1366,14 +1393,14 @@
         "googleAnalytics": {
             "service": "google_analytics",
             "libraryAlias": "GoogleAnalyticsCampaignMetrics",
-            "name": "Google Analytics Campaign Metrics (Trial-Facebook-Marketers)",
+            "name": "Google Analytics Campaign Metrics ({{ds.google_analytics.campaignName}})",
             "description": "Retrieve detailed Google AdWords metrics on your website's keyword performance through Google Analytics. Originates from the Gallery.",
             "type": "google_analytics",
             "format": "csv",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-90).format()}&end-date={date.today}&filters=ga:campaign=={{ds.google_analytics.campaignName}}",
-                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-90).format()}&end-date={date.today}&filters=ga:campaign=={{ds.google_analytics.campaignName}}",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-90).format()}&end-date={date.today}&filters=ga:campaign=={hash.append('{{ds.google_analytics.campaignName}}').encodeURL().printDigest()}",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-90).format()}&end-date={date.today}&filters=ga:campaign=={hash.append('{{ds.google_analytics.campaignName}}').encodeURL().printDigest()}",
                 "max_pages": "1",
                 "mode": "Advanced",
                 "profile": "{{ds.google_analytics.profileId}}",
@@ -1387,8 +1414,9 @@
         "service": "google_analytics"
     }],
     "dsMappings": {
-        "facebookAds-01": "4481689ae9348edba658doogeraspilk",
-        "facebookAds-02": "c5832bb29501bb14ae5fdoogeraspilk",
+        "facebookAds-01": "458aa7c791e5f0947e79doogeraspilk",
+        "facebookAds-02": "4481689ae9348edba658doogeraspilk",
+        "facebookAds-03": "c5832bb29501bb14ae5fdoogeraspilk",
         "googleAnalytics": "3fe095cc3418f297e5dadoogeraspilk"
     },
     "uiVariables": [{
@@ -1495,8 +1523,8 @@
         "results": [{
             "propId": "ds.google_analytics.campaignName",
             "propField": "options",
-            "labels": "kf:element_at(/rows,1)[contains(.,'Facebook')]",
-            "values": "kf:element_at(/rows,1)[contains(.,'Facebook')]"
+            "labels": "kf:element_at(/rows,1)[contains(translate(.,'f','F'),'Facebook')]",
+            "values": "kf:element_at(/rows,1)[contains(translate(.,'f','F'),'Facebook')]"
         }]
     }]
 }
