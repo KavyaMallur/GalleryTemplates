@@ -83,11 +83,35 @@
                "wrap": true
             },
             {
+               "type": "html_tpl2",
+               "id": "cf54c359",
+               "displayName": "Info",
+               "layoutConfig": {
+                  "x": 3,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "html_data",
+                     "role": "data",
+                     "id": "7e45d37d",
+                     "displayName": "Series1",
+                     "formulas": [],
+                     "data": [],
+                     "mixin": "label",
+                     "dataId": "Series1"
+                  }
+               ],
+               "tpl": "<a href=\"https://support.klipfolio.com/hc/en-us/articles/215546258#campaign\" target=\"_blank\" title=\"Follow this link to learn more about this Klip.\">\n<img src=\"/images/style201512/help/help-onlight.svg?\" height=\"12\" width=\"12\"/></a>",
+               "overflow": "ns"
+            },
+            {
                "type": "label",
                "id": "363647bc",
                "displayName": "Start Date",
                "layoutConfig": {
-                  "x": 2,
+                  "x": 4,
                   "y": 0
                },
                "renamed": true,
@@ -505,7 +529,7 @@
                "id": "c782205c",
                "displayName": "End Date",
                "layoutConfig": {
-                  "x": 3,
+                  "x": 5,
                   "y": 0
                },
                "renamed": true,
@@ -814,7 +838,7 @@
                "id": "11fc8be1",
                "displayName": "Date Range",
                "layoutConfig": {
-                  "x": 4,
+                  "x": 6,
                   "y": 0
                },
                "renamed": true,
@@ -953,14 +977,14 @@
                "scope": 1,
                "propName": "GAdsPeriod",
                "inputType": 1,
-               "defaultValue": "Today"
+               "defaultValue": "thismonth"
             },
             {
                "type": "label",
                "id": "a7575ae4",
                "displayName": "Start Date (Prev)",
                "layoutConfig": {
-                  "x": 2,
+                  "x": 4,
                   "y": 1
                },
                "renamed": true,
@@ -1382,7 +1406,7 @@
                "id": "f69334d2",
                "displayName": "End Date (Prev)",
                "layoutConfig": {
-                  "x": 3,
+                  "x": 5,
                   "y": 1
                },
                "renamed": true,
@@ -1418,7 +1442,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_add(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())",
+                     "txt": "if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -1586,7 +1610,7 @@
                                              },
                                              {
                                                 "t": "f",
-                                                "v": "date_add",
+                                                "v": "date_endof",
                                                 "c": [
                                                    {
                                                       "t": "f",
@@ -1611,6 +1635,16 @@
                                                    {
                                                       "t": "l",
                                                       "v": "-2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "first",
+                                                         "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                         "default": "Sunday (week) or January (year)",
+                                                         "optional": true
+                                                      }
                                                    }
                                                 ]
                                              },
@@ -1794,24 +1828,32 @@
             }
          ],
          "rows": 2,
-         "cols": 5,
+         "cols": 7,
          "widths": [
             {
-               "x": 2,
-               "w": 87
+               "x": 4,
+               "w": 95
+            },
+            {
+               "x": 5,
+               "w": 175
+            },
+            {
+               "x": 6,
+               "w": "15%"
+            },
+            {
+               "x": 1,
+               "w": 25
             },
             {
                "x": 3,
-               "w": 150
-            },
-            {
-               "x": 4,
-               "w": "15%"
+               "w": 27
             }
          ],
          "cellData": [
             {
-               "x": 3,
+               "x": 5,
                "y": 0,
                "cellPadding": [
                   0,
@@ -1834,13 +1876,13 @@
                "h": 2
             },
             {
-               "x": 2,
+               "x": 4,
                "y": 0,
                "cellPadding": 0,
                "alignment": 2
             },
             {
-               "x": 3,
+               "x": 5,
                "y": 1,
                "cellPadding": [
                   0,
@@ -1850,13 +1892,25 @@
                ]
             },
             {
-               "x": 2,
+               "x": 4,
                "y": 1,
                "cellPadding": 0
             },
             {
-               "x": 4,
+               "x": 6,
                "y": 0,
+               "h": 2
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "h": 2,
+               "alignment": 1
+            },
+            {
+               "x": 3,
+               "y": 0,
+               "alignment": 1,
                "h": 2
             }
          ]
@@ -2032,30 +2086,6 @@
                "wrap": true
             },
             {
-               "type": "html_tpl2",
-               "id": "cf54c359",
-               "displayName": "Info",
-               "layoutConfig": {
-                  "x": 10,
-                  "y": 0
-               },
-               "renamed": true,
-               "components": [
-                  {
-                     "type": "html_data",
-                     "role": "data",
-                     "id": "7e45d37d",
-                     "displayName": "Series1",
-                     "formulas": [],
-                     "data": [],
-                     "mixin": "label",
-                     "dataId": "Series1"
-                  }
-               ],
-               "tpl": "<a href=\"https://support.klipfolio.com/hc/en-us/articles/215546258#campaign\" target=\"_blank\" title=\"Follow this link to learn more about this Klip.\">\n<img src=\"/images/style201512/help/help-onlight.svg?\" height=\"12\" width=\"12\"/></a>",
-               "overflow": "ns"
-            },
-            {
                "type": "gauge",
                "id": "61c2d45a",
                "displayName": "Spend Gauge",
@@ -2070,7 +2100,7 @@
                      "predicates": [
                         {
                            "left": {
-                              "cx": "abd213f7"
+                              "cx": "8ae18f7f"
                            },
                            "type": "gt",
                            "right": {
@@ -2090,7 +2120,7 @@
                      "predicates": [
                         {
                            "left": {
-                              "cx": "abd213f7"
+                              "cx": "8ae18f7f"
                            },
                            "type": "lt",
                            "right": {
@@ -2110,7 +2140,7 @@
                      "predicates": [
                         {
                            "left": {
-                              "cx": "abd213f7"
+                              "cx": "8ae18f7f"
                            },
                            "type": "gt",
                            "right": {
@@ -2119,7 +2149,7 @@
                         },
                         {
                            "left": {
-                              "cx": "abd213f7"
+                              "cx": "8ae18f7f"
                            },
                            "type": "lt",
                            "right": {
@@ -2529,7 +2559,7 @@
                         [
                         ]
                      ],
-                     "font_colour": "cx-color_888",
+                     "font_colour": "cx-color_ccc",
                      "font_style": "regular",
                      "show_value": false
                   },
@@ -2543,66 +2573,29 @@
                      "fmt": "cur",
                      "formulas": [
                         {
-                           "txt": "if(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")>((sum(select(slice(400b121c5827aa0d3630natceewzhere@H:H;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))),(sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"),(((sum(select(slice(400b121c5827aa0d3630natceewzhere@H:H;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))*\"1.25\"))",
+                           "txt": "(((sum(select(slice(400b121c5827aa0d3630natceewzhere@H:H;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))*\"1.75\")",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "if",
+                                    "t": "expr",
+                                    "v": false,
                                     "c": [
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "ref",
-                                                "v": {
-                                                   "r": "cx",
-                                                   "cx": "8ae18f7f"
-                                                }
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": ">"
-                                             },
-                                             {
-                                                "t": "ref",
-                                                "v": {
-                                                   "r": "cx",
-                                                   "cx": "563e3cb0"
-                                                }
-                                             }
-                                          ]
-                                       },
                                        {
                                           "t": "ref",
                                           "v": {
                                              "r": "cx",
-                                             "cx": "8ae18f7f"
+                                             "cx": "563e3cb0"
                                           }
                                        },
                                        {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "ref",
-                                                "v": {
-                                                   "r": "cx",
-                                                   "cx": "563e3cb0"
-                                                }
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "*"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "1.25"
-                                             }
-                                          ]
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.75"
                                        }
                                     ]
                                  }
@@ -2614,7 +2607,7 @@
                         [
                         ]
                      ],
-                     "font_colour": "cx-color_888",
+                     "font_colour": "cx-color_ccc",
                      "font_style": "regular",
                      "show_value": false
                   },
@@ -2803,6 +2796,92 @@
                      "dataDisabled": true,
                      "rangeId": 3,
                      "color": "cx-theme_ccc"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "5a776159-1",
+                     "displayName": "Spend Range 3",
+                     "renamed": true,
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "7a3e68b1-2",
+                           "displayName": "Spend Start 3",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "(((sum(select(slice(400b121c5827aa0d3630natceewzhere@H:H;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))*\"1.1\")",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "563e3cb0"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1.1"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                              ]
+                           ]
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "ee0d8faf-3",
+                           "displayName": "Spend End 3",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "((((sum(select(slice(400b121c5827aa0d3630natceewzhere@H:H;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))*\"1.75\"))",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "eb09619a"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                              ]
+                           ]
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 4,
+                     "color": "cx-theme_ccc"
                   }
                ],
                "gaugeStyle": "hg"
@@ -2822,11 +2901,11 @@
                      "predicates": [
                         {
                            "left": {
-                              "cx": "c623fe65"
+                              "cx": "5b520ae9"
                            },
                            "type": "gt",
                            "right": {
-                              "cx": "74fad199"
+                              "cx": "08e70162"
                            }
                         }
                      ],
@@ -2842,7 +2921,7 @@
                      "predicates": [
                         {
                            "left": {
-                              "cx": "c623fe65"
+                              "cx": "5b520ae9"
                            },
                            "type": "lt",
                            "right": {
@@ -2862,7 +2941,7 @@
                      "predicates": [
                         {
                            "left": {
-                              "cx": "c623fe65"
+                              "cx": "5b520ae9"
                            },
                            "type": "gt",
                            "right": {
@@ -2871,11 +2950,11 @@
                         },
                         {
                            "left": {
-                              "cx": "c623fe65"
+                              "cx": "5b520ae9"
                            },
                            "type": "lt",
                            "right": {
-                              "cx": "74fad199"
+                              "cx": "08e70162"
                            }
                         }
                      ],
@@ -3135,6 +3214,7 @@
                      ],
                      "data": [
                         [
+                           "100"
                         ]
                      ],
                      "font_colour": "cx-color_888",
@@ -3167,7 +3247,7 @@
                         [
                         ]
                      ],
-                     "font_colour": "cx-color_888",
+                     "font_colour": "cx-color_ccc",
                      "font_style": "regular",
                      "show_value": false
                   },
@@ -3215,7 +3295,7 @@
                         [
                         ]
                      ],
-                     "font_colour": "cx-color_888",
+                     "font_colour": "cx-color_ccc",
                      "font_style": "regular",
                      "show_value": false
                   },
@@ -3363,17 +3443,31 @@
                            "renamed": true,
                            "formulas": [
                               {
-                                 "txt": "(if(($GAdsConversionTarget=\"\"),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))*\"1.75\"),$GAdsConversionTarget))",
+                                 "txt": "((if(($GAdsConversionTarget=\"\"),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))*\"1.75\"),$GAdsConversionTarget))*\"1.1\")",
                                  "src": {
                                     "t": "expr",
                                     "v": false,
                                     "c": [
                                        {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "0ceecadb"
-                                          }
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "0ceecadb"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1.1"
+                                             }
+                                          ]
                                        }
                                     ]
                                  }
@@ -3406,17 +3500,31 @@
                            "renamed": true,
                            "formulas": [
                               {
-                                 "txt": "(if(($GAdsConversionTarget=\"\"),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))*\"1.75\"),$GAdsConversionTarget))",
+                                 "txt": "((if(($GAdsConversionTarget=\"\"),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))*\"1.75\"),$GAdsConversionTarget))*\"1.1\")",
                                  "src": {
                                     "t": "expr",
                                     "v": false,
                                     "c": [
                                        {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "0ceecadb"
-                                          }
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "0ceecadb"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1.1"
+                                             }
+                                          ]
                                        }
                                     ]
                                  }
@@ -3432,106 +3540,6 @@
                            "role": "end",
                            "id": "74fad199",
                            "displayName": "Conversions End 3",
-                           "renamed": true,
-                           "formulas": [
-                              {
-                                 "txt": "((if(($GAdsConversionTarget=\"\"),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))*\"1.75\"),$GAdsConversionTarget))*\"1.1\")",
-                                 "src": {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "ref",
-                                                "v": {
-                                                   "r": "cx",
-                                                   "cx": "0ceecadb"
-                                                }
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "*"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "1.1"
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              }
-                           ],
-                           "data": [
-                              [
-                              ]
-                           ]
-                        }
-                     ],
-                     "formulas": [],
-                     "data": [],
-                     "dataDisabled": true,
-                     "rangeId": 3,
-                     "color": "cx-theme_ccc"
-                  },
-                  {
-                     "type": "range",
-                     "role": "range",
-                     "id": "ba326674",
-                     "displayName": "Conversion Range 4",
-                     "renamed": true,
-                     "components": [
-                        {
-                           "type": "proxy",
-                           "role": "start",
-                           "id": "b358aaad",
-                           "displayName": "Conversions Start 4",
-                           "renamed": true,
-                           "formulas": [
-                              {
-                                 "txt": "((if(($GAdsConversionTarget=\"\"),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))*\"1.75\"),$GAdsConversionTarget))*\"1.1\")",
-                                 "src": {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "ref",
-                                                "v": {
-                                                   "r": "cx",
-                                                   "cx": "0ceecadb"
-                                                }
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "*"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "1.1"
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              }
-                           ],
-                           "data": [
-                              [
-                              ]
-                           ]
-                        },
-                        {
-                           "type": "proxy",
-                           "role": "end",
-                           "id": "ed3eff19",
-                           "displayName": "Conversions End 4",
                            "renamed": true,
                            "formulas": [
                               {
@@ -3560,7 +3568,7 @@
                      "formulas": [],
                      "data": [],
                      "dataDisabled": true,
-                     "rangeId": 4,
+                     "rangeId": 3,
                      "color": "cx-theme_ccc"
                   }
                ],
@@ -3585,27 +3593,7 @@
                            },
                            "type": "gt",
                            "right": {
-                              "cx": "8a54227e"
-                           }
-                        }
-                     ],
-                     "reactions": [
-                        {
-                           "type": "color",
-                           "value": "cx-theme_red_3",
-                           "isScalar": true
-                        }
-                     ]
-                  },
-                  {
-                     "predicates": [
-                        {
-                           "left": {
-                              "cx": "6b5a3ef6"
-                           },
-                           "type": "lt",
-                           "right": {
-                              "cx": "7b4b579e"
+                              "cx": "f772e30f"
                            }
                         }
                      ],
@@ -3623,9 +3611,29 @@
                            "left": {
                               "cx": "6b5a3ef6"
                            },
+                           "type": "lt",
+                           "right": {
+                              "cx": "b7e6f854"
+                           }
+                        }
+                     ],
+                     "reactions": [
+                        {
+                           "type": "color",
+                           "value": "cx-theme_red_3",
+                           "isScalar": true
+                        }
+                     ]
+                  },
+                  {
+                     "predicates": [
+                        {
+                           "left": {
+                              "cx": "6b5a3ef6"
+                           },
                            "type": "gt",
                            "right": {
-                              "cx": "0d74c7dc"
+                              "cx": "b7e6f854"
                            }
                         },
                         {
@@ -3634,7 +3642,7 @@
                            },
                            "type": "lt",
                            "right": {
-                              "cx": "7b4b579e"
+                              "cx": "f772e30f"
                            }
                         }
                      ],
@@ -3798,6 +3806,7 @@
                      ],
                      "data": [
                         [
+                           "10"
                         ]
                      ],
                      "font_colour": "cx-color_888",
@@ -3830,7 +3839,7 @@
                         [
                         ]
                      ],
-                     "font_colour": "cx-color_888",
+                     "font_colour": "cx-color_ccc",
                      "font_style": "regular",
                      "show_value": false
                   },
@@ -3844,25 +3853,25 @@
                      "fmt": "cur",
                      "formulas": [
                         {
-                           "txt": "(if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"2\"",
+                           "txt": "(if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"1.75\"",
                            "src": {
-                              "v": false,
                               "t": "expr",
+                              "v": false,
                               "c": [
                                  {
+                                    "t": "ref",
                                     "v": {
                                        "r": "cx",
                                        "cx": "3d6f92aa"
-                                    },
-                                    "t": "ref"
+                                    }
                                  },
                                  {
-                                    "v": "*",
-                                    "t": "o"
+                                    "t": "o",
+                                    "v": "*"
                                  },
                                  {
-                                    "v": "2",
-                                    "t": "l"
+                                    "t": "l",
+                                    "v": "1.75"
                                  }
                               ]
                            }
@@ -3872,7 +3881,7 @@
                         [
                         ]
                      ],
-                     "font_colour": "cx-color_888",
+                     "font_colour": "cx-color_ccc",
                      "font_style": "regular",
                      "show_value": false
                   },
@@ -3887,10 +3896,40 @@
                            "type": "proxy",
                            "role": "start",
                            "id": "0d74c7dc",
-                           "displayName": "Start 1",
+                           "displayName": "CPConversion Start 1",
+                           "renamed": true,
                            "formulas": [
                               {
-                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))-((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"0.1\"))",
+                                 "txt": "(\"0\")",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "8a54227e"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                              ]
+                           ]
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "b7e6f854",
+                           "displayName": "CPConversion End 1",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"0.9\")",
                                  "src": {
                                     "t": "expr",
                                     "v": false,
@@ -3908,58 +3947,13 @@
                                              },
                                              {
                                                 "t": "o",
-                                                "v": "-"
+                                                "v": "*"
                                              },
                                              {
-                                                "t": "expr",
-                                                "v": false,
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "3d6f92aa"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "o",
-                                                      "v": "*"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "0.1"
-                                                   }
-                                                ]
+                                                "t": "l",
+                                                "v": "0.9"
                                              }
                                           ]
-                                       }
-                                    ]
-                                 }
-                              }
-                           ],
-                           "data": [
-                              [
-                              ]
-                           ]
-                        },
-                        {
-                           "type": "proxy",
-                           "role": "end",
-                           "id": "b7e6f854",
-                           "displayName": "End 1",
-                           "formulas": [
-                              {
-                                 "txt": "(if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))",
-                                 "src": {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "3d6f92aa"
-                                          }
                                        }
                                     ]
                                  }
@@ -3988,38 +3982,11 @@
                            "type": "proxy",
                            "role": "start",
                            "id": "7b4b579e",
-                           "displayName": "Start 2",
+                           "displayName": "CPConversion Start 2",
+                           "renamed": true,
                            "formulas": [
                               {
-                                 "txt": "(if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))",
-                                 "src": {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "3d6f92aa"
-                                          }
-                                       }
-                                    ]
-                                 }
-                              }
-                           ],
-                           "data": [
-                              [
-                              ]
-                           ]
-                        },
-                        {
-                           "type": "proxy",
-                           "role": "end",
-                           "id": "f772e30f",
-                           "displayName": "End 2",
-                           "formulas": [
-                              {
-                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))+((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"0.1\"))",
+                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"0.9\")",
                                  "src": {
                                     "t": "expr",
                                     "v": false,
@@ -4037,28 +4004,54 @@
                                              },
                                              {
                                                 "t": "o",
-                                                "v": "+"
+                                                "v": "*"
                                              },
                                              {
-                                                "t": "expr",
-                                                "v": false,
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "3d6f92aa"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "o",
-                                                      "v": "*"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "0.1"
-                                                   }
-                                                ]
+                                                "t": "l",
+                                                "v": "0.9"
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              }
+                           ],
+                           "data": [
+                              [
+                              ]
+                           ]
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "f772e30f",
+                           "displayName": "CPConversion End 2",
+                           "renamed": true,
+                           "formulas": [
+                              {
+                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"1.1\")",
+                                 "src": {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "3d6f92aa"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1.1"
                                              }
                                           ]
                                        }
@@ -4089,10 +4082,11 @@
                            "type": "proxy",
                            "role": "start",
                            "id": "02c0d8b5",
-                           "displayName": "Start 4",
+                           "displayName": "CPConversion Start 3",
+                           "renamed": true,
                            "formulas": [
                               {
-                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))+((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"0.1\"))",
+                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"1.1\")",
                                  "src": {
                                     "t": "expr",
                                     "v": false,
@@ -4110,28 +4104,11 @@
                                              },
                                              {
                                                 "t": "o",
-                                                "v": "+"
+                                                "v": "*"
                                              },
                                              {
-                                                "t": "expr",
-                                                "v": false,
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "3d6f92aa"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "o",
-                                                      "v": "*"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "0.1"
-                                                   }
-                                                ]
+                                                "t": "l",
+                                                "v": "1.1"
                                              }
                                           ]
                                        }
@@ -4148,10 +4125,11 @@
                            "type": "proxy",
                            "role": "end",
                            "id": "2d6e85c1",
-                           "displayName": "End 4",
+                           "displayName": "CPConversion End 3",
+                           "renamed": true,
                            "formulas": [
                               {
-                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"2\")",
+                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"1.75\")",
                                  "src": {
                                     "t": "expr",
                                     "v": false,
@@ -4177,108 +4155,6 @@
                      "data": [],
                      "dataDisabled": true,
                      "rangeId": 4,
-                     "color": "cx-theme_ccc"
-                  },
-                  {
-                     "type": "range",
-                     "role": "range",
-                     "id": "0f2e90e8",
-                     "displayName": "CPConversion Range 4",
-                     "renamed": true,
-                     "components": [
-                        {
-                           "type": "proxy",
-                           "role": "start",
-                           "id": "4b5f2a71",
-                           "displayName": "Start 4",
-                           "renamed": true,
-                           "formulas": [
-                              {
-                                 "txt": "(\"0\")",
-                                 "src": {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "8a54227e"
-                                          }
-                                       }
-                                    ]
-                                 }
-                              }
-                           ],
-                           "data": [
-                              [
-                              ]
-                           ]
-                        },
-                        {
-                           "type": "proxy",
-                           "role": "end",
-                           "id": "4c8c6999",
-                           "displayName": "End 5",
-                           "formulas": [
-                              {
-                                 "txt": "((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))-((if(($GAdsCPCTarget=\"\"),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))*\"1.75\"),$GAdsCPCTarget))*\"0.1\"))",
-                                 "src": {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "ref",
-                                                "v": {
-                                                   "r": "cx",
-                                                   "cx": "3d6f92aa"
-                                                }
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "-"
-                                             },
-                                             {
-                                                "t": "expr",
-                                                "v": false,
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "3d6f92aa"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "o",
-                                                      "v": "*"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "0.1"
-                                                   }
-                                                ]
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              }
-                           ],
-                           "data": [
-                              [
-                              ]
-                           ]
-                        }
-                     ],
-                     "formulas": [],
-                     "data": [],
-                     "dataDisabled": true,
-                     "rangeId": 5,
                      "color": "cx-theme_ccc"
                   }
                ],
@@ -4999,7 +4875,7 @@
                },
                "formulas": [
                   {
-                     "txt": "if(or(($GAdsPeriod=\"thisweek\"),($GAdsPeriod=\"thismonth\")),((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),today())*count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),(sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))",
+                     "txt": "if(or(($GAdsPeriod=\"thisweek\"),($GAdsPeriod=\"thismonth\")),((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),today())*if(($GAdsPeriod=\"thisweek\"),count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(today(),\"4\")),count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(today(),\"3\")))),(sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -5147,79 +5023,217 @@
                                        },
                                        {
                                           "t": "f",
-                                          "v": "count_days",
+                                          "v": "if",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "date",
+                                                "t": "expr",
+                                                "v": false,
                                                 "c": [
                                                    {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "363647bc"
-                                                      }
+                                                      "t": "var",
+                                                      "v": "GAdsPeriod"
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "yyyyMMdd"
+                                                      "v": "thisweek"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "count_days",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "363647bc"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_endof",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "4"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "relative value",
+                                                               "description": "Optional, number of units to add or subtract.",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "first",
+                                                               "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                               "default": "Sunday (week) or January (year)",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "timezone",
+                                                         "placeholder": "exclude DOW",
+                                                         "description": "1 or more days of week to exclude from the count.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "holidays",
                                                          "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
+                                                         "description": "1 or more epoch dates to exclude from count."
                                                       }
                                                    }
                                                 ]
                                              },
                                              {
                                                 "t": "f",
-                                                "v": "date",
+                                                "v": "count_days",
                                                 "c": [
                                                    {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "c782205c"
-                                                      }
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "363647bc"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
-                                                      "t": "l",
-                                                      "v": "yyyyMMdd"
+                                                      "t": "f",
+                                                      "v": "date_endof",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "3"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "relative value",
+                                                               "description": "Optional, number of units to add or subtract.",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "first",
+                                                               "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                               "default": "Sunday (week) or January (year)",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "timezone",
+                                                         "placeholder": "exclude DOW",
+                                                         "description": "1 or more days of week to exclude from the count.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "holidays",
                                                          "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
+                                                         "description": "1 or more epoch dates to exclude from count."
                                                       }
                                                    }
                                                 ]
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "exclude DOW",
-                                                   "description": "1 or more days of week to exclude from the count.",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "holidays",
-                                                   "optional": true,
-                                                   "description": "1 or more epoch dates to exclude from count."
-                                                }
                                              }
                                           ]
                                        }
@@ -5261,7 +5275,7 @@
                },
                "formulas": [
                   {
-                     "txt": "(sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_add(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")",
+                     "txt": "(sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -5450,7 +5464,7 @@
                },
                "formulas": [
                   {
-                     "txt": "if(or(($GAdsPeriod=\"thisweek\"),($GAdsPeriod=\"thismonth\")),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))/count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),today())*count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))))",
+                     "txt": "if(or(($GAdsPeriod=\"thisweek\"),($GAdsPeriod=\"thismonth\")),((sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))/count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),today())*if(($GAdsPeriod=\"thisweek\"),count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(today(),\"4\")),count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(today(),\"3\")))),(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -5598,79 +5612,217 @@
                                        },
                                        {
                                           "t": "f",
-                                          "v": "count_days",
+                                          "v": "if",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "date",
+                                                "t": "expr",
+                                                "v": false,
                                                 "c": [
                                                    {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "363647bc"
-                                                      }
+                                                      "t": "var",
+                                                      "v": "GAdsPeriod"
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "yyyyMMdd"
+                                                      "v": "thisweek"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "count_days",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "363647bc"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_endof",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "4"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "relative value",
+                                                               "description": "Optional, number of units to add or subtract.",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "first",
+                                                               "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                               "default": "Sunday (week) or January (year)",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "timezone",
+                                                         "placeholder": "exclude DOW",
+                                                         "description": "1 or more days of week to exclude from the count.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "holidays",
                                                          "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
+                                                         "description": "1 or more epoch dates to exclude from count."
                                                       }
                                                    }
                                                 ]
                                              },
                                              {
                                                 "t": "f",
-                                                "v": "date",
+                                                "v": "count_days",
                                                 "c": [
                                                    {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "c782205c"
-                                                      }
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "363647bc"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
-                                                      "t": "l",
-                                                      "v": "yyyyMMdd"
+                                                      "t": "f",
+                                                      "v": "date_endof",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "3"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "relative value",
+                                                               "description": "Optional, number of units to add or subtract.",
+                                                               "optional": true
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "first",
+                                                               "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                               "default": "Sunday (week) or January (year)",
+                                                               "optional": true
+                                                            }
+                                                         }
+                                                      ]
                                                    },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "timezone",
+                                                         "placeholder": "exclude DOW",
+                                                         "description": "1 or more days of week to exclude from the count.",
+                                                         "optional": true
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "holidays",
                                                          "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
+                                                         "description": "1 or more epoch dates to exclude from count."
                                                       }
                                                    }
                                                 ]
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "exclude DOW",
-                                                   "description": "1 or more days of week to exclude from the count.",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "holidays",
-                                                   "optional": true,
-                                                   "description": "1 or more epoch dates to exclude from count."
-                                                }
                                              }
                                           ]
                                        }
@@ -5712,7 +5864,7 @@
                },
                "formulas": [
                   {
-                     "txt": "sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_add(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))",
+                     "txt": "sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -5879,8 +6031,8 @@
             },
             {
                "type": "label",
-               "id": "3b2c431a",
-               "displayName": "CPConversion Predicted Value",
+               "id": "45901d31",
+               "displayName": "CPConversion Previous Value",
                "layoutConfig": {
                   "x": 6,
                   "y": 5
@@ -5893,269 +6045,7 @@
                },
                "formulas": [
                   {
-                     "txt": "if(or(($GAdsPeriod=\"thisweek\"),($GAdsPeriod=\"thismonth\")),((substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\"))/count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),today())*count_days(date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),(substitute(((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\")/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-6\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Yesterday\",yesterday(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\")))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "if",
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "or",
-                                    "c": [
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "var",
-                                                "v": "GAdsPeriod"
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "="
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "thisweek"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
-                                          "c": [
-                                             {
-                                                "t": "var",
-                                                "v": "GAdsPeriod"
-                                             },
-                                             {
-                                                "t": "o",
-                                                "v": "="
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "thismonth"
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "condition",
-                                             "repeats": true,
-                                             "description": "1 or more true/false values, typically the result of a comparison or formula."
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "6b5a3ef6"
-                                          }
-                                       },
-                                       {
-                                          "t": "o",
-                                          "v": "/"
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "count_days",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "date",
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "363647bc"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "yyyyMMdd"
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "today",
-                                                "c": [
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true,
-                                                         "description": "",
-                                                         "default": "GMT"
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "exclude DOW",
-                                                   "description": "1 or more days of week to exclude from the count.",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "holidays",
-                                                   "optional": true,
-                                                   "description": "1 or more epoch dates to exclude from count."
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "o",
-                                          "v": "*"
-                                       },
-                                       {
-                                          "t": "f",
-                                          "v": "count_days",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "date",
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "363647bc"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "yyyyMMdd"
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "f",
-                                                "v": "date",
-                                                "c": [
-                                                   {
-                                                      "t": "ref",
-                                                      "v": {
-                                                         "r": "cx",
-                                                         "cx": "c782205c"
-                                                      }
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "yyyyMMdd"
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "timezone",
-                                                         "optional": true,
-                                                         "description": "The time zone.",
-                                                         "default": "GMT"
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "exclude DOW",
-                                                   "description": "1 or more days of week to exclude from the count.",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "holidays",
-                                                   "optional": true,
-                                                   "description": "1 or more epoch dates to exclude from count."
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "6b5a3ef6"
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "align": "c",
-               "wrap": true
-            },
-            {
-               "type": "label",
-               "id": "45901d31",
-               "displayName": "CPConversion Previous Value",
-               "layoutConfig": {
-                  "x": 7,
-                  "y": 5
-               },
-               "renamed": true,
-               "size": "1",
-               "fmt": "cur",
-               "fmtArgs": {
-                  "precision": "1"
-               },
-               "formulas": [
-                  {
-                     "txt": "substitute((((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_add(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_add(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\")",
+                     "txt": "substitute((((sum(select(slice(400b121c5827aa0d3630natceewzhere@D:D;,\"2\",\"-1\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))))/\"1000000\"))/(sum(select(slice(400b121c5827aa0d3630natceewzhere@C:C;,\"2\"),between(date(slice(400b121c5827aa0d3630natceewzhere@F:F;,\"2\",\"-1\"),\"yyyy-MM-dd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-13\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(slice(400b121c5827aa0d3630natceewzhere@F:F;))>\"0\"),datevalue(switch($GAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\")))))),\"Infinity\",\"\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -6357,44 +6247,10 @@
             },
             {
                "type": "label",
-               "id": "632cbea1",
-               "displayName": "Spend Predicted Label",
-               "layoutConfig": {
-                  "x": 6,
-                  "y": 6
-               },
-               "renamed": true,
-               "size": "1",
-               "fmt": "txt",
-               "formulas": [
-                  {
-                     "txt": "\"Predicted\"",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "l",
-                              "v": "Predicted"
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "align": "c",
-               "font_style": "regular",
-               "wrap": true
-            },
-            {
-               "type": "label",
                "id": "a90b0622",
                "displayName": "Spend Previous Label",
                "layoutConfig": {
-                  "x": 7,
+                  "x": 6,
                   "y": 6
                },
                "renamed": true,
@@ -6436,8 +6292,7 @@
                "scope": 2,
                "propName": "GAdsConversionTarget",
                "inputType": 2,
-               "inputLabel": "Target",
-               "defaultValue": "100"
+               "inputLabel": "Target"
             },
             {
                "type": "input",
@@ -6452,12 +6307,11 @@
                "scope": 2,
                "propName": "GAdsCPCTarget",
                "inputType": 2,
-               "inputLabel": "Target",
-               "defaultValue": "10"
+               "inputLabel": "Target"
             }
          ],
          "rows": 9,
-         "cols": 11,
+         "cols": 10,
          "widths": [
             {
                "x": 8,
@@ -6474,10 +6328,6 @@
             {
                "x": 9,
                "w": "30%"
-            },
-            {
-               "x": 10,
-               "w": 25
             }
          ],
          "cellData": [
@@ -6625,7 +6475,8 @@
                   5,
                   0,
                   5
-               ]
+               ],
+               "w": 2
             },
             {
                "x": 9,
@@ -6735,7 +6586,8 @@
                   5,
                   0,
                   5
-               ]
+               ],
+               "w": 2
             },
             {
                "x": 7,
@@ -6746,16 +6598,6 @@
                   0,
                   5
                ]
-            },
-            {
-               "x": 10,
-               "y": 1
-            },
-            {
-               "x": 10,
-               "y": 0,
-               "h": 9,
-               "alignment": 1
             }
          ]
       }
