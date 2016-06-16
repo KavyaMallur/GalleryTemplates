@@ -1,6 +1,6 @@
 {
-    "name": "Google Analytics Campaign Performance",
-    "description": "See how your campaigns are performing for the selected date range. Originates from the Gallery.",
+    "name": "Google Analytics Campaign Stats",
+    "description": "Make sure your ad campaign is generating traffic by monitoring your key Google Analytics campaign statistics for the time period of your choice. Originates from the Gallery.",
     "sampleFormulas": {
         "07efbee3": {
             "txt": "\"20160501\"",
@@ -69,13 +69,13 @@
             }
         },
         "2f6d15bc": {
-            "txt": "\"<b>Klip Marketing</b>\"",
+            "txt": "\"<b>Spring Fling Promotion</b>\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "<b>Klip Marketing</b>"
+                    "v": "<b>Spring Fling Promotion</b>"
                 }]
             }
         },
@@ -259,15 +259,15 @@
     "datasources": {
         "googleAnalytics": {
             "service": "google_analytics",
-            "libraryAlias": "GoogleAnalyticsCampaignMetrics",
-            "name": "Google Analytics Campaign Metrics",
+            "libraryAlias": "GoogleAnalyticsCampaignMetrics(Last93Days)",
+            "name": "Google Analytics Campaign Metrics (Last 93 Days)",
             "description": "Retrieve detailed Google AdWords metrics on your website's keyword performance through Google Analytics. Originates from the Gallery.",
             "type": "google_analytics",
             "format": "csv",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-90).format()}&end-date={date.today}&filters=ga:campaign=={{ds.google_analytics.campaignName}}",
-                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-90).format()}&end-date={date.today}&filters=ga:campaign=={{ds.google_analytics.campaignName}}",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-93).format()}&end-date={date.today}&filters=ga:campaign=={{ds.google_analytics.campaignName}}",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:campaign,ga:date&metrics=ga:sessions,ga:bounces,ga:pageviews,ga:newusers,ga:bounceRate,ga:pageviewsPerSession,ga:sessionDuration,ga:ctr,ga:adClicks,ga:impressions&start-date={date.add(-93).format()}&end-date={date.today}&filters=ga:campaign=={{ds.google_analytics.campaignName}}",
                 "max_pages": "1",
                 "mode": "Advanced",
                 "profile": "{{ds.google_analytics.profileId}}",
@@ -283,19 +283,19 @@
     },
     "uiVariables": [{
         "name": "gaPeriod",
-        "value": "last7days"
+        "value": "thismonth"
     }],
     "datasourceConfigModel": [{
         "type": "select",
         "id": "ds.google_analytics.profileId",
         "label": "Profile",
-        "description": "Select a Google Analytics Profile",
+        "description": "Select a Google Analytics account from the drop-down list below.",
         "isRequired": true
     }, {
         "type": "text",
         "id": "ds.google_analytics.campaignName",
         "label": "Campaign",
-        "description": "Enter your Campaign Name",
+        "description": "Enter a Campaign Name. You can <a href='https://support.klipfolio.com/hc/en-us/articles/215546288#campaign' target='_blank'>find it</a> in your Google Analytics account.",
         "urlEncode": true,
         "isRequired": true
     }],

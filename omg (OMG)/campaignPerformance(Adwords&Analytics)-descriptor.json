@@ -1,87 +1,917 @@
 {
-  "name": "Campaign Performance",
-  "description": "See how your campaigns are performing for the selected date range. Originates from the Gallery.",
-  "datasources": {
-    "googleAdwords-01": {
-      "service": "google_adwords",
-      "libraryAlias": "GoogleAdwordsCampaignPerformanceReportLast93days",
-      "name": "Google Adwords Campaign Performance Report (Last 93 Days)",
-      "description": "See your AdWords campaign performance. Originates from the Gallery.",
-      "type": "google_adwords",
-      "format": "csv",
-      "refreshInterval": 14400,
-      "props": {
-        "body": " __rdquery=SELECT CampaignName,Clicks,Conversions,Cost,Impressions,Date,AverageCpc,Amount FROM CAMPAIGN_PERFORMANCE_REPORT WHERE CampaignName='{{ds.google_adwords.campaignName}}' DURING {date.add(-93).format('yyyyMMdd')},{date.today.format('yyyyMMdd')}&__fmt=CSV&mode=Custom",
-        "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
-        "method": "post",
-        "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
-      }
-    }
-  },
-  "dsMappings": {
-    "googleAdwords-01": "400b121c5827aa0d3630natceewzhere"
-  },
-  "uiVariables": [
-    {
-      "name": "GAdsPeriod",
-      "value": "last7days"
-    },
-    {
-      "name": "GAdsConversionTarget",
-      "value": "100"
-    },
-    {
-      "name": "GAdsCPCTarget",
-      "value": "10"
-    }
-  ],
-  "datasourceConfigModel": [
-    {
-      "type": "text",
-      "id": "ds.google_adwords.customerId",
-      "label": "Customer ID",
-      "description": "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
-      "debounceEnabled": true,
-      "isRequired": true,
-      "onChangeQueries": [
-        "q2"
-      ]
-    },
-    {
-      "type": "select",
-      "id": "ds.google_adwords.campaignId",
-      "label": "Campaign",
-      "isRequired": true
-    }
-  ],
-  "queries": [
-    {
-      "id": "q2",
-      "errorMessage": "Here are two suggestions:<br><br>1. Make sure the Google Adwords account you signed in with includes a Google Adwords account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-      "connector": {
-        "service": "google_adwords",
-        "type": "google_adwords",
-        "format": "csv",
-        "props": {
-          "body": "__rdquery=SELECT CampaignName,CampaignId,Impressions\r\nFROM CAMPAIGN_PERFORMANCE_REPORT\r\nDURING LAST_30_DAYS&__fmt=CSV&mode=Standard",
-          "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
-          "method": "post",
-          "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+    "name": "Google Adwords Campaign Performance",
+    "description": "Reach your current and month-to-month advertising goals with detailed metrics on each of your AdWords campaigns. Originates from the Gallery.",
+    "sampleFormulas": {
+        "74945c1b-1": {
+            "txt": "\"<b>Spring Fling Promotion</b>\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "<b>Spring Fling Promotion</b>"
+                }]
+            }
+        },
+        "363647bc": {
+            "txt": "\"20160501\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20160501"
+                }]
+            }
+        },
+        "c782205c": {
+            "txt": "\"20160525\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20160525"
+                }]
+            }
+        },
+        "93cc21d0": {
+            "txt": "\"thismonth\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "thismonth"
+                }]
+            }
+        },
+        "b4840432": {
+            "txt": "\"This Month\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "This Month"
+                }]
+            }
+        },
+        "a7575ae4": {
+            "txt": "\"20160401\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20160401"
+                }]
+            }
+        },
+        "f69334d2": {
+            "txt": "\"20160425\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "20160425"
+                }]
+            }
+        },
+        "73bdd93d": {
+            "txt": "\"Spend\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Spend"
+                }]
+            }
+        },
+        "65d8acfa": {
+            "txt": "\"Conversions\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Conversions"
+                }]
+            }
+        },
+        "858bd129": {
+            "txt": "\"Cost per Conversion\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Cost per Conversion"
+                }]
+            }
+        },
+        "5b09f8aa": {
+            "txt": "\"Conversion Trend\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Conversion Trend"
+                }]
+            }
+        },
+        "8ae18f7f": {
+            "txt": "\"21731.44\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 21731.44
+                }]
+            }
+        },
+        "563e3cb0": {
+            "txt": "\"82800.19\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 82800.19
+                }]
+            }
+        },
+        "3610b7cf": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "eb09619a": {
+            "txt": "\"1575\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1575
+                }]
+            }
+        },
+        "f2e641d0": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "faa6d5b8": {
+            "txt": "\"74520\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 74520
+                }]
+            }
+        },
+        "4cf9a151": {
+            "txt": "\"74520\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 74520
+                }]
+            }
+        },
+        "b05c1859": {
+            "txt": "\"91080.00000000001\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 91080.00000000001
+                }]
+            }
+        },
+        "7a3e68b1-2": {
+            "txt": "\"91080.00000000001\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 91080.00000000001
+                }]
+            }
+        },
+        "ee0d8faf-3": {
+            "txt": "\"144900\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 144900
+                }]
+            }
+        },
+        "5b520ae9": {
+            "txt": "\"70.9\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 70.9
+                }]
+            }
+        },
+        "0ceecadb": {
+            "txt": "\"100\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "100"
+                }]
+            }
+        },
+        "bafac9c2": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0"
+                }]
+            }
+        },
+        "225e468a": {
+            "txt": "\"175\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 175
+                }]
+            }
+        },
+        "8866c3cd": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0"
+                }]
+            }
+        },
+        "c3f4913a": {
+            "txt": "\"90\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 90
+                }]
+            }
+        },
+        "b606bda1": {
+            "txt": "\"90\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 90
+                }]
+            }
+        },
+        "08e70162": {
+            "txt": "\"110.00000000000001\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 110.00000000000001
+                }]
+            }
+        },
+        "858758dc": {
+            "txt": "\"110.00000000000001\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 110.00000000000001
+                }]
+            }
+        },
+        "74fad199": {
+            "txt": "\"175\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 175
+                }]
+            }
+        },
+        "6b5a3ef6": {
+            "txt": "\"306.074\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "306.074"
+                }]
+            }
+        },
+        "3d6f92aa": {
+            "txt": "\"100\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "100"
+                }]
+            }
+        },
+        "8a54227e": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0"
+                }]
+            }
+        },
+        "7d1a5473": {
+            "txt": "\"17.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 17.5
+                }]
+            }
+        },
+        "0d74c7dc": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "0"
+                }]
+            }
+        },
+        "b7e6f854": {
+            "txt": "\"9\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 9
+                }]
+            }
+        },
+        "7b4b579e": {
+            "txt": "\"9\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 9
+                }]
+            }
+        },
+        "f772e30f": {
+            "txt": "\"11\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 11
+                }]
+            }
+        },
+        "02c0d8b5": {
+            "txt": "\"11\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 11
+                }]
+            }
+        },
+        "2d6e85c1": {
+            "txt": "\"17.5\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 17.5
+                }]
+            }
+        },
+        "f9fab6db": {
+            "txt": "array(\"6.8\",\"27.2\",\"40.8\",\"20.4\",\"13.6\",\"17\",\"44.199999999999996\",\"27.2\",\"30.599999999999998\",\"37.4\",\"17\",\"13.6\",\"17\",\"34\",\"27.2\",\"40.8\",\"20.4\",\"13.6\",\"17\",\"44.199999999999996\",\"27.2\",\"30.599999999999998\",\"37.4\",\"17\",\"17\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": 6.8
+                    }, {
+                        "t": "l",
+                        "v": 27.2
+                    }, {
+                        "t": "l",
+                        "v": 40.8
+                    }, {
+                        "t": "l",
+                        "v": 20.4
+                    }, {
+                        "t": "l",
+                        "v": 13.6
+                    }, {
+                        "t": "l",
+                        "v": 17
+                    }, {
+                        "t": "l",
+                        "v": 44.199999999999996
+                    }, {
+                        "t": "l",
+                        "v": 27.2
+                    }, {
+                        "t": "l",
+                        "v": 30.599999999999998
+                    }, {
+                        "t": "l",
+                        "v": 37.4
+                    }, {
+                        "t": "l",
+                        "v": 17
+                    }, {
+                        "t": "l",
+                        "v": 13.6
+                    }, {
+                        "t": "l",
+                        "v": 17
+                    }, {
+                        "t": "l",
+                        "v": 34
+                    }, {
+                        "t": "l",
+                        "v": 27.2
+                    }, {
+                        "t": "l",
+                        "v": 40.8
+                    }, {
+                        "t": "l",
+                        "v": 20.4
+                    }, {
+                        "t": "l",
+                        "v": 13.6
+                    }, {
+                        "t": "l",
+                        "v": 17
+                    }, {
+                        "t": "l",
+                        "v": 44.199999999999996
+                    }, {
+                        "t": "l",
+                        "v": 27.2
+                    }, {
+                        "t": "l",
+                        "v": 30.599999999999998
+                    }, {
+                        "t": "l",
+                        "v": 37.4
+                    }, {
+                        "t": "l",
+                        "v": 17
+                    }, {
+                        "t": "l",
+                        "v": 17
+                    }]
+                }]
+            }
+        },
+        "b6bae765": {
+            "txt": "array(\"39.1\",\"23.8\",\"25.84\",\"28.220000000000002\",\"42.5\",\"37.4\",\"12.92\",\"23.119999999999997\",\"26.894\",\"27.2\",\"31.79\",\"55.08\",\"32.64\",\"14.96\",\"51.339999999999996\",\"22.61\",\"25.84\",\"28.220000000000002\",\"42.5\",\"34\",\"34\",\"12.92\",\"14.62\",\"26.894\",\"28.9\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": 39.1
+                    }, {
+                        "t": "l",
+                        "v": 23.8
+                    }, {
+                        "t": "l",
+                        "v": 25.84
+                    }, {
+                        "t": "l",
+                        "v": 28.220000000000002
+                    }, {
+                        "t": "l",
+                        "v": 42.5
+                    }, {
+                        "t": "l",
+                        "v": 37.4
+                    }, {
+                        "t": "l",
+                        "v": 12.92
+                    }, {
+                        "t": "l",
+                        "v": 23.119999999999997
+                    }, {
+                        "t": "l",
+                        "v": 26.894
+                    }, {
+                        "t": "l",
+                        "v": 27.2
+                    }, {
+                        "t": "l",
+                        "v": 31.79
+                    }, {
+                        "t": "l",
+                        "v": 55.08
+                    }, {
+                        "t": "l",
+                        "v": 32.64
+                    }, {
+                        "t": "l",
+                        "v": 14.96
+                    }, {
+                        "t": "l",
+                        "v": 51.339999999999996
+                    }, {
+                        "t": "l",
+                        "v": 22.61
+                    }, {
+                        "t": "l",
+                        "v": 25.84
+                    }, {
+                        "t": "l",
+                        "v": 28.220000000000002
+                    }, {
+                        "t": "l",
+                        "v": 42.5
+                    }, {
+                        "t": "l",
+                        "v": 34
+                    }, {
+                        "t": "l",
+                        "v": 34
+                    }, {
+                        "t": "l",
+                        "v": 12.92
+                    }, {
+                        "t": "l",
+                        "v": 14.62
+                    }, {
+                        "t": "l",
+                        "v": 26.894
+                    }, {
+                        "t": "l",
+                        "v": 28.9
+                    }]
+                }]
+            }
+        },
+        "efd4b468": {
+            "txt": "array(\"20160501\",\"20160502\",\"20160503\",\"20160504\",\"20160505\",\"20160506\",\"20160507\",\"20160508\",\"20160509\",\"20160510\",\"20160511\",\"20160512\",\"20160513\",\"20160514\",\"20160515\",\"20160516\",\"20160517\",\"20160518\",\"20160519\",\"20160520\",\"20160521\",\"20160522\",\"20160523\",\"20160524\",\"20160525\",\"20160526\",\"20160527\",\"20160528\",\"20160529\",\"20160530\",\"20160531\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "20160501"
+                    }, {
+                        "t": "l",
+                        "v": "20160502"
+                    }, {
+                        "t": "l",
+                        "v": "20160503"
+                    }, {
+                        "t": "l",
+                        "v": "20160504"
+                    }, {
+                        "t": "l",
+                        "v": "20160505"
+                    }, {
+                        "t": "l",
+                        "v": "20160506"
+                    }, {
+                        "t": "l",
+                        "v": "20160507"
+                    }, {
+                        "t": "l",
+                        "v": "20160508"
+                    }, {
+                        "t": "l",
+                        "v": "20160509"
+                    }, {
+                        "t": "l",
+                        "v": "20160510"
+                    }, {
+                        "t": "l",
+                        "v": "20160511"
+                    }, {
+                        "t": "l",
+                        "v": "20160512"
+                    }, {
+                        "t": "l",
+                        "v": "20160513"
+                    }, {
+                        "t": "l",
+                        "v": "20160514"
+                    }, {
+                        "t": "l",
+                        "v": "20160515"
+                    }, {
+                        "t": "l",
+                        "v": "20160516"
+                    }, {
+                        "t": "l",
+                        "v": "20160517"
+                    }, {
+                        "t": "l",
+                        "v": "20160518"
+                    }, {
+                        "t": "l",
+                        "v": "20160519"
+                    }, {
+                        "t": "l",
+                        "v": "20160520"
+                    }, {
+                        "t": "l",
+                        "v": "20160521"
+                    }, {
+                        "t": "l",
+                        "v": "20160522"
+                    }, {
+                        "t": "l",
+                        "v": "20160523"
+                    }, {
+                        "t": "l",
+                        "v": "20160524"
+                    }, {
+                        "t": "l",
+                        "v": "20160525"
+                    }, {
+                        "t": "l",
+                        "v": "20160526"
+                    }, {
+                        "t": "l",
+                        "v": "20160527"
+                    }, {
+                        "t": "l",
+                        "v": "20160528"
+                    }, {
+                        "t": "l",
+                        "v": "20160529"
+                    }, {
+                        "t": "l",
+                        "v": "20160530"
+                    }, {
+                        "t": "l",
+                        "v": "20160531"
+                    }]
+                }]
+            }
+        },
+        "abd213f7": {
+            "txt": "\"35463\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 35463
+                }]
+            }
+        },
+        "f2a9a2db": {
+            "txt": "\"39994\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 39994
+                }]
+            }
+        },
+        "c623fe65": {
+            "txt": "\"115.400000000000006\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 115.400000000000006
+                }]
+            }
+        },
+        "5fa02595": {
+            "txt": "\"102\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 102
+                }]
+            }
+        },
+        "45901d31": {
+            "txt": "\"996.849999999\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "996.849999999"
+                }]
+            }
+        },
+        "8e700a5c": {
+            "txt": "\"Predicted\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Predicted"
+                }]
+            }
+        },
+        "7b6ef1a9": {
+            "txt": "\"Previous\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Previous"
+                }]
+            }
+        },
+        "f12e94b2": {
+            "txt": "\"Predicted\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Predicted"
+                }]
+            }
+        },
+        "a7115aa6": {
+            "txt": "\"Previous\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Previous"
+                }]
+            }
+        },
+        "a90b0622": {
+            "txt": "\"Previous\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Previous"
+                }]
+            }
         }
-      },
-      "results": [
-        {
-          "propId": "ds.google_adwords.campaignId",
-          "propField": "options",
-          "labels": "SLICE(B:B,2)",
-          "values": "SLICE(B:B,2)"
+    },
+    "datasources": {
+        "googleAdwords-01": {
+            "service": "google_adwords",
+            "libraryAlias": "GoogleAdwordsCampaignPerformanceReportLast93days",
+            "name": "Google Adwords Campaign Performance Report (Last 93 Days)",
+            "description": "See your AdWords campaign performance. Originates from the Gallery.",
+            "type": "google_adwords",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "body": "__rdquery=SELECT CampaignName,Clicks,Conversions,Cost,Impressions,Date,AverageCpc,Amount FROM CAMPAIGN_PERFORMANCE_REPORT WHERE CampaignName='{{ds.google_adwords.campaignName}}' DURING {date.add(-90).format('yyyyMMdd')},{date.today.format('yyyyMMdd')}&__fmt=CSV&mode=Custom",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
         }
-      ]
-    }
-  ],
-  "services": [
-    {
-      "service": "google_adwords"
-    }
-  ]
+    },
+    "dsMappings": {
+        "googleAdwords-01": "400b121c5827aa0d3630natceewzhere"
+    },
+    "services": [{
+        "service": "google_adwords"
+    }],
+    "uiVariables": [{
+        "name": "GAdsPeriod",
+        "value": "last7days"
+    }, {
+        "name": "GAdsConversionTarget",
+        "value": "100"
+    }, {
+        "name": "GAdsCPCTarget",
+        "value": "100"
+    }],
+    "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.google_adwords.customerId",
+        "label": "Customer ID",
+        "description": "Enter your Google AdWords <b>Customer ID</b>. If you manage accounts (MCC), enter an <b>Account ID</b>. <a href='https://support.klipfolio.com/hc/en-us/articles/215546258-Klip-Gallery-Google-AdWords#connect' target='_blank'>Don't know where to find your ID?</a>",
+        "isRequired": true,
+        "ghostText": "123-123-1234",
+        "debounceEnabled": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "description": "Select a Campaign name from the list below. ",
+        "id": "ds.google_adwords.campaignName",
+        "label": "Campaign",
+        "isRequired": true,
+        "urlEncode": true
+    }],
+    "queries": [{
+        "id": "q2",
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure the Google Adwords account you signed in with includes a Google Adwords account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_adwords",
+            "type": "google_adwords",
+            "format": "xml",
+            "props": {
+                "body": "__rdquery=SELECT CampaignName,CampaignId FROM CAMPAIGN_PERFORMANCE_REPORT DURING LAST_30_DAYS&__fmt=XML&mode=Custom",
+                "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201603",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_adwords.campaignName",
+            "propField": "options",
+            "labels": "/report/table/row/@campaign",
+            "values": "/report/table/row/@campaign"
+        }]
+    }]
 }
