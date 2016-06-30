@@ -3,10 +3,11 @@
    "id": "aad79972a0b939430ddedd258c4326b8",
    "workspace": {
       "datasources": [
-         "0f5c3f0214cfd2b16c90doogeraspilk"
+         "0f5c3f0214cfd2b16c90doogeraspilk",
+         "7b3324d1d6038d7ad59cKavyaMallur9"
       ],
       "dimensions": {
-         "w": 754
+         "w": 946
       }
    },
    "components": [
@@ -17,105 +18,176 @@
          "components": [
             {
                "type": "label",
-               "id": "afc63096-3",
-               "displayName": "Completion Percentage",
+               "id": "2cb7291b-1",
+               "displayName": "Funnel",
                "layoutConfig": {
-                  "x": 1,
+                  "x": 0,
                   "y": 0
                },
                "renamed": true,
-               "size": "2",
-               "fmt": "pct",
+               "size": "1",
+               "fmt": "txt",
                "fmtArgs": {
-                  "precision": "2"
+                  "prefix": "<div class style=\"display:inline; font-weight:normal;\">Funnel: </div>"
                },
                "formulas": [
                   {
-                     "txt": "0f5c3f0214cfd2b16c90doogeraspilk@//analysis/*[name()='completion'];/0f5c3f0214cfd2b16c90doogeraspilk@//analysis/*[name()='starting_amount'];",
+                     "txt": "lookup(\"{{ds.mixpanel.funnelId}}\",7b3324d1d6038d7ad59cKavyaMallur9@/funnel_id;,7b3324d1d6038d7ad59cKavyaMallur9@/name;)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "d",
-                              "v": {
-                                 "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//analysis/*[name()='completion']"
-                              }
-                           },
-                           {
-                              "t": "o",
-                              "v": "/"
-                           },
-                           {
-                              "t": "d",
-                              "v": {
-                                 "id": "0f5c3f0214cfd2b16c90doogeraspilk",
-                                 "a": "//analysis/*[name()='starting_amount']"
-                              }
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.mixpanel.funnelId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7b3324d1d6038d7ad59cKavyaMallur9",
+                                       "a": "/funnel_id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7b3324d1d6038d7ad59cKavyaMallur9",
+                                       "a": "/name"
+                                    }
+                                 }
+                              ]
                            }
                         ]
                      }
                   }
                ],
-               "data": [],
-               "align": "r",
+               "data": [
+                  [
+                  ]
+               ],
                "wrap": true
             },
             {
-               "type": "label",
-               "id": "6310f489-4",
-               "displayName": "Label",
+               "type": "simple_value",
+               "id": "06cfcf40-1",
+               "displayName": "Completion Rate",
                "layoutConfig": {
                   "x": 2,
                   "y": 0
                },
-               "size": "1",
-               "fmt": "txt",
-               "formulas": [
+               "renamed": true,
+               "components": [
                   {
-                     "txt": "\"Completion Rate\"",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "l",
-                              "v": "Completion Rate"
+                     "type": "label",
+                     "role": "primary",
+                     "id": "5fe52d7c-2",
+                     "displayName": "Completion Rate Value",
+                     "renamed": true,
+                     "size": 2,
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "precision": "1"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "(0f5c3f0214cfd2b16c90doogeraspilk@//analysis/*[name()='completion'];/0f5c3f0214cfd2b16c90doogeraspilk@//analysis/*[name()='starting_amount'];)",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//analysis/*[name()='completion']"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "0f5c3f0214cfd2b16c90doogeraspilk",
+                                             "a": "//analysis/*[name()='starting_amount']"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
                            }
+                        }
+                     ],
+                     "data": [
+                        [
                         ]
-                     }
+                     ],
+                     "align": "c"
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "8f84c4de-3",
+                     "displayName": "Completion Rate Label",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "formulas": [
+                        {
+                           "txt": "\"Completion Rate\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Completion Rate"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                        [
+                        ]
+                     ],
+                     "align": "c",
+                     "font_style": "regular"
                   }
-               ],
-               "data": [],
-               "font_style": "regular",
-               "wrap": true
+               ]
             }
          ],
          "rows": 1,
-         "cols": 4,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 2,
+               "w": 180
+            }
+         ],
          "cellData": [
             {
                "x": 1,
+               "y": 0
+            },
+            {
+               "x": 0,
                "y": 0,
-               "alignment": 2,
-               "cellPadding": [
-                  5,
-                  1,
-                  5,
-                  5
-               ]
+               "w": 2,
+               "alignment": 1
             },
             {
                "x": 2,
-               "y": 0,
-               "cellPadding": [
-                  5,
-                  5,
-                  5,
-                  1
-               ],
-               "alignment": 2
+               "y": 0
             }
          ]
       },
@@ -165,7 +237,10 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+                  [
+                  ]
+               ],
                "name": "Stage",
                "index": 0
             },
@@ -211,7 +286,10 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+                  [
+                  ]
+               ],
                "name": "Count",
                "index": 1,
                "fw": "fixed",
@@ -226,8 +304,8 @@
                "size": 1,
                "fmt": "hrz",
                "fmtArgs": {
-                  "minVal": null,
-                  "maxVal": null,
+                  "minVal": 116,
+                  "maxVal": 823,
                   "hideRange": true
                },
                "components": [
@@ -264,7 +342,10 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+                  [
+                  ]
+               ],
                "name": "",
                "index": 2,
                "borderLeft": "0",
@@ -389,7 +470,10 @@
                      }
                   }
                ],
-               "data": [],
+               "data": [
+                  [
+                  ]
+               ],
                "name": "Conversion",
                "index": 3,
                "fw": "fixed",

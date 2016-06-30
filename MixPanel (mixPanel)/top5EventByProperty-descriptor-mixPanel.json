@@ -1,11 +1,11 @@
 {
-    "name" : "Mixpanel Top 5 {{ds.mixpanel.event}} by {{ds.mixpanel.name}}",
+    "name" : "Mixpanel Top 5 {{ds.mixpanel.event}} by {{ds.mixpanel.property}}",
     "description" : "Track your top five Mixpanel properties and the total number of their events. <br>Originates from the Gallery. (v1.1)",
     "datasources" : {
         "mixpanel" : {
             "service" : "mixpanel",
             "libraryAlias" : "MixpanelEventPropertiesToday",
-            "name": "Mixpanel {{ds.mixpanel.event}} by {{ds.mixpanel.name}}(Today)",
+            "name": "Mixpanel {{ds.mixpanel.event}} by {{ds.mixpanel.property}}(Today)",
             "description" : "Provide event properties for today on the event:Klip Added from Gallery. Originates from the Gallery.",
             "type" : "simple_rest",
             "format" : "json",
@@ -13,7 +13,7 @@
             "props" : {
                 "auth_method": "basic",
                 "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
-                "endpoint_url": "https://mixpanel.com/api/2.0/events/properties?event={{ds.mixpanel.event}}&interval=0&name={{ds.mixpanel.name}}&type=general&unit=day"
+                "endpoint_url": "https://mixpanel.com/api/2.0/events/properties?event={hash.append(\"{{ds.mixpanel.event}}\").encodeURL().printDigest();}&interval=0&name={{ds.mixpanel.property}}&type=general&unit=day"
             }
         }
     },
@@ -27,6 +27,12 @@
             "service" : "mixpanel"
         }
     ],
+    "uiVariables": [
+        {
+            "name":"Mixpaneltemp", 
+            "value":"1"
+        }
+    ],
     "datasourceConfigModel" : [
         {
             "type" : "select",
@@ -37,8 +43,8 @@
         },
         {
             "type" : "select",
-            "id" : "ds.mixpanel.name",
-            "label" : "Enter Property",
+            "id" : "ds.mixpanel.property",
+            "label" : "Select Property",
             "urlEncode": "true"
         }
     ],
@@ -73,23 +79,17 @@
                 "props" : { 
                     "auth_method": "basic",
                     "basic_auth_username": "{{auth.mixpanel.apiSecret}}",
-                    "endpoint_url": "https://mixpanel.com/api/2.0/events/properties/top?event={{ds.mixpanel.event}}&limit=100"
+                    "endpoint_url": "https://mixpanel.com/api/2.0/events/properties/top?event={hash.append(\"{{ds.mixpanel.event}}\").encodeURL().printDigest();}&limit=100"
                 }
             },
             "results": [
                 {
-                    "propId" : "ds.mixpanel.name", 
+                    "propId" : "ds.mixpanel.property", 
                     "propField" : "options", 
                     "labels": "kf:names(.)",  
                     "values": "kf:names(.)" 
                 }
             ]
-        }
-    ],
-    "uiVariables": [
-        {
-            "name":"Mixpaneltemp", 
-            "value":"1"
         }
     ]
 }
