@@ -1,0 +1,85 @@
+{
+    "name": "Google Analytics Campaign Funnel",
+    "description": "Discover the full picture of your campaign lifecycle and always make informed decisions. Originates from the Gallery.",
+    "datasources": {
+        "googleAnalytics": {
+            "service": "google_analytics",
+            "libraryAlias": "GoogleAnalyticsCampaignMetricsByLandingPage(Last2Quarters)",
+            "name": "Google Analytics Campaign Metrics by Landing Page (Last 2 Quarters)",
+            "description": "Retrieve detailed analytics metrics for the selected campaign and landing page. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:landingPagePath,ga:campaign&metrics=ga:pageviews,ga:sessions,ga:timeOnPage,ga:avgTimeOnPage,ga:pageviewsPerSession,ga:goalCompletionsAll&start-date={date.add(-280).format()}&end-date={date.today}&filters=ga%3AlandingPagePath%3D%3D{{ds.google_analytics.landingpagePath}}%3Bga%3Acampaign%3D%3D{{ds.google_analytics.campaignName}}",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:date,ga:landingPagePath,ga:campaign&metrics=ga:pageviews,ga:sessions,ga:timeOnPage,ga:avgTimeOnPage,ga:pageviewsPerSession,ga:goalCompletionsAll&start-date={date.add(-280).format()}&end-date={date.today}&filters=ga%3AlandingPagePath%3D%3D{{ds.google_analytics.landingpagePath}}%3Bga%3Acampaign%3D%3D{{ds.google_analytics.campaignName}}",
+                "max_pages": "2",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "start-date={date.add(-280).format()}&end-date={date.today}"
+            }
+        }
+    },
+    "dsMappings": {
+        "googleAnalytics": "c2c155360cf7740a02bdKavyaMallur9"
+    },
+    "services": [{
+        "service": "google_analytics"
+    }],
+    "uiVariables": [
+        {
+            "name":"gaPeriod", 
+            "value":"thismonth" 
+        },
+        {
+            "name":"gaEngagementType", 
+            "value":"Average Time" 
+        },
+        {
+            "name":"gaEngagementValue", 
+            "value":"10" 
+        }
+    ],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    }, 
+    {
+        "type": "text",
+        "id": "ds.google_analytics.campaignName",
+        "label": "Campaign",
+        "description": "Enter a Campaign Name. You can <a href='https://support.klipfolio.com/hc/en-us/articles/215546288#campaign' target='_blank'>find it</a> in your Google Analytics account.",
+        "urlEncode": true,
+        "isRequired": true
+    },
+    {
+        "type": "text",
+        "id": "ds.google_analytics.landingpagePath",
+        "label": "Page Path",
+        "ghostText": "/pricing",
+        "description": "Enter the Landing page path.",
+        "urlEncode": true,
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
+}

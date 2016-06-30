@@ -1,0 +1,76 @@
+{
+    "name": "Google Analytics Landing Page Traffic by Source/Medium",
+    "description": "Monitor traffic on your landing page by Source/Medium. Originates from the Gallery.",
+    "datasources": {
+        "googleAnalytics": {
+            "service": "google_analytics",
+            "libraryAlias": "GoogleAnalyticsLandingPageMetrics(Last2Quarters)",
+            "name": "Google Analytics Landing Page Metrics (Last 2 Quarters)",
+            "description": "Retrieve detailed Google AdWords metrics on your website's keyword performance through Google Analytics. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath,ga:sourceMedium,ga:date&metrics=ga:pageviews,ga:sessions,ga:goalCompletionsAll,ga:users,ga:bounces,ga:pageViews,ga:pageviewsPerSession,ga:timeOnPage&start-date={date.add(-280).format()}&end-date={date.today}&filters=ga:landingPagePath=={{ds.google_analytics.landingpagePath}}",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath,ga:sourceMedium,ga:date&metrics=ga:pageviews,ga:sessions,ga:goalCompletionsAll,ga:users,ga:bounces,ga:pageViews,ga:pageviewsPerSession,ga:timeOnPage&start-date={date.add(-280).format()}&end-date={date.today}&filters=ga:landingPagePath=={{ds.google_analytics.landingpagePath}}",
+                "max_pages": "10",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}",
+                "timePeriod": "&start-date={date.add(-280).format()}&end-date={date.today}"
+            }
+        }
+    },
+    "services": [{
+        "service": "google_analytics"
+    }],
+    "dsMappings": {
+        "googleAnalytics": "ab23cc4fb9db9ef211fcKavyaMallur9"
+    },
+    "uiVariables": [
+        {
+            "name":"gaPeriod", 
+            "value":"thismonth" 
+        },
+        {
+            "name":"gaEngagementType", 
+            "value":"Average Time" 
+        },
+        {
+            "name":"gaEngagementValue", 
+            "value":"10" 
+        }
+    ],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.google_analytics.profileId",
+        "label": "Analytics Account",
+        "description": "Select an Analytics Account from the drop-down list.",
+        "isRequired": true
+    }, {
+        "type": "text",
+        "id": "ds.google_analytics.landingpagePath",
+        "label": "Page Path",
+        "ghostText": "/pricing",
+        "description": "Enter the Landing Page Path.",
+        "urlEncode": true,
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "google_analytics",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.google_analytics.profileId",
+            "propField": "options",
+            "labels": "/items/name",
+            "values": "/items/id"
+        }]
+    }]
+}
