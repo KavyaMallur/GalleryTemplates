@@ -1,0 +1,147 @@
+{
+    "name": "Twitter Ads Account Impressions (Last 7 Days)",
+    "description": "See the number of impressions generated from your Twitter Ads account over the last 7 days.<br>Originates from the Gallery.",
+    "sampleFormulas": {
+        "b48904c9": {
+            "txt": "\"<b>Klip Factory</b>\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "<b>Klip Factory</b>"
+                }]
+            }
+        },
+        "9549c956": {
+            "txt": "array(\"12336\",\"10231\",\"9345\",\"11765\",\"14241\",\"12539\",\"8365\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "12336"
+                    }, {
+                        "t": "l",
+                        "v": "10231"
+                    }, {
+                        "t": "l",
+                        "v": "9345"
+                    }, {
+                        "t": "l",
+                        "v": "11765"
+                    }, {
+                        "t": "l",
+                        "v": "14241"
+                    }, {
+                        "t": "l",
+                        "v": "12539"
+                    }, {
+                        "t": "l",
+                        "v": "8365"
+                    }]
+                }]
+            }
+        },
+        "13fcee13": {
+            "txt": "array(\"2016-04-01\",\"2016-04-02\",\"2016-04-03\",\"2016-04-04\",\"2016-04-05\",\"2016-04-06\",\"2016-04-07\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "2016-04-01"
+                    }, {
+                        "t": "l",
+                        "v": "2016-04-02"
+                    }, {
+                        "t": "l",
+                        "v": "2016-04-03"
+                    }, {
+                        "t": "l",
+                        "v": "2016-04-04"
+                    }, {
+                        "t": "l",
+                        "v": "2016-04-05"
+                    }, {
+                        "t": "l",
+                        "v": "2016-04-06"
+                    }, {
+                        "t": "l",
+                        "v": "2016-04-07"
+                    }]
+                }]
+            }
+        }
+    },
+
+    "datasources": {
+        "twitter_ads-01": {
+            "service": "twitter_ads",
+            "libraryAlias": "TwitterAdsAccountsInfoList",
+            "name": "Twitter Ads Accounts Info",
+            "description": "Retrieve your Twitter Ads accounts information. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts",
+                "method": "get"
+            }
+        },
+        "twitter_ads-02": {
+            "service": "twitter_ads",
+            "libraryAlias": "TwitterAdsAccountAnalyticsbyDay7Days",
+            "name": "Twitter Ads Account Analytics by Day (7 Days)",
+            "description": "Retrieve engagement metrics from your Twitter Ads account for the last 7 days. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.accountId}}&entity=ACCOUNT&start_time=2016-03-02&end_time=2016-03-09&granularity=DAY&metric_groups=ENGAGEMENT&placement=ALL_ON_TWITTER",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "twitter_ads-01": "61c96dec2e334eca53dfdoogeraspilk",
+        "twitter_ads-02": "be84ca21ff2094fad4addoogeraspilk"
+    },
+
+    "services": [{
+        "service": "twitter_ads"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.twitter_ads.accountId",
+        "label": "Twitter Ads Account",
+        "description": "Select a Twitter Ads account from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to Twitter Ads account(s). <br><br>2. From time to time, your Twitter OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "twitter_ads",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.twitter_ads.accountId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
+}
