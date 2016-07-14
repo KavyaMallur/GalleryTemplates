@@ -1,104 +1,992 @@
 {
-    "name": "Google Search Console Organic Keyword Rankings",
-    "description": "From Impressions to Click-Through-Rates, get the information you need on how your keywords are ranking and performing.<br> Originates from the Gallery. (v1.0)",
-    "datasources": {
-        "google_searchConsole-1": {
-            "service": "google_searchConsole",
-            "libraryAlias": "GoogleSearchConsoleStats(Last7Days)",
-            "refreshInterval": 14400,
-            "description": "See important metrics for your websites's keywords for the last 7 days. Originates from the Gallery.",
-            "name": "Google Search Console Stats (Last 7 Days)",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "body": "{\r\n\"startDate\": \"{date.add(-9).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
-                "method": "post",
-                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
-                "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
-            }
-        },
-        "google_searchConsole-2": {
-            "service": "google_searchConsole",
-            "libraryAlias": "GoogleSearchConsoleStats(Last30Days)",
-            "refreshInterval": 14400,
-            "description": "See important metrics for your websites's keywords for the last 30 days. Originates from the Gallery.",
-            "name": "Google Search Console Stats (Last 30 Days)",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "body": "{\r\n\"startDate\": \"{date.add(-32).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
-                "method": "post",
-                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
-                "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
-            }
-        },
-        "google_searchConsole-3": {
-            "service": "google_searchConsole",
-            "libraryAlias": "GoogleSearchConsoleStats(Last60Days)",
-            "refreshInterval": 14400,
-            "description": "See important metrics for your websites's keywords for the last 60 days. Originates from the Gallery.",
-            "name": "Google Search Console Stats (Last 60 Days)",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "body": "{\r\n\"startDate\": \"{date.add(-62).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-33).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
-                "method": "post",
-                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
-                "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
-            }
-        },
-        "google_searchConsole-4": {
-            "service": "google_searchConsole",
-            "libraryAlias": "GoogleSearchConsoleStats(Last14Days)",
-            "refreshInterval": 14400,
-            "description": "See important metrics for your websites's keywords for the last 14 days. Originates from the Gallery.",
-            "name": "Google Search Console Stats (Last 14 Days)",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "body": "{\r\n\"startDate\": \"{date.add(-16).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-10).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
-                "method": "post",
-                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
-                "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
-            }
+  "name": "Google Search Console Organic Keyword Rankings",
+  "description": "From Impressions to Click-Through-Rates, get the information you need on how your keywords are ranking and performing.<br> Originates from the Gallery. (v1.0)",
+  "sampleFormulas": {
+    "43e9458d-1": {
+      "txt": "array(\"1415.92\",\"0\",\"0\",\"111.76\",\"0\",\"0\",\"4.4\",\"25635.28\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1415.92
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 111.76
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 4.4
+              },
+              {
+                "t": "l",
+                "v": 25635.28
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "51921668": {
+      "txt": "\"20160705\"",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "l",
+            "v": "20160705"
+          }
+        ]
+      }
+    },
+    "815b4f5b": {
+      "txt": "\"20160711\"",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "l",
+            "v": "20160711"
+          }
+        ]
+      }
+    },
+    "7b3bdbff": {
+      "txt": "array(\"last7days\",\"last30days\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": "last7days"
+              },
+              {
+                "t": "l",
+                "v": "last30days"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "60bbdd1d": {
+      "txt": "array(\"Last 7 Days\",\"Last 30 Days\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": "Last 7 Days"
+              },
+              {
+                "t": "l",
+                "v": "Last 30 Days"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "31262421": {
+      "txt": "\"20160628\"",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "l",
+            "v": "20160628"
+          }
+        ]
+      }
+    },
+    "e2d4aa80": {
+      "txt": "\"20160704\"",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "l",
+            "v": "20160704"
+          }
+        ]
+      }
+    },
+    "0217601d": {
+      "txt": "\"Include rankings between\"",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "l",
+            "v": "Include rankings between"
+          }
+        ]
+      }
+    },
+    "e7a17bfb-3": {
+      "txt": "array(\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\"20\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1
+              },
+              {
+                "t": "l",
+                "v": 2
+              },
+              {
+                "t": "l",
+                "v": 3
+              },
+              {
+                "t": "l",
+                "v": 4
+              },
+              {
+                "t": "l",
+                "v": 5
+              },
+              {
+                "t": "l",
+                "v": 6
+              },
+              {
+                "t": "l",
+                "v": 7
+              },
+              {
+                "t": "l",
+                "v": 8
+              },
+              {
+                "t": "l",
+                "v": 9
+              },
+              {
+                "t": "l",
+                "v": 10
+              },
+              {
+                "t": "l",
+                "v": 11
+              },
+              {
+                "t": "l",
+                "v": 12
+              },
+              {
+                "t": "l",
+                "v": 13
+              },
+              {
+                "t": "l",
+                "v": 14
+              },
+              {
+                "t": "l",
+                "v": 15
+              },
+              {
+                "t": "l",
+                "v": 16
+              },
+              {
+                "t": "l",
+                "v": 17
+              },
+              {
+                "t": "l",
+                "v": 18
+              },
+              {
+                "t": "l",
+                "v": 19
+              },
+              {
+                "t": "l",
+                "v": 20
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "009aeab4": {
+      "txt": "\"and\"",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "l",
+            "v": "and"
+          }
+        ]
+      }
+    },
+    "652f28a4-6": {
+      "txt": "array(\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\"20\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1
+              },
+              {
+                "t": "l",
+                "v": 2
+              },
+              {
+                "t": "l",
+                "v": 3
+              },
+              {
+                "t": "l",
+                "v": 4
+              },
+              {
+                "t": "l",
+                "v": 5
+              },
+              {
+                "t": "l",
+                "v": 6
+              },
+              {
+                "t": "l",
+                "v": 7
+              },
+              {
+                "t": "l",
+                "v": 8
+              },
+              {
+                "t": "l",
+                "v": 9
+              },
+              {
+                "t": "l",
+                "v": 10
+              },
+              {
+                "t": "l",
+                "v": 11
+              },
+              {
+                "t": "l",
+                "v": 12
+              },
+              {
+                "t": "l",
+                "v": 13
+              },
+              {
+                "t": "l",
+                "v": 14
+              },
+              {
+                "t": "l",
+                "v": 15
+              },
+              {
+                "t": "l",
+                "v": 16
+              },
+              {
+                "t": "l",
+                "v": 17
+              },
+              {
+                "t": "l",
+                "v": 18
+              },
+              {
+                "t": "l",
+                "v": 19
+              },
+              {
+                "t": "l",
+                "v": 20
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "6df3e047-11": {
+      "txt": "array(\"klipfolio\",\"klipfolio neuro\",\"klip gallery\",\"business dashboards\",\"saas\",\"klip bar chart\",\"klipfolio integrations\",\"kpi\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": "klipfolio"
+              },
+              {
+                "t": "l",
+                "v": "klipfolio neuro"
+              },
+              {
+                "t": "l",
+                "v": "klip gallery"
+              },
+              {
+                "t": "l",
+                "v": "business dashboards"
+              },
+              {
+                "t": "l",
+                "v": "saas"
+              },
+              {
+                "t": "l",
+                "v": "klip bar chart"
+              },
+              {
+                "t": "l",
+                "v": "klipfolio integrations"
+              },
+              {
+                "t": "l",
+                "v": "kpi"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "9e208cd8-13": {
+      "txt": "array(\"3608.098\",\"60335.098\",\"5673.098\",\"4958.098\",\"8202.098\",\"2673.098\",\"5371.098\",\"1171.098\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 3608.098
+              },
+              {
+                "t": "l",
+                "v": 60335.098
+              },
+              {
+                "t": "l",
+                "v": 5673.098
+              },
+              {
+                "t": "l",
+                "v": 4958.098
+              },
+              {
+                "t": "l",
+                "v": 8202.098
+              },
+              {
+                "t": "l",
+                "v": 2673.098
+              },
+              {
+                "t": "l",
+                "v": 5371.098
+              },
+              {
+                "t": "l",
+                "v": 1171.098
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "3a5ebcc3-23": {
+      "txt": "array(\"1.548235776032544\",\"\",\"\",\"43.36379742304939\",\"\",\"\",\"1219.7040909090908\",\"-0.9543169413402155\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1.548235776032544
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": 43.36379742304939
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": 1219.7040909090908
+              },
+              {
+                "t": "l",
+                "v": -0.9543169413402155
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "2141cc72-15": {
+      "txt": "array(\"1438.0520000000001\",\"1421.952\",\"579.6\",\"309.764\",\"260.176\",\"233.12800000000001\",\"195.132\",\"154.56\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1438.0520000000001
+              },
+              {
+                "t": "l",
+                "v": 1421.952
+              },
+              {
+                "t": "l",
+                "v": 579.6
+              },
+              {
+                "t": "l",
+                "v": 309.764
+              },
+              {
+                "t": "l",
+                "v": 260.176
+              },
+              {
+                "t": "l",
+                "v": 233.12800000000001
+              },
+              {
+                "t": "l",
+                "v": 195.132
+              },
+              {
+                "t": "l",
+                "v": 154.56
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "127d6e8c-3": {
+      "txt": "array(\"1940.38\",\"0\",\"0\",\"8.78\",\"0\",\"0\",\"7.024\",\"1931.6\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1940.38
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 8.78
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 7.024
+              },
+              {
+                "t": "l",
+                "v": 1931.6
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "9df3ff7e-25": {
+      "txt": "array(\"-0.2588812500644203\",\"\",\"\",\"34.28063781321185\",\"\",\"\",\"26.780751708428248\",\"-0.919983433423069\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": -0.2588812500644203
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": 34.28063781321185
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": ""
+              },
+              {
+                "t": "l",
+                "v": 26.780751708428248
+              },
+              {
+                "t": "l",
+                "v": -0.919983433423069
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "5b602dc6-17": {
+      "txt": "array(\"0.2951101321585903\",\"0.016523647974456195\",\"0.0740402193784278\",\"0.0455205047318612\",\"0.022727840980122514\",\"0.06595141700404858\",\"0.026383513931888543\",\"0.1115702479338843\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 0.2951101321585903
+              },
+              {
+                "t": "l",
+                "v": 0.016523647974456195
+              },
+              {
+                "t": "l",
+                "v": 0.0740402193784278
+              },
+              {
+                "t": "l",
+                "v": 0.0455205047318612
+              },
+              {
+                "t": "l",
+                "v": 0.022727840980122514
+              },
+              {
+                "t": "l",
+                "v": 0.06595141700404858
+              },
+              {
+                "t": "l",
+                "v": 0.026383513931888543
+              },
+              {
+                "t": "l",
+                "v": 0.1115702479338843
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "a5f616c1-1": {
+      "txt": "array(\"0.4463952765692977\",\"0\",\"0\",\"0.025590551181102362\",\"0\",\"0\",\"0.52\",\"0.024544299886718617\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 0.4463952765692977
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0.025590551181102362
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0
+              },
+              {
+                "t": "l",
+                "v": 0.52
+              },
+              {
+                "t": "l",
+                "v": 0.024544299886718617
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "51fb8fbe-19": {
+      "txt": "array(\"1.4\",\"5.466320760992484\",\"3.3447897623400364\",\"3.3158780231335436\",\"5.43487935991999\",\"2.299595141700405\",\"3.437732198142415\",\"1.4733471074380167\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 1.4
+              },
+              {
+                "t": "l",
+                "v": 5.466320760992484
+              },
+              {
+                "t": "l",
+                "v": 3.3447897623400364
+              },
+              {
+                "t": "l",
+                "v": 3.3158780231335436
+              },
+              {
+                "t": "l",
+                "v": 5.43487935991999
+              },
+              {
+                "t": "l",
+                "v": 2.299595141700405
+              },
+              {
+                "t": "l",
+                "v": 3.437732198142415
+              },
+              {
+                "t": "l",
+                "v": 1.4733471074380167
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "d701049c-21": {
+      "txt": "array(\"2.5037290242386576\",\"1.5\",\"1.5\",\"2.5039370078740157\",\"1.5\",\"1.5\",\"2.5\",\"6.607514331811473\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": 2.5037290242386576
+              },
+              {
+                "t": "l",
+                "v": 1.5
+              },
+              {
+                "t": "l",
+                "v": 1.5
+              },
+              {
+                "t": "l",
+                "v": 2.5039370078740157
+              },
+              {
+                "t": "l",
+                "v": 1.5
+              },
+              {
+                "t": "l",
+                "v": 1.5
+              },
+              {
+                "t": "l",
+                "v": 2.5
+              },
+              {
+                "t": "l",
+                "v": 6.607514331811473
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "09cf7a45-27": {
+      "txt": "array(\"-0.4408340573414423\",\"2.644213840661656\",\"1.2298598415600241\",\"0.3242657513772329\",\"2.623252906613327\",\"0.5330634278002699\",\"0.3750928792569659\",\"-0.7770194609575529\")",
+      "src": {
+        "t": "expr",
+        "v": false,
+        "c": [
+          {
+            "t": "f",
+            "v": "array",
+            "c": [
+              {
+                "t": "l",
+                "v": -0.4408340573414423
+              },
+              {
+                "t": "l",
+                "v": 2.644213840661656
+              },
+              {
+                "t": "l",
+                "v": 1.2298598415600241
+              },
+              {
+                "t": "l",
+                "v": 0.3242657513772329
+              },
+              {
+                "t": "l",
+                "v": 2.623252906613327
+              },
+              {
+                "t": "l",
+                "v": 0.5330634278002699
+              },
+              {
+                "t": "l",
+                "v": 0.3750928792569659
+              },
+              {
+                "t": "l",
+                "v": -0.7770194609575529
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "datasources": {
+    "google_searchConsole-1": {
+      "service": "google_searchConsole",
+      "libraryAlias": "GoogleSearchConsoleStats(Last7Days)",
+      "refreshInterval": 14400,
+      "description": "See important metrics for your websites's keywords for the last 7 days. Originates from the Gallery.",
+      "name": "Google Search Console Stats (Last 7 Days)",
+      "type": "simple_rest",
+      "format": "json",
+      "props": {
+        "body": "{\r\n\"startDate\": \"{date.add(-9).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
+        "method": "post",
+        "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
+        "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
+      }
+    },
+    "google_searchConsole-2": {
+      "service": "google_searchConsole",
+      "libraryAlias": "GoogleSearchConsoleStats(Last30Days)",
+      "refreshInterval": 14400,
+      "description": "See important metrics for your websites's keywords for the last 30 days. Originates from the Gallery.",
+      "name": "Google Search Console Stats (Last 30 Days)",
+      "type": "simple_rest",
+      "format": "json",
+      "props": {
+        "body": "{\r\n\"startDate\": \"{date.add(-32).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
+        "method": "post",
+        "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
+        "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
+      }
+    },
+    "google_searchConsole-3": {
+      "service": "google_searchConsole",
+      "libraryAlias": "GoogleSearchConsoleStats(Last60Days)",
+      "refreshInterval": 14400,
+      "description": "See important metrics for your websites's keywords for the last 60 days. Originates from the Gallery.",
+      "name": "Google Search Console Stats (Last 60 Days)",
+      "type": "simple_rest",
+      "format": "json",
+      "props": {
+        "body": "{\r\n\"startDate\": \"{date.add(-62).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-33).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
+        "method": "post",
+        "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
+        "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
+      }
+    },
+    "google_searchConsole-4": {
+      "service": "google_searchConsole",
+      "libraryAlias": "GoogleSearchConsoleStats(Last14Days)",
+      "refreshInterval": 14400,
+      "description": "See important metrics for your websites's keywords for the last 14 days. Originates from the Gallery.",
+      "name": "Google Search Console Stats (Last 14 Days)",
+      "type": "simple_rest",
+      "format": "json",
+      "props": {
+        "body": "{\r\n\"startDate\": \"{date.add(-16).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-10).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n}",
+        "method": "post",
+        "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
+        "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
+      }
+    }
+  },
+  "dsMappings": {
+    "google_searchConsole-1": "c4eb299e7b1c62b75aaenatceewzhere",
+    "google_searchConsole-2": "4d876b06e4e642f181ffnatceewzhere",
+    "google_searchConsole-3": "a79f5024fc305235c443natceewzhere",
+    "google_searchConsole-4": "9e7e1a7c1283bd95dc89natceewzhere"
+  },
+  "services": [
+    {
+      "service": "google_searchConsole"
+    }
+  ],
+  "datasourceConfigModel": [
+    {
+      "type": "select",
+      "id": "ds.google_searchConsole.siteURL",
+      "label": "Site URL",
+      "description": "Select a Site URL from the drop-down list.",
+      "isRequired": true,
+      "urlEncode": true
+    }
+  ],
+  "queries": [
+    {
+      "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have right permission level to access the site data. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+      "connector": {
+        "service": "google_searchConsole",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites",
+          "method": "GET"
         }
-    },
-    "dsMappings": {
-        "google_searchConsole-1": "c4eb299e7b1c62b75aaenatceewzhere",
-        "google_searchConsole-2": "4d876b06e4e642f181ffnatceewzhere",
-        "google_searchConsole-3": "a79f5024fc305235c443natceewzhere",
-        "google_searchConsole-4": "9e7e1a7c1283bd95dc89natceewzhere"
-    },
-    "services": [{
-        "service": "google_searchConsole"
-    }],
-    "datasourceConfigModel": [{
-        "type": "select",
-        "id": "ds.google_searchConsole.siteURL",
-        "label": "Site URL",
-        "description": "Select a Site URL from the drop-down list.",
-        "isRequired": true,
-        "urlEncode": true
-    }],
-    "queries": [{
-        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have right permission level to access the site data. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-        "connector": {
-            "service": "google_searchConsole",
-            "type": "simple_rest",
-            "format": "json",
-            "props": {
-                "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites",
-                "method": "GET"
-            }
-        },
-        "results": [{
-            "propId": "ds.google_searchConsole.siteURL",
-            "propField": "options",
-            "labels": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']",
-            "values": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']"
-        }]
-    }],
-    "uiVariables": [
+      },
+      "results": [
+        {
+          "propId": "ds.google_searchConsole.siteURL",
+          "propField": "options",
+          "labels": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']",
+          "values": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']"
+        }
+      ]
+    }
+  ],
+  "uiVariables": [
     {
       "name": "gaPeriod",
       "value": "last7days"
@@ -112,5 +1000,4 @@
       "value": "10"
     }
   ]
-    
 }
