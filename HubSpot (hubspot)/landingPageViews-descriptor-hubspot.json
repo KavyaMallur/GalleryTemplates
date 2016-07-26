@@ -1,0 +1,83 @@
+{
+    "name": "Hubspot Landing Page Views",
+    "description": "Make sure your website is generating interest by tracking the number of views for the selected period. <br>Originates from the Gallery.",
+    "datasources": {
+        "hubspot-01": {
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "name": "Hubspot Landing Page Daily Metrics(3Months)",
+            "libraryAlias": "HubspotLandingDailyPageMetrics(3Months)",
+            "refreshInterval": 14400,
+            "description": "Retrieve daily metrics for your landing page over last 3 months. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.hubapi.com/analytics/v2/sources/summary/d?pageId={{ds.hubspot.landingPageID}}&start={date.addMonths(-3).startOfMonth.format('epochTime')}000&end={date.today.format('epochTime')}000",
+                "method": "get",
+                "portalId": "{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string"
+            }
+        },
+        "hubspot-02": {
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "name": "Hubspot Landing Pages",
+            "libraryAlias": "HubspotLandingPages",
+            "refreshInterval": 14400,
+            "description": "Retrieve hubspot landing pages. Originates from the Gallery.",
+            "props": {
+                "endpoint_url": "https://api.hubapi.com/content/api/v2/pages?limit=1000&subcategory=landing_page",
+                "method": "get",
+                "portalId": "{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "hubspot-01": "50dd78b1dd68be4a5d67KavyaMallur9",
+        "hubspot-02": "00f8b9a342297d5d24b9KavyaMallur9"
+    },
+
+    "services": [{
+        "service": "hubspot"
+    }],
+    "uiVariables": [
+    {
+      "name": "HSPeriod",
+      "value": "thismonth"
+    }, {
+      "name": "HSDate",
+      "value": ""
+    }, {
+      "name": "HSPageViewsTarget",
+      "value": "250"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.hubspot.landingPageID",
+        "label": "Landing Page",
+        "description": "Select an Hubspot Landing Page from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Hubspot OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "hubspot",
+            "type": "hubspot",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://api.hubapi.com/content/api/v2/pages?limit=1000&subcategory=landing_page",
+                "method": "get",
+                "portalId": "{{auth.hubspot.portalId}}",
+                "oauth_sign_query_string": "oauth_sign_query_string"
+            }
+        },
+        "results": [{
+            "propId": "ds.hubspot.landingPageID",
+            "propField": "options",
+            "labels": "/objects/name[preceding-sibling::is_draft!='true']",
+            "values": "/objects/page_id[preceding-sibling::is_draft!='true']"
+        }]
+    }]
+}
