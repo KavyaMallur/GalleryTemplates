@@ -1,0 +1,61 @@
+{
+  "name": "CTR Improvement Opportunities (Last 30 Days)",
+  "description": "Discover where your keywords can improve on click-through rates based on their position in search results. <br> Originates from the Gallery. (v1.0)",
+  "datasources": {
+    "google_searchConsole-1": {
+      "service": "google_searchConsole",
+      "libraryAlias": "GoogleSearchConsoleStats(Last30Days)",
+      "refreshInterval": 14400,
+      "description": "See important metrics for your websites's keywords for the last 30 days. Originates from the Gallery.",
+      "name": "Google Search Console Stats (Last 30 Days)",
+      "type": "simple_rest",
+      "format": "json",
+      "props": {
+        "body": "{\r\n\"startDate\": \"{date.add(-32).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"]\r\n\"rowLimit\":\"5000\"}",
+        "method": "post",
+        "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
+        "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
+      }
+    }
+  },
+  "dsMappings": {
+    "google_searchConsole-1": "860004eaf2620a0a9af2natceewzhere"
+  },
+  "services": [
+    {
+      "service": "google_searchConsole"
+    }
+  ],
+  "datasourceConfigModel": [
+    {
+      "type": "select",
+      "id": "ds.google_searchConsole.siteURL",
+      "label": "Site URL",
+      "description": "Select a Site URL from the drop-down list.",
+      "isRequired": true,
+      "urlEncode": true
+    }
+  ],
+  "queries": [
+    {
+      "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have right permission level to access the site data. <br><br>2. From time to time, your Google OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+      "connector": {
+        "service": "google_searchConsole",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.google_searchConsole.siteURL",
+          "propField": "options",
+          "labels": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']",
+          "values": "/siteEntry/siteUrl[preceding-sibling::permissionLevel!='siteUnverifiedUser']"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "name": "Google Analytics Blog Subscribers (Today)",
+  "description": "Stay in the loop on how many blog subscribers you have right now.<br> Originates from the Gallery. (v1.0)",
+  "sampleFormulas":{
+  "11ecb36170e573cb96ff7f0a5069baed70e2581c": {
+    "txt": "\"687\"",
+    "src": {
+      "t": "expr",
+      "v": false,
+      "c": [
+        {
+          "t": "l",
+          "v": "687"
+        }
+      ]
+    }
+  },
+  "434ed9949e95f408edfec8937c7d657bc8105617": {
+    "txt": "\"0.6051401869158879\"",
+    "src": {
+      "t": "expr",
+      "v": false,
+      "c": [
+        {
+          "t": "l",
+          "v": 0.6051401869158879
+        }
+      ]
+    }
+  },
+  "992bab63552cf2244bd6e7386b571145572589b5": {
+    "txt": "\"Blog Subscribers\"",
+    "src": {
+      "t": "expr",
+      "v": false,
+      "c": [
+        {
+          "t": "l",
+          "v": "Blog Subscribers"
+        }
+      ]
+    }
+  },
+  "dc03aa5f45e902b9f9527cacf2ee1de1249f8b5e": {
+    "txt": "\"428\"",
+    "src": {
+      "t": "expr",
+      "v": false,
+      "c": [
+        {
+          "t": "l",
+          "v": "428"
+        }
+      ]
+    }
+  }
+},
+  "datasources": {
+    "googleAnalytics-01": {
+      "service": "google_analytics",
+      "libraryAlias": "GABlogSubscriptionsLast2Days",
+      "name": "Google Analytics Blog Subscriptions (Last 2 Days)",
+      "description": "This data source gives you your blog subscribers over the past two days. Originates from the Gallery.",
+      "type": "google_analytics",
+      "format": "csv",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=yesterday&end-date=today&metrics=ga:goal{{ds.google_analytics.goalId}}Completions&dimensions=ga:date",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=yesterday&end-date=today&metrics=ga:goal{{ds.google_analytics.goalId}}Completions&dimensions=ga:date",
+        "max_pages": "10",
+        "mode": "Advanced",
+        "profile": "{{ds.google_analytics.profileId}}"
+      }
+    }
+  },
+  "dsMappings": {
+    "googleAnalytics-01": "c354040321914108f70enatceewzhere"
+  },
+  "services": [
+    {
+      "service": "google_analytics"
+    }
+  ],
+  "datasourceConfigModel": [
+    {
+      "type": "select",
+      "id": "ds.google_analytics.accountId",
+      "label": "Analytics Account",
+      "description": "Select your Analytics Account, Web Property and Analytics Profile from the lists below.",
+      "isRequired": true,
+      "onChangeQueries": [
+        "q2"
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ds.google_analytics.webPropertyId",
+      "label": "Web Property",      
+      "isRequired": true,
+      "onChangeQueries": [
+        "q3"
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ds.google_analytics.profileId",
+      "label": "Analytics Profile",
+      "isRequired": true,
+      "onChangeQueries": [
+        "q4"
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ds.google_analytics.goalId",
+      "label": "Goal",
+      "description": "Select the goal that indicates someone subscribed to your blog.",
+      "isRequired": true
+    }
+  ],
+  "queries": [
+    {
+      "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to your company's Google Analytics account. <br><br>2. From time to time, your Google token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+      "connector": {
+        "service": "google_analytics",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.google_analytics.accountId",
+          "propField": "options",
+          "labels": "/items/name",
+          "values": "/items/id"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "connector": {
+        "service": "google_analytics",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/{{ds.google_analytics.accountId}}/webproperties",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.google_analytics.webPropertyId",
+          "propField": "options",
+          "labels": "/items/name",
+          "values": "/items/id"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "connector": {
+        "service": "google_analytics",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/{{ds.google_analytics.accountId}}/webproperties/{{ds.google_analytics.webPropertyId}}/profiles",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.google_analytics.profileId",
+          "propField": "options",
+          "labels": "/items/name",
+          "values": "/items/id"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "connector": {
+        "service": "google_analytics",
+        "type": "simple_rest",
+        "format": "json",
+        "props": {
+          "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/{{ds.google_analytics.accountId}}/webproperties/{{ds.google_analytics.webPropertyId}}/profiles/{{ds.google_analytics.profileId}}/goals",
+          "method": "GET"
+        }
+      },
+      "results": [
+        {
+          "propId": "ds.google_analytics.goalId",
+          "propField": "options",
+          "labels": "/items/name[preceding-sibling::active='true']",
+          "values": "/items/id[preceding-sibling::active='true']"
+        }
+      ]
+    }
+  ]
+}
