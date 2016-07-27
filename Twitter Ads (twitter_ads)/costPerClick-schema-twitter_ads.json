@@ -1,0 +1,537 @@
+{
+   "title": "Twitter Ads Cost-per-Click (Last 7 Days)",
+   "id": "d4ac0cc9f4cb9918f80aa49dcd372fbc",
+   "useSamePadding": false,
+   "padding": [
+      10,
+      10,
+      "20",
+      10
+   ],
+   "workspace": {
+      "datasources": [
+         "4ef4d6e659ce67b6e0b6doogeraspilk",
+         "f696e1c849fc167b448ddoogeraspilk"
+      ],
+      "dimensions": {
+         "w": 829
+      }
+   },
+   "datasourceProps": [
+      "AWKSCampaignId",
+      "AWKSdynperiod",
+      "AWKSClient"
+   ],
+   "components": [
+      {
+         "type": "label",
+         "id": "798ea797",
+         "displayName": "Campaign Name",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
+         "renamed": true,
+         "size": "1",
+         "fmt": "raw",
+         "fmtArgs": {
+            "prefix": "Campaign: ",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "concat(\"<b>\",lookup(f696e1c849fc167b448ddoogeraspilk@/data/id;,4ef4d6e659ce67b6e0b6doogeraspilk@/data/id;,4ef4d6e659ce67b6e0b6doogeraspilk@/data/name;),\"</b>\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f696e1c849fc167b448ddoogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "4ef4d6e659ce67b6e0b6doogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "4ef4d6e659ce67b6e0b6doogeraspilk",
+                                       "a": "/data/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true,
+                                 "description": "1 or more items."
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "gauge",
+         "id": "9b08c163",
+         "displayName": "Gauge",
+         "layoutConfig": {
+            "y": 0,
+            "x": 0
+         },
+         "size": "2",
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "151e5390"
+                     },
+                     "type": "gteq",
+                     "right": {
+                        "cx": "dc0c8283"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "value": "cx-theme_red_3",
+                     "type": "color",
+                     "isScalar": true
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "151e5390"
+                     },
+                     "type": "lt",
+                     "right": {
+                        "cx": "dc0c8283"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "value": "cx-theme_green_3",
+                     "type": "color",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "151e5390",
+               "displayName": "CPC Current Value",
+               "renamed": true,
+               "size": "2",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "1",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "(sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "f696e1c849fc167b448ddoogeraspilk",
+                                                   "a": "/data/id_data/metrics/billed_charge_local_micro"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1000000"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "A list of 1 or more numeric items."
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f696e1c849fc167b448ddoogeraspilk",
+                                             "a": "/data/id_data/metrics/clicks"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "A list of 1 or more numeric items."
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "dc0c8283",
+               "displayName": "CPC Target Value",
+               "renamed": true,
+               "size": "1",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "1",
+                  "prefix": "Target: ",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if(($twitterAdsCPCTarget=\"\"),(((sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)))*\"1.25\"),$twitterAdsCPCTarget)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "var",
+                                          "v": "twitterAdsCPCTarget"
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "151e5390"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.25"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "var",
+                                    "v": "twitterAdsCPCTarget"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "b382b41a",
+               "displayName": "CPC Min Value",
+               "renamed": true,
+               "size": 1,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "0",
+                              "t": "l"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "266ca3ce",
+               "displayName": "CPC Max Value",
+               "renamed": true,
+               "size": 1,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if(((((sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)))*\"1.25\")>(if(($twitterAdsCPCTarget=\"\"),(((sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)))*\"1.25\"),$twitterAdsCPCTarget))),(((sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)))*\"1.25\"),((if(($twitterAdsCPCTarget=\"\"),(((sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)))*\"1.25\"),$twitterAdsCPCTarget))*\"1.25\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "151e5390"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1.25"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "dc0c8283"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "151e5390"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.25"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "dc0c8283"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.25"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            }
+         ],
+         "gaugeStyle": "hg"
+      },
+      {
+         "type": "panel_grid",
+         "id": "cd3b6b70",
+         "displayName": "Layout Grid",
+         "layoutConfig": {
+            "y": 1,
+            "x": 0
+         },
+         "components": [
+            {
+               "type": "input",
+               "id": "a7f34209",
+               "displayName": "Text Field",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "components": [],
+               "scope": 1,
+               "propName": "twitterAdsCPCTarget",
+               "inputType": 2,
+               "inputLabel": "Target"
+            }
+         ],
+         "rows": 1,
+         "cols": 2,
+         "widths": [
+            {
+               "w": 150,
+               "x": 0
+            }
+         ],
+         "cellData": [
+            {
+               "alignment": 1,
+               "y": 0,
+               "x": 1,
+               "cellPadding": 0
+            },
+            {
+               "y": 0,
+               "x": 0
+            }
+         ]
+      }
+   ]
+}
