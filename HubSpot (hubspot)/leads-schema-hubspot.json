@@ -1,0 +1,3377 @@
+{
+    "title": "Hubspot Leads",
+    "id": "7ec7497facfcebbaeaac790b44c9d7d2",
+    "workspace": {
+        "dimensions": {
+            "w": 1008
+        },
+        "datasources": [
+            "03b7de185b3626277e0cKavyaMallur9"
+        ]
+    },
+    "components": [{
+        "type": "panel_grid",
+        "id": "24e6d94b",
+        "displayName": "Layout Grid",
+        "renamed": true,
+        "components": [{
+            "type": "input",
+            "id": "2d22bb99",
+            "displayName": "Period",
+            "layoutConfig": {
+                "x": 0,
+                "y": 0
+            },
+            "renamed": true,
+            "components": [{
+                "type": "proxy",
+                "role": "values",
+                "id": "29c86006",
+                "displayName": "Period Values",
+                "renamed": true,
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "array(\"today\",\"yesterday\",\"thisweek\",\"lastweek\",\"last7days\",\"thismonth\",\"lastmonth\",\"last30days\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "array",
+                            "c": [{
+                                "t": "l",
+                                "v": "today"
+                            }, {
+                                "t": "l",
+                                "v": "yesterday"
+                            }, {
+                                "t": "l",
+                                "v": "thisweek"
+                            }, {
+                                "t": "l",
+                                "v": "lastweek"
+                            }, {
+                                "t": "l",
+                                "v": "last7days"
+                            }, {
+                                "t": "l",
+                                "v": "thismonth"
+                            }, {
+                                "t": "l",
+                                "v": "lastmonth"
+                            }, {
+                                "t": "l",
+                                "v": "last30days"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "0 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    []
+                ]
+            }, {
+                "type": "proxy",
+                "role": "labels",
+                "id": "8c49ea14",
+                "displayName": "Period Labels",
+                "renamed": true,
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "array(\"Today\",\"Yesterday\",\"This Week\",\"Last Week\",\"Last 7 Days\",\"This Month\",\"Last Month\",\"Last 30 Days\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "array",
+                            "c": [{
+                                "t": "l",
+                                "v": "Today"
+                            }, {
+                                "t": "l",
+                                "v": "Yesterday"
+                            }, {
+                                "t": "l",
+                                "v": "This Week"
+                            }, {
+                                "t": "l",
+                                "v": "Last Week"
+                            }, {
+                                "t": "l",
+                                "v": "Last 7 Days"
+                            }, {
+                                "t": "l",
+                                "v": "This Month"
+                            }, {
+                                "t": "l",
+                                "v": "Last Month"
+                            }, {
+                                "t": "l",
+                                "v": "Last 30 Days"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "0 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    []
+                ]
+            }],
+            "scope": 1,
+            "propName": "HSPeriod",
+            "inputType": 1,
+            "defaultValue": "thismonth"
+        }, {
+            "type": "label",
+            "id": "33f4142e",
+            "displayName": "Start Date",
+            "layoutConfig": {
+                "x": 1,
+                "y": 0
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                },
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy"
+            },
+            "formulas": [{
+                "txt": "if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "//*"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "HSPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "today"
+                                }, {
+                                    "t": "f",
+                                    "v": "today",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-7"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "relative value",
+                                            "description": "Number of units to add or subtract.",
+                                            "optional": true
+                                        }
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "relative value",
+                                            "description": "Number of units to add or subtract.",
+                                            "optional": true
+                                        }
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last30days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-30"
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "align": "r",
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "e67669c2",
+            "displayName": "End Date",
+            "layoutConfig": {
+                "x": 2,
+                "y": 0
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                },
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy",
+                "prefix": "to ",
+                "suffix": ""
+            },
+            "conditions": [{
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    },
+                    "type": "eq",
+                    "right": {
+                        "cx": "33f4142e"
+                    }
+                }],
+                "reactions": [{
+                    "type": "text",
+                    "value": " ",
+                    "isScalar": true
+                }]
+            }],
+            "formulas": [{
+                "txt": "if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "//*"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "HSPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "_default_"
+                                }, {
+                                    "t": "f",
+                                    "v": "today",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "html_tpl2",
+            "id": "9ea790ee",
+            "displayName": "Set Target (Button)",
+            "layoutConfig": {
+                "x": 3,
+                "y": 0
+            },
+            "renamed": true,
+            "components": [{
+                "type": "html_data",
+                "role": "data",
+                "id": "734d7ddc",
+                "displayName": "Series 1",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "$HSLeadsTarget",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "var",
+                            "v": "HSLeadsTarget"
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+                        "250"
+                    ]
+                ],
+                "mixin": "label",
+                "dataId": "Series 1"
+            }],
+            "tpl": "<div id=\"lTargetDiv\" style=\"width:100%; float:right;cursor:pointer;\" class=\"btn btn-info\"; data-toggle=\"collapse\">\n\t<button id=\"lTargetBtn\" title= \"Set Monthly Targets\" data-toggle=\"collapse\"\" style=\"height:32px; float:right; width:120px; background-color:#7395e5; margin:5px; line-height:0;\">Set a Target</button>\n</div>",
+            "script_tpl": "try%20%7B%0A%20%20%20%20document.getElementById(%22lTargetBtn%22).addEventListener(%22click%22,%20function()%20%7B%0A%20%20%20%20%20%20%20%20if%20(document.getElementById(%22lContent%22).style.display%20==%20%22block%22)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20document.getElementById(%22lContent%22).style.display%20=%20%22none%22;%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20document.getElementById(%22lContent%22).style.display%20=%20%22block%22;%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D);%0A%7D%0Acatch(err)%20%7B%0A%7D%0A",
+            "overflow": "ns"
+        }, {
+            "type": "label",
+            "id": "3c887fa7",
+            "displayName": "Start Date (Prev.)",
+            "layoutConfig": {
+                "x": 1,
+                "y": 1
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                },
+                "dateFormat": "MMM dd, yyyy",
+                "dateInputFormat": "yyyyMMdd"
+            },
+            "formulas": [{
+                "txt": "if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-60\")),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "//*"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "HSPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "today"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "yesterday",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-14"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last30days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-60"
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "align": "r",
+            "font_colour": "cx-color_aaa",
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "6fec9c78",
+            "displayName": "End Date (Prev.)",
+            "layoutConfig": {
+                "x": 2,
+                "y": 1
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                },
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy",
+                "prefix": "to ",
+                "suffix": " (prev.)"
+            },
+            "conditions": [{
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    },
+                    "type": "eq",
+                    "right": {
+                        "cx": "3c887fa7"
+                    }
+                }],
+                "reactions": [{
+                    "type": "text",
+                    "value": " ",
+                    "isScalar": true
+                }]
+            }],
+            "formulas": [{
+                "txt": "if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-31\")),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "//*"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "HSPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "today"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "yesterday",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-8"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last30days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-31"
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "font_colour": "cx-color_aaa",
+            "font_style": "regular",
+            "wrap": true
+        }],
+        "rows": 2,
+        "cols": 4,
+        "widths": [{
+            "x": 1,
+            "w": 85
+        }, {
+            "x": 0,
+            "w": "20%"
+        }],
+        "cellData": [{
+            "x": 2,
+            "y": 0,
+            "alignment": 2,
+            "cellPadding": [
+                0,
+                0,
+                0,
+                5
+            ]
+        }, {
+            "x": 3,
+            "y": 0,
+            "h": 2,
+            "alignment": 1,
+            "cellPadding": 0
+        }, {
+            "x": 0,
+            "y": 0,
+            "h": 2,
+            "alignment": 1,
+            "cellPadding": 0
+        }, {
+            "x": 2,
+            "y": 1,
+            "cellPadding": [
+                0,
+                0,
+                0,
+                5
+            ]
+        }, {
+            "x": 1,
+            "y": 0,
+            "cellPadding": 0,
+            "alignment": 2
+        }, {
+            "x": 1,
+            "y": 1,
+            "cellPadding": 0
+        }]
+    }, {
+        "type": "html_tpl2",
+        "id": "095e310c",
+        "displayName": "Target Popup",
+        "layoutConfig": {
+            "x": 2,
+            "y": 0
+        },
+        "renamed": true,
+        "components": [{
+            "type": "html_data",
+            "role": "data",
+            "id": "4ac5d8e5",
+            "displayName": "Series1",
+            "formulas": [],
+            "data": [],
+            "mixin": "label",
+            "dataId": "Series1"
+        }],
+        "tpl": "<style>\ndiv#lContent {\n    display: none;\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    padding: 20px;\n    width: 320px;\n    height: 40px;\n    color: #4F4A4A;\n    background-color: #f7f7f8;\n    border-radius: 0.5em;\n    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);\n    z-index: 20;\n    margin-top: 30px\n}\n</style>\n<div id=\"lContent\"> Set monthly target:\n    <div class=\"overlay-close\" style=\"right: -33px; top: -32px;\" id=\"lClose\"></div>\n    <input id=\"lTargetTxt\" type=\"text\" size=\"10\" style=\"width:70px; height:25px; border: 1px solid #b2b2b2; border-radius:0.25em; margin: 5px\" />\n    <button id=\"lApply\" style=\"height:32px; margin:5px; line-height:0;\">Apply</button>\n    <br />\n</div>\n",
+        "script_tpl": "try%20%7B%0A%20%20%20%20document.getElementById(%22lApply%22).addEventListener(%22click%22,%20function()%20%7B%0A%20%20%20%20%20%20var%20ltemp%20=%20document.getElementById(%22lTargetTxt%22).value;%0A%20%20%20%20%20%20dashboard.setDashboardProp(2,%20%22HSLeadsTarget%22,%20ltemp,%20dashboard.activeTab.id);%0A%20%20%20%20%20%20document.getElementById(%22lContent%22).style.display%20=%20%22none%22;%0A%20%20%20%20%7D);%0A%0A%20%20%20%20document.getElementById(%22lClose%22).addEventListener(%22click%22,%20function()%20%7B%0A%20%20%20%20%20%20if%20(document.getElementById(%22lContent%22).style.display%20==%20%22block%22)%20%7B%0A%20%20%20%20%20%20%20%20document.getElementById(%22lContent%22).style.display%20=%20%22none%22;%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D);%0A%7D%20catch%20(err)%20%7B%7D"
+    }, {
+        "type": "panel_grid",
+        "id": "0ac400eb",
+        "displayName": "Layout Grid",
+        "renamed": true,
+        "components": [{
+            "type": "chart_series",
+            "id": "803fc1c8",
+            "displayName": "Bar/Line Chart",
+            "layoutConfig": {
+                "x": 1,
+                "y": 0
+            },
+            "components": [{
+                "type": "series_data",
+                "role": "series",
+                "id": "a5038809",
+                "displayName": "Leads (This Period)",
+                "renamed": true,
+                "fmt": "num",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "cumulative(lookup(datevalue(switch($HSPeriod,\"today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"_default_\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyy-MM-dd\"),03b7de185b3626277e0cKavyaMallur9@kf:names(.);,map(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"HSDate\",sum(datasource(\"03b7de185b3626277e0cKavyaMallur9\",concat(\"/*[name()='\",$HSDate,\"']/leads\"))))))",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "cumulative",
+                            "c": [{
+                                "t": "f",
+                                "v": "lookup",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "switch",
+                                        "c": [{
+                                            "t": "var",
+                                            "v": "HSPeriod"
+                                        }, {
+                                            "t": "l",
+                                            "v": "today"
+                                        }, {
+                                            "t": "f",
+                                            "v": "daterange",
+                                            "c": [{
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "today",
+                                                    "c": [{
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "opt",
+                                                    "v": "5"
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "-6"
+                                                }]
+                                            }, {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [{
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "timezone",
+                                                        "optional": true,
+                                                        "description": "",
+                                                        "default": "GMT"
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "format",
+                                                    "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                    "optional": true
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "yesterday"
+                                        }, {
+                                            "t": "f",
+                                            "v": "daterange",
+                                            "c": [{
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "yesterday",
+                                                    "c": [{
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "opt",
+                                                    "v": "5"
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "-6"
+                                                }]
+                                            }, {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [{
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "timezone",
+                                                        "optional": true,
+                                                        "description": "",
+                                                        "default": "GMT"
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "format",
+                                                    "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                    "optional": true
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "_default_"
+                                        }, {
+                                            "t": "f",
+                                            "v": "daterange",
+                                            "c": [{
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [{
+                                                    "t": "ref",
+                                                    "v": {
+                                                        "r": "cx",
+                                                        "cx": "33f4142e"
+                                                    }
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "yyyyMMdd"
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "timezone",
+                                                        "optional": true,
+                                                        "description": "The time zone.",
+                                                        "default": "GMT"
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "f",
+                                                "v": "date",
+                                                "c": [{
+                                                    "t": "ref",
+                                                    "v": {
+                                                        "r": "cx",
+                                                        "cx": "e67669c2"
+                                                    }
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "yyyyMMdd"
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "timezone",
+                                                        "optional": true,
+                                                        "description": "The time zone.",
+                                                        "default": "GMT"
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "format",
+                                                    "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                    "optional": true
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "case",
+                                                "repeats": true,
+                                                "description": ""
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "case",
+                                                "repeats": true,
+                                                "description": ""
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyy-MM-dd"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "description": "",
+                                            "default": "GMT",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "kf:names(.)"
+                                    }
+                                }, {
+                                    "t": "f",
+                                    "v": "map",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "03b7de185b3626277e0cKavyaMallur9",
+                                            "a": "kf:names(.)"
+                                        }
+                                    }, {
+                                        "t": "l",
+                                        "v": "HSDate"
+                                    }, {
+                                        "t": "f",
+                                        "v": "sum",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "datasource",
+                                            "c": [{
+                                                "t": "l",
+                                                "v": "03b7de185b3626277e0cKavyaMallur9"
+                                            }, {
+                                                "t": "f",
+                                                "v": "concat",
+                                                "c": [{
+                                                    "t": "l",
+                                                    "v": "/*[name()='"
+                                                }, {
+                                                    "t": "var",
+                                                    "v": "HSDate"
+                                                }, {
+                                                    "t": "l",
+                                                    "v": "']/leads"
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "data",
+                                                        "repeats": true,
+                                                        "description": "1 or more items."
+                                                    }
+                                                }]
+                                            }]
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "data",
+                                                "repeats": true,
+                                                "description": "A list of 1 or more numeric items."
+                                            }
+                                        }]
+                                    }]
+                                }]
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+                    ]
+                ],
+                "seriesName": "This Period",
+                "renderer": "line",
+                "chartStyle": "points_area",
+                "lineWeight": "2",
+                "axis": "124d1e35"
+            }, {
+                "type": "series_data",
+                "role": "series",
+                "id": "cd9fa50a",
+                "displayName": "Leads (Last Period)",
+                "renamed": true,
+                "fmt": "num",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "cumulative(slice(lookup(datevalue(switch($HSPeriod,\"today\",daterange(date_add(today(),\"5\",\"-13\"),date_add(today(),\"5\",\"-7\")),\"yesterday\",daterange(date_add(yesterday(),\"5\",\"-13\"),date_add(yesterday(),\"5\",\"-7\")),\"thisweek\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-60\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-31\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"4\")),\"thismonth\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-60\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-31\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"3\")),\"_default_\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-60\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-31\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyy-MM-dd\"),03b7de185b3626277e0cKavyaMallur9@kf:names(.);,map(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"HSDate\",sum(datasource(\"03b7de185b3626277e0cKavyaMallur9\",concat(\"/*[name()='\",$HSDate,\"']/leads\"))))),\"0\",count((datevalue(switch($HSPeriod,\"today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"thisweek\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"4\")),\"thismonth\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"3\")),\"_default_\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyyMMdd\")))))",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "cumulative",
+                            "c": [{
+                                "t": "f",
+                                "v": "slice",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "datevalue",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "switch",
+                                            "c": [{
+                                                "t": "var",
+                                                "v": "HSPeriod"
+                                            }, {
+                                                "t": "l",
+                                                "v": "today"
+                                            }, {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date_add",
+                                                    "c": [{
+                                                        "t": "f",
+                                                        "v": "today",
+                                                        "c": [{
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                                "placeholder": "timezone",
+                                                                "optional": true,
+                                                                "description": "",
+                                                                "default": "GMT"
+                                                            }
+                                                        }]
+                                                    }, {
+                                                        "t": "opt",
+                                                        "v": "5"
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "-13"
+                                                    }]
+                                                }, {
+                                                    "t": "f",
+                                                    "v": "date_add",
+                                                    "c": [{
+                                                        "t": "f",
+                                                        "v": "today",
+                                                        "c": [{
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                                "placeholder": "timezone",
+                                                                "optional": true,
+                                                                "description": "",
+                                                                "default": "GMT"
+                                                            }
+                                                        }]
+                                                    }, {
+                                                        "t": "opt",
+                                                        "v": "5"
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "-7"
+                                                    }]
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "format",
+                                                        "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "l",
+                                                "v": "yesterday"
+                                            }, {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date_add",
+                                                    "c": [{
+                                                        "t": "f",
+                                                        "v": "yesterday",
+                                                        "c": [{
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                                "placeholder": "timezone",
+                                                                "optional": true,
+                                                                "description": "",
+                                                                "default": "GMT"
+                                                            }
+                                                        }]
+                                                    }, {
+                                                        "t": "opt",
+                                                        "v": "5"
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "-13"
+                                                    }]
+                                                }, {
+                                                    "t": "f",
+                                                    "v": "date_add",
+                                                    "c": [{
+                                                        "t": "f",
+                                                        "v": "yesterday",
+                                                        "c": [{
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                                "placeholder": "timezone",
+                                                                "optional": true,
+                                                                "description": "",
+                                                                "default": "GMT"
+                                                            }
+                                                        }]
+                                                    }, {
+                                                        "t": "opt",
+                                                        "v": "5"
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "-7"
+                                                    }]
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "format",
+                                                        "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "l",
+                                                "v": "thisweek"
+                                            }, {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date",
+                                                    "c": [{
+                                                        "t": "ref",
+                                                        "v": {
+                                                            "r": "cx",
+                                                            "cx": "3c887fa7"
+                                                        }
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "yyyyMMdd"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "The time zone.",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "f",
+                                                    "v": "date_endof",
+                                                    "c": [{
+                                                        "t": "f",
+                                                        "v": "date",
+                                                        "c": [{
+                                                            "t": "ref",
+                                                            "v": {
+                                                                "r": "cx",
+                                                                "cx": "6fec9c78"
+                                                            }
+                                                        }, {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                        }, {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                                "placeholder": "timezone",
+                                                                "optional": true,
+                                                                "description": "The time zone.",
+                                                                "default": "GMT"
+                                                            }
+                                                        }]
+                                                    }, {
+                                                        "t": "opt",
+                                                        "v": "4"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "relative value",
+                                                            "description": "Optional, number of units to add or subtract.",
+                                                            "optional": true
+                                                        }
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "first",
+                                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                            "default": "Sunday (week) or January (year)",
+                                                            "optional": true
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "format",
+                                                        "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "l",
+                                                "v": "thismonth"
+                                            }, {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date",
+                                                    "c": [{
+                                                        "t": "ref",
+                                                        "v": {
+                                                            "r": "cx",
+                                                            "cx": "3c887fa7"
+                                                        }
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "yyyyMMdd"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "The time zone.",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "f",
+                                                    "v": "date_endof",
+                                                    "c": [{
+                                                        "t": "f",
+                                                        "v": "date",
+                                                        "c": [{
+                                                            "t": "ref",
+                                                            "v": {
+                                                                "r": "cx",
+                                                                "cx": "6fec9c78"
+                                                            }
+                                                        }, {
+                                                            "t": "l",
+                                                            "v": "yyyyMMdd"
+                                                        }, {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                                "placeholder": "timezone",
+                                                                "optional": true,
+                                                                "description": "The time zone.",
+                                                                "default": "GMT"
+                                                            }
+                                                        }]
+                                                    }, {
+                                                        "t": "opt",
+                                                        "v": "3"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "relative value",
+                                                            "description": "Optional, number of units to add or subtract.",
+                                                            "optional": true
+                                                        }
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "first",
+                                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                            "default": "Sunday (week) or January (year)",
+                                                            "optional": true
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "format",
+                                                        "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "l",
+                                                "v": "_default_"
+                                            }, {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date",
+                                                    "c": [{
+                                                        "t": "ref",
+                                                        "v": {
+                                                            "r": "cx",
+                                                            "cx": "3c887fa7"
+                                                        }
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "yyyyMMdd"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "The time zone.",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "f",
+                                                    "v": "date",
+                                                    "c": [{
+                                                        "t": "ref",
+                                                        "v": {
+                                                            "r": "cx",
+                                                            "cx": "6fec9c78"
+                                                        }
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "yyyyMMdd"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "The time zone.",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "format",
+                                                        "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "case",
+                                                    "repeats": true,
+                                                    "description": ""
+                                                }
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "case",
+                                                    "repeats": true,
+                                                    "description": ""
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyy-MM-dd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "description": "",
+                                                "default": "GMT",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "d",
+                                        "v": {
+                                            "id": "03b7de185b3626277e0cKavyaMallur9",
+                                            "a": "kf:names(.)"
+                                        }
+                                    }, {
+                                        "t": "f",
+                                        "v": "map",
+                                        "c": [{
+                                            "t": "d",
+                                            "v": {
+                                                "id": "03b7de185b3626277e0cKavyaMallur9",
+                                                "a": "kf:names(.)"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "HSDate"
+                                        }, {
+                                            "t": "f",
+                                            "v": "sum",
+                                            "c": [{
+                                                "t": "f",
+                                                "v": "datasource",
+                                                "c": [{
+                                                    "t": "l",
+                                                    "v": "03b7de185b3626277e0cKavyaMallur9"
+                                                }, {
+                                                    "t": "f",
+                                                    "v": "concat",
+                                                    "c": [{
+                                                        "t": "l",
+                                                        "v": "/*[name()='"
+                                                    }, {
+                                                        "t": "var",
+                                                        "v": "HSDate"
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "']/leads"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "data",
+                                                            "repeats": true,
+                                                            "description": "1 or more items."
+                                                        }
+                                                    }]
+                                                }]
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "data",
+                                                    "repeats": true,
+                                                    "description": "A list of 1 or more numeric items."
+                                                }
+                                            }]
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "0"
+                                }, {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [{
+                                        "t": "ref",
+                                        "v": {
+                                            "r": "cx",
+                                            "cx": "590dfa96"
+                                        }
+                                    }]
+                                }]
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+                    ]
+                ],
+                "seriesName": "Last Period",
+                "renderer": "line",
+                "lineWeight": "2",
+                "axis": "124d1e35",
+                "overrideColor": true,
+                "color": "cx-theme_888"
+            }, {
+                "type": "series_data",
+                "role": "series",
+                "id": "017c0c10",
+                "displayName": "Target",
+                "fmt": "num",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "cumulative(repeat((($HSLeadsTarget/count_days(date_startof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"3\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"3\")))),count((datevalue(switch($HSPeriod,\"today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"thisweek\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"4\")),\"thismonth\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"3\")),\"_default_\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyyMMdd\")))))",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "cumulative",
+                            "c": [{
+                                "t": "f",
+                                "v": "repeat",
+                                "c": [{
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [{
+                                        "t": "expr",
+                                        "v": false,
+                                        "c": [{
+                                            "t": "var",
+                                            "v": "HSLeadsTarget"
+                                        }, {
+                                            "t": "o",
+                                            "v": "/"
+                                        }, {
+                                            "t": "f",
+                                            "v": "count_days",
+                                            "c": [{
+                                                "t": "f",
+                                                "v": "date_startof",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date",
+                                                    "c": [{
+                                                        "t": "ref",
+                                                        "v": {
+                                                            "r": "cx",
+                                                            "cx": "33f4142e"
+                                                        }
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "yyyyMMdd"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "The time zone.",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "opt",
+                                                    "v": "3"
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "relative value",
+                                                        "description": "Number of units to add or subtract.",
+                                                        "optional": true
+                                                    }
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "first",
+                                                        "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                        "default": "Sunday (week) or January (year)",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "f",
+                                                "v": "date_endof",
+                                                "c": [{
+                                                    "t": "f",
+                                                    "v": "date",
+                                                    "c": [{
+                                                        "t": "ref",
+                                                        "v": {
+                                                            "r": "cx",
+                                                            "cx": "e67669c2"
+                                                        }
+                                                    }, {
+                                                        "t": "l",
+                                                        "v": "yyyyMMdd"
+                                                    }, {
+                                                        "t": "a",
+                                                        "v": null,
+                                                        "arg_obj": {
+                                                            "placeholder": "timezone",
+                                                            "optional": true,
+                                                            "description": "The time zone.",
+                                                            "default": "GMT"
+                                                        }
+                                                    }]
+                                                }, {
+                                                    "t": "opt",
+                                                    "v": "3"
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "relative value",
+                                                        "description": "Optional, number of units to add or subtract.",
+                                                        "optional": true
+                                                    }
+                                                }, {
+                                                    "t": "a",
+                                                    "v": null,
+                                                    "arg_obj": {
+                                                        "placeholder": "first",
+                                                        "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                        "default": "Sunday (week) or January (year)",
+                                                        "optional": true
+                                                    }
+                                                }]
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "exclude DOW",
+                                                    "description": "1 or more days of week to exclude from the count.",
+                                                    "optional": true
+                                                }
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "holidays",
+                                                    "optional": true,
+                                                    "description": "1 or more epoch dates to exclude from count."
+                                                }
+                                            }]
+                                        }]
+                                    }]
+                                }, {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [{
+                                        "t": "ref",
+                                        "v": {
+                                            "r": "cx",
+                                            "cx": "590dfa96"
+                                        }
+                                    }]
+                                }]
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+                    ]
+                ],
+                "seriesName": "Target",
+                "renderer": "line",
+                "lineWeight": "1",
+                "lineDashes": "ShortDot",
+                "axis": "124d1e35"
+            }, {
+                "type": "chart_axis",
+                "role": "axis_x",
+                "id": "590dfa96",
+                "displayName": "Dates",
+                "fmt": "dat",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    },
+                    "dateInputFormat": "yyyyMMdd",
+                    "dateFormat": "custom",
+                    "dateFormatCustom": "MMM d"
+                },
+                "formulas": [{
+                    "txt": "datevalue(switch($HSPeriod,\"today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"thisweek\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"4\")),\"thismonth\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date_endof(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),\"3\")),\"_default_\",daterange(date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyyMMdd\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "HSPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "today"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_add",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "5"
+                                        }, {
+                                            "t": "l",
+                                            "v": "-6"
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_add",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "yesterday",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "5"
+                                        }, {
+                                            "t": "l",
+                                            "v": "-6"
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "yesterday",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date",
+                                        "c": [{
+                                            "t": "ref",
+                                            "v": {
+                                                "r": "cx",
+                                                "cx": "33f4142e"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyyMMdd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "The time zone.",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "date_endof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "date",
+                                            "c": [{
+                                                "t": "ref",
+                                                "v": {
+                                                    "r": "cx",
+                                                    "cx": "e67669c2"
+                                                }
+                                            }, {
+                                                "t": "l",
+                                                "v": "yyyyMMdd"
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "The time zone.",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "4"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "description": "Optional, number of units to add or subtract.",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                "default": "Sunday (week) or January (year)",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date",
+                                        "c": [{
+                                            "t": "ref",
+                                            "v": {
+                                                "r": "cx",
+                                                "cx": "33f4142e"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyyMMdd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "The time zone.",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "date_endof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "date",
+                                            "c": [{
+                                                "t": "ref",
+                                                "v": {
+                                                    "r": "cx",
+                                                    "cx": "e67669c2"
+                                                }
+                                            }, {
+                                                "t": "l",
+                                                "v": "yyyyMMdd"
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "The time zone.",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "3"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "description": "Optional, number of units to add or subtract.",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                "default": "Sunday (week) or January (year)",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "_default_"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date",
+                                        "c": [{
+                                            "t": "ref",
+                                            "v": {
+                                                "r": "cx",
+                                                "cx": "33f4142e"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyyMMdd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "The time zone.",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "date",
+                                        "c": [{
+                                            "t": "ref",
+                                            "v": {
+                                                "r": "cx",
+                                                "cx": "e67669c2"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyyMMdd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "The time zone.",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                    [
+                    ]
+                ],
+                "label": "Dates",
+                "showAxis": false,
+                "labelAngle": "-45",
+                "labelDrop": "2"
+            }, {
+                "type": "chart_axis",
+                "role": "axis_y",
+                "id": "124d1e35",
+                "displayName": "Leads Count",
+                "renamed": true,
+                "fmt": "num",
+                "formulas": [],
+                "data": [],
+                "dataDisabled": true,
+                "label": "Untitled",
+                "showAxis": false,
+                "originLine": false,
+                "labelDrop": 0,
+                "grid": true
+            }]
+        }, {
+            "type": "label",
+            "id": "fb92b0df",
+            "displayName": "Leads (This Period)",
+            "layoutConfig": {
+                "x": 0,
+                "y": 1
+            },
+            "renamed": true,
+            "size": "3",
+            "fmt": "txt",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                }
+            },
+            "formulas": [{
+                "txt": "sum(select(map(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"HSDate\",sum(datasource(\"03b7de185b3626277e0cKavyaMallur9\",concat(\"/*[name()='\",$HSDate,\"']/leads\")))),between(date_convert(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"yyyy-MM-dd\",\"yyyyMMdd\"),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())))))",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "sum",
+                        "c": [{
+                            "t": "f",
+                            "v": "select",
+                            "c": [{
+                                "t": "f",
+                                "v": "map",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "kf:names(.)"
+                                    }
+                                }, {
+                                    "t": "l",
+                                    "v": "HSDate"
+                                }, {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "datasource",
+                                        "c": [{
+                                            "t": "l",
+                                            "v": "03b7de185b3626277e0cKavyaMallur9"
+                                        }, {
+                                            "t": "f",
+                                            "v": "concat",
+                                            "c": [{
+                                                "t": "l",
+                                                "v": "/*[name()='"
+                                            }, {
+                                                "t": "var",
+                                                "v": "HSDate"
+                                            }, {
+                                                "t": "l",
+                                                "v": "']/leads"
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "data",
+                                                    "repeats": true,
+                                                    "description": "1 or more items."
+                                                }
+                                            }]
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "data",
+                                            "repeats": true,
+                                            "description": "A list of 1 or more numeric items."
+                                        }
+                                    }]
+                                }]
+                            }, {
+                                "t": "f",
+                                "v": "between",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "03b7de185b3626277e0cKavyaMallur9",
+                                            "a": "kf:names(.)"
+                                        }
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyy-MM-dd"
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyyMMdd"
+                                    }]
+                                }, {
+                                    "t": "ref",
+                                    "v": {
+                                        "r": "cx",
+                                        "cx": "33f4142e"
+                                    }
+                                }, {
+                                    "t": "ref",
+                                    "v": {
+                                        "r": "cx",
+                                        "cx": "e67669c2"
+                                    }
+                                }]
+                            }]
+                        }, {
+                            "t": "a",
+                            "v": null,
+                            "arg_obj": {
+                                "placeholder": "data",
+                                "repeats": true,
+                                "description": "A list of 1 or more numeric items."
+                            }
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "align": "c",
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "74a043db",
+            "displayName": "Leads Delta",
+            "layoutConfig": {
+                "x": 0,
+                "y": 2
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "pct",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                },
+                "precision": "1"
+            },
+            "conditions": [{
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    },
+                    "type": "gt",
+                    "right": {
+                        "raw": "0"
+                    }
+                }],
+                "reactions": [{
+                    "type": "icon",
+                    "value": "ind-triangle-up-green",
+                    "isScalar": true
+                }]
+            }, {
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    },
+                    "type": "lt",
+                    "right": {
+                        "raw": "0"
+                    }
+                }],
+                "reactions": [{
+                    "type": "icon",
+                    "value": "ind-triangle-down-red",
+                    "isScalar": true
+                }]
+            }, {
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    },
+                    "type": "eq",
+                    "right": {
+                        "raw": "0"
+                    }
+                }],
+                "reactions": [{
+                    "type": "icon",
+                    "value": "ind-blank",
+                    "isScalar": true
+                }]
+            }],
+            "formulas": [{
+                "txt": "replace(((sum(select(map(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"HSDate\",sum(datasource(\"03b7de185b3626277e0cKavyaMallur9\",concat(\"/*[name()='\",$HSDate,\"']/leads\")))),between(date_convert(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"yyyy-MM-dd\",\"yyyyMMdd\"),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",today(),\"yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\"),\"last30days\",date_add(today(),\"5\",\"-30\")),\"yyyyMMdd\"),blank())),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank()))))))/(sum(select(map(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"HSDate\",sum(datasource(\"03b7de185b3626277e0cKavyaMallur9\",concat(\"/*[name()='\",$HSDate,\"']/leads\")))),between(date_convert(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"yyyy-MM-dd\",\"yyyyMMdd\"),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-60\")),\"yyyyMMdd\"),blank())),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-31\")),\"yyyyMMdd\"),blank()))))))-\"1\"),\"Infinity\",blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "replace",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "ref",
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "fb92b0df"
+                                }
+                            }, {
+                                "t": "o",
+                                "v": "/"
+                            }, {
+                                "t": "ref",
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "ef1c6c1d"
+                                }
+                            }, {
+                                "t": "o",
+                                "v": "-"
+                            }, {
+                                "t": "l",
+                                "v": "1"
+                            }]
+                        }, {
+                            "t": "l",
+                            "v": "Infinity"
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "align": "c",
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "ef1c6c1d",
+            "displayName": "Leads (Last Period)",
+            "layoutConfig": {
+                "x": 0,
+                "y": 3
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "num",
+            "fmtArgs": {
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                },
+                "prefix": "vs ",
+                "suffix": " (prev.)"
+            },
+            "formulas": [{
+                "txt": "sum(select(map(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"HSDate\",sum(datasource(\"03b7de185b3626277e0cKavyaMallur9\",concat(\"/*[name()='\",$HSDate,\"']/leads\")))),between(date_convert(03b7de185b3626277e0cKavyaMallur9@kf:names(.);,\"yyyy-MM-dd\",\"yyyyMMdd\"),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-60\")),\"yyyyMMdd\"),blank())),(if((count(03b7de185b3626277e0cKavyaMallur9@//*;)>\"0\"),datevalue(switch($HSPeriod,\"today\",yesterday(),\"yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\"),\"last30days\",date_add(today(),\"5\",\"-31\")),\"yyyyMMdd\"),blank())))))",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "sum",
+                        "c": [{
+                            "t": "f",
+                            "v": "select",
+                            "c": [{
+                                "t": "f",
+                                "v": "map",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "03b7de185b3626277e0cKavyaMallur9",
+                                        "a": "kf:names(.)"
+                                    }
+                                }, {
+                                    "t": "l",
+                                    "v": "HSDate"
+                                }, {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "datasource",
+                                        "c": [{
+                                            "t": "l",
+                                            "v": "03b7de185b3626277e0cKavyaMallur9"
+                                        }, {
+                                            "t": "f",
+                                            "v": "concat",
+                                            "c": [{
+                                                "t": "l",
+                                                "v": "/*[name()='"
+                                            }, {
+                                                "t": "var",
+                                                "v": "HSDate"
+                                            }, {
+                                                "t": "l",
+                                                "v": "']/leads"
+                                            }, {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "data",
+                                                    "repeats": true,
+                                                    "description": "1 or more items."
+                                                }
+                                            }]
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "data",
+                                            "repeats": true,
+                                            "description": "A list of 1 or more numeric items."
+                                        }
+                                    }]
+                                }]
+                            }, {
+                                "t": "f",
+                                "v": "between",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "03b7de185b3626277e0cKavyaMallur9",
+                                            "a": "kf:names(.)"
+                                        }
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyy-MM-dd"
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyyMMdd"
+                                    }]
+                                }, {
+                                    "t": "ref",
+                                    "v": {
+                                        "r": "cx",
+                                        "cx": "3c887fa7"
+                                    }
+                                }, {
+                                    "t": "ref",
+                                    "v": {
+                                        "r": "cx",
+                                        "cx": "6fec9c78"
+                                    }
+                                }]
+                            }]
+                        }, {
+                            "t": "a",
+                            "v": null,
+                            "arg_obj": {
+                                "placeholder": "data",
+                                "repeats": true,
+                                "description": "A list of 1 or more numeric items."
+                            }
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+                [
+                ]
+            ],
+            "align": "c",
+            "font_colour": "cx-color_aaa",
+            "font_style": "regular",
+            "wrap": true
+        }],
+        "rows": 5,
+        "cols": 2,
+        "widths": [{
+            "x": 0,
+            "w": "30%"
+        }],
+        "cellData": [{
+            "x": 1,
+            "y": 0,
+            "h": 5,
+            "alignment": 1
+        }, {
+            "x": 1,
+            "y": 1
+        }, {
+            "x": 0,
+            "y": 0,
+            "alignment": 1,
+            "cellPadding": [
+                5,
+                5,
+                0,
+                5
+            ]
+        }, {
+            "x": 0,
+            "y": 1,
+            "cellPadding": 0,
+            "alignment": 2
+        }, {
+            "x": 0,
+            "y": 2,
+            "cellPadding": 0,
+            "alignment": 2
+        }, {
+            "x": 0,
+            "y": 3,
+            "cellPadding": [
+                5,
+                0,
+                0,
+                0
+            ]
+        }]
+    }]
+}
