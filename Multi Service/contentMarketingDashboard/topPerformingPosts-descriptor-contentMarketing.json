@@ -386,15 +386,15 @@
   "datasources": {
     "googleAnalytics-01": {
       "service": "google_analytics",
-      "libraryAlias": "GABlogPageviews",
-      "name": "Google Analytics Blog Pageviews",
-      "description": "Track blog pageviews, users and sessions over the course of this year. Originates from the Gallery.",
+      "libraryAlias": "GABlogPageviewsLast365Days",
+      "name": "Google Analytics Blog Pageviews (Last 365 Days)",
+      "description": "Track blog pageviews, users and sessions over the last 365 days. Originates from the Gallery.",
       "type": "google_analytics",
       "format": "csv",
       "refreshInterval": 14400,
       "props": {
-        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:pagePath&metrics=ga:users,ga:sessions,ga:pageviews&start-date={date.startOfYear}&end-date={date.today}&max-results=10000&filters=ga:pagePath=~/blog/*",
-        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:pagePath&metrics=ga:users,ga:sessions,ga:pageviews&start-date={date.startOfYear}&end-date={date.today}&max-results=10000&filters=ga:pagePath=~/blog/*",
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:pagePath&metrics=ga:users,ga:sessions,ga:pageviews&start-date=365daysAgo&end-date=today&max-results=10000&filters=ga:pagePath=~/blog/*",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:pagePath&metrics=ga:users,ga:sessions,ga:pageviews&start-date=365daysAgo&end-date=today&max-results=10000&filters=ga:pagePath=~/blog/*",
         "max_pages": "10",
         "mode": "Advanced",
         "profile": "{{ds.google_analytics.profileId}}"
@@ -402,15 +402,15 @@
     },
     "googleAnalytics-02": {
       "service": "google_analytics",
-      "libraryAlias": "GAReverseGoalPath",
-      "name": "Google Analytics Goal Completion (This Year)",
-      "description": "Track your Google Analytics goal completions over the course of this year. Originates from the Gallery.",
+      "libraryAlias": "GAReverseGoalPathLast365Days",
+      "name": "Google Analytics Goal Completion (Last 365 Days)",
+      "description": "Track your Google Analytics goal completions over the last 365 days. Originates from the Gallery.",
       "type": "google_analytics",
       "format": "csv",
       "refreshInterval": 14400,
       "props": {
-        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A{{ds.google_analytics.profileId}}&start-date={date.startOfYear}&end-date={date.today}&metrics=ga%3Agoal{{ds.google_analytics.goalId}}Completions&dimensions=ga%3AgoalCompletionLocation%2Cga%3AgoalPreviousStep1%2Cga%3AgoalPreviousStep2%2Cga%3AgoalPreviousStep3&sort=-ga%3Agoal{{ds.google_analytics.goalId}}Completions&max-results=10000",
-        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A{{ds.google_analytics.profileId}}&start-date={date.startOfYear}&end-date={date.today}&metrics=ga%3Agoal{{ds.google_analytics.goalId}}Completions&dimensions=ga%3AgoalCompletionLocation%2Cga%3AgoalPreviousStep1%2Cga%3AgoalPreviousStep2%2Cga%3AgoalPreviousStep3&sort=-ga%3Agoal{{ds.google_analytics.goalId}}Completions&max-results=10000",
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=365daysAgo&end-date=today&metrics=ga:goal{{ds.google_analytics.goalId}}Completions&dimensions=ga:goalCompletionLocation,ga:goalPreviousStep1&sort=-ga:goal{{ds.google_analytics.goalId}}Completions&max-results=10000",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&start-date=365daysAgo&end-date=today&metrics=ga:goal{{ds.google_analytics.goalId}}Completions&dimensions=ga:goalCompletionLocation,ga:goalPreviousStep1&sort=-ga:goal{{ds.google_analytics.goalId}}Completions&max-results=10000",
         "max_pages": "10",
         "mode": "Advanced",
         "profile": "{{ds.google_analytics.profileId}}"
