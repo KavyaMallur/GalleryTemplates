@@ -1,0 +1,538 @@
+{
+   "title": "Twitter Ads Clickthrough Rate (Last 7 Days)",
+   "id": "3d08d6a03995205778f0de9ec3fe3dd9",
+   "useSamePadding": false,
+   "padding": [
+      10,
+      10,
+      "20",
+      10
+   ],
+   "workspace": {
+      "datasources": [
+         "4ef4d6e659ce67b6e0b6doogeraspilk",
+         "f696e1c849fc167b448ddoogeraspilk"
+      ],
+      "dimensions": {
+         "w": 829
+      }
+   },
+   "datasourceProps": [
+      "AWKSCampaignId",
+      "AWKSdynperiod",
+      "AWKSClient"
+   ],
+   "components": [
+      {
+         "type": "label",
+         "id": "99befd8e",
+         "displayName": "Campaign Name",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
+         "renamed": true,
+         "size": "1",
+         "fmt": "raw",
+         "fmtArgs": {
+            "prefix": "Campaign: ",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "concat(\"<b>\",lookup(f696e1c849fc167b448ddoogeraspilk@/data/id;,4ef4d6e659ce67b6e0b6doogeraspilk@/data/id;,4ef4d6e659ce67b6e0b6doogeraspilk@/data/name;),\"</b>\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f696e1c849fc167b448ddoogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "4ef4d6e659ce67b6e0b6doogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "4ef4d6e659ce67b6e0b6doogeraspilk",
+                                       "a": "/data/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true,
+                                 "description": "1 or more items."
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "gauge",
+         "id": "f4057efd",
+         "displayName": "Gauge",
+         "layoutConfig": {
+            "y": 0,
+            "x": 0
+         },
+         "size": "2",
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "98ab5dda"
+                     },
+                     "type": "gteq",
+                     "right": {
+                        "cx": "4dcb4349"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "value": "cx-theme_green_3",
+                     "type": "color",
+                     "isScalar": true
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "98ab5dda"
+                     },
+                     "type": "lt",
+                     "right": {
+                        "cx": "4dcb4349"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "value": "cx-theme_red_3",
+                     "type": "color",
+                     "isScalar": true
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "98ab5dda",
+               "displayName": "CTR Current Value",
+               "renamed": true,
+               "size": "2",
+               "fmt": "pct",
+               "fmtArgs": {
+                  "precision": "1",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "(sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/impressions;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f696e1c849fc167b448ddoogeraspilk",
+                                             "a": "/data/id_data/metrics/clicks"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "A list of 1 or more numeric items."
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "o",
+                                    "v": "/"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "f696e1c849fc167b448ddoogeraspilk",
+                                             "a": "/data/id_data/metrics/impressions"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "A list of 1 or more numeric items."
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "4dcb4349",
+               "displayName": "CTR Target Value",
+               "renamed": true,
+               "size": "1",
+               "fmt": "pct",
+               "fmtArgs": {
+                  "precision": "1",
+                  "prefix": "Target: ",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if(($twitterAdsCTRTarget=\"\"),(((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/impressions;)))*\"1.25\"),($twitterAdsCTRTarget/\"100\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "var",
+                                          "v": "twitterAdsCTRTarget"
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "="
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ""
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "98ab5dda"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.25"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "var",
+                                          "v": "twitterAdsCTRTarget"
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "100"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "27b13d8f",
+               "displayName": "CTR Min Value",
+               "renamed": true,
+               "size": 1,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "0",
+                              "t": "l"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "816dff2d",
+               "displayName": "CTR Max Value",
+               "renamed": true,
+               "size": 1,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if(((((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/impressions;)))*\"1.25\")>(if(($twitterAdsCTRTarget=\"\"),(((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/impressions;)))*\"1.25\"),($twitterAdsCTRTarget/\"100\")))),(((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/impressions;)))*\"1.25\"),((if(($twitterAdsCTRTarget=\"\"),(((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/clicks;)/sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/impressions;)))*\"1.25\"),($twitterAdsCTRTarget/\"100\")))*\"1.25\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "98ab5dda"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "*"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1.25"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "4dcb4349"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "98ab5dda"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.25"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "4dcb4349"
+                                          }
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "*"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "1.25"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            }
+         ],
+         "gaugeStyle": "hg"
+      },
+      {
+         "type": "panel_grid",
+         "id": "64e129ee",
+         "displayName": "Layout Grid",
+         "layoutConfig": {
+            "y": 1,
+            "x": 0
+         },
+         "components": [
+            {
+               "type": "input",
+               "id": "7508bdf9",
+               "displayName": "Target Input",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "renamed": true,
+               "components": [],
+               "scope": 1,
+               "propName": "twitterAdsCTRTarget",
+               "inputType": 2,
+               "inputLabel": "Target"
+            }
+         ],
+         "rows": 1,
+         "cols": 2,
+         "widths": [
+            {
+               "w": 150,
+               "x": 0
+            }
+         ],
+         "cellData": [
+            {
+               "alignment": 1,
+               "y": 0,
+               "x": 1,
+               "cellPadding": 0
+            },
+            {
+               "y": 0,
+               "x": 0
+            }
+         ]
+      }
+   ]
+}
