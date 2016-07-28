@@ -1,6 +1,6 @@
 {
   "name": "Search Position Improvement Opportunities (Last 30 Days)",
-  "description": "Change me.<br> Originates from the Gallery. (v1.0)",
+  "description": "Discover which pages are listed on page two of Google search results, and optimize those pages to get them ranked higher.<br> Originates from the Gallery. (v1.0)",
   "sampleFormulas": {
     "29873860": {
       "txt": "\"and\"",
@@ -477,7 +477,7 @@
       "type": "simple_rest",
       "format": "json",
       "props": {
-        "body": "{\r\n\"startDate\": \"{date.add(-32).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-3).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"],\r\n\"rowLimit\":\"5000\"}",
+        "body": "{\r\n\"startDate\": \"{date.add(-33).format('yyyy-MM-dd')}\", \r\n\"endDate\": \"{date.add(-2).format('yyyy-MM-dd')}\", \r\n\"dimensions\": [\"query\"],\r\n\"dimensionFilterGroups\": [\r\n{\r\n\"groupType\": \"and\",\r\n\"filters\": [\r\n{\r\n\"dimension\": \"query\",\r\n\"operator\": \"notContains\",\r\n\"expression\": \"{{ds.google_searchConsole.brandName}}\"\r\n}\r\n]\r\n}\r\n],\r\n \"rowLimit\":\"5000\"\r\n}",
         "method": "post",
         "endpoint_url": "https://www.googleapis.com/webmasters/v3/sites/{{ds.google_searchConsole.siteURL}}/searchAnalytics/query",
         "parameters": "[{\"name\":\"content-type\",\"value\":\"application/json\",\"type\":\"header\"}]"
@@ -500,6 +500,15 @@
       "description": "Select a Site URL from the drop-down list.",
       "isRequired": true,
       "urlEncode": true
+    },
+    {
+      "type": "text",
+      "id": "ds.google_searchConsole.brandName",
+      "label": "Brand Name",
+      "description": "Enter the name of your brand.",
+      "isRequired": true,
+      "urlEncode": true,
+      "ghostText": "acme"
     }
   ],
   "queries": [
