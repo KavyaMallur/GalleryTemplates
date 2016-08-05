@@ -1,64 +1,188 @@
 {
-	"name" : "Facebook Demographics",
-	"description" : "Understand the users visiting your page, and identify audience segments that your content resonates with most.<br>Originates from the Gallery (v2.0).",
-	
-
-	"datasources" : {
-		"facebook" : {
-			"service" : "facebook",
-			"libraryAlias" : "facebookDemographics",
-			"name": "Facebook Fans Demographics",
-			"description" : "Aggregated demographic data about the people who like your Page based on the age and gender information they provide in their user profiles. Originates from the Gallery.",
-			"type" : "facebook",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_gender_age/lifetime",
-            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_gender_age/lifetime",
-            	"qtype": "Graph API"
-			}
-		}
-	},
-
-	"dsMappings" : {
-		"facebook" : "a5fdf63c177c3794d529niktawuzhere"	
-	},
-
-	"services" : [
-		{
-			"service" : "facebook"
-		}
-	],
-
-	"datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.facebook.pageId",
-            "label" : "Facebook Page",
-            "description":"Select your company Facebook page from the drop-down list."
+    "name": "Facebook Demographics",
+    "description": "Understand the users visiting your page, and identify audience segments that your content resonates with most.<br>Originates from the Gallery (v2.0).",
+    "sampleFormulas": {
+        "8b5bc7e3-2": {
+            "txt": "array(\"672\",\"18816\",\"153090\",\"119448\",\"59976\",\"6300\",\"2520\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": 672
+                    }, {
+                        "t": "l",
+                        "v": 18816
+                    }, {
+                        "t": "l",
+                        "v": 153090
+                    }, {
+                        "t": "l",
+                        "v": 119448
+                    }, {
+                        "t": "l",
+                        "v": 59976
+                    }, {
+                        "t": "l",
+                        "v": 6300
+                    }, {
+                        "t": "l",
+                        "v": 2520
+                    }]
+                }]
+            }
+        },
+        "2759d640-5": {
+            "txt": "array(\"2730\",\"26754\",\"162162\",\"88452\",\"41769\",\"20475\",\"13923\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": 2730
+                    }, {
+                        "t": "l",
+                        "v": 26754
+                    }, {
+                        "t": "l",
+                        "v": 162162
+                    }, {
+                        "t": "l",
+                        "v": 88452
+                    }, {
+                        "t": "l",
+                        "v": 41769
+                    }, {
+                        "t": "l",
+                        "v": 20475
+                    }, {
+                        "t": "l",
+                        "v": 13923
+                    }]
+                }]
+            }
+        },
+        "ec006d11-1": {
+            "txt": "array(\"0\",\"0\",\"10296\",\"2808\",\"3744\",\"1872\",\"1872\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": 0
+                    }, {
+                        "t": "l",
+                        "v": 0
+                    }, {
+                        "t": "l",
+                        "v": 10296
+                    }, {
+                        "t": "l",
+                        "v": 2808
+                    }, {
+                        "t": "l",
+                        "v": 3744
+                    }, {
+                        "t": "l",
+                        "v": 1872
+                    }, {
+                        "t": "l",
+                        "v": 1872
+                    }]
+                }]
+            }
+        },
+        "b401b201-3": {
+            "txt": "array(\"13-17\",\"18-24\",\"25-34\",\"35-44\",\"45-54\",\"55-64\",\"65+\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "13-17"
+                    }, {
+                        "t": "l",
+                        "v": "18-24"
+                    }, {
+                        "t": "l",
+                        "v": "25-34"
+                    }, {
+                        "t": "l",
+                        "v": "35-44"
+                    }, {
+                        "t": "l",
+                        "v": "45-54"
+                    }, {
+                        "t": "l",
+                        "v": "55-64"
+                    }, {
+                        "t": "l",
+                        "v": "65+"
+                    }]
+                }]
+            }
         }
-    ],
-    "queries": [
-        {
-            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "facebook",
-                "type": "facebook",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
-                    "method": "GET",
-                    "qtype": "Graph API"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.facebook.pageId",
-                    "propField" : "options",
-                    "labels": "/data/name",
-                    "values": "/data/id"
-                }
-            ]
-        }   
-    ]
+    },
+    "datasources": {
+        "facebook": {
+            "service": "facebook",
+            "libraryAlias": "facebookDemographics",
+            "name": "Facebook Fans Demographics",
+            "description": "Aggregated demographic data about the people who like your Page based on the age and gender information they provide in their user profiles. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_gender_age/lifetime",
+                "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_gender_age/lifetime",
+                "qtype": "Graph API"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "facebook": "c"
+    },
+
+    "services": [{
+        "service": "facebook"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook.pageId",
+        "label": "Facebook Page",
+        "description": "Select your company Facebook page from the drop-down list."
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook.pageId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
 }
