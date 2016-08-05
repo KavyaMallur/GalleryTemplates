@@ -1,0 +1,64 @@
+{
+	"name" : "Facebook Demographics",
+	"description" : "Understand the users visiting your page, and identify audience segments that your content resonates with most.<br>Originates from the Gallery (v2.0).",
+	
+
+	"datasources" : {
+		"facebook" : {
+			"service" : "facebook",
+			"libraryAlias" : "facebookDemographics",
+			"name": "Facebook Fans Demographics",
+			"description" : "Aggregated demographic data about the people who like your Page based on the age and gender information they provide in their user profiles. Originates from the Gallery.",
+			"type" : "facebook",
+			"format" : "json",
+			"refreshInterval" : 14400,
+			"props" : {
+				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_gender_age/lifetime",
+            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_gender_age/lifetime",
+            	"qtype": "Graph API"
+			}
+		}
+	},
+
+	"dsMappings" : {
+		"facebook" : "a5fdf63c177c3794d529niktawuzhere"	
+	},
+
+	"services" : [
+		{
+			"service" : "facebook"
+		}
+	],
+
+	"datasourceConfigModel" : [
+        {
+            "type" : "select",
+            "id" : "ds.facebook.pageId",
+            "label" : "Facebook Page",
+            "description":"Select your company Facebook page from the drop-down list."
+        }
+    ],
+    "queries": [
+        {
+            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+            "connector": {
+                "service": "facebook",
+                "type": "facebook",
+                "format": "json",
+                "props": {
+                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                    "method": "GET",
+                    "qtype": "Graph API"
+                }
+            },
+            "results": [
+                {
+                    "propId" : "ds.facebook.pageId",
+                    "propField" : "options",
+                    "labels": "/data/name",
+                    "values": "/data/id"
+                }
+            ]
+        }   
+    ]
+}
