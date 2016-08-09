@@ -1,0 +1,79 @@
+{
+    "name": "Facebook Ads Video Campaign Overview",
+    "description": "Show Facebook Ads video campaign overview. Originates from the Gallery.",
+    "datasources": {
+        "facebookAds": {
+            "service": "facebook_ads",
+            "libraryAlias": "FacebooksAdsCampaignMetrics(62Days)",
+            "name": "Facebooks Ads Campaign Metrics (62 Days)",
+            "description": "Retrieve the metrics of a specific Facebook Ads campaign. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.campaignId}}/insights?level=ad&time_range[since]={date.add(-62).format('yyyy-MM-dd')}&time_range[until]={date.today}&time_increment=1&fields=campaign_name,campaign_id,adset_id,adset_name,ad_id,ad_name,spend,actions,action_values,ctr,clicks,impressions,reach,cost_per_10_sec_video_view,video_10_sec_watched_actions,video_avg_pct_watched_actions,video_avg_sec_watched_actions&limit=5000",
+                "graphUrl": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.campaignId}}/insights?level=ad&time_range[since]={date.add(-62).format('yyyy-MM-dd')}&time_range[until]={date.today}&time_increment=1&fields=campaign_name,campaign_id,adset_id,adset_name,ad_id,ad_name,spend,actions,action_values,ctr,clicks,impressions,reach,cost_per_10_sec_video_view,video_10_sec_watched_actions,video_avg_pct_watched_actions,video_avg_sec_watched_actions&limit=5000",
+                "qtype": "Graph API"
+            }
+        }
+    },
+    "services": [{
+        "service": "facebook_ads"
+    }],
+    "dsMappings": {
+        "facebookAds": "2c05335fb6b7ae4c4db6doogeraspilk"
+    },
+    "uiVariables": [{
+        "name": "fbAdsPeriod",
+        "value": "-30"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook_ads.accountId",
+        "label": "Account",
+        "description": "Select a Facebook Ads account, and then a corresponding campaign.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.facebook_ads.campaignId",
+        "label": "Campaign",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure the Facebook account you signed in with includes a Facebook Ads account. <br><br>2. From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook_ads",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.6/me/adaccounts?fields=id,name",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook_ads.accountId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "facebook_ads",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.6/{{ds.facebook_ads.accountId}}/campaigns?fields=id,name,created_time,effective_status",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook_ads.campaignId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
+}
