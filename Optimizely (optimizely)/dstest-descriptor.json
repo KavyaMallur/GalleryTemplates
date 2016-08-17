@@ -2,12 +2,12 @@
 	"name" : "Optimizely Experiment Results",
 	"description" : "See the results of your Optimizely experiments at a glance. Originates from the Gallery.",
 
-	"datasources" : { 
+	"datasources" : {
 		"optimizely-01" : {
 			"service" : "optimizely",
-			"libraryAlias" : "DDSExperimentsbyHardcodedProject",
-			"name": "DDS Experiments by Hardcoded Project",
-			"description" : "Retrieve a list of experiments in project {{ds.optimizely.projectId}} Originates from the Gallery.",
+			"libraryAlias" : "test",
+			"name": "Optimizely Project Experiments",
+			"description" : "Retrieve a list of experiments in a project. Originates from the Gallery.",
 			"type" : "simple_rest",
 			"format" : "json",
 			"refreshInterval" : 14400,
@@ -19,14 +19,14 @@
 		},
 		"optimizely-02" : {
 			"service" : "optimizely",
-			"libraryAlias" : "",
-			"name": "DDS Experiments results by props",
-			"description" : "Retrieve a list of experiments in project {{ds.optimizely.projectId}} Originates from the Gallery.",
+			"libraryAlias" : "test2",
+			"name": "Optimizely Experiment Results (dynamic)",
+			"description" : "Retrieve a list of results in an experiment. Originates from the Gallery.",
 			"type" : "simple_rest",
 			"format" : "json",
 			"refreshInterval" : 14400,
 			"props" : {
-				"endpoint_url": "https://www.optimizelyapis.com/experiment/v1/experiments/{props.expID}/results",
+				"endpoint_url": "https://www.optimizelyapis.com/experiment/v1/experiments/{props.experimentID}/results",
             	"method": "get",
             	"parameters": "[{\"name\":\"token\",\"value\":\"{{auth.optimizely.token}}\",\"type\":\"header\"}]"
 			}
@@ -34,9 +34,15 @@
 	},
 
 	"dsMappings" : {
-		"optimizely-01" : "bbc0e68cd67534c540e1doogeraspilk"	
+		"optimizely-01" : "1a774f0ed6c6554e8248doogeraspilk",
+		"optimizely-02" : "df62255cc101f8309de1doogeraspilk"
 	},
-
+	"uiVariables": [
+        {
+            "name":"experimentID",
+            "value":"794045130"
+        }
+    ],
 	"services" : [
 		{
 			"service" : "optimizely"
