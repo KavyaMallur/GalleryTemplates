@@ -1,6 +1,6 @@
 {
-    "name": "Instagram Ads Campaign Overview",
-    "description": "Make sure your Instagram Ads are attracting attention. Drill down and get detailed metrics on each campagin by clicking on an Ad Set name. Originates from the Gallery.",
+    "name": "Instagram Ads Video Campaign Overview",
+    "description": "Make sure your Instagram Ads are attracting attention. Drill down and get detailed video metrics on each campaign by clicking on an Ad Set name. Originates from the Gallery.",
     "sampleFormulas": {
         "b638d1e6": {
             "txt": "\"Klip like a Pro\"",
@@ -1321,8 +1321,8 @@
     "datasources": {
         "facebookAds": {
             "service": "facebook_ads",
-            "libraryAlias": "InstagramAdsCampaignMetrics(62Days)",
-            "name": "Instagram Ads Campaign Metrics (62 Days)",
+            "libraryAlias": "InstagramAdsVideoCampaignMetrics(62Days)",
+            "name": "Instagram Ads Video Campaign Metrics (62 Days)",
             "description": "Retrieve the metrics of a specific Facebook Ads campaign. Originates from the Gallery.",
             "type": "facebook",
             "format": "json",
@@ -1364,7 +1364,7 @@
             "type": "facebook",
             "format": "json",
             "props": {
-                "endpoint_url": "https://graph.facebook.com/v2.6/me/adaccounts?fields=id,name",
+                "endpoint_url": "https://graph.facebook.com/v2.7/me/adaccounts?fields=id,name",
                 "method": "GET",
                 "qtype": "Graph API"
             }
@@ -1382,7 +1382,7 @@
             "type": "facebook",
             "format": "json",
             "props": {
-                "endpoint_url": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.accountId}}/insights?fields=campaign_id,campaign_name&breakdowns=placement&level=campaign&filtering=[{'field':'placement','operator':'IN','value':['instagramstream']}]&time_range[since]={date.add(-62).format('yyyy-MM-dd')}&time_range[until]={date.today}",
+                "endpoint_url": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.accountId}}/insights?fields=campaign_id,campaign_name,objective&breakdowns=placement&level=campaign&filtering=[{'field':'placement','operator':'IN','value':['instagramstream']},{'field':'objective','operator':'IN','value':['VIDEO_VIEWS']}]&time_range[since]={date.add(-62).format('yyyy-MM-dd')}&time_range[until]={date.today}",
                 "method": "GET"
             }
         },
