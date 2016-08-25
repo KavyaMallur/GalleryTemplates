@@ -1,0 +1,1470 @@
+{
+   "title": "Audience Metrics - Dynamic DS",
+   "id": "711010b0627d0ffbb7c0130abcd04e87",
+   "workspace": {
+      "datasources": [
+         "ae364cede23ad08ec0f8natceewzhere",
+         "f8f0d86053e1624eb0f0natceewzhere"
+      ],
+      "dimensions": {
+         "w": 831
+      }
+   },
+   "datasourceProps": [
+      "profile_id"
+   ],
+   "components": [
+      {
+         "type": "input",
+         "id": "0ba61f41-1",
+         "displayName": "User Input Control",
+         "components": [
+            {
+               "type": "proxy",
+               "role": "values",
+               "id": "f6b8c3f9-2",
+               "displayName": "Values",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "array(f8f0d86053e1624eb0f0natceewzhere@/items/id;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "array",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "f8f0d86053e1624eb0f0natceewzhere",
+                                       "a": "/items/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true,
+                                       "description": "0 or more items."
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "labels",
+               "id": "794754f0-3",
+               "displayName": "Labels",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "f8f0d86053e1624eb0f0natceewzhere@/items/name;",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "f8f0d86053e1624eb0f0natceewzhere",
+                                 "a": "/items/name"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            }
+         ],
+         "scope": 1,
+         "propName": "profile_id",
+         "inputType": 1,
+         "inputLabel": "GA Profile"
+      },
+      {
+         "type": "panel_grid",
+         "id": "00f6a9ef",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "1bccc8b8",
+               "displayName": "Start Date",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "dat",
+               "fmtArgs": {
+                  "suffix": " to",
+                  "dateInputFormat": "yyyyMMdd",
+                  "dateFormat": "MMM dd, yyyy",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(date_add(yesterday(),\"5\",($KTPeriod+\"1\")),\"yyyyMMdd\"),blank())",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "count",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                   "a": "A:A"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "yesterday",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "var",
+                                                      "v": "KTPeriod"
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "+"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "1"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMMdd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "blank",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true,
+                                             "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                             "default": "1"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "eefa8b64",
+               "displayName": "End Date",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateInputFormat": "yyyyMMdd",
+                  "dateFormat": "MMM dd, yyyy",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(yesterday(),\"yyyyMMdd\"),blank())",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "if",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "count",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                   "a": "A:A"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": ">"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "yesterday",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true,
+                                                   "description": "",
+                                                   "default": "GMT"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMMdd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "blank",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true,
+                                             "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                             "default": "1"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_style": "regular",
+               "wrap": true
+            },
+            {
+               "type": "input",
+               "id": "849d3174",
+               "displayName": "Drop-Down List",
+               "layoutConfig": {
+                  "x": 2,
+                  "y": 0
+               },
+               "components": [
+                  {
+                     "type": "proxy",
+                     "role": "values",
+                     "id": "6289e0bd",
+                     "displayName": "Period Values",
+                     "renamed": true,
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"-365\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "-365"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "proxy",
+                     "role": "labels",
+                     "id": "7f51a0a9",
+                     "displayName": "Period Labels",
+                     "renamed": true,
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"Last 365 Days\"",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Last 365 Days"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  }
+               ],
+               "scope": 1,
+               "propName": "KTPeriod",
+               "inputType": 1,
+               "defaultValue": "-365"
+            }
+         ],
+         "rows": 1,
+         "cols": 3,
+         "widths": [
+            {
+               "x": 0,
+               "w": 100
+            },
+            {
+               "x": 2,
+               "w": "40%"
+            }
+         ],
+         "cellData": [
+            {
+               "x": 2,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  0,
+                  5,
+                  5
+               ],
+               "alignment": 2
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "cellPadding": 0,
+               "alignment": 1
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "cellPadding": [
+                  0,
+                  0,
+                  0,
+                  5
+               ],
+               "alignment": 1
+            }
+         ]
+      },
+      {
+         "type": "chart_series",
+         "id": "55f2dd96",
+         "displayName": "Series Chart",
+         "layoutConfig": {
+            "y": 0,
+            "x": 0
+         },
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "45482ad5",
+               "displayName": "Sessions",
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "sort(date(select(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),(between(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(date_add(yesterday(),\"5\",($KTPeriod+\"1\")),\"yyyyMMdd\"),blank())),\"6\"),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(yesterday(),\"yyyyMMdd\"),blank())),\"6\")))),\"yyyyMM\"),\"ascnumeric\",select(slice(ae364cede23ad08ec0f8natceewzhere@D:D;),(between(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(date_add(yesterday(),\"5\",($KTPeriod+\"1\")),\"yyyyMMdd\"),blank())),\"6\"),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(yesterday(),\"yyyyMMdd\"),blank())),\"6\")))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "concat",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                               "a": "A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "data",
+                                                         "repeats": true,
+                                                         "description": "1 or more items."
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "concat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                           "a": "B:B"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the number of items sliced off the top.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the position of the last item to be returned.",
+                                                                           "default": "length of the list"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                           "a": "A:A"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the number of items sliced off the top.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the position of the last item to be returned.",
+                                                                           "default": "length of the list"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true,
+                                                                     "description": "1 or more items."
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "1bccc8b8"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "6"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "eefa8b64"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "6"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMM"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true,
+                                             "description": "The time zone.",
+                                             "default": "GMT"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "ascnumeric"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                   "a": "D:D"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true,
+                                                   "description": "Indicates the number of items sliced off the top.",
+                                                   "default": "1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true,
+                                                   "description": "Indicates the position of the last item to be returned.",
+                                                   "default": "length of the list"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "between",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "concat",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                     "a": "B:B"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true,
+                                                                     "description": "Indicates the number of items sliced off the top.",
+                                                                     "default": "1"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true,
+                                                                     "description": "Indicates the position of the last item to be returned.",
+                                                                     "default": "length of the list"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "slice",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                     "a": "A:A"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "start",
+                                                                     "optional": true,
+                                                                     "description": "Indicates the number of items sliced off the top.",
+                                                                     "default": "1"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "end",
+                                                                     "optional": true,
+                                                                     "description": "Indicates the position of the last item to be returned.",
+                                                                     "default": "length of the list"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "data",
+                                                               "repeats": true,
+                                                               "description": "1 or more items."
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "left",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "1bccc8b8"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "6"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "left",
+                                                      "c": [
+                                                         {
+                                                            "t": "ref",
+                                                            "v": {
+                                                               "r": "cx",
+                                                               "cx": "eefa8b64"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "6"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "seriesName": "Sessions",
+               "renderer": "line",
+               "lineStyle": "curve",
+               "lineDashes": "ShortDot",
+               "axis": "7a4aaa05",
+               "overrideColor": true,
+               "color": "cx-theme_blue_1"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "44650237",
+               "displayName": "Period",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "dateInputFormat": "custom",
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "MMM d",
+                  "dateInputFormatCustom": "yyyyMM",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "sort(date(select(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),(between(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(date_add(yesterday(),\"5\",($KTPeriod+\"1\")),\"yyyyMMdd\"),blank())),\"6\"),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(yesterday(),\"yyyyMMdd\"),blank())),\"6\")))),\"yyyyMM\"),\"ascnumeric\",date_convert(select(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),(between(concat(slice(ae364cede23ad08ec0f8natceewzhere@B:B;),slice(ae364cede23ad08ec0f8natceewzhere@A:A;)),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(date_add(yesterday(),\"5\",($KTPeriod+\"1\")),\"yyyyMMdd\"),blank())),\"6\"),left((if((count(ae364cede23ad08ec0f8natceewzhere@A:A;)>\"0\"),datevalue(yesterday(),\"yyyyMMdd\"),blank())),\"6\")))),\"yyyyMM\",\"MMM yyyy\"))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "sort",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "date",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "concat",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                               "a": "A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "data",
+                                                         "repeats": true,
+                                                         "description": "1 or more items."
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "concat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                           "a": "B:B"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the number of items sliced off the top.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the position of the last item to be returned.",
+                                                                           "default": "length of the list"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                           "a": "A:A"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the number of items sliced off the top.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the position of the last item to be returned.",
+                                                                           "default": "length of the list"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true,
+                                                                     "description": "1 or more items."
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "1bccc8b8"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "6"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "eefa8b64"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "6"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMM"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "optional": true,
+                                             "description": "The time zone.",
+                                             "default": "GMT"
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "opt",
+                                    "v": "ascnumeric"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "concat",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                               "a": "B:B"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "slice",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                               "a": "A:A"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "start",
+                                                               "optional": true,
+                                                               "description": "Indicates the number of items sliced off the top.",
+                                                               "default": "1"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "end",
+                                                               "optional": true,
+                                                               "description": "Indicates the position of the last item to be returned.",
+                                                               "default": "length of the list"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "data",
+                                                         "repeats": true,
+                                                         "description": "1 or more items."
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "between",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "concat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                           "a": "B:B"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the number of items sliced off the top.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the position of the last item to be returned.",
+                                                                           "default": "length of the list"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "slice",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "ae364cede23ad08ec0f8natceewzhere",
+                                                                           "a": "A:A"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "start",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the number of items sliced off the top.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "end",
+                                                                           "optional": true,
+                                                                           "description": "Indicates the position of the last item to be returned.",
+                                                                           "default": "length of the list"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true,
+                                                                     "description": "1 or more items."
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "1bccc8b8"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "6"
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "left",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "eefa8b64"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "6"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyyMM"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "MMM yyyy"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "label": "Period",
+               "labelAngle": "-45",
+               "labelDrop": "3"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "7a4aaa05",
+               "displayName": "Sessions",
+               "renamed": true,
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "Users/Sessions",
+               "showLabel": true,
+               "showAxis": false,
+               "labelDrop": 0,
+               "grid": true
+            }
+         ],
+         "height": "5",
+         "customHeight": "260"
+      }
+   ]
+}

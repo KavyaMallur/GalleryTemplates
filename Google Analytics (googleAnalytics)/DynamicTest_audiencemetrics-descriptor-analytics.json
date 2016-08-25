@@ -1,0 +1,54 @@
+{
+  "name": "Audience Metrics - Dynamic DS",
+  "description": "See how your Users, Sessions, and Pageviews trend over time. Originates from the Gallery.",
+  "datasources": {
+    "googleAnalytics-01": {
+      "service": "google_analytics",
+      "libraryAlias": "ProfileIDs",
+      "name": "Profile IDs",
+      "description": "",
+      "type": "simple_rest",
+      "format": "json",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/management/accounts/~all/webproperties/~all/profiles?fields=items(id%2Cname%2Cpermissions%2CwebPropertyId%2CwebsiteUrl)",
+        "method": "get"
+      }
+    },
+    "googleAnalytics-02": {
+      "service": "google_analytics",
+      "libraryAlias": "DDS365Days",
+      "name": "DDS - 365 Days",
+      "description": "",
+      "type": "google_analytics",
+      "format": "csv",
+      "refreshInterval": 14400,
+      "props": {
+        "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{props.profile_id}&start-date={date.add(-365).format()}&end-date=yesterday&metrics=ga:users,ga:sessions,ga:pageviews&dimensions=ga:month,ga:year&sort=-ga:month",
+        "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{props.profile_id}&start-date={date.add(-365).format()}&end-date=yesterday&metrics=ga:users,ga:sessions,ga:pageviews&dimensions=ga:month,ga:year&sort=-ga:month",
+        "max_pages": "1",
+        "mode": "Advanced",
+        "profile": "ga:{props.profile_id}"
+      }
+    }
+  },
+  "uiVariables": [
+    {
+      "name": "KTPeriod",
+      "value": "-365"
+    },
+    {
+      "name": "profile_id",
+      "value": "{{auth.google_analytics.profileId}}"
+    }
+  ],
+  "dsMappings": {
+    "googleAnalytics-01": "f8f0d86053e1624eb0f0natceewzhere",
+    "googleAnalytics-02": "ae364cede23ad08ec0f8natceewzhere"
+  },
+  "services": [
+    {
+      "service": "google_analytics"
+    }
+  ]
+}
