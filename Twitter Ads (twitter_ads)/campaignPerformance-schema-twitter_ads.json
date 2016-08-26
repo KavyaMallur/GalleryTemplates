@@ -1,13 +1,14 @@
 {
    "title": "Twitter Ads Campaign Performance (Last 7 Days)",
-   "id": "9a148b7e435d0818ae103fb497c637b8",
+   "id": "190dfb5e9bfd540a79512ed7bff84214",
    "padding": "10",
    "innerPadding": "10",
    "workspace": {
       "datasources": [
-         "4ef4d6e659ce67b6e0b6doogeraspilk",
-         "13dc372e73798099573cdoogeraspilk",
-         "f696e1c849fc167b448ddoogeraspilk"
+         "3db359ff0426101fa48ddoogeraspilk",
+         "d7e11eb33da969597550doogeraspilk",
+         "6b296fefaec070529c18doogeraspilk",
+         "7fab8855c9cd8ae50a97doogeraspilk"
       ],
       "dimensions": {
          "w": 1372
@@ -19,14 +20,14 @@
          "id": "9c438e89",
          "displayName": "Campaign Name",
          "layoutConfig": {
-            "x": 0,
-            "y": 0
+            "y": 0,
+            "x": 0
          },
          "renamed": true,
          "size": "1",
          "fmt": "raw",
          "fmtArgs": {
-            "prefix": "Campaign: ",
+            "prefix": "",
             "resultMetadata": {
                "ignoreDateFormat": false,
                "isAggregated": false
@@ -34,7 +35,7 @@
          },
          "formulas": [
             {
-               "txt": "concat(\"<b>\",lookup(f696e1c849fc167b448ddoogeraspilk@/data/id;,4ef4d6e659ce67b6e0b6doogeraspilk@/data/id;,4ef4d6e659ce67b6e0b6doogeraspilk@/data/name;),\"</b>\")",
+               "txt": "concat(\"Campaign: \",\"<b>\",lookup(d7e11eb33da969597550doogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/name;),\"</b>\",\" | Objective: \",\"<b>\",lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \"))),\"</b>\")",
                "src": {
                   "t": "expr",
                   "v": false,
@@ -43,6 +44,10 @@
                         "t": "f",
                         "v": "concat",
                         "c": [
+                           {
+                              "t": "l",
+                              "v": "Campaign: "
+                           },
                            {
                               "t": "l",
                               "v": "<b>"
@@ -54,23 +59,98 @@
                                  {
                                     "t": "d",
                                     "v": {
-                                       "id": "f696e1c849fc167b448ddoogeraspilk",
+                                       "id": "d7e11eb33da969597550doogeraspilk",
                                        "a": "/data/id"
                                     }
                                  },
                                  {
                                     "t": "d",
                                     "v": {
-                                       "id": "4ef4d6e659ce67b6e0b6doogeraspilk",
+                                       "id": "3db359ff0426101fa48ddoogeraspilk",
                                        "a": "/data/id"
                                     }
                                  },
                                  {
                                     "t": "d",
                                     "v": {
-                                       "id": "4ef4d6e659ce67b6e0b6doogeraspilk",
+                                       "id": "3db359ff0426101fa48ddoogeraspilk",
                                        "a": "/data/name"
                                     }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "l",
+                              "v": " | Objective: "
+                           },
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "d7e11eb33da969597550doogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                       "a": "/data/campaign_id"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "capitalize",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "substitute",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "lower",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                                         "a": "/data/objective"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "_"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": " "
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "occurrence",
+                                                   "optional": true,
+                                                   "description": "Occurrence of substitution.",
+                                                   "default": "all"
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
                                  }
                               ]
                            },
@@ -100,7 +180,7 @@
       },
       {
          "type": "panel_grid",
-         "id": "4dca6398",
+         "id": "15fb85c52b5a3668644ea28b1a512e46b4ce1e7e",
          "displayName": "Layout Grid",
          "components": [
             {
@@ -124,12 +204,12 @@
                   {
                      "txt": "\"Spend\"",
                      "src": {
-                        "t": "expr",
                         "v": false,
+                        "t": "expr",
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Spend"
+                              "v": "Spend",
+                              "t": "l"
                            }
                         ]
                      }
@@ -144,8 +224,8 @@
                "id": "38132a54",
                "displayName": "Separator",
                "layoutConfig": {
-                  "x": 2,
-                  "y": 0
+                  "y": 0,
+                  "x": 2
                },
                "orientation": "v",
                "line_style": "ShortDot"
@@ -169,14 +249,87 @@
                },
                "formulas": [
                   {
-                     "txt": "\"Conversions\"",
+                     "txt": "lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Conversions"
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "d7e11eb33da969597550doogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                       "a": "/data/campaign_id"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "replace",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "capitalize",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "substitute",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "lower",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                                               "a": "/data/objective"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "_"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": " "
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "occurrence",
+                                                         "optional": true,
+                                                         "description": "Occurrence of substitution.",
+                                                         "default": "all"
+                                                      }
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Custom"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Conversions"
+                                       }
+                                    ]
+                                 }
+                              ]
                            }
                         ]
                      }
@@ -216,14 +369,50 @@
                },
                "formulas": [
                   {
-                     "txt": "\"Cost per Conversion\"",
+                     "txt": "concat(\"Cost per \",substring((lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))),\"0\",\"-1\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Cost per Conversion"
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "Cost per "
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "substring",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "65d8acfa"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true,
+                                       "description": "1 or more items."
+                                    }
+                                 }
+                              ]
                            }
                         ]
                      }
@@ -238,8 +427,8 @@
                "id": "df68310d",
                "displayName": "Separator",
                "layoutConfig": {
-                  "x": 8,
-                  "y": 0
+                  "y": 0,
+                  "x": 8
                },
                "orientation": "v",
                "line_style": "ShortDot"
@@ -249,8 +438,8 @@
                "id": "5b09f8aa",
                "displayName": "Conversion Trend Label",
                "layoutConfig": {
-                  "x": 9,
-                  "y": 0
+                  "y": 0,
+                  "x": 9
                },
                "renamed": true,
                "size": "1",
@@ -263,14 +452,50 @@
                },
                "formulas": [
                   {
-                     "txt": "\"Conversion Trend\"",
+                     "txt": "concat(substring((lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))),\"0\",\"-1\"),\" Trend\")",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Conversion Trend"
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "substring",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "65d8acfa"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": " Trend"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true,
+                                       "description": "1 or more items."
+                                    }
+                                 }
+                              ]
                            }
                         ]
                      }
@@ -306,8 +531,8 @@
                      "reactions": [
                         {
                            "value": "cx-theme_red_3",
-                           "type": "color",
-                           "isScalar": true
+                           "isScalar": true,
+                           "type": "color"
                         }
                      ]
                   },
@@ -326,8 +551,8 @@
                      "reactions": [
                         {
                            "value": "cx-theme_green_3",
-                           "type": "color",
-                           "isScalar": true
+                           "isScalar": true,
+                           "type": "color"
                         }
                      ]
                   },
@@ -354,9 +579,9 @@
                      ],
                      "reactions": [
                         {
-                           "type": "color",
                            "value": "cx-theme_blue_3",
-                           "isScalar": true
+                           "isScalar": true,
+                           "type": "color"
                         }
                      ]
                   }
@@ -371,8 +596,8 @@
                      "size": "2",
                      "fmt": "cur",
                      "fmtArgs": {
-                        "prefix": "",
                         "precision": "0",
+                        "prefix": "",
                         "resultMetadata": {
                            "ignoreDateFormat": false,
                            "isAggregated": false
@@ -380,43 +605,43 @@
                      },
                      "formulas": [
                         {
-                           "txt": "sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))",
+                           "txt": "sum((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "f",
                                     "v": "sum",
+                                    "t": "f",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "d",
                                                 "v": {
-                                                   "id": "f696e1c849fc167b448ddoogeraspilk",
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
                                                    "a": "/data/id_data/metrics/billed_charge_local_micro"
-                                                }
+                                                },
+                                                "t": "d"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "/"
+                                                "v": "/",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1000000"
+                                                "v": "1000000",
+                                                "t": "l"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "a",
                                           "v": null,
+                                          "t": "a",
                                           "arg_obj": {
+                                             "description": "A list of 1 or more numeric items.",
                                              "placeholder": "data",
-                                             "repeats": true,
-                                             "description": "A list of 1 or more numeric items."
+                                             "repeats": true
                                           }
                                        }
                                     ]
@@ -436,8 +661,8 @@
                      "size": "1",
                      "fmt": "num",
                      "fmtArgs": {
-                        "prefix": "Budget: $",
                         "precision": "0",
+                        "prefix": "Budget: $",
                         "resultMetadata": {
                            "ignoreDateFormat": false,
                            "isAggregated": false
@@ -445,84 +670,84 @@
                      },
                      "formulas": [
                         {
-                           "txt": "if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\"))",
+                           "txt": "if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\"))",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "f",
                                     "v": "if",
+                                    "t": "f",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "twitterAdsBudget"
+                                                "v": "twitterAdsBudget",
+                                                "t": "var"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "="
+                                                "v": "=",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": ""
+                                                "v": "",
+                                                "t": "l"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "f",
                                           "v": "sum",
+                                          "t": "f",
                                           "c": [
                                              {
-                                                "t": "expr",
                                                 "v": false,
+                                                "t": "expr",
                                                 "c": [
                                                    {
-                                                      "t": "d",
                                                       "v": {
-                                                         "id": "13dc372e73798099573cdoogeraspilk",
+                                                         "id": "6b296fefaec070529c18doogeraspilk",
                                                          "a": "/data/id_data/metrics/billed_charge_local_micro"
-                                                      }
+                                                      },
+                                                      "t": "d"
                                                    },
                                                    {
-                                                      "t": "o",
-                                                      "v": "/"
+                                                      "v": "/",
+                                                      "t": "o"
                                                    },
                                                    {
-                                                      "t": "l",
-                                                      "v": "1000000"
+                                                      "v": "1000000",
+                                                      "t": "l"
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "a",
                                                 "v": null,
+                                                "t": "a",
                                                 "arg_obj": {
+                                                   "description": "A list of 1 or more numeric items.",
                                                    "placeholder": "data",
-                                                   "repeats": true,
-                                                   "description": "A list of 1 or more numeric items."
+                                                   "repeats": true
                                                 }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "twitterAdsBudget"
+                                                "v": "twitterAdsBudget",
+                                                "t": "var"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "7"
+                                                "v": "7",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -586,17 +811,17 @@
                      },
                      "formulas": [
                         {
-                           "txt": "f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;",
+                           "txt": "d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "d",
                                     "v": {
-                                       "id": "f696e1c849fc167b448ddoogeraspilk",
+                                       "id": "d7e11eb33da969597550doogeraspilk",
                                        "a": "/data/id_data/metrics/conversion_sign_ups/metric"
-                                    }
+                                    },
+                                    "t": "d"
                                  }
                               ]
                            }
@@ -630,15 +855,15 @@
                               {
                                  "txt": "(0)",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "3610b7cf"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  }
@@ -660,29 +885,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"0.9\")",
+                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"0.9\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "563e3cb0"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0.9"
+                                                "v": "0.9",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -720,29 +945,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"0.9\")",
+                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"0.9\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "563e3cb0"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0.9"
+                                                "v": "0.9",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -766,29 +991,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"1.1\")",
+                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"1.1\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "563e3cb0"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.1"
+                                                "v": "1.1",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -826,29 +1051,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"1.1\")",
+                                 "txt": "((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))*\"1.1\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "563e3cb0"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.1"
+                                                "v": "1.1",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -872,17 +1097,17 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;)",
+                                 "txt": "(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;)",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "eb09619a"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  }
@@ -926,7 +1151,8 @@
                      "reactions": [
                         {
                            "value": "cx-theme_green_3",
-                           "type": "color"
+                           "type": "color",
+                           "isScalar": true
                         }
                      ]
                   },
@@ -945,8 +1171,8 @@
                      "reactions": [
                         {
                            "value": "cx-theme_red_3",
-                           "type": "color",
-                           "isScalar": true
+                           "isScalar": true,
+                           "type": "color"
                         }
                      ]
                   },
@@ -973,9 +1199,9 @@
                      ],
                      "reactions": [
                         {
-                           "type": "color",
                            "value": "cx-theme_blue_3",
-                           "isScalar": true
+                           "isScalar": true,
+                           "type": "color"
                         }
                      ]
                   }
@@ -997,7 +1223,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;)",
+                           "txt": "sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1007,10 +1233,10 @@
                                     "v": "sum",
                                     "c": [
                                        {
-                                          "t": "d",
+                                          "t": "ref",
                                           "v": {
-                                             "id": "f696e1c849fc167b448ddoogeraspilk",
-                                             "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                             "r": "cx",
+                                             "cx": "f9fab6db"
                                           }
                                        },
                                        {
@@ -1047,69 +1273,69 @@
                      },
                      "formulas": [
                         {
-                           "txt": "if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\"))",
+                           "txt": "if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\"))",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "f",
                                     "v": "if",
+                                    "t": "f",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "twitterAdsTarget"
+                                                "v": "twitterAdsTarget",
+                                                "t": "var"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "="
+                                                "v": "=",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": ""
+                                                "v": "",
+                                                "t": "l"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "5b520ae9"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.75"
+                                                "v": "1.75",
+                                                "t": "l"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "var",
-                                                "v": "twitterAdsTarget"
+                                                "v": "twitterAdsTarget",
+                                                "t": "var"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "7"
+                                                "v": "7",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -1173,29 +1399,29 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\")",
+                           "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\")",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "0ceecadb"
-                                          }
+                                          },
+                                          "t": "ref"
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "*"
+                                          "v": "*",
+                                          "t": "o"
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "1.75"
+                                          "v": "1.75",
+                                          "t": "l"
                                        }
                                     ]
                                  }
@@ -1231,15 +1457,15 @@
                               {
                                  "txt": "(\"0\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "bafac9c2"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  }
@@ -1261,29 +1487,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "0ceecadb"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0.9"
+                                                "v": "0.9",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -1321,29 +1547,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "0ceecadb"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0.9"
+                                                "v": "0.9",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -1367,29 +1593,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "0ceecadb"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.1"
+                                                "v": "1.1",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -1427,29 +1653,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "0ceecadb"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.1"
+                                                "v": "1.1",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -1473,17 +1699,17 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "(((if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\"))",
+                                 "txt": "(((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\"))",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "225e468a"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  }
@@ -1526,9 +1752,9 @@
                      ],
                      "reactions": [
                         {
-                           "type": "color",
                            "value": "cx-theme_red_3",
-                           "isScalar": true
+                           "isScalar": true,
+                           "type": "color"
                         }
                      ]
                   },
@@ -1546,8 +1772,8 @@
                      ],
                      "reactions": [
                         {
-                           "type": "color",
-                           "value": "cx-theme_green_3"
+                           "value": "cx-theme_green_3",
+                           "type": "color"
                         }
                      ]
                   },
@@ -1574,8 +1800,8 @@
                      ],
                      "reactions": [
                         {
-                           "type": "color",
-                           "value": "cx-theme_blue_3"
+                           "value": "cx-theme_blue_3",
+                           "type": "color"
                         }
                      ]
                   }
@@ -1591,63 +1817,63 @@
                      "fmt": "cur",
                      "fmtArgs": {
                         "precision": "1",
-                        "suffix": "",
                         "resultMetadata": {
                            "ignoreDateFormat": false,
                            "isAggregated": false
-                        }
+                        },
+                        "suffix": ""
                      },
                      "formulas": [
                         {
-                           "txt": "substitute(((sum((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))),\"Infinity\",\"\")",
+                           "txt": "substitute(((sum((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))),\"Infinity\",\"\")",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "f",
                                     "v": "substitute",
+                                    "t": "f",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "8ae18f7f"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "/"
+                                                "v": "/",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "5b520ae9"
-                                                }
+                                                },
+                                                "t": "ref"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "Infinity"
+                                          "v": "Infinity",
+                                          "t": "l"
                                        },
                                        {
-                                          "t": "l",
-                                          "v": ""
+                                          "v": "",
+                                          "t": "l"
                                        },
                                        {
-                                          "t": "a",
                                           "v": null,
+                                          "t": "a",
                                           "arg_obj": {
-                                             "placeholder": "occurrence",
-                                             "optional": true,
+                                             "default": "all",
                                              "description": "Occurrence of substitution.",
-                                             "default": "all"
+                                             "placeholder": "occurrence",
+                                             "optional": true
                                           }
                                        }
                                     ]
@@ -1676,83 +1902,83 @@
                      },
                      "formulas": [
                         {
-                           "txt": "substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\")",
+                           "txt": "substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\")",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "f",
                                     "v": "substitute",
+                                    "t": "f",
                                     "c": [
                                        {
-                                          "t": "f",
                                           "v": "if",
+                                          "t": "f",
                                           "c": [
                                              {
-                                                "t": "expr",
                                                 "v": false,
+                                                "t": "expr",
                                                 "c": [
                                                    {
-                                                      "t": "var",
-                                                      "v": "twitterAdsCPConversionTarget"
+                                                      "v": "twitterAdsCPConversionTarget",
+                                                      "t": "var"
                                                    },
                                                    {
-                                                      "t": "o",
-                                                      "v": "="
+                                                      "v": "=",
+                                                      "t": "o"
                                                    },
                                                    {
-                                                      "t": "l",
-                                                      "v": ""
+                                                      "v": "",
+                                                      "t": "l"
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "expr",
                                                 "v": false,
+                                                "t": "expr",
                                                 "c": [
                                                    {
-                                                      "t": "ref",
                                                       "v": {
                                                          "r": "cx",
                                                          "cx": "563e3cb0"
-                                                      }
+                                                      },
+                                                      "t": "ref"
                                                    },
                                                    {
-                                                      "t": "o",
-                                                      "v": "/"
+                                                      "v": "/",
+                                                      "t": "o"
                                                    },
                                                    {
-                                                      "t": "ref",
                                                       "v": {
                                                          "r": "cx",
                                                          "cx": "0ceecadb"
-                                                      }
+                                                      },
+                                                      "t": "ref"
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "var",
-                                                "v": "twitterAdsCPConversionTarget"
+                                                "v": "twitterAdsCPConversionTarget",
+                                                "t": "var"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "Infinity"
+                                          "v": "Infinity",
+                                          "t": "l"
                                        },
                                        {
-                                          "t": "l",
-                                          "v": ""
+                                          "v": "",
+                                          "t": "l"
                                        },
                                        {
-                                          "t": "a",
                                           "v": null,
+                                          "t": "a",
                                           "arg_obj": {
-                                             "placeholder": "occurrence",
-                                             "optional": true,
+                                             "default": "all",
                                              "description": "Occurrence of substitution.",
-                                             "default": "all"
+                                             "placeholder": "occurrence",
+                                             "optional": true
                                           }
                                        }
                                     ]
@@ -1783,12 +2009,12 @@
                         {
                            "txt": "\"0\"",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "l",
-                                    "v": "0"
+                                    "v": "0",
+                                    "t": "l"
                                  }
                               ]
                            }
@@ -1815,29 +2041,29 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\")",
+                           "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\")",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "3d6f92aa"
-                                          }
+                                          },
+                                          "t": "ref"
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "*"
+                                          "v": "*",
+                                          "t": "o"
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "1.75"
+                                          "v": "1.75",
+                                          "t": "l"
                                        }
                                     ]
                                  }
@@ -1873,15 +2099,15 @@
                               {
                                  "txt": "(\"0\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "8a54227e"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  }
@@ -1903,29 +2129,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "3d6f92aa"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0.9"
+                                                "v": "0.9",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -1963,29 +2189,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "3d6f92aa"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "0.9"
+                                                "v": "0.9",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -2009,29 +2235,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "3d6f92aa"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.1"
+                                                "v": "1.1",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -2069,29 +2295,29 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "expr",
                                           "v": false,
+                                          "t": "expr",
                                           "c": [
                                              {
-                                                "t": "ref",
                                                 "v": {
                                                    "r": "cx",
                                                    "cx": "3d6f92aa"
-                                                }
+                                                },
+                                                "t": "ref"
                                              },
                                              {
-                                                "t": "o",
-                                                "v": "*"
+                                                "v": "*",
+                                                "t": "o"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1.1"
+                                                "v": "1.1",
+                                                "t": "l"
                                              }
                                           ]
                                        }
@@ -2115,17 +2341,17 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "(((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\"))",
+                                 "txt": "(((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\"))",
                                  "src": {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "7d1a5473"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  }
@@ -2144,12 +2370,90 @@
                "gaugeStyle": "hg"
             },
             {
+               "type": "label",
+               "id": "3da3eed0-1",
+               "displayName": "Label 2",
+               "layoutConfig": {
+                  "x": 9,
+                  "y": 1
+               },
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "ref",
+                              "v": {
+                                 "r": "cx",
+                                 "cx": "65d8acfa"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_colour": "cx-color_blue_3",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "18e138f5-2",
+               "displayName": "Label 3",
+               "layoutConfig": {
+                  "x": 10,
+                  "y": 1
+               },
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "(concat(\"Cost per \",substring((lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))),\"0\",\"-1\")))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "ref",
+                              "v": {
+                                 "r": "cx",
+                                 "cx": "858bd129"
+                              }
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "c",
+               "font_colour": "cx-color_888",
+               "wrap": true
+            },
+            {
                "type": "chart_series",
                "id": "0fa4d011",
                "displayName": "Conversion Trend Chart",
                "layoutConfig": {
-                  "x": 9,
-                  "y": 1
+                  "y": 2,
+                  "x": 9
                },
                "renamed": true,
                "components": [
@@ -2157,7 +2461,7 @@
                      "type": "series_data",
                      "role": "series",
                      "id": "f9fab6db",
-                     "displayName": "Conversions",
+                     "displayName": "Objective",
                      "renamed": true,
                      "fmt": "num",
                      "fmtArgs": {
@@ -2168,50 +2472,46 @@
                      },
                      "formulas": [
                         {
-                           "txt": "f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/*[contains(name(),'conversion')]/metric;",
+                           "txt": "switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "f696e1c849fc167b448ddoogeraspilk",
-                                       "a": "/data/id_data/metrics/*[contains(name(),'conversion')]/metric"
-                                    }
-                                 }
-                              ]
-                           }
-                        }
-                     ],
-                     "data": [],
-                     "seriesName": "Conversions",
-                     "axis": "c6aef0f0",
-                     "color": "cx-theme_blue_5"
-                  },
-                  {
-                     "type": "series_data",
-                     "role": "series",
-                     "id": "b6bae765",
-                     "displayName": "Cost per Conversion",
-                     "fmt": "num",
-                     "fmtArgs": {
-                        "resultMetadata": {
-                           "ignoreDateFormat": false,
-                           "isAggregated": false
-                        }
-                     },
-                     "formulas": [
-                        {
-                           "txt": "((f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")/(f696e1c849fc167b448ddoogeraspilk@/data/id_data/metrics/*[contains(name(),'conversion')]/metric;))",
-                           "src": {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "expr",
-                                    "v": false,
+                                    "t": "f",
+                                    "v": "switch",
                                     "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "lookup",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id"
+                                                }
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                                   "a": "/data/campaign_id"
+                                                }
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                                   "a": "/data/objective"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "WEBSITE_CLICKS"
+                                       },
                                        {
                                           "t": "expr",
                                           "v": false,
@@ -2219,8 +2519,157 @@
                                              {
                                                 "t": "d",
                                                 "v": {
-                                                   "id": "f696e1c849fc167b448ddoogeraspilk",
-                                                   "a": "/data/id_data/metrics/billed_charge_local_micro"
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_custom/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_sign_ups/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_downloads/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_purchases/metric"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "WEBSITE_CONVERSIONS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "APP_INSTALLS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "APP_ENGAGEMENTS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "TWEET_ENGAGEMENTS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "FOLLOWERS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/follows"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "LEAD_GENERATION"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/card_engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "VIDEO_VIEWS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_total_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "VIDEO_VIEWS_PREROLL"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_mrc_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "QUALIFIED_IMPRESSIONS"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/qualified_impressions"
                                                 }
                                              },
                                              {
@@ -2229,19 +2678,26 @@
                                              },
                                              {
                                                 "t": "l",
-                                                "v": "1000000"
+                                                "v": "1000"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "/"
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "case",
+                                             "repeats": true,
+                                             "description": ""
+                                          }
                                        },
                                        {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "f9fab6db"
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "case",
+                                             "repeats": true,
+                                             "description": ""
                                           }
                                        }
                                     ]
@@ -2251,13 +2707,80 @@
                         }
                      ],
                      "data": [],
-                     "seriesName": "Cost per Conversion",
+                     "seriesName": "Objective",
+                     "axis": "c6aef0f0",
+                     "color": "cx-theme_blue_5"
+                  },
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "b6bae765",
+                     "displayName": "Cost Per Objective",
+                     "renamed": true,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")/(switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))))",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": false,
+                                    "t": "expr",
+                                    "c": [
+                                       {
+                                          "v": false,
+                                          "t": "expr",
+                                          "c": [
+                                             {
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/billed_charge_local_micro"
+                                                },
+                                                "t": "d"
+                                             },
+                                             {
+                                                "v": "/",
+                                                "t": "o"
+                                             },
+                                             {
+                                                "v": "1000000",
+                                                "t": "l"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "v": "/",
+                                          "t": "o"
+                                       },
+                                       {
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "f9fab6db"
+                                          },
+                                          "t": "ref"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesName": "Cost per Objective",
                      "renderer": "line",
                      "lineWeight": "2",
                      "leaveGaps": true,
                      "axis": "db740a80",
                      "overrideColor": true,
-                     "color": "cx-theme_666"
+                     "color": "cx-theme_888"
                   },
                   {
                      "type": "chart_axis",
@@ -2267,53 +2790,53 @@
                      "renamed": true,
                      "fmt": "dat",
                      "fmtArgs": {
-                        "dateFormat": "custom",
-                        "dateFormatCustom": "MMM d",
                         "dateInputFormat": "custom",
-                        "dateInputFormatCustom": "yyyy-MM-dd",
+                        "dateFormatCustom": "MMM d",
                         "resultMetadata": {
                            "ignoreDateFormat": false,
                            "isAggregated": false
-                        }
+                        },
+                        "dateFormat": "custom",
+                        "dateInputFormatCustom": "yyyy-MM-dd"
                      },
                      "formulas": [
                         {
-                           "txt": "first(daterange(f696e1c849fc167b448ddoogeraspilk@/request/params/start_time;,f696e1c849fc167b448ddoogeraspilk@/request/params/end_time;,\"yyyy-MM-dd\"),\"7\")",
+                           "txt": "first(daterange(d7e11eb33da969597550doogeraspilk@/request/params/start_time;,d7e11eb33da969597550doogeraspilk@/request/params/end_time;,\"yyyy-MM-dd\"),\"7\")",
                            "src": {
-                              "t": "expr",
                               "v": false,
+                              "t": "expr",
                               "c": [
                                  {
-                                    "t": "f",
                                     "v": "first",
+                                    "t": "f",
                                     "c": [
                                        {
-                                          "t": "f",
                                           "v": "daterange",
+                                          "t": "f",
                                           "c": [
                                              {
-                                                "t": "d",
                                                 "v": {
-                                                   "id": "f696e1c849fc167b448ddoogeraspilk",
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
                                                    "a": "/request/params/start_time"
-                                                }
+                                                },
+                                                "t": "d"
                                              },
                                              {
-                                                "t": "d",
                                                 "v": {
-                                                   "id": "f696e1c849fc167b448ddoogeraspilk",
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
                                                    "a": "/request/params/end_time"
-                                                }
+                                                },
+                                                "t": "d"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "yyyy-MM-dd"
+                                                "v": "yyyy-MM-dd",
+                                                "t": "l"
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "7"
+                                          "v": "7",
+                                          "t": "l"
                                        }
                                     ]
                                  }
@@ -2359,15 +2882,16 @@
                      "labelDrop": 0
                   }
                ],
-               "height": "2"
+               "height": "2",
+               "showLegend": false
             },
             {
                "type": "label",
                "id": "f2a9a2db",
                "displayName": "Spend Previous Value",
                "layoutConfig": {
-                  "x": 0,
-                  "y": 5
+                  "y": 5,
+                  "x": 0
                },
                "renamed": true,
                "size": "1",
@@ -2381,43 +2905,43 @@
                },
                "formulas": [
                   {
-                     "txt": "sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))",
+                     "txt": "sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"))",
                      "src": {
-                        "t": "expr",
                         "v": false,
+                        "t": "expr",
                         "c": [
                            {
-                              "t": "f",
                               "v": "sum",
+                              "t": "f",
                               "c": [
                                  {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "d",
                                           "v": {
-                                             "id": "13dc372e73798099573cdoogeraspilk",
+                                             "id": "6b296fefaec070529c18doogeraspilk",
                                              "a": "/data/id_data/metrics/billed_charge_local_micro"
-                                          }
+                                          },
+                                          "t": "d"
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "/"
+                                          "v": "/",
+                                          "t": "o"
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "1000000"
+                                          "v": "1000000",
+                                          "t": "l"
                                        }
                                     ]
                                  },
                                  {
-                                    "t": "a",
                                     "v": null,
+                                    "t": "a",
                                     "arg_obj": {
+                                       "description": "A list of 1 or more numeric items.",
                                        "placeholder": "data",
-                                       "repeats": true,
-                                       "description": "A list of 1 or more numeric items."
+                                       "repeats": true
                                     }
                                  }
                               ]
@@ -2435,8 +2959,8 @@
                "id": "5fa02595",
                "displayName": "Conversions Previous Value",
                "layoutConfig": {
-                  "x": 3,
-                  "y": 5
+                  "y": 5,
+                  "x": 3
                },
                "renamed": true,
                "size": "1",
@@ -2450,7 +2974,7 @@
                },
                "formulas": [
                   {
-                     "txt": "sum(13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;)",
+                     "txt": "sum(switch(lookup(6b296fefaec070529c18doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -2460,11 +2984,229 @@
                               "v": "sum",
                               "c": [
                                  {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "13dc372e73798099573cdoogeraspilk",
-                                       "a": "/data/id_data/metrics/conversion_site_visits/metric"
-                                    }
+                                    "t": "f",
+                                    "v": "switch",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "lookup",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id"
+                                                }
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                                   "a": "/data/campaign_id"
+                                                }
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
+                                                   "a": "/data/objective"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "WEBSITE_CLICKS"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_custom/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_sign_ups/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_downloads/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_purchases/metric"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "WEBSITE_CONVERSIONS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "APP_INSTALLS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "APP_ENGAGEMENTS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "TWEET_ENGAGEMENTS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "FOLLOWERS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/follows"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "LEAD_GENERATION"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/card_engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "VIDEO_VIEWS"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_total_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "VIDEO_VIEWS_PREROLL"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_mrc_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "QUALIFIED_IMPRESSIONS"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/qualified_impressions"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "/"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "1000"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "case",
+                                             "repeats": true,
+                                             "description": ""
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "case",
+                                             "repeats": true,
+                                             "description": ""
+                                          }
+                                       }
+                                    ]
                                  },
                                  {
                                     "t": "a",
@@ -2490,8 +3232,8 @@
                "id": "45901d31",
                "displayName": "CPConversion Previous Value",
                "layoutConfig": {
-                  "x": 6,
-                  "y": 5
+                  "y": 5,
+                  "x": 6
                },
                "renamed": true,
                "size": "1",
@@ -2505,55 +3247,55 @@
                },
                "formulas": [
                   {
-                     "txt": "substitute(((sum((13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum(13dc372e73798099573cdoogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;))),\"Infinity\",\"\")",
+                     "txt": "substitute(((sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum(switch(lookup(6b296fefaec070529c18doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))))),\"Infinity\",\"\")",
                      "src": {
-                        "t": "expr",
                         "v": false,
+                        "t": "expr",
                         "c": [
                            {
-                              "t": "f",
                               "v": "substitute",
+                              "t": "f",
                               "c": [
                                  {
-                                    "t": "expr",
                                     "v": false,
+                                    "t": "expr",
                                     "c": [
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "f2a9a2db"
-                                          }
+                                          },
+                                          "t": "ref"
                                        },
                                        {
-                                          "t": "o",
-                                          "v": "/"
+                                          "v": "/",
+                                          "t": "o"
                                        },
                                        {
-                                          "t": "ref",
                                           "v": {
                                              "r": "cx",
                                              "cx": "5fa02595"
-                                          }
+                                          },
+                                          "t": "ref"
                                        }
                                     ]
                                  },
                                  {
-                                    "t": "l",
-                                    "v": "Infinity"
+                                    "v": "Infinity",
+                                    "t": "l"
                                  },
                                  {
-                                    "t": "l",
-                                    "v": ""
+                                    "v": "",
+                                    "t": "l"
                                  },
                                  {
-                                    "t": "a",
                                     "v": null,
+                                    "t": "a",
                                     "arg_obj": {
-                                       "placeholder": "occurrence",
-                                       "optional": true,
+                                       "default": "all",
                                        "description": "Occurrence of substitution.",
-                                       "default": "all"
+                                       "placeholder": "occurrence",
+                                       "optional": true
                                     }
                                  }
                               ]
@@ -2571,8 +3313,8 @@
                "id": "7b6ef1a9",
                "displayName": "Spend Previous Label",
                "layoutConfig": {
-                  "x": 0,
-                  "y": 6
+                  "y": 6,
+                  "x": 0
                },
                "renamed": true,
                "size": "1",
@@ -2587,12 +3329,12 @@
                   {
                      "txt": "\"Previous\"",
                      "src": {
-                        "t": "expr",
                         "v": false,
+                        "t": "expr",
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Previous"
+                              "v": "Previous",
+                              "t": "l"
                            }
                         ]
                      }
@@ -2608,8 +3350,8 @@
                "id": "a7115aa6",
                "displayName": "Conversions Previous Label",
                "layoutConfig": {
-                  "x": 3,
-                  "y": 6
+                  "y": 6,
+                  "x": 3
                },
                "renamed": true,
                "size": "1",
@@ -2624,12 +3366,12 @@
                   {
                      "txt": "\"Previous\"",
                      "src": {
-                        "t": "expr",
                         "v": false,
+                        "t": "expr",
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Previous"
+                              "v": "Previous",
+                              "t": "l"
                            }
                         ]
                      }
@@ -2645,8 +3387,8 @@
                "id": "a90b0622",
                "displayName": "Spend Previous Label",
                "layoutConfig": {
-                  "x": 6,
-                  "y": 6
+                  "y": 6,
+                  "x": 6
                },
                "renamed": true,
                "size": "1",
@@ -2661,12 +3403,12 @@
                   {
                      "txt": "\"Previous\"",
                      "src": {
-                        "t": "expr",
                         "v": false,
+                        "t": "expr",
                         "c": [
                            {
-                              "t": "l",
-                              "v": "Previous"
+                              "v": "Previous",
+                              "t": "l"
                            }
                         ]
                      }
@@ -2682,8 +3424,8 @@
                "id": "5edc114c",
                "displayName": "Conversions Target",
                "layoutConfig": {
-                  "x": 0,
-                  "y": 7
+                  "y": 7,
+                  "x": 0
                },
                "renamed": true,
                "components": [],
@@ -2697,8 +3439,8 @@
                "id": "a0bdc2bf",
                "displayName": "Conversions Target",
                "layoutConfig": {
-                  "x": 3,
-                  "y": 7
+                  "y": 7,
+                  "x": 3
                },
                "renamed": true,
                "components": [],
@@ -2712,8 +3454,8 @@
                "id": "16a0e73e",
                "displayName": "CPConversion Target",
                "layoutConfig": {
-                  "x": 6,
-                  "y": 7
+                  "y": 7,
+                  "x": 6
                },
                "renamed": true,
                "components": [],
@@ -2723,190 +3465,139 @@
                "inputLabel": "Target"
             }
          ],
-         "rows": 9,
-         "cols": 10,
+         "rows": 8,
+         "cols": 11,
          "widths": [
             {
-               "x": 8,
-               "w": 20
+               "w": 20,
+               "x": 8
             },
             {
-               "x": 2,
-               "w": 20
+               "w": 20,
+               "x": 2
             },
             {
-               "x": 5,
-               "w": 20
+               "w": 20,
+               "x": 5
+            },
+            {
+               "x": 10,
+               "w": 200
             },
             {
                "x": 9,
-               "w": "30%"
+               "w": "17%"
             }
          ],
          "cellData": [
             {
+               "w": 2,
                "y": 0,
-               "cellPadding": 0,
                "x": 0,
-               "w": 2
-            },
-            {
-               "y": 0,
-               "h": 9,
-               "x": 2,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
-                  5
-               ]
-            },
-            {
-               "y": 0,
-               "h": 9,
-               "x": 5,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
-                  5
-               ]
-            },
-            {
-               "x": 8,
-               "y": 0,
-               "h": 9,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
-                  5
-               ]
-            },
-            {
-               "x": 0,
-               "y": 3,
-               "alignment": 1
-            },
-            {
-               "x": 3,
-               "y": 3,
-               "alignment": 1
-            },
-            {
-               "x": 6,
-               "y": 3,
-               "alignment": 1
-            },
-            {
-               "x": 0,
-               "y": 7,
-               "w": 2,
-               "h": 2,
-               "alignment": 1
-            },
-            {
-               "x": 3,
-               "y": 7,
-               "alignment": 1,
-               "w": 2,
-               "h": 2
-            },
-            {
-               "x": 6,
-               "y": 7,
-               "cellPadding": [
-                  5,
-                  5,
-                  5,
-                  5
-               ],
-               "alignment": 1,
-               "w": 2,
-               "h": 2
-            },
-            {
-               "x": 0,
-               "y": 1,
-               "h": 4,
-               "w": 2,
-               "alignment": 1
-            },
-            {
-               "x": 3,
-               "y": 1,
-               "h": 4,
-               "w": 2,
-               "alignment": 1
-            },
-            {
-               "x": 6,
-               "y": 1,
-               "h": 4,
-               "w": 2,
-               "alignment": 1
-            },
-            {
-               "x": 3,
-               "y": 0,
-               "cellPadding": 0,
-               "w": 2
-            },
-            {
-               "x": 6,
-               "y": 0,
-               "cellPadding": 0,
-               "w": 2
-            },
-            {
-               "x": 0,
-               "y": 5,
-               "alignment": 2,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
-                  5
-               ],
-               "w": 2
-            },
-            {
-               "x": 3,
-               "y": 5,
-               "alignment": 2,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
-                  5
-               ],
-               "w": 2
-            },
-            {
-               "x": 6,
-               "y": 5,
-               "alignment": 2,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
-                  5
-               ],
-               "w": 2
-            },
-            {
-               "x": 9,
-               "y": 1,
-               "h": 8,
-               "alignment": 1
-            },
-            {
-               "x": 9,
-               "y": 0,
                "cellPadding": 0
             },
             {
-               "x": 1,
+               "h": 8,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 2
+            },
+            {
+               "h": 8,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 5
+            },
+            {
+               "h": 8,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 8
+            },
+            {
+               "alignment": 1,
+               "y": 4,
+               "x": 0
+            },
+            {
+               "alignment": 1,
+               "y": 4,
+               "x": 3
+            },
+            {
+               "alignment": 1,
+               "y": 4,
+               "x": 6
+            },
+            {
+               "w": 2,
+               "alignment": 1,
+               "y": 7,
+               "x": 0
+            },
+            {
+               "w": 2,
+               "alignment": 1,
+               "y": 7,
+               "x": 3
+            },
+            {
+               "w": 2,
+               "alignment": 1,
+               "y": 7,
+               "cellPadding": [
+                  5,
+                  5,
+                  5,
+                  5
+               ],
+               "x": 6
+            },
+            {
+               "alignment": 1,
+               "y": 2,
+               "x": 0
+            },
+            {
+               "alignment": 1,
+               "y": 2,
+               "x": 3
+            },
+            {
+               "alignment": 1,
+               "y": 2,
+               "x": 6
+            },
+            {
+               "w": 2,
+               "y": 0,
+               "cellPadding": 0,
+               "x": 3
+            },
+            {
+               "w": 2,
+               "y": 0,
+               "cellPadding": 0,
+               "x": 6
+            },
+            {
+               "w": 2,
+               "alignment": 2,
                "y": 5,
                "cellPadding": [
                   5,
@@ -2914,10 +3605,11 @@
                   0,
                   5
                ],
-               "alignment": 2
+               "x": 0
             },
             {
-               "x": 4,
+               "w": 2,
+               "alignment": 2,
                "y": 5,
                "cellPadding": [
                   5,
@@ -2925,95 +3617,197 @@
                   0,
                   5
                ],
-               "alignment": 2
+               "x": 3
             },
             {
-               "x": 7,
+               "w": 2,
+               "alignment": 2,
                "y": 5,
                "cellPadding": [
-                  0,
+                  5,
                   5,
                   0,
                   5
                ],
-               "alignment": 2
+               "x": 6
             },
             {
-               "x": 0,
-               "y": 2
-            },
-            {
-               "x": 6,
-               "y": 8
-            },
-            {
-               "x": 3,
-               "y": 8
-            },
-            {
-               "x": 0,
-               "y": 8
-            },
-            {
-               "x": 0,
-               "y": 6,
+               "alignment": 1,
+               "h": 6,
+               "y": 2,
+               "x": 9,
+               "w": 2,
                "cellPadding": [
                   0,
                   5,
-                  0,
+                  5,
                   5
-               ],
+               ]
+            },
+            {
+               "y": 0,
+               "cellPadding": 0,
+               "x": 9,
                "w": 2
             },
             {
-               "x": 1,
+               "alignment": 2,
+               "y": 5,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 1
+            },
+            {
+               "alignment": 2,
+               "y": 5,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 4
+            },
+            {
+               "alignment": 2,
+               "y": 5,
+               "cellPadding": [
+                  0,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 7
+            },
+            {
+               "y": 3,
+               "x": 0
+            },
+            {
+               "w": 2,
+               "y": 6,
+               "cellPadding": [
+                  0,
+                  5,
+                  20,
+                  5
+               ],
+               "x": 0
+            },
+            {
                "y": 6,
                "cellPadding": [
                   0,
                   5,
                   0,
+                  5
+               ],
+               "x": 1
+            },
+            {
+               "w": 2,
+               "y": 6,
+               "cellPadding": [
+                  0,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 3
+            },
+            {
+               "y": 6,
+               "cellPadding": [
+                  0,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 4
+            },
+            {
+               "w": 2,
+               "y": 6,
+               "cellPadding": [
+                  0,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 6
+            },
+            {
+               "y": 6,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ],
+               "x": 7
+            },
+            {
+               "x": 9,
+               "y": 1,
+               "cellPadding": [
+                  10,
+                  5,
+                  0,
+                  0
+               ],
+               "alignment": 2
+            },
+            {
+               "x": 10,
+               "y": 1,
+               "cellPadding": [
+                  10,
+                  5,
+                  0,
+                  10
+               ],
+               "alignment": 2
+            },
+            {
+               "x": 0,
+               "y": 1,
+               "w": 2,
+               "h": 4,
+               "alignment": 2,
+               "cellPadding": [
+                  0,
+                  5,
+                  15,
                   5
                ]
             },
             {
                "x": 3,
-               "y": 6,
+               "y": 1,
+               "w": 2,
+               "h": 4,
+               "alignment": 2,
                "cellPadding": [
                   0,
                   5,
-                  0,
-                  5
-               ],
-               "w": 2
-            },
-            {
-               "x": 4,
-               "y": 6,
-               "cellPadding": [
-                  0,
-                  5,
-                  0,
+                  15,
                   5
                ]
             },
             {
                "x": 6,
-               "y": 6,
+               "y": 1,
+               "w": 2,
+               "h": 4,
+               "alignment": 2,
                "cellPadding": [
                   0,
                   5,
-                  0,
-                  5
-               ],
-               "w": 2
-            },
-            {
-               "x": 7,
-               "y": 6,
-               "cellPadding": [
-                  5,
-                  5,
-                  0,
+                  15,
                   5
                ]
             }
