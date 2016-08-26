@@ -1,0 +1,16 @@
+{
+  "connector": {
+    "type": "salesforce",
+    "format": "json",
+    "refresh_interval": 14400,
+    "props": {
+      "SOQLQuery": "SELECT SUM(Amount) Amount, COUNT(amount) Total_Count, CALENDAR_MONTH(Closedate) Month, CALENDAR_YEAR(Closedate) Year, StageName, isClosed, isWon, Type\r\nFROM Opportunity\r\nWHERE Closedate = THIS_YEAR OR Closedate = LAST_N_QUARTERS:1\r\nGROUP BY CALENDAR_MONTH(Closedate), CALENDAR_YEAR(Closedate), StageName, isClosed, isWon,Type",
+      "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+SUM%28Amount%29+Amount%2C+COUNT%28amount%29+Total_Count%2C+CALENDAR_MONTH%28Closedate%29+Month%2C+CALENDAR_YEAR%28Closedate%29+Year%2C+StageName%2C+isClosed%2C+isWon%2C+Type+FROM+Opportunity+%0D%0AWHERE+Closedate+%3D+THIS_YEAR+OR+Closedate+%3D+LAST_N_QUARTERS%3A1%0D%0AGROUP+BY+CALENDAR_MONTH%28Closedate%29%2C+CALENDAR_YEAR%28Closedate%29%2C+StageName%2C+isClosed%2C+isWon%2CType",
+                "instance": "{{auth.salesforce.instanceName}}",
+       "SalesforceMode": "SOQL"
+    }
+  }
+}
+
+//Opportunities
+//Number of opportunities grouped by type for the past 2 quarters or this year.

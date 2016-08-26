@@ -1,0 +1,16 @@
+{
+  "connector": {
+    "type": "salesforce",
+    "format": "json",
+    "refresh_interval": 14400,
+    "props": {
+      "SOQLQuery": "SELECT Count(Company) Total_Count, CALENDAR_MONTH(convertTimezone(CreatedDate)) Month, CALENDAR_YEAR(convertTimezone(CreatedDate)) Year, Status\r\nFROM Lead\r\nWHERE CreatedDate >= THIS_MONTH\r\nGROUP BY CALENDAR_MONTH(convertTimezone(CreatedDate)), CALENDAR_YEAR(convertTimezone(CreatedDate)), Status",
+      "endpoint_url": "{{auth.salesforce.instanceName}}/services/data/v32.0/query/?q=SELECT+Count%28Company%29+Total_Count%2C+CALENDAR_MONTH%28convertTimezone%28CreatedDate%29%29+Month%2C+CALENDAR_YEAR%28convertTimezone%28CreatedDate%29%29+Year%2C+Status%0D%0AFROM+Lead%0D%0AWHERE+CreatedDate+%3E%3D+THIS_MONTH%0D%0AGROUP+BY+CALENDAR_MONTH%28convertTimezone%28CreatedDate%29%29%2C+CALENDAR_YEAR%28convertTimezone%28CreatedDate%29%29%2C+Status",
+                "instance": "{{auth.salesforce.instanceName}}",
+       "SalesforceMode": "SOQL"
+    }
+  }
+}
+
+//Leads by Status
+//See the number of leads added this month. Originates from the Gallery.
