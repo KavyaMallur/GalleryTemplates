@@ -10,6 +10,11 @@
          "w": 445
       }
    },
+   "datasourceProps": [
+      "gaProfile",
+      "gaStartDate",
+      "gaEndDate"
+   ],
    "components": [
       {
          "type": "panel_grid",
@@ -30,7 +35,11 @@
                "fmtArgs": {
                   "suffix": " to",
                   "dateInputFormat": "yyyyMMdd",
-                  "dateFormat": "MMM dd, yyyy"
+                  "dateFormat": "MMM dd, yyyy",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
                },
                "formulas": [
                   {
@@ -332,7 +341,6 @@
                ],
                "data": [
                   [
-
                   ]
                ],
                "align": "r",
@@ -353,7 +361,11 @@
                "fmtArgs": {
                   "dateInputFormat": "yyyyMMdd",
                   "dateFormat": "MMM dd, yyyy",
-                  "prefix": ""
+                  "prefix": "",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
                },
                "formulas": [
                   {
@@ -575,7 +587,6 @@
                ],
                "data": [
                   [
-
                   ]
                ],
                "font_style": "regular",
@@ -596,6 +607,12 @@
                      "id": "59d8b9df",
                      "displayName": "Period Values",
                      "renamed": true,
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
                      "formulas": [
                         {
                            "txt": "array(\"-7,MTD,-30,lastmonth,-90,YTD,-365\")",
@@ -627,7 +644,6 @@
                      ],
                      "data": [
                         [
-
                         ]
                      ]
                   },
@@ -637,6 +653,12 @@
                      "id": "93d5bfd2",
                      "displayName": "Period Labels",
                      "renamed": true,
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
                      "formulas": [
                         {
                            "txt": "array(\"Last 7 Days,Current Month (MTD),Last 30 Days,Last Month,Last 90 Days,Current Year (YTD),Last 365 Days\")",
@@ -668,7 +690,6 @@
                      ],
                      "data": [
                         [
-
                         ]
                      ]
                   }
@@ -733,6 +754,26 @@
                   "y": 0,
                   "x": 0
                },
+               "dstContext": {
+                  "ops": [
+                     {
+                        "type": "group",
+                        "groupBy": "72f76629"
+                     },
+                     {
+                        "type": "sort",
+                        "sortBy": [
+                           {
+                              "dim": "a5197afb",
+                              "dir": 2
+                           }
+                        ]
+                     }
+                  ],
+                  "aggs": {
+                     "a5197afb": "sum"
+                  }
+               },
                "components": [
                   {
                      "type": "table_col",
@@ -741,6 +782,12 @@
                      "displayName": "Top 5 Regions",
                      "size": 1,
                      "fmt": "txt",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
                      "components": [
                         {
                            "type": "table_results",
@@ -759,304 +806,100 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "slice(sort(groupby(select(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),select(slice(3fb3b9d24259e9fe5981niktawuzhere@C:C;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank()))))),\"descnumeric\",group(select(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))))),\"0\",\"5\")",
+                           "txt": "select(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank()))))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "slice",
+                                    "v": "select",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "sort",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "3fb3b9d24259e9fe5981niktawuzhere",
+                                                   "a": "A:A"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true,
+                                                   "description": "Indicates the number of items sliced off the top.",
+                                                   "default": "1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true,
+                                                   "description": "Indicates the position of the last item to be returned.",
+                                                   "default": "length of the list"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "between",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "groupby",
+                                                "v": "slice",
                                                 "c": [
                                                    {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "slice",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                     "a": "A:A"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "start",
-                                                                     "optional": true
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "end",
-                                                                     "optional": true
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "slice",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                           "a": "B:B"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "start",
-                                                                           "optional": true
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "end",
-                                                                           "optional": true
-                                                                        }
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "1e8af0e9-1"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "64669b2c-2"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "slice",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                     "a": "C:C"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "start",
-                                                                     "optional": true
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "end",
-                                                                     "optional": true
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "slice",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                           "a": "B:B"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "start",
-                                                                           "optional": true
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "end",
-                                                                           "optional": true
-                                                                        }
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "1e8af0e9-1"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "64669b2c-2"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "3fb3b9d24259e9fe5981niktawuzhere",
+                                                         "a": "B:B"
+                                                      }
                                                    },
                                                    {
                                                       "t": "a",
                                                       "v": null,
                                                       "arg_obj": {
-                                                         "placeholder": "method",
-                                                         "optional": true
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
                                                       }
                                                    }
                                                 ]
                                              },
                                              {
-                                                "t": "opt",
-                                                "v": "descnumeric"
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "1e8af0e9-1"
+                                                }
                                              },
                                              {
-                                                "t": "f",
-                                                "v": "group",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "slice",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                     "a": "A:A"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "start",
-                                                                     "optional": true
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "end",
-                                                                     "optional": true
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "slice",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                           "a": "B:B"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "start",
-                                                                           "optional": true
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "end",
-                                                                           "optional": true
-                                                                        }
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "1e8af0e9-1"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "64669b2c-2"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   }
-                                                ]
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "64669b2c-2"
+                                                }
                                              }
                                           ]
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "0"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "5"
                                        }
                                     ]
                                  }
@@ -1066,7 +909,6 @@
                      ],
                      "data": [
                         [
-
                         ]
                      ],
                      "name": "Top 5 Regions",
@@ -1079,6 +921,12 @@
                      "displayName": "Sessions",
                      "size": 1,
                      "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": true
+                        }
+                     },
                      "components": [
                         {
                            "type": "table_results",
@@ -1097,222 +945,100 @@
                      ],
                      "formulas": [
                         {
-                           "txt": "slice(sort(groupby(select(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank())))),select(slice(3fb3b9d24259e9fe5981niktawuzhere@C:C;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank()))))),\"descnumeric\"),\"0\",\"5\")",
+                           "txt": "select(slice(3fb3b9d24259e9fe5981niktawuzhere@C:C;),between(slice(3fb3b9d24259e9fe5981niktawuzhere@B:B;),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"0\"),datevalue(switch($KTPeriod,\"MTD\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"YTD\",date_startof(today(),\"1\"),\"_default_\",date_add(yesterday(),\"5\",($KTPeriod+\"1\"))),\"yyyyMMdd\"),blank())),(if((count(slice(3fb3b9d24259e9fe5981niktawuzhere@A:A;))>\"1\"),datevalue(switch($KTPeriod,\"MTD\",today(),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"YTD\",today(),\"_default_\",yesterday()),\"yyyyMMdd\"),blank()))))",
                            "src": {
                               "t": "expr",
                               "v": false,
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "slice",
+                                    "v": "select",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "sort",
+                                          "v": "slice",
                                           "c": [
                                              {
-                                                "t": "f",
-                                                "v": "groupby",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "slice",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                     "a": "A:A"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "start",
-                                                                     "optional": true
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "end",
-                                                                     "optional": true
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "slice",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                           "a": "B:B"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "start",
-                                                                           "optional": true
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "end",
-                                                                           "optional": true
-                                                                        }
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "1e8af0e9-1"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "64669b2c-2"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "f",
-                                                      "v": "select",
-                                                      "c": [
-                                                         {
-                                                            "t": "f",
-                                                            "v": "slice",
-                                                            "c": [
-                                                               {
-                                                                  "t": "d",
-                                                                  "v": {
-                                                                     "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                     "a": "C:C"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "start",
-                                                                     "optional": true
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "a",
-                                                                  "v": null,
-                                                                  "arg_obj": {
-                                                                     "placeholder": "end",
-                                                                     "optional": true
-                                                                  }
-                                                               }
-                                                            ]
-                                                         },
-                                                         {
-                                                            "t": "f",
-                                                            "v": "between",
-                                                            "c": [
-                                                               {
-                                                                  "t": "f",
-                                                                  "v": "slice",
-                                                                  "c": [
-                                                                     {
-                                                                        "t": "d",
-                                                                        "v": {
-                                                                           "id": "3fb3b9d24259e9fe5981niktawuzhere",
-                                                                           "a": "B:B"
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "start",
-                                                                           "optional": true
-                                                                        }
-                                                                     },
-                                                                     {
-                                                                        "t": "a",
-                                                                        "v": null,
-                                                                        "arg_obj": {
-                                                                           "placeholder": "end",
-                                                                           "optional": true
-                                                                        }
-                                                                     }
-                                                                  ]
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "1e8af0e9-1"
-                                                                  }
-                                                               },
-                                                               {
-                                                                  "t": "ref",
-                                                                  "v": {
-                                                                     "r": "cx",
-                                                                     "cx": "64669b2c-2"
-                                                                  }
-                                                               }
-                                                            ]
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "method",
-                                                         "optional": true
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "opt",
-                                                "v": "descnumeric"
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "3fb3b9d24259e9fe5981niktawuzhere",
+                                                   "a": "C:C"
+                                                }
                                              },
                                              {
                                                 "t": "a",
                                                 "v": null,
                                                 "arg_obj": {
-                                                   "placeholder": "return values",
-                                                   "optional": true
+                                                   "placeholder": "start",
+                                                   "optional": true,
+                                                   "description": "Indicates the number of items sliced off the top.",
+                                                   "default": "1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true,
+                                                   "description": "Indicates the position of the last item to be returned.",
+                                                   "default": "length of the list"
                                                 }
                                              }
                                           ]
                                        },
                                        {
-                                          "t": "l",
-                                          "v": "0"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "5"
+                                          "t": "f",
+                                          "v": "between",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "3fb3b9d24259e9fe5981niktawuzhere",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "1e8af0e9-1"
+                                                }
+                                             },
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "64669b2c-2"
+                                                }
+                                             }
+                                          ]
                                        }
                                     ]
                                  }
@@ -1322,7 +1048,6 @@
                      ],
                      "data": [
                         [
-
                         ]
                      ],
                      "name": "Sessions",
@@ -1332,7 +1057,8 @@
                      "align": "r",
                      "font_style": "bold"
                   }
-               ]
+               ],
+               "maxRows": "5"
             },
             {
                "type": "tile_map",
@@ -1355,6 +1081,12 @@
                            "role": "region_id",
                            "id": "3887fd56-3",
                            "displayName": "ID",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
                            "formulas": [
                               {
                                  "txt": "slice(75a9136c5ac6fdc99755niktawuzhere@A:A;)",
@@ -1397,7 +1129,6 @@
                            ],
                            "data": [
                               [
-                                 
                               ]
                            ]
                         },
@@ -1408,7 +1139,11 @@
                            "displayName": "Color",
                            "fmt": "num",
                            "fmtArgs": {
-                              "prefix": "Sessions: "
+                              "prefix": "Sessions: ",
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": true
+                              }
                            },
                            "formulas": [
                               {
@@ -1730,7 +1465,6 @@
                            ],
                            "data": [
                               [
-                                 
                               ]
                            ],
                            "valueType": "color"
