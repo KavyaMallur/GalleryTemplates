@@ -18,6 +18,19 @@
          "type": "table",
          "id": "dd57b0c6-1",
          "displayName": "Table",
+         "dstContext": {
+            "ops": [
+               {
+                  "type": "sort",
+                  "sortBy": [
+                     {
+                        "dim": "9b4d4bf06",
+                        "dir": 2
+                     }
+                  ]
+               }
+            ]
+         },
          "components": [
             {
                "type": "table_col",
@@ -50,76 +63,41 @@
                ],
                "formulas": [
                   {
-                     "txt": "sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))",
+                     "txt": "slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "sort",
+                              "v": "slice",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                             "a": "B:B"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
+                                    "t": "d",
+                                    "v": {
+                                       "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                       "a": "A:A"
+                                    }
                                  },
                                  {
-                                    "t": "opt",
-                                    "v": "descnumeric"
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "start",
+                                       "optional": true,
+                                       "description": "Indicates the number of items sliced off the top.",
+                                       "default": "1"
+                                    }
                                  },
                                  {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                             "a": "A:A"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true,
+                                       "description": "Indicates the position of the last item to be returned.",
+                                       "default": "length of the list"
+                                    }
                                  }
                               ]
                            }
@@ -128,8 +106,6 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Channel",
                "index": 0
@@ -197,11 +173,149 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "c60b38e0-5",
-                     "displayName": "Unnamed 2 Result",
+                     "displayName": "Total Progress",
+                     "renamed": true,
                      "size": 1,
-                     "formulas": [],
+                     "fmt": "bch",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        },
+                        "rangeThemeColors": [
+                           "cx-theme_ccc",
+                           "cx-theme_aaa",
+                           "cx-theme_888"
+                        ]
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "cx": "08334134-7"
+                                 },
+                                 "type": "gteq",
+                                 "right": {
+                                    "cx": "a4250ec8-17"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "color",
+                                 "value": "cx-theme_green_3",
+                                 "isScalar": true
+                              }
+                           ]
+                        },
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "cx": "08334134-7"
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "cx": "a4250ec8-17"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "color",
+                                 "value": "cx-theme_red_3",
+                                 "isScalar": true
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "concat(sum((lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;))),\",\",(sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;))),\",\",sum((lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "concat",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "f6057765-16"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ","
+                                       },
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "08334134-7"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": ","
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "ead76b92-18"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "1 or more items."
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
                      "align": "l",
@@ -210,7 +324,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "concat((lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)),\",\",(sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\")),\",\",(lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;)))",
+                     "txt": "concat((lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)),\",\",(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)),\",\",(lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;)))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -263,11 +377,10 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Progress",
-               "index": 1
+               "index": 1,
+               "resultFmt": "custom"
             },
             {
                "type": "table_col",
@@ -287,67 +400,118 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "08334134-7",
-                     "displayName": "Unnamed 3 Result",
+                     "displayName": "Total Sessions",
+                     "renamed": true,
                      "size": 1,
-                     "formulas": [],
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                   "a": "B:B"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "start",
+                                                   "optional": true,
+                                                   "description": "Indicates the number of items sliced off the top.",
+                                                   "default": "1"
+                                                }
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "end",
+                                                   "optional": true,
+                                                   "description": "Indicates the position of the last item to be returned.",
+                                                   "default": "length of the list"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "A list of 1 or more numeric items."
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
-                     "align": "l",
+                     "align": "r",
                      "font_style": "bold"
                   }
                ],
                "formulas": [
                   {
-                     "txt": "sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\")",
+                     "txt": "slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
                               "t": "f",
-                              "v": "sort",
+                              "v": "slice",
                               "c": [
                                  {
-                                    "t": "f",
-                                    "v": "slice",
-                                    "c": [
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                             "a": "B:B"
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "start",
-                                             "optional": true
-                                          }
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "end",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "opt",
-                                    "v": "descnumeric"
+                                    "t": "d",
+                                    "v": {
+                                       "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                       "a": "B:B"
+                                    }
                                  },
                                  {
                                     "t": "a",
                                     "v": null,
                                     "arg_obj": {
-                                       "placeholder": "return values",
-                                       "optional": true
+                                       "placeholder": "start",
+                                       "optional": true,
+                                       "description": "Indicates the number of items sliced off the top.",
+                                       "default": "1"
+                                    }
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "end",
+                                       "optional": true,
+                                       "description": "Indicates the position of the last item to be returned.",
+                                       "default": "length of the list"
                                     }
                                  }
                               ]
@@ -357,11 +521,10 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Sessions",
-               "index": 2
+               "index": 2,
+               "resultFmt": "custom"
             },
             {
                "type": "table_col",
@@ -383,20 +546,144 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "67640459-9",
-                     "displayName": "Conversion Rate Result",
+                     "displayName": "Total Conversion Rate",
+                     "renamed": true,
                      "size": 1,
-                     "formulas": [],
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        },
+                        "precision": "2"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@E:E;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "E:E"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
-                     "align": "l",
+                     "align": "r",
                      "font_style": "bold"
                   }
                ],
                "formulas": [
                   {
-                     "txt": "(sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@E:E;))/sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\"))",
+                     "txt": "(slice(cb7956e2ebb780503dcedoogeraspilk@E:E;)/slice(cb7956e2ebb780503dcedoogeraspilk@B:B;))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -407,69 +694,34 @@
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "d",
+                                          "v": {
+                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                             "a": "E:E"
+                                          }
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true,
+                                             "description": "Indicates the number of items sliced off the top.",
+                                             "default": "1"
+                                          }
                                        },
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "E:E"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true,
+                                             "description": "Indicates the position of the last item to be returned.",
+                                             "default": "length of the list"
+                                          }
                                        }
                                     ]
                                  },
@@ -477,107 +729,6 @@
                                     "t": "o",
                                     "v": "/"
                                  },
-                                 {
-                                    "t": "f",
-                                    "v": "sort",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "opt",
-                                          "v": "descnumeric"
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "return values",
-                                             "optional": true
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Conversion<br>Rate",
-               "index": 3
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "e85c5d02-10",
-               "displayName": "Avg Time On Site",
-               "renamed": true,
-               "size": 1,
-               "fmt": "dur",
-               "fmtArgs": {
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "ac3a0834-11",
-                     "displayName": "Avg Time On Site Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",(slice(cb7956e2ebb780503dcedoogeraspilk@D:D;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "sort",
-                              "c": [
                                  {
                                     "t": "f",
                                     "v": "slice",
@@ -594,7 +745,9 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "start",
-                                             "optional": true
+                                             "optional": true,
+                                             "description": "Indicates the number of items sliced off the top.",
+                                             "default": "1"
                                           }
                                        },
                                        {
@@ -602,47 +755,10 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "end",
-                                             "optional": true
+                                             "optional": true,
+                                             "description": "Indicates the position of the last item to be returned.",
+                                             "default": "length of the list"
                                           }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "opt",
-                                    "v": "descnumeric"
-                                 },
-                                 {
-                                    "t": "expr",
-                                    "v": false,
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "D:D"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
                                        }
                                     ]
                                  }
@@ -653,11 +769,219 @@
                   }
                ],
                "data": [
-                  [
-                  ]
+               ],
+               "name": "Conversion<br>Rate",
+               "index": 3,
+               "resultFmt": "custom"
+            },
+            {
+               "type": "table_col",
+               "role": "tcol",
+               "id": "e85c5d02-10",
+               "displayName": "Avg Time on Site",
+               "renamed": true,
+               "size": 1,
+               "fmt": "dur",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "components": [
+                  {
+                     "type": "table_results",
+                     "role": "result",
+                     "id": "ac3a0834-11",
+                     "displayName": "Total Avg Time on Site ",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@H:H;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "H:H"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [
+                     ],
+                     "mixin": "label",
+                     "align": "r",
+                     "font_style": "bold"
+                  }
+               ],
+               "formulas": [
+                  {
+                     "txt": "(slice(cb7956e2ebb780503dcedoogeraspilk@D:D;))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                             "a": "D:D"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true,
+                                             "description": "Indicates the number of items sliced off the top.",
+                                             "default": "1"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true,
+                                             "description": "Indicates the position of the last item to be returned.",
+                                             "default": "length of the list"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [
                ],
                "name": "Avg Time<br>On Site",
                "index": 4,
+               "resultFmt": "custom",
                "align": "left"
             },
             {
@@ -680,20 +1004,144 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "3b505fc2-13",
-                     "displayName": "Bounce Rate Result",
+                     "displayName": "Total Bounce Rate",
+                     "renamed": true,
                      "size": 1,
-                     "formulas": [],
+                     "fmt": "pct",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        },
+                        "precision": "2"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@I:I;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "I:I"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
-                     "align": "l",
+                     "align": "r",
                      "font_style": "bold"
                   }
                ],
                "formulas": [
                   {
-                     "txt": "(sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@C:C;))/\"100\")",
+                     "txt": "(slice(cb7956e2ebb780503dcedoogeraspilk@C:C;)/\"100\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -704,69 +1152,34 @@
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "d",
+                                          "v": {
+                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                             "a": "C:C"
+                                          }
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true,
+                                             "description": "Indicates the number of items sliced off the top.",
+                                             "default": "1"
+                                          }
                                        },
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "C:C"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true,
+                                             "description": "Indicates the position of the last item to be returned.",
+                                             "default": "length of the list"
+                                          }
                                        }
                                     ]
                                  },
@@ -785,11 +1198,10 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Bounce<br>Rate",
                "index": 5,
+               "resultFmt": "custom",
                "align": "left"
             },
             {
@@ -813,20 +1225,145 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "fe33ed1d-15",
-                     "displayName": "Events:Sessions Ratio Result",
+                     "displayName": "Total Events:Sessions Ratio",
+                     "renamed": true,
                      "size": 1,
-                     "formulas": [],
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        },
+                        "suffix": " : 1",
+                        "precision": "2"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@G:G;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "G:G"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "slice",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                                         "a": "B:B"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "start",
+                                                         "optional": true,
+                                                         "description": "Indicates the number of items sliced off the top.",
+                                                         "default": "1"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "end",
+                                                         "optional": true,
+                                                         "description": "Indicates the position of the last item to be returned.",
+                                                         "default": "length of the list"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
-                     "align": "l",
+                     "align": "r",
                      "font_style": "bold"
                   }
                ],
                "formulas": [
                   {
-                     "txt": "(sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@G:G;))/sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\"))",
+                     "txt": "(slice(cb7956e2ebb780503dcedoogeraspilk@G:G;)/slice(cb7956e2ebb780503dcedoogeraspilk@B:B;))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -837,69 +1374,34 @@
                               "c": [
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "d",
+                                          "v": {
+                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                             "a": "G:G"
+                                          }
                                        },
                                        {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "start",
+                                             "optional": true,
+                                             "description": "Indicates the number of items sliced off the top.",
+                                             "default": "1"
+                                          }
                                        },
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "G:G"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true,
+                                             "description": "Indicates the position of the last item to be returned.",
+                                             "default": "length of the list"
+                                          }
                                        }
                                     ]
                                  },
@@ -909,47 +1411,33 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "sort",
+                                    "v": "slice",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "opt",
-                                          "v": "descnumeric"
+                                          "t": "d",
+                                          "v": {
+                                             "id": "cb7956e2ebb780503dcedoogeraspilk",
+                                             "a": "B:B"
+                                          }
                                        },
                                        {
                                           "t": "a",
                                           "v": null,
                                           "arg_obj": {
-                                             "placeholder": "return values",
-                                             "optional": true
+                                             "placeholder": "start",
+                                             "optional": true,
+                                             "description": "Indicates the number of items sliced off the top.",
+                                             "default": "1"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "end",
+                                             "optional": true,
+                                             "description": "Indicates the position of the last item to be returned.",
+                                             "default": "length of the list"
                                           }
                                        }
                                     ]
@@ -961,11 +1449,10 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Events:Sessions<br>Ratio",
                "index": 6,
+               "resultFmt": "custom",
                "align": "left"
             },
             {
@@ -988,20 +1475,59 @@
                      "type": "table_results",
                      "role": "result",
                      "id": "a4250ec8-17",
-                     "displayName": "Sessions (Prev Month) Result",
+                     "displayName": "Total Sessions (Prev Month)",
+                     "renamed": true,
                      "size": 1,
-                     "formulas": [],
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum((lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "sum",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "f6057765-16"
+                                          }
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": "A list of 1 or more numeric items."
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
-                     "align": "l",
+                     "align": "r",
                      "font_style": "bold"
                   }
                ],
                "formulas": [
                   {
-                     "txt": "lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)",
+                     "txt": "lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -1038,12 +1564,11 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Sessions<br>(Prev Month)",
                "index": 7,
                "colHidden": "hidden",
+               "resultFmt": "custom",
                "align": "left"
             },
             {
@@ -1068,9 +1593,18 @@
                      "id": "ef1fc089-19",
                      "displayName": "Sessions (Prev MTD) Result",
                      "size": 1,
-                     "formulas": [],
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "sum(array(\"151534\",\"28119\",\"20259\",\"16542\",\"6068\",\"2905\",\"3172\",\"712\"))"
+                        }
+                     ],
                      "data": [
-                        []
                      ],
                      "mixin": "label",
                      "align": "l",
@@ -1079,7 +1613,7 @@
                ],
                "formulas": [
                   {
-                     "txt": "lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;)",
+                     "txt": "lookup((slice(cb7956e2ebb780503dcedoogeraspilk@A:A;)),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;)",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -1116,986 +1650,14 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "name": "Sessions<br>(Prev MTD)",
                "index": 8,
                "colHidden": "hidden",
+               "resultFmt": "sum",
                "align": "left"
             }
          ]
-      },
-      {
-         "type": "table",
-         "id": "578600e9-4",
-         "displayName": "Table",
-         "components": [
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "bda86b17-5",
-               "displayName": "Aggregates",
-               "size": 1,
-               "fmt": "txt",
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "37616a0a-6",
-                     "displayName": "Unnamed 1 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [],
-               "data": [],
-               "name": "Aggregates",
-               "index": 0
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "7dfe50e6-7",
-               "displayName": "Total Progress",
-               "renamed": true,
-               "size": 1,
-               "fmt": "bch",
-               "fmtArgs": {
-                  "rangeThemeColors": [
-                     "cx-theme_ccc",
-                     "cx-theme_aaa",
-                     "cx-theme_888"
-                  ],
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "conditions": [
-                  {
-                     "predicates": [
-                        {
-                           "left": {
-                              "cx": "6e5d5a3e-9"
-                           },
-                           "type": "gteq",
-                           "right": {
-                              "cx": "1d4e44ca-3"
-                           }
-                        }
-                     ],
-                     "reactions": [
-                        {
-                           "type": "color",
-                           "value": "cx-theme_green_3",
-                           "isScalar": true
-                        }
-                     ]
-                  },
-                  {
-                     "predicates": [
-                        {
-                           "left": {
-                              "cx": "6e5d5a3e-9"
-                           },
-                           "type": "lt",
-                           "right": {
-                              "cx": "1d4e44ca-3"
-                           }
-                        }
-                     ],
-                     "reactions": [
-                        {
-                           "type": "color",
-                           "value": "cx-theme_red_3",
-                           "isScalar": true
-                        }
-                     ]
-                  }
-               ],
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "af6ef74e-8",
-                     "displayName": "Total Progress Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "concat((sum((lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)))),\",\",(sum((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\")))),\",\",(sum((lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;)))))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "concat",
-                              "c": [
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "f6ab14d9-1"
-                                    }
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": ","
-                                 },
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "6e5d5a3e-9"
-                                    }
-                                 },
-                                 {
-                                    "t": "l",
-                                    "v": ","
-                                 },
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "1d4e44ca-3"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Total Progress",
-               "index": 1
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "6e5d5a3e-9",
-               "displayName": "Total Sessions",
-               "size": 1,
-               "fmt": "num",
-               "fmtArgs": {
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "7bc5abd4-10",
-                     "displayName": "Unnamed 3 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "sum((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\")))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "sum",
-                              "c": [
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "9b4d4bf0-6"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Total Sessions",
-               "index": 2,
-               "font_style": "bold"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "a8bf6647-11",
-               "displayName": "Total Conversion Rate",
-               "size": 1,
-               "fmt": "pct",
-               "fmtArgs": {
-                  "precision": "2",
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "9ae22391-12",
-                     "displayName": "Unnamed 4 Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@E:E;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "E:E"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "/"
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Total Conversion Rate",
-               "index": 3,
-               "font_style": "bold"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "f1976a2b-13",
-               "displayName": "Avg Time on Site (Total)",
-               "size": 1,
-               "fmt": "dur",
-               "fmtArgs": {
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "5a115872-14",
-                     "displayName": "New Column Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@H:H;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "H:H"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "/"
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Avg Time on Site (Total)",
-               "index": 4,
-               "align": "left",
-               "font_style": "bold"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "ed2aea79-15",
-               "displayName": "Total Bounce Rate",
-               "renamed": true,
-               "size": 1,
-               "fmt": "pct",
-               "fmtArgs": {
-                  "precision": "2",
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "c1ee0799-16",
-                     "displayName": "Total Bounce Rate Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@I:I;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "I:I"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "/"
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Avg Bounce Rate",
-               "index": 5,
-               "align": "left",
-               "font_style": "bold"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "6c050f1f-17",
-               "displayName": "Total Events:Sessions Ratio",
-               "renamed": true,
-               "size": 1,
-               "fmt": "num",
-               "fmtArgs": {
-                  "precision": "2",
-                  "suffix": " : 1",
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "43e9f7ed-18",
-                     "displayName": "Total Events:Sessions Ratio Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "(sum(slice(cb7956e2ebb780503dcedoogeraspilk@G:G;))/sum(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "expr",
-                              "v": false,
-                              "c": [
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "G:G"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 },
-                                 {
-                                    "t": "o",
-                                    "v": "/"
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "sum",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "slice",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "cb7956e2ebb780503dcedoogeraspilk",
-                                                   "a": "B:B"
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "start",
-                                                   "optional": true
-                                                }
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "end",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "a",
-                                          "v": null,
-                                          "arg_obj": {
-                                             "placeholder": "data",
-                                             "repeats": true
-                                          }
-                                       }
-                                    ]
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Avg Event / Session",
-               "index": 6,
-               "align": "left",
-               "font_style": "bold"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "f6ab14d9-1",
-               "displayName": "Total Sessions (Prev Month)",
-               "vis": false,
-               "size": 1,
-               "fmt": "num",
-               "fmtArgs": {
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "94ed02fb-2",
-                     "displayName": "New Column Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "sum((lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),dfe272e176a1b7304c32doogeraspilk@A:A;,dfe272e176a1b7304c32doogeraspilk@B:B;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "sum",
-                              "c": [
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "f6057765-16"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Total Sessions (Prev Month)",
-               "index": 7,
-               "colHidden": "hidden",
-               "align": "left",
-               "font_style": "bold"
-            },
-            {
-               "type": "table_col",
-               "role": "tcol",
-               "id": "1d4e44ca-3",
-               "displayName": "Total Sessions (Prev MTD)",
-               "renamed": true,
-               "vis": false,
-               "size": 1,
-               "fmt": "num",
-               "fmtArgs": {
-                  "resultMetadata": {
-                     "ignoreDateFormat": false,
-                     "isAggregated": false
-                  }
-               },
-               "components": [
-                  {
-                     "type": "table_results",
-                     "role": "result",
-                     "id": "03b1ab02-4",
-                     "displayName": "Total Sessions (Prev MTD) Result",
-                     "size": 1,
-                     "formulas": [],
-                     "data": [
-                        []
-                     ],
-                     "mixin": "label",
-                     "align": "l",
-                     "font_style": "bold"
-                  }
-               ],
-               "formulas": [
-                  {
-                     "txt": "sum((lookup((sort(slice(cb7956e2ebb780503dcedoogeraspilk@B:B;),\"descnumeric\",slice(cb7956e2ebb780503dcedoogeraspilk@A:A;))),d4e8c12a2963b2942efddoogeraspilk@A:A;,d4e8c12a2963b2942efddoogeraspilk@B:B;)))",
-                     "src": {
-                        "t": "expr",
-                        "v": false,
-                        "c": [
-                           {
-                              "t": "f",
-                              "v": "sum",
-                              "c": [
-                                 {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "ead76b92-18"
-                                    }
-                                 },
-                                 {
-                                    "t": "a",
-                                    "v": null,
-                                    "arg_obj": {
-                                       "placeholder": "data",
-                                       "repeats": true
-                                    }
-                                 }
-                              ]
-                           }
-                        ]
-                     }
-                  }
-               ],
-               "data": [
-                  [
-                  ]
-               ],
-               "name": "Sum (Prev MTD)",
-               "index": 8,
-               "colHidden": "hidden",
-               "align": "left",
-               "font_style": "bold"
-            }
-         ],
-         "showHeader": false
       }
    ]
 }
