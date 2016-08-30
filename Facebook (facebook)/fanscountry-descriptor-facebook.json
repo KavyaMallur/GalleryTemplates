@@ -1,23 +1,77 @@
 {
-	"name" : "Facebook Fans by Country",
-	"description" : "See where your most Facebook fans are located. Originates from the Gallery.",
-	
-
-	"datasources" : {
-		"facebook" : {
-			"service" : "facebook",
-			"libraryAlias" : "facebookFansByCountry",
-			"name": "Facebook Fans by Country",
-			"description" : "Aggregated, lifetime Facebook location data, sorted by country, about the people who like your page (Unique Users). Originates from the Gallery.",
-			"type" : "facebook",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_country/lifetime",
-            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_country/lifetime",
-            	"qtype": "Graph API"
-			}
-		},
+    "name": "Facebook Fans by Country",
+    "description": "See where your most Facebook fans are located.<br>Originates from the Gallery. (v1.1)",
+    "sampleFormulas": {
+        "de7b0c5a": {
+            "txt": "array(\"1845\",\"1077\",\"889\",\"727\",\"422\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "1845"
+                    }, {
+                        "t": "l",
+                        "v": "1077"
+                    }, {
+                        "t": "l",
+                        "v": "889"
+                    }, {
+                        "t": "l",
+                        "v": "727"
+                    }, {
+                        "t": "l",
+                        "v": "422"
+                    }]
+                }]
+            }
+        },
+        "fe23a996": {
+            "txt": "array(\"United States\",\"Canada\",\"Australia\",\"United Kingdom\",\"India\")",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "f",
+                    "v": "array",
+                    "c": [{
+                        "t": "l",
+                        "v": "United States"
+                    }, {
+                        "t": "l",
+                        "v": "Canada"
+                    }, {
+                        "t": "l",
+                        "v": "Australia"
+                    }, {
+                        "t": "l",
+                        "v": "United Kingdom"
+                    }, {
+                        "t": "l",
+                        "v": "India"
+                    }]
+                }]
+            }
+        }
+    },
+    "datasources": {
+        "facebook": {
+            "service": "facebook",
+            "libraryAlias": "facebookFansByCountry",
+            "name": "Facebook Fans by Country",
+            "description": "Aggregated, lifetime Facebook location data, sorted by country, about the people who like your page (Unique Users). Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_country/lifetime",
+                "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_country/lifetime",
+                "qtype": "Graph API"
+            }
+        },
         "worldRegionIds": {
             "libraryAlias": "worldRegionIds",
             "name": "World Region IDs",
@@ -29,48 +83,40 @@
                 "endpoint_url": "http://static.klipfolio.com/static/klips/saas/quickstart/world_region_ids.csv"
             }
         }
-	},
+    },
 
-	"dsMappings" : {
-		"facebook" : "dd3b5a95adf8c115b85eniktawuzhere",
+    "dsMappings": {
+        "facebook": "dd3b5a95adf8c115b85eniktawuzhere",
         "worldRegionIds": "4c21d9bb923b08bae02anatceewzhere"
-	},
+    },
 
-	"services" : [
-		{
-			"service" : "facebook"
-		}
-	],
+    "services": [{
+        "service": "facebook"
+    }],
 
-	"datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.facebook.pageId",
-            "label" : "Facebook Page",
-            "description":"Select your company Facebook page from the drop-down list."
-        }
-    ],
-    "queries": [
-        {
-            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "facebook",
-                "type": "facebook",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
-                    "method": "GET",
-                    "qtype": "Graph API"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.facebook.pageId",
-                    "propField" : "options",
-                    "labels": "/data/name",
-                    "values": "/data/id"
-                }
-            ]
-        }   
-    ]
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook.pageId",
+        "label": "Facebook Page",
+        "description": "Select your company Facebook page from the drop-down list."
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook.pageId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
 }

@@ -1,64 +1,452 @@
 {
-	"name" : "Facebook Sources of Daily Likes (Last 90 Days)",
-	"description" : "Monitor where your Likes are coming from. Originates from the Gallery.",
-	
-
-	"datasources" : {
-		"facebook" : {
-			"service" : "facebook",
-			"libraryAlias" : "facebookLikeSources",
-			"name": "Facebook Like Sources",
-			"description" : "See a breakdown of the number of Page likes from the most common places where people can like your Page (Total Count). Originates from the Gallery.",
-			"type" : "facebook",
-			"format" : "json",
-			"refreshInterval" : 14400,
-			"props" : {
-				"endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_by_like_source/day?since={date.add(-90).format()}&until={date.today}",
-            	"graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_by_like_source/day?since={date.add(-90).format()}&until={date.today}",
-            	"qtype": "Graph API"
-			}
-		}
-	},
-
-	"dsMappings" : {
-		"facebook" : "d4e0a916689bb84da99cniktawuzhere"	
-	},
-
-	"services" : [
-		{
-			"service" : "facebook"
-		}
-	],
-
-	"datasourceConfigModel" : [
-        {
-            "type" : "select",
-            "id" : "ds.facebook.pageId",
-            "label" : "Facebook Page",
-            "description":"Select your company Facebook page from the drop-down list."
+    "name": "Facebook Sources of Daily Likes (Last 90 Days)",
+    "description": "Monitor where your Likes are coming from.<br>Originates from the Gallery. (v1.1)",
+    "sampleFormulas": {
+        "54862101": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1043
+                }]
+            }
+        },
+        "96807318": {
+            "txt": "\"Favorite\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Favorite"
+                }]
+            }
+        },
+        "98514739": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1043
+                }]
+            }
+        },
+        "eafa6e84-3": {
+            "txt": "\"Page Profile\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Page Profile"
+                }]
+            }
+        },
+        "86172694-2": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1043"
+                }]
+            }
+        },
+        "f2913c61-8": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1043"
+                }]
+            }
+        },
+        "973e2955-9": {
+            "txt": "\"80\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 80
+                }]
+            }
+        },
+        "b5d0a91b-10": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "e5b2d1c2-11": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1043
+                }]
+            }
+        },
+        "ba7498b8": {
+            "txt": "\"762\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "762"
+                }]
+            }
+        },
+        "55d359f6": {
+            "txt": "\"762\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "762"
+                }]
+            }
+        },
+        "12e7f4d9": {
+            "txt": "\"80\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 80
+                }]
+            }
+        },
+        "69e61a76": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "aeb11587": {
+            "txt": "\"Like Story\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Like Story"
+                }]
+            }
+        },
+        "8bc360b3": {
+            "txt": "\"201\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "201"
+                }]
+            }
+        },
+        "95e87c16": {
+            "txt": "\"201\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "201"
+                }]
+            }
+        },
+        "2970bb93": {
+            "txt": "\"80\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 80
+                }]
+            }
+        },
+        "14ce60ec": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "1b25d0e9": {
+            "txt": "\"Mobile\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Mobile"
+                }]
+            }
+        },
+        "ad36a6d6": {
+            "txt": "\"432\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "432"
+                }]
+            }
+        },
+        "75fb40b0": {
+            "txt": "\"432\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "432"
+                }]
+            }
+        },
+        "bcf9121a": {
+            "txt": "\"80\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 80
+                }]
+            }
+        },
+        "b454ccb6": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "1c84b7f5": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1043
+                }]
+            }
+        },
+        "b8405b37": {
+            "txt": "\"External Connect\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "External Connect"
+                }]
+            }
+        },
+        "4a3da6b8": {
+            "txt": "\"34\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "34"
+                }]
+            }
+        },
+        "969ec0ca": {
+            "txt": "\"34\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "34"
+                }]
+            }
+        },
+        "60923d23": {
+            "txt": "\"80\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 80
+                }]
+            }
+        },
+        "1329c90d": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "1effddc9": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1043
+                }]
+            }
+        },
+        "4eb150b3": {
+            "txt": "\"Recommended Pages\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Recommended Pages"
+                }]
+            }
+        },
+        "b4b62bed": {
+            "txt": "\"134\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "134"
+                }]
+            }
+        },
+        "9086d4bc": {
+            "txt": "\"134\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "134"
+                }]
+            }
+        },
+        "c4efcb69": {
+            "txt": "\"80\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 80
+                }]
+            }
+        },
+        "82243ac5": {
+            "txt": "\"0\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 0
+                }]
+            }
+        },
+        "2c114689": {
+            "txt": "\"1043\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": 1043
+                }]
+            }
         }
-    ],
-    "queries": [
-        {
-            "errorMessage":"From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
-            "connector": {
-                "service": "facebook",
-                "type": "facebook",
-                "format": "json",
-                "props": {
-                    "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
-                    "method": "GET",
-                    "qtype": "Graph API"
-                }
-            },
-            "results": [
-                {
-                    "propId" : "ds.facebook.pageId",
-                    "propField" : "options",
-                    "labels": "/data/name",
-                    "values": "/data/id"
-                }
-            ]
-        }   
-    ]
+    },
+    "datasources": {
+        "facebook": {
+            "service": "facebook",
+            "libraryAlias": "facebookLikeSources",
+            "name": "Facebook Like Sources",
+            "description": "See a breakdown of the number of Page likes from the most common places where people can like your Page (Total Count). Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_by_like_source/day?since={date.add(-90).format()}&until={date.today}",
+                "graphUrl": "https://graph.facebook.com/v2.5/{{ds.facebook.pageId}}/insights/page_fans_by_like_source/day?since={date.add(-90).format()}&until={date.today}",
+                "qtype": "Graph API"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "facebook": "d4e0a916689bb84da99cniktawuzhere"
+    },
+
+    "services": [{
+        "service": "facebook"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook.pageId",
+        "label": "Facebook Page",
+        "description": "Select your company Facebook page from the drop-down list."
+    }],
+    "queries": [{
+        "errorMessage": "From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.5/me/accounts?fields=name,id",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook.pageId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
 }

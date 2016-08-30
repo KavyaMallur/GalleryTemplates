@@ -14,6 +14,14 @@
          "type": "chart_series",
          "id": "3e0238f1-1",
          "displayName": "Series Chart",
+         "dstContext": {
+            "ops": [],
+            "aggs": {
+               "8b5bc7e32": "sum",
+               "2759d6405": "sum",
+               "ec006d111": "sum"
+            }
+         },
          "components": [
             {
                "type": "series_data",
@@ -21,9 +29,15 @@
                "id": "8b5bc7e3-2",
                "displayName": "Male",
                "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": true
+                  }
+               },
                "formulas": [
                   {
-                     "txt": "lookup((group(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values/value);,\"2\"))),select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"M\"))),select(a5fdf63c177c3794d529niktawuzhere@/data/values[last()]/value/*;,(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"M\"))))",
+                     "txt": "lookup(group((group(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values/value);,\"2\")))),group(select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"M\")))),groupby(select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"M\"))),select(a5fdf63c177c3794d529niktawuzhere@/data/values[last()]/value/*;,(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"M\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -33,48 +47,29 @@
                               "v": "lookup",
                               "c": [
                                  {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "b401b201-3"
-                                    }
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "b401b201-3"
+                                          }
+                                       }
+                                    ]
                                  },
                                  {
                                     "t": "f",
-                                    "v": "select",
+                                    "v": "group",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "substring",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "a5fdf63c177c3794d529niktawuzhere",
-                                                   "a": "kf:names(/data/values[last()]/value)"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "2"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "to",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
+                                          "v": "select",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "contains",
+                                                "v": "substring",
                                                 "c": [
                                                    {
                                                       "t": "d",
@@ -85,7 +80,40 @@
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "M"
+                                                      "v": "2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true,
+                                                         "description": "The position to end the substring where the first character in text is at position 1.",
+                                                         "default": "end of text string"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "M"
+                                                         }
+                                                      ]
                                                    }
                                                 ]
                                              }
@@ -95,22 +123,15 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "select",
+                                    "v": "groupby",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "a5fdf63c177c3794d529niktawuzhere",
-                                             "a": "/data/values[last()]/value/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
+                                          "t": "f",
+                                          "v": "select",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "contains",
+                                                "v": "substring",
                                                 "c": [
                                                    {
                                                       "t": "d",
@@ -121,11 +142,90 @@
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "M"
+                                                      "v": "2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true,
+                                                         "description": "The position to end the substring where the first character in text is at position 1.",
+                                                         "default": "end of text string"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "M"
+                                                         }
+                                                      ]
                                                    }
                                                 ]
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                   "a": "/data/values[last()]/value/*"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "M"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "description": "The aggregation method to use when grouping.",
+                                             "optional": true,
+                                             "default": "sum(values)"
+                                          }
                                        }
                                     ]
                                  }
@@ -147,9 +247,15 @@
                "id": "2759d640-5",
                "displayName": "Female",
                "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": true
+                  }
+               },
                "formulas": [
                   {
-                     "txt": "lookup((group(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values/value);,\"2\"))),select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"F\"))),select(a5fdf63c177c3794d529niktawuzhere@/data/values[last()]/value/*;,(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"F\"))))",
+                     "txt": "lookup(group((group(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values/value);,\"2\")))),group(select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"F\")))),groupby(select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"F\"))),select(a5fdf63c177c3794d529niktawuzhere@/data/values[last()]/value/*;,(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"F\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -159,48 +265,29 @@
                               "v": "lookup",
                               "c": [
                                  {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "b401b201-3"
-                                    }
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "b401b201-3"
+                                          }
+                                       }
+                                    ]
                                  },
                                  {
                                     "t": "f",
-                                    "v": "select",
+                                    "v": "group",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "substring",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "a5fdf63c177c3794d529niktawuzhere",
-                                                   "a": "kf:names(/data/values[last()]/value)"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "2"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "to",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
+                                          "v": "select",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "contains",
+                                                "v": "substring",
                                                 "c": [
                                                    {
                                                       "t": "d",
@@ -211,7 +298,40 @@
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "F"
+                                                      "v": "2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true,
+                                                         "description": "The position to end the substring where the first character in text is at position 1.",
+                                                         "default": "end of text string"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "F"
+                                                         }
+                                                      ]
                                                    }
                                                 ]
                                              }
@@ -221,22 +341,15 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "select",
+                                    "v": "groupby",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "a5fdf63c177c3794d529niktawuzhere",
-                                             "a": "/data/values[last()]/value/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
+                                          "t": "f",
+                                          "v": "select",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "contains",
+                                                "v": "substring",
                                                 "c": [
                                                    {
                                                       "t": "d",
@@ -247,11 +360,90 @@
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "F"
+                                                      "v": "2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true,
+                                                         "description": "The position to end the substring where the first character in text is at position 1.",
+                                                         "default": "end of text string"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "F"
+                                                         }
+                                                      ]
                                                    }
                                                 ]
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                   "a": "/data/values[last()]/value/*"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "F"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "description": "The aggregation method to use when grouping.",
+                                             "optional": true,
+                                             "default": "sum(values)"
+                                          }
                                        }
                                     ]
                                  }
@@ -273,9 +465,15 @@
                "id": "ec006d11-1",
                "displayName": "Unspecified",
                "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": true
+                  }
+               },
                "formulas": [
                   {
-                     "txt": "lookup((group(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values/value);,\"2\"))),select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"U\"))),select(a5fdf63c177c3794d529niktawuzhere@/data/values[last()]/value/*;,(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"U\"))))",
+                     "txt": "lookup(group((group(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values/value);,\"2\")))),group(select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"U\")))),groupby(select(substring(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"2\"),(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"U\"))),select(a5fdf63c177c3794d529niktawuzhere@/data/values[last()]/value/*;,(contains(a5fdf63c177c3794d529niktawuzhere@kf:names(/data/values[last()]/value);,\"U\")))))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -285,48 +483,29 @@
                               "v": "lookup",
                               "c": [
                                  {
-                                    "t": "ref",
-                                    "v": {
-                                       "r": "cx",
-                                       "cx": "b401b201-3"
-                                    }
+                                    "t": "f",
+                                    "v": "group",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "b401b201-3"
+                                          }
+                                       }
+                                    ]
                                  },
                                  {
                                     "t": "f",
-                                    "v": "select",
+                                    "v": "group",
                                     "c": [
                                        {
                                           "t": "f",
-                                          "v": "substring",
-                                          "c": [
-                                             {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "a5fdf63c177c3794d529niktawuzhere",
-                                                   "a": "kf:names(/data/values[last()]/value)"
-                                                }
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "2"
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "to",
-                                                   "optional": true
-                                                }
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
+                                          "v": "select",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "contains",
+                                                "v": "substring",
                                                 "c": [
                                                    {
                                                       "t": "d",
@@ -337,7 +516,40 @@
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "U"
+                                                      "v": "2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true,
+                                                         "description": "The position to end the substring where the first character in text is at position 1.",
+                                                         "default": "end of text string"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "U"
+                                                         }
+                                                      ]
                                                    }
                                                 ]
                                              }
@@ -347,22 +559,15 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "select",
+                                    "v": "groupby",
                                     "c": [
                                        {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "a5fdf63c177c3794d529niktawuzhere",
-                                             "a": "/data/values[last()]/value/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "expr",
-                                          "v": false,
+                                          "t": "f",
+                                          "v": "select",
                                           "c": [
                                              {
                                                 "t": "f",
-                                                "v": "contains",
+                                                "v": "substring",
                                                 "c": [
                                                    {
                                                       "t": "d",
@@ -373,11 +578,90 @@
                                                    },
                                                    {
                                                       "t": "l",
-                                                      "v": "U"
+                                                      "v": "2"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "to",
+                                                         "optional": true,
+                                                         "description": "The position to end the substring where the first character in text is at position 1.",
+                                                         "default": "end of text string"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "U"
+                                                         }
+                                                      ]
                                                    }
                                                 ]
                                              }
                                           ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                   "a": "/data/values[last()]/value/*"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "contains",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "a5fdf63c177c3794d529niktawuzhere",
+                                                               "a": "kf:names(/data/values[last()]/value)"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "U"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "method",
+                                             "description": "The aggregation method to use when grouping.",
+                                             "optional": true,
+                                             "default": "sum(values)"
+                                          }
                                        }
                                     ]
                                  }
@@ -400,7 +684,11 @@
                "displayName": "Age Range",
                "fmt": "txt",
                "fmtArgs": {
-                  "prefix": ""
+                  "prefix": "",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
                },
                "formulas": [
                   {
@@ -433,7 +721,9 @@
                                           "v": null,
                                           "arg_obj": {
                                              "placeholder": "to",
-                                             "optional": true
+                                             "optional": true,
+                                             "description": "The position to end the substring where the first character in text is at position 1.",
+                                             "default": "end of text string"
                                           }
                                        }
                                     ]
@@ -447,8 +737,8 @@
                "data": [],
                "label": "Age Range",
                "showLabel": true,
-               "labelDrop": 0,
-               "showLabelTicks": true
+               "showAxis": false,
+               "labelDrop": 0
             },
             {
                "type": "chart_axis",
@@ -461,6 +751,8 @@
                "dataDisabled": true,
                "label": "People",
                "showLabel": true,
+               "showAxis": false,
+               "originLine": false,
                "labelDrop": 0,
                "grid": true
             }
