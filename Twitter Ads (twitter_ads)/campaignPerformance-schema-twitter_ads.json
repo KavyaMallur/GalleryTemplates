@@ -5,10 +5,9 @@
    "innerPadding": "10",
    "workspace": {
       "datasources": [
-         "3db359ff0426101fa48ddoogeraspilk",
-         "d7e11eb33da969597550doogeraspilk",
          "6b296fefaec070529c18doogeraspilk",
-         "7fab8855c9cd8ae50a97doogeraspilk"
+         "d7e11eb33da969597550doogeraspilk",
+         "3db359ff0426101fa48ddoogeraspilk"
       ],
       "dimensions": {
          "w": 1372
@@ -35,7 +34,7 @@
          },
          "formulas": [
             {
-               "txt": "concat(\"Campaign: \",\"<b>\",lookup(d7e11eb33da969597550doogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/name;),\"</b>\",\" | Objective: \",\"<b>\",lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \"))),\"</b>\")",
+               "txt": "concat(\"Campaign: \",\"<b>\",lookup(d7e11eb33da969597550doogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/name;),\"</b>\",\" | Objective: \",\"<b>\",\"{{ds.twitter_ads.objective}}\",\"</b>\")",
                "src": {
                   "t": "expr",
                   "v": false,
@@ -92,67 +91,8 @@
                               "v": "<b>"
                            },
                            {
-                              "t": "f",
-                              "v": "lookup",
-                              "c": [
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "d7e11eb33da969597550doogeraspilk",
-                                       "a": "/data/id"
-                                    }
-                                 },
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                       "a": "/data/campaign_id"
-                                    }
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "capitalize",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "substitute",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "lower",
-                                                "c": [
-                                                   {
-                                                      "t": "d",
-                                                      "v": {
-                                                         "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                                         "a": "/data/objective"
-                                                      }
-                                                   }
-                                                ]
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": "_"
-                                             },
-                                             {
-                                                "t": "l",
-                                                "v": " "
-                                             },
-                                             {
-                                                "t": "a",
-                                                "v": null,
-                                                "arg_obj": {
-                                                   "placeholder": "occurrence",
-                                                   "optional": true,
-                                                   "description": "Occurrence of substitution.",
-                                                   "default": "all"
-                                                }
-                                             }
-                                          ]
-                                       }
-                                    ]
-                                 }
-                              ]
+                              "t": "l",
+                              "v": "{{ds.twitter_ads.objective}}"
                            },
                            {
                               "t": "l",
@@ -249,87 +189,14 @@
                },
                "formulas": [
                   {
-                     "txt": "lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))",
+                     "txt": "\"{{ds.twitter_ads.objective}}\"",
                      "src": {
                         "t": "expr",
                         "v": false,
                         "c": [
                            {
-                              "t": "f",
-                              "v": "lookup",
-                              "c": [
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "d7e11eb33da969597550doogeraspilk",
-                                       "a": "/data/id"
-                                    }
-                                 },
-                                 {
-                                    "t": "d",
-                                    "v": {
-                                       "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                       "a": "/data/campaign_id"
-                                    }
-                                 },
-                                 {
-                                    "t": "f",
-                                    "v": "replace",
-                                    "c": [
-                                       {
-                                          "t": "f",
-                                          "v": "capitalize",
-                                          "c": [
-                                             {
-                                                "t": "f",
-                                                "v": "substitute",
-                                                "c": [
-                                                   {
-                                                      "t": "f",
-                                                      "v": "lower",
-                                                      "c": [
-                                                         {
-                                                            "t": "d",
-                                                            "v": {
-                                                               "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                                               "a": "/data/objective"
-                                                            }
-                                                         }
-                                                      ]
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": "_"
-                                                   },
-                                                   {
-                                                      "t": "l",
-                                                      "v": " "
-                                                   },
-                                                   {
-                                                      "t": "a",
-                                                      "v": null,
-                                                      "arg_obj": {
-                                                         "placeholder": "occurrence",
-                                                         "optional": true,
-                                                         "description": "Occurrence of substitution.",
-                                                         "default": "all"
-                                                      }
-                                                   }
-                                                ]
-                                             }
-                                          ]
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "Custom"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "Conversions"
-                                       }
-                                    ]
-                                 }
-                              ]
+                              "t": "l",
+                              "v": "{{ds.twitter_ads.objective}}"
                            }
                         ]
                      }
@@ -369,7 +236,7 @@
                },
                "formulas": [
                   {
-                     "txt": "concat(\"Cost per \",substring((lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))),\"0\",\"-1\"))",
+                     "txt": "concat(\"Cost per \",if(((substring(\"{{ds.twitter_ads.objective}}\",\"-1\")=\"s\")),substring(\"{{ds.twitter_ads.objective}}\",\"0\",\"-1\"),\"{{ds.twitter_ads.objective}}\"))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -384,22 +251,73 @@
                                  },
                                  {
                                     "t": "f",
-                                    "v": "substring",
+                                    "v": "if",
                                     "c": [
                                        {
-                                          "t": "ref",
-                                          "v": {
-                                             "r": "cx",
-                                             "cx": "65d8acfa"
-                                          }
+                                          "t": "expr",
+                                          "v": false,
+                                          "c": [
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "substring",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "{{ds.twitter_ads.objective}}"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-1"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "to",
+                                                               "optional": true,
+                                                               "description": "The position to end the substring where the first character in text is at position 1.",
+                                                               "default": "end of text string"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "s"
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "substring",
+                                          "c": [
+                                             {
+                                                "t": "l",
+                                                "v": "{{ds.twitter_ads.objective}}"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             }
+                                          ]
                                        },
                                        {
                                           "t": "l",
-                                          "v": "0"
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "-1"
+                                          "v": "{{ds.twitter_ads.objective}}"
                                        }
                                     ]
                                  },
@@ -452,7 +370,7 @@
                },
                "formulas": [
                   {
-                     "txt": "concat(substring((lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))),\"0\",\"-1\"),\" Trend\")",
+                     "txt": "concat(substring((\"{{ds.twitter_ads.objective}}\"),\"0\",\"-1\"),\" Trend\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -1223,7 +1141,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))))",
+                           "txt": "sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;))))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -1273,7 +1191,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\"))",
+                           "txt": "if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\"))",
                            "src": {
                               "v": false,
                               "t": "expr",
@@ -1399,7 +1317,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\")",
+                           "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\")",
                            "src": {
                               "v": false,
                               "t": "expr",
@@ -1487,7 +1405,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -1547,7 +1465,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"0.9\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -1593,7 +1511,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -1653,7 +1571,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
+                                 "txt": "((if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.1\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -1699,7 +1617,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "(((if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\"))",
+                                 "txt": "(((if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))*\"1.75\"))",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -1825,7 +1743,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "substitute(((sum((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))),\"Infinity\",\"\")",
+                           "txt": "substitute(((sum((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))),\"Infinity\",\"\")",
                            "src": {
                               "v": false,
                               "t": "expr",
@@ -1902,7 +1820,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\")",
+                           "txt": "substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\")",
                            "src": {
                               "v": false,
                               "t": "expr",
@@ -2041,7 +1959,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\")",
+                           "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\")",
                            "src": {
                               "v": false,
                               "t": "expr",
@@ -2129,7 +2047,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -2189,7 +2107,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"0.9\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -2235,7 +2153,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -2295,7 +2213,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
+                                 "txt": "((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.1\")",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -2341,7 +2259,7 @@
                            },
                            "formulas": [
                               {
-                                 "txt": "(((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\"))",
+                                 "txt": "(((substitute(if(($twitterAdsCPConversionTarget=\"\"),((if(($twitterAdsBudget=\"\"),sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")),($twitterAdsBudget*\"7\")))/(if(($twitterAdsTarget=\"\"),((sum((switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))))*\"1.75\"),($twitterAdsTarget*\"7\")))),$twitterAdsCPConversionTarget),\"Infinity\",\"\"))*\"1.75\"))",
                                  "src": {
                                     "v": false,
                                     "t": "expr",
@@ -2387,7 +2305,7 @@
                },
                "formulas": [
                   {
-                     "txt": "(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\")))",
+                     "txt": "(\"{{ds.twitter_ads.objective}}\")",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -2426,7 +2344,7 @@
                },
                "formulas": [
                   {
-                     "txt": "(concat(\"Cost per \",substring((lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,replace(capitalize(substitute(lower(7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"_\",\" \")),\"Custom\",\"Conversions\"))),\"0\",\"-1\")))",
+                     "txt": "(concat(\"Cost per \",if(((substring(\"{{ds.twitter_ads.objective}}\",\"-1\")=\"s\")),substring(\"{{ds.twitter_ads.objective}}\",\"0\",\"-1\"),\"{{ds.twitter_ads.objective}}\")))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -2472,7 +2390,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))",
+                           "txt": "switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;))",
                            "src": {
                               "t": "expr",
                               "v": false,
@@ -2482,35 +2400,114 @@
                                     "v": "switch",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "lookup",
+                                          "t": "l",
+                                          "v": "{{ds.twitter_ads.objective}}"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "App Engagements"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "App Installs"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Followers"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/follows"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Lead Generation"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/card_engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Tweet Engagements"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Video Views"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_total_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Video Views Preroll"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "d7e11eb33da969597550doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_mrc_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Qualified Impressions"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
                                           "c": [
                                              {
                                                 "t": "d",
                                                 "v": {
                                                    "id": "d7e11eb33da969597550doogeraspilk",
-                                                   "a": "/data/id"
+                                                   "a": "/data/id_data/metrics/qualified_impressions"
                                                 }
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                                   "a": "/data/campaign_id"
-                                                }
+                                                "t": "o",
+                                                "v": "/"
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                                   "a": "/data/objective"
-                                                }
+                                                "t": "l",
+                                                "v": "1000"
                                              }
                                           ]
                                        },
                                        {
                                           "t": "l",
-                                          "v": "WEBSITE_CLICKS"
+                                          "v": "{{ds.twitter_ads.objective}}"
                                        },
                                        {
                                           "t": "expr",
@@ -2571,95 +2568,7 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "WEBSITE_CONVERSIONS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "APP_INSTALLS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "APP_ENGAGEMENTS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "TWEET_ENGAGEMENTS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/engagements"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "FOLLOWERS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/follows"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "LEAD_GENERATION"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/card_engagements"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "VIDEO_VIEWS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/video_total_views"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "VIDEO_VIEWS_PREROLL"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/video_mrc_views"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "QUALIFIED_IMPRESSIONS"
+                                          "v": "Website Conversions"
                                        },
                                        {
                                           "t": "expr",
@@ -2669,16 +2578,52 @@
                                                 "t": "d",
                                                 "v": {
                                                    "id": "d7e11eb33da969597550doogeraspilk",
-                                                   "a": "/data/id_data/metrics/qualified_impressions"
+                                                   "a": "/data/id_data/metrics/conversion_custom/metric"
                                                 }
                                              },
                                              {
                                                 "t": "o",
-                                                "v": "/"
+                                                "v": "+"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1000"
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_sign_ups/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_downloads/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "d7e11eb33da969597550doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_purchases/metric"
+                                                }
                                              }
                                           ]
                                        },
@@ -2726,7 +2671,7 @@
                      },
                      "formulas": [
                         {
-                           "txt": "((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")/(switch(lookup(d7e11eb33da969597550doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))))",
+                           "txt": "((d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")/(switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;))))",
                            "src": {
                               "v": false,
                               "t": "expr",
@@ -2974,7 +2919,7 @@
                },
                "formulas": [
                   {
-                     "txt": "sum(switch(lookup(6b296fefaec070529c18doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\")))",
+                     "txt": "sum(switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;)))",
                      "src": {
                         "t": "expr",
                         "v": false,
@@ -2988,35 +2933,114 @@
                                     "v": "switch",
                                     "c": [
                                        {
-                                          "t": "f",
-                                          "v": "lookup",
+                                          "t": "l",
+                                          "v": "{{ds.twitter_ads.objective}}"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "App Engagements"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "App Installs"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Followers"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/follows"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Lead Generation"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/card_engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Tweet Engagements"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/engagements"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Video Views"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_total_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Video Views Preroll"
+                                       },
+                                       {
+                                          "t": "d",
+                                          "v": {
+                                             "id": "6b296fefaec070529c18doogeraspilk",
+                                             "a": "/data/id_data/metrics/video_mrc_views"
+                                          }
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "Qualified Impressions"
+                                       },
+                                       {
+                                          "t": "expr",
+                                          "v": false,
                                           "c": [
                                              {
                                                 "t": "d",
                                                 "v": {
                                                    "id": "6b296fefaec070529c18doogeraspilk",
-                                                   "a": "/data/id"
+                                                   "a": "/data/id_data/metrics/qualified_impressions"
                                                 }
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                                   "a": "/data/campaign_id"
-                                                }
+                                                "t": "o",
+                                                "v": "/"
                                              },
                                              {
-                                                "t": "d",
-                                                "v": {
-                                                   "id": "7fab8855c9cd8ae50a97doogeraspilk",
-                                                   "a": "/data/objective"
-                                                }
+                                                "t": "l",
+                                                "v": "1000"
                                              }
                                           ]
                                        },
                                        {
                                           "t": "l",
-                                          "v": "WEBSITE_CLICKS"
+                                          "v": "{{ds.twitter_ads.objective}}"
                                        },
                                        {
                                           "t": "expr",
@@ -3077,95 +3101,7 @@
                                        },
                                        {
                                           "t": "l",
-                                          "v": "WEBSITE_CONVERSIONS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "APP_INSTALLS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "APP_ENGAGEMENTS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/mobile_conversion_installs/*"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "TWEET_ENGAGEMENTS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/engagements"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "FOLLOWERS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/follows"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "LEAD_GENERATION"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/card_engagements"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "VIDEO_VIEWS"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/video_total_views"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "VIDEO_VIEWS_PREROLL"
-                                       },
-                                       {
-                                          "t": "d",
-                                          "v": {
-                                             "id": "d7e11eb33da969597550doogeraspilk",
-                                             "a": "/data/id_data/metrics/video_mrc_views"
-                                          }
-                                       },
-                                       {
-                                          "t": "l",
-                                          "v": "QUALIFIED_IMPRESSIONS"
+                                          "v": "Website Conversions"
                                        },
                                        {
                                           "t": "expr",
@@ -3174,17 +3110,53 @@
                                              {
                                                 "t": "d",
                                                 "v": {
-                                                   "id": "d7e11eb33da969597550doogeraspilk",
-                                                   "a": "/data/id_data/metrics/qualified_impressions"
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_custom/metric"
                                                 }
                                              },
                                              {
                                                 "t": "o",
-                                                "v": "/"
+                                                "v": "+"
                                              },
                                              {
-                                                "t": "l",
-                                                "v": "1000"
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_sign_ups/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_downloads/metric"
+                                                }
+                                             },
+                                             {
+                                                "t": "o",
+                                                "v": "+"
+                                             },
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "6b296fefaec070529c18doogeraspilk",
+                                                   "a": "/data/id_data/metrics/conversion_purchases/metric"
+                                                }
                                              }
                                           ]
                                        },
@@ -3247,7 +3219,7 @@
                },
                "formulas": [
                   {
-                     "txt": "substitute(((sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum(switch(lookup(6b296fefaec070529c18doogeraspilk@/data/id;,7fab8855c9cd8ae50a97doogeraspilk@/data/campaign_id;,7fab8855c9cd8ae50a97doogeraspilk@/data/objective;),\"WEBSITE_CLICKS\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"WEBSITE_CONVERSIONS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric;,\"APP_INSTALLS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"APP_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"TWEET_ENGAGEMENTS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/engagements;,\"FOLLOWERS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/follows;,\"LEAD_GENERATION\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/card_engagements;,\"VIDEO_VIEWS\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_total_views;,\"VIDEO_VIEWS_PREROLL\",d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"QUALIFIED_IMPRESSIONS\",(d7e11eb33da969597550doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"))))),\"Infinity\",\"\")",
+                     "txt": "substitute(((sum((6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\")))/(sum(switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"App Installs\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,\"Followers\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/follows;,\"Lead Generation\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/card_engagements;,\"Tweet Engagements\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/engagements;,\"Video Views\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/video_total_views;,\"Video Views Preroll\",6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/video_mrc_views;,\"Qualified Impressions\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),\"{{ds.twitter_ads.objective}}\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),\"Website Conversions\",(6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+6b296fefaec070529c18doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;))))),\"Infinity\",\"\")",
                      "src": {
                         "v": false,
                         "t": "expr",

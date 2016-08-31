@@ -1,0 +1,344 @@
+{
+   "title": "Facebook Ads Campaign Impressions and Reach (Last 30 Days)",
+   "id": "2cdcd143093f21c778a50ae4f520b1da",
+   "workspace": {
+      "datasources": [
+         "9c718fbc2987cc4da7d8doogeraspilk",
+         "fa2a9329eef7f49b4224doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 500
+      }
+   },
+   "components": [
+      {
+         "type": "label",
+         "id": "ff7ebb89",
+         "displayName": "Campaign Name",
+         "layoutConfig": {
+            "x": 0,
+            "y": 0
+         },
+         "renamed": true,
+         "size": "1",
+         "fmt": "raw",
+         "fmtArgs": {
+            "prefix": "Campaign: ",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "concat(\"<b>\",lookup(\"{{ds.facebook_ads.campaignId}}\",fa2a9329eef7f49b4224doogeraspilk@/data/id;,fa2a9329eef7f49b4224doogeraspilk@/data/name;),\"</b>\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.facebook_ads.campaignId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "fa2a9329eef7f49b4224doogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "fa2a9329eef7f49b4224doogeraspilk",
+                                       "a": "/data/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true,
+                                 "description": "1 or more items."
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "chart_series",
+         "id": "866118d3",
+         "displayName": "Series Chart",
+         "layoutConfig": {
+            "x": 0,
+            "y": 1
+         },
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "696d74bd",
+               "displayName": "Impressions",
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),9c718fbc2987cc4da7d8doogeraspilk@/data/date_start;,9c718fbc2987cc4da7d8doogeraspilk@/data/impressions;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "5dccf3e7"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "9c718fbc2987cc4da7d8doogeraspilk",
+                                       "a": "/data/date_start"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "9c718fbc2987cc4da7d8doogeraspilk",
+                                       "a": "/data/impressions"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "seriesName": "Impressions",
+               "renderer": "line",
+               "axis": "8a7d1640"
+            },
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "67ab9519",
+               "displayName": "Reach",
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),9c718fbc2987cc4da7d8doogeraspilk@/data/date_start;,9c718fbc2987cc4da7d8doogeraspilk@/data/reach;)",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "5dccf3e7"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "9c718fbc2987cc4da7d8doogeraspilk",
+                                       "a": "/data/date_start"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "9c718fbc2987cc4da7d8doogeraspilk",
+                                       "a": "/data/reach"
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "seriesName": "Reach",
+               "renderer": "line",
+               "axis": "8a7d1640"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "5dccf3e7",
+               "displayName": "Date",
+               "renamed": true,
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateFormat": "custom",
+                  "dateFormatCustom": "MMM d",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-29"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "today",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true,
+                                                   "description": "",
+                                                   "default": "GMT"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "format",
+                                             "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "description": "",
+                                       "default": "GMT",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "label": "Date",
+               "labelAngle": "-45",
+               "labelDrop": "2"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "8a7d1640",
+               "displayName": "Count",
+               "renamed": true,
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "Count",
+               "showAxis": false,
+               "labelDrop": 0,
+               "grid": true
+            }
+         ]
+      }
+   ]
+}
