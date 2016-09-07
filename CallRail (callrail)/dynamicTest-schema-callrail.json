@@ -1,0 +1,607 @@
+{
+   "title": "CallRail Today's Average Call Duration",
+   "id": "a757f08eae9c6d58811db8c6dbceeea0",
+   "workspace": {
+      "datasources": [
+         "9c62442db188232503bfdoogeraspilk",
+         "9164a12028b14640c858ssilbsissilb"
+      ],
+      "dimensions": {
+         "w": 565
+      }
+   },
+   "datasourceProps": [
+      "callrailPageNumber"
+   ],
+   "components": [
+      {
+         "type": "label",
+         "id": "d598a428",
+         "displayName": "Company Name",
+         "renamed": true,
+         "size": "1",
+         "fmt": "txt",
+         "fmtArgs": {
+            "prefix": "<div class style=\"display:inline; font-weight:normal;\">Company: </div>",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "lookup(\"{{ds.callrail.companyId}}\",9c62442db188232503bfdoogeraspilk@/companies/id;,9c62442db188232503bfdoogeraspilk@/companies/name;)",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "lookup",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "{{ds.callrail.companyId}}"
+                           },
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "9c62442db188232503bfdoogeraspilk",
+                                 "a": "/companies/id"
+                              }
+                           },
+                           {
+                              "t": "d",
+                              "v": {
+                                 "id": "9c62442db188232503bfdoogeraspilk",
+                                 "a": "/companies/name"
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "wrap": true
+      },
+      {
+         "type": "panel_grid",
+         "id": "093c61c9",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "simple_value",
+               "id": "ee73cf8c",
+               "displayName": "Average Call Duration",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "primary",
+                     "id": "f03c9580",
+                     "displayName": "Average Call Duration Value",
+                     "renamed": true,
+                     "size": "3",
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "average(mapflat(numberformat(cumulative(repeat(\"1\",\"5\")),\"0\"),\"callrailPageNumber\",select(9164a12028b14640c858ssilbsissilb@/calls/duration;,(date(9164a12028b14640c858ssilbsissilb@/calls/start_time;,\"yyyy-MM-dd\")=yesterday()))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "average",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "mapflat",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "numberformat",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "cumulative",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "repeat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "1"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "5"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "separator",
+                                                         "optional": true,
+                                                         "description": "The thousands separator character.",
+                                                         "default": "no separator"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "callrailPageNumber"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "9164a12028b14640c858ssilbsissilb",
+                                                         "a": "/calls/duration"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "9164a12028b14640c858ssilbsissilb",
+                                                                     "a": "/calls/start_time"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-MM-dd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "The time zone.",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "yesterday",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "data",
+                                             "repeats": true,
+                                             "description": ""
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "secondary",
+                     "id": "85497726",
+                     "displayName": "Total Calls",
+                     "renamed": true,
+                     "size": 1,
+                     "fmt": "txt",
+                     "fmtArgs": {
+                        "prefix": "Based on ",
+                        "suffix": " calls",
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "count(mapflat(numberformat(cumulative(repeat(\"1\",\"5\")),\"0\"),\"callrailPageNumber\",select(9164a12028b14640c858ssilbsissilb@/calls/duration;,(date(9164a12028b14640c858ssilbsissilb@/calls/start_time;,\"yyyy-MM-dd\")=yesterday()))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "mapflat",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "numberformat",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "cumulative",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "repeat",
+                                                            "c": [
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "1"
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "5"
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "0"
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "separator",
+                                                         "optional": true,
+                                                         "description": "The thousands separator character.",
+                                                         "default": "no separator"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "callrailPageNumber"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "select",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "9164a12028b14640c858ssilbsissilb",
+                                                         "a": "/calls/duration"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "date",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "9164a12028b14640c858ssilbsissilb",
+                                                                     "a": "/calls/start_time"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "yyyy-MM-dd"
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "The time zone.",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "o",
+                                                            "v": "="
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "yesterday",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_style": "regular"
+                  }
+               ]
+            },
+            {
+               "type": "mini_series",
+               "id": "dde8305d",
+               "displayName": "Sparkline",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "size": 3,
+               "components": [
+                  {
+                     "type": "mini_data",
+                     "role": "series",
+                     "id": "b11a29bc",
+                     "displayName": "Duration",
+                     "renamed": true,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "mapflat(numberformat(cumulative(repeat(\"1\",\"5\")),\"0\"),\"callrailPageNumber\",select(9164a12028b14640c858ssilbsissilb@/calls/duration;,(date(9164a12028b14640c858ssilbsissilb@/calls/start_time;,\"yyyy-MM-dd\")=yesterday())))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "mapflat",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "numberformat",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "cumulative",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "separator",
+                                                   "optional": true,
+                                                   "description": "The thousands separator character.",
+                                                   "default": "no separator"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "callrailPageNumber"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "select",
+                                          "c": [
+                                             {
+                                                "t": "d",
+                                                "v": {
+                                                   "id": "9164a12028b14640c858ssilbsissilb",
+                                                   "a": "/calls/duration"
+                                                }
+                                             },
+                                             {
+                                                "t": "expr",
+                                                "v": false,
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "9164a12028b14640c858ssilbsissilb",
+                                                               "a": "/calls/start_time"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "yyyy-MM-dd"
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "The time zone.",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "o",
+                                                      "v": "="
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "yesterday",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesId": 1
+                  },
+                  {
+                     "type": "label",
+                     "role": "last-value",
+                     "id": "34951975",
+                     "displayName": "Last Value",
+                     "size": 3,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "0"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "dataDisabled": true
+                  }
+               ],
+               "lastValueSeries": "hidden"
+            }
+         ],
+         "rows": 1,
+         "cols": 2,
+         "widths": [
+            {
+               "x": 0,
+               "w": 250
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 0,
+               "h": 1
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "alignment": 2
+            }
+         ]
+      }
+   ]
+}

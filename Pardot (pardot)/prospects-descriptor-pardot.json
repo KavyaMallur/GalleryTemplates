@@ -1,0 +1,41 @@
+{
+  "name": "Pardot Prospects by Source",
+  "description": ".<br> Originates from the Gallery.(v1.0)",
+  "datasources": {
+    "pardot-01": {
+      "service": "pardot",
+      "type": "simple_rest",
+      "format": "json",
+      "name": "Pardot Prospects",
+      "libraryAlias": "PardotProspects",
+      "refreshInterval": 14400,
+      "description": "See an overview of all your Pardot prospects. Originates from the Gallery.",
+      "props": {
+        "endpoint_url": "https://pi.pardot.com/api/prospect/version/3/do/query?user_key={{auth.pardot.userKey}}&api_key=[auth_token]&fields=country,created_at,source&format=json",
+        "method": "get",
+        "2step_auth_method": "post",
+        "2step_auth_post_body": "email=[username]&password=[password]&user_key={{auth.pardot.userKey}}",
+        "2step_auth_url": "https://pi.pardot.com/api/login/version/3?format=json",
+        "2step_parameters": "[{\"name\":\"Content-Type\",\"value\":\"application/x-www-form-urlencoded\",\"type\":\"header\"}]",
+        "2step_response_type": "TEXT",
+        "2step_token_path": "\"api_key\":\"(.*)\"",
+        "2step_username": "{{auth.pardot.username}}",
+        "2step_password": "{{auth.pardot.password}}"
+      }
+    }
+  },
+  "uiVariables": [
+    {
+      "name": "pardotDatePicker",
+      "value": "today"
+    }
+  ],
+  "dsMappings": {
+    "pardot-01": "9a3934e4dde80b3979bdnatceewzhere"
+  },
+  "services": [
+    {
+      "service": "pardot"
+    }
+  ]
+}
