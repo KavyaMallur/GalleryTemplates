@@ -1,0 +1,819 @@
+{
+   "title": "Twitter Ads Account Impressions (Last 30 Days)",
+   "id": "4a69e5457f27298c786b7df2d8fcb574",
+   "workspace": {
+      "datasources": [
+         "61c96dec2e334eca53dfdoogeraspilk",
+         "9a18c532b3547f77a782doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 831
+      }
+   },
+   "datasourceProps": [
+      "twitterAdsDateRange"
+   ],
+   "components": [
+      {
+         "type": "input",
+         "id": "1da34e8c",
+         "displayName": "User Input Control",
+         "renamed": true,
+         "vis": false,
+         "components": [
+            {
+               "type": "proxy",
+               "role": "values",
+               "id": "e519031d",
+               "displayName": "Date Ranges",
+               "renamed": true,
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "start_time="
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "cfcbda30"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "array",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "join",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "true,false,false,false,false,false"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "glue",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "comma"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "0 or more items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "&"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "end_time="
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-28"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "description": "",
+                                                   "default": "GMT",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "array",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "join",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "false,false,false,false,false,true"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "glue",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "comma"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "0 or more items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true,
+                                       "description": "1 or more items."
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "labels",
+               "id": "81a011e5",
+               "displayName": "Labels",
+               "formulas": [],
+               "data": []
+            }
+         ],
+         "scope": 1,
+         "propName": "",
+         "inputType": 1,
+         "defaultValue": "start_time=2016-02-28&end_time=2016-03-06,start_time=2016-03-06&end_time=2016-03-13,start_time=2016-03-13&end_time=2016-03-20,start_time=2016-03-20&end_time=2016-03-27,start_time=2016-03-27&end_time=2016-04-03",
+         "controlHidden": "hidden"
+      },
+      {
+         "type": "label",
+         "id": "b58c763f",
+         "displayName": "Label",
+         "size": "1",
+         "fmt": "raw",
+         "fmtArgs": {
+            "prefix": "Account: ",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "concat(\"<b>\",lookup(\"{{ds.twitter_ads.accountId}}\",61c96dec2e334eca53dfdoogeraspilk@/data/id;,61c96dec2e334eca53dfdoogeraspilk@/data/name;),\"</b>\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.twitter_ads.accountId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "61c96dec2e334eca53dfdoogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "61c96dec2e334eca53dfdoogeraspilk",
+                                       "a": "/data/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true,
+                                 "description": "1 or more items."
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "chart_series",
+         "id": "a37f0ebb",
+         "displayName": "Series Chart",
+         "layoutConfig": {
+            "y": 0,
+            "x": 0
+         },
+         "components": [
+            {
+               "type": "series_data",
+               "role": "series",
+               "id": "c71b07ae",
+               "displayName": "Impressions",
+               "renamed": true,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "lookup((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),slice(daterange(first(trim(map((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(9a18c532b3547f77a782doogeraspilk@boolean(count(/data/id_data/metrics/impressions));,9a18c532b3547f77a782doogeraspilk@/request/params/start_time;,blank())))),last(trim(map((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(9a18c532b3547f77a782doogeraspilk@boolean(count(/data/id_data/metrics/impressions));,9a18c532b3547f77a782doogeraspilk@/request/params/end_time;,blank())))),\"yyyy-MM-dd\"),\"0\",\"-1\"),trim(mapflat((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(9a18c532b3547f77a782doogeraspilk@boolean(count(/data/id_data/metrics/impressions));,9a18c532b3547f77a782doogeraspilk@/data/id_data/metrics/impressions;,blank()))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "ref",
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "cfcbda30"
+                                    }
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "slice",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "daterange",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "first",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "trim",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "map",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "e519031d"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "twitterAdsDateRange"
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "if",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "9a18c532b3547f77a782doogeraspilk",
+                                                                           "a": "boolean(count(/data/id_data/metrics/impressions))"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "9a18c532b3547f77a782doogeraspilk",
+                                                                           "a": "/request/params/start_time"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "blank",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "count",
+                                                                                 "optional": true,
+                                                                                 "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                 "default": "1"
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "pattern",
+                                                               "optional": true,
+                                                               "description": "0 or more items to be removed.",
+                                                               "default": "blank"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "description": "The number of items to return.",
+                                                         "optional": true,
+                                                         "default": "1"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "last",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "trim",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "map",
+                                                            "c": [
+                                                               {
+                                                                  "t": "ref",
+                                                                  "v": {
+                                                                     "r": "cx",
+                                                                     "cx": "e519031d"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "l",
+                                                                  "v": "twitterAdsDateRange"
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "if",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "9a18c532b3547f77a782doogeraspilk",
+                                                                           "a": "boolean(count(/data/id_data/metrics/impressions))"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "9a18c532b3547f77a782doogeraspilk",
+                                                                           "a": "/request/params/end_time"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "blank",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "count",
+                                                                                 "optional": true,
+                                                                                 "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                 "default": "1"
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "pattern",
+                                                               "optional": true,
+                                                               "description": "0 or more items to be removed.",
+                                                               "default": "blank"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "count",
+                                                         "optional": true,
+                                                         "description": "The number of items to return.",
+                                                         "default": "1"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "0"
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "-1"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "trim",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "mapflat",
+                                          "c": [
+                                             {
+                                                "t": "ref",
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "e519031d"
+                                                }
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "twitterAdsDateRange"
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "if",
+                                                "c": [
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "9a18c532b3547f77a782doogeraspilk",
+                                                         "a": "boolean(count(/data/id_data/metrics/impressions))"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "d",
+                                                      "v": {
+                                                         "id": "9a18c532b3547f77a782doogeraspilk",
+                                                         "a": "/data/id_data/metrics/impressions"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "blank",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "count",
+                                                               "optional": true,
+                                                               "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                               "default": "1"
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "pattern",
+                                             "optional": true,
+                                             "description": "0 or more items to be removed.",
+                                             "default": "blank"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "seriesName": "Impressions",
+               "lineStyle": "curve",
+               "axis": "44bb4d85",
+               "color": "cx-theme_blue_5"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_x",
+               "id": "cfcbda30",
+               "displayName": "Dates",
+               "fmt": "dat",
+               "fmtArgs": {
+                  "dateInputFormat": "custom",
+                  "dateFormatCustom": "MMM d",
+                  "dateFormat": "custom",
+                  "dateInputFormatCustom": "yyyy-MM-dd",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "datevalue",
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "date_add",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "opt",
+                                                "v": "5"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-29"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "today",
+                                          "c": [
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "optional": true,
+                                                   "description": "",
+                                                   "default": "GMT"
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "format",
+                                             "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "timezone",
+                                       "description": "",
+                                       "default": "GMT",
+                                       "optional": true
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "label": "Dates",
+               "labelAngle": "-45",
+               "labelDrop": "2"
+            },
+            {
+               "type": "chart_axis",
+               "role": "axis_y",
+               "id": "44bb4d85",
+               "displayName": "Impressions",
+               "renamed": true,
+               "fmt": "num",
+               "formulas": [],
+               "data": [],
+               "dataDisabled": true,
+               "label": "Impressions",
+               "showAxis": false,
+               "labelDrop": 0,
+               "grid": true
+            }
+         ],
+         "height": "5",
+         "customHeight": "260"
+      }
+   ]
+}

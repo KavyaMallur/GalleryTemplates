@@ -1,6 +1,6 @@
 {
     "name": "Twitter Ads Campaign Performance (Last 7 Days)",
-    "description": "See how your campaign is performing during the last 7 days in  comparison to the previous 7 days.<br>Originates from the Gallery.",
+    "description": "See how your campaign is performing during the last 7 days in comparison to the previous 7 days.<br>Originates from the Gallery.",
     "sampleFormulas": {
         "9c438e89": {
             "txt": "\"Campaign: <b>Marketing Jobs</b> | Objective: <b>Website Clicks</b>\"",
@@ -585,7 +585,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://ads-api.twitter.com/1/accounts/{{ds.twitter_ads.accountId}}/campaigns",
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts/{{ds.twitter_ads.accountId}}/campaigns?sort_by=updated_at-desc",
                 "method": "get"
             }
         },
@@ -593,12 +593,12 @@
             "service": "twitter_ads",
             "libraryAlias": "TwitterAdsCampaignAnalyticsLast7Days",
             "name": "Twitter Ads Campaign Analytics (Last 7 Days)",
-            "description": "Retrieve engagement and conversion metrics from your Twitter Ads campaign for the last 7 days. Originates from the Gallery.",
+            "description": "Retrieve engagement and objective metrics from your Twitter Ads campaign for the last 7 days. Originates from the Gallery.",
             "type": "simple_rest",
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.campaignId}}&entity=CAMPAIGN&start_time=2015-04-09&end_time=2015-04-16&granularity=DAY&metric_groups=ENGAGEMENT,WEB_CONVERSION,MOBILE_CONVERSION,MEDIA,VIDEO,BILLING&placement=ALL_ON_TWITTER",
+                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.campaignId}}&entity=CAMPAIGN&start_time={date.add(-6).format()}&end_time={date.add(1).format()}&granularity=DAY&metric_groups=ENGAGEMENT,WEB_CONVERSION,MOBILE_CONVERSION,MEDIA,VIDEO,BILLING&placement=ALL_ON_TWITTER",
                 "method": "get"
             }
         },
@@ -606,12 +606,12 @@
             "service": "twitter_ads",
             "libraryAlias": "TwitterAdsCampaignAnalyticsPrev7Days",
             "name": "Twitter Ads Campaign Analytics (Prev 7 Days)",
-            "description": "Retrieve engagement and conversion metrics from your Twitter Ads campaign for the previous 7 days. Originates from the Gallery.",
+            "description": "Retrieve engagement and objective metrics from your Twitter Ads campaign for the previous 7 days. Originates from the Gallery.",
             "type": "simple_rest",
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.campaignId}}&entity=CAMPAIGN&start_time=2015-04-01&end_time=2015-04-08&granularity=DAY&metric_groups=ENGAGEMENT,WEB_CONVERSION,MOBILE_CONVERSION,MEDIA,VIDEO,BILLING&placement=ALL_ON_TWITTER",
+                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.campaignId}}&entity=CAMPAIGN&start_time={date.add(-13).format()}&end_time={date.add(-6).format()}&granularity=DAY&metric_groups=ENGAGEMENT,WEB_CONVERSION,MOBILE_CONVERSION,MEDIA,VIDEO,BILLING&placement=ALL_ON_TWITTER",
                 "method": "get"
             }
         }
@@ -691,7 +691,7 @@
             "type": "simple_rest",
             "format": "json",
             "props": {
-                "endpoint_url": "https://ads-api.twitter.com/1/accounts",
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts?sort_by=updated_at-desc",
                 "method": "GET"
             }
         },
@@ -708,7 +708,7 @@
             "type": "simple_rest",
             "format": "json",
             "props": {
-                "endpoint_url": "https://ads-api.twitter.com/1/accounts/{{ds.twitter_ads.accountId}}/campaigns",
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts/{{ds.twitter_ads.accountId}}/campaigns?sort_by=updated_at-desc",
                 "method": "GET"
             }
         },

@@ -1,0 +1,1023 @@
+{
+   "title": "Twitter Ads Cost-per-Click (Last 30 Days)",
+   "id": "d5be4648248aa0ca6fce98a49eddb736",
+   "useSamePadding": false,
+   "padding": [
+      10,
+      10,
+      "20",
+      10
+   ],
+   "workspace": {
+      "datasources": [
+         "3db359ff0426101fa48ddoogeraspilk",
+         "d7f1d8a2c54196937d30doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 829
+      }
+   },
+   "datasourceProps": [
+      "twitterAdsDateRange"
+   ],
+   "components": [
+      {
+         "type": "input",
+         "id": "822786e4",
+         "displayName": "User Input Control",
+         "renamed": true,
+         "vis": false,
+         "components": [
+            {
+               "type": "proxy",
+               "role": "values",
+               "id": "a6e9c6eb",
+               "displayName": "Date Ranges",
+               "renamed": true,
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "start_time="
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-29"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "description": "",
+                                                   "default": "GMT",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "array",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "join",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "true,false,false,false,false,false"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "glue",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "comma"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "0 or more items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "&"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "end_time="
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-28"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "description": "",
+                                                   "default": "GMT",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "array",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "join",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "false,false,false,false,false,true"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "glue",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "comma"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "0 or more items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true,
+                                       "description": "1 or more items."
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "labels",
+               "id": "03acb813",
+               "displayName": "Labels",
+               "formulas": [],
+               "data": []
+            }
+         ],
+         "scope": 1,
+         "propName": "",
+         "inputType": 1,
+         "defaultValue": "start_time=2016-02-28&end_time=2016-03-06,start_time=2016-03-06&end_time=2016-03-13,start_time=2016-03-13&end_time=2016-03-20,start_time=2016-03-20&end_time=2016-03-27,start_time=2016-03-27&end_time=2016-04-03",
+         "controlHidden": "hidden"
+      },
+      {
+         "type": "label",
+         "id": "75bd0575",
+         "displayName": "Campaign Name",
+         "layoutConfig": {
+            "y": 0,
+            "x": 0
+         },
+         "renamed": true,
+         "size": "1",
+         "fmt": "raw",
+         "fmtArgs": {
+            "prefix": "Campaign: ",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "concat(\"<b>\",lookup(\"{{ds.twitter_ads.campaignId}}\",3db359ff0426101fa48ddoogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/name;),\"</b>\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.twitter_ads.campaignId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3db359ff0426101fa48ddoogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3db359ff0426101fa48ddoogeraspilk",
+                                       "a": "/data/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true,
+                                 "description": "1 or more items."
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "gauge",
+         "id": "2ce0e7cf",
+         "displayName": "Gauge",
+         "layoutConfig": {
+            "y": 0,
+            "x": 0
+         },
+         "size": "2",
+         "conditions": [
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "424d9b59"
+                     },
+                     "type": "gteq",
+                     "right": {
+                        "cx": "e8e0d821"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "value": "cx-theme_red_3",
+                     "isScalar": true,
+                     "type": "color"
+                  }
+               ]
+            },
+            {
+               "predicates": [
+                  {
+                     "left": {
+                        "cx": "424d9b59"
+                     },
+                     "type": "lt",
+                     "right": {
+                        "cx": "e8e0d821"
+                     }
+                  }
+               ],
+               "reactions": [
+                  {
+                     "value": "cx-theme_green_3",
+                     "isScalar": true,
+                     "type": "color"
+                  }
+               ]
+            }
+         ],
+         "components": [
+            {
+               "type": "label",
+               "role": "current",
+               "id": "424d9b59",
+               "displayName": "CPC Current Value",
+               "renamed": true,
+               "size": "2",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "2",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "replace((sum(map((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",(sum(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/billed_charge_local_micro));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"),blank())))))/sum(mapflat((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/clicks));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/clicks;,blank())))),\"Infinity\",blank())",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "replace",
+                              "c": [
+                                 {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "map",
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "a6e9c6eb"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "twitterAdsDateRange"
+                                                   },
+                                                   {
+                                                      "t": "expr",
+                                                      "v": false,
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "sum",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "if",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "boolean(count(/data/id_data/metrics/billed_charge_local_micro))"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "/data/id_data/metrics/billed_charge_local_micro"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "/"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "1000000"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "blank",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "count",
+                                                                                 "optional": true,
+                                                                                 "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                 "default": "1"
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "data",
+                                                                     "repeats": true,
+                                                                     "description": "A list of 1 or more numeric items."
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "o",
+                                          "v": "/"
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "sum",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "mapflat",
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "a6e9c6eb"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "twitterAdsDateRange"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "if",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                               "a": "boolean(count(/data/id_data/metrics/clicks))"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                               "a": "/data/id_data/metrics/clicks"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "blank",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "count",
+                                                                     "optional": true,
+                                                                     "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                     "default": "1"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "A list of 1 or more numeric items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "Infinity"
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "blank",
+                                    "c": [
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "count",
+                                             "optional": true,
+                                             "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                             "default": "1"
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "label",
+               "role": "target",
+               "id": "e8e0d821",
+               "displayName": "CPC Target Value",
+               "renamed": true,
+               "size": "1",
+               "fmt": "cur",
+               "fmtArgs": {
+                  "precision": "2",
+                  "prefix": "Target: ",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if(($twitterAdsCPCTarget=\"\"),((replace((sum(map((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",(sum(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/billed_charge_local_micro));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"),blank())))))/sum(mapflat((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/clicks));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/clicks;,blank())))),\"Infinity\",blank()))*\"1.25\"),$twitterAdsCPCTarget)",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "if",
+                              "t": "f",
+                              "c": [
+                                 {
+                                    "v": false,
+                                    "t": "expr",
+                                    "c": [
+                                       {
+                                          "v": "twitterAdsCPCTarget",
+                                          "t": "var"
+                                       },
+                                       {
+                                          "v": "=",
+                                          "t": "o"
+                                       },
+                                       {
+                                          "v": "",
+                                          "t": "l"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "v": false,
+                                    "t": "expr",
+                                    "c": [
+                                       {
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "424d9b59"
+                                          },
+                                          "t": "ref"
+                                       },
+                                       {
+                                          "v": "*",
+                                          "t": "o"
+                                       },
+                                       {
+                                          "v": "1.25",
+                                          "t": "l"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "v": "twitterAdsCPCTarget",
+                                    "t": "var"
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular"
+            },
+            {
+               "type": "label",
+               "role": "min",
+               "id": "e43050ee",
+               "displayName": "CPC Min Value",
+               "renamed": true,
+               "size": 1,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "0",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "0",
+                              "t": "l"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            },
+            {
+               "type": "label",
+               "role": "max",
+               "id": "8d02b3eb",
+               "displayName": "CPC Max Value",
+               "renamed": true,
+               "size": 1,
+               "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "if((((replace((sum(map((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",(sum(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/billed_charge_local_micro));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"),blank())))))/sum(mapflat((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/clicks));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/clicks;,blank())))),\"Infinity\",blank()))*\"1.25\")>(if(($twitterAdsCPCTarget=\"\"),((replace((sum(map((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",(sum(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/billed_charge_local_micro));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"),blank())))))/sum(mapflat((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/clicks));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/clicks;,blank())))),\"Infinity\",blank()))*\"1.25\"),$twitterAdsCPCTarget))),((replace((sum(map((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",(sum(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/billed_charge_local_micro));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"),blank())))))/sum(mapflat((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/clicks));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/clicks;,blank())))),\"Infinity\",blank()))*\"1.25\"),((if(($twitterAdsCPCTarget=\"\"),((replace((sum(map((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",(sum(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/billed_charge_local_micro));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/billed_charge_local_micro;/\"1000000\"),blank())))))/sum(mapflat((concat(\"start_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\"),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/clicks));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/clicks;,blank())))),\"Infinity\",blank()))*\"1.25\"),$twitterAdsCPCTarget))*\"1.25\"))",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "if",
+                              "t": "f",
+                              "c": [
+                                 {
+                                    "v": false,
+                                    "t": "expr",
+                                    "c": [
+                                       {
+                                          "v": false,
+                                          "t": "expr",
+                                          "c": [
+                                             {
+                                                "v": {
+                                                   "r": "cx",
+                                                   "cx": "424d9b59"
+                                                },
+                                                "t": "ref"
+                                             },
+                                             {
+                                                "v": "*",
+                                                "t": "o"
+                                             },
+                                             {
+                                                "v": "1.25",
+                                                "t": "l"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "v": ">",
+                                          "t": "o"
+                                       },
+                                       {
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "e8e0d821"
+                                          },
+                                          "t": "ref"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "v": false,
+                                    "t": "expr",
+                                    "c": [
+                                       {
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "424d9b59"
+                                          },
+                                          "t": "ref"
+                                       },
+                                       {
+                                          "v": "*",
+                                          "t": "o"
+                                       },
+                                       {
+                                          "v": "1.25",
+                                          "t": "l"
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "v": false,
+                                    "t": "expr",
+                                    "c": [
+                                       {
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "e8e0d821"
+                                          },
+                                          "t": "ref"
+                                       },
+                                       {
+                                          "v": "*",
+                                          "t": "o"
+                                       },
+                                       {
+                                          "v": "1.25",
+                                          "t": "l"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "font_colour": "cx-color_888",
+               "font_style": "regular",
+               "show_value": false
+            }
+         ],
+         "gaugeStyle": "hg"
+      },
+      {
+         "type": "panel_grid",
+         "id": "76dc7b0b",
+         "displayName": "Layout Grid",
+         "layoutConfig": {
+            "y": 1,
+            "x": 0
+         },
+         "components": [
+            {
+               "type": "input",
+               "id": "d3970565",
+               "displayName": "Text Field",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "components": [],
+               "scope": 1,
+               "propName": "twitterAdsCPCTarget",
+               "inputType": 2,
+               "inputLabel": "Target"
+            }
+         ],
+         "rows": 1,
+         "cols": 2,
+         "widths": [
+            {
+               "w": 150,
+               "x": 0
+            }
+         ],
+         "cellData": [
+            {
+               "alignment": 1,
+               "y": 0,
+               "cellPadding": 0,
+               "x": 1
+            },
+            {
+               "y": 0,
+               "x": 0
+            }
+         ]
+      }
+   ]
+}

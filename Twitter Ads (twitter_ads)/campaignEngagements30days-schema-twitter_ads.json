@@ -1,0 +1,2059 @@
+{
+   "title": "Twitter Ads Campaign Engagements (Last 30 Days)",
+   "id": "be0457ea35bc63207b3331194d93888b",
+   "workspace": {
+      "datasources": [
+         "3db359ff0426101fa48ddoogeraspilk",
+         "d7f1d8a2c54196937d30doogeraspilk"
+      ],
+      "dimensions": {
+         "w": 831
+      }
+   },
+   "datasourceProps": [
+      "twitterAdsDateRange"
+   ],
+   "components": [
+      {
+         "type": "input",
+         "id": "fb3ce5bc",
+         "displayName": "User Input Control",
+         "renamed": true,
+         "vis": false,
+         "components": [
+            {
+               "type": "proxy",
+               "role": "values",
+               "id": "b16aa68e",
+               "displayName": "Date Ranges",
+               "renamed": true,
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "f",
+                              "v": "concat",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "start_time="
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "3bfc8747"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "array",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "join",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "true,false,false,false,false,false"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "glue",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "comma"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "0 or more items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "&"
+                                 },
+                                 {
+                                    "t": "l",
+                                    "v": "end_time="
+                                 },
+                                 {
+                                    "t": "f",
+                                    "v": "select",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "datevalue",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "-28"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "date_add",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "today",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "timezone",
+                                                                     "optional": true,
+                                                                     "description": "",
+                                                                     "default": "GMT"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "opt",
+                                                            "v": "5"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "1"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "format",
+                                                         "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                         "optional": true
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "yyyy-MM-dd"
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "timezone",
+                                                   "description": "",
+                                                   "default": "GMT",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "array",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "join",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "repeat",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "false,false,false,false,false,true"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "5"
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "glue",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "comma"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "data",
+                                                   "repeats": true,
+                                                   "description": "0 or more items."
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 },
+                                 {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                       "placeholder": "data",
+                                       "repeats": true,
+                                       "description": "1 or more items."
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": []
+            },
+            {
+               "type": "proxy",
+               "role": "labels",
+               "id": "ebd87972",
+               "displayName": "Labels",
+               "formulas": [],
+               "data": []
+            }
+         ],
+         "scope": 1,
+         "propName": "",
+         "inputType": 1,
+         "defaultValue": " start_time=2016-03-01&end_time=2016-03-08,start_time=2016-03-08&end_time=2016-03-15,start_time=2016-03-15&end_time=2016-03-22,start_time=2016-03-22&end_time=2016-03-29,start_time=2016-03-29&end_time=2016-03-30",
+         "controlHidden": "hidden"
+      },
+      {
+         "type": "label",
+         "id": "d07bf137",
+         "displayName": "Label",
+         "size": "1",
+         "fmt": "raw",
+         "fmtArgs": {
+            "prefix": "",
+            "resultMetadata": {
+               "ignoreDateFormat": false,
+               "isAggregated": false
+            }
+         },
+         "formulas": [
+            {
+               "txt": "concat(\"Campaign: \",\"<b>\",lookup(\"{{ds.twitter_ads.campaignId}}\",3db359ff0426101fa48ddoogeraspilk@/data/id;,3db359ff0426101fa48ddoogeraspilk@/data/name;),\"</b>\",\" | Objective: \",\"<b>\",\"{{ds.twitter_ads.objective}}\",\"</b>\")",
+               "src": {
+                  "t": "expr",
+                  "v": false,
+                  "c": [
+                     {
+                        "t": "f",
+                        "v": "concat",
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Campaign: "
+                           },
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "f",
+                              "v": "lookup",
+                              "c": [
+                                 {
+                                    "t": "l",
+                                    "v": "{{ds.twitter_ads.campaignId}}"
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3db359ff0426101fa48ddoogeraspilk",
+                                       "a": "/data/id"
+                                    }
+                                 },
+                                 {
+                                    "t": "d",
+                                    "v": {
+                                       "id": "3db359ff0426101fa48ddoogeraspilk",
+                                       "a": "/data/name"
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "l",
+                              "v": " | Objective: "
+                           },
+                           {
+                              "t": "l",
+                              "v": "<b>"
+                           },
+                           {
+                              "t": "l",
+                              "v": "{{ds.twitter_ads.objective}}"
+                           },
+                           {
+                              "t": "l",
+                              "v": "</b>"
+                           },
+                           {
+                              "t": "a",
+                              "v": null,
+                              "arg_obj": {
+                                 "placeholder": "data",
+                                 "repeats": true,
+                                 "description": "1 or more items."
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         ],
+         "data": [],
+         "align": "c",
+         "font_style": "regular",
+         "wrap": true
+      },
+      {
+         "type": "panel_grid",
+         "id": "39534662",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "024acef2",
+               "displayName": "Engagement Label",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "\"Engagements\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "Engagements"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "r",
+               "font_colour": "cx-color_blue_3",
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "25f9a014",
+               "displayName": "Conversion Label",
+               "layoutConfig": {
+                  "x": 1,
+                  "y": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "\"{{ds.twitter_ads.objective}}\"",
+                     "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [
+                           {
+                              "t": "l",
+                              "v": "{{ds.twitter_ads.objective}}"
+                           }
+                        ]
+                     }
+                  }
+               ],
+               "data": [],
+               "align": "c",
+               "font_colour": "cx-color_green_3",
+               "wrap": true
+            },
+            {
+               "type": "chart_series",
+               "id": "967d88ac",
+               "displayName": "Series Chart",
+               "layoutConfig": {
+                  "x": 0,
+                  "y": 1
+               },
+               "components": [
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "ea8d2d5a",
+                     "displayName": "Engagements",
+                     "renamed": true,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "lookup((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),slice(daterange(first(trim(map((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/engagements));,d7f1d8a2c54196937d30doogeraspilk@/request/params/start_time;,blank())))),last(trim(map((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/engagements));,d7f1d8a2c54196937d30doogeraspilk@/request/params/end_time;,blank())))),\"yyyy-MM-dd\"),\"0\",\"-1\"),trim(mapflat((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/engagements));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/engagements;,blank()))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "3bfc8747"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "first",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "trim",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "map",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "b16aa68e"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "twitterAdsDateRange"
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "if",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "boolean(count(/data/id_data/metrics/engagements))"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "/request/params/start_time"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "f",
+                                                                              "v": "blank",
+                                                                              "c": [
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "count",
+                                                                                       "optional": true,
+                                                                                       "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                       "default": "1"
+                                                                                    }
+                                                                                 }
+                                                                              ]
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "pattern",
+                                                                     "optional": true,
+                                                                     "description": "0 or more items to be removed.",
+                                                                     "default": "blank"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "count",
+                                                               "description": "The number of items to return.",
+                                                               "optional": true,
+                                                               "default": "1"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "last",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "trim",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "map",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "b16aa68e"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "twitterAdsDateRange"
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "if",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "boolean(count(/data/id_data/metrics/engagements))"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "/request/params/end_time"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "f",
+                                                                              "v": "blank",
+                                                                              "c": [
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "count",
+                                                                                       "optional": true,
+                                                                                       "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                       "default": "1"
+                                                                                    }
+                                                                                 }
+                                                                              ]
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "pattern",
+                                                                     "optional": true,
+                                                                     "description": "0 or more items to be removed.",
+                                                                     "default": "blank"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "count",
+                                                               "optional": true,
+                                                               "description": "The number of items to return.",
+                                                               "default": "1"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "trim",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "mapflat",
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b16aa68e"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "twitterAdsDateRange"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "if",
+                                                      "c": [
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                               "a": "boolean(count(/data/id_data/metrics/engagements))"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "d",
+                                                            "v": {
+                                                               "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                               "a": "/data/id_data/metrics/engagements"
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "blank",
+                                                            "c": [
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "count",
+                                                                     "optional": true,
+                                                                     "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                     "default": "1"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "pattern",
+                                                   "optional": true,
+                                                   "description": "0 or more items to be removed.",
+                                                   "default": "blank"
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesName": "Engagements",
+                     "lineStyle": "curve",
+                     "axis": "fba81bcb",
+                     "color": "cx-theme_blue_5"
+                  },
+                  {
+                     "type": "series_data",
+                     "role": "series",
+                     "id": "3b3fd5bc",
+                     "displayName": "Objectives",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "lookup((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),slice(daterange(first(trim(map((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/mobile_conversion_installs/*));,\"App Installs\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/mobile_conversion_installs/*));,\"Followers\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/follows));,\"Lead Generation\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/card_engagements));,\"Tweet Engagements\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/card_engagements));,\"{{ds.twitter_ads.objective}}\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/video_total_views));,\"{{ds.twitter_ads.objective}} Preroll\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/video_mrc_views));,\"Qualified Impressions\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/qualified_impressions));,\"Website Clicks\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric));,\"Website Conversions\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric));),d7f1d8a2c54196937d30doogeraspilk@/request/params/start_time;,blank())))),last(trim(map((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",if(switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/mobile_conversion_installs/*));,\"App Installs\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/mobile_conversion_installs/*));,\"Followers\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/follows));,\"Lead Generation\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/card_engagements));,\"Tweet Engagements\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/card_engagements));,\"{{ds.twitter_ads.objective}}\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/video_total_views));,\"{{ds.twitter_ads.objective}} Preroll\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/video_mrc_views));,\"Qualified Impressions\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/qualified_impressions));,\"Website Clicks\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric));,\"Website Conversions\",d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric));),d7f1d8a2c54196937d30doogeraspilk@/request/params/end_time;,blank())))),\"yyyy-MM-dd\"),\"0\",\"-1\"),trim(mapflat((concat(\"start_time=\",select((datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")),array(join(repeat(\"true,false,false,false,false,false\",\"5\")))),\"&\",\"end_time=\",select(datevalue(daterange(date_add(today(),\"5\",\"-28\"),date_add(today(),\"5\",\"1\")),\"yyyy-MM-dd\"),array(join(repeat(\"false,false,false,false,false,true\",\"5\")))))),\"twitterAdsDateRange\",switch(\"{{ds.twitter_ads.objective}}\",\"App Engagements\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/mobile_conversion_installs/*));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,blank()),\"App Installs\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/mobile_conversion_installs/*));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/mobile_conversion_installs/*;,blank()),\"Followers\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/follows));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/follows;,blank()),\"Lead Generation\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/card_engagements));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/card_engagements;,blank()),\"Tweet Engagements\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/card_engagements));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/card_engagements;,blank()),\"{{ds.twitter_ads.objective}}\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/video_total_views));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/video_total_views;,blank()),\"{{ds.twitter_ads.objective}} Preroll\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/video_mrc_views));,d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/video_mrc_views;,blank()),\"Qualified Impressions\",(if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/qualified_impressions));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/qualified_impressions;/\"1000\"),blank())),\"Website Clicks\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),blank()),\"Website Conversions\",if(d7f1d8a2c54196937d30doogeraspilk@boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric));,(d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_custom/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_site_visits/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_sign_ups/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_downloads/metric;+d7f1d8a2c54196937d30doogeraspilk@/data/id_data/metrics/conversion_purchases/metric;),blank())))))",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "lookup",
+                                    "c": [
+                                       {
+                                          "t": "ref",
+                                          "v": {
+                                             "r": "cx",
+                                             "cx": "3bfc8747"
+                                          }
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "slice",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "daterange",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "first",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "trim",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "map",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "b16aa68e"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "twitterAdsDateRange"
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "if",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "f",
+                                                                              "v": "switch",
+                                                                              "c": [
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "{{ds.twitter_ads.objective}}"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "App Engagements"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/mobile_conversion_installs/*))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "App Installs"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/mobile_conversion_installs/*))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Followers"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/follows))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Lead Generation"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/card_engagements))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Tweet Engagements"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/card_engagements))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "{{ds.twitter_ads.objective}}"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/video_total_views))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "{{ds.twitter_ads.objective}} Preroll"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/video_mrc_views))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Qualified Impressions"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/qualified_impressions))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Website Clicks"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Website Conversions"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "case",
+                                                                                       "repeats": true,
+                                                                                       "description": ""
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "case",
+                                                                                       "repeats": true,
+                                                                                       "description": ""
+                                                                                    }
+                                                                                 }
+                                                                              ]
+                                                                           },
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "/request/params/start_time"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "f",
+                                                                              "v": "blank",
+                                                                              "c": [
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "count",
+                                                                                       "optional": true,
+                                                                                       "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                       "default": "1"
+                                                                                    }
+                                                                                 }
+                                                                              ]
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "pattern",
+                                                                     "optional": true,
+                                                                     "description": "0 or more items to be removed.",
+                                                                     "default": "blank"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "count",
+                                                               "description": "The number of items to return.",
+                                                               "optional": true,
+                                                               "default": "1"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "last",
+                                                      "c": [
+                                                         {
+                                                            "t": "f",
+                                                            "v": "trim",
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "map",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "ref",
+                                                                        "v": {
+                                                                           "r": "cx",
+                                                                           "cx": "b16aa68e"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "l",
+                                                                        "v": "twitterAdsDateRange"
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "if",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "f",
+                                                                              "v": "switch",
+                                                                              "c": [
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "{{ds.twitter_ads.objective}}"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "App Engagements"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/mobile_conversion_installs/*))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "App Installs"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/mobile_conversion_installs/*))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Followers"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/follows))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Lead Generation"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/card_engagements))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Tweet Engagements"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/card_engagements))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "{{ds.twitter_ads.objective}}"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/video_total_views))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "{{ds.twitter_ads.objective}} Preroll"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/video_mrc_views))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Qualified Impressions"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/qualified_impressions))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Website Clicks"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "l",
+                                                                                    "v": "Website Conversions"
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "d",
+                                                                                    "v": {
+                                                                                       "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                       "a": "boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric))"
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "case",
+                                                                                       "repeats": true,
+                                                                                       "description": ""
+                                                                                    }
+                                                                                 },
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "case",
+                                                                                       "repeats": true,
+                                                                                       "description": ""
+                                                                                    }
+                                                                                 }
+                                                                              ]
+                                                                           },
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "/request/params/end_time"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "f",
+                                                                              "v": "blank",
+                                                                              "c": [
+                                                                                 {
+                                                                                    "t": "a",
+                                                                                    "v": null,
+                                                                                    "arg_obj": {
+                                                                                       "placeholder": "count",
+                                                                                       "optional": true,
+                                                                                       "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                       "default": "1"
+                                                                                    }
+                                                                                 }
+                                                                              ]
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "a",
+                                                                  "v": null,
+                                                                  "arg_obj": {
+                                                                     "placeholder": "pattern",
+                                                                     "optional": true,
+                                                                     "description": "0 or more items to be removed.",
+                                                                     "default": "blank"
+                                                                  }
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "count",
+                                                               "optional": true,
+                                                               "description": "The number of items to return.",
+                                                               "default": "1"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "yyyy-MM-dd"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "0"
+                                             },
+                                             {
+                                                "t": "l",
+                                                "v": "-1"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "f",
+                                          "v": "trim",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "mapflat",
+                                                "c": [
+                                                   {
+                                                      "t": "ref",
+                                                      "v": {
+                                                         "r": "cx",
+                                                         "cx": "b16aa68e"
+                                                      }
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "twitterAdsDateRange"
+                                                   },
+                                                   {
+                                                      "t": "f",
+                                                      "v": "switch",
+                                                      "c": [
+                                                         {
+                                                            "t": "l",
+                                                            "v": "{{ds.twitter_ads.objective}}"
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "App Engagements"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/mobile_conversion_installs/*))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "App Installs"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/mobile_conversion_installs/*))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/mobile_conversion_installs/*"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Followers"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/follows))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/follows"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Lead Generation"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/card_engagements))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/card_engagements"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Tweet Engagements"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/card_engagements))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/card_engagements"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "{{ds.twitter_ads.objective}}"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/video_total_views))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/video_total_views"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "{{ds.twitter_ads.objective}} Preroll"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/video_mrc_views))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "/data/id_data/metrics/video_mrc_views"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Qualified Impressions"
+                                                         },
+                                                         {
+                                                            "t": "expr",
+                                                            "v": false,
+                                                            "c": [
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "if",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "boolean(count(/data/id_data/metrics/qualified_impressions))"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "expr",
+                                                                        "v": false,
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "d",
+                                                                              "v": {
+                                                                                 "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                                 "a": "/data/id_data/metrics/qualified_impressions"
+                                                                              }
+                                                                           },
+                                                                           {
+                                                                              "t": "o",
+                                                                              "v": "/"
+                                                                           },
+                                                                           {
+                                                                              "t": "l",
+                                                                              "v": "1000"
+                                                                           }
+                                                                        ]
+                                                                     },
+                                                                     {
+                                                                        "t": "f",
+                                                                        "v": "blank",
+                                                                        "c": [
+                                                                           {
+                                                                              "t": "a",
+                                                                              "v": null,
+                                                                              "arg_obj": {
+                                                                                 "placeholder": "count",
+                                                                                 "optional": true,
+                                                                                 "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                                 "default": "1"
+                                                                              }
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Website Clicks"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "expr",
+                                                                  "v": false,
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_custom/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_sign_ups/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_downloads/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_purchases/metric"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "l",
+                                                            "v": "Website Conversions"
+                                                         },
+                                                         {
+                                                            "t": "f",
+                                                            "v": "if",
+                                                            "c": [
+                                                               {
+                                                                  "t": "d",
+                                                                  "v": {
+                                                                     "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                     "a": "boolean(count(/data/id_data/metrics/*[starts-with(name(),'conversion_')]/metric))"
+                                                                  }
+                                                               },
+                                                               {
+                                                                  "t": "expr",
+                                                                  "v": false,
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_custom/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_site_visits/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_sign_ups/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_downloads/metric"
+                                                                        }
+                                                                     },
+                                                                     {
+                                                                        "t": "o",
+                                                                        "v": "+"
+                                                                     },
+                                                                     {
+                                                                        "t": "d",
+                                                                        "v": {
+                                                                           "id": "d7f1d8a2c54196937d30doogeraspilk",
+                                                                           "a": "/data/id_data/metrics/conversion_purchases/metric"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               },
+                                                               {
+                                                                  "t": "f",
+                                                                  "v": "blank",
+                                                                  "c": [
+                                                                     {
+                                                                        "t": "a",
+                                                                        "v": null,
+                                                                        "arg_obj": {
+                                                                           "placeholder": "count",
+                                                                           "optional": true,
+                                                                           "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                                                           "default": "1"
+                                                                        }
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "case",
+                                                               "repeats": true,
+                                                               "description": ""
+                                                            }
+                                                         },
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "case",
+                                                               "repeats": true,
+                                                               "description": ""
+                                                            }
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "pattern",
+                                                   "optional": true,
+                                                   "description": "0 or more items to be removed.",
+                                                   "default": "blank"
+                                                }
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "seriesName": "Objectives",
+                     "renderer": "line",
+                     "lineWeight": "3",
+                     "leaveGaps": true,
+                     "axis": "f8919e8a-1",
+                     "color": "cx-theme_green_4"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_x",
+                     "id": "3bfc8747",
+                     "displayName": "Dates",
+                     "fmt": "dat",
+                     "fmtArgs": {
+                        "dateInputFormat": "custom",
+                        "dateFormatCustom": "MMM d",
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        },
+                        "dateFormat": "custom",
+                        "dateInputFormatCustom": "yyyy-MM-dd"
+                     },
+                     "formulas": [
+                        {
+                           "txt": "datevalue(daterange(date_add(today(),\"5\",\"-29\"),today()),\"yyyy-MM-dd\")",
+                           "src": {
+                              "t": "expr",
+                              "v": false,
+                              "c": [
+                                 {
+                                    "t": "f",
+                                    "v": "datevalue",
+                                    "c": [
+                                       {
+                                          "t": "f",
+                                          "v": "daterange",
+                                          "c": [
+                                             {
+                                                "t": "f",
+                                                "v": "date_add",
+                                                "c": [
+                                                   {
+                                                      "t": "f",
+                                                      "v": "today",
+                                                      "c": [
+                                                         {
+                                                            "t": "a",
+                                                            "v": null,
+                                                            "arg_obj": {
+                                                               "placeholder": "timezone",
+                                                               "optional": true,
+                                                               "description": "",
+                                                               "default": "GMT"
+                                                            }
+                                                         }
+                                                      ]
+                                                   },
+                                                   {
+                                                      "t": "opt",
+                                                      "v": "5"
+                                                   },
+                                                   {
+                                                      "t": "l",
+                                                      "v": "-29"
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "f",
+                                                "v": "today",
+                                                "c": [
+                                                   {
+                                                      "t": "a",
+                                                      "v": null,
+                                                      "arg_obj": {
+                                                         "placeholder": "timezone",
+                                                         "optional": true,
+                                                         "description": "",
+                                                         "default": "GMT"
+                                                      }
+                                                   }
+                                                ]
+                                             },
+                                             {
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                   "placeholder": "format",
+                                                   "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                                   "optional": true
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "t": "l",
+                                          "v": "yyyy-MM-dd"
+                                       },
+                                       {
+                                          "t": "a",
+                                          "v": null,
+                                          "arg_obj": {
+                                             "placeholder": "timezone",
+                                             "description": "",
+                                             "default": "GMT",
+                                             "optional": true
+                                          }
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "label": "Dates",
+                     "labelAngle": "-45",
+                     "labelDrop": "2"
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "fba81bcb",
+                     "displayName": "Engagements",
+                     "renamed": true,
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Engagements",
+                     "showLabel": true,
+                     "showAxis": false,
+                     "labelDrop": 0,
+                     "grid": true
+                  },
+                  {
+                     "type": "chart_axis",
+                     "role": "axis_y",
+                     "id": "f8919e8a-1",
+                     "displayName": "Objectives",
+                     "fmt": "num",
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "label": "Objectives",
+                     "showLabel": true,
+                     "axisPosition": "right",
+                     "showAxis": false,
+                     "labelDrop": 0
+                  }
+               ],
+               "height": "5",
+               "customHeight": "260",
+               "showLegend": false
+            }
+         ],
+         "rows": 2,
+         "cols": 2,
+         "widths": [
+            {
+               "x": 1,
+               "w": 180
+            }
+         ],
+         "cellData": [
+            {
+               "x": 0,
+               "y": 1,
+               "w": 2,
+               "cellPadding": [
+                  0,
+                  5,
+                  5,
+                  5
+               ]
+            },
+            {
+               "x": 0,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  5
+               ]
+            },
+            {
+               "x": 1,
+               "y": 0,
+               "cellPadding": [
+                  5,
+                  5,
+                  0,
+                  10
+               ]
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,69 @@
+{
+    "name": "Twitter Ads Account Impressions (Last 30 Days)",
+    "description": "See the number of impressions generated from your Twitter Ads account over the last 30 days.<br>Originates from the Gallery.",
+    "datasources": {
+        "twitter_ads-01": {
+            "service": "twitter_ads",
+            "libraryAlias": "TwitterAdsAccountsInfoList",
+            "name": "Twitter Ads Accounts Info",
+            "description": "Retrieve your Twitter Ads accounts information. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts?sort_by=updated_at-desc",
+                "method": "get"
+            }
+        },
+        "twitter_ads-02": {
+            "service": "twitter_ads",
+            "libraryAlias": "TwitterAdsAccountAnalytics(Dynamic)",
+            "name": "Twitter Ads Account Analytics (Dynamic)",
+            "description": "Retrieve your Twitter Ads account engagement metrics based on a dynamic date range. Originates from the Gallery.",
+            "type": "simple_rest",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.accountId}}&entity=ACCOUNT&{props.twitterAdsDateRange}&granularity=DAY&metric_groups=ENGAGEMENT&placement=ALL_ON_TWITTER",
+                "method": "get"
+            }
+        }
+    },
+
+    "dsMappings": {
+        "twitter_ads-01": "61c96dec2e334eca53dfdoogeraspilk",
+        "twitter_ads-02": "9a18c532b3547f77a782doogeraspilk"
+    },
+    "services": [{
+        "service": "twitter_ads"
+    }],
+    "uiVariables": [{
+        "name": "twitterAdsDateRange",
+        "value": "start_time=2016-08-01&end_time=2016-08-08"
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.twitter_ads.accountId",
+        "label": "Twitter Ads Account",
+        "description": "Select a Twitter Ads account from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure you have access to Twitter Ads account(s). <br><br>2. From time to time, your Twitter OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "twitter_ads",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://ads-api.twitter.com/1/accounts?sort_by=updated_at-desc",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.twitter_ads.accountId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
+}

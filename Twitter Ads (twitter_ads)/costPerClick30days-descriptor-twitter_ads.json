@@ -1,63 +1,6 @@
 {
-    "name": "Twitter Ads Cost-per-Click (Last 7 Days)",
-    "description": "Compare your cost-per-click rate over the last 7 days.<br>Originates from the Gallery.",
-    "sampleFormulas": {
-        "798ea797": {
-            "txt": "\"<b>Marketing Jobs</b>\"",
-            "src": {
-                "t": "expr",
-                "v": false,
-                "c": [{
-                    "t": "l",
-                    "v": "<b>Marketing Jobs</b>"
-                }]
-            }
-        },
-        "151e5390": {
-            "txt": "\"18.67\"",
-            "src": {
-                "t": "expr",
-                "v": false,
-                "c": [{
-                    "t": "l",
-                    "v": "18.67"
-                }]
-            }
-        },
-        "dc0c8283": {
-            "txt": "\"20\"",
-            "src": {
-                "t": "expr",
-                "v": false,
-                "c": [{
-                    "t": "l",
-                    "v": "20"
-                }]
-            }
-        },
-        "b382b41a": {
-            "txt": "\"0\"",
-            "src": {
-                "t": "expr",
-                "v": false,
-                "c": [{
-                    "t": "l",
-                    "v": 0
-                }]
-            }
-        },
-        "266ca3ce": {
-            "txt": "\"23.337500000000002\"",
-            "src": {
-                "t": "expr",
-                "v": false,
-                "c": [{
-                    "t": "l",
-                    "v": 23.337500000000002
-                }]
-            }
-        }
-    },
+    "name": "Twitter Ads Cost-per-Click (Last 30 Days)",
+    "description": "Compare your cost-per-click rate over the last 30 days.<br>Originates from the Gallery.",
     "datasources": {
         "twitter_ads-01": {
             "service": "twitter_ads",
@@ -74,14 +17,14 @@
         },
         "twitter_ads-02": {
             "service": "twitter_ads",
-            "libraryAlias": "TwitterAdsCampaignAnalyticsLast7Days",
-            "name": "Twitter Ads Campaign Analytics (Last 7 Days)",
-            "description": "Retrieve engagement and objective metrics from your Twitter Ads campaign for the last 7 days. Originates from the Gallery.",
+            "libraryAlias": "TwitterAdsCampaignAnalytics(Dynamic)",
+            "name": "Twitter Ads Campaign Analytics (Dynamic)",
+            "description": "Retrieve engagement and objective metrics from your Twitter Ads campaign based on a dynamic date range. Originates from the Gallery.",
             "type": "simple_rest",
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.campaignId}}&entity=CAMPAIGN&start_time={date.add(-6).format()}&end_time={date.add(1).format()}&granularity=DAY&metric_groups=ENGAGEMENT,WEB_CONVERSION,MOBILE_CONVERSION,MEDIA,VIDEO,BILLING&placement=ALL_ON_TWITTER",
+                "endpoint_url": "https://ads-api.twitter.com/1/stats/accounts/{{ds.twitter_ads.accountId}}?entity_ids={{ds.twitter_ads.campaignId}}&entity=CAMPAIGN&{props.twitterAdsDateRange}&granularity=DAY&metric_groups=ENGAGEMENT,WEB_CONVERSION,MOBILE_CONVERSION,MEDIA,VIDEO,BILLING&placement=ALL_ON_TWITTER",
                 "method": "get"
             }
         }
@@ -89,7 +32,7 @@
 
     "dsMappings": {
         "twitter_ads-01": "3db359ff0426101fa48ddoogeraspilk",
-        "twitter_ads-02": "d7e11eb33da969597550doogeraspilk"
+        "twitter_ads-02": "d7f1d8a2c54196937d30doogeraspilk"
     },
 
     "services": [{
@@ -98,6 +41,9 @@
     "uiVariables": [{
         "name": "twitterAdsCPCTarget",
         "value": ""
+    }, {
+        "name": "twitterAdsDateRange",
+        "value": "start_time=2016-08-01&end_time=2016-08-08"
     }],
     "datasourceConfigModel": [{
         "type": "select",

@@ -105,24 +105,24 @@
             }
         },
         "7be5fdf1": {
-            "txt": "\"20160601\"",
+            "txt": "\"2016-06-01\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "20160601"
+                    "v": "2016-06-01"
                 }]
             }
         },
         "9d211878": {
-            "txt": "\"20160625\"",
+            "txt": "\"2016-06-25\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "20160625"
+                    "v": "2016-06-25"
                 }]
             }
         },
@@ -149,18 +149,18 @@
             }
         },
         "3dd34b8c": {
-            "txt": "\"20160501\"",
+            "txt": "\"2016-05-01\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "20160501"
+                    "v": "2016-05-01"
                 }]
             }
         },
         "5edb2398": {
-            "txt": "\"20160525\"",
+            "txt": "\"2016-05-25\"",
             "src": {
                 "t": "expr",
                 "v": false,
@@ -171,13 +171,13 @@
             }
         },
         "e78f0a5a": {
-            "txt": "\"avgTime\"",
+            "txt": "\"avgTimeOnPage\"",
             "src": {
                 "t": "expr",
                 "v": false,
                 "c": [{
                     "t": "l",
-                    "v": "avgTime"
+                    "v": "avgTimeOnPage"
                 }]
             }
         },
@@ -530,24 +530,50 @@
                     }]
                 }]
             }
+        },
+        "d8102e2b-3": {
+            "txt": "\"Submit\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Submit"
+                }]
+            }
         }
     },
     "datasources": {
-        "googleAnalytics": {
+        "googleAnalytics-01": {
             "service": "google_analytics",
-            "libraryAlias": "GoogleAnalyticsTopLandingPageMetrics(280Days)",
-            "name": "Google Analytics Top Landing Page Metrics (280 Days)",
+            "libraryAlias": "GoogleAnalyticsTopLandingPageMetrics(Dynamic)",
+            "name": "Google Analytics Top Landing Page Metrics (Dynamic)",
             "description": "Retrieve detailed Google AdWords metrics on your website's keyword performance through Google Analytics. Originates from the Gallery.",
             "type": "google_analytics",
             "format": "csv",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath,ga:date&metrics=ga:pageviews,ga:sessions,ga:goalCompletionsAll,ga:users,ga:bounces,ga:pageviewsPerSession,ga:timeOnPage&start-date={date.add(-280).format()}&end-date={date.today}&max-results=10000",
-                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&&dimensions=ga:landingPagePath,ga:date&metrics=ga:pageviews,ga:sessions,ga:goalCompletionsAll,ga:users,ga:bounces,ga:pageviewsPerSession,ga:timeOnPage&start-date={date.add(-280).format()}&end-date={date.today}&max-results=10000",
-                "max_pages": "10",
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath&metrics=ga:sessions,ga:users,ga:goalConversionRateAll,ga:bounceRate,ga:pageviewsPerSession,ga:avgTimeOnPage&start-date={props.gaStartDate}&end-date={props.gaEndDate}&sort=-ga:sessions&filters=ga:{props.gaEngagementType}>{props.gaEngagementValue}&max-results=200",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath&metrics=ga:sessions,ga:users,ga:goalConversionRateAll,ga:bounceRate,ga:pageviewsPerSession,ga:avgTimeOnPage&start-date={props.gaStartDate}&end-date={props.gaEndDate}&sort=-ga:sessions&filters=ga:{props.gaEngagementType}>{props.gaEngagementValue}&max-results=200",
+                "max_pages": "1",
                 "mode": "Advanced",
-                "profile": "{{ds.google_analytics.profileId}}",
-                "timePeriod": "&start-date={date.add(-280).format()}&end-date={date.today}"
+                "profile": "{{ds.google_analytics.profileId}}"
+            }
+        },
+        "googleAnalytics-02": {
+            "service": "google_analytics",
+            "libraryAlias": "GoogleAnalyticsTopLandingPageMetricsPrev(Dynamic)",
+            "name": "Google Analytics Top Landing Page Metrics - Prev (Dynamic)",
+            "description": "Retrieve detailed Google AdWords metrics on your website's keyword performance through Google Analytics. Originates from the Gallery.",
+            "type": "google_analytics",
+            "format": "csv",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath&metrics=ga:sessions&start-date={props.gaPrevStartDate}&end-date={props.gaPrevEndDate}&sort=-ga:sessions&filters=ga:{props.gaEngagementType}>{props.gaEngagementValue}&max-results=10000",
+                "advancedQuery": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:{{ds.google_analytics.profileId}}&dimensions=ga:landingPagePath&metrics=ga:sessions&start-date={props.gaPrevStartDate}&end-date={props.gaPrevEndDate}&sort=-ga:sessions&filters=ga:{props.gaEngagementType}>{props.gaEngagementValue}&max-results=10000",
+                "max_pages": "1",
+                "mode": "Advanced",
+                "profile": "{{ds.google_analytics.profileId}}"
             }
         }
     },
@@ -555,17 +581,30 @@
         "service": "google_analytics"
     }],
     "dsMappings": {
-        "googleAnalytics": "acbae58d6e53fcab277bKavyaMallur9"
+        "googleAnalytics-01": "e12cc4606349e1d8ddb0doogeraspilk",
+        "googleAnalytics-02": "1c2991cfd8047fdb23dddoogeraspilk"
     },
     "uiVariables": [{
         "name": "gaPeriod",
         "value": "thismonth"
     }, {
         "name": "gaEngagementType",
-        "value": "viewsPerSec"
+        "value": "avgTimeOnPage"
     }, {
         "name": "gaEngagementValue",
-        "value": "10"
+        "value": "0"
+    }, {
+        "name": "gaStartDate",
+        "value": "2016-08-01"
+    }, {
+        "name": "gaEndDate",
+        "value": "2016-08-25"
+    }, {
+        "name": "gaPrevStartDate",
+        "value": "2016-07-01"
+    }, {
+        "name": "gaPrevEndDate",
+        "value": "2016-07-25"
     }],
     "datasourceConfigModel": [{
         "type": "select",
