@@ -1,47 +1,180 @@
 {
-    "name": "42matters1 App Overview",
-    "description": "Originates from the Gallery.",
+    "name": "42matters App Overview",
+    "description": "Get a snapshot of how you app appears in the Google Play Store. Originates from the Gallery.",
+    "sampleFormulas": {
+        "80990752-3": {
+            "txt": "\"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR6Fsgg9ogADS0OVtVQfe2wYB7DekzHMGxfxeNPZNwF0jubPk1X5g\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR6Fsgg9ogADS0OVtVQfe2wYB7DekzHMGxfxeNPZNwF0jubPk1X5g"
+                }]
+            }
+        },
+        "ce5d4fc3-7": {
+            "txt": "\"Acme|#\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Acme|#"
+                }]
+            }
+        },
+        "19e420fc-9": {
+            "txt": "\"Acme Inc.\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Acme Inc."
+                }]
+            }
+        },
+        "68d5eda6": {
+            "txt": "\"1.9.6\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1.9.6"
+                }]
+            }
+        },
+        "5f121747-1": {
+            "txt": "\"https://static.klipfolio.com/templates/images/google-play.png\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "https://static.klipfolio.com/templates/images/google-play.png"
+                }]
+            }
+        },
+        "34541876-5": {
+            "txt": "\"1000\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "1000"
+                }]
+            }
+        },
+        "da78e126-6": {
+            "txt": "\"Downloads\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Downloads"
+                }]
+            }
+        },
+        "dccf4a9f": {
+            "txt": "\"4.21\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "4.21"
+                }]
+            }
+        },
+        "23d833df": {
+            "txt": "\"29\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "19"
+                }]
+            }
+        },
+        "70ca22ec": {
+            "txt": "\"Let the Acme app manage your files. You'll never have to do paperwork again!\"",
+            "src": {
+                "t": "expr",
+                "v": false,
+                "c": [{
+                    "t": "l",
+                    "v": "Let the Acme app manage your files. You'll never have to do paperwork again!"
+                }]
+            }
+        },
+        "bf2d4256-8": {
+        "txt": "\"<b>New</b><br>This version fixes the following bugs: - Search field not working for special characters. - Improved rendering of notes for the paragraphs. - Support of different fonts. - Support of farmat painter.\"",
+        "src": {
+            "t": "expr",
+            "v": false,
+            "c": [
+                {
+                    "t": "l",
+                    "v": "<b>New</b><br>This version fixes the following bugs: - Search field not working for special characters. - Improved rendering of notes for the paragraphs. - Support of different fonts. - Support of farmat painter."
+                }]
+            }
+        }
+    },
     "datasources": {
-        "42matters1-01": {
-            "service": "42matters1",
+        "42matters-01": {
+            "service": "42matters",
             "type": "simple_rest",
             "format": "json",
-            "isLocked": true,
-            "name": "42matters App Overview (Google Play Store)",
-            "libraryAlias": "42mattersAppOverviewGooglePlayStore",
+            "name": "42matters App Overview (Android, {{ds.42matters.packageName}})",
+            "libraryAlias": "42mattersAppOverview(Android,{{ds.42matters.packageName}})",
             "refreshInterval": 14400,
-            "description": "Retrieve App details on the Google Play Store. Originates from the Gallery.",
+            "description": "Retrieve app details on the Google Play Store. Originates from the Gallery.",
             "props": {
-                "endpoint_url": "https://data.42matters.com/api/v2.0/android/apps/lookup.json?access_token={{auth.42matters1.apiKey}}&p={{ds.42matters1.packageName}}",
+                "endpoint_url": "https://data.42matters.com/api/v2.0/android/apps/lookup.json?access_token={{auth.42matters.apiKey}}&p={{ds.42matters.packageName}}",
                 "method": "GET"
             }
         }
     },
     "dsMappings": {
-        "42matters1-01": "5a295a951becdd68625bKavyaMallur9"
+        "42matters-01": "5a295a951becdd68625bKavyaMallur9"
     },
     "services": [{
-        "service": "42matters1"
+        "service": "42matters"
     }],
     "datasourceConfigModel": [{
+        "type": "text",
+        "id": "ds.42matters.appName",
+        "label": "App Name",
+        "description": "Enter the name of your app.",
+        "debounceEnabled": true,
+        "isRequired": true,
+        "ghostText": "angry bird",
+        "onChangeQueries": ["q1"]
+    }, {
         "type": "select",
-        "id": "ds.42matters1.packageName",
+        "id": "ds.42matters.packageName",
         "label": "App",
-        "description": "Pick the right app from the list.",
+        "description": "Pick the app you would like to track from the list.",
         "isRequired": true
     }],
     "queries": [{
-        "errorMessage": "Make sure you have the correct 42Matters API Key.",
+        "id": "q1",
+        "errorMessage": "Make sure you have the correct 42Matters API Access Token.",
         "connector": {
-            "service": "42matters1",
+            "service": "42matters",
             "type": "simple_rest",
             "format": "json",
             "props": {
-                "endpoint_url": "https://42matters.com/api/1/apps/search.json?q={{auth.42matters1.app}}&limit=5&access_token={{auth.42matters1.apiKey}}"
+                "endpoint_url": "https://42matters.com/api/1/apps/search.json?q={{ds.42matters.appName}}&access_token={{auth.42matters.apiKey}}&limit=10"
             }
         },
         "results": [{
-            "propId": "ds.42matters1.packageName",
+            "propId": "ds.42matters.packageName",
             "propField": "options",
             "labels": "//title",
             "values": "//package_name"
