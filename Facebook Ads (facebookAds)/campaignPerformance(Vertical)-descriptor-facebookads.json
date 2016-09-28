@@ -1,0 +1,122 @@
+{
+    "name": "Facebook Ads Campaign Performance",
+    "description": "Is your campaign on budget and meeting your conversion targets? Make sure your message is reaching the right audience by monitoring your Facebook Ads campaign performance for the date range and campaign of your choice. Originates from the Gallery.",
+    "datasources": {
+        "facebookAds-01": {
+            "service": "facebook_ads",
+            "libraryAlias": "FacebookAdsCampaigns",
+            "name": "Facebook Ads Campaigns",
+            "description": "Retrieve the list of campaigns in your Facebook Ads account. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.accountId}}/campaigns?fields=id,name,created_time,effective_status",
+                "graphUrl": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.accountId}}/campaigns?fields=id,name,created_time,effective_status",
+                "qtype": "Graph API"
+            }
+        },
+        "facebookAds-02": {
+            "service": "facebook_ads",
+            "libraryAlias": "FacebookAdsCampaignAdsetsBudget",
+            "name": "Facebook Ads Campaign Adsets Budgets",
+            "description": "Retrieve the budget details of the Adsets for a selected Facebook Ads Campaign. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.7/{props.fbAdsCampaign}/adsets?fields=id,name,lifetime_budget,daily_budget,budget_remaining",
+                "graphUrl": "https://graph.facebook.com/v2.7/{props.fbAdsCampaign}/adsets?fields=id,name,lifetime_budget,daily_budget,budget_remaining",
+                "qtype": "Graph API"
+            }
+        },
+        "facebookAds-03": {
+            "service": "facebook_ads",
+            "libraryAlias": "FacebookAdsCampaignMetrics",
+            "name": "Facebook Ads Campaign Metrics",
+            "description": "Retrieve the daily metrics of a selected Facebook Ads Campaign for the last 93 days. Originates from the Gallery.",
+            "type": "facebook",
+            "format": "json",
+            "refreshInterval": 14400,
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.7/{props.fbAdsCampaign}/insights?time_range[since]={date.add(-93).format('yyyy-MM-dd')}&time_range[until]={date.today}&time_increment=1&fields=spend,actions,ctr,clicks,impressions&limit=100",
+                "graphUrl": "https://graph.facebook.com/v2.7/{props.fbAdsCampaign}/insights?time_range[since]={date.add(-93).format('yyyy-MM-dd')}&time_range[until]={date.today}&time_increment=1&fields=spend,actions,ctr,clicks,impressions&limit=100",
+                "qtype": "Graph API"
+            }
+        }
+    },
+    "services": [{
+        "service": "facebook_ads"
+    }],
+    "dsMappings": {
+        "facebookAds-01": "fa2a9329eef7f49b4224KavyaMallur9",
+        "facebookAds-02": "cdc44fe3998b314d6b57KavyaMallur9",
+        "facebookAds-03": "0f71f4cecc6e7f515ee7KavyaMallur9"
+    },
+    "uiVariables": [{
+        "name": "fbAdsPeriod",
+        "value": "thismonth"
+    }, {
+        "name": "fbAdsConversionTarget",
+        "value": ""
+    }, {
+        "name": "fbAdsCPConversionTarget",
+        "value": ""
+    }, {
+        "name": "fbAdsCampaign",
+        "value": "{{ds.facebook_ads.campaignId}}"
+    }, {
+        "name": "fbAdsSpendBudget",
+        "value": ""
+    }],
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.facebook_ads.accountId",
+        "label": "Account",
+        "description": "Select a Facebook Ads account, and then a corresponding campaign.",
+        "isRequired": true,
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.facebook_ads.campaignId",
+        "label": "Campaign",
+        "isRequired": true,
+        "onChangeQueries": ["q3"]
+    }],
+    "queries": [{
+        "errorMessage": "Here are two suggestions:<br><br>1. Make sure the Facebook account you signed in with includes a Facebook Ads account. <br><br>2. From time to time, your Facebook OAuth token will expire. This token allows you to safely bring your data into Klipfolio. <a href='https://support.klipfolio.com/hc/en-us/articles/215548958-OAuth-token-expired-for-connected-accounts' target='_blank'>Find out how to re-authorize your OAuth tokens</a>.",
+        "connector": {
+            "service": "facebook_ads",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.7/me/adaccounts?fields=id,name",
+                "method": "GET",
+                "qtype": "Graph API"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook_ads.accountId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "facebook_ads",
+            "type": "facebook",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://graph.facebook.com/v2.7/{{ds.facebook_ads.accountId}}/campaigns?fields=id,name,created_time,effective_status",
+                "method": "GET"
+            }
+        },
+        "results": [{
+            "propId": "ds.facebook_ads.campaignId",
+            "propField": "options",
+            "labels": "/data/name",
+            "values": "/data/id"
+        }]
+    }]
+}
