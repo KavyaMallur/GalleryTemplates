@@ -1,0 +1,53 @@
+{
+    "name": "Versature Single Call Queue Monitoring",
+    "description": "Monitor current call queue metrics including Calls Waiting, Current Wait Time, Available Agents and Maximum Current Wait Time. Using a gauge chart, visualize call center data including min and max thresholds for at a glance performance monitoring.",
+    "datasources": {
+        "versature": {
+            "service": "versature",
+            "type": "simple_rest",
+            "format": "json",
+            "name": "Versature Call Queue",
+            "libraryAlias": "VersatureCallQueue",
+            "refreshInterval": 60,
+            "description": "Retrieve current call queue metrics including Calls Waiting, Current Wait Time, Available Agents and Maximum Current Wait Time.",
+            "props": {
+                "endpoint_url": "https://integrate.versature.com/api/call_queues/stats",
+                "parameters": "[{\"name\":\"Accept\",\"value\":\"application/vnd.integrate.v1.1.0+json\",\"type\":\"header\"}]",
+                "method": "get"
+            }
+        }
+    },
+    "dsMappings": {
+        "versature": "3a31b18a136c9a65025cdoogeraspilk"
+    },
+    "services": [{
+        "service": "versature"
+    }],
+
+    "datasourceConfigModel": [{
+        "type": "select",
+        "id": "ds.versature.queueID",
+        "label": "Queue",
+        "description": "Select a Queue from the drop-down list.",
+        "isRequired": true
+    }],
+    "queries": [{
+        "errorMessage": "Make sure you have the access to the correct Versature account.",
+        "connector": {
+            "service": "versature",
+            "type": "simple_rest",
+            "format": "json",
+            "props": {
+                "endpoint_url": "https://integrate.versature.com/api/call_queues/stats",
+                "parameters": "[{\"name\":\"Accept\",\"value\":\"application/vnd.integrate.v1.1.0+json\",\"type\":\"header\"}]",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.versature.queueID",
+            "propField": "options",
+            "labels": "/user",
+            "values": "/user"
+        }]
+    }]
+}

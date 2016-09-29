@@ -1,0 +1,1323 @@
+{
+   "title": "Versature Single Call Queue Monitoring",
+   "id": "5de374aa003f32b01fbd95443f2d8980",
+   "workspace": {
+      "datasources": [
+         "3a31b18a136c9a65025cdoogeraspilk"
+      ],
+      "dimensions": {
+         "w": 1615
+      }
+   },
+   "components": [
+      {
+         "type": "panel_grid",
+         "id": "17707ed5c7575522f695cc97bfea04c39692d8ca",
+         "displayName": "Layout Grid",
+         "components": [
+            {
+               "type": "label",
+               "id": "5898810ff7c1f4093e5e7b6b7477c7c0cce7c89d",
+               "displayName": "Label - Calls Waiting",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 0
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "\"Current Calls Waiting\"",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "Calls Waiting",
+                              "t": "l"
+                           }
+                        ]
+                     },
+                     "ver": 2
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "604ce722482c3056a77e44cff51c1c3a2690d408",
+               "displayName": "Label - Agents",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 1
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "\"Current Available Agents\"",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "Avail Agents",
+                              "t": "l"
+                           }
+                        ]
+                     },
+                     "ver": 2
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "1f5b1159f7083928ddfe703e518643275a937de9",
+               "displayName": "Label - Current Wait Time",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 2
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "\"Average Wait Time\"",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "Avg. Wait",
+                              "t": "l"
+                           }
+                        ]
+                     },
+                     "ver": 2
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "label",
+               "id": "89d51276e31ade8c125c41ee7fa0de3a49461e42",
+               "displayName": "Label - Max Wait",
+               "layoutConfig": {
+                  "y": 0,
+                  "x": 3
+               },
+               "renamed": true,
+               "size": "1",
+               "fmt": "txt",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
+               "formulas": [
+                  {
+                     "txt": "\"Maximum Wait Time\"",
+                     "src": {
+                        "v": false,
+                        "t": "expr",
+                        "c": [
+                           {
+                              "v": "Max Wait",
+                              "t": "l"
+                           }
+                        ]
+                     },
+                     "ver": 2
+                  }
+               ],
+               "data": [],
+               "wrap": true
+            },
+            {
+               "type": "gauge",
+               "id": "8f02a2cb69f51be9a8c3932ee9c15ab28e4d8c4b",
+               "displayName": "Gauge - Calls Waiting",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 0
+               },
+               "renamed": true,
+               "size": "2",
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "3235180859670b569e9782eeec9620a4f2551779",
+                     "displayName": "Calls Waiting",
+                     "renamed": true,
+                     "size": "2",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "1"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-warning-red",
+                                 "isScalar": true,
+                                 "type": "icon"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "SUMif(3a31b18a136c9a65025cdoogeraspilk@/user;={{ds.versature.queueID}},3a31b18a136c9a65025cdoogeraspilk@/calls_waiting;)",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "sumif",
+                                    "t": "f",
+                                    "c": [
+                                       {
+                                          "v": false,
+                                          "t": "expr",
+                                          "c": [
+                                             {
+                                                "v": {
+                                                   "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                                   "a": "/user"
+                                                },
+                                                "t": "d"
+                                             },
+                                             {
+                                                "v": "=",
+                                                "t": "o"
+                                             },
+                                             {
+                                                "v": "{{ds.versature.queueID}}",
+                                                "t": "l"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "v": {
+                                             "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                             "a": "/calls_waiting"
+                                          },
+                                          "t": "d"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "d368ed701bf37dc3954dcc972aa4225d4150bace",
+                     "displayName": "Target - Calls Waiting",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "5",
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888"
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "0d7ab234380105198c8016c45e56176d5f351788",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"Total Number of Agents\"",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "Total Number of Agents",
+                                    "t": "l"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "21bbeff5fc85a9471f4ef814bf2099367a426cf3",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "10",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": {
+                                       "r": "cx",
+                                       "cx": "e7f884cf"
+                                    },
+                                    "t": "ref"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ],
+               "gaugeStyle": "ag"
+            },
+            {
+               "type": "gauge",
+               "id": "68d07245ef8e8cedb3f0eec7810cbb6f95dfd7ec",
+               "displayName": "Gauge - Available Agents",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 1
+               },
+               "renamed": true,
+               "size": "2",
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "d6fab2ed07e3086696b66d0bf853ddf002757cff",
+                     "displayName": "Agents In Queue",
+                     "renamed": true,
+                     "size": "2",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "lt",
+                                 "right": {
+                                    "raw": "1"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "type": "icon",
+                                 "value": "ind-triangle-warning-red"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "SUMif(3a31b18a136c9a65025cdoogeraspilk@/user;={{ds.versature.queueID}},3a31b18a136c9a65025cdoogeraspilk@/available_agents;)",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "sumif",
+                                    "t": "f",
+                                    "c": [
+                                       {
+                                          "v": false,
+                                          "t": "expr",
+                                          "c": [
+                                             {
+                                                "v": {
+                                                   "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                                   "a": "/user"
+                                                },
+                                                "t": "d"
+                                             },
+                                             {
+                                                "v": "=",
+                                                "t": "o"
+                                             },
+                                             {
+                                                "v": "{{ds.versature.queueID}}",
+                                                "t": "l"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "v": {
+                                             "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                             "a": "/available_agents"
+                                          },
+                                          "t": "d"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "fbfab56e31ae28a21510367a20b39cff8fe22e5b",
+                     "displayName": "Target - Agents in Queue",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "10",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "2",
+                                    "t": "l"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888"
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "28697830ce0bf7012376123fd3ecce26ab1a3538",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"Total Number of Agents\"",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "Total Number of Agents",
+                                    "t": "l"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "1dbe88d5ecd6d80b723c6908b531bfe1aa93be26",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "30",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "2",
+                                    "t": "l"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  }
+               ],
+               "gaugeStyle": "ag"
+            },
+            {
+               "type": "gauge",
+               "id": "8398adde199352c22344eedd91c61b08cdeea24b",
+               "displayName": "Gauge - Average Wait Time",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 2
+               },
+               "renamed": true,
+               "size": "2",
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "1422c9bc184584263bcf6910555562673e4e737b",
+                     "displayName": "Average Wait Time",
+                     "renamed": true,
+                     "size": "2",
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "60"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-warning-red",
+                                 "isScalar": true,
+                                 "type": "icon"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "SUMIF(3a31b18a136c9a65025cdoogeraspilk@/user;={{ds.versature.queueID}},3a31b18a136c9a65025cdoogeraspilk@/avg_wait;)",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "averageif",
+                                    "t": "f",
+                                    "c": [
+                                       {
+                                          "v": false,
+                                          "t": "expr",
+                                          "c": [
+                                             {
+                                                "v": {
+                                                   "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                                   "a": "/user"
+                                                },
+                                                "t": "d"
+                                             },
+                                             {
+                                                "v": "=",
+                                                "t": "o"
+                                             },
+                                             {
+                                                "v": "{{ds.versature.queueID}}",
+                                                "t": "l"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "v": {
+                                             "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                             "a": "/avg_wait"
+                                          },
+                                          "t": "d"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "7017ac53d91ff1fc8a56e76a9e038673904cd15a",
+                     "displayName": "Target - Average Wait Time",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "durationFormat": "ss",
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "\"30\"",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "30",
+                                    "t": "l"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888"
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "a2937383292fd5935136b16e7d7f60073abf1ea2",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "0",
+                                    "t": "l"
+                                 }
+                              ]
+                           }
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "720cea4e7e180a7d68bf8962e3418fdadabe3e5c",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "durationFormat": "mm",
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "60",
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "0342ee8e74b7054f7f9af8f4dab0658ae50206e7",
+                     "displayName": "Range 1",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "338bab4526c6e03deddbacba5bb5ca674ac380c4",
+                           "displayName": "Start 1",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "7b1e24e82": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "0",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "052acbdfff6bf94fde644f18f135dbd218c6acee",
+                           "displayName": "End 1",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "21f2be8a3": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "30",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 1,
+                     "color": "#21a310"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "acb9f9b6287a955882859c9a91a5d33c5aa11e43",
+                     "displayName": "Range 2",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "c8bc56388d37e2915f380a1d5561ac0336863af3",
+                           "displayName": "Start 2",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "9cfc1a095": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "30",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "afc6385fb035bdac0137d6896d5aa3eb7a0cee80",
+                           "displayName": "End 2",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "1ced5e816": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "45",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 2,
+                     "color": "#ffe100"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "37a6a7bea91e669210b2e51c9f6aa029a0ffd04f",
+                     "displayName": "Range 3",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "da29f134a28aedbb310b366f49b6efabac0bb0b1",
+                           "displayName": "Start 3",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "6a4969d58": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "45",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "21fe793d09d0339ff3436634bfe35275824398c4",
+                           "displayName": "End 3",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "3addfc7e9": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "60",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 3,
+                     "color": "#dd1b1b"
+                  }
+               ],
+               "gaugeStyle": "ag"
+            },
+            {
+               "type": "gauge",
+               "id": "afc26994abd3dd0e7ed9daed086ce91e4aef2f8c",
+               "displayName": "Gauge - Max Wait Time",
+               "layoutConfig": {
+                  "y": 1,
+                  "x": 3
+               },
+               "renamed": true,
+               "size": "2",
+               "components": [
+                  {
+                     "type": "label",
+                     "role": "current",
+                     "id": "a80a588b3b2b3ca642034e724ffab13f884885d1",
+                     "displayName": "Current Max Wait Time ",
+                     "renamed": true,
+                     "size": "2",
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "conditions": [
+                        {
+                           "predicates": [
+                              {
+                                 "left": {
+                                    "self": 1
+                                 },
+                                 "type": "gt",
+                                 "right": {
+                                    "raw": "120"
+                                 }
+                              }
+                           ],
+                           "reactions": [
+                              {
+                                 "value": "ind-triangle-warning-red",
+                                 "isScalar": true,
+                                 "type": "icon"
+                              }
+                           ]
+                        }
+                     ],
+                     "formulas": [
+                        {
+                           "txt": "SUMIF(3a31b18a136c9a65025cdoogeraspilk@/user;={{ds.versature.queueID}},3a31b18a136c9a65025cdoogeraspilk@/max_wait;)",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "sumif",
+                                    "t": "f",
+                                    "c": [
+                                       {
+                                          "v": false,
+                                          "t": "expr",
+                                          "c": [
+                                             {
+                                                "v": {
+                                                   "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                                   "a": "/user"
+                                                },
+                                                "t": "d"
+                                             },
+                                             {
+                                                "v": "=",
+                                                "t": "o"
+                                             },
+                                             {
+                                                "v": "{{ds.versature.queueID}}",
+                                                "t": "l"
+                                             }
+                                          ]
+                                       },
+                                       {
+                                          "v": {
+                                             "id": "3a31b18a136c9a65025cdoogeraspilk",
+                                             "a": "/max_wait"
+                                          },
+                                          "t": "d"
+                                       }
+                                    ]
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": []
+                  },
+                  {
+                     "type": "label",
+                     "role": "target",
+                     "id": "623ed3b090135e9a7c50424a9f55b8a958afdabc",
+                     "displayName": "Target Max Wait Time",
+                     "renamed": true,
+                     "size": "1",
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "durationFormat": "ss",
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "60",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "30",
+                                    "t": "l"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888"
+                  },
+                  {
+                     "type": "label",
+                     "role": "min",
+                     "id": "e544714e2f71b552af29065bcdc536ea4a3f9a17",
+                     "displayName": "Min Value",
+                     "size": 1,
+                     "fmt": "num",
+                     "fmtArgs": {
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "0",
+                           "src": {
+                              "v": false,
+                              "t": "expr",
+                              "c": [
+                                 {
+                                    "v": "0",
+                                    "t": "l"
+                                 }
+                              ]
+                           },
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular",
+                     "show_value": false
+                  },
+                  {
+                     "type": "label",
+                     "role": "max",
+                     "id": "28c3b5eb421bb1b7db9c6dd576edf8c300537bb2",
+                     "displayName": "Max Value",
+                     "size": 1,
+                     "fmt": "dur",
+                     "fmtArgs": {
+                        "durationFormat": "mm",
+                        "resultMetadata": {
+                           "ignoreDateFormat": false,
+                           "isAggregated": false
+                        }
+                     },
+                     "formulas": [
+                        {
+                           "txt": "300",
+                           "ver": 2
+                        }
+                     ],
+                     "data": [],
+                     "font_colour": "cx-color_888",
+                     "font_style": "regular"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "a9ed6363f27b4512160614e587d73121c1327be3",
+                     "displayName": "Range 1",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "528281e6155373388d9ca6e38b95a8dc0d104e71",
+                           "displayName": "Start 1",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "ac826be711": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "0",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "d09392e7756770bfd8cd864767e9cc7e1886a4e9",
+                           "displayName": "End 1",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "4f6a10e012": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "60",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": [ ]
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 1,
+                     "color": "#21a310"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "5f0e3814411a2b3b327906cb2f37103f8ee62c87",
+                     "displayName": "Range 2",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "4341ceb824dd48c126720beb52d3906813422165",
+                           "displayName": "Start 2",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "0983954d14": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "60",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "3465e4bc012a852f5ccecb4e68cc88afda362ea0",
+                           "displayName": "End 2",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "ec0579fa15": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "120",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 2,
+                     "color": "#ffe100"
+                  },
+                  {
+                     "type": "range",
+                     "role": "range",
+                     "id": "d027ca90f25b9c5f292cd511908107718cbd1073",
+                     "displayName": "Range 3",
+                     "components": [
+                        {
+                           "type": "proxy",
+                           "role": "start",
+                           "id": "9ab053a3dce00be397047b34e3fb1172cb546b36",
+                           "displayName": "Start 3",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "fab9e2b517": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "120",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        },
+                        {
+                           "type": "proxy",
+                           "role": "end",
+                           "id": "df03dc791ba144ae8a51bea03da8fee95ff7b225",
+                           "displayName": "End 3",
+                           "fmt": "num",
+                           "fmtArgs": {
+                              "resultMetadata": {
+                                 "ignoreDateFormat": false,
+                                 "isAggregated": false
+                              }
+                           },
+                           "dstContext": {
+                              "aggs": {
+                                 "603eb91418": "sum"
+                              },
+                              "ops": []
+                           },
+                           "formulas": [
+                              {
+                                 "txt": "300",
+                                 "ver": 2
+                              }
+                           ],
+                           "data": []
+                        }
+                     ],
+                     "formulas": [],
+                     "data": [],
+                     "dataDisabled": true,
+                     "rangeId": 3,
+                     "color": "#dd1b1b"
+                  }
+               ],
+               "gaugeStyle": "ag"
+            }
+         ],
+         "rows": 2,
+         "cols": 4
+      }
+   ]
+}
