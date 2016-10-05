@@ -1,0 +1,2191 @@
+{
+    "title": "Facebook Ads Conversions by Campaign",
+    "id": "c02610ebb7c82b93636e9afc4b258e5c",
+    "padding": "10",
+    "innerPadding": "20",
+    "workspace": {
+        "datasources": [
+            "fa2a9329eef7f49b4224KavyaMallur9",
+            "0f71f4cecc6e7f515ee7KavyaMallur9"
+        ],
+        "dimensions": {
+            "w": 1055
+        }
+    },
+    "datasourceProps": [
+        "fbAdsCampaign"
+    ],
+    "components": [{
+        "type": "panel_grid",
+        "id": "54534ef0",
+        "displayName": "Layout Grid 1",
+        "renamed": true,
+        "components": [{
+            "type": "input",
+            "id": "cede9aa5",
+            "displayName": "Ads Campaign",
+            "layoutConfig": {
+                "x": 0,
+                "y": 0
+            },
+            "renamed": true,
+            "components": [{
+                "type": "proxy",
+                "role": "values",
+                "id": "f88a56bd",
+                "displayName": "Campaign Values",
+                "renamed": true,
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "fa2a9329eef7f49b4224KavyaMallur9@/data/id;",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "d",
+                            "v": {
+                                "id": "fa2a9329eef7f49b4224KavyaMallur9",
+                                "a": "/data/id"
+                            }
+                        }]
+                    }
+                }],
+                "data": [
+                ]
+            }, {
+                "type": "proxy",
+                "role": "labels",
+                "id": "397bec89",
+                "displayName": "Campaign Labels",
+                "renamed": true,
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "fa2a9329eef7f49b4224KavyaMallur9@/data/name;",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "d",
+                            "v": {
+                                "id": "fa2a9329eef7f49b4224KavyaMallur9",
+                                "a": "/data/name"
+                            }
+                        }]
+                    }
+                }],
+                "data": [
+                ]
+            }],
+            "scope": 1,
+            "propName": "fbAdsCampaign",
+            "inputType": 1,
+            "defaultValue": "{{ds.facebook_ads.campaignId}}"
+        }, {
+            "type": "label",
+            "id": "c49b1af1",
+            "displayName": "Start Date",
+            "layoutConfig": {
+                "x": 4,
+                "y": 0
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy",
+                "suffix": "",
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                }
+            },
+            "formulas": [{
+                "txt": "if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "fa2a9329eef7f49b4224KavyaMallur9",
+                                        "a": "/data/id"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "fbAdsPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "Today"
+                                }, {
+                                    "t": "f",
+                                    "v": "today",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-7"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "relative value",
+                                            "description": "Number of units to add or subtract.",
+                                            "optional": true
+                                        }
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "relative value",
+                                            "description": "Number of units to add or subtract.",
+                                            "optional": true
+                                        }
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+            ],
+            "align": "r",
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "0a660b37",
+            "displayName": "End Date",
+            "layoutConfig": {
+                "x": 5,
+                "y": 0
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy",
+                "suffix": "",
+                "prefix": " to ",
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                }
+            },
+            "conditions": [{
+                "predicates": [{
+                    "left": {
+                        "cx": "c49b1af1"
+                    },
+                    "type": "eq",
+                    "right": {
+                        "self": 1
+                    }
+                }],
+                "reactions": [{
+                    "type": "text",
+                    "value": " ",
+                    "isScalar": true
+                }]
+            }, {
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    }
+                }],
+                "reactions": [{
+                    "type": "color",
+                    "value": "cx-theme_green_3"
+                }]
+            }],
+            "formulas": [{
+                "txt": "if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "fa2a9329eef7f49b4224KavyaMallur9",
+                                        "a": "/data/id"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "fbAdsPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "Yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "_default_"
+                                }, {
+                                    "t": "f",
+                                    "v": "today",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+            ],
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "input",
+            "id": "4420ca69",
+            "displayName": "Date Range",
+            "layoutConfig": {
+                "x": 6,
+                "y": 0
+            },
+            "renamed": true,
+            "components": [{
+                "type": "proxy",
+                "role": "values",
+                "id": "2c6c547b",
+                "displayName": "Period Values",
+                "renamed": true,
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "array(\"Today\",\"Yesterday\",\"last7days\",\"thisweek\",\"lastweek\",\"thismonth\",\"lastmonth\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "array",
+                            "c": [{
+                                "t": "l",
+                                "v": "Today"
+                            }, {
+                                "t": "l",
+                                "v": "Yesterday"
+                            }, {
+                                "t": "l",
+                                "v": "last7days"
+                            }, {
+                                "t": "l",
+                                "v": "thisweek"
+                            }, {
+                                "t": "l",
+                                "v": "lastweek"
+                            }, {
+                                "t": "l",
+                                "v": "thismonth"
+                            }, {
+                                "t": "l",
+                                "v": "lastmonth"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "0 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                ]
+            }, {
+                "type": "proxy",
+                "role": "labels",
+                "id": "803d6ad3",
+                "displayName": "Period Labels",
+                "renamed": true,
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "array(\"Today\",\"Yesterday\",\"Last 7 Days\",\"This Week\",\"Last Week\",\"This Month\",\"Last Month\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "array",
+                            "c": [{
+                                "t": "l",
+                                "v": "Today"
+                            }, {
+                                "t": "l",
+                                "v": "Yesterday"
+                            }, {
+                                "t": "l",
+                                "v": "Last 7 Days"
+                            }, {
+                                "t": "l",
+                                "v": "This Week"
+                            }, {
+                                "t": "l",
+                                "v": "Last Week"
+                            }, {
+                                "t": "l",
+                                "v": "This Month"
+                            }, {
+                                "t": "l",
+                                "v": "Last Month"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "data",
+                                    "repeats": true,
+                                    "description": "0 or more items."
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                ]
+            }],
+            "scope": 1,
+            "propName": "fbAdsPeriod",
+            "inputType": 1,
+            "defaultValue": "thismonth"
+        }, {
+            "type": "html_tpl2",
+            "id": "d5679897",
+            "displayName": "Info",
+            "layoutConfig": {
+                "x": 7,
+                "y": 0
+            },
+            "renamed": true,
+            "components": [{
+                "type": "html_data",
+                "role": "data",
+                "id": "f3068985",
+                "displayName": "Series1",
+                "formulas": [],
+                "data": [],
+                "mixin": "label",
+                "dataId": "Series1"
+            }],
+            "tpl": "<a href='https://support.klipfolio.com/hc/en-us/articles/216181347#campaign' target='_blank' title='Follow this link to learn more about this Klip.'>\n<img src=\"/images/style201512/help/help-onlight.svg?\" height=\"12\" width='12' align='right'/></a>",
+            "overflow": "ns"
+        }, {
+            "type": "label",
+            "id": "b3a8bab0",
+            "displayName": "Start Date (Prev.)",
+            "layoutConfig": {
+                "x": 4,
+                "y": 1
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy",
+                "suffix": "",
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                }
+            },
+            "formulas": [{
+                "txt": "if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-14\"),\"lastweek\",date_startof(today(),\"4\",\"-2\"),\"thismonth\",date_startof(today(),\"3\",\"-1\"),\"lastmonth\",date_startof(today(),\"3\",\"-2\"),\"thisweek\",date_startof(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "fa2a9329eef7f49b4224KavyaMallur9",
+                                        "a": "/data/id"
+                                    }
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "fbAdsPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "Today"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "yesterday",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-14"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_startof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+            ],
+            "align": "r",
+            "font_colour": "cx-color_aaa",
+            "font_style": "regular",
+            "wrap": true
+        }, {
+            "type": "label",
+            "id": "25d6adce",
+            "displayName": "End Date (Prev.)",
+            "layoutConfig": {
+                "x": 5,
+                "y": 1
+            },
+            "renamed": true,
+            "size": "1",
+            "fmt": "dat",
+            "fmtArgs": {
+                "dateInputFormat": "yyyyMMdd",
+                "dateFormat": "MMM dd, yyyy",
+                "suffix": " (prev.)",
+                "prefix": " to ",
+                "resultMetadata": {
+                    "ignoreDateFormat": false,
+                    "isAggregated": false
+                }
+            },
+            "conditions": [{
+                "predicates": [{
+                    "left": {
+                        "cx": "b3a8bab0"
+                    },
+                    "type": "eq",
+                    "right": {
+                        "self": 1
+                    }
+                }],
+                "reactions": [{
+                    "type": "text",
+                    "value": "(prev.)",
+                    "isScalar": true
+                }]
+            }, {
+                "predicates": [{
+                    "left": {
+                        "self": 1
+                    }
+                }],
+                "reactions": [{
+                    "type": "color",
+                    "value": "cx-theme_green_3"
+                }]
+            }],
+            "formulas": [{
+                "txt": "if((count(count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;))>\"0\"),datevalue(switch($fbAdsPeriod,\"Today\",yesterday(),\"Yesterday\",date_add(yesterday(),\"5\",\"-1\"),\"last7days\",date_add(today(),\"5\",\"-8\"),\"lastweek\",date_endof(today(),\"4\",\"-2\"),\"thismonth\",date_add(today(),\"3\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-2\"),\"thisweek\",date_add(today(),\"4\",\"-1\")),\"yyyyMMdd\"),blank())",
+                "src": {
+                    "t": "expr",
+                    "v": false,
+                    "c": [{
+                        "t": "f",
+                        "v": "if",
+                        "c": [{
+                            "t": "expr",
+                            "v": false,
+                            "c": [{
+                                "t": "f",
+                                "v": "count",
+                                "c": [{
+                                    "t": "f",
+                                    "v": "count",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "fa2a9329eef7f49b4224KavyaMallur9",
+                                            "a": "/data/id"
+                                        }
+                                    }]
+                                }]
+                            }, {
+                                "t": "o",
+                                "v": ">"
+                            }, {
+                                "t": "l",
+                                "v": "0"
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "fbAdsPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "Today"
+                                }, {
+                                    "t": "f",
+                                    "v": "yesterday",
+                                    "c": [{
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "timezone",
+                                            "optional": true,
+                                            "description": "",
+                                            "default": "GMT"
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "yesterday",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "last7days"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "5"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-8"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "lastmonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_endof",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "3"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-2"
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "first",
+                                            "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                            "default": "Sunday (week) or January (year)",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "date_add",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "opt",
+                                        "v": "4"
+                                    }, {
+                                        "t": "l",
+                                        "v": "-1"
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }, {
+                            "t": "f",
+                            "v": "blank",
+                            "c": [{
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "count",
+                                    "optional": true,
+                                    "description": "The number of blank items to be returned. Negative numbers are treated as positives.",
+                                    "default": "1"
+                                }
+                            }]
+                        }]
+                    }]
+                }
+            }],
+            "data": [
+            ],
+            "font_colour": "cx-color_aaa",
+            "font_style": "regular",
+            "wrap": true
+        }],
+        "rows": 2,
+        "cols": 8,
+        "widths": [{
+            "x": 7,
+            "w": 27
+        }, {
+            "x": 4,
+            "w": 95
+        }, {
+            "x": 5,
+            "w": 150
+        }, {
+            "x": 6,
+            "w": 120
+        }],
+        "cellData": [{
+            "x": 0,
+            "y": 0,
+            "alignment": 1,
+            "h": 2,
+            "cellPadding": 0,
+            "w": 3
+        }, {
+            "x": 7,
+            "y": 0,
+            "alignment": 1
+        }, {
+            "x": 4,
+            "y": 0,
+            "alignment": 2,
+            "cellPadding": 0
+        }, {
+            "x": 5,
+            "y": 0,
+            "cellPadding": 0,
+            "alignment": 2
+        }, {
+            "x": 4,
+            "y": 1,
+            "cellPadding": 0
+        }, {
+            "x": 5,
+            "y": 1,
+            "cellPadding": 0
+        }, {
+            "x": 6,
+            "y": 0,
+            "h": 2,
+            "alignment": 1,
+            "cellPadding": 0
+        }, {
+            "x": 3,
+            "y": 0
+        }]
+    }, {
+        "type": "panel_grid",
+        "id": "5c5c95e0",
+        "displayName": "Layout Grid 2",
+        "components": [],
+        "rows": 2,
+        "cols": 3,
+        "widths": [{
+            "x": 0,
+            "w": 95
+        }, {
+            "x": 1,
+            "w": 175
+        }],
+        "cellData": [{
+            "x": 0,
+            "y": 0,
+            "alignment": 2,
+            "cellPadding": 0
+        }, {
+            "x": 1,
+            "y": 0,
+            "alignment": 2,
+            "cellPadding": [
+                0,
+                0,
+                0,
+                5
+            ]
+        }, {
+            "x": 0,
+            "y": 1,
+            "cellPadding": 0
+        }, {
+            "x": 1,
+            "y": 1,
+            "cellPadding": [
+                0,
+                0,
+                0,
+                5
+            ]
+        }]
+    }, {
+        "type": "panel_grid",
+        "id": "8dc5ca1c",
+        "displayName": "Layout Grid 3",
+        "renamed": true,
+        "components": [{
+            "type": "chart_series",
+            "id": "d965725c",
+            "displayName": "Series Chart Copy",
+            "layoutConfig": {
+                "x": 0,
+                "y": 0
+            },
+            "components": [{
+                "type": "series_data",
+                "role": "series",
+                "id": "59e9e364",
+                "displayName": "Conversions",
+                "renamed": true,
+                "fmt": "num",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "lookup((datevalue(switch($fbAdsPeriod,\"Today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"Yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"thisweek\",daterange(date_startof(today(),\"4\"),date_endof(today(),\"4\")),\"thismonth\",daterange(date_startof(today(),\"3\"),date_endof(today(),\"3\")),\"_default_\",daterange(date((if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyyMMdd\")),date_convert(0f71f4cecc6e7f515ee7KavyaMallur9@//value[preceding-sibling::action_type='offsite_conversion']/../../date_stop;,\"yyyy-MM-dd\",\"yyyyMMdd\"),0f71f4cecc6e7f515ee7KavyaMallur9@//value[preceding-sibling::action_type='offsite_conversion'];)",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "lookup",
+                            "c": [{
+                                "t": "ref",
+                                "v": {
+                                    "r": "cx",
+                                    "cx": "d7212f61"
+                                }
+                            }, {
+                                "t": "f",
+                                "v": "date_convert",
+                                "c": [{
+                                    "t": "d",
+                                    "v": {
+                                        "id": "0f71f4cecc6e7f515ee7KavyaMallur9",
+                                        "a": "//value[preceding-sibling::action_type='offsite_conversion']/../../date_stop"
+                                    }
+                                }, {
+                                    "t": "l",
+                                    "v": "yyyy-MM-dd"
+                                }, {
+                                    "t": "l",
+                                    "v": "yyyyMMdd"
+                                }]
+                            }, {
+                                "t": "d",
+                                "v": {
+                                    "id": "0f71f4cecc6e7f515ee7KavyaMallur9",
+                                    "a": "//value[preceding-sibling::action_type='offsite_conversion']"
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                ],
+                "seriesName": "Conversions",
+                "axis": "2d6d0721"
+            }, {
+                "type": "series_data",
+                "role": "series",
+                "id": "55178454",
+                "displayName": "Cost per Conversion",
+                "fmt": "num",
+                "fmtArgs": {
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "substitute(lookup((datevalue(switch($fbAdsPeriod,\"Today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"Yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"thisweek\",daterange(date_startof(today(),\"4\"),date_endof(today(),\"4\")),\"thismonth\",daterange(date_startof(today(),\"3\"),date_endof(today(),\"3\")),\"_default_\",daterange(date((if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyyMMdd\")),date_convert(0f71f4cecc6e7f515ee7KavyaMallur9@//value[preceding-sibling::action_type='offsite_conversion']/../../date_stop;,\"yyyy-MM-dd\",\"yyyyMMdd\"),(0f71f4cecc6e7f515ee7KavyaMallur9@//value[preceding-sibling::action_type='offsite_conversion']/../../spend;/0f71f4cecc6e7f515ee7KavyaMallur9@/data/actions/value[preceding-sibling::action_type='offsite_conversion'];)),\"Infinity\",\"\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "substitute",
+                            "c": [{
+                                "t": "f",
+                                "v": "lookup",
+                                "c": [{
+                                    "t": "ref",
+                                    "v": {
+                                        "r": "cx",
+                                        "cx": "d7212f61"
+                                    }
+                                }, {
+                                    "t": "f",
+                                    "v": "date_convert",
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "0f71f4cecc6e7f515ee7KavyaMallur9",
+                                            "a": "//value[preceding-sibling::action_type='offsite_conversion']/../../date_stop"
+                                        }
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyy-MM-dd"
+                                    }, {
+                                        "t": "l",
+                                        "v": "yyyyMMdd"
+                                    }]
+                                }, {
+                                    "t": "expr",
+                                    "v": false,
+                                    "c": [{
+                                        "t": "d",
+                                        "v": {
+                                            "id": "0f71f4cecc6e7f515ee7KavyaMallur9",
+                                            "a": "//value[preceding-sibling::action_type='offsite_conversion']/../../spend"
+                                        }
+                                    }, {
+                                        "t": "o",
+                                        "v": "/"
+                                    }, {
+                                        "t": "d",
+                                        "v": {
+                                            "id": "0f71f4cecc6e7f515ee7KavyaMallur9",
+                                            "a": "/data/actions/value[preceding-sibling::action_type='offsite_conversion']"
+                                        }
+                                    }]
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "Infinity"
+                            }, {
+                                "t": "l",
+                                "v": ""
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "occurrence",
+                                    "optional": true,
+                                    "description": "Occurrence of substitution.",
+                                    "default": "all"
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                ],
+                "seriesName": "Cost per Conversion",
+                "renderer": "line",
+                "lineWeight": "2",
+                "leaveGaps": true,
+                "axis": "9fa4e2ea",
+                "overrideColor": true,
+                "color": "cx-theme_666"
+            }, {
+                "type": "chart_axis",
+                "role": "axis_x",
+                "id": "d7212f61",
+                "displayName": "Date Range",
+                "renamed": true,
+                "fmt": "dat",
+                "fmtArgs": {
+                    "dateFormat": "custom",
+                    "dateFormatCustom": "MMM d",
+                    "dateInputFormat": "custom",
+                    "dateInputFormatCustom": "yyyyMMdd",
+                    "resultMetadata": {
+                        "ignoreDateFormat": false,
+                        "isAggregated": false
+                    }
+                },
+                "formulas": [{
+                    "txt": "datevalue(switch($fbAdsPeriod,\"Today\",daterange(date_add(today(),\"5\",\"-6\"),today()),\"Yesterday\",daterange(date_add(yesterday(),\"5\",\"-6\"),yesterday()),\"thisweek\",daterange(date_startof(today(),\"4\"),date_endof(today(),\"4\")),\"thismonth\",daterange(date_startof(today(),\"3\"),date_endof(today(),\"3\")),\"_default_\",daterange(date((if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Today\",today(),\"Yesterday\",yesterday(),\"last7days\",date_add(today(),\"5\",\"-7\"),\"lastweek\",date_startof(today(),\"4\",\"-1\"),\"thismonth\",date_startof(today(),\"3\"),\"lastmonth\",date_startof(today(),\"3\",\"-1\"),\"thisweek\",date_startof(today(),\"4\")),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"),date((if((count(fa2a9329eef7f49b4224KavyaMallur9@/data/id;)>\"0\"),datevalue(switch($fbAdsPeriod,\"Yesterday\",yesterday(),\"last7days\",yesterday(),\"lastweek\",date_endof(today(),\"4\",\"-1\"),\"lastmonth\",date_endof(today(),\"3\",\"-1\"),\"_default_\",today()),\"yyyyMMdd\"),blank())),\"yyyyMMdd\"))),\"yyyyMMdd\")",
+                    "src": {
+                        "t": "expr",
+                        "v": false,
+                        "c": [{
+                            "t": "f",
+                            "v": "datevalue",
+                            "c": [{
+                                "t": "f",
+                                "v": "switch",
+                                "c": [{
+                                    "t": "var",
+                                    "v": "fbAdsPeriod"
+                                }, {
+                                    "t": "l",
+                                    "v": "Today"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_add",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "5"
+                                        }, {
+                                            "t": "l",
+                                            "v": "-6"
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "today",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "Yesterday"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_add",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "yesterday",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "5"
+                                        }, {
+                                            "t": "l",
+                                            "v": "-6"
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "yesterday",
+                                        "c": [{
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thisweek"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_startof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "4"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "description": "Number of units to add or subtract.",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                "default": "Sunday (week) or January (year)",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "date_endof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "4"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "description": "Optional, number of units to add or subtract.",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                "default": "Sunday (week) or January (year)",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "thismonth"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date_startof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "3"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "description": "Number of units to add or subtract.",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "description": "When unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                "default": "Sunday (week) or January (year)",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "date_endof",
+                                        "c": [{
+                                            "t": "f",
+                                            "v": "today",
+                                            "c": [{
+                                                "t": "a",
+                                                "v": null,
+                                                "arg_obj": {
+                                                    "placeholder": "timezone",
+                                                    "optional": true,
+                                                    "description": "",
+                                                    "default": "GMT"
+                                                }
+                                            }]
+                                        }, {
+                                            "t": "opt",
+                                            "v": "3"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "relative value",
+                                                "description": "Optional, number of units to add or subtract.",
+                                                "optional": true
+                                            }
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "first",
+                                                "description": "Optional when unit is set to week or year (not applicable otherwise), starting point for unit.",
+                                                "default": "Sunday (week) or January (year)",
+                                                "optional": true
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "l",
+                                    "v": "_default_"
+                                }, {
+                                    "t": "f",
+                                    "v": "daterange",
+                                    "c": [{
+                                        "t": "f",
+                                        "v": "date",
+                                        "c": [{
+                                            "t": "ref",
+                                            "v": {
+                                                "r": "cx",
+                                                "cx": "c49b1af1"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyyMMdd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "The time zone.",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "f",
+                                        "v": "date",
+                                        "c": [{
+                                            "t": "ref",
+                                            "v": {
+                                                "r": "cx",
+                                                "cx": "0a660b37"
+                                            }
+                                        }, {
+                                            "t": "l",
+                                            "v": "yyyyMMdd"
+                                        }, {
+                                            "t": "a",
+                                            "v": null,
+                                            "arg_obj": {
+                                                "placeholder": "timezone",
+                                                "optional": true,
+                                                "description": "The time zone.",
+                                                "default": "GMT"
+                                            }
+                                        }]
+                                    }, {
+                                        "t": "a",
+                                        "v": null,
+                                        "arg_obj": {
+                                            "placeholder": "format",
+                                            "description": "required if start and end dates are in a format other than the default or in Epoch (default input is M/d/yyyy, default output is MM/dd/yyyy).",
+                                            "optional": true
+                                        }
+                                    }]
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }, {
+                                    "t": "a",
+                                    "v": null,
+                                    "arg_obj": {
+                                        "placeholder": "case",
+                                        "repeats": true,
+                                        "description": ""
+                                    }
+                                }]
+                            }, {
+                                "t": "l",
+                                "v": "yyyyMMdd"
+                            }, {
+                                "t": "a",
+                                "v": null,
+                                "arg_obj": {
+                                    "placeholder": "timezone",
+                                    "description": "",
+                                    "default": "GMT",
+                                    "optional": true
+                                }
+                            }]
+                        }]
+                    }
+                }],
+                "data": [
+                ],
+                "label": "Untitled",
+                "labelAngle": "-45",
+                "labelDrop": "2"
+            }, {
+                "type": "chart_axis",
+                "role": "axis_y",
+                "id": "2d6d0721",
+                "displayName": "Conversion Count",
+                "fmt": "num",
+                "formulas": [],
+                "data": [],
+                "dataDisabled": true,
+                "label": "Conversion Count",
+                "showAxis": false,
+                "labelDrop": 0,
+                "grid": true
+            }, {
+                "type": "chart_axis",
+                "role": "axis_y",
+                "id": "9fa4e2ea",
+                "displayName": "CPConversion Amount",
+                "fmt": "cur",
+                "fmtArgs": {
+                    "precision": "1"
+                },
+                "formulas": [],
+                "data": [],
+                "dataDisabled": true,
+                "label": "CPConversion Amount",
+                "axisPosition": "right",
+                "showAxis": false,
+                "labelDrop": 0
+            }],
+            "height": "2"
+        }],
+        "rows": 5,
+        "cols": 2,
+        "cellData": [{
+            "x": 0,
+            "y": 2,
+            "alignment": 1
+        }, {
+            "x": 0,
+            "y": 0,
+            "h": 5,
+            "w": 2,
+            "alignment": 2
+        }, {
+            "x": 0,
+            "y": 4,
+            "alignment": 2,
+            "cellPadding": [
+                5,
+                5,
+                0,
+                5
+            ]
+        }, {
+            "x": 1,
+            "y": 4,
+            "cellPadding": [
+                5,
+                5,
+                0,
+                5
+            ],
+            "alignment": 2
+        }]
+    }]
+}
