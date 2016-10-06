@@ -1,0 +1,42 @@
+{
+   "name" : "Top-Performing Ad by Clicks",
+   "description" : ".<br>Originates from the Gallery. (v1.1)",
+
+   "datasources" : {
+      "googleAdwords-01" : {
+         "service" : "google_adwords",
+         "libraryAlias" : "AdWordsAdPerformanceReport",
+         "name": "Google AdWords Ad Performance Report",
+         "description" : "See your AdWords campaigns and impressions. Originates from the Gallery.",
+         "type" : "google_adwords",
+         "format" : "csv",
+         "refreshInterval" : 14400,
+         "props" : {
+             "body": "__rdquery=SELECT Headline,Status,AdType,Clicks,ConversionRate,Description1,Description2,CreativeDestinationUrl,DisplayUrl,ImageAdUrl,Impressions,AdNetworkType1,Id,HeadlinePart1,HeadlinePart2,Description, CreativeFinalUrls, Path1,Path2 FROM AD_PERFORMANCE_REPORT DURING {date.add(-30).format('yyyyMMdd')},{date.yesterday.format('yyyyMMdd')}&__fmt=CSV&mode=Custom",
+             "endpoint_url": "https://adwords.google.com/api/adwords/reportdownload/v201607",
+                "method": "post",
+                "parameters": "[{\"name\":\"developerToken\",\"value\":\"O5KbgkrEobequlPEVk-cLQ\",\"type\":\"header\"},{\"name\":\"clientCustomerID\",\"value\":\"{{ds.google_adwords.customerId}}\",\"type\":\"header\"}]"
+         }
+      }
+   },
+
+   "dsMappings" : {
+      "googleAdwords-01" :"b20f92886d20293bb933natceewzhere"
+   },
+    
+    "datasourceConfigModel" : [
+      {
+         "type" : "text",
+         "id" : "ds.google_adwords.customerId",
+         "label" : "Customer ID",
+         "description" : "Don't know where to find your Customer ID? Sign in to your AdWords account and look in the top right-hand corner. Your customer ID will be in the form xxx-xxx-xxxx.",
+         "isRequired" : true
+      }
+   ],
+
+   "services" : [
+      {
+         "service" : "google_adwords"
+      }
+   ]
+}
