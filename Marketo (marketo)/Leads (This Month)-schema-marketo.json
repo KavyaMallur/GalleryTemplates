@@ -1,9 +1,9 @@
 {
-   "title": "Marketo Leads",
+   "title": "Marketo Leads (This Month) (BETA)",
    "id": "2409d2a2eeccdaf46f1cfeb0b7f8d91b",
    "workspace": {
       "dimensions": {
-         "w": 445
+         "w": 730
       },
       "datasources": [
          "1792ec96ed3498b253e6KavyaMallur9"
@@ -22,6 +22,12 @@
                "displayName": "Leads This Month",
                "renamed": true,
                "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
+               },
                "formulas": [
                   {
                      "txt": "first(cumulative(lookup((datevalue(daterange(date_startof(today(),\"3\"),date_endof(today(),\"3\")),\"yyyy-MM-dd\")),group(left(1792ec96ed3498b253e6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"10\")),countdistinct(left(1792ec96ed3498b253e6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"10\")))),datevalue(today(),\"d\"))",
@@ -141,8 +147,6 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "seriesName": "This Month",
                "renderer": "line",
@@ -157,6 +161,12 @@
                "displayName": "Leads Last Month",
                "renamed": true,
                "fmt": "num",
+               "fmtArgs": {
+                  "resultMetadata": {
+                     "ignoreDateFormat": true,
+                     "isAggregated": false
+                  }
+               },
                "formulas": [
                   {
                      "txt": "cumulative(slice(lookup(datevalue(daterange(date_startof(today(),\"3\",\"-1\"),date_endof(today(),\"3\",\"-1\")),\"yyyy-MM-dd\"),group(left(1792ec96ed3498b253e6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"10\")),countdistinct(left(1792ec96ed3498b253e6KavyaMallur9@/result/timestampMarketingCapturedLead;,\"10\"))),\"0\",count((datevalue(daterange(date_startof(today(),\"3\"),date_endof(today(),\"3\")),\"yyyy-MM-dd\")))))",
@@ -365,8 +375,6 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "seriesName": "Last Month",
                "renderer": "line",
@@ -385,7 +393,11 @@
                   "dateInputFormat": "custom",
                   "dateInputFormatCustom": "yyyy-MM-dd",
                   "dateFormat": "custom",
-                  "dateFormatCustom": "MMM d"
+                  "dateFormatCustom": "MMM d",
+                  "resultMetadata": {
+                     "ignoreDateFormat": false,
+                     "isAggregated": false
+                  }
                },
                "formulas": [
                   {
@@ -524,13 +536,11 @@
                   }
                ],
                "data": [
-                  [
-                  ]
                ],
                "label": "Date",
                "showAxis": false,
                "labelAngle": "-45",
-               "labelDrop": "0"
+               "labelDrop": "3"
             },
             {
                "type": "chart_axis",

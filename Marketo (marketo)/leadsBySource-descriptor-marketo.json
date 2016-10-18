@@ -1,6 +1,6 @@
 {
     "name": "Marketo Leads by Source (BETA)",
-    "description": "Keep monitoring your opportunity pipeline by segmenting your leads by source. Originates from the Gallery.",
+    "description": "Keep monitoring your opportunity pipeline by segmenting your leads by source. Originates from the Gallery. (v1.1)",
     "sampleFormulas": {
         "d7328147": {
             "txt": "\"20160501\"",
@@ -176,7 +176,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields={{ds.marketo.MCLTimestamp}},inferredCountry,leadSource",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -207,7 +207,13 @@
     }, {
         "type": "select",
         "id": "ds.marketo.MCLID",
-        "label": "Marketing Captured"
+        "label": "Marketing Captured",
+        "onChangeQueries": ["q2"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.MCLTimestamp",
+        "description": "Select the timestamp field for the Marketing Captured List.",
+        "label": "Marketing Captured Timestamp"
     }],
     "queries": [{
         "id": "q1",
@@ -230,6 +236,27 @@
             "propField": "options",
             "labels": "/result/name",
             "values": "/result/id"
+        }]
+    }, {
+        "id": "q2",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/leads/describe.json?fields=id,displayName",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MCLTimestamp",
+            "propField": "options",
+            "labels": "/result/displayName",
+            "values": "kf:fill_elements(/result,'rest','name')"
         }]
     }]
 }

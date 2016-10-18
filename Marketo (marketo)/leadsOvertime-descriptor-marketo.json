@@ -1,6 +1,6 @@
 {
     "name": "Marketo Leads Over Time (BETA)",
-    "description": "This interactive stacked bar chart displays and compares the number of prospects at each stage of the lead lifecycle. Originates from the Gallery.",
+    "description": "This interactive stacked bar chart displays and compares the number of prospects at each stage of the lead lifecycle. Originates from the Gallery. (v1.1)",
     "sampleFormulas": {
         "0587a37b": {
             "txt": "\"20160501\"",
@@ -680,7 +680,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields=timestampMarketingCapturedLead,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MCLID}}/leads.json?fields={{ds.marketo.MCLTimestamp}},inferredCountry,leadSource",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -697,7 +697,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MQLID}}/leads.json?fields=timestampMarketingQualifiedLead,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.MQLID}}/leads.json?fields={{ds.marketo.MQLTimestamp}},inferredCountry,leadSource",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -714,7 +714,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SALID}}/leads.json?fields=timestampSalesAcceptedLead,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SALID}}/leads.json?fields={{ds.marketo.SALTimestamp}},inferredCountry,leadSource",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -731,7 +731,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SQLID}}/leads.json?fields=timestampSalesQualifiedOpportunity,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.SQLID}}/leads.json?fields={{ds.marketo.SQLTimestamp}},inferredCountry,leadSource",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -748,7 +748,7 @@
             "format": "json",
             "refreshInterval": 14400,
             "props": {
-                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.customerID}}/leads.json?fields=timestampCustomer,inferredCountry,leadSource",
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/list/{{ds.marketo.customerID}}/leads.json?fields={{ds.marketo.customerTimestamp}},inferredCountry,leadSource",
                 "identity_url": "{{auth.marketo.identityURL}}/identity",
                 "oauth_client_id": "{{auth.marketo.clientID}}",
                 "oauth_user_secret": "{{auth.marketo.clientSecret}}",
@@ -804,6 +804,32 @@
     }, {
         "type": "select",
         "id": "ds.marketo.customerID",
+        "label": "Customer",
+        "onChangeQueries": ["q6"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.MCLTimestamp",
+        "label": "Marketing Captured",
+        "description": "Select the Timestamp field for the following lists.",
+        "onChangeQueries": ["q7"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.MQLTimestamp",
+        "label": "Marketing Qualified",
+        "onChangeQueries": ["q8"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.SALTimestamp",
+        "label": "Sales Accepted",
+        "onChangeQueries": ["q9"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.SQLTimestamp",
+        "label": "Sales Qualified",
+        "onChangeQueries": ["q10"]
+    }, {
+        "type": "select",
+        "id": "ds.marketo.customerTimestamp",
         "label": "Customer"
     }],
     "queries": [{
@@ -911,6 +937,111 @@
             "propField": "options",
             "labels": "/result/name",
             "values": "/result/id"
+        }]
+    }, {
+        "id": "q6",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/leads/describe.json?fields=id,displayName",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MCLTimestamp",
+            "propField": "options",
+            "labels": "/result/displayName",
+            "values": "kf:fill_elements(/result,'rest','name')"
+        }]
+    }, {
+        "id": "q7",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/leads/describe.json?fields=id,displayName",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.MQLTimestamp",
+            "propField": "options",
+            "labels": "/result/displayName",
+            "values": "kf:fill_elements(/result,'rest','name')"
+        }]
+    }, {
+        "id": "q8",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/leads/describe.json?fields=id,displayName",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.SALTimestamp",
+            "propField": "options",
+            "labels": "/result/displayName",
+            "values": "kf:fill_elements(/result,'rest','name')"
+        }]
+    }, {
+        "id": "q9",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/leads/describe.json?fields=id,displayName",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.SQLTimestamp",
+            "propField": "options",
+            "labels": "/result/displayName",
+            "values": "kf:fill_elements(/result,'rest','name')"
+        }]
+    }, {
+        "id": "q10",
+        "connector": {
+            "service": "marketo",
+            "type": "marketo",
+            "format": "json",
+            "props": {
+                "endpoint_url": "{{auth.marketo.identityURL}}/rest/v1/leads/describe.json?fields=id,displayName",
+                "identity_url": "{{auth.marketo.identityURL}}/identity",
+                "oauth_client_id": "{{auth.marketo.clientID}}",
+                "oauth_user_secret": "{{auth.marketo.clientSecret}}",
+                "oauth_provider_id": "marketo",
+                "method": "get"
+            }
+        },
+        "results": [{
+            "propId": "ds.marketo.customerTimestamp",
+            "propField": "options",
+            "labels": "/result/displayName",
+            "values": "kf:fill_elements(/result,'rest','name')"
         }]
     }]
 }
